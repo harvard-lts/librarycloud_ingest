@@ -40,7 +40,7 @@ public class EADComponentIterator implements Iterator<String> {
 	protected DOMSource domSource;
 	protected Transformer transformer;
 	protected int position = 0;
-
+        
     public EADComponentIterator(EADReader reader) throws Exception {
         this.eadReader = reader;
         nodes = reader.getNodes();
@@ -60,39 +60,39 @@ public class EADComponentIterator implements Iterator<String> {
 	        String nodeName = nodes.item(position).getNodeName();
 	        String nodeValue = nodes.item(position).getNodeValue();
 	        position++;
-	        if (nodeName.equals("id")) {
-	        	String eadComponentMods = null;
-				try {
+		        if (nodeName.equals("id")) {
+		        	String eadComponentMods = null;
+					try {
 					eadComponentMods = transformOASIS(nodeValue);
-				} catch (Exception e) {
-					e.printStackTrace();
+					} catch (Exception e) {
+						e.printStackTrace();
 					throw new NoSuchElementException();
-				}
-				LibCommMessage lcmessage = new LibCommMessage();
-				Payload payload = new Payload();
-				payload.setFormat("MODS");
-				payload.setSource("OASIS");
-				payload.setData(eadComponentMods);
+					}
+					LibCommMessage lcmessage = new LibCommMessage();
+					Payload payload = new Payload();
+					payload.setFormat("MODS");
+					payload.setSource("OASIS");
+					payload.setData(eadComponentMods);
 				lcmessage.setCommand("ENRICH");
-	        	lcmessage.setPayload(payload);
+		        	lcmessage.setPayload(payload);
 
-	        	try {
+		try {
 	        		return MessageUtils.marshalMessage(lcmessage);
 				} catch (JAXBException e) {
-					e.printStackTrace();
+			e.printStackTrace();
 					return null;
-				}		        		
+		}
 
-	        }
+	}
 
-    	}
+			}
     	throw new NoSuchElementException();
 	}
 
     @Override
     public void remove() {
         throw new UnsupportedOperationException();
-    }
+	}
 
     protected Transformer buildTransformer(String xslFilePath) throws Exception {
 		final InputStream xsl = new FileInputStream(xslFilePath);
