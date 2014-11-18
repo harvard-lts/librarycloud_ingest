@@ -232,7 +232,7 @@
             <doTry>
                 <split streaming="true">
                     <tokenize token="viaRecord" xml="true"/>                
-                    <split streaming="true" parallelProcessing="true">
+                <split streaming="true" parallelProcessing="true">
                         <method bean="viaRawSplitter" method="split"/>
                         <aggregate strategyRef="modsVIARawAggregator" completionSize="100" completionInterval="10000">
                             <correlationExpression>
@@ -241,10 +241,10 @@
                             <completionPredicate>
                                 <simple>${header.messageLength} > 150000</simple>
                             </completionPredicate>  
-                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
-                            <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
+                    <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
+                    <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
                         </aggregate>
-                    </split>
+                </split>
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
@@ -252,7 +252,7 @@
                 </doCatch>
             </doTry>
         </route>
-
+        
         <!-- Route messages to the correct part of the enrich pipeline -->
         <route id="enrich-start" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-start" /> -->
@@ -335,7 +335,7 @@
                 </when>
                 <otherwise>
                     <!-- <to uri="file://{{librarycloud.files.basepath}}/publish-public" /> -->
-                    <to uri="aws-sqs://{{librarycloud.sqs.environment}}-publish-public?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
+            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-publish-public?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
                 </otherwise>
             </choice>
         </route>
@@ -356,7 +356,7 @@
         <route id="DeleteSolrMessages" errorHandlerRef="eh">
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-solr?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <!--<from uri="file://{{librarycloud.files.basepath}}/publish-public-solrDelete" />-->
-
+        
             <process ref="solrDeleteProcessor"/>
             <to uri="file://{{librarycloud.files.basepath}}/publish-public-solrDelete-output" />
           
