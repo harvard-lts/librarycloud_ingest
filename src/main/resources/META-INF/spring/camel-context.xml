@@ -77,6 +77,14 @@
             </bean>
         </property>
     </bean>
+    <bean id="solrDeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.SolrDeleteProcessor">
+                <property name="commitWithinTime" value="30000"/>
+            </bean>
+        </property>
+    </bean>
+
     <camelContext id="sqsContext" xmlns="http://camel.apache.org/schema/spring" trace="true">
         <!-- Environment-specific properties -->
         <propertyPlaceholder id="librarycloud-properties" location="classpath:/librarycloud.env.properties" />
@@ -109,6 +117,8 @@
             </doTry>
          </route>
          
+
+
 		<!-- need to change from filesys to aws queue -->
          <route id="aleph-delete-ingest-split">
             <from uri="file:{{librarycloud.files.basepath}}/deletefiles?include=.*.xml" />
@@ -131,6 +141,14 @@
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start" /> -->
         </route>
+
+
+        <route id="solrDelete" errorHandlerRef="eh">
+            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-start" /> -->
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <!--<to uri="seda:addholdingstomods?size=20&amp;blockWhenFull=true" />-->
+        </route>
+
 
         <route id="addholdingstomods-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-start" /> -->
