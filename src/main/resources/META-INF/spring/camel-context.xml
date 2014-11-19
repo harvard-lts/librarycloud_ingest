@@ -117,10 +117,10 @@
             </bean>
         </property>
     </bean>
-<bean id="solrDeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+    <bean id="solrDeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.SolrDeleteProcessor">
-                <!--<property name="commitWithinTime" value="30000"/>-->
+                <property name="commitWithinTime" value="30000"/>
             </bean>
         </property>
     </bean>
@@ -180,6 +180,8 @@
             </doTry>
          </route>
          
+
+
 		<!-- need to change from filesys to aws queue -->
          <route id="aleph-delete-ingest-split">
             <from uri="file:{{librarycloud.files.basepath}}/deletefiles?include=.*.xml" />
