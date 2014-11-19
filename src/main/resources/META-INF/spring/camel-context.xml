@@ -105,10 +105,10 @@
             </bean>
         </property>
     </bean>
-<bean id="solrDeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+    <bean id="solrDeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.SolrDeleteProcessor">
-                <!--<property name="commitWithinTime" value="30000"/>-->
+                <property name="commitWithinTime" value="30000"/>
             </bean>
         </property>
     </bean>
@@ -168,6 +168,8 @@
             </doTry>
          </route>
          
+
+
 		<!-- need to change from filesys to aws queue -->
          <route id="aleph-delete-ingest-split">
             <from uri="file:{{librarycloud.files.basepath}}/deletefiles?include=.*.xml" />
@@ -212,92 +214,15 @@
             <to uri="seda:oasis-ingest-seda?size=4&amp;blockWhenFull=true"/>
         </route>
 
-        <route id="oasis-ingest" errorHandlerRef="eh">
-            <from uri="seda:oasis-ingest-seda?concurrentConsumers=4" />
-            <!-- Try block required for errors thrown out of the splitter -->
-            <doTry>
-                <split streaming="true" parallelProcessing="true">
-                    <method bean="eadSplitter" method="split"/>
-                    <aggregate strategyRef="modsAggregator" completionSize="100" completionInterval="10000">
-                        <correlationExpression>
-                            <simple>all</simple>
-                        </correlationExpression>
-                        <completionPredicate>
-                            <simple>${header.messageLength} > 150000</simple>
-                        </completionPredicate>  
-                        <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
-                        <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
-                    </aggregate>
-                </split>
-                <doCatch>
-                    <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
-                </doCatch>
-            </doTry>
-        </route>
 
-        <!-- Option for ingesting OASIS data from a raw XML file -->
-        <route id="oasis-ingest-raw-file" errorHandlerRef="eh">
-            <from uri="file://{{librarycloud.files.basepath}}/ingest-oasis-file" />
-            <!-- Try block required for errors thrown out of the splitter -->
-            <doTry>
-                <split>
-                    <tokenize token="ead" xml="true"/>                
-                    <split streaming="true" parallelProcessing="true">
-                        <method bean="eadRawSplitter" method="split"/>
-                        <aggregate strategyRef="modsRawAggregator" completionSize="100" completionInterval="10000">
-                            <correlationExpression>
-                                <simple>all</simple>
-                            </correlationExpression>
-                            <completionPredicate>
-                                <simple>${header.messageLength} > 150000</simple>
-                            </completionPredicate>  
-                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
-                            <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
-                        </aggregate>
-                    </split>
-                </split>
-                <doCatch>
-                    <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
-                </doCatch>
-            </doTry>
+        <route id="solrDelete" errorHandlerRef="eh">
+            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-start" /> -->
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <!--<to uri="seda:addholdingstomods?size=20&amp;blockWhenFull=true" />-->
         </route>
 
 
-
-        <!-- VIA ingest and normalization -->
-        <!--  Read from raw VIA export files dropped on disk.
-              We want to change this to a model whereby the command is read from SQS with a reference
-              to the raw VIA file in S3, which camel will download; rather than forcing us to drop the
-              raw VIA file on a specific server.   -->
-        <route id="via-ingest-raw-file" errorHandlerRef="eh">
-            <from uri="file://{{librarycloud.files.basepath}}/ingest-via-file" />
-            <doTry>
-                <split>
-                    <tokenize token="viaRecord" xml="true"/>                
-                    <split streaming="true" parallelProcessing="true">
-                        <method bean="viaRawSplitter" method="split"/>
-                        <aggregate strategyRef="modsRawAggregator" completionSize="100" completionInterval="10000">
-                            <correlationExpression>
-                                <simple>all</simple>
-                            </correlationExpression>
-                            <completionPredicate>
-                                <simple>${header.messageLength} > 150000</simple>
-                            </completionPredicate>  
-                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
-                            <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
-                        </aggregate>
-                    </split>
-                </split>
-                <doCatch>
-                    <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
-                </doCatch>
-            </doTry>
-        </route>
-        <!-- Route messages to the correct part of the enrich pipeline -->
-        <route id="enrich-start" errorHandlerRef="eh">
+        <route id="addholdingstomods-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-start" /> -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <choice>
