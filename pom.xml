@@ -14,6 +14,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <spring.version>3.2.11.RELEASE</spring.version>
+    <openjpa.version>2.3.0</openjpa.version>
   </properties>
 
   <dependencies>
@@ -69,6 +71,50 @@
       <artifactId>commons-validator</artifactId>
       <version>1.4.0</version>
     </dependency>
+
+    <!-- Persistence -->
+      <dependency>
+	  <groupId>mysql</groupId>
+	  <artifactId>mysql-connector-java</artifactId>
+	  <version>5.1.33</version>
+      </dependency>
+
+      <dependency>
+	  <groupId>org.apache.openjpa</groupId>
+	  <artifactId>openjpa</artifactId>
+	  <version>${openjpa.version}</version>
+      </dependency>
+      
+          <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
     <!-- testing -->
     <dependency>
@@ -141,6 +187,28 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
+      
+      <plugin>
+	<groupId>org.apache.openjpa</groupId>
+	<artifactId>openjpa-maven-plugin</artifactId>
+	<version>${openjpa.version}</version>
+	  <executions>
+	    <execution>
+		<id>enhancer</id>
+		<phase>process-classes</phase>
+		<goals>
+		    <goal>enhance</goal>
+		</goals>
+	    </execution>
+	</executions>
+	<dependencies>
+	    <dependency>
+		<groupId>org.apache.openjpa</groupId>
+		<artifactId>openjpa</artifactId>
+		<version>${openjpa.version}</version>
+	    </dependency>
+	</dependencies>
+    </plugin>
 
       <!-- allows the route to be ran via 'mvn camel:run' -->
       <plugin>
