@@ -175,6 +175,42 @@
         </route>
 
         <!-- VIA ingest and normalization -->
+
+        <!-- VIA Option 1: Read from raw VIA export files dropped on disk, split them into individual VIA records
+                          on disk, create the necessary command files to ingest them from disk, and then place
+                          them on the local SEDA queue to be split into individual items, then place on the 
+                          SQS enrich queue. 
+                          We want to change this to a model whereby the a command is read from SQS with a reference
+                          to the raw VIA file in S3, which camel will download; rather than forcing us to drop the
+                          raw VIA file on a specific server.
+                      -->
+        <route id="via-ingest-raw-file" errorHandlerRef="eh">
+            <from uri="file://{{librarycloud.files.basepath}}/ingest-via-file" />
+             <split>
+                <tokenize token="viaRecord" xml="true"/>                
+                <to uri="file://{{librarycloud.files.basepath}}/via-testing?fileName=${id}-${header.CamelSplitIndex}" /> 
+                <transform>
+                    <simple>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;lib_comm_message&gt;
+    &lt;command&gt;INGEST&lt;/command&gt;
+    &lt;payload&gt;
+        &lt;source&gt;via&lt;/source&gt;
+        &lt;format&gt;via&lt;/format&gt;
+        &lt;filepath&gt;{{librarycloud.files.basepath}}/via-testing/${id}-${header.CamelSplitIndex}&lt;/filepath&gt;
+    &lt;/payload&gt;
+&lt;/lib_comm_message&gt;
+                    </simple>
+                </transform>
+                <!-- <to uri="file://{{librarycloud.files.basepath}}/via-commands?fileName=${id}-${header.CamelSplitIndex}" />  -->
+                <to uri="seda:via-ingest-seda?size=10&amp;blockWhenFull=true"/>
+            </split>
+        </route>
+
+        <!-- VIA Option 2: Read command file with reference to indvidual VIA record in S3, and then place
+                          them on the local SEDA queue to detch item from S3, break into individual items, 
+                          and then place on the SQS enrich queue -->
+
         <route id="via-ingest-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}/ingest-via" /> -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-via?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
@@ -245,7 +281,7 @@
             <to uri="seda:enrich-03?size=20&amp;blockWhenFull=true" />
         </route>
         <route id="addcollectionstomods" errorHandlerRef="eh">
-            <from uri="seda:enrich-03?concurrentConsumers=1"/>
+            <from uri="seda:enrich-03?concurrentConsumers=5"/>
             <process ref="collectionsProcessor"/>
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-end?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
