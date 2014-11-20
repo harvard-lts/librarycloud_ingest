@@ -1,6 +1,5 @@
 package edu.harvard.libcomm.pipeline;
 
-
 import java.io.IOException;
 import java.net.URI;
 import java.util.Date;
@@ -20,22 +19,21 @@ public class StackScoreProcessor implements IProcessor {
 	
 		String data = null;
 		String recids = "0";
-		libCommMessage.setCommand("PUBLISH");
-
+		
 		try {
 			recids = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/recids.xsl",null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
-		//System.out.println("RECIDS: " + recids);
-		URI uri = new URI(Config.getInstance().ITEM_URL + "?filter=hollis_catalog&filter=id_inst:(" + recids + ")&fields=shelfrank,id_inst&limit=250");
+
+		URI uri = new URI(Config.getInstance().ITEM_URL + "?filter=collection:hollis_catalog&filter=id_inst:(" + recids + ")&fields=shelfrank,id_inst&limit=250");
 		JSONTokener tokener;
 		try {
 			Date start = new Date();
 			tokener = new JSONTokener(uri.toURL().openStream());
 			Date end = new Date();
-			log.debug("StackScoreProcesser query time: " + (end.getTime() - start.getTime()));
+			log.trace("StackScoreProcesser query time: " + (end.getTime() - start.getTime()));
 			log.trace("StackScoreProcesser query : " +  uri.toURL());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -44,7 +42,6 @@ public class StackScoreProcessor implements IProcessor {
 		
 		JSONObject stackscoreJson = new JSONObject(tokener);
 		String stackscoreXml = XML.toString(stackscoreJson);
-		System.out.println(stackscoreXml);
 		stackscoreXml = "<stackscore>" + stackscoreXml + "</stackscore>";
 		log.trace("StackScoreProcessor result:" + stackscoreXml);
 		

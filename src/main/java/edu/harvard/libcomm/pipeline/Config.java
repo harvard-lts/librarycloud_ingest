@@ -41,6 +41,7 @@ public class Config {
 	public String SOLR_URL;
 	public String HOLDINGS_URL;
 	public String ITEM_URL;
+	public String COLLECTIONS_URL;
 	
 	private static Config conf;
 	
@@ -60,6 +61,7 @@ public class Config {
 		SOLR_URL = props.getProperty("solr_url");
 		HOLDINGS_URL = props.getProperty("holdings_url");
 		ITEM_URL = props.getProperty("item_url");
+		COLLECTIONS_URL = props.getProperty("collections_url");
 	
 	}
 	

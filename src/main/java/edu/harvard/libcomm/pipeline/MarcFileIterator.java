@@ -56,18 +56,17 @@ public class MarcFileIterator implements Iterator<String> {
             Payload payload = new Payload();
             payload.setSource("aleph");
             payload.setFormat("mods");
-            try {
-				payload.setData(output.toString("UTF-8").replace("<collection>", "<collection " + "xmlns=\"http://www.loc.gov/MARC21/slim\"" + ">"));
-				//payload.setData(output.toString("UTF-8"));
-
-            } catch (UnsupportedEncodingException e) {
-			    e.printStackTrace();
+			try {
+				String data = filterContent(output.toString("UTF-8"));
+				payload.setData(data);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
 			}
+
             message.setPayload(payload);
             try {
 				return MessageUtils.marshalMessage(message);
 			} catch (JAXBException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return null;
 			}
@@ -79,5 +78,12 @@ public class MarcFileIterator implements Iterator<String> {
     @Override
     public void remove() {
         throw new UnsupportedOperationException();
+    }
+    
+    private String filterContent(String content) {
+    	content = content.replace("<collection>", "<collection " + "xmlns=\"http://www.loc.gov/MARC21/slim\"" + ">");
+    	content = content.replace("&#x2;","");
+    	content = content.replace("&#x1f;","");
+        return content.replaceAll("[^\\u0009\\u000a\\u000d\\u0020-\\uD7FF\\uE000-\\uFFFD]", "");
     }
 }

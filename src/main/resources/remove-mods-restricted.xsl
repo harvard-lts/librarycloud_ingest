@@ -17,7 +17,7 @@
             <xsl:value-of select=".[not(contains(mods:recordInfo/mods:recordOrigin[starts-with(.,'Open Metadata')],'RES-C')) and not(contains(mods:recordInfo/mods:recordOrigin[starts-with(.,'Open Metadata')],'RES-D'))]"></xsl:value-of>
         </xsl:variable>
         -->
-        <xsl:if test="not(contains(mods:recordInfo/mods:recordOrigin[starts-with(.,'Open Metadata')],'RES-C')) and not(contains(mods:recordInfo/mods:recordOrigin[starts-with(.,'Open Metadata')],'RES-D'))">
+        <xsl:if test="not(mods:recordInfo/mods:recordOrigin='Open Metadata Status: RES-C') and not(mods:recordInfo/mods:recordOrigin='Open Metadata Status: RES-D')">
             <xsl:copy-of select="."/>            
         </xsl:if>
     </xsl:template>

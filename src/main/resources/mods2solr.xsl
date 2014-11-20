@@ -2,7 +2,10 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs"
     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mods="http://www.loc.gov/mods/v3" 
-    xmlns:usage="http://lib.harvard.edu/usagedata" version="1.0">
+    xmlns:usage="http://lib.harvard.edu/usagedata" version="1.0"
+    xmlns:collection="http://api.lib.harvard.edu/v2/collection"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    >
 
     <xsl:output indent="no"/>
 
@@ -17,6 +20,20 @@
             <xsl:apply-templates select="mods:titleInfo"/>
             <xsl:apply-templates select="mods:name"/>
             <xsl:apply-templates select="mods:typeOfResource"/>
+            <!-- put the isOnline field here to keep grouped woth isCollection and isManuscript -->
+            <xsl:element name="field">
+                <xsl:attribute name="name">
+                    <xsl:text>isOnline</xsl:text>
+                </xsl:attribute>
+                <xsl:choose>
+                    <xsl:when test="mods:location/mods:url">
+                        <xsl:text>true</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>false</xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:element>
             <xsl:apply-templates select="mods:genre"/>
             <xsl:apply-templates select="mods:originInfo"/>
             <xsl:apply-templates select="mods:language"/>
@@ -32,6 +49,7 @@
             <xsl:apply-templates select="mods:recordInfo"/>
             <xsl:apply-templates select="mods:relatedItem[@type='series']"/>
             <xsl:apply-templates select="mods:extension/usage:usageData/usage:stackScore"/>
+            <xsl:apply-templates select="mods:extension/collection:collection/dc:title"/>
             <!--
             <xsl:apply-templates select="//mods:relatedItem[@displayLabel='collection']"/>
             <xsl:apply-templates select="mods:relatedItem[@type='constituent']"/>
@@ -107,10 +125,10 @@
             </xsl:attribute>
             <xsl:choose>
                 <xsl:when test="@manuscript='yes'">
-                    <xsl:text>yes</xsl:text>
+                    <xsl:text>true</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:text>no</xsl:text>
+                    <xsl:text>false</xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:element>
@@ -120,10 +138,10 @@
             </xsl:attribute>
             <xsl:choose>
                 <xsl:when test="@collection='yes'">
-                    <xsl:text>yes</xsl:text>
+                    <xsl:text>true</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:text>no</xsl:text>
+                    <xsl:text>false</xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:element>
@@ -377,6 +395,19 @@
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>urn</xsl:text>
+            </xsl:attribute>
+            <xsl:choose>
+                <xsl:when test="contains(.,'?')">
+                    <xsl:value-of select="substring-before(substring-after(.,'http://nrs.harvard.edu/'),'?')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="substring-after(.,'http://nrs.harvard.edu/')"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="mods:recordInfo">
@@ -487,6 +518,15 @@
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>stackscore</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>        
+    </xsl:template>
+ 
+    <xsl:template match="dc:title">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>collectionTitle</xsl:text>
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>        

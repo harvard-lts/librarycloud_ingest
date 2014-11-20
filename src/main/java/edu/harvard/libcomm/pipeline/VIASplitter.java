@@ -6,12 +6,13 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 
 
-public class EADSplitter implements ISplitter {
-	protected Logger log = Logger.getLogger(EADSplitter.class); 	
+public class VIASplitter implements ISplitter {
+	protected Logger log = Logger.getLogger(VIASplitter.class); 	
 
 	public Iterator getIterator(InputStream is) throws Exception {
-		EADReader reader = new EADReader(is);
-	    return new EADComponentIterator(reader);
+		
+		VIAReader reader = new VIAReader(is);
+	    return new VIAComponentIterator(reader);
 	}
 
 

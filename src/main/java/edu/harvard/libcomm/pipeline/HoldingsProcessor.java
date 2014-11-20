@@ -19,20 +19,21 @@ public class HoldingsProcessor implements IProcessor {
 	
 		String data = null;
 		String recids = "0";
-		libCommMessage.setCommand("PUBLISH");
+
 		try {
 			recids = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/recids.xsl",null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
+
 		URI uri = new URI(Config.getInstance().HOLDINGS_URL + "?filter=MarcLKRB:(" + recids + ")&fields=MarcLKRB,Marc852B,Marc856U,DisplayCallNumber&limit=250");
 		JSONTokener tokener;
 		try {
 			Date start = new Date();
 			tokener = new JSONTokener(uri.toURL().openStream());
 			Date end = new Date();
-			log.debug("HoldingProcesser query time: " + (end.getTime() - start.getTime()));
+			log.trace("HoldingProcesser query time: " + (end.getTime() - start.getTime()));
 			log.trace("HoldingProcesser query : " +  uri.toURL());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -56,8 +57,4 @@ public class HoldingsProcessor implements IProcessor {
         libCommMessage.setPayload(payload);
         
 	}
-
-
-
-
 }

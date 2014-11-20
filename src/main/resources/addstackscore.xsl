@@ -8,9 +8,8 @@
     <xsl:output indent="no"/>
     <xsl:strip-space elements="*"/>
  
-    <xsl:param name="param1"><stackscore/></xsl:param> 
- 
-     
+    <xsl:param name="param1"><stackscore/></xsl:param>
+   
     <xsl:template match="@*|node()">
         <xsl:copy-of select="."/>
     </xsl:template>
@@ -28,15 +27,17 @@
             <xsl:variable name="hollisid"><xsl:value-of select="./mods:recordInfo/mods:recordIdentifier"/></xsl:variable>
             
             <xsl:for-each select="$stackscore//docs[id_inst=$hollisid]">
-                <xsl:element name="extension" namespace="http://www.loc.gov/mods/v3">
-                        <xsl:if test="$stackscore//docs[id_inst=$hollisid]/shelfrank">
-                            <xsl:element name="usageData" namespace="http://lib.harvard.edu/usagedata">
-                                <xsl:element name="stackScore" namespace="http://lib.harvard.edu/usagedata">
-                                    <xsl:value-of select="$stackscore//docs[id_inst=$hollisid]/shelfrank"/>
+                <xsl:if test="position()=1">
+                    <xsl:element name="extension" namespace="http://www.loc.gov/mods/v3">
+                            <xsl:if test="$stackscore//docs[id_inst=$hollisid]/shelfrank">
+                                <xsl:element name="usageData" namespace="http://lib.harvard.edu/usagedata">
+                                    <xsl:element name="stackScore" namespace="http://lib.harvard.edu/usagedata">
+                                        <xsl:value-of select="$stackscore//docs[id_inst=$hollisid]/shelfrank"/>
+                                    </xsl:element>
                                 </xsl:element>
-                            </xsl:element>
-                        </xsl:if>
-                </xsl:element>
+                            </xsl:if>
+                    </xsl:element>
+                </xsl:if>
             </xsl:for-each>
             
         </xsl:copy>

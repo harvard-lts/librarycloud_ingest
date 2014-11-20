@@ -1,3 +1,4 @@
 /target/
 /src/main/resources/aws.properties
+/src/main/resources/librarycloud.env.properties
 /bin/
