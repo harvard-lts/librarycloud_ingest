@@ -36,7 +36,7 @@
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.MarcSplitter"/>
         </property>
-    </bean>	
+    </bean>
 
 	<bean id="deleteSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
         <property name="splitter">
@@ -48,7 +48,7 @@
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.EADSplitter"/>
         </property>
-    </bean>	
+    </bean>
     <bean id="eadRawSplitter" class="edu.harvard.libcomm.pipeline.RawSplitter">
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.EADRawSplitter"/>
@@ -140,7 +140,7 @@
                 <transform>
                     <simple>${exception}${exception.stacktrace}${in.body}</simple>
                 </transform>
-            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-dead-letter?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient"/>
+                <to uri="aws-sqs://{{librarycloud.sqs.environment}}-dead-letter?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient"/>
                 <doCatch>
                     <!-- If can't post the full message to the dead letter queue, post only the headers to the queue -->
                     <exception>java.lang.Exception</exception>
@@ -178,8 +178,8 @@
                     <to uri="direct:dead-letter" />
                 </doCatch>
             </doTry>
-         </route>
-         
+        </route>
+
 
 
 		<!-- need to change from filesys to aws queue -->
@@ -258,7 +258,7 @@
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-02?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-02" /> -->
         </route>
- 
+
         <route id="addstackscoretomods-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-02" /> -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-02?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
@@ -292,7 +292,7 @@
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-end?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
         </route>
-        
+
         <!-- Publishing records to consumers -->
         <route id="publish-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
