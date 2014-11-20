@@ -22,7 +22,7 @@ public class IngestDAO {
 	public IngestDAO(){}
 
 	@Transactional
-	public Set<String> CheckAndSaveItemChecksum(Map<String, Integer> items)
+	public Set<String> checkAndSaveItemChecksum(Map<String, Integer> items)
 	{
 		Map<String, Integer> sameMap = new HashMap<String, Integer>();
 		for(Entry<String, Integer> entry : items.entrySet()){

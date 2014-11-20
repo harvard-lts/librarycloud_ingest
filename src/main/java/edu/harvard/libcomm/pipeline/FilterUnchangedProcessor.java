@@ -22,27 +22,26 @@ public class FilterUnchangedProcessor implements IProcessor {
 
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {	
 		String recids = "0";
-		libCommMessage.setCommand("ENRICH");
 		try {
 			recids = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/recids-MODS-checksum.xsl",null);	
 		} catch (Exception e) {
 			log.info(e);
-			log.error("Could not transform record from MARC to MODS");
+			log.error("Could not extract record ids from MODS message");
 			throw e;
 		}	
-		log.info("RecIds Result:" + recids);
-		Map<String, Integer> recordMap = SplitIdAndChecksum(recids);
+
+		Map<String, Integer> recordMap = splitIdAndChecksum(recids);
 
         Payload payload = new Payload();
-        payload.setSource("mods");
-        payload.setFormat("mods");
 
-		log.info("starting insert!");
-		Set<String> duplicateRecordIds = ingestDao.CheckAndSaveItemChecksum(recordMap);
-		log.info(duplicateRecordIds.size() + " duplicate records found.");
-		
+		Set<String> duplicateRecordIds = ingestDao.checkAndSaveItemChecksum(recordMap);
+		log.debug(recordMap.size() + " records, " + duplicateRecordIds.size() + " duplicates");
 		if(duplicateRecordIds == null ||  duplicateRecordIds.size() == 0){
 	        return;
+		} else if (duplicateRecordIds.size() == recordMap.size()){
+			payload.setData("");
+			libCommMessage.setPayload(payload);
+			return;
 		}
 		//remove duplicates
 		String duplicateRecordIdString = "<recordIdList><recordId>" + StringUtils.join(duplicateRecordIds,"</recordId><recordId>") + "</recordId></recordIdList>"; 
@@ -52,7 +51,7 @@ public class FilterUnchangedProcessor implements IProcessor {
         libCommMessage.setPayload(payload);
 	}
 	
-	private Map<String, Integer> SplitIdAndChecksum(String body)
+	private Map<String, Integer> splitIdAndChecksum(String body)
 	{
 		Map<String, Integer> result = new HashMap<String, Integer>();
 		String[] tuples = body.split("\\|");
