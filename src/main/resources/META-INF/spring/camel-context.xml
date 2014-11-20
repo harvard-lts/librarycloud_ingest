@@ -319,26 +319,11 @@
             <process ref="filterUnchangedProcessor"/>
             <choice>
                 <when>
-                <xpath>not(contains(/lib_comm_message/payload/data, "modsCollection"))</xpath>
+                <xpath>string-length(/lib_comm_message/payload/data) = 0</xpath>
                 <to uri="file://{{librarycloud.files.basepath}}/publish-public-dupe" />
             </when>
             <otherwise>
                 <to uri="file://{{librarycloud.files.basepath}}/publish-public-to" />
-
-            </otherwise>
-            </choice>
-        </route>
--->
-<route id="FilterUnchangedMessages" errorHandlerRef="eh">
-            <from uri="file://{{librarycloud.files.basepath}}/publish-public-from" />
-            <process ref="filterUnchangedProcessor"/>
-            <choice>
-                <when>
-                <xpath>count(/modsCollection) != 0</xpath>
-                <to uri="file://{{librarycloud.files.basepath}}/publish-public-to" />
-            </when>
-            <otherwise>
-                <to uri="file://{{librarycloud.files.basepath}}/publish-public-dupe" />
 
             </otherwise>
             </choice>
