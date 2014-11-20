@@ -26,7 +26,7 @@ public class FilterUnchangedProcessor implements IProcessor {
 			recids = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/recids-MODS-checksum.xsl",null);	
 		} catch (Exception e) {
 			log.info(e);
-			log.error("Could not extract record ids from MODS message");
+			log.error("Could not extract record ids MODS message");
 			throw e;
 		}	
 
@@ -35,7 +35,7 @@ public class FilterUnchangedProcessor implements IProcessor {
         Payload payload = new Payload();
 
 		Set<String> duplicateRecordIds = ingestDao.checkAndSaveItemChecksum(recordMap);
-		log.debug(recordMap.size() + " records, " + duplicateRecordIds.size() + " duplicates");
+		log.info(recordMap.size() + " records, " + duplicateRecordIds.size() + " duplicates");
 		if(duplicateRecordIds == null ||  duplicateRecordIds.size() == 0){
 	        return;
 		} else if (duplicateRecordIds.size() == recordMap.size()){

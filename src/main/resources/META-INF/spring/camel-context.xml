@@ -328,6 +328,21 @@
             </otherwise>
             </choice>
         </route>
+-->
+<route id="FilterUnchangedMessages" errorHandlerRef="eh">
+            <from uri="file://{{librarycloud.files.basepath}}/publish-public-from" />
+            <process ref="filterUnchangedProcessor"/>
+            <choice>
+                <when>
+                <xpath>count(/modsCollection) != 0</xpath>
+                <to uri="file://{{librarycloud.files.basepath}}/publish-public-to" />
+            </when>
+            <otherwise>
+                <to uri="file://{{librarycloud.files.basepath}}/publish-public-dupe" />
+
+            </otherwise>
+            </choice>
+        </route>
 
 	
     </camelContext>
