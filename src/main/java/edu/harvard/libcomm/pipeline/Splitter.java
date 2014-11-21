@@ -24,7 +24,7 @@ public class Splitter  {
 		return splitter.getIterator(getResourceInputStream(body));
 	}
 
-	public InputStream getResourceInputStream(String body) throws FileNotFoundException, IOException, JAXBException  {
+	protected InputStream getResourceInputStream(String body) throws FileNotFoundException, IOException, JAXBException  {
 
 		LibCommMessage libCommMessage = MessageUtils.unmarshalLibCommMessage(new StringReader(body));
 

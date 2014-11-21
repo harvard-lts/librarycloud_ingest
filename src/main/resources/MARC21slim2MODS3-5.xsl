@@ -8,7 +8,7 @@
 <!-- Harvard modifications -->
 <!-- 
 
-Revision 2.2 use MS:ALEPH in recordIdentifier/@source rather than 003	
+Revision 2.2 use MH:ALEPH in recordIdentifier/@source rather than 003	
 Revision 2.1 change to indent="no" 
 Revision 2.0 added omit-xml-declaration ="yes" on xsl output element - we need to wrap mods in message xml doc 
 	
@@ -2665,7 +2665,7 @@ Revision 1.02 - Added Log Comment  2003/03/24 19:37:42  ckeith
 			</xsl:for-each>
 			<xsl:for-each select="marc:controlfield[@tag=001]">
 				<recordIdentifier>
-					<!-- use hardcoded MS:ALEPH instead -->
+					<!-- use hardcoded MH:ALEPH instead -->
 					<!-- 
 					<xsl:if test="../marc:controlfield[@tag=003]">
 						<xsl:attribute name="source">
@@ -2674,7 +2674,7 @@ Revision 1.02 - Added Log Comment  2003/03/24 19:37:42  ckeith
 					</xsl:if>
 					 -->
 					<xsl:attribute name="source">
-						<xsl:text>MS:ALEPH</xsl:text>
+						<xsl:text>MH:ALEPH</xsl:text>
 					</xsl:attribute>					 
 					<xsl:value-of select="substring-before(.,'-')"/>
 				</recordIdentifier>

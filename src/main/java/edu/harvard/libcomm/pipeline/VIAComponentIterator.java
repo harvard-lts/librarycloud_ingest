@@ -22,11 +22,11 @@ import edu.harvard.libcomm.message.LibCommMessage.Payload;
 public class VIAComponentIterator implements Iterator<String> {
 	protected Logger log = Logger.getLogger(VIAComponentIterator.class);
 
-	private VIAReader viaReader;
-	private NodeList nodes;
-	private DOMSource domSource;
-	private Transformer transformer;
-	private int position = 0;
+	protected VIAReader viaReader;
+	protected NodeList nodes;
+	protected DOMSource domSource;
+	protected Transformer transformer;
+	protected int position = 0;
 
     public VIAComponentIterator(VIAReader reader) throws Exception {
         this.viaReader = reader;
@@ -43,32 +43,32 @@ public class VIAComponentIterator implements Iterator<String> {
     @Override
     public String next() {
     	log.trace("Processing node " + position + " of " + nodes.getLength());
+        String viaComponentMods = "";
     	while ((nodes != null) && (position < nodes.getLength())) {
 	        String nodeName = nodes.item(position).getNodeName();
 	        String nodeValue = nodes.item(position).getNodeValue();
 	        position++;
-        	String viaComponentMods = null;
 			try {
-				viaComponentMods = transformVIA(nodeValue);
+				viaComponentMods += transformVIA(nodeValue);
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new NoSuchElementException();
 			}
-			LibCommMessage lcmessage = new LibCommMessage();
-			Payload payload = new Payload();
-			payload.setFormat("MODS");
-			payload.setSource("VIA");
-			payload.setData(viaComponentMods);
-			lcmessage.setCommand("ENRICH");
-        	lcmessage.setPayload(payload);
-        	try {
-        		return MessageUtils.marshalMessage(lcmessage);
-			} catch (JAXBException e) {
-				e.printStackTrace();
-				return null;
-			}		        		
+            break;
     	}
-    	throw new NoSuchElementException();
+        LibCommMessage lcmessage = new LibCommMessage();
+        Payload payload = new Payload();
+        payload.setFormat("MODS");
+        payload.setSource("VIA");
+        payload.setData(viaComponentMods);
+        lcmessage.setCommand("ENRICH");
+        lcmessage.setPayload(payload);
+        try {
+            return MessageUtils.marshalMessage(lcmessage);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+            return null;
+        }                       
 	}
 
     @Override
@@ -76,14 +76,14 @@ public class VIAComponentIterator implements Iterator<String> {
         throw new UnsupportedOperationException();
     }
 
-    private Transformer buildTransformer(String xslFilePath) throws Exception {
+    protected Transformer buildTransformer(String xslFilePath) throws Exception {
 		final InputStream xsl = new FileInputStream(xslFilePath);
 		final TransformerFactory tFactory = TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl",null);
         StreamSource styleSource = new StreamSource(xsl);
         return tFactory.newTransformer(styleSource);    	
     }
 
-	private String transformVIA (String xslParam) throws Exception {		
+	protected String transformVIA (String xslParam) throws Exception {		
        	this.transformer.setParameter("urn", xslParam);
 		StringWriter writer = new StringWriter();
         StreamResult result = new StreamResult(writer);
