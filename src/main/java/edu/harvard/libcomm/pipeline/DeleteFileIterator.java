@@ -25,8 +25,7 @@ public class DeleteFileIterator {
     	String id = null;
     	while((id = br.readLine()) != null){
     		System.out.println(id);
-    		deleteFromSolr(id.trim());
-			LibCommMessage lcmessage = new LibCommMessage();
+    		LibCommMessage lcmessage = new LibCommMessage();
 			Payload payload = new Payload();
 			payload.setFormat("DELETE_ID");
 			payload.setSource("MARCDELETE");
@@ -38,29 +37,5 @@ public class DeleteFileIterator {
 		return idList.iterator();
     
     }
-    
-    private void deleteFromSolr(String id) throws Exception{
-	    HttpSolrServer server = null;
-		Date start = new Date();
-	    server = SolrServer.getSolrConnection();
-		UpdateRequest update = new UpdateRequest();
-		update.deleteById(id);
-		if (commitWithinTime > 0) {
-			update.setCommitWithin(commitWithinTime);
-		    update.process(server);
-		} else {
-		    update.process(server);
-    	    server.commit();
-		}
-		Date end = new Date();
-		log.debug("Solr delete time: " + (end.getTime() - start.getTime()));
-    }
-  
-	public void setCommitWithinTime(Integer commitWithinTime) {
-		this.commitWithinTime = commitWithinTime;
-	}
 
-	public Integer getCommitWithinTime() {
-		return this.commitWithinTime;
-	}
 }
