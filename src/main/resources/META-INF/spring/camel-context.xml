@@ -66,6 +66,11 @@
             <bean class="edu.harvard.libcomm.pipeline.ModsProcessor"/>
         </property>
     </bean>
+    <bean id="filterUnchangedProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.FilterUnchangedProcessor"/>
+        </property>
+    </bean>
     <bean id="holdingsProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.HoldingsProcessor"/>
@@ -325,5 +330,22 @@
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-done?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient"/>
             <!-- <to uri="file://{{librarycloud.files.basepath}}/done" /> -->
         </route>
+
+<route id="FilterUnchangedMessages" errorHandlerRef="eh">
+            <from uri="file://{{librarycloud.files.basepath}}/publish-public-from" />
+            <process ref="filterUnchangedProcessor"/>
+            <choice>
+                <when>
+                <xpath>string-length(/lib_comm_message/payload/data) = 0</xpath>
+                <to uri="file://{{librarycloud.files.basepath}}/publish-public-dupe" />
+            </when>
+            <otherwise>
+                <to uri="file://{{librarycloud.files.basepath}}/publish-public-to" />
+
+            </otherwise>
+            </choice>
+        </route>
+
+	
     </camelContext>
 </beans>
