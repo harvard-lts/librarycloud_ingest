@@ -20,7 +20,7 @@
             <xsl:apply-templates select="mods:titleInfo"/>
             <xsl:apply-templates select="mods:name"/>
             <xsl:apply-templates select="mods:typeOfResource"/>
-            <!-- put the isOnline field here to keep grouped woth isCollection and isManuscript -->
+            <!-- put the isOnline field here to keep grouped with isCollection and isManuscript -->
             <xsl:element name="field">
                 <xsl:attribute name="name">
                     <xsl:text>isOnline</xsl:text>
