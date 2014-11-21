@@ -386,16 +386,19 @@
 
 <xsl:template match="relatedWork">
 	<relatedItem>
+		<xsl:apply-templates select="relationship"/>
 		<titleInfo>
 			<title>
 				<xsl:value-of select="textElement"/>
 			</title>
 		</titleInfo>
+		<!--
 		<extension xmlns:via="http://via.harvard.edu">
 		    <via:relationship>
 			<xsl:value-of select="relationship"/>
 		    </via:relationship>	
 		</extension>
+		-->
 		<xsl:apply-templates select="creator"/>
 		<xsl:call-template name="originInfo"/>
 		    <xsl:if test="contains(@href,$urn)">
@@ -406,6 +409,10 @@
 			</location>
 		    </xsl:if>
 	</relatedItem>
+</xsl:template>
+
+<xsl:template match="relationship">
+	<xsl:attribute name="displayLabel"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="relatedInformation">
@@ -462,7 +469,9 @@
 			<xsl:attribute name="displayLabel">
 				<xsl:value-of select="'repository'"/>
 			</xsl:attribute>
+			<xsl:value-of select="repositoryName"/>
 <!-- 11 may 2006 mjv added number to end of repos name -->
+			<!--
 			<xsl:choose>
 			  <xsl:when test="number">
 			    <xsl:value-of select="repositoryName"/><xsl:text>; </xsl:text><xsl:value-of select="number"/>
@@ -471,9 +480,17 @@
 			    <xsl:value-of select="repositoryName"/>
 			  </xsl:otherwise>
 			</xsl:choose>
+			-->
 			<!-- do not display repository numbers -->
 		</physicalLocation>
+		<xsl:apply-templates select="number" mode="reposNo"/>
 	</location>
+</xsl:template>
+
+<xsl:template match="number" mode="reposNo">
+	<shelfLocator>
+		<xsl:value-of select="."/>
+	</shelfLocator>
 </xsl:template>
 
 <xsl:template match="location">
