@@ -36,7 +36,7 @@
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.MarcSplitter"/>
         </property>
-    </bean>	
+    </bean>
 
 	<bean id="deleteSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
         <property name="splitter">
@@ -66,7 +66,14 @@
     </bean>
 
     <bean id="modsAggregator" class="edu.harvard.libcomm.pipeline.MODSAggregatorStrategy"/>
-    <bean id="modsRawAggregator" class="edu.harvard.libcomm.pipeline.MODSRawAggregatorStrategy"/>
+    
+    <bean id="modsEADRawAggregator" class="edu.harvard.libcomm.pipeline.MODSRawAggregatorStrategy">
+        <property name="source" value="OASIS"/>
+    </bean>
+
+    <bean id="modsVIARawAggregator" class="edu.harvard.libcomm.pipeline.MODSRawAggregatorStrategy">
+        <property name="source" value="VIA"/>
+    </bean>
 
     <bean id="modsProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
@@ -166,7 +173,7 @@
                     <to uri="direct:dead-letter" />
                 </doCatch>
             </doTry>
-         </route>
+        </route>
          
 
 
@@ -210,14 +217,85 @@
         </route>
 
 
-        <route id="solrDelete" errorHandlerRef="eh">
-            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-start" /> -->
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <!--<to uri="seda:addholdingstomods?size=20&amp;blockWhenFull=true" />-->
+        <!-- Option for ingesting OASIS data from a raw XML file -->
+        <route id="oasis-ingest-raw-file" errorHandlerRef="eh">
+            <from uri="file://{{librarycloud.files.basepath}}/ingest-oasis-file" />
+            <!-- Try block required for errors thrown out of the splitter -->
+            <doTry>
+                <split streaming="true">
+                    <tokenize token="ead" xml="true"/>                
+                    <split streaming="true" parallelProcessing="true">
+                        <method bean="eadRawSplitter" method="split"/>
+                        <aggregate strategyRef="modsEADRawAggregator" completionSize="100" completionInterval="10000">
+                            <correlationExpression>
+                                <simple>all</simple>
+                            </correlationExpression>
+                            <completionPredicate>
+                                <simple>${header.messageLength} > 150000</simple>
+                            </completionPredicate>  
+                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
+                            <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
+                        </aggregate>
+                    </split>
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                </doCatch>
+            </doTry>
         </route>
 
 
-     
+
+        <!-- VIA ingest and normalization -->
+        <!--  Read from raw VIA export files dropped on disk.
+              We want to change this to a model whereby the command is read from SQS with a reference
+              to the raw VIA file in S3, which camel will download; rather than forcing us to drop the
+              raw VIA file on a specific server.   -->
+        <route id="via-ingest-raw-file" errorHandlerRef="eh">
+            <from uri="file://{{librarycloud.files.basepath}}/ingest-via-file" />
+            <doTry>
+                <split streaming="true">
+                    <tokenize token="viaRecord" xml="true"/>                
+                    <split streaming="true" parallelProcessing="true">
+                        <method bean="viaRawSplitter" method="split"/>
+                        <aggregate strategyRef="modsVIARawAggregator" completionSize="100" completionInterval="10000">
+                            <correlationExpression>
+                                <simple>all</simple>
+                            </correlationExpression>
+                            <completionPredicate>
+                                <simple>${header.messageLength} > 150000</simple>
+                            </completionPredicate>  
+                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
+                            <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
+                        </aggregate>
+                    </split>
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                </doCatch>
+            </doTry>
+        </route>
+        <!-- Route messages to the correct part of the enrich pipeline -->
+        <route id="enrich-start" errorHandlerRef="eh">
+            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-start" /> -->
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <choice>
+                <when>
+                    <xpath>//source = 'aleph'</xpath>
+                    <to uri="seda:enrich-01?size=20&amp;blockWhenFull=true" />
+                </when>
+                <when>
+                    <xpath>//source = 'ALEPH'</xpath>
+                    <to uri="seda:enrich-01?size=20&amp;blockWhenFull=true" />
+                </when>
+                <otherwise>
+                    <!-- Skip Holdings and Stackscore steps for non-aleph records -->
+                    <to uri="seda:enrich-03?size=20&amp;blockWhenFull=true" />
+                </otherwise>
+            </choice>
+        </route>
         <route id="addholdingstomods-seda" errorHandlerRef="eh">
             <from uri="direct:enrich-01"/>
             <to uri="seda:enrich-01?size=20&amp;blockWhenFull=true" />

@@ -36,14 +36,15 @@ public class EADRawComponentIterator extends EADComponentIterator {
 	        position++;
 	        if (nodeName.equals("id")) {
 				try {
-					eadComponentMods += transformOASIS(nodeValue);
+					eadComponentMods = transformOASIS(nodeValue);
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new NoSuchElementException();
 				}
 	        }
+	        return eadComponentMods;
     	}
-		return eadComponentMods;
+		throw new NoSuchElementException();
 	}
     
 }

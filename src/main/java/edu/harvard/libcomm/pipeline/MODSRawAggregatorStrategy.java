@@ -23,6 +23,7 @@ public class MODSRawAggregatorStrategy implements CompletionAwareAggregationStra
  
 	protected Logger log = Logger.getLogger(MODSAggregatorStrategy.class); 
 	protected LibCommMessage libCommMessage = null;
+    private String source;
     
     /**
      * Combine two LibComMessages into a new LibComMesasge with the payload data concatenated
@@ -60,7 +61,7 @@ public class MODSRawAggregatorStrategy implements CompletionAwareAggregationStra
         LibCommMessage lcmessage = new LibCommMessage();
         Payload payload = new Payload();
         payload.setFormat("MODS");
-        payload.setSource("VIA");
+        payload.setSource(getSource());
         payload.setData(body);
         lcmessage.setCommand("ENRICH");
         lcmessage.setPayload(payload);
@@ -70,6 +71,14 @@ public class MODSRawAggregatorStrategy implements CompletionAwareAggregationStra
             log.error(e);
             e.printStackTrace();
         }                       
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
 }
