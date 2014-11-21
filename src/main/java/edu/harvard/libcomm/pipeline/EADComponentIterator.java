@@ -35,11 +35,11 @@ import edu.harvard.libcomm.message.LibCommMessage.Payload;
 public class EADComponentIterator implements Iterator<String> {
 	protected Logger log = Logger.getLogger(EADComponentIterator.class);
 
-	private EADReader eadReader;
-	private NodeList nodes;
-	private DOMSource domSource;
-	private Transformer transformer;
-	private int position = 0;
+	protected EADReader eadReader;
+	protected NodeList nodes;
+	protected DOMSource domSource;
+	protected Transformer transformer;
+	protected int position = 0;
 
     public EADComponentIterator(EADReader reader) throws Exception {
         this.eadReader = reader;
@@ -94,14 +94,14 @@ public class EADComponentIterator implements Iterator<String> {
         throw new UnsupportedOperationException();
     }
 
-    private Transformer buildTransformer(String xslFilePath) throws Exception {
+    protected Transformer buildTransformer(String xslFilePath) throws Exception {
 		final InputStream xsl = new FileInputStream(xslFilePath);
 		final TransformerFactory tFactory = TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl",null);
         StreamSource styleSource = new StreamSource(xsl);
         return tFactory.newTransformer(styleSource);    	
     }
 
-	private String transformOASIS (String xslParam) throws Exception {		
+	protected String transformOASIS (String xslParam) throws Exception {		
        	this.transformer.setParameter("componentid", xslParam);
 		StringWriter writer = new StringWriter();
         StreamResult result = new StreamResult(writer);

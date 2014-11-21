@@ -160,7 +160,7 @@
 			</xsl:otherwise>	
 		</xsl:choose>
 		<title>
-			<xsl:value-of select="textElement"/>
+			<xsl:value-of select="normalize-space(textElement)"/>
 		</title>
 	</titleInfo>
 </xsl:template>	

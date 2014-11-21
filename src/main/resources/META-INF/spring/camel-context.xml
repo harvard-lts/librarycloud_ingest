@@ -36,7 +36,7 @@
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.MarcSplitter"/>
         </property>
-    </bean>	
+    </bean>
 
 	<bean id="deleteSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
         <property name="splitter">
@@ -49,11 +49,25 @@
             <bean class="edu.harvard.libcomm.pipeline.EADSplitter"/>
         </property>
     </bean>
+    <bean id="eadRawSplitter" class="edu.harvard.libcomm.pipeline.RawSplitter">
+        <property name="splitter">
+            <bean class="edu.harvard.libcomm.pipeline.EADRawSplitter"/>
+        </property>
+    </bean>
     <bean id="viaSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.VIASplitter"/>
         </property>
     </bean>
+    <bean id="viaRawSplitter" class="edu.harvard.libcomm.pipeline.RawSplitter">
+        <property name="splitter">
+            <bean class="edu.harvard.libcomm.pipeline.VIARawSplitter"/>
+        </property>
+    </bean>
+
+    <bean id="modsAggregator" class="edu.harvard.libcomm.pipeline.MODSAggregatorStrategy"/>
+    <bean id="modsRawAggregator" class="edu.harvard.libcomm.pipeline.MODSRawAggregatorStrategy"/>
+
     <bean id="modsProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.ModsProcessor"/>
@@ -131,7 +145,6 @@
                 </doCatch>
             </doTry>
         </route>
-
         <!-- Aleph ingest and normalization -->
         <route id="aleph-ingest-split" errorHandlerRef="eh">
             <!-- <from uri="file:{{librarycloud.files.basepath}}/ingest-aleph?include=.*.xml" /> -->
@@ -148,7 +161,7 @@
                     <to uri="direct:dead-letter" />
                 </doCatch>
             </doTry>
-         </route>
+        </route>
          
 
 
@@ -184,21 +197,29 @@
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start" /> -->
         </route>
-
         <!-- OASIS ingest and normalization -->
         <route id="oasis-ingest-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}/ingest-oasis" /> -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-oasis?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
             <to uri="seda:oasis-ingest-seda?size=4&amp;blockWhenFull=true"/>
         </route>
+
         <route id="oasis-ingest" errorHandlerRef="eh">
             <from uri="seda:oasis-ingest-seda?concurrentConsumers=4" />
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
                 <split streaming="true" parallelProcessing="true">
                     <method bean="eadSplitter" method="split"/>
-                    <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
-                    <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
+                    <aggregate strategyRef="modsAggregator" completionSize="100" completionInterval="10000">
+                        <correlationExpression>
+                            <simple>all</simple>
+                        </correlationExpression>
+                        <completionPredicate>
+                            <simple>${header.messageLength} > 150000</simple>
+                        </completionPredicate>  
+                        <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
+                        <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
+                    </aggregate>
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
@@ -207,20 +228,26 @@
             </doTry>
         </route>
 
-        <!-- VIA ingest and normalization -->
-        <route id="via-ingest-seda" errorHandlerRef="eh">
-            <!-- <from uri="file://{{librarycloud.files.basepath}}/ingest-via" /> -->
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-via?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
-            <to uri="seda:via-ingest-seda?size=10&amp;blockWhenFull=true"/>
-        </route>
-        <route id="via-ingest" errorHandlerRef="eh">
-            <from uri="seda:via-ingest-seda?concurrentConsumers=4" />
+        <!-- Option for ingesting OASIS data from a raw XML file -->
+        <route id="oasis-ingest-raw-file" errorHandlerRef="eh">
+            <from uri="file://{{librarycloud.files.basepath}}/ingest-oasis-file" />
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
-                <split streaming="true" parallelProcessing="true">
-                    <method bean="viaSplitter" method="split"/>
-                    <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
-                    <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
+                <split>
+                    <tokenize token="ead" xml="true"/>                
+                    <split streaming="true" parallelProcessing="true">
+                        <method bean="eadRawSplitter" method="split"/>
+                        <aggregate strategyRef="modsRawAggregator" completionSize="100" completionInterval="10000">
+                            <correlationExpression>
+                                <simple>all</simple>
+                            </correlationExpression>
+                            <completionPredicate>
+                                <simple>${header.messageLength} > 150000</simple>
+                            </completionPredicate>  
+                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
+                            <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
+                        </aggregate>
+                    </split>
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
@@ -230,7 +257,56 @@
         </route>
 
 
-     
+
+        <!-- VIA ingest and normalization -->
+        <!--  Read from raw VIA export files dropped on disk.
+              We want to change this to a model whereby the command is read from SQS with a reference
+              to the raw VIA file in S3, which camel will download; rather than forcing us to drop the
+              raw VIA file on a specific server.   -->
+        <route id="via-ingest-raw-file" errorHandlerRef="eh">
+            <from uri="file://{{librarycloud.files.basepath}}/ingest-via-file" />
+            <doTry>
+                <split>
+                    <tokenize token="viaRecord" xml="true"/>                
+                    <split streaming="true" parallelProcessing="true">
+                        <method bean="viaRawSplitter" method="split"/>
+                        <aggregate strategyRef="modsRawAggregator" completionSize="100" completionInterval="10000">
+                            <correlationExpression>
+                                <simple>all</simple>
+                            </correlationExpression>
+                            <completionPredicate>
+                                <simple>${header.messageLength} > 150000</simple>
+                            </completionPredicate>  
+                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
+                            <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
+                        </aggregate>
+                    </split>
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                </doCatch>
+            </doTry>
+        </route>
+        <!-- Route messages to the correct part of the enrich pipeline -->
+        <route id="enrich-start" errorHandlerRef="eh">
+            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-start" /> -->
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <choice>
+                <when>
+                    <xpath>//source = 'aleph'</xpath>
+                    <to uri="seda:enrich-01?size=20&amp;blockWhenFull=true" />
+                </when>
+                <when>
+                    <xpath>//source = 'ALEPH'</xpath>
+                    <to uri="seda:enrich-01?size=20&amp;blockWhenFull=true" />
+                </when>
+                <otherwise>
+                    <!-- Skip Holdings and Stackscore steps for non-aleph records -->
+                    <to uri="seda:enrich-03?size=20&amp;blockWhenFull=true" />
+                </otherwise>
+            </choice>
+        </route>
         <route id="addholdingstomods-seda" errorHandlerRef="eh">
             <from uri="direct:enrich-01"/>
             <to uri="seda:enrich-01?size=20&amp;blockWhenFull=true" />
@@ -241,7 +317,6 @@
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-02?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-02" /> -->
         </route>
-
         <route id="addstackscoretomods-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-02" /> -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-02?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
@@ -253,19 +328,17 @@
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-03?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-03" /> -->
         </route>
-
         <route id="addcollectionstomods-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-03" /> -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-03?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <to uri="seda:enrich-03?size=20&amp;blockWhenFull=true" />
         </route>
         <route id="addcollectionstomods" errorHandlerRef="eh">
-            <from uri="seda:enrich-03?concurrentConsumers=1"/>
+            <from uri="seda:enrich-03?concurrentConsumers=5"/>
             <process ref="collectionsProcessor"/>
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-end?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
         </route>
-
         <!-- Publishing records to consumers -->
         <route id="publish-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
@@ -278,7 +351,6 @@
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-publish-public?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
             <!-- <to uri="file://{{librarycloud.files.basepath}}/publish-public" /> -->
         </route>
-
         <!-- SOLR consumer for loading into item API -->
         <route id="modstosolr-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}/publish-public" /> -->
