@@ -322,13 +322,22 @@
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-03?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-03" /> -->
         </route>
-        <route id="addcollectionstomods-seda" errorHandlerRef="eh">
-            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-03" /> -->
+        <route id="addslcctomods-seda" errorHandlerRef="eh">
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-03?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <to uri="seda:enrich-03?size=20&amp;blockWhenFull=true" />
         </route>
+        <route id="addslcctomods" errorHandlerRef="eh">
+            <from uri="seda:enrich-03?concurrentConsumers=1"/>
+            <process ref="lccProcessor"/>
+            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-04?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
+        </route> 
+        <route id="addcollectionstomods-seda" errorHandlerRef="eh">
+            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-04" /> -->
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-04?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <to uri="seda:enrich-04?size=20&amp;blockWhenFull=true" />
+        </route>
         <route id="addcollectionstomods" errorHandlerRef="eh">
-            <from uri="seda:enrich-03?concurrentConsumers=5"/>
+            <from uri="seda:enrich-04?concurrentConsumers=5"/>
             <process ref="collectionsProcessor"/>
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-end?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
@@ -403,15 +412,6 @@
             <to uri="file://{{librarycloud.files.basepath}}/publish-public-solrDelete-output" />
           
         </route>
-        
-        <!--  template for using lcc processor-->
-        <!-- 
-        <route id="addslcctomods" errorHandlerRef="eh">
-            <from uri="file://{{librarycloud.files.basepath}}/enrich-02"/>
-            <process ref="lccProcessor"/>
-            <to uri="file://{{librarycloud.files.basepath}}/enrich-end" />
-        </route> 
-        -->
         
     </camelContext>
 </beans>
