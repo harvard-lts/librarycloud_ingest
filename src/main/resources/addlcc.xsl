@@ -45,7 +45,7 @@
                         <xsl:element name="subject" namespace="http://www.loc.gov/mods/v3">
                             <xsl:attribute name="authority"><xsl:text>LCC</xsl:text></xsl:attribute>
                             <xsl:element name="topic" namespace="http://www.loc.gov/mods/v3">
-                                <xsl:value-of select="$lcc//docs[id_inst=$hollisid]/loc_call_num_subject"/>
+                                <xsl:value-of select="$lcc//docs[id_inst=$hollisid]/loc_call_num_subject[1]"/>
                             </xsl:element>
                         </xsl:element>
                     </xsl:if>
