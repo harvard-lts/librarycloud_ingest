@@ -139,6 +139,11 @@
             <xsl:element name="namePart">
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:element>
+            <xsl:element name="role">
+                <xsl:element name="roleTerm">
+                    <xsl:text>originator</xsl:text>
+                </xsl:element>
+            </xsl:element>
         </xsl:element>
     </xsl:template> 
 
