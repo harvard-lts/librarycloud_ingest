@@ -164,8 +164,8 @@
         </route>
         <!-- Aleph ingest and normalization -->
         <route id="aleph-ingest-split" errorHandlerRef="eh">
-            <!-- <from uri="file:{{librarycloud.files.basepath}}/ingest-aleph?include=.*.xml" /> -->
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-aleph?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <from uri="file:{{librarycloud.files.basepath}}/ingest-aleph?include=.*.xml" /> 
+            <!--<from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-aleph?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />-->
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
                 <split streaming="true" parallelProcessing="true">
@@ -220,14 +220,6 @@
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-oasis?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
             <to uri="seda:oasis-ingest-seda?size=4&amp;blockWhenFull=true"/>
         </route>
-
-
-        <route id="solrDelete" errorHandlerRef="eh">
-            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-start" /> -->
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <!--<to uri="seda:addholdingstomods?size=20&amp;blockWhenFull=true" />-->
-        </route>
-
 
 
         <route id="addholdingstomods-seda" errorHandlerRef="eh">
@@ -324,16 +316,6 @@
             <to uri="seda:filterUnchangedMessages?size=20&amp;blockWhenFull=true"/>
         </route>
 
-        <route id="filterUnchangedMessages-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-filter-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
-            <to uri="seda:filterUnchangedMessages?size=20&amp;blockWhenFull=true"/>
-        </route>
-
-        <route id="filterUnchangedMessages-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-filter-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
-            <to uri="seda:filterUnchangedMessages?size=20&amp;blockWhenFull=true"/>
-        </route>
-
 <route id="FilterUnchangedMessages" errorHandlerRef="eh">
            <from uri="seda:filterUnchangedMessages?concurrentConsumers=10" />
 
@@ -352,13 +334,5 @@
         </route>
 
 	
-        <route id="DeleteSolrMessages" errorHandlerRef="eh">
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-solr?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <!--<from uri="file://{{librarycloud.files.basepath}}/publish-public-solrDelete" />-->
-
-            <process ref="solrDeleteProcessor"/>
-            <to uri="file://{{librarycloud.files.basepath}}/publish-public-solrDelete-output" />
-          
-        </route>
     </camelContext>
 </beans>
