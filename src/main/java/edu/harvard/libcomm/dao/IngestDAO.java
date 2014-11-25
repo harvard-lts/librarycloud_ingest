@@ -25,6 +25,8 @@ public class IngestDAO {
 	public Set<String> checkAndSaveItemChecksum(Map<String, Integer> items)
 	{
 		Map<String, Integer> sameMap = new HashMap<String, Integer>();
+		Map<String, Integer> differentMap = new HashMap<String, Integer>();
+
 		for(Entry<String, Integer> entry : items.entrySet()){
 			String query = "SELECT c from Checksum c where c.itemId = :itemId";
 			Checksum checksum = null;
@@ -38,9 +40,18 @@ public class IngestDAO {
 				//expected in most cases.
 			}
 			if(checksum != null && checksum.getChecksum().equals(entry.getValue())){
-				sameMap.put(entry.getKey(), entry.getValue());
+				if(!sameMap.containsKey(entry.getKey()) && !differentMap.containsKey(entry.getKey())) {
+					sameMap.put(entry.getKey(), entry.getValue());
+				}
+
 			} else
 			{
+				if(sameMap.containsKey(entry.getKey())) {
+					sameMap.remove(entry.getKey());
+				}
+				if(!differentMap.containsKey(entry.getKey())){
+					differentMap.put(entry.getKey(), entry.getValue());
+				}
 				saveItemChecksum(entry.getKey(), entry.getValue(), checksum == null);
 			}
 		}
