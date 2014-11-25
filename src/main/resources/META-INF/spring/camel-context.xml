@@ -289,6 +289,11 @@
             <to uri="seda:filterUnchangedMessages?size=20&amp;blockWhenFull=true"/>
         </route>
 
+        <route id="filterUnchangedMessages-seda" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-filter-start?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
+            <to uri="seda:filterUnchangedMessages?size=20&amp;blockWhenFull=true"/>
+        </route>
+
 <route id="FilterUnchangedMessages" errorHandlerRef="eh">
            <from uri="seda:filterUnchangedMessages?concurrentConsumers=10" />
 
