@@ -36,7 +36,14 @@
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.MarcSplitter"/>
         </property>
-    </bean>
+    </bean>	
+
+	<bean id="deleteSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
+        <property name="splitter">
+            <bean class="edu.harvard.libcomm.pipeline.DeleteFileSplitter"/>
+        </property>
+    </bean>	
+
     <bean id="eadSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.EADSplitter"/>
@@ -59,7 +66,7 @@
     </bean>
 
     <bean id="modsAggregator" class="edu.harvard.libcomm.pipeline.MODSAggregatorStrategy"/>
-    
+
     <bean id="modsEADRawAggregator" class="edu.harvard.libcomm.pipeline.MODSRawAggregatorStrategy">
         <property name="source" value="OASIS"/>
     </bean>
@@ -105,6 +112,14 @@
             </bean>
         </property>
     </bean>
+<bean id="solrDeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.SolrDeleteProcessor">
+                <property name="commitWithinTime" value="30000"/>
+            </bean>
+        </property>
+    </bean>
+
     <camelContext id="sqsContext" xmlns="http://camel.apache.org/schema/spring" trace="true">
         <!-- Environment-specific properties -->
         <propertyPlaceholder id="librarycloud-properties" location="classpath:/librarycloud.env.properties" />
@@ -158,7 +173,31 @@
                     <to uri="direct:dead-letter" />
                 </doCatch>
             </doTry>
+         </route>
+         
+
+
+		<!-- need to change from filesys to aws queue -->
+         <route id="aleph-delete-ingest-split">
+            <from uri="file:{{librarycloud.files.basepath}}/deletefiles?include=.*.xml" />
+            <split streaming="true">
+                <method bean="deleteSplitter" method="split"/>
+                <to uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-solr?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
+            </split>
+         </route>
+
+        <route id="deleteSolrSplitter">
+            <from uri="file://{{librarycloud.files.basepath}}/publish-public-solrDelete-split" />
+           <split streaming="true">
+                <method bean="deleteSplitter" method="split"/>
+                <!--<to uri="file://{{librarycloud.files.basepath}}/publish-public-solrDelete" />-->
+          
+            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-solr?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
+            </split>
+
         </route>
+
+
         <route id="marctomods-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}/normalize-marcxml" /> -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-normalize-marcxml?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
@@ -313,8 +352,8 @@
                     <to uri="aws-sqs://{{librarycloud.sqs.environment}}-empty-message?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
                 </when>
                 <otherwise>
-                    <!-- <to uri="file://{{librarycloud.files.basepath}}/publish-public" /> -->
-                    <to uri="aws-sqs://{{librarycloud.sqs.environment}}-publish-public?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
+            <!-- <to uri="file://{{librarycloud.files.basepath}}/publish-public" /> -->
+            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-publish-public?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient" />
                 </otherwise>
             </choice>
         </route>
@@ -332,6 +371,15 @@
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-done?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient"/>
             <!-- <to uri="file://{{librarycloud.files.basepath}}/done" /> -->
         </route>
-        
-    </camelContext>
+
+      <route id="DeleteSolrMessages" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-solr?accessKey=${access.key}&amp;secretKey=${secret.key}&amp;amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <!--<from uri="file://{{librarycloud.files.basepath}}/publish-public-solrDelete" />-->
+
+            <process ref="solrDeleteProcessor"/>
+            <!--<to uri="file://{{librarycloud.files.basepath}}/publish-public-solrDelete-output" /> -->
+          
+        </route>
+
+ </camelContext>
 </beans>
