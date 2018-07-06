@@ -548,68 +548,24 @@
         <route id="enrich-start" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-start" /> -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>            
+            <unmarshal><custom ref="cloudbody"/></unmarshal>
             <choice>
                 <when>
                     <xpath>//source = 'aleph'</xpath>
-                    <to uri="seda:enrich-01?size=20&amp;blockWhenFull=true" />
+                    <to uri="seda:enrich-04?size=20&amp;blockWhenFull=true" />
                 </when>
                 <when>
                     <xpath>//source = 'ALEPH'</xpath>
-                    <to uri="seda:enrich-01?size=20&amp;blockWhenFull=true" />
+                    <to uri="seda:enrich-04?size=20&amp;blockWhenFull=true" />
                 </when>
                 <otherwise>
-                    <!-- Skip Holdings, Stackscore, and LCCSH steps for non-aleph records -->
+                    <!-- Skip MODS aggregation steps for non-aleph records -->
                     <!--<to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-05?amazonSQSClient=#sqsClient" />-->
                     <to uri="seda:enrich-05?size=20&amp;blockWhenFull=true" />
                     <!--<to uri="file://{{librarycloud.files.basepath}}//enrich-05" />-->
                 </otherwise>
             </choice>
         </route>
-
-        <route id="addholdingstomods-seda" errorHandlerRef="eh">
-            <from uri="direct:enrich-01"/>
-            <to uri="seda:enrich-01?size=20&amp;blockWhenFull=true" />
-        </route>
-        <route id="addholdingstomods" errorHandlerRef="eh">
-            <from uri="seda:enrich-01?concurrentConsumers=1"/>
-            <process ref="holdingsProcessor"/>
-            <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-02?amazonSQSClient=#sqsClient" />
-            <!--<to uri="file://{{librarycloud.files.basepath}}/enrich-02" />-->
-        </route>
-
-        <route id="addstackscoretomods-seda" errorHandlerRef="eh">
-            <!-- <from uri="file://{{librarycloud.files.basepath}}/enrich-02" /> -->
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-02?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>            
-            <to uri="seda:enrich-02?size=20&amp;blockWhenFull=true" />
-        </route>
-        <route id="addstackscoretomods" errorHandlerRef="eh">
-            <from uri="seda:enrich-02?concurrentConsumers=1"/>
-            <process ref="stackscoreProcessor"/>
-            <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-03?amazonSQSClient=#sqsClient" />
-            <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-03" /> -->
-        </route>
-
-        <route id="addslcctomods-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-03?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-03?size=20&amp;blockWhenFull=true" />
-        </route>
-        <route id="addslcctomods" errorHandlerRef="eh">
-            <from uri="seda:enrich-03?concurrentConsumers=1"/>
-            <process ref="lccProcessor"/>
-            <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-04?amazonSQSClient=#sqsClient" />
-            <!--<to uri="file://{{librarycloud.files.basepath}}/enrich-04" />-->
-            <!--<multicast>
-                <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-04?amazonSQSClient=#sqsClient" />
-                <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-05?amazonSQSClient=#sqsClient" />
-            </multicast>-->
-        </route>
-
 
         <route id="alephmodssplit-seda" errorHandlerRef="eh">
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-04?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
