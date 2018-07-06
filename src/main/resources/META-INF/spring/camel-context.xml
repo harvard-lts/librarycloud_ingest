@@ -112,6 +112,10 @@
         <property name="source" value="ALEPH"/>
     </bean>
 
+    <bean id="marcxmlAlmaRawAggregator" class="edu.harvard.libcomm.pipeline.MARCXMLRawAggregatorStrategy">
+        <property name="source" value="ALMA"/>
+    </bean>
+
     <bean id="extractPayloadProcessor" class="edu.harvard.libcomm.pipeline.ExtractPayloadProcessor"/>
 
     <bean id="modsProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
@@ -299,11 +303,100 @@
             <!--<to uri="file://{{librarycloud.files.basepath}}/done"/>-->
         </route>
 
+
+        <!-- ============================== -->
+        <!-- Alma Bib records ingest and normalization -->
+        <!-- ============================== -->
+
+        <route id="alma-ingest" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-alma?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <split>
+                <xtokenize mode="t">//filepath</xtokenize>
+                <bean ref="prepareURI" method="prepare"/>
+                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+                <to uri="http://www.example.com" />
+                <to uri="direct:alma-ingest-file"/>
+            </split>
+        </route>
+        <route id="alma-ingest-file" errorHandlerRef="eh">
+            <from uri="direct:alma-ingest-file"/>
+            <doTry>
+                <split streaming="true">
+                    <xtokenize>//record</xtokenize>
+                    <setHeader headerName="outerSplitIndex">
+                        <simple>${header.CamelSplitIndex}</simple>
+                    </setHeader>
+                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100" completionInterval="10000">
+                        <correlationExpression>
+                            <simple>all</simple>
+                        </correlationExpression>
+                        <completionPredicate>
+                            <simple>${header.messageLength} > 150000</simple>
+                        </completionPredicate>
+                        <multicast parallelProcessing="true">
+                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
+                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient" />
+                        </multicast>
+                        <!-- <to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml?fileName=alma-${header.CamelSplitIndex}" /> -->
+                    </aggregate>
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                </doCatch>
+            </doTry>
+        </route>
+
+        <!-- ============================== -->
+        <!-- Alma Holdings records ingest   -->
+        <!-- ============================== -->
+        <route id="alma-holdings-ingest" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-alma-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <split>
+                <xtokenize mode="t">//filepath</xtokenize>
+                <bean ref="prepareURI" method="prepare"/>
+                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+                <to uri="http://www.example.com" />
+                <to uri="direct:alma-holdings-ingest-file"/>
+            </split>
+        </route>
+        <route id="alma-holdings-ingest-file" errorHandlerRef="eh">
+            <from uri="direct:alma-holdings-ingest-file"/>
+            <doTry>
+                <split streaming="true">
+                    <xtokenize>//record</xtokenize>
+                    <setHeader headerName="outerSplitIndex">
+                        <simple>${header.CamelSplitIndex}</simple>
+                    </setHeader>
+                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100" completionInterval="10000">
+                        <correlationExpression>
+                            <simple>all</simple>
+                        </correlationExpression>
+                        <completionPredicate>
+                            <simple>${header.messageLength} > 150000</simple>
+                        </completionPredicate>
+                        <to uri="aws-sqs://{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient" />
+                        <!-- <to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml?fileName=alma-${header.CamelSplitIndex}" /> -->
+                    </aggregate>
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                </doCatch>
+            </doTry>
+        </route>
+
+        <route id="alma-holdings-to-solr" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <to uri="file://{{librarycloud.files.basepath}}/alma-holdings-done" />
+        </route>
+
+
         <!-- ============================== -->
         <!-- Aleph ingest and normalization -->
         <!-- ============================== -->
 
-        <!-- Take a command file, which references a MARC file. Download the MARC file and split it into a 
+        <!-- Take a command file, which references a MARC file. Download the MARC file and split it into a
              series of messages containing MARCXML -->
         <route id="aleph-ingest-split" errorHandlerRef="eh">
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-aleph?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
@@ -313,7 +406,7 @@
                     <method bean="marcSplitter" method="split"/>
                     <marshal><custom ref="cloudbody"/></marshal>
                     <!-- <to uri="file://{{librarycloud.files.basepath}}/cloudbody?fileName=${header.CamelSplitIndex}" /> -->
-                    <!-- Route to two locations. One copy is transformed to MODS and sent through the rest of the pipeline. 
+                    <!-- Route to two locations. One copy is transformed to MODS and sent through the rest of the pipeline.
                          The other copy is used to upload raw MARCXML data to S3 -->
                     <multicast parallelProcessing="true">
                         <to uri="aws-sqs://{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
@@ -326,28 +419,29 @@
                 </doCatch>
             </doTry>
          </route>
-         
+
         <!-- Transform MARCXML to MODS -->
         <route id="marctomods-seda" errorHandlerRef="eh">
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <unmarshal><custom ref="cloudbody"/></unmarshal>
             <to uri="seda:normalize-marcxml?size=20&amp;blockWhenFull=true"/>
-        </route>               
+        </route>
         <route id="marctomods" errorHandlerRef="eh">
             <from uri="seda:normalize-marcxml?concurrentConsumers=4" />
             <process ref="modsProcessor"/>
             <process ref="addMarcLocationProcessor"/>
             <marshal><custom ref="cloudbody"/></marshal>
+            <!-- <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" /> -->
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" />
         </route>
 
-        <!-- Extract the aleph ID from the MARCXML, and upload the record to S3, keyed by aleph ID-->
+        <!-- Extract the record ID from the MARCXML, and upload the record to S3, keyed by record ID-->
         <route id="uploadmarc-seda" errorHandlerRef="eh">
             <!-- Note the reduced messages per poll, so we don't end up getting messages timed out, since this takes a while -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=1&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
             <unmarshal><custom ref="cloudbody"/></unmarshal>
             <to uri="seda:upload-marc?size=20&amp;blockWhenFull=true"/>
-        </route>               
+        </route>
         <route id="upload-marc" errorHandlerRef="eh">
             <from uri="seda:upload-marc?concurrentConsumers=4" />
             <process ref="extractPayloadProcessor" />
@@ -357,7 +451,7 @@
                     <xpath resultType="java.lang.String">
                         /marcxml:record/marcxml:controlfield[@tag='001']
                     </xpath>
-                </setHeader>                
+                </setHeader>
                 <!--<process ref="filterUnchangedMarcProcessor"/>-->
                 <choice>
                     <when>
