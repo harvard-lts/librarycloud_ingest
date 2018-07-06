@@ -56,7 +56,7 @@ public class MARCXMLRawAggregatorStrategy implements CompletionAwareAggregationS
     @Override
     public void onCompletion(Exchange exchange) {
         String body = exchange.getIn().getBody(String.class);
-        body = "<collection>" + body + "</collection>";
+        body = "<collection xmlns=\"http://www.loc.gov/MARC21/slim\">" + body + "</collection>";
 
         LibCommMessage lcmessage = new LibCommMessage();
         Payload payload = new Payload();
