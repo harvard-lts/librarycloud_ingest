@@ -1,4 +1,4 @@
-<xsl:stylesheet xmlns="http://www.loc.gov/mods/v3" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="xlink marc" version="1.0">
+<xsl:stylesheet xmlns="http://www.loc.gov/mods/v3" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:priorrecordids="http://lib.harvard.edu/alephmigration" exclude-result-prefixes="xlink marc" version="1.0">
 	<!--<xsl:include href="http://www.loc.gov/standards/marcxml/xslt/MARC21slimUtils.xsl"/>-->
 	<xsl:include href="src/main/resources/MARC21slimUtils.xsl"/>
 	<xsl:output encoding="UTF-8" indent="yes" method="xml"  omit-xml-declaration="yes"/>
@@ -2945,6 +2945,13 @@
 				</languageOfCataloging>
 			</xsl:for-each>
 		</recordInfo>
+
+		<!-- Harvard revision 10.01 - Add original system ID as an extension -->
+		<xsl:for-each select="marc:datafield[@tag=900]">
+			<xsl:call-template name="addOriginalSystemId"/>
+		</xsl:for-each>
+
+
 	</xsl:template>
 
 	<xsl:template name="displayForm">
@@ -5856,6 +5863,22 @@
 	</xsl:template>
 
 	<!-- recordInfo 040 005 001 003 -->
+
+	<!-- Harvard revision 10.01 - Add original system ID as an extension -->
+
+	<xsl:template name="addOriginalSystemId">
+		<xsl:if test="marc:subfield[@code='a']">
+            <extension>
+            	<priorrecordids:priorrecordids>
+            		<xsl:element name="priorrecordids:recordIdentifier">
+            			<xsl:attribute name='source'>MH:ALEPH</xsl:attribute>
+						<xsl:value-of select="marc:subfield[@code='a']"/>
+                    </xsl:element>
+				</priorrecordids:priorrecordids>
+			</extension>
+		</xsl:if>
+	</xsl:template>
+
 
 	<!-- 880 global copy template -->
 	<xsl:template match="* | @*" mode="global_copy">
