@@ -8,20 +8,29 @@ import edu.harvard.libcomm.pipeline.IProcessor;
 import edu.harvard.libcomm.pipeline.MessageUtils;
 
 public class ModsProcessor implements IProcessor {
-	protected Logger log = Logger.getLogger(ModsProcessor.class); 
+	protected Logger log = Logger.getLogger(ModsProcessor.class);
 
-	public void processMessage(LibCommMessage libCommMessage) throws Exception {	
+	private String stylesheet = "src/main/resources/MARC21slim2MODS3-6.xsl";
+
+	public void processMessage(LibCommMessage libCommMessage) throws Exception {
 		String modsCollection = null;
 		libCommMessage.setCommand("ENRICH");
 		try {
-			modsCollection = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/MARC21slim2MODS3-6.xsl", null);
+			modsCollection = MessageUtils.transformPayloadData(libCommMessage, this.getStylesheet(), null);
 		} catch (Exception e) {
 			log.error("Could not transform record from MARC to MODS");
 			throw e;
-		}	
+		}
 		log.trace("ModProcessor Result:" + modsCollection);
         libCommMessage.getPayload().setData(modsCollection);
 	}
 
-	
+	public void setStylesheet(String stylesheet) {
+		this.stylesheet = stylesheet;
+	}
+
+	public String getStylesheet() {
+		return this.stylesheet;
+	}
+
 }

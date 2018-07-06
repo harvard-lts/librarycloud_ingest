@@ -120,7 +120,16 @@
 
     <bean id="modsProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
-            <bean class="edu.harvard.libcomm.pipeline.marc.ModsProcessor"/>
+            <bean class="edu.harvard.libcomm.pipeline.marc.ModsProcessor">
+                <property name="stylesheet" value="src/main/resources/MARC21slim2MODS3-6.xsl"/>
+            </bean>
+        </property>
+    </bean>
+    <bean id="modsProcessorAlma" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.marc.ModsProcessor">
+                <property name="stylesheet" value="src/main/resources/MARC21slim2MODS3-6-alma.xsl"/>
+            </bean>
         </property>
     </bean>
     <bean id="filterUnchangedProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
@@ -428,7 +437,26 @@
         </route>
         <route id="marctomods" errorHandlerRef="eh">
             <from uri="seda:normalize-marcxml?concurrentConsumers=4" />
-            <process ref="modsProcessor"/>
+            <!-- Slightly different MODS transformers depending on whether it's coming from Aleph or Alma -->
+            <choice>
+                <when>
+                    <xpath>//source = 'aleph'</xpath>
+                    <process ref="modsProcessor"/>
+                </when>
+                <when>
+                    <xpath>//source = 'ALEPH'</xpath>
+                    <process ref="modsProcessor"/>
+                </when>
+                <when>
+                    <xpath>//source = 'alma'</xpath>
+                    <process ref="modsProcessorAlma"/>
+                </when>
+                <when>
+                    <xpath>//source = 'ALMA'</xpath>
+                    <process ref="modsProcessorAlma"/>
+                </when>
+            </choice>
+
             <process ref="addMarcLocationProcessor"/>
             <marshal><custom ref="cloudbody"/></marshal>
             <!-- <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" /> -->
@@ -556,6 +584,14 @@
                 </when>
                 <when>
                     <xpath>//source = 'ALEPH'</xpath>
+                    <to uri="seda:enrich-04?size=20&amp;blockWhenFull=true" />
+                </when>
+                <when>
+                    <xpath>//source = 'alma'</xpath>
+                    <to uri="seda:enrich-04?size=20&amp;blockWhenFull=true" />
+                </when>
+                <when>
+                    <xpath>//source = 'ALMA'</xpath>
                     <to uri="seda:enrich-04?size=20&amp;blockWhenFull=true" />
                 </when>
                 <otherwise>
