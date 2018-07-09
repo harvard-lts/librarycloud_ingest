@@ -103,4 +103,17 @@
          </hierarchicalGeographic>
      </subject>
    </mods>
+   <mods>
+     <titleInfo><title>relatedItemTest</title></titleInfo>
+     <relatedItem type="series">
+       <titleInfo>
+         <title>Musique ; 1</title>
+       </titleInfo>
+       <name type="personal">
+         <namePart>Bory, Jean Louis</namePart>
+         <namePart type="date">1919-1979</namePart>
+       </name>
+     </relatedItem>
+   </mods>
+   
 </modsCollection>

@@ -150,4 +150,11 @@ class SolrProcessorTests {
         assertEquals("Germany", country);
         assertEquals("Cologne", city);
     }
+
+    @Test
+    void buildRelatedItem() throws Exception {
+        String relatedItem = (String) xPath.compile("//doc[field[@name='title'] = 'relatedItemTest']//field[@name='relatedItem'][1]").evaluate(solrDoc, XPathConstants.STRING);
+
+        assertEquals("Musique ; 1", relatedItem);
+    }
 }

@@ -563,6 +563,12 @@
     <xsl:template match="mods:relatedItem[@type='series']">
         <xsl:apply-templates select="./mods:titleInfo" />
         <xsl:apply-templates select="./mods:name" />
+        <xsl:for-each select="mods:titleInfo/mods:title">
+          <xsl:element name="field">
+            <xsl:attribute name="name">relatedItem</xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+          </xsl:element>
+        </xsl:for-each>
     </xsl:template>
 
     <!-- not using related item templates below for aleph, leave for possible use with ead -->
