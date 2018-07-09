@@ -56,23 +56,32 @@ import edu.harvard.libcomm.test.TestMessageUtils;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class EADComponentIteratorTests {
 
-    @Test
-    void useResourceLanguageCode() throws Exception {
+    private Document mods;
+
+    @BeforeAll
+    void setup() throws Exception {
         InputStream is = new FileInputStream(this.getClass().getResource("/sample-oasis-ead.xml").getFile());
 
         EADReader r = new EADReader(is);
         Iterator i = new EADComponentIterator(r);
         String lcmString = (String) i.next();
         LibCommMessage lcm = TestMessageUtils.unmarshalLibCommMessage(IOUtils.toInputStream(lcmString, "UTF-8"));
+        mods = TestHelpers.extractXmlDoc(lcm);
+        String xml = lcm.getPayload().getData();
+        System.out.println(xml);
+    }
 
-        // String xml = lcm.getPayload().getData();
-        // System.out.println(xml);
-
-        Document mods = TestHelpers.extractXmlDoc(lcm);
-
+    @Test
+    void useResourceLanguageCode() throws Exception {
         String languageCode = TestHelpers.getXPath("//mods:languageTerm[@type='code']", mods);
         String languageText = TestHelpers.getXPath("//mods:languageTerm[@type='text']", mods);
         assertEquals("eng", languageCode);
         assertEquals("English", languageText);
+    }
+
+    @Test // LTSCLOUD-697
+    void buildModsDateCreated() throws Exception {
+        String dateCreated = TestHelpers.getXPath("//mods:originInfo/mods:dateCreated", mods);
+        assertEquals("1848-11-07/1849-07-30", dateCreated);
     }
 }

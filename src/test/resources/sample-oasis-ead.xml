@@ -64,7 +64,10 @@
                <unittitle>
                   <extref xlink:href="http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1848phae.proj....1B&amp;data_type=PDF_HIGH&amp;whole_paper=YES&amp;type=PRINTER&amp;filetype=.pdf" xlink:show="new" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink">Transit Circle</extref>
                </unittitle>
-               <unitdate calendar="gregorian" endYear="1849" era="ce" startYear="1848">1848-11-07/1849-07-30 </unitdate>
+               <unitdate calendar="gregorian"
+                         era="ce"
+                         normal="1848-11-07/1849-07-30"
+                         type="inclusive">1848-11-07/1849-07-30</unitdate>
             </did>
             <odd id="aspace_b434238c93c7f61a669107cf65b59e6e">
                <head>KG Number:</head>
