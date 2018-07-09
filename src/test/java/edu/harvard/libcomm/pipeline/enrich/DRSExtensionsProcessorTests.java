@@ -123,14 +123,6 @@ class DRSExtensionsProcessorTests {
 
         String result = lcm.getPayload().getData();
 
-        byte[] xmlBytes = input.getBytes();
-        Path p1 = Paths.get("./tmp/extensions_input.xml");
-        Files.write(p1, xmlBytes);
-
-        byte[] resultBytes = result.getBytes();
-        Path p2 = Paths.get("./tmp/extensions_output.xml");
-        Files.write(p2, resultBytes);
-
         Document doc = TestHelpers.extractXmlDoc(lcm);
 
         String thumb1Url = TestHelpers.getXPath("//mods:mods[2]//mods:url[@access='preview']", doc);
