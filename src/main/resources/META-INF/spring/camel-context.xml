@@ -26,7 +26,7 @@
     <bean name="s3Client" class="com.amazonaws.services.s3.AmazonS3Client">
         <constructor-arg><ref bean="awsCredentials"/></constructor-arg>
     </bean>
-    
+
     <!-- Custom S3 marshaller to place body on S3 -->
     <bean id="cloudbody" class="edu.harvard.libcomm.pipeline.MessageBodyS3Marshaller">
         <constructor-arg><ref bean="awsCredentials"/></constructor-arg>
@@ -664,7 +664,7 @@
         <route id="addcollectionstomods-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-06" /> -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-06?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>            
+            <unmarshal><custom ref="cloudbody"/></unmarshal>
             <to uri="seda:enrich-06?size=20&amp;blockWhenFull=true" />
         </route>
         <route id="addcollectionstomods" errorHandlerRef="eh">
@@ -672,25 +672,24 @@
             <process ref="collectionsProcessor"/>
             <marshal><custom ref="cloudbody"/></marshal>
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-end?amazonSQSClient=#sqsClient" />
-            <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
         </route>
 
         <!-- Publishing records to consumers -->
         <route id="publish-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-end?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>            
+            <unmarshal><custom ref="cloudbody"/></unmarshal>
             <to uri="seda:enrich-end?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="publish" errorHandlerRef="eh">
             <from uri="seda:enrich-end?concurrentConsumers=1" />
             <process ref="removeRestrictedProcessor"/>
-            
+
             <multicast>
                 <to uri="direct:publish-delta"/>
                 <to uri="direct:publish-full"/>
             </multicast>
-        </route>            
+        </route>
 
         <!-- Publish records that have changed -->
         <route id="publish-delta" errorHandlerRef="eh">
@@ -705,7 +704,7 @@
                     <to uri="aws-sqs://{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
                 </when>
                 <otherwise>
-                    <marshal><custom ref="cloudbody"/></marshal>            
+                    <marshal><custom ref="cloudbody"/></marshal>
                     <multicast>
                         <!-- Publishing to Solr doesn't yet go through the SNS publishing, so put it on its own queue -->
                         <to uri="aws-sqs://{{librarycloud.sqs.environment}}-publish-public-delta-solr?amazonSQSClient=#sqsClient" />
