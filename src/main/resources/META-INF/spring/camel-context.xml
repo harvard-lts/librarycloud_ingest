@@ -51,7 +51,7 @@
                 <constructor-arg value="500000" /> <!-- Approx. max size of messages, in bytes -->
             </bean>
         </property>
-    </bean>	
+    </bean>
 
 	<bean id="deleteSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
         <property name="splitter">
@@ -520,7 +520,7 @@
                         </correlationExpression>
                         <completionPredicate>
                             <simple>${header.messageLength} > 150000</simple>
-                        </completionPredicate>  
+                        </completionPredicate>
                         <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" />
                         <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
                     </aggregate>
@@ -553,7 +553,7 @@
                     <setHeader headerName="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
-    
+
                     <split streaming="true" parallelProcessing="true">
                         <method bean="viaRawSplitter" method="split"/>
                         <aggregate strategyRef="modsVIARawAggregator" completionSize="100" completionInterval="10000">
@@ -562,7 +562,7 @@
                             </correlationExpression>
                             <completionPredicate>
                                 <simple>${header.messageLength} > 150000</simple>
-                            </completionPredicate>  
+                            </completionPredicate>
                             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" />
                             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.outerSplitIndex}-${header.CamelSplitIndex}" /> -->
                         </aggregate>
@@ -738,14 +738,14 @@
         <route id="modstosolr-seda" errorHandlerRef="eh">
             <!--<from uri="file://{{librarycloud.files.basepath}}/publish-public-delta-solr" /> -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-publish-public-delta-solr?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>            
+            <unmarshal><custom ref="cloudbody"/></unmarshal>
             <to uri="seda:publish-public?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="modstosolr" errorHandlerRef="eh">
             <from uri="seda:publish-public?concurrentConsumers=1" />
             <process ref="solrLoadProcessor"/>
             <to uri="log:edu.harvard.libcomm.throughput?level=TRACE&amp;marker=solrLoadProcessor&amp;groupSize=10"/>
-            <marshal><custom ref="cloudbody"/></marshal>            
+            <marshal><custom ref="cloudbody"/></marshal>
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
             <!-- <to uri="file://{{librarycloud.files.basepath}}/done" /> -->
         </route>
