@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mods="http://www.loc.gov/mods/v3" 
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mods="http://www.loc.gov/mods/v3"
     xmlns:usage="http://lib.harvard.edu/usagedata" version="1.0"
     xmlns:collection="http://hul.harvard.edu/ois/xml/ns/libraryCloud"
     xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:priorrecordids="http://lib.harvard.edu/alephmigration"
     >
 
     <xsl:output indent="yes" encoding="UTF-8"/>
@@ -52,6 +53,7 @@
             <xsl:apply-templates select="mods:extension/usage:usageData/usage:stackScore"/>
             <xsl:apply-templates select="mods:extension/collection:collections/collection:collection/collection:title"/>
             <xsl:apply-templates select="mods:extension/collection:collections/collection:collection/collection:identifier"/>
+            <xsl:apply-templates select="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier"/>
             <xsl:choose>
                 <xsl:when test="mods:extension/HarvardDRS:DRSMetadata">
                     <xsl:element name="field">
@@ -453,7 +455,17 @@
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
     </xsl:template>
-    
+
+    <xsl:template match="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>priorRecordIdentifier</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+
     <xsl:template match="@source">
         <xsl:element name="field">
             <xsl:attribute name="name">source</xsl:attribute>
