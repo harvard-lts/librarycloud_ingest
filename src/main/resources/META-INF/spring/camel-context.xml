@@ -598,10 +598,8 @@
                     <to uri="seda:enrich-04?size=20&amp;blockWhenFull=true" />
                 </when>
                 <otherwise>
-                    <!-- Skip MODS aggregation steps for non-aleph records -->
-                    <!--<to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-05?amazonSQSClient=#sqsClient" />-->
+                    <!-- Skip MODS aggregation steps for non-aleph/alma records -->
                     <to uri="seda:enrich-05?size=20&amp;blockWhenFull=true" />
-                    <!--<to uri="file://{{librarycloud.files.basepath}}//enrich-05" />-->
                 </otherwise>
             </choice>
         </route>
