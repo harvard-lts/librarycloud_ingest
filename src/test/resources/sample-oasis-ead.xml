@@ -32,7 +32,7 @@
    <frontmatter>
       <titlepage>
          <num>KG11365-6</num>
-         <titleproper>Harvard College Observatory observations, logs, instrument readings, and calculations : an inventory 
+         <titleproper>Harvard College Observatory observations, logs, instrument readings, and calculations : an inventory
             </titleproper>
          <author>Wolbach Archives, Wolbach Library, Harvard University</author>
          <publisher>Wolbach Archives, Wolbach Library, Harvard University</publisher>
@@ -45,6 +45,9 @@
          <repository>
             <corpname>Wolbach Archives, Wolbach Library, Harvard University</corpname>
          </repository>
+         <origination label="creator">
+            <persname source="ingest">Sam I Am</persname>
+         </origination>
          <unittitle>Harvard College Observatory observations, logs, instrument readings, and calculations</unittitle>
          <unitdate calendar="gregorian" era="ce" normal="1750/1990" type="inclusive">1750-1990</unitdate>
          <physdesc altrender="whole">

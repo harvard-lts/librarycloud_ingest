@@ -84,4 +84,13 @@ class EADComponentIteratorTests {
         String dateCreated = TestHelpers.getXPath("//mods:originInfo/mods:dateCreated", mods);
         assertEquals("1848-11-07/1849-07-30", dateCreated);
     }
+
+    @Test // LTSCLOUD-619
+    void buildModsRoleTerm() throws Exception {
+        String roleTerm1 = TestHelpers.getXPath("//mods:relatedItem/mods:name[mods:namePart = 'Sam I Am']/mods:role[1]/mods:roleTerm", mods);
+        String roleTerm2 = TestHelpers.getXPath("//mods:relatedItem/mods:name[mods:namePart = 'Sam I Am']/mods:role[2]/mods:roleTerm", mods);
+
+        assertEquals("originator", roleTerm1);
+        assertEquals("creator", roleTerm2);
+    }
 }
