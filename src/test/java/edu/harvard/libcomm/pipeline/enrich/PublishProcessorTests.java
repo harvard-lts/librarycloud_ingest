@@ -1,6 +1,7 @@
 package edu.harvard.libcomm.pipeline.enrich;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -11,6 +12,12 @@ import java.nio.file.Files;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -92,5 +99,29 @@ class PublishProcessorTests {
 
         assertEquals("Restricted", available1);
         assertEquals("Everyone", available2);
+    }
+
+    //LTSCLOUD-618
+    @Test
+    void libraryCloudProcessingDate() throws Exception {
+        LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "publish-processor-tests-sample-1.xml");
+        Date before = new Date();
+
+        p.processMessage(lcm);
+        System.out.println(lcm.getPayload().getData());
+        Document doc = TestHelpers.extractXmlDoc(lcm);
+
+        Date after = new Date();
+
+        String processingDateString = TestHelpers.getXPath("//mods:mods[1]/mods:extension/tbd:processingDate", doc);
+
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+        df.setTimeZone(tz);
+        Date processingDate = df.parse(processingDateString);
+
+        //run the before and after dates through to lose the seconds
+        assertTrue(processingDate.compareTo(df.parse(df.format(before))) >= 0);
+        assertTrue(processingDate.compareTo(df.parse(df.format(after))) <= 0);
     }
 }

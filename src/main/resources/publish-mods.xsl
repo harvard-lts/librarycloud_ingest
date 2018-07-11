@@ -2,10 +2,12 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:mods="http://www.loc.gov/mods/v3"
+    xmlns:tbd="http://lib.harvard.edu/TBD"
     xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
     exclude-result-prefixes="xs"
     version="2.0">
     <xsl:output method="xml" encoding="UTF-8"/>
+    <xsl:param name="param1"><processingDate /></xsl:param>
     <xsl:param name="repository-map-file" select="'src/main/resources/RepositoryNameMapping.xml'" />
     <xsl:variable name="map" select="document($repository-map-file)" />
 
@@ -83,7 +85,7 @@
                   </xsl:element>
                 </xsl:if>
 
-                <extension>
+                <xsl:element name="extension" namespace="http://www.loc.gov/mods/v3">
                     <xsl:if test="count($harvardRepositoriesMap/mapping) &gt; 0">
                         <xsl:element name="HarvardRepositories" namespace="http://lib.harvard.edu/TBD">
                             <xsl:for-each select="$harvardRepositoriesMap/mapping">
@@ -97,9 +99,11 @@
                             </xsl:for-each>
                         </xsl:element>
                     </xsl:if>
-                </extension>
+                </xsl:element>
 
-
+                <xsl:element name="extension" namespace="http://www.loc.gov/mods/v3">
+                    <xsl:element name="processingDate" namespace="http://lib.harvard.edu/TBD"><xsl:value-of select="$param1" /></xsl:element>
+                    </xsl:element>
             </xsl:copy>
         </xsl:if>
 

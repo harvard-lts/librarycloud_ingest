@@ -1,5 +1,11 @@
 package edu.harvard.libcomm.pipeline.enrich;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
+
 import edu.harvard.libcomm.message.LibCommMessage;
 import edu.harvard.libcomm.message.LibCommMessage.Payload;
 import edu.harvard.libcomm.pipeline.IProcessor;
@@ -13,8 +19,12 @@ public class PublishProcessor implements IProcessor {
 		libCommMessage.setCommand("PUBLISH");
 		String modsCount = null;
 		try {
+      TimeZone tz = TimeZone.getTimeZone("UTC");
+      DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+      df.setTimeZone(tz);
+      String processingDate = df.format(new Date());
 
-			data = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/publish-mods.xsl",null);
+			data = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/publish-mods.xsl", "<processingDate>"+processingDate+"</processingDate>");
 			LibCommMessage tempMessage = new LibCommMessage();
 			Payload tempPayload = new Payload();
 			tempPayload.setData(data);
@@ -31,7 +41,7 @@ public class PublishProcessor implements IProcessor {
 			data = "";
 		}
 
-		libCommMessage.getPayload().setData(data);		
+		libCommMessage.getPayload().setData(data);
 	}
 
 
