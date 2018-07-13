@@ -782,6 +782,15 @@
         </xsl:element>
     </xsl:template>
 
+    <xsl:template match="HarvardDRS:fileDeliveryURL">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>fileDeliveryURL</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
     <xsl:template match="tbd:digitalFormat">
         <xsl:element name="field">
             <xsl:attribute name="name">

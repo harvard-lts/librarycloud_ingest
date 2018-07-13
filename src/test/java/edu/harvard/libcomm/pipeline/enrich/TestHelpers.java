@@ -42,6 +42,7 @@ public class TestHelpers {
                     else if ("mods".equals(prefix)) return "http://www.loc.gov/mods/v3";
                     else if ("tbd".equals(prefix)) return "http://lib.harvard.edu/TBD";
                     else if ("sets".equals(prefix)) return "http://hul.harvard.edu/ois/xml/ns/libraryCloud";
+                    else if ("drs".equals(prefix)) return "http://hul.harvard.edu/ois/xml/ns/HarvardDRS";
                     return XMLConstants.NULL_NS_URI;
                 }
 

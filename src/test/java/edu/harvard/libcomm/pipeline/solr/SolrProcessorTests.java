@@ -157,4 +157,11 @@ class SolrProcessorTests {
 
         assertEquals("Musique ; 1", relatedItem);
     }
+
+    @Test
+    void buildFileDeliveryURL() throws Exception {
+        String fileDeliveryURL = (String) xPath.compile("//doc[1]//field[@name='fileDeliveryURL'][1]").evaluate(solrDoc, XPathConstants.STRING);
+
+        assertEquals("http://nrs.harvard.edu/urn-3:FHCL:1549105", fileDeliveryURL);
+    }
 }
