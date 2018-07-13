@@ -41,6 +41,5 @@ public class DRSExtensionsProcessor extends ExternalServiceProcessor implements 
 		}
 		//System.out.println("URI: " + uri.toString());
 		process(libCommMessage, uri, "results", "src/main/resources/adddrsextensions.xsl");
-        
 	}
 }

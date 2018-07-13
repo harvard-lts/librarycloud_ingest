@@ -27,7 +27,7 @@
  **********************************************************************/
 package edu.harvard.libcomm.pipeline.solr;
 
-import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
 
 import edu.harvard.libcomm.pipeline.Config;
 import edu.harvard.libcomm.pipeline.IProcessor;
@@ -38,11 +38,13 @@ import edu.harvard.libcomm.pipeline.IProcessor;
 *
 */
 public class SolrServer {
-	private static HttpSolrServer server = null;
+	private static HttpSolrClient server = null;
 	
-	public static HttpSolrServer getSolrConnection() {
+	public static HttpSolrClient getSolrConnection() {
 		try {
-			server = new HttpSolrServer(Config.getInstance().SOLR_URL);
+			// server = new HttpSolrClient.Builder(Config.getInstance().SOLR_URL).build();
+			server = new HttpSolrClient(Config.getInstance().SOLR_URL);
+
 		} catch (Exception e) {
 			// TO DO - error handling
 			System.out.println( e);

@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modsCollection xmlns="http://www.loc.gov/mods/v3">
+   <mods xmlns:countries="info:lc/xmlns/codelist-v1"
+         xmlns:marc="http://www.loc.gov/MARC21/slim"
+         xmlns:mods="http://www.loc.gov/mods/v3"
+         xmlns:urlinfo="http://lib.harvard.edu/urlinfo"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <titleInfo>
+         <title>Divertimento for string orchestra</title>
+      </titleInfo>
+      <titleInfo nameTitleGroup="1" type="uniform">
+         <title>Divertimento, string orchestra</title>
+      </titleInfo>
+      <name nameTitleGroup="1" type="personal" usage="primary">
+         <namePart>Bartók, Béla</namePart>
+         <namePart type="date">1881-1945</namePart>
+         <role>
+            <roleTerm type="text">creator</roleTerm>
+         </role>
+      </name>
+      <name type="personal">
+         <namePart>Solti, Georg</namePart>
+         <namePart type="date">1912-1997</namePart>
+         <role>
+            <roleTerm type="text">former owner.</roleTerm>
+         </role>
+      </name>
+      <name type="corporate">
+         <namePart>Sir Georg Solti Archive</namePart>
+      </name>
+      <typeOfResource collection="yes">notated music</typeOfResource>
+      <genre authority="rdacontent">notated music</genre>
+      <originInfo>
+         <place>
+            <placeTerm authority="marccountry" type="code">dva</placeTerm>
+            <placeTerm authority="marccountry" type="text"/>
+         </place>
+         <place>
+            <placeTerm type="text">London</placeTerm>
+         </place>
+         <place>
+            <placeTerm type="text">New York</placeTerm>
+         </place>
+         <publisher>Hawkes</publisher>
+         <publisher>Sole selling agents Boosey &amp; Hawkes</publisher>
+         <dateIssued>©1940</dateIssued>
+         <dateIssued encoding="marc">1940</dateIssued>
+         <issuance>monographic</issuance>
+      </originInfo>
+      <language objectPart="accompanying material">
+         <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+      </language>
+      <language objectPart="accompanying material">
+         <languageTerm authority="iso639-2b" type="code">fre</languageTerm>
+      </language>
+      <language objectPart="accompanying material">
+         <languageTerm authority="iso639-2b" type="code">hun</languageTerm>
+      </language>
+      <physicalDescription>
+         <extent>1 score (42 pages) ; 31 cm</extent>
+         <form authority="rdamedia" type="media">unmediated</form>
+         <form authority="rdacarrier" type="carrier">volume</form>
+      </physicalDescription>
+      <note type="statement of responsibility">Béla Bartók.</note>
+      <note>Prefatory note in English, French, and    Hungarian.</note>
+      <note>Duration: ca. 22:00.</note>
+      <note>"Written for the Basle chamber    orchestra"--Caption.</note>
+      <subject authority="lcsh">
+         <topic>Suites (String orchestra)</topic>
+         <genre>Scores</genre>
+      </subject>
+      <subject authority="fast">
+         <topic>Suites (String orchestra)</topic>
+         <topic>Scores</topic>
+      </subject>
+      <classification authority="lcc">M1103.B37 D585</classification>
+      <classification authority="ddc">785.3/054</classification>
+      <relatedItem>
+         <titleInfo>
+            <title>Hawkes pocket scores ; no. 28</title>
+         </titleInfo>
+      </relatedItem>
+      <relatedItem type="series">
+         <titleInfo>
+            <title>Hawkes pocket scores ; no. 28</title>
+         </titleInfo>
+      </relatedItem>
+      <identifier type="music plate">B. &amp; H. 8326 Boosey &amp; Hawkes</identifier>
+      <location>
+         <physicalLocation type="repository">MUS</physicalLocation>
+         <shelfLocator>Mus 627.22.225 Solti C PF C</shelfLocator>
+      </location>
+      <location>
+         <physicalLocation type="repository">MUS</physicalLocation>
+         <shelfLocator>Mus 627.22.225</shelfLocator>
+      </location>
+      <location>
+         <shelfLocator>Solti B-C digital copies</shelfLocator>
+         <holdingSimple>
+            <copyInformation>
+               <note type="reproduction">Electronic reproduction. Cambridge, Mass. : Harvard College Library Digital Imaging Group, 2013.</note>
+            </copyInformation>
+         </holdingSimple>
+         <url access="raw object"
+              displayLabel="Mus 627.22.225 Solti B"
+              note="Provides access to page images of entire work.">http://nrs.harvard.edu/urn-3:fhcl.loeb:10356603</url>
+         <url access="raw object"
+              displayLabel="Mus 627.22.225 Solti C PF"
+              note="Provides access to page images of entire work.">http://nrs.harvard.edu/urn-3:fhcl.loeb:9961581</url>
+      </location>
+      <location>
+         <physicalLocation type="repository">MUS</physicalLocation>
+         <shelfLocator>Mus 627.22.225 Solti B B</shelfLocator>
+      </location>
+      <extension>
+         <originalDocument xmlns="http://lib.harvard.edu/TBD">https://s3.amazonaws.com/harvard.librarycloud.marc.foo/001763319</originalDocument>
+      </extension>
+      <recordInfo>
+         <descriptionStandard>aacr</descriptionStandard>
+         <recordContentSource authority="marcorg">BBH</recordContentSource>
+         <recordCreationDate encoding="marc">860409</recordCreationDate>
+         <recordChangeDate encoding="iso8601">20170426152038.0</recordChangeDate>
+         <recordIdentifier source="MH:ALEPH">001763319</recordIdentifier>
+         <recordOrigin>Converted from MARCXML to MODS version 3.6 using MARC21slim2MODS3-6.xsl   (Revision 1.117 2017/02/14)</recordOrigin>
+         <languageOfCataloging>
+            <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+         </languageOfCataloging>
+      </recordInfo>
+   </mods>
+   <mods xmlns:countries="info:lc/xmlns/codelist-v1"
+         xmlns:marc="http://www.loc.gov/MARC21/slim"
+         xmlns:mods="http://www.loc.gov/mods/v3"
+         xmlns:urlinfo="http://lib.harvard.edu/urlinfo"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <titleInfo>
+         <title>Divertimento for string orchestra, Mus 627.22.225 Solti B</title>
+      </titleInfo>
+      <titleInfo nameTitleGroup="1" type="uniform">
+         <title>Divertimento, string orchestra, Mus 627.22.225 Solti B</title>
+      </titleInfo>
+      <name nameTitleGroup="1" type="personal" usage="primary">
+         <namePart>Bartók, Béla</namePart>
+         <namePart type="date">1881-1945</namePart>
+         <role>
+            <roleTerm type="text">creator</roleTerm>
+         </role>
+      </name>
+      <name type="personal">
+         <namePart>Solti, Georg</namePart>
+         <namePart type="date">1912-1997</namePart>
+         <role>
+            <roleTerm type="text">former owner.</roleTerm>
+         </role>
+      </name>
+      <name type="corporate">
+         <namePart>Sir Georg Solti Archive</namePart>
+      </name>
+      <typeOfResource>notated music</typeOfResource>
+      <genre authority="rdacontent">notated music</genre>
+      <originInfo>
+         <place>
+            <placeTerm authority="marccountry" type="code">dva</placeTerm>
+            <placeTerm authority="marccountry" type="text"/>
+         </place>
+         <place>
+            <placeTerm type="text">London</placeTerm>
+         </place>
+         <place>
+            <placeTerm type="text">New York</placeTerm>
+         </place>
+         <publisher>Hawkes</publisher>
+         <publisher>Sole selling agents Boosey &amp; Hawkes</publisher>
+         <dateIssued>©1940</dateIssued>
+         <dateIssued encoding="marc">1940</dateIssued>
+         <issuance>monographic</issuance>
+      </originInfo>
+      <language objectPart="accompanying material">
+         <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+      </language>
+      <language objectPart="accompanying material">
+         <languageTerm authority="iso639-2b" type="code">fre</languageTerm>
+      </language>
+      <language objectPart="accompanying material">
+         <languageTerm authority="iso639-2b" type="code">hun</languageTerm>
+      </language>
+      <physicalDescription>
+         <extent>1 score (42 pages) ; 31 cm</extent>
+         <form authority="rdamedia" type="media">unmediated</form>
+         <form authority="rdacarrier" type="carrier">volume</form>
+      </physicalDescription>
+      <note type="statement of responsibility">Béla Bartók.</note>
+      <note>Prefatory note in English, French, and    Hungarian.</note>
+      <note>Duration: ca. 22:00.</note>
+      <note>"Written for the Basle chamber    orchestra"--Caption.</note>
+      <subject authority="lcsh">
+         <topic>Suites (String orchestra)</topic>
+         <genre>Scores</genre>
+      </subject>
+      <subject authority="fast">
+         <topic>Suites (String orchestra)</topic>
+         <topic>Scores</topic>
+      </subject>
+      <classification authority="lcc">M1103.B37 D585</classification>
+      <classification authority="ddc">785.3/054</classification>
+      <relatedItem>
+         <titleInfo>
+            <title>Hawkes pocket scores ; no. 28</title>
+         </titleInfo>
+      </relatedItem>
+      <relatedItem type="series">
+         <titleInfo>
+            <title>Hawkes pocket scores ; no. 28</title>
+         </titleInfo>
+      </relatedItem>
+      <identifier type="music plate">B. &amp; H. 8326 Boosey &amp; Hawkes</identifier>
+      <location>
+         <physicalLocation type="repository">MUS</physicalLocation>
+         <shelfLocator>Mus 627.22.225 Solti C PF C</shelfLocator>
+      </location>
+      <location>
+         <physicalLocation type="repository">MUS</physicalLocation>
+         <shelfLocator>Mus 627.22.225</shelfLocator>
+      </location>
+      <location>
+         <shelfLocator>Solti B-C digital copies</shelfLocator>
+         <url access="raw object"
+              displayLabel="Mus 627.22.225 Solti B"
+              note="Provides access to page images of entire work.">http://nrs.harvard.edu/urn-3:fhcl.loeb:10356603</url>
+         <url access="preview">http://ids.lib.harvard.edu/ids/view/45562415?width=150&amp;height=150&amp;usethumb=y</url>
+      </location>
+      <location>
+         <physicalLocation type="repository">MUS</physicalLocation>
+         <shelfLocator>Mus 627.22.225 Solti B B</shelfLocator>
+      </location>
+      <extension>
+         <originalDocument xmlns="http://lib.harvard.edu/TBD">https://s3.amazonaws.com/harvard.librarycloud.marc.foo/001763319</originalDocument>
+      </extension>
+      <recordInfo>
+         <descriptionStandard>aacr</descriptionStandard>
+         <recordContentSource authority="marcorg">BBH</recordContentSource>
+         <recordCreationDate encoding="marc">860409</recordCreationDate>
+         <recordChangeDate encoding="iso8601">20170426152038.0</recordChangeDate>
+         <recordIdentifier source="MH:ALEPH">001763319_fhcl.loeb:10356603</recordIdentifier>
+         <recordOrigin>Converted from MARCXML to MODS version 3.6 using MARC21slim2MODS3-6.xsl   (Revision 1.117 2017/02/14)</recordOrigin>
+         <languageOfCataloging>
+            <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+         </languageOfCataloging>
+      </recordInfo>
+      <extension>
+         <HarvardDRS:DRSMetadata xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
+            <inDRS xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">true</inDRS>
+            <accessFlag xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">P</accessFlag>
+            <contentModel xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">PDS DOCUMENT</contentModel>
+            <uriType xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">PDS</uriType>
+            <fileDeliveryURL xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">http://nrs.harvard.edu/urn-3:FHCL.Loeb:10356603</fileDeliveryURL>
+            <ownerCode xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">FHCL.MUSI</ownerCode>
+            <ownerCodeDisplayName xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">Eda Kuhn Loeb Music Library</ownerCodeDisplayName>
+            <metsLabel xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">Bartók, Béla, 1881-1945. [Divertimento, string orchestra]. Divertimento for string orchestra. London: Hawkes [c1940]. Merritt Mus 627.22.225 Solti B. Gift of the Solti Estate. Reproduced by permission of Boosey &amp; Hawkes Music Publishers Ltd.</metsLabel>
+            <lastModifiedDate xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">2016-03-14T14:28:07.202Z</lastModifiedDate>
+         </HarvardDRS:DRSMetadata>
+      </extension>
+      <relatedItem otherType="HOLLIS record">
+         <location>
+            <url>http://id.lib.harvard.edu/aleph/001763319/catalog</url>
+         </location>
+      </relatedItem>
+   </mods>
+   <mods xmlns:countries="info:lc/xmlns/codelist-v1"
+         xmlns:marc="http://www.loc.gov/MARC21/slim"
+         xmlns:mods="http://www.loc.gov/mods/v3"
+         xmlns:urlinfo="http://lib.harvard.edu/urlinfo"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <titleInfo>
+         <title>Divertimento for string orchestra, Mus 627.22.225 Solti C PF</title>
+      </titleInfo>
+      <titleInfo nameTitleGroup="1" type="uniform">
+         <title>Divertimento, string orchestra, Mus 627.22.225 Solti C PF</title>
+      </titleInfo>
+      <name nameTitleGroup="1" type="personal" usage="primary">
+         <namePart>Bartók, Béla</namePart>
+         <namePart type="date">1881-1945</namePart>
+         <role>
+            <roleTerm type="text">creator</roleTerm>
+         </role>
+      </name>
+      <name type="personal">
+         <namePart>Solti, Georg</namePart>
+         <namePart type="date">1912-1997</namePart>
+         <role>
+            <roleTerm type="text">former owner.</roleTerm>
+         </role>
+      </name>
+      <name type="corporate">
+         <namePart>Sir Georg Solti Archive</namePart>
+      </name>
+      <typeOfResource>notated music</typeOfResource>
+      <genre authority="rdacontent">notated music</genre>
+      <originInfo>
+         <place>
+            <placeTerm authority="marccountry" type="code">dva</placeTerm>
+            <placeTerm authority="marccountry" type="text"/>
+         </place>
+         <place>
+            <placeTerm type="text">London</placeTerm>
+         </place>
+         <place>
+            <placeTerm type="text">New York</placeTerm>
+         </place>
+         <publisher>Hawkes</publisher>
+         <publisher>Sole selling agents Boosey &amp; Hawkes</publisher>
+         <dateIssued>©1940</dateIssued>
+         <dateIssued encoding="marc">1940</dateIssued>
+         <issuance>monographic</issuance>
+      </originInfo>
+      <language objectPart="accompanying material">
+         <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+      </language>
+      <language objectPart="accompanying material">
+         <languageTerm authority="iso639-2b" type="code">fre</languageTerm>
+      </language>
+      <language objectPart="accompanying material">
+         <languageTerm authority="iso639-2b" type="code">hun</languageTerm>
+      </language>
+      <physicalDescription>
+         <extent>1 score (42 pages) ; 31 cm</extent>
+         <form authority="rdamedia" type="media">unmediated</form>
+         <form authority="rdacarrier" type="carrier">volume</form>
+      </physicalDescription>
+      <note type="statement of responsibility">Béla Bartók.</note>
+      <note>Prefatory note in English, French, and    Hungarian.</note>
+      <note>Duration: ca. 22:00.</note>
+      <note>"Written for the Basle chamber    orchestra"--Caption.</note>
+      <subject authority="lcsh">
+         <topic>Suites (String orchestra)</topic>
+         <genre>Scores</genre>
+      </subject>
+      <subject authority="fast">
+         <topic>Suites (String orchestra)</topic>
+         <topic>Scores</topic>
+      </subject>
+      <classification authority="lcc">M1103.B37 D585</classification>
+      <classification authority="ddc">785.3/054</classification>
+      <relatedItem>
+         <titleInfo>
+            <title>Hawkes pocket scores ; no. 28</title>
+         </titleInfo>
+      </relatedItem>
+      <relatedItem type="series">
+         <titleInfo>
+            <title>Hawkes pocket scores ; no. 28</title>
+         </titleInfo>
+      </relatedItem>
+      <identifier type="music plate">B. &amp; H. 8326 Boosey &amp; Hawkes</identifier>
+      <location>
+         <physicalLocation type="repository">MUS</physicalLocation>
+         <shelfLocator>Mus 627.22.225 Solti C PF C</shelfLocator>
+      </location>
+      <location>
+         <physicalLocation type="repository">MUS</physicalLocation>
+         <shelfLocator>Mus 627.22.225</shelfLocator>
+      </location>
+      <location>
+         <shelfLocator>Solti B-C digital copies</shelfLocator>
+         <url access="raw object"
+              displayLabel="Mus 627.22.225 Solti C PF"
+              note="Provides access to page images of entire work.">http://nrs.harvard.edu/urn-3:fhcl.loeb:9961581</url>
+      </location>
+      <location>
+         <physicalLocation type="repository">MUS</physicalLocation>
+         <shelfLocator>Mus 627.22.225 Solti B B</shelfLocator>
+      </location>
+      <extension>
+         <originalDocument xmlns="http://lib.harvard.edu/TBD">https://s3.amazonaws.com/harvard.librarycloud.marc.foo/001763319</originalDocument>
+      </extension>
+      <recordInfo>
+         <descriptionStandard>aacr</descriptionStandard>
+         <recordContentSource authority="marcorg">BBH</recordContentSource>
+         <recordCreationDate encoding="marc">860409</recordCreationDate>
+         <recordChangeDate encoding="iso8601">20170426152038.0</recordChangeDate>
+         <recordIdentifier source="MH:ALEPH">001763319_fhcl.loeb:9961581</recordIdentifier>
+         <recordOrigin>Converted from MARCXML to MODS version 3.6 using MARC21slim2MODS3-6.xsl   (Revision 1.117 2017/02/14)</recordOrigin>
+         <languageOfCataloging>
+            <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+         </languageOfCataloging>
+      </recordInfo>
+      <extension>
+         <HarvardDRS:DRSMetadata xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
+            <inDRS xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">true</inDRS>
+            <accessFlag xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">R</accessFlag>
+            <contentModel xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">PDS DOCUMENT</contentModel>
+            <uriType xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">PDS</uriType>
+            <fileDeliveryURL xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">http://nrs.harvard.edu/urn-3:FHCL.Loeb:9961581</fileDeliveryURL>
+            <ownerCode xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">FHCL.MUSI</ownerCode>
+            <ownerCodeDisplayName xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">Eda Kuhn Loeb Music Library</ownerCodeDisplayName>
+            <metsLabel xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">Bartök, Béla, 1881-1945. [Divertimento, string orchestra]. Divertimento for string orchestra. London, Hawkes [c1940]. Enlarged photocopy. Merritt Mus 627.22.225 Solti C PF. Gift of the Solti corporate entities. Reproduced by permission of Boosey &amp; Hawkes Music Publishers Ltd.</metsLabel>
+            <lastModifiedDate xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">2016-03-14T13:34:21.843Z</lastModifiedDate>
+         </HarvardDRS:DRSMetadata>
+      </extension>
+      <relatedItem otherType="HOLLIS record">
+         <location>
+            <url>http://id.lib.harvard.edu/aleph/001763319/catalog</url>
+         </location>
+      </relatedItem>
+   </mods>
+</modsCollection>

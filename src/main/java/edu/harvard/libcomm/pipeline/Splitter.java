@@ -34,9 +34,8 @@ public class Splitter  {
 		if ((libCommMessage != null) && (libCommMessage.getPayload() != null)) {
 			String resource = libCommMessage.getPayload().getFilepath();
 			InputStream input = null;
-
 			/* Figure out if the path is a URI or a local file system reference, and handle appropriately */
-			UrlValidator urlValidator = new UrlValidator();
+      UrlValidator urlValidator = new UrlValidator(UrlValidator.ALLOW_LOCAL_URLS);
 			if (urlValidator.isValid(resource)) {
 				try {
 					input = new URL(resource).openStream();

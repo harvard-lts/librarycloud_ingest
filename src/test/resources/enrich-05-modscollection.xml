@@ -1,0 +1,161 @@
+<modsCollection xmlns="http://www.loc.gov/mods/v3">
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <titleInfo>
+        <title>Cinq poëmes de Charles Baudelaire</title>
+    </titleInfo>
+    <titleInfo type="uniform">
+        <title>Poèmes de Baudelaire</title>
+    </titleInfo>
+    <name type="personal">
+        <namePart>Debussy, Claude</namePart>
+        <namePart type="date">1862-1918</namePart>
+        <role>
+            <roleTerm type="text">creator</roleTerm>
+        </role>
+    </name>
+    <name type="personal">
+        <namePart>Baudelaire, Charles</namePart>
+        <namePart type="date">1821-1867</namePart>
+        <role>
+            <roleTerm type="code" authority="marcrelator">lbt</roleTerm>
+        </role>
+    </name>
+    <typeOfResource>notated music</typeOfResource>
+    <originInfo>
+        <place>
+            <placeTerm authority="marccountry" type="code">fr</placeTerm>
+            <placeTerm authority="marccountry" type="text">France</placeTerm>
+        </place>
+        <place>
+            <placeTerm type="text">Paris</placeTerm>
+        </place>
+        <publisher>A. Durand</publisher>
+        <dateIssued>c1904</dateIssued>
+        <dateIssued encoding="marc">1904</dateIssued>
+        <edition>[1st ed.]</edition>
+        <issuance>monographic</issuance>
+    </originInfo>
+    <language>
+        <languageTerm authority="iso639-2b" type="code">fre</languageTerm>
+        <languageTerm authority="iso639-2b" type="text">French</languageTerm>
+    </language>
+    <physicalDescription>
+        <form authority="marcform">print</form>
+        <extent>1 score (35 p.) ; 31 cm.</extent>
+    </physicalDescription>
+    <tableOfContents>Le Balcon -- Harmonie du Soir -- Le Jet d'eau -- Recueillement -- La Mort des amants.</tableOfContents>
+    <note type="statement of responsibility">musique de Claude Debussy ; chant et piano.</note>
+    <note>For high voice and piano.</note>
+    <subject>
+        <temporal encoding="iso8601" point="start">1887</temporal>
+        <temporal encoding="iso8601" point="end">1889</temporal>
+    </subject>
+    <subject authority="lcsh">
+        <name type="personal">
+            <namePart>Baudelaire, Charles</namePart>
+            <namePart type="date">1821-1867</namePart>
+        </name>
+        <genre>Musical settings</genre>
+    </subject>
+    <subject authority="lcsh">
+        <topic>Songs (High voice) with piano</topic>
+    </subject>
+    <subject authority="LCC">
+        <topic>Music -- Music -- Collections -- Collected works of individual composers -- Selections</topic>
+    </subject>
+    <relatedItem type="series">
+        <titleInfo>
+            <title>LDI 8: Digital scores from the Loeb Music Library II</title>
+        </titleInfo>
+    </relatedItem>
+    <identifier type="music plate">D. &amp; F. 6103 Durand</identifier>
+    <location>
+        <physicalLocation type="repository">MUS</physicalLocation>
+        <shelfLocator>Mus 645.5.717</shelfLocator>
+    </location>
+    <location>
+        <physicalLocation type="repository">MUS</physicalLocation>
+        <shelfLocator>Mus 645.5.717</shelfLocator>
+    </location>
+    <location>
+      <url note="Provides access to page images of entire work." access="raw object">http://nrs.harvard.edu/urn-3:fhcl.loeb:1269248</url>
+    </location>
+    <extension>
+        <originalDocument:originalDocument xmlns:originalDocument="http://lib.harvard.edu/TBD" xmlns="http://lib.harvard.edu/TBD" xmlns:urlinfo="http://lib.harvard.edu/urlinfo" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:countries="info:lc/xmlns/codelist-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">https://s3.amazonaws.com/harvard.librarycloud.marc.qa/001490591</originalDocument:originalDocument>
+    </extension>
+    <extension>
+        <usageData:usageData xmlns:usageData="http://lib.harvard.edu/usagedata" xmlns="http://lib.harvard.edu/usagedata" xmlns:urlinfo="http://lib.harvard.edu/urlinfo" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:countries="info:lc/xmlns/codelist-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <stackScore>1</stackScore>
+        </usageData:usageData>
+    </extension>
+    <extension>
+        <HarvardDRS:DRSMetadata xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS" xmlns:urlinfo="http://lib.harvard.edu/urlinfo" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:countries="info:lc/xmlns/codelist-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <HarvardDRS:inDRS xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">true</HarvardDRS:inDRS>
+            <HarvardDRS:accessFlag xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">P</HarvardDRS:accessFlag>
+            <HarvardDRS:contentModel xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">PDS DOCUMENT</HarvardDRS:contentModel>
+            <HarvardDRS:uriType xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">PDS</HarvardDRS:uriType>
+            <HarvardDRS:fileDeliveryURL xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">http://nrs.harvard.edu/urn-3:FHCL.Loeb:1269248</HarvardDRS:fileDeliveryURL>
+            <HarvardDRS:ownerCode xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">FHCL.MUSI</HarvardDRS:ownerCode>
+            <HarvardDRS:ownerCodeDisplayName xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">Eda Kuhn Loeb Music Library</HarvardDRS:ownerCodeDisplayName>
+            <HarvardDRS:metsLabel xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">Debussy, Claude, 1862-1918. Poèmes de Baudelaire. Paris: Durand, c1904. Mus 645.5.717.</HarvardDRS:metsLabel>
+            <HarvardDRS:lastModifiedDate xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">2016-03-14T13:21:49.91Z</HarvardDRS:lastModifiedDate>
+        </HarvardDRS:DRSMetadata>
+    </extension>
+    <relatedItem otherType="HOLLIS record">
+        <location>
+            <url>http://id.lib.harvard.edu/aleph/001490591/catalog</url>
+        </location>
+    </relatedItem>
+    <extension>
+        <sets:sets xmlns:sets="http://hul.harvard.edu/ois/xml/ns/libraryCloud" xmlns="http://hul.harvard.edu/ois/xml/ns/libraryCloud" xmlns:urlinfo="http://lib.harvard.edu/urlinfo" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:countries="info:lc/xmlns/codelist-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <set>
+                <recordType>set</recordType>
+                <sytemId>44001</sytemId>
+                <setDescription>The scores and libretti in this Virtual Collection include first and early editions and manuscript copies of music from the eighteenth and early nineteenth centuries by J.S. Bach and Bach family members, Mozart, Schubert and other composers, as well as multiple versions of nineteenth century opera scores, seminal works of musical modernism, and music of the Second Viennese School. Many, such as variant editions of nineteenth century operas and related libretti, fall into intellectually related sets that are meant to be seen and used together. </setDescription>
+                <setName>scores</setName>
+                <setSpec>scores</setSpec>
+                <dcp>true</dcp>
+                <public>true</public>
+                <collectionUrn>http://nrs.harvard.edu/urn-3:hul.eresource:digiscor</collectionUrn>
+                <thumbnailUrn>https://ids.lib.harvard.edu/ids/iiif/2583003/full/,150/0/native.jpg</thumbnailUrn>
+                <baseUrl>http://dcp.lib.harvard.edu/spotlight/digital-scores-and-libretti</baseUrl>
+                <created>2018-05-11T15:49:09-04:00</created>
+                <modified>2018-05-22T09:20:25-04:00</modified>
+                <contactName>Kerry C. Masteller</contactName>
+                <contactDepartment>Loeb Music Library, HL</contactDepartment>
+            </set>
+        </sets:sets>
+    </extension>
+    <recordInfo>
+        <recordContentSource authority="marcorg">MH-Mu</recordContentSource>
+        <recordCreationDate encoding="marc">880512</recordCreationDate>
+        <recordChangeDate encoding="iso8601">20081114113652.0</recordChangeDate>
+        <recordIdentifier source="MH:ALEPH">001490591</recordIdentifier>
+        <recordOrigin>Converted from MARCXML to MODS version 3.6 using MARC21slim2MODS3-6.xsl
+        (Revision 1.117 2017/02/14)</recordOrigin>
+    </recordInfo>
+  </mods>
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <location>
+      <url note="Provides access to page images of entire work." access="raw object">http://nrs.harvard.edu/urn-3:fhcl.loeb:12345</url>
+      <url access="preview"></url>
+    </location>
+</mods>
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <location>
+      <url note="Provides access to page images of entire work." access="raw object">http://nrs.harvard.edu/urn-3:fhcl.loeb:55555</url>
+      <url access="preview">http://dontreplaceme.com/55555</url>
+    </location>
+</mods>
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <location>
+      <url note="Provides access to page images of entire work." access="raw object">http://nrs.nothumbnails.edu/urn-3:fhcl.loeb:11111</url>
+    </location>
+</mods>
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <location>
+      <url note="Provides access to page images of entire work." access="raw object">http://nrs.nothumbnails.edu/urn-3:fhcl.loeb:11111</url>
+      <url note="Provides access to page images of entire work." access="raw object">http://nrs.nothumbnails.edu/urn-3:fhcl.loeb:ebookbatch</url>
+    </location>
+</mods>
+</modsCollection>

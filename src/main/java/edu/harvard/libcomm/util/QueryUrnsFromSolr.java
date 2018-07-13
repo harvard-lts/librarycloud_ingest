@@ -2,9 +2,8 @@ package main.java.edu.harvard.libcomm.util;
 
 import edu.harvard.libcomm.pipeline.Config;
 import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
@@ -49,7 +48,8 @@ public class QueryUrnsFromSolr {
     }
 
     private void queryForUrns() throws Exception {
-        SolrServer server = new HttpSolrServer(URL);
+        // HttpSolrClient server = new HttpSolrClient.Builder(URL).build();
+        HttpSolrClient server = new HttpSolrClient(URL);
         String currentStatus = type + "_huldrsadmin_status_string:current";
         String queryStr = "doc_type_string:" + type + " AND " + currentStatus + " AND " + field + ":[* TO *]";
         if (type.equals("object"))

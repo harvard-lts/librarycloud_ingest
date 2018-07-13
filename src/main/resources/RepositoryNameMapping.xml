@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueMappings>
+    <mapping>
+        <source>AFR</source>
+        <replacement>African and African American Studies Reading Room, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/no2018062623</valueURI>
+        <extensionValue>Afro-American Studies</extensionValue>
+    </mapping>
+    <mapping>
+        <source>AJP</source>
+        <replacement>Arnold Arboretum Horticultural Library (Jamaica Plain), Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Botany Arboretum</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Arnold Arboretum Horticultural Library (Jamaica Plain)</source>
+        <replacement>Arnold Arboretum Horticultural Library (Jamaica Plain), Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Botany Arboretum</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Archives of the Arnold Arboretum, Harvard University</source>
+        <replacement>Arnold Arboretum Horticultural Library (Jamaica Plain), Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Botany Arboretum</extensionValue>
+    </mapping>
+    <mapping>
+        <source>ARG</source>
+        <replacement>Arnold Arboretum Library (Cambridge), Botany Libraries, Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Botany Gray/Arnold</extensionValue>
+    </mapping>
+    <mapping>
+        <source>ARN</source>
+        <replacement>Arnold Arboretum Library (Cambridge), Botany Libraries, Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Botany Arnold (Cambr.)</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Archives of the Arnold Arboretum (Cambridge), Botany Libraries, Harvard University</source>
+        <replacement>Arnold Arboretum Library (Cambridge), Botany Libraries, Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Botany Arnold (Cambr.)</extensionValue>
+    </mapping>
+    <mapping>
+        <source>ART</source>
+        <replacement>Harvard Art Museums</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2008065752</valueURI>
+        <extensionValue>Harvard Art Museums</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Portrait/Clock Collections</source>
+        <replacement>Harvard Portrait/Clock Collections, Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Portrait/Clock Collections</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Art Museums</source>
+        <replacement>Harvard Art Museums</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2008065752</valueURI>
+        <extensionValue>Harvard Art Museums</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Art Museum Archives, Harvard Art Museums, Harvard University</source>
+        <replacement>Harvard Art Museums Archives, Harvard Art Museums, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2008065752</valueURI>
+        <extensionValue>Harvard Art Museums</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Art Museums Archives, Harvard Art Museums, Harvard University</source>
+        <replacement>Harvard Art Museums Archives, Harvard Art Museums, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2008065752</valueURI>
+        <extensionValue>Harvard Art Museums</extensionValue>
+    </mapping>
+    <mapping>
+        <source>AWH</source>
+        <replacement>General Artemas Ward Museum</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2007087525</valueURI>
+        <extensionValue>Artemas Ward House</extensionValue>
+    </mapping>
+    <mapping>
+        <source>General Artemas Ward House Museum</source>
+        <replacement>General Artemas Ward Museum</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2007087525</valueURI>
+        <extensionValue>Artemas Ward House</extensionValue>
+    </mapping>
+    <mapping>
+        <source>BAK</source>
+        <replacement>Baker Library, Harvard Business School, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000123374118</valueURI>
+        <extensionValue>Baker Business</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Baker Library Historical Collections, Harvard Business School, Harvard University</source>
+        <replacement>Baker Library Historical Collections, Harvard Business School, Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Baker Business</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Baker Library, Harvard Business School, Historical Collections</source>
+        <replacement>Baker Library Historical Collections, Harvard Business School, Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Baker Business</extensionValue>
+    </mapping>
+    <mapping>
+        <source>BER</source>
+        <replacement>Biblioteca Berenson, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
+        <valueURI>http://isni.org/isni/0000000460340699</valueURI>
+        <extensionValue>Biblioteca Berenson</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Berenson Art Collection, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</source>
+        <replacement>Berenson Art Collection, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Biblioteca Berenson</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Biblioteca Berenson, Fototeca, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</source>
+        <replacement/>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Biblioteca Berenson</extensionValue>
+    </mapping>
+    <mapping>
+        <source>BIR</source>
+        <replacement>Birkhoff Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460341683</valueURI>
+        <extensionValue>Birkhoff Math</extensionValue>
+    </mapping>
+    <mapping>
+        <source>BLH</source>
+        <replacement>Cabot Science Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/000000046073724X</valueURI>
+        <extensionValue>Cabot Science</extensionValue>
+    </mapping>
+    <mapping>
+        <source>CAB</source>
+        <replacement>Cabot Science Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/000000046073724X</valueURI>
+        <extensionValue>Cabot Science</extensionValue>
+    </mapping>
+    <mapping>
+        <source>CAR</source>
+        <replacement>Carpenter Center for the Visual Arts, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/000000011942846X</valueURI>
+        <extensionValue>Carpenter Center</extensionValue>
+    </mapping>
+    <mapping>
+        <source>CEL</source>
+        <replacement>Fred Norris Robinson Celtic Seminar Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000464717721</valueURI>
+        <extensionValue>Robinson Celtic</extensionValue>
+    </mapping>
+    <mapping>
+        <source>CHE</source>
+        <replacement>Chemistry and Chemical Biology Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000464733123</valueURI>
+        <extensionValue>Chemistry</extensionValue>
+    </mapping>
+    <mapping>
+        <source>CHI</source>
+        <replacement>Child Memorial Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000464733131</valueURI>
+        <extensionValue>Child Memorial</extensionValue>
+    </mapping>
+    <mapping>
+        <source>DDO</source>
+        <replacement>Dumbarton Oaks Research Library and Collection, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121086569</valueURI>
+        <extensionValue>Dumbarton Oaks</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Dumbarton Oaks Research Library and Collection</source>
+        <replacement>Dumbarton Oaks Research Library and Collection, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121086569</valueURI>
+        <extensionValue>Dumbarton Oaks</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Dumbarton Oaks Research Library and Collection, Harvard Library, Harvard University</source>
+        <replacement>Dumbarton Oaks Research Library and Collection, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121086569</valueURI>
+        <extensionValue>Dumbarton Oaks</extensionValue>
+    </mapping>
+    <mapping>
+        <source>DES</source>
+        <replacement>Frances L. Loeb Library, Graduate School of Design, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460342862</valueURI>
+        <extensionValue>Loeb Design</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Frances L. Loeb Library, Harvard University Graduate School of Design</source>
+        <replacement>Frances L. Loeb Library, Graduate School of Design, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460342862</valueURI>
+        <extensionValue>Loeb Design</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Special Collections, Frances Loeb Library, Graduate School of Design, Harvard University</source>
+        <replacement>Frances L. Loeb Library, Graduate School of Design, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460342862</valueURI>
+        <extensionValue>Loeb Design</extensionValue>
+    </mapping>
+    <mapping>
+        <source>DIV</source>
+        <replacement>Andover-Harvard Theological Library, Harvard Divinity School, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121705139</valueURI>
+        <extensionValue>Andover-Harv. Theol</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Andover-Harvard Theological Library, Harvard Divinity School</source>
+        <replacement>Andover-Harvard Theological Library, Harvard Divinity School, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121705139</valueURI>
+        <extensionValue>Andover-Harv. Theol</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Andover-Harvard Theological Library, Harvard Divinity School, Harvard University</source>
+        <replacement>Andover-Harvard Theological Library, Harvard Divinity School, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121705139</valueURI>
+        <extensionValue>Andover-Harv. Theol</extensionValue>
+    </mapping>
+    <mapping>
+        <source>DOC</source>
+        <replacement>Government Documents and Microforms Collection, Harvard Library, Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Documents (Lamont)</extensionValue>
+    </mapping>
+    <mapping>
+        <source>ECB</source>
+        <replacement>Economic Botany Library of Oakes Ames, Botany Libraries, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000463448371</valueURI>
+        <extensionValue>Botany Econ. Botany</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Economic Botany Archives of Oakes Ames, Botany Libraries, Harvard University</source>
+        <replacement>Economic Botany Library of Oakes Ames, Botany Libraries, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000463448371</valueURI>
+        <extensionValue>Botany Econ. Botany</extensionValue>
+    </mapping>
+    <mapping>
+        <source>ENV</source>
+        <replacement>Environmental Information Services &amp; Environmental Science and Public Policy Archives, Lamont Library, Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Environmental Information Ctr</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Environmental Science and Public Policy Archives, Harvard Library, Harvard University</source>
+        <replacement>Environmental Information Services &amp; Environmental Science and Public Policy Archives, Lamont Library, Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Environmental Information Ctr</extensionValue>
+    </mapping>
+    <mapping>
+        <source>FAL</source>
+        <replacement>Fine Arts Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000109432246</valueURI>
+        <extensionValue>Fine Arts</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Fine Arts Library, Harvard Library, Harvard University</source>
+        <replacement>Fine Arts Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000109432246</valueURI>
+        <extensionValue>Fine Arts</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Fine Arts Library, Digital Images &amp; Slides Collection</source>
+        <replacement>Fine Arts Library, Digital Images &amp; Slides Collection, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000109432246</valueURI>
+        <extensionValue>Fine Arts</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Fine Arts Library, Special Collections</source>
+        <replacement>Fine Arts Library, Special Collections, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000109432246</valueURI>
+        <extensionValue>Fine Arts</extensionValue>
+    </mapping>
+    <mapping>
+        <source>FAR</source>
+        <replacement>Farlow Reference Library of Cryptogamic Botany, Botany Libraries, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/000000046344838X</valueURI>
+        <extensionValue>Botany Farlow Library </extensionValue>
+    </mapping>
+    <mapping>
+        <source>Archives of the Farlow Herbarium of Cryptogamic Botany, Botany Libraries, Harvard University</source>
+        <replacement>Farlow Reference Library of Cryptogamic Botany, Botany Libraries, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/000000046344838X</valueURI>
+        <extensionValue>Botany Farlow Library </extensionValue>
+    </mapping>
+    <mapping>
+        <source>FOR</source>
+        <replacement>Harvard Forest Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000464615004</valueURI>
+        <extensionValue>Harvard Forest</extensionValue>
+    </mapping>
+    <mapping>
+        <source>FUN</source>
+        <replacement>Fung Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000463633294</valueURI>
+        <extensionValue>Fung Library</extensionValue>
+    </mapping>
+    <mapping>
+        <source>H.C. Fung Library, Harvard Library, Harvard University</source>
+        <replacement>Fung Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000463633294</valueURI>
+        <extensionValue>Fung Library</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Fung Library</source>
+        <replacement>Fung Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000463633294</valueURI>
+        <extensionValue>Fung Library</extensionValue>
+    </mapping>
+    <mapping>
+        <source>GIB</source>
+        <replacement>Gibb Islamic Seminar Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/no2018024023</valueURI>
+        <extensionValue>Gibb Islamic</extensionValue>
+    </mapping>
+    <mapping>
+        <source>GRA</source>
+        <replacement>Gray Herbarium Library, Botany Libraries, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000463448419</valueURI>
+        <extensionValue>Botany Gray Herbarium</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Gray Herbarium Archives</source>
+        <replacement>Gray Herbarium Library, Botany Libraries, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000463448419</valueURI>
+        <extensionValue>Botany Gray Herbarium</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Archives of the Gray Herbarium, Botany Libraries, Harvard University</source>
+        <replacement>Gray Herbarium Library, Botany Libraries, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000463448419</valueURI>
+        <extensionValue>Botany Gray Herbarium</extensionValue>
+    </mapping>
+    <mapping>
+        <source>GRO</source>
+        <replacement>Grossman Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000464739787</valueURI>
+        <extensionValue>Grossman</extensionValue>
+    </mapping>
+    <mapping>
+        <source>GUT</source>
+        <replacement>Monroe C. Gutman Library, Graduate School of Education, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460342846</valueURI>
+        <extensionValue>Gutman Education</extensionValue>
+    </mapping>
+    <mapping>
+        <source>HCO</source>
+        <replacement>Harvard College Observatory Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000464739795</valueURI>
+        <extensionValue>Harvard College Observatory</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard College Observatory Library</source>
+        <replacement>Harvard College Observatory Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000464739795</valueURI>
+        <extensionValue>Harvard College Observatory</extensionValue>
+    </mapping>--> <mapping>
+        <source>HEL</source>
+        <replacement>Center for Hellenic Studies Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460635171</valueURI>
+        <extensionValue>Ctr Hellen Studies</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Center for Hellenic Studies</source>
+        <replacement>Center for Hellenic Studies Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460635171</valueURI>
+        <extensionValue>Ctr Hellen Studies</extensionValue>
+    </mapping>
+    <mapping>
+        <source>HFA</source>
+        <replacement>Harvard Film Archive, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460737119</valueURI>
+        <extensionValue>Harvard Film Archive</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Film Archive</source>
+        <replacement>Harvard Film Archive, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460737119</valueURI>
+        <extensionValue>Harvard Film Archive</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Film Archive, Harvard Library, Harvard University</source>
+        <replacement>Harvard Film Archive, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460737119</valueURI>
+        <extensionValue>Harvard Film Archive</extensionValue>
+    </mapping>
+    <mapping>
+        <source>HIS</source>
+        <replacement>History Departmental Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/no2018017635</valueURI>
+        <extensionValue>History Dept.</extensionValue>
+    </mapping>
+    <mapping>
+        <source>HOU</source>
+        <replacement>Houghton Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121904234</valueURI>
+        <extensionValue>Houghton</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Houghton Library, Harvard Library, Harvard University</source>
+        <replacement>Houghton Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121904234</valueURI>
+        <extensionValue>Houghton</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Houghton Library</source>
+        <replacement>Houghton Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121904234</valueURI>
+        <extensionValue>Houghton</extensionValue>
+    </mapping>
+    <mapping>
+        <source>HPO</source>
+        <replacement>Harvard Property Information Resource Center, Harvard University</replacement>
+        <!--      <valueURI></valueURI> -->
+        <extensionValue>Harvard Planning &amp; Real Estate</extensionValue>
+    </mapping>--> <mapping>
+        <source>HSI</source>
+        <replacement>Collection of Historical Scientific Instruments, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/n91089739</valueURI>
+        <extensionValue>Sci Instruments</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Collection of Historical Scientific Instruments, Harvard University</source>
+        <replacement>Collection of Historical Scientific Instruments, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/n91089739</valueURI>
+        <extensionValue>Sci Instruments</extensionValue>
+    </mapping>
+    <mapping>
+        <source>HSL</source>
+        <replacement>History of Science Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000464428911</valueURI>
+        <extensionValue>History of Science</extensionValue>
+    </mapping>
+    <mapping>
+        <source>HUA</source>
+        <replacement>Harvard University Archives</replacement>
+        <valueURI>http://isni.org/isni/0000000460737207</valueURI>
+        <extensionValue>Harvard University Archives</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard University Archives</source>
+        <replacement>Harvard University Archives</replacement>
+        <valueURI>http://isni.org/isni/0000000460737207</valueURI>
+        <extensionValue>Harvard University Archives</extensionValue>
+    </mapping>
+    <mapping>
+        <source>HYL</source>
+        <replacement>Harvard-Yenching Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121790804</valueURI>
+        <extensionValue>Harvard-Yenching</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard-Yenching Library</source>
+        <replacement>Harvard-Yenching Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121790804</valueURI>
+        <extensionValue>Harvard-Yenching</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard-Yenching Library, Harvard Library, Harvard University</source>
+        <replacement>Harvard-Yenching Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121790804</valueURI>
+        <extensionValue>Harvard-Yenching</extensionValue>
+    </mapping>
+    <mapping>
+        <source>KIR</source>
+        <replacement>Kirkland House Library, Harvard University</replacement>
+        <!--      <valueURI></valueURI> -->
+        <extensionValue>Kirkland</extensionValue>
+    </mapping>
+    <mapping>
+        <source>KSG</source>
+        <replacement>Harvard Kennedy School Library &amp; Knowledge Services</replacement>
+        <valueURI>http://isni.org/isni/0000000460341317 </valueURI>
+        <extensionValue>Harvard Kennedy School</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Kennedy School Library &amp; Knowledge Services</source>
+        <replacement>Harvard Kennedy School Library &amp; Knowledge Services</replacement>
+        <valueURI>http://isni.org/isni/0000000460341317 </valueURI>
+        <extensionValue>Harvard Kennedy School</extensionValue>
+    </mapping>
+    <mapping>
+        <source>LAM</source>
+        <replacement>Lamont Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000463633307</valueURI>
+        <extensionValue>Lamont</extensionValue>
+    </mapping>
+    <mapping>
+        <source>LAW</source>
+        <replacement>Harvard Law School Library</replacement>
+        <valueURI>http://isni.org/isni/000000011940971X</valueURI>
+        <extensionValue>Law School</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Law School Library</source>
+        <replacement>Harvard Law School Library</replacement>
+        <valueURI>http://isni.org/isni/000000011940971X</valueURI>
+        <extensionValue>Law School</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Law School Library, Harvard Library, Harvard University</source>
+        <replacement>Harvard Law School Library</replacement>
+        <valueURI>http://isni.org/isni/000000011940971X</valueURI>
+        <extensionValue>Law School</extensionValue>
+    </mapping>
+    <mapping>
+        <source>LIN</source>
+        <replacement>Linguistics Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2018024257</valueURI>
+        <extensionValue>Linguistics</extensionValue>
+    </mapping>
+    <mapping>
+        <source>MAP</source>
+        <replacement>Harvard Map Collection, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2006038016</valueURI>
+        <extensionValue>Map Coll (Pusey)</extensionValue>
+    </mapping>
+    <mapping>
+        <source>MCK</source>
+        <replacement>Cabot Science Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/000000046073724X</valueURI>
+        <extensionValue>Cabot Science</extensionValue>
+    </mapping>
+    <mapping>
+        <source>MCZ</source>
+        <replacement>Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460377627</valueURI> --> <extensionValue>Museum Comp Zoology</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Ernst Mayr Library of the Museum of Comparative Zoology, Museum of Comparative Zoology, Harvard University</source>
+        <replacement>Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460377627</valueURI> --> <extensionValue>Museum Comp Zoology</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Ernst Mayr Library of the Museum of Comparative Zoology</source>
+        <replacement>Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460377627</valueURI> --> <extensionValue>Museum Comp Zoology</extensionValue>
+    </mapping>
+    <mapping>
+        <source>MED</source>
+        <replacement>Francis A. Countway Library of Medicine</replacement>
+        <valueURI>http://isni.org/isni/000000041937001X</valueURI>
+        <extensionValue>Countway Medicine</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Center for the History of Medicine (Francis A. Countway Library of Medicine)</source>
+        <replacement>Center for the History of Medicine (Francis A. Countway Library of Medicine)</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2011103181</valueURI>
+        <extensionValue>Countway Medicine</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Center for the History of Medicine, Francis A. Countway Library of Medicine</source>
+        <replacement>Center for the History of Medicine (Francis A. Countway Library of Medicine)</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2011103181</valueURI>
+        <extensionValue>Countway Medicine</extensionValue>
+    </mapping>
+    <mapping>
+        <source>MIC</source>
+        <replacement>Microforms, Lamont Library, Harvard University</replacement>
+        <valueURI/>
+        <extensionValue>Microforms (Lamont)</extensionValue>
+    </mapping>
+    <mapping>
+        <source>MMF</source>
+        <replacement>Master Microforms</replacement>
+        <valueURI/>
+        <extensionValue>Master Microforms </extensionValue>
+    </mapping>
+    <mapping>
+        <source>MUR</source>
+        <replacement>Henry A. Murray Research Archive, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/no2015169441</valueURI>
+        <extensionValue>Murray Research Ctr</extensionValue>
+    </mapping>
+    <mapping>
+        <source>MUS</source>
+        <replacement>Eda Kuhn Loeb Music Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460341675</valueURI>
+        <extensionValue>Loeb Music</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Loeb Music Library</source>
+        <replacement>Eda Kuhn Loeb Music Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460341675</valueURI>
+        <extensionValue>Loeb Music</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Eda Kuhn Loeb Music Library, Harvard Library, Harvard University</source>
+        <replacement>Eda Kuhn Loeb Music Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460341675</valueURI>
+        <extensionValue>Loeb Music</extensionValue>
+    </mapping>
+    <mapping>
+        <source>NEL</source>
+        <replacement>Near Eastern Languages and Literatures Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2018025071</valueURI>
+        <extensionValue>Near Eastern Lib</extensionValue>
+    </mapping>
+    <mapping>
+        <source>NET</source>
+        <replacement>Networked Resource</replacement>
+        <!--      <valueURI></valueURI> -->
+        <extensionValue>Networked Resource</extensionValue>
+    </mapping>
+    <mapping>
+        <source>NMM</source>
+        <replacement>National master microform</replacement>
+        <!--      <valueURI></valueURI> -->
+        <extensionValue>National master micro</extensionValue>
+    </mapping>--> <mapping>
+        <source>OPH</source>
+        <replacement>Abraham Pollen Archives and Rare Book Library</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/nr2002023534</valueURI>
+        <extensionValue>Opthamology</extensionValue>
+    </mapping>
+    <mapping>
+        <source>ORA</source>
+        <replacement>Milman Parry Collection of Oral Literature, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000123154019</valueURI>
+        <extensionValue>Milman Parry Collection</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Milman Parry Collection of Oral Literature</source>
+        <replacement>Milman Parry Collection of Oral Literature, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000123154019</valueURI>
+        <extensionValue>Milman Parry Collection</extensionValue>
+    </mapping>
+    <mapping>
+        <source>ORC</source>
+        <replacement>Orchid Library of Oakes Ames, Botany Libraries, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000463448427</valueURI>
+        <extensionValue>Botany Ames Orchid</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Archives of the Orchid Library of Oakes Ames, Botany Libraries, Harvard University</source>
+        <replacement>Orchid Library of Oakes Ames, Botany Libraries, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000463448427</valueURI>
+        <extensionValue>Botany Ames Orchid</extensionValue>
+    </mapping>
+    <mapping>
+        <source>PAL</source>
+        <replacement>Medieval Studies Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2018025068</valueURI>
+        <extensionValue>Medieval Studies Lib</extensionValue>
+    </mapping>
+    <mapping>
+        <source>PEA</source>
+        <replacement>Peabody Museum of Archaeology and Ethnology Archives, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/no2010153089</valueURI>
+        <extensionValue>Peabody Museum</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Peabody Museum of Archaeology and Ethnology Archives, Harvard University</source>
+        <replacement>Peabody Museum of Archaeology and Ethnology Archives, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/no2010153089</valueURI>
+        <extensionValue>Peabody Museum</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Peabody Museum of Archaeology and Ethnology, Photographic Archives</source>
+        <replacement>Peabody Museum of Archaeology and Ethnology Archives, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/no2010153089</valueURI>
+        <extensionValue>Peabody Museum</extensionValue>
+    </mapping>
+    <mapping>
+        <source>PHI</source>
+        <replacement>Robbins Library of Philosophy, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460372818</valueURI>
+        <extensionValue>Robbins Philosophy</extensionValue>
+    </mapping>
+    <mapping>
+        <source>PHY</source>
+        <replacement>Physics Reading Room, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2018043450</valueURI>
+        <extensionValue>Physics Research</extensionValue>
+    </mapping>
+    <mapping>
+        <source>POE</source>
+        <replacement>Woodberry Poetry Room, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/n85304584</valueURI>
+        <extensionValue>Poetry Room (Lamont)</extensionValue>
+    </mapping>
+    <mapping>
+        <source>RUB</source>
+        <replacement>Fine Arts Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000109432246</valueURI>
+        <extensionValue>Rubel (Fine Arts)</extensionValue>
+    </mapping>
+    <mapping>
+        <source>SAN</source>
+        <replacement>Sanskrit Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2018029926</valueURI>
+        <extensionValue>Sanskrit</extensionValue>
+    </mapping>
+    <mapping>
+        <source>SCH</source>
+        <replacement>Arthur and Elizabeth Schlesinger Library on the History of Women in America,
+            Radcliffe Institute for Advanced Study, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000109426663</valueURI>
+        <extensionValue>Schlesinger</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Schlesinger Library on the History of Women in America, Radcliffe Institute</source>
+        <replacement>Arthur and Elizabeth Schlesinger Library on the History of Women in America,
+            Radcliffe Institute for Advanced Study, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000109426663</valueURI>
+        <extensionValue>Schlesinger</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Arthur and Elizabeth Schlesinger Library on the History of Women in America,
+            Radcliffe Institute for Advanced Study, Harvard University</source>
+        <replacement>Arthur and Elizabeth Schlesinger Library on the History of Women in America,
+            Radcliffe Institute for Advanced Study, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000109426663</valueURI>
+        <extensionValue>Schlesinger</extensionValue>
+    </mapping>
+    <mapping>
+        <source>SCC</source>
+        <replacement>Straus Center for Conservation and Technical Studies, Harvard Art Museums,
+            Harvard University</replacement>
+        <valueURI>http://isni.org/isni/000000012218462X</valueURI>
+        <extensionValue>Straus Conservation</extensionValue>
+    </mapping>
+    <mapping>
+        <source>SIA</source>
+        <replacement>Belfer Center for Science and International Affairs Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460341309</valueURI>
+        <extensionValue>Sci &amp; Intl Affairs</extensionValue>
+    </mapping>
+    <mapping>
+        <source>SMY</source>
+        <replacement>Smyth Classical Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2018030064</valueURI>
+        <extensionValue>Smyth Classical</extensionValue>
+    </mapping>
+    <mapping>
+        <source>STA</source>
+        <replacement>Statistics Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2018030069</valueURI>
+        <extensionValue>Statistics</extensionValue>
+    </mapping>
+    <mapping>
+        <source>THE</source>
+        <replacement>Harvard Theatre Collection, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/000000012216846X</valueURI>
+        <extensionValue>Theatre Collection</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Theatre Collection</source>
+        <replacement>Harvard Theatre Collection, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/000000012216846X</valueURI>
+        <extensionValue>Theatre Collection</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Theatre Collection, Houghton Library</source>
+        <replacement>Harvard Theatre Collection, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/000000012216846X</valueURI>
+        <extensionValue>Theatre Collection</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Theodore Roosevelt Collection</source>
+        <replacement>Theodore Roosevelt Collection, Houghton Library, Harvard University</replacement>
+        <!--      <valueURI></valueURI> -->
+        <extensionValue>Houghton</extensionValue>
+    </mapping>
+    <mapping>
+        <source>TOZ</source>
+        <replacement>Tozzer Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460710151</valueURI>
+        <extensionValue>Tozzer</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Tozzer Library</source>
+        <replacement>Tozzer Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460710151</valueURI>
+        <extensionValue>Tozzer</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Tozzer Library, Harvard Library, Harvard University</source>
+        <replacement>Tozzer Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460710151</valueURI>
+        <extensionValue>Tozzer</extensionValue>
+    </mapping>
+    <mapping>
+        <source>URI</source>
+        <replacement>Ukrainian Research Institute Reference Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/n79124861</valueURI>
+        <extensionValue>Ukrainian Res Inst</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Ukrainian Research Institute Reference Library, Harvard Library, Harvard University</source>
+        <replacement>Ukrainian Research Institute Reference Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/n79124861</valueURI>
+        <extensionValue>Ukrainian Res Inst</extensionValue>
+    </mapping>
+    <mapping>
+        <source>WAM</source>
+        <replacement>Warren Anatomical Museum, Center for the History of Medicine (Francis A.
+            Countway Library of Medicine)</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/no2011103190</valueURI>
+        <extensionValue>Warren Anatomical</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Warren Anatomical Museum, Center for the History of Medicine, Francis A. Countway Library of Medicine</source>
+        <replacement>Warren Anatomical Museum, Center for the History of Medicine (Francis A.
+            Countway Library of Medicine)</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/no2011103190</valueURI>
+        <extensionValue>Warren Anatomical</extensionValue>
+    </mapping>
+    <mapping>
+        <source>WEI</source>
+        <replacement>Weissman Preservation Center Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460737549</valueURI>
+        <extensionValue>Weissman Preservation Ctr</extensionValue>
+    </mapping>
+    <mapping>
+        <source>WID</source>
+        <replacement>Widener Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/no2014094889</valueURI>
+        <extensionValue>Widener</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Judaica Division, Widener Library</source>
+        <replacement>Judaica Division, Widener Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000122939201</valueURI>
+        <extensionValue>Widener</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Middle Eastern Division, Widener Library</source>
+        <replacement>Middle Eastern Division, Widener Library, Harvard University</replacement>
+        <valueURI/>
+        <extensionValue>Widener</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Slavic Division, Widener Library</source>
+        <replacement>Slavic Division, Widener Library, Harvard University</replacement>
+        <valueURI/>
+        <extensionValue>Widener</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harry Elkins Widener Memorial Library, Harvard Library, Harvard University</source>
+        <replacement>Widener Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/no2014094889</valueURI>
+        <extensionValue>Widener</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Widener Library</source>
+        <replacement>Widener Library, Harvard University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/no2014094889</valueURI>
+        <extensionValue>Widener</extensionValue>
+    </mapping>
+    <mapping>
+        <source>WOL</source>
+        <replacement>Wolbach Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460371700</valueURI>
+        <extensionValue>Wolbach Library</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Wolbach Archives, Wolbach Library, Harvard University</source>
+        <replacement>Wolbach Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460371700</valueURI>
+        <extensionValue>Wolbach Library</extensionValue>
+    </mapping>
+</valueMappings>

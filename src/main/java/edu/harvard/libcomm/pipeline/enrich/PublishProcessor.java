@@ -14,7 +14,7 @@ public class PublishProcessor implements IProcessor {
 		String modsCount = null;
 		try {
 
-			data = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/remove-mods-restricted.xsl",null);
+			data = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/publish-mods.xsl",null);
 			LibCommMessage tempMessage = new LibCommMessage();
 			Payload tempPayload = new Payload();
 			tempPayload.setData(data);

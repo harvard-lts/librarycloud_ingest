@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+
+<lst name="responseHeader">
+  <bool name="zkConnected">true</bool>
+  <int name="status">0</int>
+  <int name="QTime">3</int>
+  <lst name="params">
+    <str name="q">004:001490591</str>
+    <str name="rows">250</str>
+    <str name="wt">xml</str>
+  </lst>
+</lst>
+<result name="response" numFound="3" start="0" maxScore="15.611115">
+  <doc>
+    <str name="id">019317910</str>
+    <str name="004">001490591</str>
+    <str name="originalMarc">
+                    
+                &lt;record xmlns="http://www.loc.gov/MARC21/slim"&gt;
+            &lt;leader&gt;00312cx   22001211n 4500&lt;/leader&gt;
+            &lt;controlfield tag="001"&gt;019317910&lt;/controlfield&gt;
+            &lt;controlfield tag="004"&gt;001490591&lt;/controlfield&gt;
+            &lt;controlfield tag="005"&gt;20130820111657.0&lt;/controlfield&gt;
+            &lt;controlfield tag="008"&gt;1308202p    8   4001uu   0000000        &lt;/controlfield&gt;
+            &lt;datafield tag="079" ind1="0" ind2=" "&gt;
+               &lt;subfield code="a"&gt;ocn370671072&lt;/subfield&gt;
+            &lt;/datafield&gt;
+            &lt;datafield tag="079" ind1="2" ind2=" "&gt;
+               &lt;subfield code="a"&gt;ocn856822207&lt;/subfield&gt;
+            &lt;/datafield&gt;
+            &lt;datafield tag="852" ind1="7" ind2=" "&gt;
+               &lt;subfield code="2"&gt;ZHCL&lt;/subfield&gt;
+               &lt;subfield code="b"&gt;MUS&lt;/subfield&gt;
+               &lt;subfield code="c"&gt;GEN&lt;/subfield&gt;
+               &lt;subfield code="h"&gt;Mus 645.5.717&lt;/subfield&gt;
+            &lt;/datafield&gt;
+         &lt;/record&gt;
+                    
+                </str>
+    <long name="_version_">1582325636632936451</long></doc>
+  <doc>
+    <str name="id">002160501</str>
+    <str name="004">001490591</str>
+    <str name="originalMarc">
+                    
+                &lt;record xmlns="http://www.loc.gov/MARC21/slim"&gt;
+            &lt;leader&gt;00317cx   22001091n 4500&lt;/leader&gt;
+            &lt;controlfield tag="001"&gt;002160501&lt;/controlfield&gt;
+            &lt;controlfield tag="004"&gt;001490591&lt;/controlfield&gt;
+            &lt;controlfield tag="005"&gt;20080523101649.0&lt;/controlfield&gt;
+            &lt;controlfield tag="008"&gt;8805122u    8   4001uu   0960407        &lt;/controlfield&gt;
+            &lt;datafield tag="079" ind1="0" ind2=" "&gt;
+               &lt;subfield code="a"&gt;ocm03332127&lt;/subfield&gt;
+            &lt;/datafield&gt;
+            &lt;datafield tag="079" ind1="2" ind2=" "&gt;
+               &lt;subfield code="a"&gt;ocn181950303&lt;/subfield&gt;
+            &lt;/datafield&gt;
+            &lt;datafield tag="852" ind1="7" ind2=" "&gt;
+               &lt;subfield code="2"&gt;ZHCL&lt;/subfield&gt;
+               &lt;subfield code="b"&gt;MUS&lt;/subfield&gt;
+               &lt;subfield code="c"&gt;MERR&lt;/subfield&gt;
+               &lt;subfield code="h"&gt;Mus 645.5.717&lt;/subfield&gt;
+               &lt;subfield code="z"&gt;Consult Isham Librarian for ML264W (B copy)&lt;/subfield&gt;
+            &lt;/datafield&gt;
+         &lt;/record&gt;
+                    
+                </str>
+    <long name="_version_">1582365589016412161</long></doc>
+  <doc>
+    <str name="id">016904150</str>
+    <str name="004">001490591</str>
+    <str name="originalMarc">
+                    
+                &lt;record xmlns="http://www.loc.gov/MARC21/slim"&gt;
+            &lt;leader&gt;00520nx   22001211n 4500&lt;/leader&gt;
+            &lt;controlfield tag="001"&gt;016904150&lt;/controlfield&gt;
+            &lt;controlfield tag="004"&gt;001490591&lt;/controlfield&gt;
+            &lt;controlfield tag="005"&gt;20081114113142.0&lt;/controlfield&gt;
+            &lt;controlfield tag="007"&gt;cr|cn 024apcda&lt;/controlfield&gt;
+            &lt;controlfield tag="008"&gt;0811142u    8   4001uu   0000000        &lt;/controlfield&gt;
+            &lt;datafield tag="843" ind1=" " ind2=" "&gt;
+               &lt;subfield code="a"&gt;Electronic reproduction.&lt;/subfield&gt;
+               &lt;subfield code="b"&gt;Cambridge, Mass. :&lt;/subfield&gt;
+               &lt;subfield code="c"&gt;Harvard College Library Digital Imaging Group,&lt;/subfield&gt;
+               &lt;subfield code="d"&gt;2008.&lt;/subfield&gt;
+               &lt;subfield code="f"&gt;(LDI 8: Digital scores from the Loeb Music Library II)&lt;/subfield&gt;
+               &lt;subfield code="7"&gt;s2008    maun s&lt;/subfield&gt;
+            &lt;/datafield&gt;
+            &lt;datafield tag="852" ind1=" " ind2=" "&gt;
+               &lt;subfield code="b"&gt;NET&lt;/subfield&gt;
+               &lt;subfield code="c"&gt;GEN&lt;/subfield&gt;
+            &lt;/datafield&gt;
+            &lt;datafield tag="856" ind1="4" ind2="1"&gt;
+               &lt;subfield code="z"&gt;Provides access to page images of entire work.&lt;/subfield&gt;
+               &lt;subfield code="u"&gt;http://nrs.harvard.edu/urn-3:fhcl.loeb:1269248&lt;/subfield&gt;
+            &lt;/datafield&gt;
+         &lt;/record&gt;
+                    
+                </str>
+    <long name="_version_">1582426336486490123</long></doc>
+</result>
+</response>

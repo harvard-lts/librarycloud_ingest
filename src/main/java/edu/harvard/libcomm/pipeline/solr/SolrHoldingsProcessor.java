@@ -9,7 +9,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.log4j.Logger;
-import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.apache.solr.common.SolrInputDocument;
 import org.w3c.dom.Document;
@@ -41,7 +41,7 @@ public class SolrHoldingsProcessor implements IProcessor {
 	
 	private void populateIndex(String solrXml) throws Exception {
 
-	    HttpSolrServer server = null;
+	    HttpSolrClient server = null;
 		Date start = new Date();
 	    server = SolrHoldingsServer.getSolrConnection();
 		UpdateRequest update = new UpdateRequest();

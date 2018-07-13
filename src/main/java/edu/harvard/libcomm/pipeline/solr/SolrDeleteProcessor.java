@@ -7,7 +7,7 @@ import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -27,7 +27,7 @@ public class SolrDeleteProcessor implements IProcessor {
 	}
 
 	private void deleteFromSolr(String id) throws Exception{
-		HttpSolrServer server = SolrServer.getSolrConnection();
+    HttpSolrClient server = SolrServer.getSolrConnection();
 		UpdateRequest update = new UpdateRequest();
 		update.deleteById(id);
 		if (commitWithinTime > 0) {

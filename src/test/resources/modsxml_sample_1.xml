@@ -1,0 +1,80 @@
+<modsCollection xmlns:countries="info:lc/xmlns/codelist-v1"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns="http://www.loc.gov/mods/v3"
+                xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+   <mods version="3.6">
+      <language>
+         <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+         <languageTerm authority="iso639-2b" type="text">English</languageTerm>
+      </language>
+      <originInfo>
+        <dateIssued>1967</dateIssued>
+      </originInfo>
+      <location>
+        <physicalLocation displayLabel="Harvard repository" type="repository">Music Repository</physicalLocation>
+        <shelfLocator>Mus 645.5.717</shelfLocator>
+      </location>
+      <extension>
+        <digitalFormats xmlns="http://lib.harvard.edu/TBD">
+          <digitalFormat>Audio</digitalFormat>
+          <digitalFormat>Images</digitalFormat>
+        </digitalFormats>
+      </extension>
+   </mods>
+   <mods version="3.6">
+     <originInfo>
+       <dateIssued>[1962?]</dateIssued>
+     </originInfo>
+   </mods>
+   <mods version="3.6">
+     <originInfo>
+       <dateIssued>[1932 or 1933]</dateIssued>
+     </originInfo>
+   </mods>
+   <mods version="3.6">
+     <originInfo>
+       <dateIssued>[1929/30]</dateIssued>
+     </originInfo>
+   </mods>
+   <mods version="3.6">
+     <originInfo>
+       <dateIssued>[193-?]</dateIssued>
+     </originInfo>
+   </mods>
+   <mods version="3.6">
+     <originInfo>
+       <dateIssued encoding="marc" point="start">1961</dateIssued>
+       <dateIssued encoding="marc" point="end">1967</dateIssued>
+     </originInfo>
+     <originInfo>
+       <dateCreated point="start">1960</dateCreated>
+       <dateCreated point="end">1966</dateCreated>
+       <dateCreated>1966</dateCreated>
+     </originInfo>
+   </mods>
+   <mods><originInfo><dateIssued>1943 or 1944]</dateIssued></originInfo></mods>
+   <mods><originInfo><dateIssued>[1942/43?]</dateIssued></originInfo></mods>
+   <mods><originInfo><dateIssued>abc123dsdfdsf</dateIssued></originInfo></mods>
+   <mods><originInfo><dateIssued>[741, 1980 or 1981]</dateIssued></originInfo></mods>
+   <mods>
+     <titleInfo><title>mods11</title></titleInfo>
+     <originInfo>
+       <dateIssued>[175- ?]</dateIssued>
+       <dateIssued encoding="marc" qualifier="questionable" point="start">1750</dateIssued>
+       <dateIssued encoding="marc" qualifier="questionable" point="end">1759</dateIssued>
+     </originInfo>
+   </mods>
+   <mods>
+     <titleInfo><title>mods12</title></titleInfo>
+     <originInfo><dateIssued>1384 [2005]</dateIssued></originInfo>
+   </mods>
+   <mods>
+     <originInfo><dateIssued encoding="marc" point="start">18uu</dateIssued><dateIssued encoding="marc" point="end">19uu</dateIssued></originInfo>
+   </mods>
+   <mods>
+     <originInfo><dateIssued encoding="marc" point="start">1uuu</dateIssued><dateIssued encoding="marc" point="end">1uuu</dateIssued></originInfo>
+   </mods>
+   <mods>
+     <originInfo><dateIssued encoding="marc" point="start">1966</dateIssued><dateIssued encoding="marc" point="end">1965</dateIssued></originInfo>
+   </mods>
+</modsCollection>

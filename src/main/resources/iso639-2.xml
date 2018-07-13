@@ -1,0 +1,489 @@
+<iso639>
+<entry><code>﻿aar</code><text>Afar</text></entry>
+<entry><code>abk</code><text>Abkhazian</text></entry>
+<entry><code>ace</code><text>Achinese</text></entry>
+<entry><code>ach</code><text>Acoli</text></entry>
+<entry><code>ada</code><text>Adangme</text></entry>
+<entry><code>ady</code><text>Adyghe; Adygei</text></entry>
+<entry><code>afa</code><text>Afro-Asiatic languages</text></entry>
+<entry><code>afh</code><text>Afrihili</text></entry>
+<entry><code>afr</code><text>Afrikaans</text></entry>
+<entry><code>ain</code><text>Ainu</text></entry>
+<entry><code>aka</code><text>Akan</text></entry>
+<entry><code>akk</code><text>Akkadian</text></entry>
+<entry><code>alb</code><text>Albanian</text></entry>
+<entry><code>ale</code><text>Aleut</text></entry>
+<entry><code>alg</code><text>Algonquian languages</text></entry>
+<entry><code>alt</code><text>Southern Altai</text></entry>
+<entry><code>amh</code><text>Amharic</text></entry>
+<entry><code>ang</code><text>English, Old (ca.450-1100)</text></entry>
+<entry><code>anp</code><text>Angika</text></entry>
+<entry><code>apa</code><text>Apache languages</text></entry>
+<entry><code>ara</code><text>Arabic</text></entry>
+<entry><code>arc</code><text>Official Aramaic (700-300 BCE); Imperial Aramaic (700-300 BCE)</text></entry>
+<entry><code>arg</code><text>Aragonese</text></entry>
+<entry><code>arm</code><text>Armenian</text></entry>
+<entry><code>arn</code><text>Mapudungun; Mapuche</text></entry>
+<entry><code>arp</code><text>Arapaho</text></entry>
+<entry><code>art</code><text>Artificial languages</text></entry>
+<entry><code>arw</code><text>Arawak</text></entry>
+<entry><code>asm</code><text>Assamese</text></entry>
+<entry><code>ast</code><text>Asturian; Bable; Leonese; Asturleonese</text></entry>
+<entry><code>ath</code><text>Athapascan languages</text></entry>
+<entry><code>aus</code><text>Australian languages</text></entry>
+<entry><code>ava</code><text>Avaric</text></entry>
+<entry><code>ave</code><text>Avestan</text></entry>
+<entry><code>awa</code><text>Awadhi</text></entry>
+<entry><code>aym</code><text>Aymara</text></entry>
+<entry><code>aze</code><text>Azerbaijani</text></entry>
+<entry><code>bad</code><text>Banda languages</text></entry>
+<entry><code>bai</code><text>Bamileke languages</text></entry>
+<entry><code>bak</code><text>Bashkir</text></entry>
+<entry><code>bal</code><text>Baluchi</text></entry>
+<entry><code>bam</code><text>Bambara</text></entry>
+<entry><code>ban</code><text>Balinese</text></entry>
+<entry><code>baq</code><text>Basque</text></entry>
+<entry><code>bas</code><text>Basa</text></entry>
+<entry><code>bat</code><text>Baltic languages</text></entry>
+<entry><code>bej</code><text>Beja; Bedawiyet</text></entry>
+<entry><code>bel</code><text>Belarusian</text></entry>
+<entry><code>bem</code><text>Bemba</text></entry>
+<entry><code>ben</code><text>Bengali</text></entry>
+<entry><code>ber</code><text>Berber languages</text></entry>
+<entry><code>bho</code><text>Bhojpuri</text></entry>
+<entry><code>bih</code><text>Bihari languages</text></entry>
+<entry><code>bik</code><text>Bikol</text></entry>
+<entry><code>bin</code><text>Bini; Edo</text></entry>
+<entry><code>bis</code><text>Bislama</text></entry>
+<entry><code>bla</code><text>Siksika</text></entry>
+<entry><code>bnt</code><text>Bantu (Other)</text></entry>
+<entry><code>bos</code><text>Bosnian</text></entry>
+<entry><code>bra</code><text>Braj</text></entry>
+<entry><code>bre</code><text>Breton</text></entry>
+<entry><code>btk</code><text>Batak languages</text></entry>
+<entry><code>bua</code><text>Buriat</text></entry>
+<entry><code>bug</code><text>Buginese</text></entry>
+<entry><code>bul</code><text>Bulgarian</text></entry>
+<entry><code>bur</code><text>Burmese</text></entry>
+<entry><code>byn</code><text>Blin; Bilin</text></entry>
+<entry><code>cad</code><text>Caddo</text></entry>
+<entry><code>cai</code><text>Central American Indian languages</text></entry>
+<entry><code>car</code><text>Galibi Carib</text></entry>
+<entry><code>cat</code><text>Catalan; Valencian</text></entry>
+<entry><code>cau</code><text>Caucasian languages</text></entry>
+<entry><code>ceb</code><text>Cebuano</text></entry>
+<entry><code>cel</code><text>Celtic languages</text></entry>
+<entry><code>cha</code><text>Chamorro</text></entry>
+<entry><code>chb</code><text>Chibcha</text></entry>
+<entry><code>che</code><text>Chechen</text></entry>
+<entry><code>chg</code><text>Chagatai</text></entry>
+<entry><code>chi</code><text>Chinese</text></entry>
+<entry><code>chk</code><text>Chuukese</text></entry>
+<entry><code>chm</code><text>Mari</text></entry>
+<entry><code>chn</code><text>Chinook jargon</text></entry>
+<entry><code>cho</code><text>Choctaw</text></entry>
+<entry><code>chp</code><text>Chipewyan; Dene Suline</text></entry>
+<entry><code>chr</code><text>Cherokee</text></entry>
+<entry><code>chu</code><text>Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic</text></entry>
+<entry><code>chv</code><text>Chuvash</text></entry>
+<entry><code>chy</code><text>Cheyenne</text></entry>
+<entry><code>cmc</code><text>Chamic languages</text></entry>
+<entry><code>cnr</code><text>Montenegrin</text></entry>
+<entry><code>cop</code><text>Coptic</text></entry>
+<entry><code>cor</code><text>Cornish</text></entry>
+<entry><code>cos</code><text>Corsican</text></entry>
+<entry><code>cpe</code><text>Creoles and pidgins, English based</text></entry>
+<entry><code>cpf</code><text>Creoles and pidgins, French-based </text></entry>
+<entry><code>cpp</code><text>Creoles and pidgins, Portuguese-based </text></entry>
+<entry><code>cre</code><text>Cree</text></entry>
+<entry><code>crh</code><text>Crimean Tatar; Crimean Turkish</text></entry>
+<entry><code>crp</code><text>Creoles and pidgins </text></entry>
+<entry><code>csb</code><text>Kashubian</text></entry>
+<entry><code>cus</code><text>Cushitic languages</text></entry>
+<entry><code>cze</code><text>Czech</text></entry>
+<entry><code>dak</code><text>Dakota</text></entry>
+<entry><code>dan</code><text>Danish</text></entry>
+<entry><code>dar</code><text>Dargwa</text></entry>
+<entry><code>day</code><text>Land Dayak languages</text></entry>
+<entry><code>del</code><text>Delaware</text></entry>
+<entry><code>den</code><text>Slave (Athapascan)</text></entry>
+<entry><code>dgr</code><text>Dogrib</text></entry>
+<entry><code>din</code><text>Dinka</text></entry>
+<entry><code>div</code><text>Divehi; Dhivehi; Maldivian</text></entry>
+<entry><code>doi</code><text>Dogri</text></entry>
+<entry><code>dra</code><text>Dravidian languages</text></entry>
+<entry><code>dsb</code><text>Lower Sorbian</text></entry>
+<entry><code>dua</code><text>Duala</text></entry>
+<entry><code>dum</code><text>Dutch, Middle (ca.1050-1350)</text></entry>
+<entry><code>dut</code><text>Dutch; Flemish</text></entry>
+<entry><code>dyu</code><text>Dyula</text></entry>
+<entry><code>dzo</code><text>Dzongkha</text></entry>
+<entry><code>efi</code><text>Efik</text></entry>
+<entry><code>egy</code><text>Egyptian (Ancient)</text></entry>
+<entry><code>eka</code><text>Ekajuk</text></entry>
+<entry><code>elx</code><text>Elamite</text></entry>
+<entry><code>eng</code><text>English</text></entry>
+<entry><code>enm</code><text>English, Middle (1100-1500)</text></entry>
+<entry><code>epo</code><text>Esperanto</text></entry>
+<entry><code>est</code><text>Estonian</text></entry>
+<entry><code>ewe</code><text>Ewe</text></entry>
+<entry><code>ewo</code><text>Ewondo</text></entry>
+<entry><code>fan</code><text>Fang</text></entry>
+<entry><code>fao</code><text>Faroese</text></entry>
+<entry><code>fat</code><text>Fanti</text></entry>
+<entry><code>fij</code><text>Fijian</text></entry>
+<entry><code>fil</code><text>Filipino; Pilipino</text></entry>
+<entry><code>fin</code><text>Finnish</text></entry>
+<entry><code>fiu</code><text>Finno-Ugrian languages</text></entry>
+<entry><code>fon</code><text>Fon</text></entry>
+<entry><code>fre</code><text>French</text></entry>
+<entry><code>frm</code><text>French, Middle (ca.1400-1600)</text></entry>
+<entry><code>fro</code><text>French, Old (842-ca.1400)</text></entry>
+<entry><code>frr</code><text>Northern Frisian</text></entry>
+<entry><code>frs</code><text>Eastern Frisian</text></entry>
+<entry><code>fry</code><text>Western Frisian</text></entry>
+<entry><code>ful</code><text>Fulah</text></entry>
+<entry><code>fur</code><text>Friulian</text></entry>
+<entry><code>gaa</code><text>Ga</text></entry>
+<entry><code>gay</code><text>Gayo</text></entry>
+<entry><code>gba</code><text>Gbaya</text></entry>
+<entry><code>gem</code><text>Germanic languages</text></entry>
+<entry><code>geo</code><text>Georgian</text></entry>
+<entry><code>ger</code><text>German</text></entry>
+<entry><code>gez</code><text>Geez</text></entry>
+<entry><code>gil</code><text>Gilbertese</text></entry>
+<entry><code>gla</code><text>Gaelic; Scottish Gaelic</text></entry>
+<entry><code>gle</code><text>Irish</text></entry>
+<entry><code>glg</code><text>Galician</text></entry>
+<entry><code>glv</code><text>Manx</text></entry>
+<entry><code>gmh</code><text>German, Middle High (ca.1050-1500)</text></entry>
+<entry><code>goh</code><text>German, Old High (ca.750-1050)</text></entry>
+<entry><code>gon</code><text>Gondi</text></entry>
+<entry><code>gor</code><text>Gorontalo</text></entry>
+<entry><code>got</code><text>Gothic</text></entry>
+<entry><code>grb</code><text>Grebo</text></entry>
+<entry><code>grc</code><text>Greek, Ancient (to 1453)</text></entry>
+<entry><code>gre</code><text>Greek, Modern (1453-)</text></entry>
+<entry><code>grn</code><text>Guarani</text></entry>
+<entry><code>gsw</code><text>Swiss German; Alemannic; Alsatian</text></entry>
+<entry><code>guj</code><text>Gujarati</text></entry>
+<entry><code>gwi</code><text>Gwich'in</text></entry>
+<entry><code>hai</code><text>Haida</text></entry>
+<entry><code>hat</code><text>Haitian; Haitian Creole</text></entry>
+<entry><code>hau</code><text>Hausa</text></entry>
+<entry><code>haw</code><text>Hawaiian</text></entry>
+<entry><code>heb</code><text>Hebrew</text></entry>
+<entry><code>her</code><text>Herero</text></entry>
+<entry><code>hil</code><text>Hiligaynon</text></entry>
+<entry><code>him</code><text>Himachali languages; Western Pahari languages</text></entry>
+<entry><code>hin</code><text>Hindi</text></entry>
+<entry><code>hit</code><text>Hittite</text></entry>
+<entry><code>hmn</code><text>Hmong; Mong</text></entry>
+<entry><code>hmo</code><text>Hiri Motu</text></entry>
+<entry><code>hrv</code><text>Croatian</text></entry>
+<entry><code>hsb</code><text>Upper Sorbian</text></entry>
+<entry><code>hun</code><text>Hungarian</text></entry>
+<entry><code>hup</code><text>Hupa</text></entry>
+<entry><code>iba</code><text>Iban</text></entry>
+<entry><code>ibo</code><text>Igbo</text></entry>
+<entry><code>ice</code><text>Icelandic</text></entry>
+<entry><code>ido</code><text>Ido</text></entry>
+<entry><code>iii</code><text>Sichuan Yi; Nuosu</text></entry>
+<entry><code>ijo</code><text>Ijo languages</text></entry>
+<entry><code>iku</code><text>Inuktitut</text></entry>
+<entry><code>ile</code><text>Interlingue; Occidental</text></entry>
+<entry><code>ilo</code><text>Iloko</text></entry>
+<entry><code>ina</code><text>Interlingua (International Auxiliary Language Association)</text></entry>
+<entry><code>inc</code><text>Indic languages</text></entry>
+<entry><code>ind</code><text>Indonesian</text></entry>
+<entry><code>ine</code><text>Indo-European languages</text></entry>
+<entry><code>inh</code><text>Ingush</text></entry>
+<entry><code>ipk</code><text>Inupiaq</text></entry>
+<entry><code>ira</code><text>Iranian languages</text></entry>
+<entry><code>iro</code><text>Iroquoian languages</text></entry>
+<entry><code>ita</code><text>Italian</text></entry>
+<entry><code>jav</code><text>Javanese</text></entry>
+<entry><code>jbo</code><text>Lojban</text></entry>
+<entry><code>jpn</code><text>Japanese</text></entry>
+<entry><code>jpr</code><text>Judeo-Persian</text></entry>
+<entry><code>jrb</code><text>Judeo-Arabic</text></entry>
+<entry><code>kaa</code><text>Kara-Kalpak</text></entry>
+<entry><code>kab</code><text>Kabyle</text></entry>
+<entry><code>kac</code><text>Kachin; Jingpho</text></entry>
+<entry><code>kal</code><text>Kalaallisut; Greenlandic</text></entry>
+<entry><code>kam</code><text>Kamba</text></entry>
+<entry><code>kan</code><text>Kannada</text></entry>
+<entry><code>kar</code><text>Karen languages</text></entry>
+<entry><code>kas</code><text>Kashmiri</text></entry>
+<entry><code>kau</code><text>Kanuri</text></entry>
+<entry><code>kaw</code><text>Kawi</text></entry>
+<entry><code>kaz</code><text>Kazakh</text></entry>
+<entry><code>kbd</code><text>Kabardian</text></entry>
+<entry><code>kha</code><text>Khasi</text></entry>
+<entry><code>khi</code><text>Khoisan languages</text></entry>
+<entry><code>khm</code><text>Central Khmer</text></entry>
+<entry><code>kho</code><text>Khotanese; Sakan</text></entry>
+<entry><code>kik</code><text>Kikuyu; Gikuyu</text></entry>
+<entry><code>kin</code><text>Kinyarwanda</text></entry>
+<entry><code>kir</code><text>Kirghiz; Kyrgyz</text></entry>
+<entry><code>kmb</code><text>Kimbundu</text></entry>
+<entry><code>kok</code><text>Konkani</text></entry>
+<entry><code>kom</code><text>Komi</text></entry>
+<entry><code>kon</code><text>Kongo</text></entry>
+<entry><code>kor</code><text>Korean</text></entry>
+<entry><code>kos</code><text>Kosraean</text></entry>
+<entry><code>kpe</code><text>Kpelle</text></entry>
+<entry><code>krc</code><text>Karachay-Balkar</text></entry>
+<entry><code>krl</code><text>Karelian</text></entry>
+<entry><code>kro</code><text>Kru languages</text></entry>
+<entry><code>kru</code><text>Kurukh</text></entry>
+<entry><code>kua</code><text>Kuanyama; Kwanyama</text></entry>
+<entry><code>kum</code><text>Kumyk</text></entry>
+<entry><code>kur</code><text>Kurdish</text></entry>
+<entry><code>kut</code><text>Kutenai</text></entry>
+<entry><code>lad</code><text>Ladino</text></entry>
+<entry><code>lah</code><text>Lahnda</text></entry>
+<entry><code>lam</code><text>Lamba</text></entry>
+<entry><code>lao</code><text>Lao</text></entry>
+<entry><code>lat</code><text>Latin</text></entry>
+<entry><code>lav</code><text>Latvian</text></entry>
+<entry><code>lez</code><text>Lezghian</text></entry>
+<entry><code>lim</code><text>Limburgan; Limburger; Limburgish</text></entry>
+<entry><code>lin</code><text>Lingala</text></entry>
+<entry><code>lit</code><text>Lithuanian</text></entry>
+<entry><code>lol</code><text>Mongo</text></entry>
+<entry><code>loz</code><text>Lozi</text></entry>
+<entry><code>ltz</code><text>Luxembourgish; Letzeburgesch</text></entry>
+<entry><code>lua</code><text>Luba-Lulua</text></entry>
+<entry><code>lub</code><text>Luba-Katanga</text></entry>
+<entry><code>lug</code><text>Ganda</text></entry>
+<entry><code>lui</code><text>Luiseno</text></entry>
+<entry><code>lun</code><text>Lunda</text></entry>
+<entry><code>luo</code><text>Luo (Kenya and Tanzania)</text></entry>
+<entry><code>lus</code><text>Lushai</text></entry>
+<entry><code>mac</code><text>Macedonian</text></entry>
+<entry><code>mad</code><text>Madurese</text></entry>
+<entry><code>mag</code><text>Magahi</text></entry>
+<entry><code>mah</code><text>Marshallese</text></entry>
+<entry><code>mai</code><text>Maithili</text></entry>
+<entry><code>mak</code><text>Makasar</text></entry>
+<entry><code>mal</code><text>Malayalam</text></entry>
+<entry><code>man</code><text>Mandingo</text></entry>
+<entry><code>mao</code><text>Maori</text></entry>
+<entry><code>map</code><text>Austronesian languages</text></entry>
+<entry><code>mar</code><text>Marathi</text></entry>
+<entry><code>mas</code><text>Masai</text></entry>
+<entry><code>may</code><text>Malay</text></entry>
+<entry><code>mdf</code><text>Moksha</text></entry>
+<entry><code>mdr</code><text>Mandar</text></entry>
+<entry><code>men</code><text>Mende</text></entry>
+<entry><code>mga</code><text>Irish, Middle (900-1200)</text></entry>
+<entry><code>mic</code><text>Mi'kmaq; Micmac</text></entry>
+<entry><code>min</code><text>Minangkabau</text></entry>
+<entry><code>mis</code><text>Uncoded languages</text></entry>
+<entry><code>mkh</code><text>Mon-Khmer languages</text></entry>
+<entry><code>mlg</code><text>Malagasy</text></entry>
+<entry><code>mlt</code><text>Maltese</text></entry>
+<entry><code>mnc</code><text>Manchu</text></entry>
+<entry><code>mni</code><text>Manipuri</text></entry>
+<entry><code>mno</code><text>Manobo languages</text></entry>
+<entry><code>moh</code><text>Mohawk</text></entry>
+<entry><code>mon</code><text>Mongolian</text></entry>
+<entry><code>mos</code><text>Mossi</text></entry>
+<entry><code>mul</code><text>Multiple languages</text></entry>
+<entry><code>mun</code><text>Munda languages</text></entry>
+<entry><code>mus</code><text>Creek</text></entry>
+<entry><code>mwl</code><text>Mirandese</text></entry>
+<entry><code>mwr</code><text>Marwari</text></entry>
+<entry><code>myn</code><text>Mayan languages</text></entry>
+<entry><code>myv</code><text>Erzya</text></entry>
+<entry><code>nah</code><text>Nahuatl languages</text></entry>
+<entry><code>nai</code><text>North American Indian languages</text></entry>
+<entry><code>nap</code><text>Neapolitan</text></entry>
+<entry><code>nau</code><text>Nauru</text></entry>
+<entry><code>nav</code><text>Navajo; Navaho</text></entry>
+<entry><code>nbl</code><text>Ndebele, South; South Ndebele</text></entry>
+<entry><code>nde</code><text>Ndebele, North; North Ndebele</text></entry>
+<entry><code>ndo</code><text>Ndonga</text></entry>
+<entry><code>nds</code><text>Low German; Low Saxon; German, Low; Saxon, Low</text></entry>
+<entry><code>nep</code><text>Nepali</text></entry>
+<entry><code>new</code><text>Nepal Bhasa; Newari</text></entry>
+<entry><code>nia</code><text>Nias</text></entry>
+<entry><code>nic</code><text>Niger-Kordofanian languages</text></entry>
+<entry><code>niu</code><text>Niuean</text></entry>
+<entry><code>nno</code><text>Norwegian Nynorsk; Nynorsk, Norwegian</text></entry>
+<entry><code>nob</code><text>Bokmål, Norwegian; Norwegian Bokmål</text></entry>
+<entry><code>nog</code><text>Nogai</text></entry>
+<entry><code>non</code><text>Norse, Old</text></entry>
+<entry><code>nor</code><text>Norwegian</text></entry>
+<entry><code>nqo</code><text>N'Ko</text></entry>
+<entry><code>nso</code><text>Pedi; Sepedi; Northern Sotho</text></entry>
+<entry><code>nub</code><text>Nubian languages</text></entry>
+<entry><code>nwc</code><text>Classical Newari; Old Newari; Classical Nepal Bhasa</text></entry>
+<entry><code>nya</code><text>Chichewa; Chewa; Nyanja</text></entry>
+<entry><code>nym</code><text>Nyamwezi</text></entry>
+<entry><code>nyn</code><text>Nyankole</text></entry>
+<entry><code>nyo</code><text>Nyoro</text></entry>
+<entry><code>nzi</code><text>Nzima</text></entry>
+<entry><code>oci</code><text>Occitan (post 1500); Provençal</text></entry>
+<entry><code>oji</code><text>Ojibwa</text></entry>
+<entry><code>ori</code><text>Oriya</text></entry>
+<entry><code>orm</code><text>Oromo</text></entry>
+<entry><code>osa</code><text>Osage</text></entry>
+<entry><code>oss</code><text>Ossetian; Ossetic</text></entry>
+<entry><code>ota</code><text>Turkish, Ottoman (1500-1928)</text></entry>
+<entry><code>oto</code><text>Otomian languages</text></entry>
+<entry><code>paa</code><text>Papuan languages</text></entry>
+<entry><code>pag</code><text>Pangasinan</text></entry>
+<entry><code>pal</code><text>Pahlavi</text></entry>
+<entry><code>pam</code><text>Pampanga; Kapampangan</text></entry>
+<entry><code>pan</code><text>Panjabi; Punjabi</text></entry>
+<entry><code>pap</code><text>Papiamento</text></entry>
+<entry><code>pau</code><text>Palauan</text></entry>
+<entry><code>peo</code><text>Persian, Old (ca.600-400 B.C.)</text></entry>
+<entry><code>per</code><text>Persian</text></entry>
+<entry><code>phi</code><text>Philippine languages</text></entry>
+<entry><code>phn</code><text>Phoenician</text></entry>
+<entry><code>pli</code><text>Pali</text></entry>
+<entry><code>pol</code><text>Polish</text></entry>
+<entry><code>pon</code><text>Pohnpeian</text></entry>
+<entry><code>por</code><text>Portuguese</text></entry>
+<entry><code>pra</code><text>Prakrit languages</text></entry>
+<entry><code>pro</code><text>Provençal, Old (to 1500)</text></entry>
+<entry><code>pus</code><text>Pushto; Pashto</text></entry>
+<entry><code>qaa-qtz</code><text>Reserved for local use</text></entry>
+<entry><code>que</code><text>Quechua</text></entry>
+<entry><code>raj</code><text>Rajasthani</text></entry>
+<entry><code>rap</code><text>Rapanui</text></entry>
+<entry><code>rar</code><text>Rarotongan; Cook Islands Maori</text></entry>
+<entry><code>roa</code><text>Romance languages</text></entry>
+<entry><code>roh</code><text>Romansh</text></entry>
+<entry><code>rom</code><text>Romany</text></entry>
+<entry><code>rum</code><text>Romanian; Moldavian; Moldovan</text></entry>
+<entry><code>run</code><text>Rundi</text></entry>
+<entry><code>rup</code><text>Aromanian; Arumanian; Macedo-Romanian</text></entry>
+<entry><code>rus</code><text>Russian</text></entry>
+<entry><code>sad</code><text>Sandawe</text></entry>
+<entry><code>sag</code><text>Sango</text></entry>
+<entry><code>sah</code><text>Yakut</text></entry>
+<entry><code>sai</code><text>South American Indian (Other)</text></entry>
+<entry><code>sal</code><text>Salishan languages</text></entry>
+<entry><code>sam</code><text>Samaritan Aramaic</text></entry>
+<entry><code>san</code><text>Sanskrit</text></entry>
+<entry><code>sas</code><text>Sasak</text></entry>
+<entry><code>sat</code><text>Santali</text></entry>
+<entry><code>scn</code><text>Sicilian</text></entry>
+<entry><code>sco</code><text>Scots</text></entry>
+<entry><code>sel</code><text>Selkup</text></entry>
+<entry><code>sem</code><text>Semitic languages</text></entry>
+<entry><code>sga</code><text>Irish, Old (to 900)</text></entry>
+<entry><code>sgn</code><text>Sign Languages</text></entry>
+<entry><code>shn</code><text>Shan</text></entry>
+<entry><code>sid</code><text>Sidamo</text></entry>
+<entry><code>sin</code><text>Sinhala; Sinhalese</text></entry>
+<entry><code>sio</code><text>Siouan languages</text></entry>
+<entry><code>sit</code><text>Sino-Tibetan languages</text></entry>
+<entry><code>sla</code><text>Slavic languages</text></entry>
+<entry><code>slo</code><text>Slovak</text></entry>
+<entry><code>slv</code><text>Slovenian</text></entry>
+<entry><code>sma</code><text>Southern Sami</text></entry>
+<entry><code>sme</code><text>Northern Sami</text></entry>
+<entry><code>smi</code><text>Sami languages</text></entry>
+<entry><code>smj</code><text>Lule Sami</text></entry>
+<entry><code>smn</code><text>Inari Sami</text></entry>
+<entry><code>smo</code><text>Samoan</text></entry>
+<entry><code>sms</code><text>Skolt Sami</text></entry>
+<entry><code>sna</code><text>Shona</text></entry>
+<entry><code>snd</code><text>Sindhi</text></entry>
+<entry><code>snk</code><text>Soninke</text></entry>
+<entry><code>sog</code><text>Sogdian</text></entry>
+<entry><code>som</code><text>Somali</text></entry>
+<entry><code>son</code><text>Songhai languages</text></entry>
+<entry><code>sot</code><text>Sotho, Southern</text></entry>
+<entry><code>spa</code><text>Spanish; Castilian</text></entry>
+<entry><code>srd</code><text>Sardinian</text></entry>
+<entry><code>srn</code><text>Sranan Tongo</text></entry>
+<entry><code>srp</code><text>Serbian</text></entry>
+<entry><code>srr</code><text>Serer</text></entry>
+<entry><code>ssa</code><text>Nilo-Saharan languages</text></entry>
+<entry><code>ssw</code><text>Swati</text></entry>
+<entry><code>suk</code><text>Sukuma</text></entry>
+<entry><code>sun</code><text>Sundanese</text></entry>
+<entry><code>sus</code><text>Susu</text></entry>
+<entry><code>sux</code><text>Sumerian</text></entry>
+<entry><code>swa</code><text>Swahili</text></entry>
+<entry><code>swe</code><text>Swedish</text></entry>
+<entry><code>syc</code><text>Classical Syriac</text></entry>
+<entry><code>syr</code><text>Syriac</text></entry>
+<entry><code>tah</code><text>Tahitian</text></entry>
+<entry><code>tai</code><text>Tai languages</text></entry>
+<entry><code>tam</code><text>Tamil</text></entry>
+<entry><code>tat</code><text>Tatar</text></entry>
+<entry><code>tel</code><text>Telugu</text></entry>
+<entry><code>tem</code><text>Timne</text></entry>
+<entry><code>ter</code><text>Tereno</text></entry>
+<entry><code>tet</code><text>Tetum</text></entry>
+<entry><code>tgk</code><text>Tajik</text></entry>
+<entry><code>tgl</code><text>Tagalog</text></entry>
+<entry><code>tha</code><text>Thai</text></entry>
+<entry><code>tib</code><text>Tibetan</text></entry>
+<entry><code>tig</code><text>Tigre</text></entry>
+<entry><code>tir</code><text>Tigrinya</text></entry>
+<entry><code>tiv</code><text>Tiv</text></entry>
+<entry><code>tkl</code><text>Tokelau</text></entry>
+<entry><code>tlh</code><text>Klingon; tlhIngan-Hol</text></entry>
+<entry><code>tli</code><text>Tlingit</text></entry>
+<entry><code>tmh</code><text>Tamashek</text></entry>
+<entry><code>tog</code><text>Tonga (Nyasa)</text></entry>
+<entry><code>ton</code><text>Tonga (Tonga Islands)</text></entry>
+<entry><code>tpi</code><text>Tok Pisin</text></entry>
+<entry><code>tsi</code><text>Tsimshian</text></entry>
+<entry><code>tsn</code><text>Tswana</text></entry>
+<entry><code>tso</code><text>Tsonga</text></entry>
+<entry><code>tuk</code><text>Turkmen</text></entry>
+<entry><code>tum</code><text>Tumbuka</text></entry>
+<entry><code>tup</code><text>Tupi languages</text></entry>
+<entry><code>tur</code><text>Turkish</text></entry>
+<entry><code>tut</code><text>Altaic languages</text></entry>
+<entry><code>tvl</code><text>Tuvalu</text></entry>
+<entry><code>twi</code><text>Twi</text></entry>
+<entry><code>tyv</code><text>Tuvinian</text></entry>
+<entry><code>udm</code><text>Udmurt</text></entry>
+<entry><code>uga</code><text>Ugaritic</text></entry>
+<entry><code>uig</code><text>Uighur; Uyghur</text></entry>
+<entry><code>ukr</code><text>Ukrainian</text></entry>
+<entry><code>umb</code><text>Umbundu</text></entry>
+<entry><code>und</code><text>Undetermined</text></entry>
+<entry><code>urd</code><text>Urdu</text></entry>
+<entry><code>uzb</code><text>Uzbek</text></entry>
+<entry><code>vai</code><text>Vai</text></entry>
+<entry><code>ven</code><text>Venda</text></entry>
+<entry><code>vie</code><text>Vietnamese</text></entry>
+<entry><code>vol</code><text>Volapük</text></entry>
+<entry><code>vot</code><text>Votic</text></entry>
+<entry><code>wak</code><text>Wakashan languages</text></entry>
+<entry><code>wal</code><text>Walamo</text></entry>
+<entry><code>war</code><text>Waray</text></entry>
+<entry><code>was</code><text>Washo</text></entry>
+<entry><code>wel</code><text>Welsh</text></entry>
+<entry><code>wen</code><text>Sorbian languages</text></entry>
+<entry><code>wln</code><text>Walloon</text></entry>
+<entry><code>wol</code><text>Wolof</text></entry>
+<entry><code>xal</code><text>Kalmyk; Oirat</text></entry>
+<entry><code>xho</code><text>Xhosa</text></entry>
+<entry><code>yao</code><text>Yao</text></entry>
+<entry><code>yap</code><text>Yapese</text></entry>
+<entry><code>yid</code><text>Yiddish</text></entry>
+<entry><code>yor</code><text>Yoruba</text></entry>
+<entry><code>ypk</code><text>Yupik languages</text></entry>
+<entry><code>zap</code><text>Zapotec</text></entry>
+<entry><code>zbl</code><text>Blissymbols; Blissymbolics; Bliss</text></entry>
+<entry><code>zen</code><text>Zenaga</text></entry>
+<entry><code>zgh</code><text>Standard Moroccan Tamazight</text></entry>
+<entry><code>zha</code><text>Zhuang; Chuang</text></entry>
+<entry><code>znd</code><text>Zande languages</text></entry>
+<entry><code>zul</code><text>Zulu</text></entry>
+<entry><code>zun</code><text>Zuni</text></entry>
+<entry><code>zxx</code><text>No linguistic content; Not applicable</text></entry>
+<entry><code>zza</code><text>Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki</text></entry>
+</iso639>

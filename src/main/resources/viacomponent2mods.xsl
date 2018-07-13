@@ -50,7 +50,7 @@
 				<recordContentSource authority="marcorg">MH</recordContentSource>
 				<recordContentSource authority="marcorg">MH-VIA</recordContentSource>
 				<recordChangeDate encoding="iso8601">
-					<xsl:value-of select="replace(substring-before(admin/updateNote/updateDate,' '),'-','')"/>
+					<xsl:value-of select="replace(substring-before(admin/updateNote[position() = last()]/updateDate/text(),' '),'-','')"/>
 				</recordChangeDate>
 				<recordIdentifier>
 					<xsl:attribute name="source">
@@ -80,6 +80,12 @@
 					<languageTerm>eng</languageTerm>
 				</languageOfCataloging>
 			</recordInfo>
+      <language>
+        <languageTerm type="code">zxx</languageTerm>
+      </language>
+      <language>
+        <languageTerm type="text">No linguistic content</languageTerm>
+      </language>
 		</mods>
 	</xsl:template>
 

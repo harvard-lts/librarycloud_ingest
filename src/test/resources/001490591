@@ -1,0 +1,80 @@
+<mods xmlns:countries="info:lc/xmlns/codelist-v1"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.loc.gov/mods/v3"
+      version="3.6"
+      xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+   <titleInfo>
+      <title>Cinq poëmes de Charles Baudelaire</title>
+   </titleInfo>
+   <titleInfo type="uniform" nameTitleGroup="1">
+      <title>Poèmes de Baudelaire</title>
+   </titleInfo>
+   <name type="personal" usage="primary" nameTitleGroup="1">
+      <namePart>Debussy, Claude</namePart>
+      <namePart type="date">1862-1918</namePart>
+      <role>
+         <roleTerm type="text">creator</roleTerm>
+      </role>
+   </name>
+   <name type="personal">
+      <namePart>Baudelaire, Charles</namePart>
+      <namePart type="date">1821-1867</namePart>
+      <role>
+         <roleTerm authority="marcrelator" type="code">lbt</roleTerm>
+      </role>
+   </name>
+   <typeOfResource>notated music</typeOfResource>
+   <originInfo>
+      <place>
+         <placeTerm type="code" authority="marccountry">fr</placeTerm>
+         <placeTerm type="text" authority="marccountry">France</placeTerm>
+      </place>
+      <place>
+         <placeTerm type="text">Paris</placeTerm>
+      </place>
+      <publisher>A. Durand</publisher>
+      <dateIssued>c1904</dateIssued>
+      <dateIssued encoding="marc">1904</dateIssued>
+      <edition>[1st ed.]</edition>
+      <issuance>monographic</issuance>
+   </originInfo>
+   <language>
+      <languageTerm authority="iso639-2b" type="code">fre</languageTerm>
+      <languageTerm authority="iso639-2b" type="text">French</languageTerm>
+   </language>
+   <physicalDescription>
+      <form authority="marcform">print</form>
+      <extent>1 score (35 p.) ; 31 cm.</extent>
+   </physicalDescription>
+   <tableOfContents>Le Balcon -- Harmonie du Soir -- Le Jet d'eau -- Recueillement -- La Mort des amants.</tableOfContents>
+   <note type="statement of responsibility">musique de Claude Debussy ; chant et piano.</note>
+   <note>For high voice and piano.</note>
+   <subject>
+      <temporal encoding="iso8601" point="start">1887</temporal>
+      <temporal encoding="iso8601" point="end">1889</temporal>
+   </subject>
+   <subject authority="lcsh">
+      <name type="personal">
+         <namePart>Baudelaire, Charles</namePart>
+         <namePart type="date">1821-1867</namePart>
+      </name>
+      <genre>Musical settings</genre>
+   </subject>
+   <subject authority="lcsh">
+      <topic>Songs (High voice) with piano</topic>
+   </subject>
+   <relatedItem type="series">
+      <titleInfo>
+         <title>LDI 8: Digital scores from the Loeb Music Library II</title>
+      </titleInfo>
+   </relatedItem>
+   <identifier type="music plate">D. &amp; F. 6103 Durand</identifier>
+   <recordInfo>
+      <recordContentSource authority="marcorg">MH-Mu</recordContentSource>
+      <recordCreationDate encoding="marc">880512</recordCreationDate>
+      <recordChangeDate encoding="iso8601">20081114113652.0</recordChangeDate>
+      <recordIdentifier source="MH:ALEPH">001490591</recordIdentifier>
+      <recordOrigin>Converted from MARCXML to MODS version 3.6 using MARC21slim2MODS3-6.xsl
+        (Revision 1.117 2017/02/14)</recordOrigin>
+   </recordInfo>
+</mods>

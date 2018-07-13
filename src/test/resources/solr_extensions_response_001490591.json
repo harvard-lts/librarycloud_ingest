@@ -1,0 +1,51 @@
+{
+  "responseHeader":{
+    "zkConnected":true,
+    "status":0,
+    "QTime":11,
+    "params":{
+      "q":"urn_keyword:\"urn-3:fhcl.loeb:1269248\""}},
+  "response":{"numFound":2,"start":0,"maxScore":21.45717,"docs":[
+      {
+        "id":"urn-3:FHCL.Loeb:1269248",
+        "urn":"urn-3:FHCL.Loeb:1269248",
+        "contentModel":"PDS DOCUMENT",
+        "accessFlag":"P",
+        "lastModifiedDate":"2016-03-14T13:21:49.91Z",
+        "fileDeliveryURL":"http://nrs.harvard.edu/urn-3:FHCL.Loeb:1269248",
+        "metsLabel":"Debussy, Claude, 1862-1918. Poèmes de Baudelaire. Paris: Durand, c1904. Mus 645.5.717.",
+        "uriType":"PDS",
+        "ownerCodeDisplayName":"Eda Kuhn Loeb Music Library",
+        "ownerCode":"FHCL.MUSI",
+        "thumbnailURL":"http://ids.lib.harvard.edu/ids/view/8316207?width=150&height=150&usethumb=y",
+        "_version_":1588771679136382979},
+        {
+        "id":"urn-3:FHCL.Loeb:12345",
+        "urn":"urn-3:FHCL.Loeb:12345",
+        "contentModel":"PDS DOCUMENT",
+        "accessFlag":"P",
+        "lastModifiedDate":"2016-03-14T13:21:49.91Z",
+        "fileDeliveryURL":"http://nrs.harvard.edu/urn-3:FHCL.Loeb:1269248",
+        "metsLabel":"Debussy, Claude, 1862-1918. Poèmes de Baudelaire. Paris: Durand, c1904. Mus 645.5.717.",
+        "uriType":"PDS",
+        "ownerCodeDisplayName":"Eda Kuhn Loeb Music Library",
+        "ownerCode":"FHCL.MUSI",
+        "thumbnailURL":"http://ids.lib.harvard.edu/ids/view/8316207?width=150&height=150&usethumb=y",
+          "_version_":1588771679136382979},
+    {
+        "id":"urn-3:FHCL.Loeb:11111",
+        "urn":"urn-3:FHCL.Loeb:11111",
+        "contentModel":"PDS DOCUMENT",
+        "accessFlag":"P",
+        "lastModifiedDate":"2016-04-12T19:25:23.696Z",
+        "fileDeliveryURL":"http://nrs.harvard.edu/urn-3:FHCL.Loeb:26527487",
+        "metsLabel":"Gomes, Carlos, 1836-1896. [Schiavo. Vocal score]. Lo schiavo : dramma lirico in quattro atti / di Rodolfo Paravicini ; musica di A. Carlos Gomes ; opera completa per canto e pianoforte, riduzione di G. Loscar. Milano : G. Ricordi, [1889]. Mus 690.568.613.3",
+        "uriType":"PDS",
+        "ownerCodeDisplayName":"Eda Kuhn Loeb Music Library",
+        "ownerCode":"FHCL.MUSI",
+        "thumbnailURL":"http://ids.lib.harvard.edu/ids/view/421568540?width=150&height=150&usethumb=y",
+        "_version_":1588771295140511744}
+  ]
+             }
+
+}

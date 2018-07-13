@@ -22,7 +22,7 @@
     </xsl:template>
 
     <!-- Remove existing collections -->
-    <xsl:template match="mods:extension[lc:collections]"/>
+    <xsl:template match="mods:extension[lc:sets]"/>
 
     <xsl:template match="mods:mods">
         <xsl:copy>
@@ -33,27 +33,27 @@
                 <xsl:value-of select="./mods:recordInfo/mods:recordIdentifier"/>
             </xsl:variable>
             <xsl:element name="extension" namespace="http://www.loc.gov/mods/v3">
-                <xsl:element name="collections"
+                <xsl:element name="sets"
                     namespace="http://hul.harvard.edu/ois/xml/ns/libraryCloud">
                      <xsl:for-each
                         select="$collections//col:item[col:item_id = $recordid]/col:collections">
-                        <xsl:element name="collection"
+                        <xsl:element name="set"
                             namespace="http://hul.harvard.edu/ois/xml/ns/libraryCloud">
-                            <xsl:element name="type"
+                            <xsl:element name="systemId"
                                 namespace="http://hul.harvard.edu/ois/xml/ns/libraryCloud">
-                                <xsl:value-of select="dc:type"/>
+                                <xsl:value-of select="col:systemId"/>
                             </xsl:element>
-                            <xsl:element name="identifier"
+                            <xsl:element name="setName"
                                 namespace="http://hul.harvard.edu/ois/xml/ns/libraryCloud">
-                                <xsl:value-of select="dc:identifier"/>
+                                <xsl:value-of select="col:setName"/>
                             </xsl:element>
-                            <xsl:element name="abstract"
+                            <xsl:element name="setSpec"
                                 namespace="http://hul.harvard.edu/ois/xml/ns/libraryCloud">
-                                <xsl:value-of select="dcterms:abstract"/>
+                                <xsl:value-of select="col:setSpec"/>
                             </xsl:element>
-                            <xsl:element name="title"
+                            <xsl:element name="baseUrl"
                                 namespace="http://hul.harvard.edu/ois/xml/ns/libraryCloud">
-                                <xsl:value-of select="dc:title"/>
+                              <xsl:value-of select="col:baseUrl"/>
                             </xsl:element>
                         </xsl:element>
                     </xsl:for-each>
@@ -62,5 +62,4 @@
             <xsl:apply-templates select="mods:recordInfo"/>
         </xsl:copy>
     </xsl:template>
-
 </xsl:stylesheet>

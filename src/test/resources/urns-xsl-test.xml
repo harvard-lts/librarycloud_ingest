@@ -1,0 +1,17 @@
+<modsCollection xmlns="http://www.loc.gov/mods/v3">
+  <mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <location>
+      <url note="Provides access to page images of entire work." access="raw object">http://nrs.harvard.edu/urn-3:fhcl.loeb:123</url>
+    </location>
+  </mods>
+    <mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <location>
+      <url note="Provides access to page images of entire work." access="raw object">http://nrs.harvard.edu/urn-3:fhcl.loeb:456</url>
+    </location>
+    </mods>
+    <mods xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <location>
+      <url note="Provides access to page images of entire work." access="raw object">http://nrs.harvard.edu/urn-3:fhcl.loeb:789</url>
+    </location>
+    </mods>
+</modsCollection>

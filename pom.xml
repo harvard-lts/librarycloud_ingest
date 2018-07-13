@@ -13,9 +13,10 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spring.version>3.2.11.RELEASE</spring.version>
+    <spring.version>4.2.5.RELEASE</spring.version><!-- last release compatible with Camel 2.17.7 -->
     <openjpa.version>2.3.0</openjpa.version>
-    <camel.version>2.14.1</camel.version>
+    <camel.version>2.17.7</camel.version><!-- last release for Java 1.7-->
+    <!-- <aws-java-sdk.version>1.11.301</aws-java-sdk.version> -->
     <aws-java-sdk.version>1.10.8</aws-java-sdk.version>
 
   </properties>
@@ -32,13 +33,21 @@
       <version>${camel.version}</version>
     </dependency>
 
-	<!--  aws jars -->
+  <!--  aws jars -->
    <dependency>
      <groupId>com.amazonaws</groupId>
      <artifactId>aws-java-sdk</artifactId>
      <version>${aws-java-sdk.version}</version>
    </dependency>
- 
+
+   <!-- https://stackoverflow.com/questions/37377075/java-lang-noclassdeffounderror-org-apache-http-conn-schemeportresolver-with-ama/38662703 -->
+   <dependency>
+     <groupId>org.apache.httpcomponents</groupId>
+     <artifactId>httpclient</artifactId>
+     <version>4.5.2</version>
+     <scope>runtime</scope>
+   </dependency>
+
    <dependency>
        <groupId>org.apache.camel</groupId>
        <artifactId>camel-aws</artifactId>
@@ -76,17 +85,17 @@
 
     <!-- Persistence -->
       <dependency>
-	  <groupId>mysql</groupId>
-	  <artifactId>mysql-connector-java</artifactId>
-	  <version>5.1.33</version>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.33</version>
       </dependency>
 
       <dependency>
-	  <groupId>org.apache.openjpa</groupId>
-	  <artifactId>openjpa</artifactId>
-	  <version>${openjpa.version}</version>
+    <groupId>org.apache.openjpa</groupId>
+    <artifactId>openjpa</artifactId>
+    <version>${openjpa.version}</version>
       </dependency>
-      
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -119,47 +128,56 @@
         </dependency>
 
     <!-- testing -->
+
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-test-spring</artifactId>
       <version>${camel.version}</version>
       <scope>test</scope>
     </dependency>
-    
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.2.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>2.18.3</version>
+      <scope>test</scope>
+    </dependency>
+
     <!-- camel streaming -->
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-stream</artifactId>
       <version>${camel.version}</version>
     </dependency>
-   
+
     <!-- camel http -->
-  	<dependency>
-  	  <groupId>org.apache.camel</groupId>
-   	  <artifactId>camel-http</artifactId>
-   	  <version>${camel.version}</version>
-  	</dependency>
-   
-  	<dependency>
-  		<groupId>org.apache.httpcomponents</groupId>
-  		<artifactId>httpclient</artifactId>
-  		<version>4.2.6</version>
-  	</dependency> 
-  	
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-http</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+
     <dependency>
       <artifactId>solr-solrj</artifactId>
       <groupId>org.apache.solr</groupId>
-      <version>4.7.0</version>
+      <version>5.5.0</version>
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
-   
+
     <!--  marc4j fork at freelib -->
     <!--<dependency>
       <groupId>info.freelibrary</groupId>
       <artifactId>freelib-marc4j</artifactId>
       <version>2.6.3</version>
-  	</dependency>-->
+    </dependency>-->
 
     <!-- https://mvnrepository.com/artifact/org.marc4j/marc4j -->
     <dependency>
@@ -168,16 +186,16 @@
       <version>2.8.2</version>
     </dependency>
 
-  	<dependency>
-  		<groupId>org.json</groupId>
-  		<artifactId>json</artifactId>
-  		<version>20140107</version>
-  	</dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20140107</version>
+    </dependency>
 
      <dependency>
        <groupId>net.sf.saxon</groupId>
        <artifactId>Saxon-HE</artifactId>
-       <version>9.5.0.1</version>
+       <version>9.5.1-5</version>
      </dependency>
 
   </dependencies>
@@ -203,34 +221,56 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
-      
+
       <plugin>
-	<groupId>org.apache.openjpa</groupId>
-	<artifactId>openjpa-maven-plugin</artifactId>
-	<version>${openjpa.version}</version>
-	  <executions>
-	    <execution>
-		<id>enhancer</id>
-		<phase>process-classes</phase>
-		<goals>
-		    <goal>enhance</goal>
-		</goals>
-	    </execution>
-	</executions>
-	<dependencies>
-	    <dependency>
-		<groupId>org.apache.openjpa</groupId>
-		<artifactId>openjpa</artifactId>
-		<version>${openjpa.version}</version>
-	    </dependency>
-	</dependencies>
-    </plugin>
+        <groupId>org.apache.openjpa</groupId>
+        <artifactId>openjpa-maven-plugin</artifactId>
+        <version>${openjpa.version}</version>
+        <configuration>
+          <includes>**/model/*.class</includes>
+          <addDefaultConstructor>true</addDefaultConstructor>
+          <enforcePropertyRestrictions>true</enforcePropertyRestrictions>
+        </configuration>
+        <executions>
+          <execution>
+            <id>enhancer</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>enhance</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.openjpa</groupId>
+            <artifactId>openjpa</artifactId>
+            <version>${openjpa.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
 
       <!-- allows the route to be ran via 'mvn camel:run' -->
       <plugin>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-maven-plugin</artifactId>
         <version>${camel.version}</version>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.21.0</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-surefire-provider</artifactId>
+            <version>1.2.0</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <additionalClasspathElements>
+            <additionalClasspathElement>src/test/resources</additionalClasspathElement>
+          </additionalClasspathElements>
+        </configuration>
       </plugin>
     </plugins>
   </build>

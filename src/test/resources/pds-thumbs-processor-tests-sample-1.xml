@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modsCollection xmlns="http://www.loc.gov/mods/v3">
+   <mods xmlns:countries="info:lc/xmlns/codelist-v1"
+         xmlns:marc="http://www.loc.gov/MARC21/slim"
+         xmlns:mods="http://www.loc.gov/mods/v3"
+         xmlns:urlinfo="http://lib.harvard.edu/urlinfo"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <location>
+         <shelfLocator>Solti B-C digital copies</shelfLocator>
+         <url access="raw object"
+              displayLabel="Mus 627.22.225 Solti C PF"
+              note="Provides access to page images of entire work.">http://nrs.harvard.edu/urn-3:fhcl.loeb:11111</url>
+      </location>
+   </mods>
+   <mods xmlns:countries="info:lc/xmlns/codelist-v1"
+         xmlns:marc="http://www.loc.gov/MARC21/slim"
+         xmlns:mods="http://www.loc.gov/mods/v3"
+         xmlns:urlinfo="http://lib.harvard.edu/urlinfo"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <location>
+         <shelfLocator>Solti B-C digital copies</shelfLocator>
+         <url access="raw object"
+              displayLabel="Mus 627.22.225 Solti C PF"
+              note="Provides access to page images of entire work.">http://nrs.harvard.edu/urn-3:fhcl.loeb:22222</url>
+         <url access="preview"></url>
+      </location>
+   </mods>
+      <mods xmlns:countries="info:lc/xmlns/codelist-v1"
+         xmlns:marc="http://www.loc.gov/MARC21/slim"
+         xmlns:mods="http://www.loc.gov/mods/v3"
+         xmlns:urlinfo="http://lib.harvard.edu/urlinfo"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <location>
+         <shelfLocator>Solti B-C digital copies</shelfLocator>
+         <url access="raw object"
+              displayLabel="Mus 627.22.225 Solti C PF"
+              note="Provides access to page images of entire work.">http://nrs.harvard.edu/urn-3:fhcl.loeb:33333</url>
+         <url access="preview">foo:bar</url>
+      </location>
+   </mods>
+</modsCollection>

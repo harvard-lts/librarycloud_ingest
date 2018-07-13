@@ -9,14 +9,14 @@ import java.util.UUID;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.spi.DataFormat;
 import org.apache.commons.io.IOUtils;
 
-import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
@@ -26,49 +26,49 @@ import edu.harvard.libcomm.message.LibCommMessage;
 import edu.harvard.libcomm.message.LibCommMessage.Payload;
 
 public class MessageBodyS3Marshaller implements DataFormat {
- 
-    private AWSCredentials awsCredentials;
+
+    @Autowired
+    private AmazonS3 s3Client;
+
     private int maxData;
     private String bucket;
     private String S3_PREFIX = "https://s3.amazonaws.com/";
 
-    public MessageBodyS3Marshaller(AWSCredentials awsCredentials, int maxData, String bucket) {
-        this.awsCredentials = awsCredentials;
+    public MessageBodyS3Marshaller(int maxData, String bucket) {
         this.maxData = maxData;
         this.bucket = bucket;
     }
 
- 	/* Take a message, check to see if it's greater than maxData. If so, 
- 	   Take the contents of payload.body, upload them to S3 (with an expiration time), 
- 	   set payload.filepath to the location of the data, and remove he contents of the body */
+  /* Take a message, check to see if it's greater than maxData. If so,
+     Take the contents of payload.body, upload them to S3 (with an expiration time),
+     set payload.filepath to the location of the data, and remove he contents of the body */
     public void marshal(Exchange exchange, Object graph, OutputStream stream) throws Exception {
-	
-		Message message = exchange.getIn();
-		InputStream messageIS = MessageUtils.readMessageBody(message);			
-        LibCommMessage libCommMessage = MessageUtils.unmarshalLibCommMessage(messageIS);        
-                
+
+    Message message = exchange.getIn();
+    InputStream messageIS = MessageUtils.readMessageBody(message);
+        LibCommMessage libCommMessage = MessageUtils.unmarshalLibCommMessage(messageIS);
+
         if ((libCommMessage.getPayload() != null) && (libCommMessage.getPayload().getData() != null)) {
             byte[] bytes = libCommMessage.getPayload().getData().getBytes(StandardCharsets.UTF_8);
-    		if (bytes.length > this.maxData) {
+        if (bytes.length > this.maxData) {
 
                 /* Upload to bucket with random key. We assume the bucket exists */
-                String key = UUID.randomUUID().toString();           
-                AmazonS3 s3Client = new AmazonS3Client(this.awsCredentials);
+                String key = UUID.randomUUID().toString();
 
                 ObjectMetadata objectMetadata = new ObjectMetadata();
                 objectMetadata.setContentLength(bytes.length);
                 PutObjectRequest putRequest = new PutObjectRequest(this.bucket, key, new ByteArrayInputStream(bytes), objectMetadata);
                 PutObjectResult putResult = s3Client.putObject(putRequest);
-                
+
                 /* Replace filepath with key to the object in s3 */
                 libCommMessage.getPayload().setFilepath(S3_PREFIX + this.bucket + "/" + key);
 
                 /* Empty body */
                 libCommMessage.getPayload().setData("");
-            }            
+            }
         }
 
-		String messageString = MessageUtils.marshalMessage(libCommMessage);
+    String messageString = MessageUtils.marshalMessage(libCommMessage);
         stream.write(messageString.getBytes());
     }
 
@@ -88,7 +88,6 @@ public class MessageBodyS3Marshaller implements DataFormat {
                 if (parts.length == 2) {
                     String bucket = parts[0];
                     String key = parts[1];
-                    AmazonS3 s3Client = new AmazonS3Client(this.awsCredentials);
                     S3Object getResult = null;
                     try {
                         getResult = s3Client.getObject(bucket, key);
@@ -105,5 +104,5 @@ public class MessageBodyS3Marshaller implements DataFormat {
         }
         String messageString = MessageUtils.marshalMessage(libCommMessage);
         return messageString;
-    } 
+    }
 }

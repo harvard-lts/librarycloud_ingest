@@ -18,7 +18,7 @@ import edu.harvard.libcomm.pipeline.MessageUtils;
 /**
  * Iterate over the MarcReader provided, generating LibraryCloud
  * messages which contain the MarcXML in a payload. Multiple
- * Marc records are included in a single message. Once the size of the 
+ * Marc records are included in a single message. Once the size of the
  * payload goes above chunkSize, start a new message.
  */
 public class MarcFileIterator implements Iterator<String> {
@@ -32,14 +32,16 @@ public class MarcFileIterator implements Iterator<String> {
     }
 
     @Override
-    public boolean hasNext() {                
+    public boolean hasNext() {
         return marcReader.hasNext();
     }
+
 
     @Override
     public String next() {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         MarcXmlWriter writer = new MarcXmlWriter(output, true);
+        writer.setCheckNonXMLChars(true);
         int count = 0;
         boolean newChunk = false;
         int totalSize = 0;
@@ -48,14 +50,14 @@ public class MarcFileIterator implements Iterator<String> {
                 Record record = marcReader.next();
                 writer.setIndent(false);
                 writer.write(record);
-                count++;           
+                count++;
                 totalSize += output.toString().length();
                 newChunk = totalSize > this.chunkSize ? true:false;
                 totalSize = 0;
             } catch (org.marc4j.MarcException ex) {
                 ex.printStackTrace();
             }
-        }   
+        }
         if (count > 0) {
         	writer.close();
             LibCommMessage message = new LibCommMessage();
@@ -86,7 +88,7 @@ public class MarcFileIterator implements Iterator<String> {
     public void remove() {
         throw new UnsupportedOperationException();
     }
-    
+
     private String filterContent(String content) {
     	content = content.replace("<collection>", "<collection " + "xmlns=\"http://www.loc.gov/MARC21/slim\"" + ">");
     	content = content.replace("&#x2;","");
