@@ -56,23 +56,34 @@ import edu.harvard.libcomm.test.TestMessageUtils;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class VIAComponentIteratorTests {
 
-    @Test
-    void useResourceLanguageCode() throws Exception {
+    private Document mods;
+
+    @BeforeAll
+    void setup() throws Exception {
         InputStream is = new FileInputStream(this.getClass().getResource("/sample-via-1.xml").getFile());
 
         VIAReader r = new VIAReader(is);
         Iterator i = new VIAComponentIterator(r);
         String lcmString = (String) i.next();
         LibCommMessage lcm = TestMessageUtils.unmarshalLibCommMessage(IOUtils.toInputStream(lcmString, "UTF-8"));
+        mods = TestHelpers.extractXmlDoc(lcm);
+    }
 
-        // String xml = lcm.getPayload().getData();
-        // System.out.println(xml);
 
-        Document mods = TestHelpers.extractXmlDoc(lcm);
-
+    @Test
+    void useResourceLanguageCode() throws Exception {
         String languageCode = TestHelpers.getXPath("//mods:languageTerm[@type='code']", mods);
         String languageText = TestHelpers.getXPath("//mods:languageTerm[@type='text']", mods);
         assertEquals("zxx", languageCode);
         assertEquals("No linguistic content", languageText);
+    }
+
+
+    @Test // LTSCLOUD-710
+    void buildModsRoleTerm() throws Exception {
+        String roleTerm1 = TestHelpers.getXPath("//mods:name[mods:namePart[1] = 'Bramante, Donato']/mods:role[1]/mods:roleTerm", mods);
+        String roleTerm2 = TestHelpers.getXPath("//mods:name[mods:namePart[1] = 'Bramante, Donato']/mods:role[2]/mods:roleTerm", mods);
+        assertEquals("creator", roleTerm1);
+        assertEquals("architect", roleTerm2);
     }
 }

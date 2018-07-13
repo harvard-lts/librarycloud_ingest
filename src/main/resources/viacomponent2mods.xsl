@@ -252,12 +252,14 @@
 				<roleTerm>
 					<xsl:value-of select="$roleType"/>
 				</roleTerm>
-				<xsl:if test="role">
-					<roleTerm>
-						<xsl:value-of select="role"/>
-					</roleTerm>
-				</xsl:if>
 			</role>
+      <xsl:if test="role">
+        <role>
+				  <roleTerm>
+					  <xsl:value-of select="role"/>
+				  </roleTerm>
+        </role>
+			</xsl:if>
 		</name>
 	</xsl:template>
 
