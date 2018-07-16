@@ -21,6 +21,9 @@
         </digitalFormats>
       </extension>
       <extension>
+        <availableTo xmlns="http://lib.harvard.edu/TBD" xmlns:countries="info:lc/xmlns/codelist-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Everyone</availableTo>
+      </extension>
+      <extension>
         <DRSMetadata xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
           <fileDeliveryURL xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">http://nrs.harvard.edu/urn-3:FHCL:1549105</fileDeliveryURL>
         </DRSMetadata>

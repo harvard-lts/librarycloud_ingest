@@ -2,7 +2,6 @@
 
 Master: [![Build Status](https://travis-ci.org/harvard-library/librarycloud_ingest.png?branch=master)](https://travis-ci.org/harvard-library/librarycloud_ingest)
 Develop: [![Build Status](https://travis-ci.org/harvard-library/librarycloud_ingest.png?branch=develop)](https://travis-ci.org/harvard-library/librarycloud_ingest) 
-Non-Alma Develop: [![Build Status](https://travis-ci.org/harvard-library/librarycloud_ingest.png?branch=non-alma-develop)](https://travis-ci.org/harvard-library/librarycloud_ingest) 
 
 
 The Library Commons pipeline (alpha) is an application to ingest metadata, transform, enrich and load for use by the Harvard Library Cloud Item api (v2). 

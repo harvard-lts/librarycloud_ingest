@@ -56,6 +56,7 @@
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:setSpec"/>
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:systemId"/>
             <xsl:apply-templates select="mods:extension/tbd:digitalFormats/tbd:digitalFormat"/>
+            <xsl:apply-templates select="mods:extension/tbd:availableTo"/>
 
             <xsl:choose>
                 <xsl:when test="mods:extension/HarvardDRS:DRSMetadata">
@@ -800,7 +801,14 @@
         </xsl:element>
     </xsl:template>
 
-
+    <xsl:template match="tbd:availableTo">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>availableTo</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
     <!-- will add space for sibs except for the last -->
     <xsl:template match="*">
         <xsl:value-of select="."/><xsl:if test="not(position()=last())"><xsl:text> </xsl:text></xsl:if>

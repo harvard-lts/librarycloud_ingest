@@ -164,4 +164,11 @@ class SolrProcessorTests {
 
         assertEquals("http://nrs.harvard.edu/urn-3:FHCL:1549105", fileDeliveryURL);
     }
+
+    @Test
+    void availableTo() throws Exception {
+        String availableTo = (String) xPath.compile("//doc[1]//field[@name='availableTo'][1]").evaluate(solrDoc, XPathConstants.STRING);
+
+        assertEquals("Everyone", availableTo);
+    }
 }
