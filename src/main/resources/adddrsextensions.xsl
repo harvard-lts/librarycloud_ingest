@@ -21,32 +21,37 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="mods:mods">
-        <xsl:choose>
-            <xsl:when test="count(.//mods:url[@access = 'raw object' and not(contains(.,'HUL.FIG')) and not(contains(.,'ebookbatch')) and not(contains(.,'ejournals'))]) > 1">
-                <xsl:copy-of select="."/>
+    <xsl:template name="returnQualifiedUrls">
+        <xsl:param name="node" />
+        <xsl:for-each select="$node/descendant::mods:url[@access = 'raw object' and not(contains(.,'HUL.FIG')) and not(contains(.,'ebookbatch')) and not(contains(.,'ejournals')) and not(contains(.,'HUL.gisdata'))]">
+            <url><xsl:value-of select="." /></url>
+        </xsl:for-each>
+    </xsl:template>
 
-            </xsl:when>
-            <xsl:when test="./mods:typeOfResource/@collection">
-              <xsl:copy-of select="."/>
+    <xsl:template match="mods:mods">
+        <xsl:variable name="qualifiedUrls">
+            <xsl:call-template name="returnQualifiedUrls">
+                <xsl:with-param name="node" select="." />
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="count($qualifiedUrls/url) != 1 or ./mods:typeOfResource/@collection">
+                <xsl:copy-of select="."/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy>
                     <xsl:apply-templates select="*"/>
                     <xsl:variable name="results" select="$param1"/>
-                    <!--<xsl:variable name="holdings" select="document('')//xsl:param[@name='param1']//holdings"/>-->
-                    <!--<xsl:variable name="urn"><xsl:value-of select="substring-after(.//mods:url[@access='raw object'],'urn-3')"/></xsl:variable>-->
                     <xsl:variable name="urn">
                         <xsl:choose>
-                            <xsl:when test="contains(.//mods:url[@access = 'raw object' and not(contains(.,'HUL.FIG')) and not(contains(.,'ebookbatch')) and not(contains(.,'ejournals'))], '?')">
+                            <xsl:when test="contains($qualifiedUrls/url/text(), '?')">
                                 <xsl:value-of
-                                    select="substring-before(substring-after(.//mods:url[@access = 'raw object' and not(contains(.,'HUL.FIG')) and not(contains(.,'ebookbatch')) and not(contains(.,'ejournals'))], 'urn-3'), '?')"
+                                    select="substring-before(substring-after($qualifiedUrls/url/text(), 'urn-3'), '?')"
                                 />
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:value-of
-                                    select="substring-after(.//mods:url[@access = 'raw object' and not(contains(.,'HUL.FIG')) and not(contains(.,'ebookbatch')) and not(contains(.,'ejournals'))], 'urn-3')"
-                                />
+                                    select="substring-after($qualifiedUrls/url/text(), 'urn-3')"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:variable>
@@ -125,34 +130,43 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="mods:location[mods:url[@access = 'raw object' and not(contains(.,'HUL.FIG')) and not(contains(.,'ebookbatch')) and not(contains(.,'ejournals'))]]">
-        <xsl:variable name="myUrl" select="mods:url[@access = 'raw object' and not(contains(.,'HUL.FIG')) and not(contains(.,'ebookbatch')) and not(contains(.,'ejournals'))][1]/text()" />
-        <xsl:copy>
-            <xsl:apply-templates select="*"/>
-            <xsl:variable name="results" select="$param1"/>
-            <!--<xsl:variable name="urn">
-                <xsl:value-of select="substring-after(mods:url[@access='raw object'],'urn-3')"/>
-            </xsl:variable>-->
-            <xsl:variable name="urn">
-                <xsl:choose>
-                    <xsl:when test="contains($myUrl, '?')">
-                        <xsl:value-of select="substring-before(substring-after($myUrl, 'urn-3'), '?')" />
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of
-                            select="substring-after($myUrl, 'urn-3')"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:variable>
-            <xsl:choose>
-                <xsl:when test="not(mods:url[@access = 'preview']) or mods:url[@access = 'preview'] = ''">
-                    <xsl:apply-templates
-                        select="$results//docs[lower-case(substring-after(urn, 'urn-3')) = lower-case($urn)]/thumbnailURL[not(. = '') and not(. = 'null')]"
-                    />
-                </xsl:when>
-                <xsl:otherwise/>
-            </xsl:choose>
-        </xsl:copy>
+    <xsl:template match="mods:location">
+        <xsl:variable name="qualifiedUrls">
+            <xsl:call-template name="returnQualifiedUrls">
+                <xsl:with-param name="node" select="." />
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="count($qualifiedUrls/url) != 1">
+                <xsl:copy>
+                    <xsl:apply-templates select="*" />
+                </xsl:copy>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates select="*"/>
+                    <xsl:variable name="results" select="$param1"/>
+                    <xsl:variable name="urn">
+                        <xsl:choose>
+                            <xsl:when test="contains($qualifiedUrls/url, '?')">
+                                <xsl:value-of select="substring-before(substring-after($qualifiedUrls/url, 'urn-3'), '?')" />
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of
+                                    select="substring-after($qualifiedUrls/url, 'urn-3')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:choose>
+                        <xsl:when test="not(string-length(mods:url[@access = 'preview']))">
+                            <xsl:apply-templates
+                                select="$results//docs[lower-case(substring-after(urn, 'urn-3')) = lower-case($urn)]/thumbnailURL[not(. = '') and not(. = 'null')]"/>
+                        </xsl:when>
+                        <xsl:otherwise/>
+                    </xsl:choose>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="mods:url[@access='preview']">

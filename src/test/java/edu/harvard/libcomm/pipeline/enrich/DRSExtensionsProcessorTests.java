@@ -55,21 +55,25 @@ import edu.harvard.libcomm.test.TestMessageUtils;
 class DRSExtensionsProcessorTests {
 
     private static HttpUrlStreamHandler httpUrlStreamHandler;
+    private static DRSExtensionsProcessor p;
+
 
     @BeforeAll
-    public static void setupURLStreamHandlerFactory() {
+    public static void setup() {
         httpUrlStreamHandler = TestHelpers.getHttpUrlStreamHandler();
+        p = new DRSExtensionsProcessor();
+
     }
+
 
     @BeforeEach
     public void reset() {
         httpUrlStreamHandler.resetConnections();
     }
 
+
     @Test
     void addDRSExtensionsData() throws Exception {
-
-        DRSExtensionsProcessor p = new DRSExtensionsProcessor();
 
         LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "enrich-05-modscollection.xml");
 
@@ -105,10 +109,8 @@ class DRSExtensionsProcessorTests {
         assertEquals("http://ids.lib.harvard.edu/ids/view/421568540?width=150&height=150&usethumb=y", thumb5Url);
     }
 
-
     @Test
     void test001763319() throws Exception {
-        DRSExtensionsProcessor p = new DRSExtensionsProcessor();
 
         LibCommMessage lcm = TestHelpers.unmarshalLibCommMessage("001763319.enrich-05.cloudbody.xml");
 
@@ -129,4 +131,21 @@ class DRSExtensionsProcessorTests {
 
         assertEquals("http://ids.lib.harvard.edu/ids/view/45562415?width=150&height=150&usethumb=y", thumb1Url);
     }
+
+
+    @Test
+    void test009444707() throws Exception {
+        LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "009444707");
+        String urns = MessageUtils.transformPayloadData(lcm,"src/main/resources/urns.xsl",null).replace(" ", "+");
+
+        TestHelpers.mockResponse(Config.getInstance().SOLR_EXTENSIONS_URL + "/select?q=urn_keyword:(%22urn-3:FHCL:2092181%22+OR+%22urn-3:HUL.gisdata:009444707%22)&rows=250", 200, "009444707_solr_response.json");
+
+        p.processMessage(lcm);
+
+        Document doc = TestHelpers.extractXmlDoc(lcm);
+        String thumb1Url = TestHelpers.getXPath("//mods:mods//mods:url[@access='preview']", doc);
+
+        assertEquals("http://nrs.harvard.edu/urn-3:FHCL:2092181?width=150&height=150&usethumb=y", thumb1Url);
+    }
+
 }
