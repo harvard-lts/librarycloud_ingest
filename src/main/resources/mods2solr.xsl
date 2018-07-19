@@ -777,7 +777,7 @@
     <xsl:template match="HarvardDRS:lastModifiedDate">
         <xsl:element name="field">
             <xsl:attribute name="name">
-                <xsl:text>lastModifiedDate</xsl:text>
+                <xsl:text>_lastModifiedDate</xsl:text>
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
