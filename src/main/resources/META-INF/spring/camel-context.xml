@@ -137,6 +137,11 @@
             <bean class="edu.harvard.libcomm.pipeline.FilterUnchangedProcessor"/>
         </property>
     </bean>
+    <bean id="filterSuppressedProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.FilterSuppressedProcessor"/>
+        </property>
+    </bean>
     <bean id="filterUnchangedMarcProcessor" class="edu.harvard.libcomm.pipeline.FilterUnchangedMarcProcessor" />
     <bean id="holdingsProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
@@ -359,6 +364,7 @@
                         <completionPredicate>
                             <simple>${header.messageLength} > 150000</simple>
                         </completionPredicate>
+                        <process ref="filterSuppressedProcessor"/>
                         <multicast parallelProcessing="true">
                             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
                             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient" />
