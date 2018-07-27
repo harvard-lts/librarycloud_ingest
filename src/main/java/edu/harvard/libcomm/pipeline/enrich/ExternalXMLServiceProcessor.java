@@ -20,14 +20,14 @@ import edu.harvard.libcomm.pipeline.IProcessor;
 import edu.harvard.libcomm.pipeline.MessageUtils;
 
 /**
- * Base class for processors that call an external service that takes a list of 
+ * Base class for processors that call an external service that takes a list of
  * record IDs, and then uses the results to transform the records using and XSL
  * stylesheet.
  */
 public class ExternalXMLServiceProcessor implements IProcessor {
-	protected Logger log = Logger.getLogger(ExternalServiceProcessor.class); 	
-	
-	public void processMessage(LibCommMessage libCommMessage) throws Exception {	
+	protected Logger log = Logger.getLogger(ExternalServiceProcessor.class);
+
+	public void processMessage(LibCommMessage libCommMessage) throws Exception {
 		throw new Exception("Not implemented - must override process() function");
 	}
 
@@ -78,6 +78,7 @@ public class ExternalXMLServiceProcessor implements IProcessor {
 		xml = xml.replace("&lt;subfield","<subfield");
 		xml = xml.replace("subfield&gt;","subfield>");
 		xml = xml.replace("&lt;/","</");
+		xml = xml.replace("\"/&gt;","\"/>");
 		xml = xml.replace("\"&gt;","\">");
 
 		xml = "<" + wrapperToken + ">" + xml + "</" + wrapperToken + ">";
