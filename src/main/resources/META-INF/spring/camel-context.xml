@@ -415,7 +415,7 @@
         <route id="alma-holdings-update" errorHandlerRef="eh">
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
             <process ref="solrAlmaHoldingsProcessor"/>
-            <to uri="file://{{librarycloud.files.basepath}}/alma-holdings-done" />
+            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
         </route>
 
 
