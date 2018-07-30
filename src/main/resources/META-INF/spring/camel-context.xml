@@ -99,16 +99,34 @@
         <property name="source" value="ALEPH"/>
     </bean>
 
+    <bean id="marcxmlAlmaRawAggregator" class="edu.harvard.libcomm.pipeline.MARCXMLRawAggregatorStrategy">
+        <property name="source" value="ALMA"/>
+    </bean>
+
     <bean id="extractPayloadProcessor" class="edu.harvard.libcomm.pipeline.ExtractPayloadProcessor"/>
 
     <bean id="modsProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
-            <bean class="edu.harvard.libcomm.pipeline.marc.ModsProcessor"/>
+            <bean class="edu.harvard.libcomm.pipeline.marc.ModsProcessor">
+                <property name="stylesheet" value="src/main/resources/MARC21slim2MODS3-6.xsl"/>
+            </bean>
+        </property>
+    </bean>
+    <bean id="modsProcessorAlma" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.marc.ModsProcessor">
+                <property name="stylesheet" value="src/main/resources/MARC21slim2MODS3-6-alma.xsl"/>
+            </bean>
         </property>
     </bean>
     <bean id="filterUnchangedProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.FilterUnchangedProcessor"/>
+        </property>
+    </bean>
+    <bean id="filterSuppressedProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.FilterSuppressedProcessor"/>
         </property>
     </bean>
     <bean id="filterUnchangedMarcProcessor" class="edu.harvard.libcomm.pipeline.FilterUnchangedMarcProcessor" />
@@ -177,7 +195,7 @@
             <bean class="edu.harvard.libcomm.pipeline.enrich.CollectionUpdateProcessor"/>
         </property>
     </bean>
-    <bean id="publishProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+    <bean id="removeRestrictedProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.enrich.PublishProcessor"/>
         </property>
@@ -201,6 +219,23 @@
                 <property name="commitWithinTime" value="30000"/>
             </bean>
         </property>
+    </bean>
+
+    <bean id="solrAlmaHoldingsProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.solr.SolrAlmaHoldingsProcessor">
+                <property name="commitWithinTime" value="30000"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="almaHoldingsProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.enrich.AlmaHoldingsProcessor"/>
+        </property>
+    </bean>
+
+    <bean id="almaDeleteProcessor" class="edu.harvard.libcomm.pipeline.delete.DeleteFileAlma">
     </bean>
 
     <bean id="solrDeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
@@ -291,6 +326,97 @@
             <!--<to uri="file://{{librarycloud.files.basepath}}/done"/>-->
         </route>
 
+
+        <!-- ============================== -->
+        <!-- Alma Bib records ingest and normalization -->
+        <!-- ============================== -->
+
+        <route id="alma-ingest" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-alma?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <split>
+                <xtokenize mode="t">//filepath</xtokenize>
+                <bean ref="prepareURI" method="prepare"/>
+                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+                <to uri="http://www.example.com" />
+                <to uri="direct:alma-ingest-file"/>
+            </split>
+        </route>
+        <route id="alma-ingest-file" errorHandlerRef="eh">
+            <from uri="direct:alma-ingest-file"/>
+            <doTry>
+                <split streaming="true">
+                    <xtokenize>//record</xtokenize>
+                    <setHeader headerName="outerSplitIndex">
+                        <simple>${header.CamelSplitIndex}</simple>
+                    </setHeader>
+                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100" completionInterval="10000">
+                        <correlationExpression>
+                            <simple>all</simple>
+                        </correlationExpression>
+                        <completionPredicate>
+                            <simple>${header.messageLength} > 150000</simple>
+                        </completionPredicate>
+                        <process ref="filterSuppressedProcessor"/>
+                        <multicast parallelProcessing="true">
+                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
+                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient" />
+                        </multicast>
+                        <!-- <to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml?fileName=alma-${header.CamelSplitIndex}" /> -->
+                    </aggregate>
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                </doCatch>
+            </doTry>
+        </route>
+
+        <!-- ============================== -->
+        <!-- Alma Holdings records ingest   -->
+        <!-- ============================== -->
+        <route id="alma-holdings-ingest" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-alma-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <split>
+                <xtokenize mode="t">//filepath</xtokenize>
+                <bean ref="prepareURI" method="prepare"/>
+                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+                <to uri="http://www.example.com" />
+                <to uri="direct:alma-holdings-ingest-file"/>
+            </split>
+        </route>
+        <route id="alma-holdings-ingest-file" errorHandlerRef="eh">
+            <from uri="direct:alma-holdings-ingest-file"/>
+            <doTry>
+                <split streaming="true">
+                    <xtokenize>//record</xtokenize>
+                    <setHeader headerName="outerSplitIndex">
+                        <simple>${header.CamelSplitIndex}</simple>
+                    </setHeader>
+                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100" completionInterval="10000">
+                        <correlationExpression>
+                            <simple>all</simple>
+                        </correlationExpression>
+                        <completionPredicate>
+                            <simple>${header.messageLength} > 150000</simple>
+                        </completionPredicate>
+                        <to uri="aws-sqs://{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient" />
+                        <!-- <to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml?fileName=alma-${header.CamelSplitIndex}" /> -->
+                    </aggregate>
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                </doCatch>
+            </doTry>
+        </route>
+
+        <route id="alma-holdings-update" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <process ref="solrAlmaHoldingsProcessor"/>
+            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
+        </route>
+
+
         <!-- ============================== -->
         <!-- Aleph ingest and normalization -->
         <!-- ============================== -->
@@ -327,13 +453,33 @@
         </route>
         <route id="marctomods" errorHandlerRef="eh">
             <from uri="seda:normalize-marcxml?concurrentConsumers=4" />
-            <process ref="modsProcessor"/>
+            <!-- Slightly different MODS transformers depending on whether it's coming from Aleph or Alma -->
+            <choice>
+                <when>
+                    <xpath>//source = 'aleph'</xpath>
+                    <process ref="modsProcessor"/>
+                </when>
+                <when>
+                    <xpath>//source = 'ALEPH'</xpath>
+                    <process ref="modsProcessor"/>
+                </when>
+                <when>
+                    <xpath>//source = 'alma'</xpath>
+                    <process ref="modsProcessorAlma"/>
+                </when>
+                <when>
+                    <xpath>//source = 'ALMA'</xpath>
+                    <process ref="modsProcessorAlma"/>
+                </when>
+            </choice>
+
             <process ref="addMarcLocationProcessor"/>
             <marshal><custom ref="cloudbody"/></marshal>
+            <!-- <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" /> -->
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" />
         </route>
 
-        <!-- Extract the aleph ID from the MARCXML, and upload the record to S3, keyed by aleph ID-->
+        <!-- Extract the record ID from the MARCXML, and upload the record to S3, keyed by record ID-->
         <route id="uploadmarc-seda" errorHandlerRef="eh">
             <!-- Note the reduced messages per poll, so we don't end up getting messages timed out, since this takes a while -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=1&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
@@ -450,64 +596,51 @@
             <choice>
                 <when>
                     <xpath>//source = 'aleph'</xpath>
-                    <to uri="seda:enrich-01?size=20&amp;blockWhenFull=true" />
+                    <to uri="seda:enrich-01-aleph?size=20&amp;blockWhenFull=true" />
                 </when>
                 <when>
                     <xpath>//source = 'ALEPH'</xpath>
-                    <to uri="seda:enrich-01?size=20&amp;blockWhenFull=true" />
+                    <to uri="seda:enrich-01-aleph?size=20&amp;blockWhenFull=true" />
+                </when>
+                <when>
+                    <xpath>//source = 'alma'</xpath>
+                    <to uri="seda:enrich-01-alma?size=20&amp;blockWhenFull=true" />
+                </when>
+                <when>
+                    <xpath>//source = 'ALMA'</xpath>
+                    <to uri="seda:enrich-01-alma?size=20&amp;blockWhenFull=true" />
                 </when>
                 <otherwise>
-                    <!-- Skip Holdings, Stackscore, and LCCSH steps for non-aleph records -->
-                    <!--<to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-05?amazonSQSClient=#sqsClient" />-->
+                    <!-- Skip MODS aggregation steps for non-aleph/alma records -->
                     <to uri="seda:enrich-05?size=20&amp;blockWhenFull=true" />
-                    <!--<to uri="file://{{librarycloud.files.basepath}}//enrich-05" />-->
                 </otherwise>
             </choice>
         </route>
 
+        <!-- Add holdings to Alma or Aleph as appropriate -->
         <route id="addholdingstomods-seda" errorHandlerRef="eh">
-            <from uri="direct:enrich-01"/>
-            <to uri="seda:enrich-01?size=20&amp;blockWhenFull=true" />
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-01-aleph?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <to uri="seda:enrich-01-aleph?size=20&amp;blockWhenFull=true" />
         </route>
         <route id="addholdingstomods" errorHandlerRef="eh">
-            <from uri="seda:enrich-01?concurrentConsumers=1"/>
+            <from uri="seda:enrich-01-aleph?concurrentConsumers=1"/>
             <process ref="holdingsProcessor"/>
             <marshal><custom ref="cloudbody"/></marshal>
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-04?amazonSQSClient=#sqsClient" />
-            <!-- <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-02?amazonSQSClient=#sqsClient" /> -->
-            <!--<to uri="file://{{librarycloud.files.basepath}}/enrich-02" />-->
         </route>
 
-        <!-- <route id="addstackscoretomods-seda" errorHandlerRef="eh"> -->
-        <!--     <!-\- <from uri="file://{{librarycloud.files.basepath}}/enrich-02" /> -\-> -->
-        <!--     <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-02?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" /> -->
-        <!--     <unmarshal><custom ref="cloudbody"/></unmarshal> -->
-        <!--     <to uri="seda:enrich-02?size=20&amp;blockWhenFull=true" /> -->
-        <!-- </route> -->
-        <!-- <route id="addstackscoretomods" errorHandlerRef="eh"> -->
-        <!--     <from uri="seda:enrich-02?concurrentConsumers=1"/> -->
-        <!--     <process ref="stackscoreProcessor"/> -->
-        <!--     <marshal><custom ref="cloudbody"/></marshal> -->
-        <!--     <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-03?amazonSQSClient=#sqsClient" /> -->
-        <!--     <!-\- <to uri="file://{{librarycloud.files.basepath}}/enrich-03" /> -\-> -->
-        <!-- </route> -->
-
-        <!-- <route id="addslcctomods-seda" errorHandlerRef="eh"> -->
-        <!--     <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-03?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" /> -->
-        <!--     <unmarshal><custom ref="cloudbody"/></unmarshal> -->
-        <!--     <to uri="seda:enrich-03?size=20&amp;blockWhenFull=true" /> -->
-        <!-- </route> -->
-        <!-- <route id="addslcctomods" errorHandlerRef="eh"> -->
-        <!--     <from uri="seda:enrich-03?concurrentConsumers=1"/> -->
-        <!--     <process ref="lccProcessor"/> -->
-        <!--     <marshal><custom ref="cloudbody"/></marshal> -->
-        <!--     <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-04?amazonSQSClient=#sqsClient" /> -->
-        <!--     <!-\-<to uri="file://{{librarycloud.files.basepath}}/enrich-04" />-\-> -->
-        <!--     <!-\-<multicast> -->
-        <!--         <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-04?amazonSQSClient=#sqsClient" /> -->
-        <!--         <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-05?amazonSQSClient=#sqsClient" /> -->
-        <!--     </multicast>-\-> -->
-        <!-- </route> -->
+        <route id="addalmaholdingstomods-seda" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-01-alma?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <to uri="seda:enrich-01-alma?size=20&amp;blockWhenFull=true" />
+        </route>
+        <route id="addalmaholdingstomods" errorHandlerRef="eh">
+            <from uri="seda:enrich-01-alma?concurrentConsumers=5"/>
+            <process ref="almaHoldingsProcessor"/>
+            <marshal><custom ref="cloudbody"/></marshal>
+            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-04?amazonSQSClient=#sqsClient" />
+        </route>
 
 
         <route id="alephmodssplit-seda" errorHandlerRef="eh">
@@ -611,8 +744,8 @@
             <process ref="collectionsProcessor"/>
             <marshal><custom ref="cloudbody"/></marshal>
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-end?amazonSQSClient=#sqsClient" />
-            <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
         </route>
+
 
         <!-- Publishing records to consumers -->
         <route id="publish-seda" errorHandlerRef="eh">
@@ -623,7 +756,7 @@
         </route>
         <route id="publish" errorHandlerRef="eh">
             <from uri="seda:enrich-end?concurrentConsumers=1" />
-            <process ref="publishProcessor"/>
+            <process ref="removeRestrictedProcessor"/>
 
             <multicast>
                 <to uri="direct:publish-delta"/>
@@ -756,6 +889,37 @@
                 </doCatch>
             </doTry>
          </route>
+
+         <route id="alma-delete-extract-file">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-alma?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <split>
+                <xtokenize mode="t">//filepath</xtokenize>
+                <bean ref="prepareURI" method="prepare"/>
+                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+                <to uri="http://www.example.com" />
+                <to uri="direct:alma-delete-file"/>
+            </split>
+        </route>
+
+        <route id="alma-delete-ingest-split">
+            <from uri="direct:alma-delete-file"/>
+            <!-- Try block required for errors thrown out of the splitter -->
+            <doTry>
+                <split streaming="true">
+                    <xtokenize>//record</xtokenize>
+                    <setHeader headerName="deleteID" >
+                        <xpath resultType="java.lang.String">//controlfield[@tag='001']</xpath>
+                    </setHeader>
+                    <process ref="almaDeleteProcessor"/>
+                    <to uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                </doCatch>
+            </doTry>
+         </route>
+
         <route id="deletesolr" errorHandlerRef="eh">
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <process ref="solrDeleteProcessor"/>

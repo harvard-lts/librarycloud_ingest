@@ -8,6 +8,7 @@
     xmlns:tbd="http://lib.harvard.edu/TBD"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:ext="http://exslt.org/common"
+    xmlns:priorrecordids="http://lib.harvard.edu/alephmigration"
     >
 
     <xsl:output indent="yes" encoding="UTF-8"/>
@@ -57,7 +58,7 @@
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:systemId"/>
             <xsl:apply-templates select="mods:extension/tbd:digitalFormats/tbd:digitalFormat"/>
             <xsl:apply-templates select="mods:extension/tbd:availableTo"/>
-
+            <xsl:apply-templates select="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier"/>
             <xsl:choose>
                 <xsl:when test="mods:extension/HarvardDRS:DRSMetadata">
                     <xsl:element name="field">
@@ -549,6 +550,15 @@
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>recordIdentifier</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>priorRecordIdentifier</xsl:text>
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
