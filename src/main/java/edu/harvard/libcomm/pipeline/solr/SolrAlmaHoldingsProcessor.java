@@ -31,7 +31,6 @@ public class SolrAlmaHoldingsProcessor implements IProcessor {
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
 		try {
 			String solrXml = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/almamarcholdings2solr.xsl",null);
-			log.debug("\n" + solrXml + "\n");
 			populateIndex(solrXml);
 		} catch (Exception e) {
 			e.printStackTrace();
