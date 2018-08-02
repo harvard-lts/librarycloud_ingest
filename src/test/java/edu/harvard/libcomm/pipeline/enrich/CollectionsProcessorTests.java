@@ -98,7 +98,7 @@ class CollectionsProcessorTests {
         }
 
         String result = lcm.getPayload().getData();
-        // System.out.println(result);
+        System.out.println(result);
 
         // byte[] xmlBytes = xml.getBytes();
         // Path p1 = Paths.get("./tmp/holdings_input.xml");

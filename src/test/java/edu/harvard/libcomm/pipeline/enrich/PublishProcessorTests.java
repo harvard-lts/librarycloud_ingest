@@ -63,7 +63,7 @@ class PublishProcessorTests {
 
         String repositoryTextChanged = TestHelpers.getXPath("//mods:location[1]/mods:physicalLocation[@type = 'repository']", doc);
         String displayLabelAdded = TestHelpers.getXPath("//mods:location[1]/mods:physicalLocation[@type = 'repository']/@displayLabel", doc);
-        String extensionValue = TestHelpers.getXPath("//tbd:HarvardRepositories/tbd:HarvardRepository/text()", doc);
+        String extensionValue = TestHelpers.getXPath("//hvd:HarvardRepositories/hvd:HarvardRepository/text()", doc);
         String valueURI = TestHelpers.getXPath("//mods:location[1]/mods:physicalLocation[@type = 'repository']/@valueURI", doc);
 
         assertEquals("African and African American Studies Reading Room, Harvard University", repositoryTextChanged);
@@ -82,7 +82,7 @@ class PublishProcessorTests {
         p.processMessage(lcm);
         Document doc = TestHelpers.extractXmlDoc(lcm);
 
-        String digitalFormat = TestHelpers.getXPath("//tbd:digitalFormat[1]", doc);
+        String digitalFormat = TestHelpers.getXPath("//digitalFormats:digitalFormat[1]", doc);
 
         assertEquals("Books and documents", digitalFormat);
     }
@@ -94,8 +94,8 @@ class PublishProcessorTests {
         p.processMessage(lcm);
         Document doc = TestHelpers.extractXmlDoc(lcm);
 
-        String available1 = TestHelpers.getXPath("//mods:mods[1]/mods:extension/tbd:availableTo", doc);
-        String available2 = TestHelpers.getXPath("//mods:mods[2]/mods:extension/tbd:availableTo", doc);
+        String available1 = TestHelpers.getXPath("//mods:mods[1]/mods:extension/avail:availableTo", doc);
+        String available2 = TestHelpers.getXPath("//mods:mods[2]/mods:extension/avail:availableTo", doc);
 
         assertEquals("Restricted", available1);
         assertEquals("Everyone", available2);
@@ -113,7 +113,7 @@ class PublishProcessorTests {
 
         Date after = new Date();
 
-        String processingDateString = TestHelpers.getXPath("//mods:mods[1]/mods:extension/tbd:processingDate", doc);
+        String processingDateString = TestHelpers.getXPath("//mods:mods[1]/mods:extension/procdate:processingDate", doc);
 
         TimeZone tz = TimeZone.getTimeZone("UTC");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");

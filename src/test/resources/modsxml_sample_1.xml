@@ -14,6 +14,9 @@
         <physicalLocation displayLabel="Harvard repository" type="repository">Music Repository</physicalLocation>
         <shelfLocator>Mus 645.5.717</shelfLocator>
       </location>
+      <location>
+        <url note="Stitched image of 2 sheets" access="raw object">http://nrs.harvard.edu/urn-3:FHCL:2092181?buttons=y</url>
+    </location>
       <extension>
         <digitalFormats xmlns="http://lib.harvard.edu/TBD">
           <digitalFormat>Audio</digitalFormat>
