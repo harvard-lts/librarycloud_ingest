@@ -1,0 +1,72 @@
+<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xlink="http://www.w3.org/TR/xlink"
+      xmlns="http://www.loc.gov/mods/v3"
+      xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd">
+   <titleInfo>
+      <title>William Whistler (brother of James Abbott McNeill Whistler)</title>
+   </titleInfo>
+   <name>
+      <namePart>Kilburn, William Edward</namePart>
+      <namePart type="date">active 1846-1862</namePart>
+      <namePart>British</namePart>
+      <role>
+         <roleTerm>creator</roleTerm>
+      </role>
+   </name>
+   <typeOfResource>still image</typeOfResource>
+   <genre>photograph</genre>
+   <originInfo>
+      <place>
+         <placeTerm>United Kingdom</placeTerm>
+      </place>
+      <dateOther keyDate="yes">1847-1849</dateOther>
+      <dateCreated>1847-1849</dateCreated>
+   </originInfo>
+   <physicalDescription>
+      <extent>7 x 4 x 1.2 cm (2 3/4 x 1 9/16 x 1/2 in.)</extent>
+   </physicalDescription>
+   <abstract>ninth plate daguerreotype</abstract>
+   <note>Credit Line: Harvard Art Museums/Fogg Museum, Gift of Dr. John H. Kennard</note>
+   <subject>
+      <topic>Photographs</topic>
+   </subject>
+   <extension xmlns:cdwalite="http://www.getty.edu/research/conducting_research/standards/cdwa/cdwalite">
+      <cdwalite:cultureWrap>
+         <cdwalite:culture>British</cdwalite:culture>
+      </cdwalite:cultureWrap>
+   </extension>
+   <extension xmlns:cdwalite="http://www.getty.edu/research/conducting_research/standards/cdwa/cdwalite">
+      <cdwalite:indexingMaterialsTechSet>
+         <cdwalite:termMaterialsTech>Ninth plate daguerreotype</cdwalite:termMaterialsTech>
+      </cdwalite:indexingMaterialsTechSet>
+   </extension>
+   <identifier type="Object Number">P1978.94</identifier>
+   <location>
+      <url displayLabel="Full Image" access="raw object" note="unrestricted">http://nrs.harvard.edu/urn-3:HUAM:31347_mddl</url>
+      <url displayLabel="Thumbnail" access="preview">http://nrs.harvard.edu/urn-3:HUAM:31347_thumb?width=150&amp;height=150&amp;usethumb=y</url>
+   </location>
+   <location>
+      <physicalLocation type="repository">Harvard Art Museums</physicalLocation>
+   </location>
+   <accessCondition displayLabel="copyright" type="useAndReproduction">© President and Fellows of Harvard College</accessCondition>
+   <relatedItem otherType="HOLLIS Images record">
+      <location>
+         <url>http://id.lib.harvard.edu/images/HUAM281333/urn-3:HUAM:31347_mddl/catalog</url>
+      </location>
+   </relatedItem>
+   <recordInfo>
+      <recordContentSource authority="marcorg">MH</recordContentSource>
+      <recordContentSource authority="marcorg">MH-VIA</recordContentSource>
+      <recordChangeDate encoding="iso8601"/>
+      <recordIdentifier source="MH:VIA">HUAM281333_urn-3:HUAM:31347_mddl</recordIdentifier>
+      <languageOfCataloging>
+         <languageTerm>eng</languageTerm>
+      </languageOfCataloging>
+   </recordInfo>
+   <language>
+      <languageTerm type="code">zxx</languageTerm>
+   </language>
+   <language>
+      <languageTerm type="text">No linguistic content</languageTerm>
+   </language>
+</mods>

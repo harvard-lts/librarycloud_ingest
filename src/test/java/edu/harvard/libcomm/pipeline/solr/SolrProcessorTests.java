@@ -171,4 +171,13 @@ class SolrProcessorTests {
 
         assertEquals("Everyone", availableTo);
     }
+
+    @Test
+    void nullLastModifiedDate() throws Exception {
+        String lastModifiedDate1 = (String) xPath.compile("//doc[1]//field[@name='_lastModifiedDate'][1]").evaluate(solrDoc, XPathConstants.STRING);
+        String lastModifiedDate2 = (String) xPath.compile("//doc[2]//field[@name='_lastModifiedDate'][1]").evaluate(solrDoc, XPathConstants.STRING);
+
+        assertEquals("2016-04-05T18:31:02.611Z", lastModifiedDate1);
+        assertEquals("", lastModifiedDate2);
+    }
 }

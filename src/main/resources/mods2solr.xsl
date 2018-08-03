@@ -3,7 +3,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:mods="http://www.loc.gov/mods/v3"
-    xmlns:usage="http://lib.harvard.edu/usagedata" version="1.0"
+    xmlns:usage="http://lib.harvard.edu/usagedata"
     xmlns:set="http://hul.harvard.edu/ois/xml/ns/libraryCloud"
     xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
     xmlns:tbd="http://lib.harvard.edu/TBD"
@@ -11,6 +11,7 @@
     xmlns:ext="http://exslt.org/common"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     exclude-result-prefixes="xs xsi"
+    version="2.0"
     >
 
     <xsl:output indent="yes" encoding="UTF-8"/>
@@ -778,12 +779,14 @@
     </xsl:template>
 
     <xsl:template match="HarvardDRS:lastModifiedDate">
+      <xsl:if test='matches(., "\d{4}")' >
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>_lastModifiedDate</xsl:text>
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
+      </xsl:if>
     </xsl:template>
 
     <xsl:template match="HarvardDRS:fileDeliveryURL">
@@ -932,8 +935,8 @@
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="formatDateRange">
-            <xsl:with-param name="lowDate" select="$lowDate" />
-            <xsl:with-param name="highDate" select="$highDate" />
+            <xsl:with-param name="lowDate" select="string($lowDate)" />
+            <xsl:with-param name="highDate" select="string($highDate)" />
           </xsl:call-template>
         </xsl:otherwise>
       </xsl:choose>

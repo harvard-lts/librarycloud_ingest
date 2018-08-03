@@ -29,6 +29,7 @@
       <extension>
         <DRSMetadata xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
           <fileDeliveryURL xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">http://nrs.harvard.edu/urn-3:FHCL:1549105</fileDeliveryURL>
+          <lastModifiedDate xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">2016-04-05T18:31:02.611Z</lastModifiedDate>
         </DRSMetadata>
       </extension>
       <name type="personal">
@@ -44,6 +45,11 @@
      <originInfo>
        <dateIssued>[1962?]</dateIssued>
      </originInfo>
+     <extension>
+        <DRSMetadata xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
+          <lastModifiedDate xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">null</lastModifiedDate>
+        </DRSMetadata>
+      </extension>
    </mods>
    <mods version="3.6">
      <originInfo>

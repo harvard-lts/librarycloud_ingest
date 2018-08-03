@@ -120,14 +120,14 @@
                 <HarvardDRS:inDRS>
                     <xsl:text>true</xsl:text>
                 </HarvardDRS:inDRS>
-                <xsl:apply-templates select="accessFlag"/>
-                <xsl:apply-templates select="contentModel"/>
-                <xsl:apply-templates select="uriType"/>
-                <xsl:apply-templates select="fileDeliveryURL[not(. = '')]"/>
-                <xsl:apply-templates select="ownerCode"/>
-                <xsl:apply-templates select="ownerCodeDisplayName[not(. = '')]"/>
-                <xsl:apply-templates select="metsLabel[not(. = '')]"/>
-                <xsl:apply-templates select="lastModifiedDate[not(. = '')]"/>
+                <xsl:apply-templates select="accessFlag[not(. = 'null')]"/>
+                <xsl:apply-templates select="contentModel[not(. = 'null')]"/>
+                <xsl:apply-templates select="uriType[not(. = 'null')]"/>
+                <xsl:apply-templates select="fileDeliveryURL[not(. = '') and not(. = 'null')]"/>
+                <xsl:apply-templates select="ownerCode[not(. = 'null')]"/>
+                <xsl:apply-templates select="ownerCodeDisplayName[not(. = '') and not(. = 'null')]"/>
+                <xsl:apply-templates select="metsLabel[not(. = '') and not(. = 'null')]"/>
+                <xsl:apply-templates select="lastModifiedDate[not(. = '') and not(. = 'null')]"/>
             </HarvardDRS:DRSMetadata>
         </extension>
     </xsl:template>
