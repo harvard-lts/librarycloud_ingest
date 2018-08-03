@@ -103,6 +103,11 @@
      <originInfo><dateIssued encoding="marc" point="start">1966</dateIssued><dateIssued encoding="marc" point="end">1965</dateIssued></originInfo>
    </mods>
    <mods>
+     <originInfo>
+       <dateIssued>1288 [1871-72]</dateIssued>
+     </originInfo>
+   </mods>
+   <mods>
      <titleInfo><title>originDateTest</title></titleInfo>
      <originInfo>
        <dateIssued>2001</dateIssued>

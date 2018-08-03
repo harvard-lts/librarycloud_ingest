@@ -959,6 +959,12 @@
             <xsl:with-param name="highDate" select="substring($highDate, 2)" />
           </xsl:call-template>
         </xsl:when>
+        <xsl:when test="string-length($lowDate) = 4 and string-length($highDate) = 2">
+          <xsl:call-template name="formatDateRange">
+            <xsl:with-param name="lowDate" select="$lowDate" />
+            <xsl:with-param name="highDate" select="concat(substring($lowDate, 1, 2), $highDate)" />
+          </xsl:call-template>
+        </xsl:when>
         <xsl:when test="string-length($lowDate) > 0 and string-length($highDate) > 0">
           <xsl:value-of select="concat('[', string($lowDate), ' TO ', string($highDate), ']')" />
         </xsl:when>
