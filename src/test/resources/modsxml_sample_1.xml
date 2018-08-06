@@ -145,5 +145,18 @@
        </name>
      </relatedItem>
    </mods>
+   <mods>
+     <titleInfo><title>brokenDate</title></titleInfo>
+     <originInfo>
+       <dateIssued>1848-11-07/1849-07-30</dateIssued>
+     </originInfo>
+   </mods>
+   <mods>
+     <titleInfo><title>brokenDate2</title></titleInfo>
+     <originInfo>
+       <dateIssued encoding="marc" point="start">18uu</dateIssued>
+       <dateIssued encoding="marc" point="end">191u</dateIssued>
+     </originInfo>
+   </mods>
 
 </modsCollection>

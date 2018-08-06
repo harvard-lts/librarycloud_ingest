@@ -982,6 +982,12 @@
         <xsl:when test="$brake &gt; 1000">
           <xsl:message>breaking out of loop: normalizeDate</xsl:message>
         </xsl:when>
+        <xsl:when test='matches($dateStringInput, "\d{4}-\d{2}-\d{2}/\d{4}-\d{2}-\d{2}") and string-length($dateStringInput) = 21'>
+          <xsl:value-of select='concat(substring($dateStringInput, 1, 4), "_", substring($dateStringInput, 12, 4))' />
+        </xsl:when>
+        <xsl:when test='matches($dateStringInput, "\d{3}u") and string-length($dateStringInput) = 4'>
+          <xsl:value-of select="translate($dateStringInput, 'u', '0')" />
+        </xsl:when>
         <xsl:when test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d?u{3}u?") and string-length($dateStringInput) = 4'>
         </xsl:when>
         <xsl:when test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d{2}u{2}") and $point = "start"'>
