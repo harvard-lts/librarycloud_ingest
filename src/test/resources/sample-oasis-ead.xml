@@ -71,6 +71,10 @@
                          era="ce"
                          normal="1848-11-07/1849-07-30"
                          type="inclusive">1848-11-07/1849-07-30</unitdate>
+               <!-- langmaterial added for testing, not part of original record -->
+               <langmaterial>
+                 <language langcode="fre">French</language>
+               </langmaterial>
             </did>
             <odd id="aspace_b434238c93c7f61a669107cf65b59e6e">
                <head>KG Number:</head>
