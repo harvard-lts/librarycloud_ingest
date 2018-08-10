@@ -14,6 +14,9 @@
         <physicalLocation displayLabel="Harvard repository" type="repository">Music Repository</physicalLocation>
         <shelfLocator>Mus 645.5.717</shelfLocator>
       </location>
+      <location>
+        <url note="Stitched image of 2 sheets" access="raw object">http://nrs.harvard.edu/urn-3:FHCL:2092181?buttons=y</url>
+    </location>
       <extension>
         <digitalFormats xmlns="http://lib.harvard.edu/TBD">
           <digitalFormat>Audio</digitalFormat>
@@ -26,6 +29,7 @@
       <extension>
         <DRSMetadata xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
           <fileDeliveryURL xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">http://nrs.harvard.edu/urn-3:FHCL:1549105</fileDeliveryURL>
+          <lastModifiedDate xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">2016-04-05T18:31:02.611Z</lastModifiedDate>
         </DRSMetadata>
       </extension>
       <name type="personal">
@@ -41,6 +45,11 @@
      <originInfo>
        <dateIssued>[1962?]</dateIssued>
      </originInfo>
+     <extension>
+        <DRSMetadata xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
+          <lastModifiedDate xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">null</lastModifiedDate>
+        </DRSMetadata>
+      </extension>
    </mods>
    <mods version="3.6">
      <originInfo>
@@ -94,6 +103,11 @@
      <originInfo><dateIssued encoding="marc" point="start">1966</dateIssued><dateIssued encoding="marc" point="end">1965</dateIssued></originInfo>
    </mods>
    <mods>
+     <originInfo>
+       <dateIssued>1288 [1871-72]</dateIssued>
+     </originInfo>
+   </mods>
+   <mods>
      <titleInfo><title>originDateTest</title></titleInfo>
      <originInfo>
        <dateIssued>2001</dateIssued>
@@ -130,6 +144,19 @@
          <namePart type="date">1919-1979</namePart>
        </name>
      </relatedItem>
+   </mods>
+   <mods>
+     <titleInfo><title>brokenDate</title></titleInfo>
+     <originInfo>
+       <dateIssued>1848-11-07/1849-07-30</dateIssued>
+     </originInfo>
+   </mods>
+   <mods>
+     <titleInfo><title>brokenDate2</title></titleInfo>
+     <originInfo>
+       <dateIssued encoding="marc" point="start">18uu</dateIssued>
+       <dateIssued encoding="marc" point="end">191u</dateIssued>
+     </originInfo>
    </mods>
 
 </modsCollection>

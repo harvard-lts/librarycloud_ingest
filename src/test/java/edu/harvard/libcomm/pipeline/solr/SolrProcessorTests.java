@@ -101,6 +101,14 @@ class SolrProcessorTests {
         String date14 = (String) xPath.compile("(//field[@name='dateRange'])[14]").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("[1965 TO 1966]", date14);
 
+        String date15 = (String) xPath.compile("(//field[@name='dateRange'])[15]").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("[1871 TO 1872]", date15);
+
+        String date20 = (String) xPath.compile("(//doc[field[@name='title'] = 'brokenDate']//field[@name='dateRange'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("[1848 TO 1849]", date20);
+
+        String date1800_1910 = (String) xPath.compile("(//doc[field[@name='title'] = 'brokenDate2']//field[@name='dateRange'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("[1800 TO 1910]", date1800_1910);
     }
 
     @Test
@@ -170,5 +178,14 @@ class SolrProcessorTests {
         String availableTo = (String) xPath.compile("//doc[1]//field[@name='availableTo'][1]").evaluate(solrDoc, XPathConstants.STRING);
 
         assertEquals("Everyone", availableTo);
+    }
+
+    @Test
+    void nullLastModifiedDate() throws Exception {
+        String lastModifiedDate1 = (String) xPath.compile("//doc[1]//field[@name='_lastModifiedDate'][1]").evaluate(solrDoc, XPathConstants.STRING);
+        String lastModifiedDate2 = (String) xPath.compile("//doc[2]//field[@name='_lastModifiedDate'][1]").evaluate(solrDoc, XPathConstants.STRING);
+
+        assertEquals("2016-04-05T18:31:02.611Z", lastModifiedDate1);
+        assertEquals("", lastModifiedDate2);
     }
 }

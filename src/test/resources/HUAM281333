@@ -1,0 +1,44 @@
+<viaRecord images="true" numberOfImages="2" numberOfSubworks="0" numberOfSurrogates="0" originalAtHarvard="true" primaryImageThumbnailURN="http://nrs.harvard.edu/urn-3:HUAM:DDC105015_dynmc" recordSize="1968" sortCreator="Kilburn, William Edward" sortCulture="British" sortTitle="William Whistler (brother of James Abbott McNeill Whistler)" sortWorktype="photograph" xmlns:xlink="http://www.w3.org/TR/xlink">
+      <recordId>HUAM281333</recordId>
+      <work>
+        <image restrictedImage="false" xlink:href="http://nrs.harvard.edu/urn-3:HUAM:31347_mddl">
+          <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:HUAM:31347_thumb"></thumbnail>
+        </image>
+        <image restrictedImage="false" xlink:href="http://nrs.harvard.edu/urn-3:HUAM:DDC105015_dynmc">
+          <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:HUAM:DDC105015_dynmc"></thumbnail>
+        </image>
+        <title>
+          <textElement>William Whistler (brother of James Abbott McNeill Whistler)</textElement>
+        </title>
+        <itemIdentifier>
+          <type>Object Number</type>
+          <number>P1978.94</number>
+        </itemIdentifier>
+        <workType>photograph</workType>
+        <creator>
+          <nameElement>Kilburn, William Edward</nameElement>
+          <dates>active 1846-1862</dates>
+          <nationality>British</nationality>
+        <namedates>Kilburn, William Edward active 1846-1862</namedates></creator>
+        <production>
+          <placeOfProduction>
+            <place>United Kingdom</place>
+          </placeOfProduction>
+        </production>
+        <freeDate>1847-1849</freeDate>
+        <description>ninth plate daguerreotype</description>
+        <dimensions>7 x 4 x 1.2 cm (2 3/4 x 1 9/16 x 1/2 in.)</dimensions>
+        <topic>
+          <term>Photographs</term>
+        </topic>
+        <culture>
+          <term>British</term>
+        </culture>
+        <materials>Ninth plate daguerreotype</materials>
+        <notes>Credit Line: Harvard Art Museums/Fogg Museum, Gift of Dr. John H. Kennard</notes>
+        <copyright>© President and Fellows of Harvard College</copyright>
+        <repository>
+          <repositoryName>Harvard Art Museums</repositoryName>
+        </repository>
+      </work>
+    <admin><createDate>2008-07-26</createDate><status>Active</status><updateNote><updateDate>2008-07-26</updateDate></updateNote><updateNote><updateDate>2008-08-21</updateDate></updateNote><updateNote><updateDate>2008-09-16</updateDate></updateNote><updateNote><updateDate>2008-10-01</updateDate></updateNote><updateNote><updateDate>2008-10-02</updateDate></updateNote><updateNote><updateDate>2012-08-02</updateDate></updateNote></admin></viaRecord>

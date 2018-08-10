@@ -86,4 +86,17 @@ class VIAComponentIteratorTests {
         assertEquals("creator", roleTerm1);
         assertEquals("architect", roleTerm2);
     }
+
+    @Test // HUAM281333
+    void HUAM281333() throws Exception {
+        InputStream is = new FileInputStream(this.getClass().getResource("/HUAM281333").getFile());
+
+        VIAReader r = new VIAReader(is);
+        Iterator i = new VIAComponentIterator(r);
+        String lcmString = (String) i.next();
+        LibCommMessage lcm = TestMessageUtils.unmarshalLibCommMessage(IOUtils.toInputStream(lcmString, "UTF-8"));
+        System.out.println(lcm.getPayload().getData());
+        Document HUAM281333 = TestHelpers.extractXmlDoc(lcm);
+    }
+
 }
