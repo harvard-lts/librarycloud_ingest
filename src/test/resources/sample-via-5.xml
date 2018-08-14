@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<viaRecord images="true" numberOfImages="8" numberOfSubworks="8" numberOfSurrogates="0" originalAtHarvard="true" primaryImageThumbnailURN="http://nrs.harvar d.edu/urn-3:RAD.ARCH:34334774" recordSize="17917" sortCreator="Gittings" sortDate="1924" sortTitle="Radcliffe College Class of 1928." sortWorktype="photogra phs">
+  <recordId altRecordId="ss_8000192475">olvgroup11538</recordId>
+  <group>
+    <title>
+      <textElement>Radcliffe College Class of 1928.</textElement>
+    </title>
+    <surrogate altComponentID="1" componentID="1">
+      <repository>
+        <repositoryName>Radcliffe College Archives</repositoryName>
+        <number>TC 38-13, TC 38-14</number>
+      </repository>
+    </surrogate> 
+    <surrogate altComponentID="2" componentID="2">
+      <repository>
+        <repositoryName>Radcliffe College Archives</repositoryName>
+        <number>TC 38-13, TC 38-14</number>
+      </repository>
+    </surrogate>
+    <subwork altComponentID="8000196598" componentID="olvwork348626">
+       <image altComponentID="4115110" componentID="W348626_1" restrictedImage="false" xlink:href="http://nrs.harvard.edu/urn-3:RAD.ARCH:957162" xmlns:xlink="http://www.w3.org/TR/xlink">
+          <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:RAD.ARCH:957162"></thumbnail>
+       </image>
+       <title>
+          <textElement>Portrait of Helene B. Lourie Markwett</textElement>
+       </title>
+       <workType>photographs</workType>
+       <dimensions>5 x 7 inches</dimensions>
+       <associatedName>
+          <nameElement>Radcliffe College, Cambridge, Massachusetts, United States</nameElement>
+          <role>associated name</role>
+       <namedates>Radcliffe College, Cambridge, Massachusetts, United States</namedates></associatedName>
+       <associatedName>
+          <nameElement>Radcliffe College. Class of 1928, Cambridge, MA, United States</nameElement>
+          <dates>1924-1928</dates>
+          <role>associated name</role>
+       <namedates>Radcliffe College. Class of 1928, Cambridge, MA, United States 1924-1928</namedates></associatedName>
+       <topic>
+          <term>photographs</term>
+       </topic>
+       <topic>
+          <term>portraits</term>
+       </topic>
+       <topic>
+          <term>women</term>
+       </topic>
+       <topic>
+          <term>alumnae and alumni</term>
+       </topic>
+       <materials>gelatin silver process</materials>
+       <notes>Inscription: Verso:  &quot;The Dinner was a triumph&quot;</notes>
+       <useRestrictions>Radcliffe College Archives: This image may not be reproduced or transmitted in any form or by any means, electronic or mechanical, without permission in writing from the Radcliffe Archives.</useRestrictions>
+       <repository>
+          <repositoryName>Radcliffe College Archives</repositoryName>
+          <number>PC 678-1928-5</number>
+       </repository>
+    </subwork>
+    <subwork altComponentID="8000193904" componentID="olvwork348625">
+       <title>
+          <textElement>Portrait of Eleanor MacDonald</textElement>
+       </title>
+       <workType>photographs</workType>
+       <creator>
+          <nameElement>Gittings</nameElement>
+          <role>producer</role>
+       <namedates>Gittings</namedates></creator>
+       <dimensions>5 x 7 inches</dimensions>
+       <associatedName>
+          <nameElement>Radcliffe College, Cambridge, Massachusetts, United States</nameElement>
+          <role>associated name</role>
+       <namedates>Radcliffe College, Cambridge, Massachusetts, United States</namedates></associatedName>
+       <associatedName>
+          <nameElement>Radcliffe College. Class of 1928, Cambridge, MA, United States</nameElement>
+          <dates>1924-1928</dates>
+          <role>associated name</role>
+       <namedates>Radcliffe College. Class of 1928, Cambridge, MA, United States 1924-1928</namedates></associatedName>
+       <topic>
+          <term>photographs</term>
+       </topic>
+       <topic>
+          <term>portraits</term>
+       </topic>
+       <topic>
+          <term>women</term>
+       </topic>
+       <topic>
+          <term>alumnae and alumni</term>
+       </topic>
+       <materials>gelatin silver process</materials>
+       <notes>Inscription: Verso:  Alumna award winner</notes>
+       <useRestrictions>Radcliffe College Archives: This image may not be reproduced or transmitted in any form or by any means, electronic or mechanical, without permission in writing from the Radcliffe Archives.</useRestrictions>
+       <repository>
+          <repositoryName>Radcliffe College Archives</repositoryName>
+          <number>PC 678-1928-4</number>
+       </repository>
+    </subwork>  
+  </group>
+  <admin>
+    <createDate>2017-05-19</createDate>
+    <status>Active</status>
+    <updateNote>
+      <updateDate>2017-05-23</updateDate>
+    </updateNote>
+    <updateNote>
+      <updateDate>2017-11-14</updateDate>
+    </updateNote>
+  </admin>
+</viaRecord>

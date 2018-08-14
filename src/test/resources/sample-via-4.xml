@@ -1,0 +1,93 @@
+<viaRecord originalAtHarvard="true"
+           numberOfSubworks="0"
+           primaryImageThumbnailURN="http://sharedshelf.stage.artstor.org/resolve/harvard-nrs/urn-3:FHCL.HOUGH:37097945">
+   <recordId altRecordId="ss_8000175683">olvwork165257</recordId>
+   <work>
+      <surrogate altComponentID="7349260" componentID="olvsurrogate683318">
+         <title>
+            <textElement>View looking east</textElement>
+         </title>
+         <classification>
+            <number>161 C 127 9Sha (i) 1</number>
+         </classification>
+         <topic>
+            <term>cenotaphs</term>
+         </topic>
+         <topic>
+            <term>muqarnas</term>
+         </topic>
+         <notes>Note-General: Funding for this image is provided by the Aga Khan Program.</notes>
+         <repository>
+            <repositoryName>Harvard Fine Arts Library, Digital Images &amp; Slides Collection</repositoryName>
+            <number>1971.02087</number>
+         </repository>
+      </surrogate>
+            <surrogate altComponentID="7349260" componentID="olvsurrogate683318">
+         <title>
+            <textElement>View looking east</textElement>
+         </title>
+         <classification>
+            <number>161 C 127 9Sha (i) 1</number>
+         </classification>
+         <topic>
+            <term>cenotaphs</term>
+         </topic>
+         <topic>
+            <term>muqarnas</term>
+         </topic>
+         <notes>Note-General: Funding for this image is provided by the Aga Khan Program.</notes>
+         <repository>
+            <repositoryName>Harvard Fine Arts Library, Digital Images &amp; Slides Collection</repositoryName>
+            <number>1971.02087</number>
+         </repository>
+      </surrogate>
+      <image xmlns:xlink="http://www.w3.org/TR/xlink"
+                restrictedImage="false"
+                xlink:href="http://sharedshelf.stage.artstor.org/resolve/harvard-nrs/urn-3:FHCL.HOUGH:37097945">
+        <thumbnail xlink:href="http://sharedshelf.stage.artstor.org/resolve/harvard-nrs/urn-3:FHCL.HOUGH:37097945"/>
+      </image>
+
+     <title>
+         <textElement>View of chuurch (photo reproduction)</textElement>
+      </title>
+      <workType>reproductive prints</workType>
+      <creator>
+         <nameElement>Bramante, Donato</nameElement>
+         <dates>c.1444-1514, Italian</dates>
+         <role>architect</role>
+         <namedates>Bramante, Donato c.1444-1514, Italian</namedates>
+      </creator>
+      <dimensions> image 14.8 x 14.8 cm ; paper 19.6 x 21 cm</dimensions>
+      <topic>
+         <term>buildings (structures)</term>
+      </topic>
+      <topic>
+         <term>religious buildings</term>
+      </topic>
+      <topic>
+         <term>churches (buildings)</term>
+      </topic>
+      <topic>
+         <term>church towers</term>
+      </topic>
+      <notes>General: Title devised. Sepia toned reproductive print, possibly a diazotype.</notes>
+      <notes>Inscription: Written in ink on back of print: This is not an original</notes>
+      <relatedWork>
+         <relationship>Part of</relationship>
+         <textElement>Harrison D. Horblit collection of early photography</textElement>
+      </relatedWork>
+      <relatedInformation xmlns:xlink="http://www.w3.org/TR/xlink"
+                          xlink:href="http://id.lib.harvard.edu/aleph/008080945/catalog">Collection-level record</relatedInformation>
+      <useRestrictions>Houghton Library: Cite as: Horblit TypPr [number], Harrison D. Horblit Collection of Early Photography, Houghton Library, Harvard University.</useRestrictions>
+      <repository>
+         <repositoryName>Houghton Library</repositoryName>
+         <number>Horblit TypPr 805.A147.228 (1) Sz1</number>
+      </repository>
+   </work>
+   <admin>
+      <createDate>2014-12-24</createDate>
+      <updateNote>
+         <updateDate>2018/06/08 11:52:45</updateDate>
+      </updateNote>
+   </admin>
+</viaRecord>
