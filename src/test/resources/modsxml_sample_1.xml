@@ -32,6 +32,12 @@
           <lastModifiedDate xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">2016-04-05T18:31:02.611Z</lastModifiedDate>
         </DRSMetadata>
       </extension>
+      <extension>
+        <HarvardRepositories xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardRepositories" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS" xmlns:urlinfo="http://lib.harvard.edu/urlinfo" xmlns:countries="info:lc/xmlns/codelist-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <HarvardRepository>Botany Gray Herbarium</HarvardRepository>
+          <HarvardRepository>Widener</HarvardRepository>
+        </HarvardRepositories>
+      </extension>
       <name type="personal">
         <namePart>John Smith</namePart>
       </name>

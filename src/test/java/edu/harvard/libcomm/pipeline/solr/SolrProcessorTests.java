@@ -112,12 +112,6 @@ class SolrProcessorTests {
     }
 
     @Test
-    void buildSolrRepositoryFields() throws Exception {
-        String languageCode = (String) xPath.compile("//field[@name='repository']").evaluate(solrDoc, XPathConstants.STRING);
-        assertEquals("Music Repository", languageCode);
-    }
-
-    @Test
     void buildSolrDigitalFormatFields() throws Exception {
         String df1 = (String) xPath.compile("//field[@name='digitalFormat'][1]").evaluate(solrDoc, XPathConstants.STRING);
         String df2 = (String) xPath.compile("//field[@name='digitalFormat'][2]").evaluate(solrDoc, XPathConstants.STRING);
@@ -188,4 +182,14 @@ class SolrProcessorTests {
         assertEquals("2016-04-05T18:31:02.611Z", lastModifiedDate1);
         assertEquals("", lastModifiedDate2);
     }
+
+    @Test // LTSCLOUD-749
+    void repositoryFieldAndFacet() throws Exception {
+        String r1 = (String) xPath.compile("//doc[1]//field[@name='repository'][1]").evaluate(solrDoc, XPathConstants.STRING);
+        String r2 = (String) xPath.compile("//doc[1]//field[@name='repository'][2]").evaluate(solrDoc, XPathConstants.STRING);
+
+        assertEquals("Botany Gray Herbarium", r1);
+        assertEquals("Widener", r2);
+    }
+
 }
