@@ -124,4 +124,28 @@ class PublishProcessorTests {
         assertTrue(processingDate.compareTo(df.parse(df.format(before))) >= 0);
         assertTrue(processingDate.compareTo(df.parse(df.format(after))) <= 0);
     }
+
+    //LTSCLOUD-695 Objects in Context Links
+    @Test
+    void objectInContextLinksDRS() throws Exception {
+        LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "publish-processor-tests-sample-1.xml");
+
+        p.processMessage(lcm);
+        System.out.println(lcm.getPayload().getData());
+        Document doc = TestHelpers.extractXmlDoc(lcm);
+        String objectInContextURL = TestHelpers.getXPath("//mods:mods[2]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Harvard Digital Collections']/text()", doc);
+        assertEquals("http://id.lib.harvard.edu/digital_collections/W280050_urn-3:FHCL:478854", objectInContextURL);
+    }
+
+    //LTSCLOUD-695 Objects in Context Links
+    @Test
+    void objectInContextLinksSpotlight() throws Exception {
+        LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "publish-processor-tests-sample-1.xml");
+
+        p.processMessage(lcm);
+        System.out.println(lcm.getPayload().getData());
+        Document doc = TestHelpers.extractXmlDoc(lcm);
+        String objectInContextURL = TestHelpers.getXPath("//mods:mods[2]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Contagion!']/text()", doc);
+        assertEquals("http://id.lib.harvard.edu/curiosity/spotlightcollname/123-W280050_urn-3:FHCL:478854", objectInContextURL);
+    }
 }

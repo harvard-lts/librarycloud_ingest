@@ -10,6 +10,7 @@
     xmlns:digitalFormats="http://hul.harvard.edu/ois/xml/ns/digitalFormats"
     xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
     xmlns:countries="info:lc/xmlns/codelist-v1"
+    xmlns:sets="http://hul.harvard.edu/ois/xml/ns/libraryCloud"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     exclude-result-prefixes="mods xs tbd xlink HarvardRepositories processingDate availableTo digitalFormats HarvardDRS xsi countries"
     version="2.0">
@@ -70,7 +71,6 @@
         </xsl:variable>
 
         <xsl:if test="not(mods:recordInfo/mods:recordOrigin='Open Metadata Status: RES-C') and not(mods:recordInfo/mods:recordOrigin='Open Metadata Status: RES-D')">
-
             <xsl:copy>
                 <xsl:copy-of select="@*"/>
                 <xsl:apply-templates />
@@ -111,9 +111,27 @@
                         <xsl:value-of select="$param1" />
                     </processingDate:processingDate>
                 </extension>
+
             </xsl:copy>
         </xsl:if>
 
+    </xsl:template>
+
+    <xsl:template match="mods:location[mods:url][1]">
+        <xsl:copy>
+            <xsl:copy-of select="@* | node()"/>
+            <xsl:if test="//mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'P'">
+                <url xmlns="http://www.loc.gov/mods/v3" access="object in context" displayLabel="Harvard Digital Collections">http://id.lib.harvard.edu/digital_collections/<xsl:value-of select="//mods:recordInfo/mods:recordIdentifier" /></url>
+            </xsl:if>
+            <xsl:for-each select="//mods:extension//sets:set">
+                <url xmlns="http://www.loc.gov/mods/v3" access="object in context">
+                    <xsl:attribute name="displayLabel">
+                        <xsl:value-of select="sets:setName/text()" />
+                    </xsl:attribute>
+                    <xsl:value-of select="./sets:baseUrl" />-<xsl:value-of select="//mods:recordInfo/mods:recordIdentifier" />
+                </url>
+            </xsl:for-each>
+        </xsl:copy>
     </xsl:template>
 
     <xsl:template match="mods:location/mods:physicalLocation">

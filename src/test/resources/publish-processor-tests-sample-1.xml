@@ -19,11 +19,27 @@
      </extension>
    </mods>
    <mods version="3.6">
+     <location>
+       <url access="raw object">http://nrs.harvard.edu/urn-3:FHCL:478854</url>
+     </location>
      <extension>
        <drs:DRSMetadata xmlns:drs="http://hul.harvard.edu/ois/xml/ns/HarvardDRS" xmlns:urlinfo="http://lib.harvard.edu/urlinfo" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:countries="info:lc/xmlns/codelist-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
          <drs:contentModel>PDS DOCUMENT</drs:contentModel>
          <drs:accessFlag>P</drs:accessFlag>
        </drs:DRSMetadata>
      </extension>
+     <extension>
+       <lc:sets xmlns:lc="http://hul.harvard.edu/ois/xml/ns/libraryCloud" xmlns="http://www.loc.gov/mods/v3">
+         <lc:set>
+           <lc:systemId>53563</lc:systemId>
+           <lc:setName>Contagion!</lc:setName>
+           <lc:setSpec>contagion</lc:setSpec>
+           <lc:baseUrl>http://id.lib.harvard.edu/curiosity/spotlightcollname/123</lc:baseUrl>
+         </lc:set>
+       </lc:sets>
+     </extension>
+     <recordInfo>
+       <recordIdentifier source="MH:VIA">W280050_urn-3:FHCL:478854</recordIdentifier>
+     </recordInfo>
    </mods>
 </modsCollection>
