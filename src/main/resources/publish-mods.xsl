@@ -112,6 +112,13 @@
                     </processingDate:processingDate>
                 </extension>
 
+                <xsl:if test="count(mods:location/mods:url) &lt; 1">
+                    <location xmlns="http://www.loc.gov/mods/v3">
+                        <xsl:call-template name="object-in-context-links">
+                            <xsl:with-param name="modsRoot" select="." />
+                        </xsl:call-template>
+                    </location>
+                </xsl:if>
             </xsl:copy>
         </xsl:if>
 
@@ -120,17 +127,9 @@
     <xsl:template match="mods:location[mods:url][1]">
         <xsl:copy>
             <xsl:copy-of select="@* | node()"/>
-            <xsl:if test="//mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'P'">
-                <url xmlns="http://www.loc.gov/mods/v3" access="object in context" displayLabel="Harvard Digital Collections">http://id.lib.harvard.edu/digital_collections/<xsl:value-of select="//mods:recordInfo/mods:recordIdentifier" /></url>
-            </xsl:if>
-            <xsl:for-each select="//mods:extension//sets:set">
-                <url xmlns="http://www.loc.gov/mods/v3" access="object in context">
-                    <xsl:attribute name="displayLabel">
-                        <xsl:value-of select="sets:setName/text()" />
-                    </xsl:attribute>
-                    <xsl:value-of select="./sets:baseUrl" />-<xsl:value-of select="//mods:recordInfo/mods:recordIdentifier" />
-                </url>
-            </xsl:for-each>
+            <xsl:call-template name="object-in-context-links">
+                <xsl:with-param name="modsRoot" select="ancestor::mods:mods" />
+            </xsl:call-template>
         </xsl:copy>
     </xsl:template>
 
@@ -173,6 +172,21 @@
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates />
         </xsl:copy>
+    </xsl:template>
+
+    <xsl:template name="object-in-context-links">
+        <xsl:param name="modsRoot" />
+        <xsl:if test="$modsRoot//mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'P'">
+            <url xmlns="http://www.loc.gov/mods/v3" access="object in context" displayLabel="Harvard Digital Collections">http://id.lib.harvard.edu/digital_collections/<xsl:value-of select="$modsRoot//mods:recordInfo/mods:recordIdentifier" /></url>
+        </xsl:if>
+        <xsl:for-each select="$modsRoot//mods:extension//sets:set">
+            <url xmlns="http://www.loc.gov/mods/v3" access="object in context">
+                <xsl:attribute name="displayLabel">
+                    <xsl:value-of select="sets:setName/text()" />
+                </xsl:attribute>
+                <xsl:value-of select="./sets:baseUrl" />-<xsl:value-of select="$modsRoot//mods:recordInfo/mods:recordIdentifier" />
+            </url>
+        </xsl:for-each>
     </xsl:template>
 
 </xsl:stylesheet>

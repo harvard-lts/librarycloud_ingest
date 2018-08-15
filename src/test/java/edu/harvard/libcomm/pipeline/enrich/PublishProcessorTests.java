@@ -131,10 +131,12 @@ class PublishProcessorTests {
         LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "publish-processor-tests-sample-1.xml");
 
         p.processMessage(lcm);
-        System.out.println(lcm.getPayload().getData());
         Document doc = TestHelpers.extractXmlDoc(lcm);
-        String objectInContextURL = TestHelpers.getXPath("//mods:mods[2]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Harvard Digital Collections']/text()", doc);
-        assertEquals("http://id.lib.harvard.edu/digital_collections/W280050_urn-3:FHCL:478854", objectInContextURL);
+        String objectInContextURL1 = TestHelpers.getXPath("//mods:mods[2]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Harvard Digital Collections']/text()", doc);
+        assertEquals("http://id.lib.harvard.edu/digital_collections/W280050_urn-3:FHCL:478854", objectInContextURL1);
+
+        String objectInContextURL2 = TestHelpers.getXPath("//mods:mods[3]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Harvard Digital Collections']/text()", doc);
+        assertEquals("http://id.lib.harvard.edu/digital_collections/W280050_urn-3:FHCL:478854", objectInContextURL2);
     }
 
     //LTSCLOUD-695 Objects in Context Links
@@ -143,9 +145,11 @@ class PublishProcessorTests {
         LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "publish-processor-tests-sample-1.xml");
 
         p.processMessage(lcm);
-        System.out.println(lcm.getPayload().getData());
         Document doc = TestHelpers.extractXmlDoc(lcm);
-        String objectInContextURL = TestHelpers.getXPath("//mods:mods[2]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Contagion!']/text()", doc);
-        assertEquals("http://id.lib.harvard.edu/curiosity/spotlightcollname/123-W280050_urn-3:FHCL:478854", objectInContextURL);
+        String objectInContextURL1 = TestHelpers.getXPath("//mods:mods[2]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Contagion!']/text()", doc);
+        assertEquals("http://id.lib.harvard.edu/curiosity/spotlightcollname/123-W280050_urn-3:FHCL:478854", objectInContextURL1);
+
+        String objectInContextURL2 = TestHelpers.getXPath("//mods:mods[3]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Contagion!']/text()", doc);
+        assertEquals("http://id.lib.harvard.edu/curiosity/spotlightcollname/123-W280050_urn-3:FHCL:478854", objectInContextURL2);
     }
 }
