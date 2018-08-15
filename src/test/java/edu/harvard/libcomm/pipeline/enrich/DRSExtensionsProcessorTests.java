@@ -71,7 +71,6 @@ class DRSExtensionsProcessorTests {
         httpUrlStreamHandler.resetConnections();
     }
 
-    @Disabled
     @Test
     void addDRSExtensionsData() throws Exception {
 
@@ -108,7 +107,7 @@ class DRSExtensionsProcessorTests {
 
         assertEquals("http://ids.lib.harvard.edu/ids/view/421568540?width=150&height=150&usethumb=y", thumb5Url);
     }
-    @Disabled
+
     @Test
     void test001763319() throws Exception {
 

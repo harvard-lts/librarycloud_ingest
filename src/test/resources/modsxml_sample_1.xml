@@ -164,5 +164,49 @@
        <dateIssued encoding="marc" point="end">191u</dateIssued>
      </originInfo>
    </mods>
+   <mods>
+     <titleInfo><title>deepData</title></titleInfo>
+     <notarealmodstag>
+         <sonofnotarealmodstag>
+             <titleInfo>
+                 <title>Musique ; 1</title>
+             </titleInfo>
+             <name type="personal">
+                 <namePart>Bory, Jean Louis</namePart>
+             </name>
+             <originInfo>
+                 <dateIssued>2001</dateIssued>
+                 <dateCreated>2002</dateCreated>
+                 <dateCaptured>2003</dateCaptured>
+                 <place>
+                     <placeTerm type="text" authority="marccountry">Germany</placeTerm>
+                 </place>
+             </originInfo>
+             <subject authority="lcsh">
+                 <name type="corporate">
+                     <namePart>Erzbischöfliche Diözesan- und Dombibliothek (Cologne, Germany)</namePart>
+                     <role>
+                         <roleTerm type="text">creator</roleTerm>
+                     </role>
+                 </name>
+                 <genre>Catalogs</genre>
+                 <typeOfResource>still image</typeOfResource>
+                 <topic>Theology</topic>
+             </subject>
+             <location>
+                 <physicalLocation type="repository">Freer Gallery of Art</physicalLocation>
+                 <shelfLocator>Mus 645.5.717</shelfLocator>
+             </location>
+             <HarvardRepositories xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardRepositories" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS" xmlns:urlinfo="http://lib.harvard.edu/urlinfo" xmlns:countries="info:lc/xmlns/codelist-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                 <HarvardRepository>Widener</HarvardRepository>
+             </HarvardRepositories>
+
+             <publisher>PUBLISHER</publisher>
+             <location>
+                 <url access="preview">http://foo.bar</url>
+             </location>
+         </sonofnotarealmodstag>
+     </notarealmodstag>
+   </mods>
 
 </modsCollection>

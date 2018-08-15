@@ -184,7 +184,7 @@
                 <xsl:attribute name="displayLabel">
                     <xsl:value-of select="sets:setName/text()" />
                 </xsl:attribute>
-                <xsl:value-of select="./sets:baseUrl" />-<xsl:value-of select="$modsRoot//mods:recordInfo/mods:recordIdentifier" />
+                <xsl:value-of select="sets:baseUrl" />-<xsl:value-of select="$modsRoot//mods:recordInfo/mods:recordIdentifier" />
             </url>
         </xsl:for-each>
     </xsl:template>

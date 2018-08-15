@@ -192,4 +192,53 @@ class SolrProcessorTests {
         assertEquals("Widener", r2);
     }
 
+    @Test //LTSCLOUD-750
+    void matchModsNodesRegardlessOfHierarchy() throws Exception {
+        String data;
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='name'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("Bory, Jean Louis", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='dateCreated'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("2002", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='dateCaptured'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("2003", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='genre'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("Catalogs", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='physicalLocation'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("Freer Gallery of Art", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='resourceType'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("still image", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='repository'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("Widener", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='role'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("creator", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='shelfLocator'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("Mus 645.5.717", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='subject.topic'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("Theology", data.trim());
+
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='originPlace'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("Germany", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='publisher'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("PUBLISHER", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='originDate'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("2001", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='url.access.preview'])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("true", data.trim());
+
+    }
+
 }

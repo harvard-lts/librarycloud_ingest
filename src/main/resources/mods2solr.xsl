@@ -27,8 +27,8 @@
     <xsl:template match="mods:mods">
         <xsl:element name="doc">
             <xsl:apply-templates select="mods:titleInfo"/>
-            <xsl:apply-templates select="mods:name"/>
-            <xsl:apply-templates select="mods:typeOfResource"/>
+            <xsl:apply-templates select=".//mods:name"/>
+            <xsl:apply-templates select=".//mods:typeOfResource"/>
              <!-- put the isOnline field here to keep grouped with isCollection and isManuscript -->
             <xsl:element name="field">
                 <xsl:attribute name="name">
@@ -43,15 +43,16 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:element>
-            <xsl:apply-templates select="mods:genre"/>
-            <xsl:apply-templates select="mods:originInfo"/>
+            <xsl:apply-templates select=".//mods:genre"/>
+            <xsl:apply-templates select=".//mods:originInfo"/>
+            <xsl:apply-templates select=".//mods:publisher"/>
             <xsl:apply-templates select="mods:language"/>
             <!--<xsl:apply-templates select="mods:physicalDescription"/>-->
             <xsl:apply-templates select="mods:tableOfContents"/>
             <xsl:apply-templates select="mods:abstract"/>
             <!--<xsl:apply-templates select="mods:targetAudience"/>
             <xsl:apply-templates select="mods:note"/>-->
-            <xsl:apply-templates select="mods:subject"/>
+            <xsl:apply-templates select=".//mods:subject"/>
             <xsl:apply-templates select="mods:classification"/>
             <xsl:apply-templates select="mods:identifier"/>
             <xsl:apply-templates select=".//mods:location"/>
@@ -63,7 +64,7 @@
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:systemId"/>
             <xsl:apply-templates select="mods:extension/tbd:digitalFormats/tbd:digitalFormat"/>
             <xsl:apply-templates select="mods:extension/tbd:availableTo"/>
-            <xsl:apply-templates select="mods:extension/HarvardRepositories:HarvardRepositories"/>
+            <xsl:apply-templates select=".//HarvardRepositories:HarvardRepositories"/>
             <xsl:apply-templates select="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier"/>
             <xsl:choose>
                 <xsl:when test="mods:extension/HarvardDRS:DRSMetadata">
@@ -120,7 +121,7 @@
                     <xsl:text>url.access.preview</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="mods:location/mods:url[@access='preview']">
+                    <xsl:when test=".//mods:location/mods:url[@access='preview']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -133,7 +134,7 @@
                     <xsl:text>url.access.raw_object</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="mods:location/mods:url[@access='raw object']">
+                    <xsl:when test="..//mods:location/mods:url[@access='raw object']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -232,7 +233,6 @@
 
     <xsl:template match="mods:originInfo">
         <xsl:apply-templates select="mods:place"/>
-        <xsl:apply-templates select="mods:publisher"/>
         <xsl:apply-templates select="mods:dateIssued"/>
         <xsl:apply-templates select="mods:dateCreated"/>
         <xsl:apply-templates select="mods:dateCaptured"/>
