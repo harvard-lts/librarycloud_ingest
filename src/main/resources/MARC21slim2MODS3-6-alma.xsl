@@ -2951,6 +2951,15 @@
 			<xsl:call-template name="addOriginalSystemId"/>
 		</xsl:for-each>
 
+    <relatedItem otherType="HOLLIS record">
+      <location>
+        <url>
+          <xsl:text>http://id.lib.harvard.edu/alma/</xsl:text>
+          <xsl:value-of select="substring-before(marc:controlfield[@tag=001],'-')"/>
+          <xsl:text>/catalog</xsl:text>
+        </url>
+      </location>
+    </relatedItem>
 
 	</xsl:template>
 

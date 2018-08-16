@@ -2961,6 +2961,15 @@
         </languageOfCataloging>
       </xsl:for-each>
     </recordInfo>
+    <relatedItem otherType="HOLLIS record">
+      <location>
+        <url>
+          <xsl:text>http://id.lib.harvard.edu/aleph/</xsl:text>
+          <xsl:value-of select="substring-before(marc:controlfield[@tag=001],'-')"/>
+          <xsl:text>/catalog</xsl:text>
+        </url>
+      </location>
+    </relatedItem>
   </xsl:template>
 
   <xsl:template name="displayForm">

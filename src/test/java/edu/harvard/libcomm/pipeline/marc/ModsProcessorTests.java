@@ -30,15 +30,16 @@ import edu.harvard.libcomm.test.TestHelpers;
 class ModsProcessorTests {
 
     private Document mods;
-    private XPath xPath;
+    private ModsProcessor p;
+    private LibCommMessage lcm;
 
     @BeforeAll
     void buildModsDoc() throws Exception {
-        ModsProcessor p = new ModsProcessor();
-        LibCommMessage lcm = TestHelpers.buildLibCommMessage("marc", "marcxml_sample_1.xml");
+        p = new ModsProcessor();
+        lcm = TestHelpers.buildLibCommMessage("marc", "marcxml_sample_1.xml");
         p.processMessage(lcm);
         mods = TestHelpers.extractXmlDoc(lcm);
-        // System.out.println(lcm.getPayload().getData());
+        System.out.println(lcm.getPayload().getData());
     }
 
 
@@ -49,5 +50,18 @@ class ModsProcessorTests {
 
         assertEquals("eng", languageCode1);
         assertEquals("und", languageCode2);
+    }
+
+    @Test //LTSCLOUD-752
+    void idDotLibURL() throws Exception {
+        String url = TestHelpers.getXPath("//mods:mods[1]//mods:relatedItem[@otherType='HOLLIS record']/mods:location/mods:url", mods);
+        assertEquals("http://id.lib.harvard.edu/aleph/000005977/catalog", url);
+
+        p.setStylesheet("src/main/resources/MARC21slim2MODS3-6-alma.xsl");
+        LibCommMessage lcmAlma = TestHelpers.buildLibCommMessage("marc", "marcxml_sample_1.xml");
+        p.processMessage(lcmAlma);
+        Document modsAlma = TestHelpers.extractXmlDoc(lcmAlma);
+        String urlAlma = TestHelpers.getXPath("//mods:mods[1]//mods:relatedItem[@otherType='HOLLIS record']/mods:location/mods:url", modsAlma);
+        assertEquals("http://id.lib.harvard.edu/alma/000005977/catalog", urlAlma);
     }
 }
