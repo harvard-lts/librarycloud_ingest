@@ -70,6 +70,7 @@ class EADComponentIteratorTests {
         mods = TestHelpers.extractXmlDoc(lcm);
     }
 
+
     @Test
     void useResourceLanguageCode() throws Exception {
         String languageCode = TestHelpers.getXPath("//mods:languageTerm[@type='code']", mods);
@@ -95,6 +96,7 @@ class EADComponentIteratorTests {
         assertEquals("creator", roleTerm2);
     }
 
+
     @Test // LTSCLOUD-754
     void languageCodeForComponents() throws Exception {
         String lcmString = (String) i.next();
@@ -103,6 +105,18 @@ class EADComponentIteratorTests {
         Document componentMods = TestHelpers.extractXmlDoc(lcm);
 
         String languageCode = TestHelpers.getXPath("//mods:languageTerm[@type='code']", componentMods);
+        assertEquals("und", languageCode);
+    }
+
+    @Test
+    void properEadNamespace() throws Exception {
+        InputStream is = new FileInputStream(this.getClass().getResource("/fal00001.xml").getFile());
+        EADReader r = new EADReader(is);
+        Iterator i = new EADComponentIterator(r);
+        String lcmString = (String) i.next();
+        LibCommMessage lcm = TestMessageUtils.unmarshalLibCommMessage(IOUtils.toInputStream(lcmString, "UTF-8"));
+        Document mods = TestHelpers.extractXmlDoc(lcm);
+        String languageCode = TestHelpers.getXPath("//mods:languageTerm[@type='code']", mods);
         assertEquals("und", languageCode);
     }
 }
