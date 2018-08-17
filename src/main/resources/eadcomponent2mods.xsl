@@ -4,6 +4,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xpath-default-namespace="urn:isbn:1-931666-22-9"
     version="2.0">
     <xsl:output encoding="UTF-8" method="xml" indent="yes" omit-xml-declaration="yes"/>
     <xsl:strip-space elements="*"/>
