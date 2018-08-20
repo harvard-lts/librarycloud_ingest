@@ -46,7 +46,7 @@ public class EADReader {
 	   	Document doc = null;
 		DocumentBuilder builder;
 		try {
-			builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+      builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			doc = builder.parse(is);
 
 		} catch (ParserConfigurationException e) {
@@ -69,7 +69,7 @@ public class EADReader {
 			Object result = null;
 			XPathExpression componentId = null;
 			try {
-				componentId = xpath.compile("//c/@id");
+				componentId = xpath.compile("//*[local-name()='c']/@id");
 				result = componentId.evaluate(doc, XPathConstants.NODESET);
 			} catch (XPathExpressionException e) {
 				e.printStackTrace();

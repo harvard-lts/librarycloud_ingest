@@ -71,7 +71,6 @@ class DRSExtensionsProcessorTests {
         httpUrlStreamHandler.resetConnections();
     }
 
-
     @Test
     void addDRSExtensionsData() throws Exception {
 
@@ -132,7 +131,6 @@ class DRSExtensionsProcessorTests {
         assertEquals("http://ids.lib.harvard.edu/ids/view/45562415?width=150&height=150&usethumb=y", thumb1Url);
     }
 
-
     @Test
     void test009444707() throws Exception {
         LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "009444707");
@@ -146,6 +144,23 @@ class DRSExtensionsProcessorTests {
         String thumb1Url = TestHelpers.getXPath("//mods:mods//mods:url[@access='preview']", doc);
 
         assertEquals("http://nrs.harvard.edu/urn-3:FHCL:2092181?width=150&height=150&usethumb=y", thumb1Url);
+    }
+
+    @Test //HUAM281333
+    void ignoreNullDRSValues() throws Exception {
+        LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "HUAM281333_mods.xml");
+        String urns = MessageUtils.transformPayloadData(lcm,"src/main/resources/urns.xsl",null).replace(" ", "+");
+        String url = Config.getInstance().SOLR_EXTENSIONS_URL + "/select?q=urn_keyword:("+urns+")&rows=250";
+
+        TestHelpers.mockResponse(url, 200, "HUAM281333_solr_response.json");
+
+        p.processMessage(lcm);
+
+        Document doc = TestHelpers.extractXmlDoc(lcm);
+        System.out.println(lcm.getPayload().getData());
+        String lastModifiedDate = TestHelpers.getXPath("//mods:mods//drs:lastModifiedDate", doc);
+
+        assertEquals("", lastModifiedDate);
     }
 
 }

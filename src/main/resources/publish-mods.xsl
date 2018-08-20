@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:mods="http://www.loc.gov/mods/v3"
     xmlns:tbd="http://lib.harvard.edu/TBD"
+    xmlns:HarvardRepositories="http://hul.harvard.edu/ois/xml/ns/HarvardRepositories"
+    xmlns:processingDate="http://hul.harvard.edu/ois/xml/ns/processingDate"
+    xmlns:availableTo="http://hul.harvard.edu/ois/xml/ns/availableTo"
+    xmlns:digitalFormats="http://hul.harvard.edu/ois/xml/ns/digitalFormats"
     xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
-    exclude-result-prefixes="xs"
+    xmlns:countries="info:lc/xmlns/codelist-v1"
+    xmlns:sets="http://hul.harvard.edu/ois/xml/ns/libraryCloud"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    exclude-result-prefixes="mods xs tbd xlink HarvardRepositories processingDate availableTo digitalFormats HarvardDRS xsi countries"
     version="2.0">
+    <!-- <xsl:namespace-alias stylesheet-prefix="mods" result-prefix="" /> -->
     <xsl:output method="xml" encoding="UTF-8"/>
-    <xsl:param name="param1"><processingDate /></xsl:param>
+    <xsl:param name="param1"><processingDate/></xsl:param>
     <xsl:param name="repository-map-file" select="'src/main/resources/RepositoryNameMapping.xml'" />
     <xsl:variable name="map" select="document($repository-map-file)" />
 
@@ -21,7 +30,7 @@
     <xsl:template match="mods:mods">
         <!--
         <xsl:variable name="restrictedRec">
-            <xsl:value-of select=".[not(contains(mods:recordInfo/mods:recordOrigin[starts-with(.,'Open Metadata')],'RES-C')) and not(contains(mods:recordInfo/mods:recordOrigin[starts-with(.,'Open Metadata')],'RES-D'))]"></xsl:value-of>
+            <xsl:value-of select=".[not(contains(recordInfo/recordOrigin[starts-with(.,'Open Metadata')],'RES-C')) and not(contains(recordInfo/recordOrigin[starts-with(.,'Open Metadata')],'RES-D'))]"></xsl:value-of>
         </xsl:variable>
         -->
         <xsl:variable name="digitalFormats">
@@ -66,47 +75,62 @@
                 <xsl:copy-of select="@*"/>
                 <xsl:apply-templates />
                 <xsl:if test="count($digitalFormats/format) &gt; 0">
-                  <xsl:element name="extension" namespace="http://www.loc.gov/mods/v3">
-                    <xsl:element name="digitalFormats" namespace="http://lib.harvard.edu/TBD">
-                      <xsl:for-each select="$digitalFormats/format">
-                        <xsl:element name="digitalFormat" namespace="http://lib.harvard.edu/TBD">
-                          <xsl:value-of select="." />
-                        </xsl:element>
-                      </xsl:for-each>
-                    </xsl:element>
-                  </xsl:element>
+                    <extension xmlns="http://www.loc.gov/mods/v3">
+                        <digitalFormats:digitalFormats>
+                            <xsl:for-each select="$digitalFormats/format">
+                                <digitalFormats:digitalFormat>
+                                    <xsl:value-of select="." />
+                                </digitalFormats:digitalFormat>
+                            </xsl:for-each>
+                        </digitalFormats:digitalFormats>
+                    </extension>
                 </xsl:if>
 
                 <xsl:if test="string-length($availableTo)">
-                  <xsl:element name="extension" namespace="http://www.loc.gov/mods/v3">
-                    <xsl:element name="availableTo" namespace="http://lib.harvard.edu/TBD">
-                      <xsl:value-of select="$availableTo" />
-                    </xsl:element>
-                  </xsl:element>
+                    <extension xmlns="http://www.loc.gov/mods/v3">
+                        <availableTo:availableTo>
+                            <xsl:value-of select="$availableTo" />
+                        </availableTo:availableTo>
+                    </extension>
                 </xsl:if>
 
-                <xsl:element name="extension" namespace="http://www.loc.gov/mods/v3">
+                <extension xmlns="http://www.loc.gov/mods/v3">
                     <xsl:if test="count($harvardRepositoriesMap/mapping) &gt; 0">
-                        <xsl:element name="HarvardRepositories" namespace="http://lib.harvard.edu/TBD">
+                        <HarvardRepositories:HarvardRepositories>
                             <xsl:for-each select="$harvardRepositoriesMap/mapping">
-                    <!-- <xsl:for-each select="mods:location/mods:physicalLocation[@type = 'repository']"> -->
-                    <!--   <xsl:variable name="source" select="./text()" /> -->
-                      <!-- <xsl:if test="string-length($map//mapping[source=$source]/extensionValue) &gt; 0"> -->
-                        <xsl:element name="HarvardRepository" namespace="http://lib.harvard.edu/TBD">
-                          <xsl:value-of select="./extensionValue" />
-                        </xsl:element>
-                      <!-- </xsl:if> -->
+                                <HarvardRepositories:HarvardRepository>
+                                    <xsl:value-of select="./extensionValue" />
+                                </HarvardRepositories:HarvardRepository>
                             </xsl:for-each>
-                        </xsl:element>
+                        </HarvardRepositories:HarvardRepositories>
                     </xsl:if>
-                </xsl:element>
+                </extension>
 
-                <xsl:element name="extension" namespace="http://www.loc.gov/mods/v3">
-                    <xsl:element name="processingDate" namespace="http://lib.harvard.edu/TBD"><xsl:value-of select="$param1" /></xsl:element>
-                    </xsl:element>
+                <extension xmlns="http://www.loc.gov/mods/v3">
+                    <processingDate:processingDate>
+                        <xsl:value-of select="$param1" />
+                    </processingDate:processingDate>
+                </extension>
+
+                <xsl:if test="count(mods:location/mods:url) &lt; 1">
+                    <location xmlns="http://www.loc.gov/mods/v3">
+                        <xsl:call-template name="object-in-context-links">
+                            <xsl:with-param name="modsRoot" select="." />
+                        </xsl:call-template>
+                    </location>
+                </xsl:if>
             </xsl:copy>
         </xsl:if>
 
+    </xsl:template>
+
+    <xsl:template match="mods:location[mods:url][1]">
+        <xsl:copy>
+            <xsl:copy-of select="@* | node()"/>
+            <xsl:call-template name="object-in-context-links">
+                <xsl:with-param name="modsRoot" select="ancestor::mods:mods" />
+            </xsl:call-template>
+        </xsl:copy>
     </xsl:template>
 
     <xsl:template match="mods:location/mods:physicalLocation">
@@ -148,6 +172,21 @@
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates />
         </xsl:copy>
+    </xsl:template>
+
+    <xsl:template name="object-in-context-links">
+        <xsl:param name="modsRoot" />
+        <xsl:if test="$modsRoot//mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'P'">
+            <url xmlns="http://www.loc.gov/mods/v3" access="object in context" displayLabel="Harvard Digital Collections">http://id.lib.harvard.edu/digital_collections/<xsl:value-of select="$modsRoot//mods:recordInfo/mods:recordIdentifier" /></url>
+        </xsl:if>
+        <xsl:for-each select="$modsRoot//mods:extension//sets:set">
+            <url xmlns="http://www.loc.gov/mods/v3" access="object in context">
+                <xsl:attribute name="displayLabel">
+                    <xsl:value-of select="sets:setName/text()" />
+                </xsl:attribute>
+                <xsl:value-of select="sets:baseUrl" />-<xsl:value-of select="$modsRoot//mods:recordInfo/mods:recordIdentifier" />
+            </url>
+        </xsl:for-each>
     </xsl:template>
 
 </xsl:stylesheet>

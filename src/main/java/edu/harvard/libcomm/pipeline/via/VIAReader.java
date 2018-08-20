@@ -3,6 +3,7 @@ package edu.harvard.libcomm.pipeline.via;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
+import java.lang.String;
 
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.parsers.DocumentBuilder;
@@ -16,85 +17,131 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class VIAReader {
 
-	private InputStream is;
-	private NodeList nodes;
-	private DOMSource domSource;	
+    private InputStream is;
+    private NodeList nodes;
+    private DOMSource domSource;
 
     public VIAReader(InputStream is) {
-		this.is = is;	        
+        this.is = is;
+    }
+
+    class FlexNodeList implements NodeList {
+        private List<NodeList> lists = new ArrayList<NodeList>();
+
+        @Override
+        public int getLength() {
+            int len = 0;
+            for (NodeList list : lists) {
+                len += list.getLength();
+            }
+            return len;
+        }
+
+        @Override
+        public Node item(int index) {
+            for (NodeList list : lists) {
+                if (list.getLength() > index) {
+                    return list.item(index);
+                } else {
+                    index -= list.getLength();
+                }
+            }
+            return null;
+        }
+
+        public void add(NodeList list) {
+            lists.add(list);
+        }
     }
 
     public NodeList getNodes() throws ParserConfigurationException, XPathExpressionException, ParserConfigurationException, SAXException, IOException {
-    	Document doc = getDocument(is);
-    	this.domSource = new DOMSource(doc);
-    	NodeList nodes = getNodeList(doc);
-    	return nodes;
+      Document doc = getDocument(is);
+      this.domSource = new DOMSource(doc);
+      NodeList nodes = getNodeList(doc);
+      return nodes;
     }
 
     public DOMSource getDOMSource() throws ParserConfigurationException, SAXException, IOException {
-    	if (this.domSource == null) {
-	    	Document doc = getDocument(is);
-    		this.domSource = new DOMSource(doc);
-    	}
-		return this.domSource;
+      if (this.domSource == null) {
+        Document doc = getDocument(is);
+        this.domSource = new DOMSource(doc);
+      }
+    return this.domSource;
     }
 
-	private Document getDocument (InputStream is) throws ParserConfigurationException, SAXException, IOException {
-	   	Document doc = null;
-		DocumentBuilder builder;
-		try {
-			builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			doc = builder.parse(is);
+  private Document getDocument (InputStream is) throws ParserConfigurationException, SAXException, IOException {
+      Document doc = null;
+    DocumentBuilder builder;
+    try {
+      builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+      doc = builder.parse(is);
 
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-			throw e;
-		} catch (SAXException e) {
-			e.printStackTrace();
-			throw e;
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw e;
-		}
-		return doc;
-	}
-	
-	private NodeList getNodeList (Document doc) throws XPathExpressionException {
+    } catch (ParserConfigurationException e) {
+      e.printStackTrace();
+      throw e;
+    } catch (SAXException e) {
+      e.printStackTrace();
+      throw e;
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw e;
+    }
+    return doc;
+  }
 
-			XPathFactory factory = XPathFactory.newInstance();
-			XPath xpath = factory.newXPath();
-			
-			xpath.setNamespaceContext(new NamespaceContext() {
-			    public String getNamespaceURI(String prefix) {
-			        return prefix.equals("xlink") ? "http://www.w3.org/TR/xlink"  : null;
-			    }
+  private NodeList getNodeList (Document doc) throws XPathExpressionException {
 
-			    public Iterator<?> getPrefixes(String val) {
-			        return null;
-			    }
+      XPathFactory factory = XPathFactory.newInstance();
+      XPath xpath = factory.newXPath();
 
-			    public String getPrefix(String uri) {
-			        return null;
-			    }
-			});
-			
-			Object result = null;
-			XPathExpression componentId = null;
-			try {
-				componentId = xpath.compile("//image/@href|//image/@xlink:href");
-				result = componentId.evaluate(doc, XPathConstants.NODESET);
-			} catch (XPathExpressionException e) {
-				e.printStackTrace();
-				throw e;
-			}
+      xpath.setNamespaceContext(new NamespaceContext() {
+          public String getNamespaceURI(String prefix) {
+              return prefix.equals("xlink") ? "http://www.w3.org/TR/xlink"  : null;
+          }
 
-			NodeList nodes = (NodeList) result;
-			return nodes;
-	}
+          public Iterator<?> getPrefixes(String val) {
+              return null;
+          }
+
+          public String getPrefix(String uri) {
+              return null;
+          }
+      });
+
+      FlexNodeList nodes = new FlexNodeList();
+
+      String[] via2ModsPaths = new String[] {
+          "//work/image",
+          "//work/surrogate",
+          "//work[not(image) and not(surrogate)]",
+          "//group/surrogate",
+          "//group/image",
+          "//group/subwork/surrogate",
+          "//group/subwork/image"
+      };
+
+      try {
+          for(String v2mp : via2ModsPaths) {
+              XPathExpression xpe = xpath.compile(v2mp);
+              nodes.add((NodeList) xpe.evaluate(doc, XPathConstants.NODESET));
+          }
+      } catch (XPathExpressionException e) {
+        e.printStackTrace();
+        throw e;
+      }
+
+      System.out.println(nodes.getLength());
+
+      return nodes;
+  }
 
 }

@@ -4,6 +4,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xpath-default-namespace="urn:isbn:1-931666-22-9"
     version="2.0">
     <xsl:output encoding="UTF-8" method="xml" indent="yes" omit-xml-declaration="yes"/>
     <xsl:strip-space elements="*"/>
@@ -37,6 +38,23 @@
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/@level"/>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//unitid"/>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//container"/>
+            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//language[string-length(@langcode) and string-length(text())]"/>
+
+            <xsl:if test="count(//c[@id=$cid_legacy_or_new]/did//language[string-length(@langcode) and string-length(text())]) &lt; 1">
+              <xsl:element name="language">
+                <xsl:element name="languageTerm">
+                  <xsl:attribute name="authority">iso639-2b</xsl:attribute>
+                  <xsl:attribute name="type">code</xsl:attribute>
+                  <xsl:text>und</xsl:text>
+                </xsl:element>
+                <xsl:element name="languageTerm">
+                  <xsl:attribute name="authority">iso639-2b</xsl:attribute>
+                  <xsl:attribute name="type">text</xsl:attribute>
+                  <xsl:text>Undefined</xsl:text>
+                </xsl:element>
+              </xsl:element>
+            </xsl:if>
+
             <!--<xsl:apply-templates select="//c[@id=$cid_legacy_or_new]//accessrestrict"/>-->
             <!--<xsl:apply-templates select="(//c[@id=$cid_legacy_or_new and not(.//accessrestrict) and ancestor::*//accessrestrict]/ancestor::*//accessrestrict)[position()=1]"/>-->
             <xsl:choose>
@@ -76,7 +94,7 @@
                 </xsl:element>
             </xsl:element>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]"/>
-            <xsl:apply-templates select="/ead/eadheader/profiledesc/langusage" />
+            <!-- <xsl:apply-templates select="/ead/eadheader/profiledesc/langusage" /> -->
         </mods>
     </xsl:template>
 
@@ -239,6 +257,21 @@
             <xsl:if test="p">
                 <xsl:value-of select="p"/>
             </xsl:if>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="language">
+      <xsl:element name="language">
+          <xsl:element name="languageTerm">
+            <xsl:attribute name="authority">iso639-2b</xsl:attribute>
+            <xsl:attribute name="type">code</xsl:attribute>
+            <xsl:value-of select="@langcode" />
+          </xsl:element>
+          <xsl:element name="languageTerm">
+            <xsl:attribute name="authority">iso639-2b</xsl:attribute>
+            <xsl:attribute name="type">text</xsl:attribute>
+            <xsl:value-of select="text()" />
+          </xsl:element>
         </xsl:element>
     </xsl:template>
 

@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mods="http://www.loc.gov/mods/v3"
-    xmlns:usage="http://lib.harvard.edu/usagedata" version="1.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:mods="http://www.loc.gov/mods/v3"
+    xmlns:usage="http://lib.harvard.edu/usagedata"
     xmlns:set="http://hul.harvard.edu/ois/xml/ns/libraryCloud"
     xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
+    xmlns:HarvardRepositories="http://hul.harvard.edu/ois/xml/ns/HarvardRepositories"
     xmlns:tbd="http://lib.harvard.edu/TBD"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:ext="http://exslt.org/common"
+    xmlns:priorrecordids="http://lib.harvard.edu/alephmigration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    exclude-result-prefixes="xs xsi"
+    version="2.0"
     >
 
     <xsl:output indent="yes" encoding="UTF-8"/>
@@ -21,8 +27,8 @@
     <xsl:template match="mods:mods">
         <xsl:element name="doc">
             <xsl:apply-templates select="mods:titleInfo"/>
-            <xsl:apply-templates select="mods:name"/>
-            <xsl:apply-templates select="mods:typeOfResource"/>
+            <xsl:apply-templates select=".//mods:name"/>
+            <xsl:apply-templates select=".//mods:typeOfResource"/>
              <!-- put the isOnline field here to keep grouped with isCollection and isManuscript -->
             <xsl:element name="field">
                 <xsl:attribute name="name">
@@ -37,15 +43,16 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:element>
-            <xsl:apply-templates select="mods:genre"/>
-            <xsl:apply-templates select="mods:originInfo"/>
+            <xsl:apply-templates select=".//mods:genre"/>
+            <xsl:apply-templates select=".//mods:originInfo"/>
+            <xsl:apply-templates select=".//mods:publisher"/>
             <xsl:apply-templates select="mods:language"/>
             <!--<xsl:apply-templates select="mods:physicalDescription"/>-->
             <xsl:apply-templates select="mods:tableOfContents"/>
             <xsl:apply-templates select="mods:abstract"/>
             <!--<xsl:apply-templates select="mods:targetAudience"/>
             <xsl:apply-templates select="mods:note"/>-->
-            <xsl:apply-templates select="mods:subject"/>
+            <xsl:apply-templates select=".//mods:subject"/>
             <xsl:apply-templates select="mods:classification"/>
             <xsl:apply-templates select="mods:identifier"/>
             <xsl:apply-templates select=".//mods:location"/>
@@ -57,7 +64,8 @@
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:systemId"/>
             <xsl:apply-templates select="mods:extension/tbd:digitalFormats/tbd:digitalFormat"/>
             <xsl:apply-templates select="mods:extension/tbd:availableTo"/>
-
+            <xsl:apply-templates select=".//HarvardRepositories:HarvardRepositories"/>
+            <xsl:apply-templates select="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier"/>
             <xsl:choose>
                 <xsl:when test="mods:extension/HarvardDRS:DRSMetadata">
                     <xsl:element name="field">
@@ -113,7 +121,7 @@
                     <xsl:text>url.access.preview</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="mods:location/mods:url[@access='preview']">
+                    <xsl:when test=".//mods:location/mods:url[@access='preview']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -126,7 +134,7 @@
                     <xsl:text>url.access.raw_object</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="mods:location/mods:url[@access='raw object']">
+                    <xsl:when test="..//mods:location/mods:url[@access='raw object']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -225,7 +233,6 @@
 
     <xsl:template match="mods:originInfo">
         <xsl:apply-templates select="mods:place"/>
-        <xsl:apply-templates select="mods:publisher"/>
         <xsl:apply-templates select="mods:dateIssued"/>
         <xsl:apply-templates select="mods:dateCreated"/>
         <xsl:apply-templates select="mods:dateCaptured"/>
@@ -497,16 +504,6 @@
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
-
-        <xsl:if test="@type = 'repository'">
-          <xsl:element name="field">
-            <xsl:attribute name="name">
-              <xsl:text>repository</xsl:text>
-            </xsl:attribute>
-            <xsl:value-of select="normalize-space(.)"/>
-          </xsl:element>
-        </xsl:if>
-
     </xsl:template>
 
     <xsl:template match="mods:shelfLocator">
@@ -549,6 +546,15 @@
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>recordIdentifier</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>priorRecordIdentifier</xsl:text>
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
@@ -708,6 +714,19 @@
         <xsl:apply-templates/>
     </xsl:template>
 
+    <xsl:template match="HarvardRepositories:HarvardRepositories">
+      <xsl:for-each select="HarvardRepositories:HarvardRepository">
+      <xsl:element name="field">
+        <xsl:attribute name="name">
+          <xsl:text>repository</xsl:text>
+        </xsl:attribute>
+        <xsl:value-of select="normalize-space(.)"/>
+      </xsl:element>
+      </xsl:for-each>
+    </xsl:template>
+
+
+
     <!--
     <xsl:template match="HarvardDRS:inDRS">
         <xsl:element name="field">
@@ -775,12 +794,14 @@
     </xsl:template>
 
     <xsl:template match="HarvardDRS:lastModifiedDate">
+      <xsl:if test='matches(., "\d{4}")' >
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>_lastModifiedDate</xsl:text>
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
+      </xsl:if>
     </xsl:template>
 
     <xsl:template match="HarvardDRS:fileDeliveryURL">
@@ -823,11 +844,11 @@
       <xsl:param name="position" select="1" />
 
       <!-- <xsl:message>buildDateRangeParams: -->
-      <!-- <xsl:value-of select="$lowDate"/> -\-\- -->
-      <!-- <xsl:value-of select="$highDate"/> -\-\- -->
-      <!-- <xsl:value-of select="$startFound"/> -\-\- -->
-      <!-- <xsl:value-of select="$endFound" /> -\-\- -->
-      <!-- <xsl:value-of select="$position" /> -\-\- -->
+      <!-- Low: <xsl:value-of select="$lowDate"/> -\-\- -->
+      <!-- High: <xsl:value-of select="$highDate"/> -\-\- -->
+      <!-- Start Found: <xsl:value-of select="$startFound"/> -\-\- -->
+      <!-- End Found: <xsl:value-of select="$endFound" /> -\-\- -->
+      <!-- Node: <xsl:value-of select="$position" /> -\-\- -->
       <!-- </xsl:message> -->
 
       <xsl:choose>
@@ -929,8 +950,8 @@
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="formatDateRange">
-            <xsl:with-param name="lowDate" select="$lowDate" />
-            <xsl:with-param name="highDate" select="$highDate" />
+            <xsl:with-param name="lowDate" select="string($lowDate)" />
+            <xsl:with-param name="highDate" select="string($highDate)" />
           </xsl:call-template>
         </xsl:otherwise>
       </xsl:choose>
@@ -953,6 +974,12 @@
             <xsl:with-param name="highDate" select="substring($highDate, 2)" />
           </xsl:call-template>
         </xsl:when>
+        <xsl:when test="string-length($lowDate) = 4 and string-length($highDate) = 2">
+          <xsl:call-template name="formatDateRange">
+            <xsl:with-param name="lowDate" select="$lowDate" />
+            <xsl:with-param name="highDate" select="concat(substring($lowDate, 1, 2), $highDate)" />
+          </xsl:call-template>
+        </xsl:when>
         <xsl:when test="string-length($lowDate) > 0 and string-length($highDate) > 0">
           <xsl:value-of select="concat('[', string($lowDate), ' TO ', string($highDate), ']')" />
         </xsl:when>
@@ -969,6 +996,12 @@
       <xsl:choose>
         <xsl:when test="$brake &gt; 1000">
           <xsl:message>breaking out of loop: normalizeDate</xsl:message>
+        </xsl:when>
+        <xsl:when test='matches($dateStringInput, "\d{4}-\d{1,2}-\d{1,2}/\d{4}-\d{1,2}-\d{1,2}")'>
+          <xsl:value-of select='concat(substring($dateStringInput, 1, 4), "_", substring(substring-after($dateStringInput, "/"), 1, 4))' />
+        </xsl:when>
+        <xsl:when test='matches($dateStringInput, "\d{3}u") and string-length($dateStringInput) = 4'>
+          <xsl:value-of select="translate($dateStringInput, 'u', '0')" />
         </xsl:when>
         <xsl:when test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d?u{3}u?") and string-length($dateStringInput) = 4'>
         </xsl:when>
@@ -1149,7 +1182,7 @@
     <xsl:template name="findLowDate">
       <xsl:param name="dateString" />
       <xsl:param name="lowDate" select="100000"/>
-
+      <xsl:message><xsl:value-of select="$dateString" /></xsl:message>
       <xsl:choose>
       <xsl:when test="string-length($dateString) &gt; 0">
         <xsl:call-template name="findLowDate">

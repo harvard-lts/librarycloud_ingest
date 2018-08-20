@@ -58,15 +58,32 @@ class VIAComponentIteratorTests {
 
     private Document mods;
 
-    @BeforeAll
-    void setup() throws Exception {
-        InputStream is = new FileInputStream(this.getClass().getResource("/sample-via-1.xml").getFile());
-
+    private Document transform(String filename) throws Exception {
+        InputStream is = new FileInputStream(this.getClass().getResource(filename).getFile());
         VIAReader r = new VIAReader(is);
         Iterator i = new VIAComponentIterator(r);
         String lcmString = (String) i.next();
         LibCommMessage lcm = TestMessageUtils.unmarshalLibCommMessage(IOUtils.toInputStream(lcmString, "UTF-8"));
-        mods = TestHelpers.extractXmlDoc(lcm);
+        //System.out.println("LCM :"+lcm.getPayload().getData());
+        Document mods = TestHelpers.extractXmlDoc(lcm);
+        return mods;
+    }
+
+    private int transformAndCountMods(String filename) throws Exception {
+        InputStream is = new FileInputStream(this.getClass().getResource(filename).getFile());
+        VIAReader r = new VIAReader(is);
+        Iterator i = new VIAComponentIterator(r);
+        int count = 0;
+        while(i.hasNext()) {
+            String foo = (String) i.next();
+            count = count+1;
+        }
+        return count;
+    }
+
+    @BeforeAll
+    void setup() throws Exception {
+        mods = transform("/sample-via-2.xml");
     }
 
 
@@ -86,4 +103,40 @@ class VIAComponentIteratorTests {
         assertEquals("creator", roleTerm1);
         assertEquals("architect", roleTerm2);
     }
+
+
+    // LTSCLOUD-720
+    // If a <work> has neither a <surrogate> nor a child <image>,
+    // create one MODS record.
+    @Test
+    void LTCLOUD720Test1() throws Exception {
+        int modsCount = transformAndCountMods("/sample-via-2.xml");
+        assertEquals(1, modsCount);
+    }
+
+    // LTSCLOUD-720
+    // If a <work> has either a single <surrogate> or a single child
+    // <image>, create one MODS record.
+    @Test
+    void LTCLOUD720Test2() throws Exception {
+        int modsCount = transformAndCountMods("/sample-via-3.xml");
+        assertEquals(1, modsCount);
+    }
+
+    // If a <work> has >1 (<surrogate> and/or child <image>), create
+    // a MODS record for every <surrogate> and every child <image>.
+    @Test
+    void LTCLOUD720Test3() throws Exception {
+        int modsCount = transformAndCountMods("/sample-via-4.xml");
+        assertEquals(3, modsCount);
+    }
+
+    // Treat group/surrogate|image like work/surrogate|image
+    // Treat group/subwork/surrogate|image like work/surrogate|image
+    @Test
+    void LTCLOUD720Test4() throws Exception {
+        int modsCount = transformAndCountMods("/sample-via-5.xml");
+        assertEquals(3, modsCount);
+    }
+
 }

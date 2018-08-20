@@ -1,4 +1,4 @@
-<xsl:stylesheet xmlns="http://www.loc.gov/mods/v3" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:countries="info:lc/xmlns/codelist-v1" exclude-result-prefixes="xlink marc" version="1.0">
+<xsl:stylesheet xmlns="http://www.loc.gov/mods/v3" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:countries="info:lc/xmlns/codelist-v1" exclude-result-prefixes="xlink marc countries" version="1.0">
   <!--<xsl:include href="http://www.loc.gov/standards/marcxml/xslt/MARC21slimUtils.xsl"/>-->
   <xsl:include href="src/main/resources/MARC21slimUtils.xsl"/>
   <xsl:output encoding="UTF-8" indent="yes" method="xml"  omit-xml-declaration="yes"/>
@@ -2961,6 +2961,15 @@
         </languageOfCataloging>
       </xsl:for-each>
     </recordInfo>
+    <relatedItem otherType="HOLLIS record">
+      <location>
+        <url>
+          <xsl:text>http://id.lib.harvard.edu/aleph/</xsl:text>
+          <xsl:value-of select="substring-before(marc:controlfield[@tag=001],'-')"/>
+          <xsl:text>/catalog</xsl:text>
+        </url>
+      </location>
+    </relatedItem>
   </xsl:template>
 
   <xsl:template name="displayForm">

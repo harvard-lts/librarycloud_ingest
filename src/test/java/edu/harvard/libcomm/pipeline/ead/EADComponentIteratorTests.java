@@ -57,33 +57,35 @@ import edu.harvard.libcomm.test.TestMessageUtils;
 class EADComponentIteratorTests {
 
     private Document mods;
+    private Iterator i;
 
     @BeforeAll
     void setup() throws Exception {
         InputStream is = new FileInputStream(this.getClass().getResource("/sample-oasis-ead.xml").getFile());
 
         EADReader r = new EADReader(is);
-        Iterator i = new EADComponentIterator(r);
+        i = new EADComponentIterator(r);
         String lcmString = (String) i.next();
         LibCommMessage lcm = TestMessageUtils.unmarshalLibCommMessage(IOUtils.toInputStream(lcmString, "UTF-8"));
         mods = TestHelpers.extractXmlDoc(lcm);
-        String xml = lcm.getPayload().getData();
-        System.out.println(xml);
     }
+
 
     @Test
     void useResourceLanguageCode() throws Exception {
         String languageCode = TestHelpers.getXPath("//mods:languageTerm[@type='code']", mods);
         String languageText = TestHelpers.getXPath("//mods:languageTerm[@type='text']", mods);
-        assertEquals("eng", languageCode);
-        assertEquals("English", languageText);
+        assertEquals("fre", languageCode);
+        assertEquals("French", languageText);
     }
+
 
     @Test // LTSCLOUD-697
     void buildModsDateCreated() throws Exception {
         String dateCreated = TestHelpers.getXPath("//mods:originInfo/mods:dateCreated", mods);
         assertEquals("1848-11-07/1849-07-30", dateCreated);
     }
+
 
     @Test // LTSCLOUD-619
     void buildModsRoleTerm() throws Exception {
@@ -92,5 +94,29 @@ class EADComponentIteratorTests {
 
         assertEquals("originator", roleTerm1);
         assertEquals("creator", roleTerm2);
+    }
+
+
+    @Test // LTSCLOUD-754
+    void languageCodeForComponents() throws Exception {
+        String lcmString = (String) i.next();
+        LibCommMessage lcm = TestMessageUtils.unmarshalLibCommMessage(IOUtils.toInputStream(lcmString, "UTF-8"));
+
+        Document componentMods = TestHelpers.extractXmlDoc(lcm);
+
+        String languageCode = TestHelpers.getXPath("//mods:languageTerm[@type='code']", componentMods);
+        assertEquals("und", languageCode);
+    }
+
+    @Test
+    void properEadNamespace() throws Exception {
+        InputStream is = new FileInputStream(this.getClass().getResource("/fal00001.xml").getFile());
+        EADReader r = new EADReader(is);
+        Iterator i = new EADComponentIterator(r);
+        String lcmString = (String) i.next();
+        LibCommMessage lcm = TestMessageUtils.unmarshalLibCommMessage(IOUtils.toInputStream(lcmString, "UTF-8"));
+        Document mods = TestHelpers.extractXmlDoc(lcm);
+        String languageCode = TestHelpers.getXPath("//mods:languageTerm[@type='code']", mods);
+        assertEquals("und", languageCode);
     }
 }
