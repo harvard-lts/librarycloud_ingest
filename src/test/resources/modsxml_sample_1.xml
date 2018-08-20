@@ -208,5 +208,14 @@
          </sonofnotarealmodstag>
      </notarealmodstag>
    </mods>
-
+   <mods>
+     <titleInfo><title>dateFail</title></titleInfo>
+     <originInfo>
+       <dateCreated>1936-8-31/1944-10-29</dateCreated>
+       <dateCreated>1930/1969</dateCreated>
+       <dateCreated>1930/2010</dateCreated>
+       <dateCreated>1920/2000</dateCreated>
+       <dateCreated>1925/2009</dateCreated>
+     </originInfo>
+   </mods>
 </modsCollection>

@@ -844,11 +844,11 @@
       <xsl:param name="position" select="1" />
 
       <!-- <xsl:message>buildDateRangeParams: -->
-      <!-- <xsl:value-of select="$lowDate"/> -\-\- -->
-      <!-- <xsl:value-of select="$highDate"/> -\-\- -->
-      <!-- <xsl:value-of select="$startFound"/> -\-\- -->
-      <!-- <xsl:value-of select="$endFound" /> -\-\- -->
-      <!-- <xsl:value-of select="$position" /> -\-\- -->
+      <!-- Low: <xsl:value-of select="$lowDate"/> -\-\- -->
+      <!-- High: <xsl:value-of select="$highDate"/> -\-\- -->
+      <!-- Start Found: <xsl:value-of select="$startFound"/> -\-\- -->
+      <!-- End Found: <xsl:value-of select="$endFound" /> -\-\- -->
+      <!-- Node: <xsl:value-of select="$position" /> -\-\- -->
       <!-- </xsl:message> -->
 
       <xsl:choose>
@@ -997,8 +997,8 @@
         <xsl:when test="$brake &gt; 1000">
           <xsl:message>breaking out of loop: normalizeDate</xsl:message>
         </xsl:when>
-        <xsl:when test='matches($dateStringInput, "\d{4}-\d{2}-\d{2}/\d{4}-\d{2}-\d{2}") and string-length($dateStringInput) = 21'>
-          <xsl:value-of select='concat(substring($dateStringInput, 1, 4), "_", substring($dateStringInput, 12, 4))' />
+        <xsl:when test='matches($dateStringInput, "\d{4}-\d{1,2}-\d{1,2}/\d{4}-\d{1,2}-\d{1,2}")'>
+          <xsl:value-of select='concat(substring($dateStringInput, 1, 4), "_", substring(substring-after($dateStringInput, "/"), 1, 4))' />
         </xsl:when>
         <xsl:when test='matches($dateStringInput, "\d{3}u") and string-length($dateStringInput) = 4'>
           <xsl:value-of select="translate($dateStringInput, 'u', '0')" />
@@ -1182,7 +1182,7 @@
     <xsl:template name="findLowDate">
       <xsl:param name="dateString" />
       <xsl:param name="lowDate" select="100000"/>
-
+      <xsl:message><xsl:value-of select="$dateString" /></xsl:message>
       <xsl:choose>
       <xsl:when test="string-length($dateString) &gt; 0">
         <xsl:call-template name="findLowDate">
