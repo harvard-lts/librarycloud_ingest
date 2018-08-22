@@ -12,13 +12,8 @@
 	<xsl:param name="urn"/>
 	<xsl:template match="/viaRecord">
 		<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd">
-			<xsl:if test="@numberOfSubworks = '0'">
-				<xsl:apply-templates select="work"/>
-			</xsl:if>
-			<xsl:if test="(@numberOfSubworks > 0 or @numberOfSurrogates > 0)">
-				<xsl:apply-templates select="group"/>
-			</xsl:if>
+			xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+			<xsl:apply-templates/>
 			<xsl:variable name="urnsuffix">
 				<xsl:choose>
 					<xsl:when test="work/surrogate/image[contains(@href, $urn)]">
@@ -698,5 +693,7 @@
 			<xsl:value-of select="."/>
 		</accessCondition>
 	</xsl:template>
+	
+	<xsl:template match="admin"/>
 
 </xsl:stylesheet>
