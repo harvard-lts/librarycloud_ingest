@@ -23,23 +23,23 @@ public class VIARawComponentIterator extends VIAComponentIterator {
         super(reader);
     }
 
-    @Override
-    public String next() {
-    	log.trace("Processing node " + position + " of " + nodes.getLength());
-        String viaComponentMods = "";
-    	while ((nodes != null) && (position < nodes.getLength())) {
-	        String nodeName = nodes.item(position).getNodeName();
-	        String nodeValue = nodes.item(position).getNodeValue();
-	        position++;
-			try {
-				viaComponentMods += transformVIA(nodeValue);
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new NoSuchElementException();
-			}
-            break;
-    	}
-        return viaComponentMods;
-	}
+  //   @Override
+  //   public String next() {
+  //   	log.trace("Processing node " + position + " of " + nodes.getLength());
+  //       String viaComponentMods = "";
+  //   	while ((nodes != null) && (position < nodes.getLength())) {
+	//         String nodeName = nodes.item(position).getNodeName();
+	//         String nodeValue = nodes.item(position).getNodeValue();
+	//         position++;
+	// 		try {
+	// 			viaComponentMods += transformVIA(nodeValue);
+	// 		} catch (Exception e) {
+	// 			e.printStackTrace();
+	// 			throw new NoSuchElementException();
+	// 		}
+  //           break;
+  //   	}
+  //       return viaComponentMods;
+	// }
     
 }

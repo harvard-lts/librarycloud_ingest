@@ -218,4 +218,15 @@
        <dateCreated>1925/2009</dateCreated>
      </originInfo>
    </mods>
+   <mods>
+     <titleInfo><title>redundantStillImage</title></titleInfo>
+     <subject>
+       <typeOfResource manuscript="yes">still image</typeOfResource>
+     </subject>
+     <relatedItem>
+       <subject>
+         <typeOfResource>still image</typeOfResource>
+       </subject>
+     </relatedItem>
+   </mods>
 </modsCollection>

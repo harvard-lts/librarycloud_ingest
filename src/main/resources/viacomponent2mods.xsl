@@ -10,6 +10,7 @@
 	<xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
 	<!--<xsl:param name="urn">http://nrs.harvard.edu/urn-3:FHCL:1154698</xsl:param>-->
 	<xsl:param name="urn"/>
+  <xsl:param name="suffix" />
 	<xsl:template match="/viaRecord">
 		<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd">
@@ -21,6 +22,9 @@
 			</xsl:if>
 			<xsl:variable name="urnsuffix">
 				<xsl:choose>
+          <xsl:when test="string-length($suffix)">
+            <xsl:value-of select="$suffix" />
+          </xsl:when>
 					<xsl:when test="work/surrogate/image[contains(@href, $urn)]">
 						<xsl:value-of
 							select="work/surrogate/image[contains(@href, $urn)]/../@componentID"/>
@@ -35,6 +39,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
+
 			<relatedItem otherType="HOLLIS Images record">
 				<location>
 					<url>
@@ -82,8 +87,6 @@
 			</recordInfo>
       <language>
         <languageTerm type="code">zxx</languageTerm>
-      </language>
-      <language>
         <languageTerm type="text">No linguistic content</languageTerm>
       </language>
 		</mods>
@@ -126,17 +129,7 @@
 	</xsl:template>
 
 	<xsl:template match="surrogate">
-		<xsl:if test="contains(image/@href, $urn)">
-			<relatedItem type="constituent">
-				<xsl:call-template name="recordElements"/>
-				<recordInfo>
-					<recordIdentifier>
-						<xsl:value-of select="@componentID"/>
-					</recordIdentifier>
-				</recordInfo>
-			</relatedItem>
-		</xsl:if>
-		<xsl:if test="contains(image/@xlink:href, $urn)">
+		<xsl:if test="string-length($urn) and contains(image/@href, $urn)">
 			<relatedItem type="constituent">
 				<xsl:call-template name="recordElements"/>
 				<recordInfo>

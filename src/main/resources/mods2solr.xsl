@@ -143,6 +143,42 @@
                 </xsl:choose>
             </xsl:element>
 
+            <xsl:for-each select="distinct-values(//mods:typeOfResource/text())">
+              <xsl:element name="field">
+                <xsl:attribute name="name">
+                  <xsl:text>resourceType</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(.)"/>
+              </xsl:element>
+            </xsl:for-each>
+
+            <xsl:element name="field">
+              <xsl:attribute name="name">
+                <xsl:text>isManuscript</xsl:text>
+              </xsl:attribute>
+              <xsl:choose>
+                <xsl:when test="//mods:typeOfResource[@manuscript='yes']">
+                  <xsl:text>true</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:text>false</xsl:text>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:element>
+            <xsl:element name="field">
+              <xsl:attribute name="name">
+                <xsl:text>isCollection</xsl:text>
+              </xsl:attribute>
+              <xsl:choose>
+                <xsl:when test="//mods:typeOfResource[@collection='yes']">
+                  <xsl:text>true</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:text>false</xsl:text>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:element>
+
         </xsl:element>
     </xsl:template>
 
@@ -187,40 +223,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="mods:typeOfResource">
-        <xsl:element name="field">
-            <xsl:attribute name="name">
-                <xsl:text>resourceType</xsl:text>
-            </xsl:attribute>
-            <xsl:value-of select="normalize-space(.)"/>
-        </xsl:element>
-        <xsl:element name="field">
-            <xsl:attribute name="name">
-                <xsl:text>isManuscript</xsl:text>
-            </xsl:attribute>
-            <xsl:choose>
-                <xsl:when test="@manuscript='yes'">
-                    <xsl:text>true</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:text>false</xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:element>
-        <xsl:element name="field">
-            <xsl:attribute name="name">
-                <xsl:text>isCollection</xsl:text>
-            </xsl:attribute>
-            <xsl:choose>
-                <xsl:when test="@collection='yes'">
-                    <xsl:text>true</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:text>false</xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:element>
-    </xsl:template>
+    <xsl:template match="mods:typeOfResource" />
 
     <xsl:template match="mods:genre">
         <xsl:element name="field">
@@ -1182,7 +1185,6 @@
     <xsl:template name="findLowDate">
       <xsl:param name="dateString" />
       <xsl:param name="lowDate" select="100000"/>
-      <xsl:message><xsl:value-of select="$dateString" /></xsl:message>
       <xsl:choose>
       <xsl:when test="string-length($dateString) &gt; 0">
         <xsl:call-template name="findLowDate">
