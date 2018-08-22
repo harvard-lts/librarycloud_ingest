@@ -569,7 +569,7 @@
 
                     <split streaming="true" parallelProcessing="true">
                         <method bean="viaRawSplitter" method="split"/>
-                        <aggregate strategyRef="modsVIARawAggregator" completionSize="100" completionInterval="10000">
+                        <aggregate strategyRef="modsAggregator" completionSize="100" completionInterval="10000">
                             <correlationExpression>
                                 <simple>all</simple>
                             </correlationExpression>

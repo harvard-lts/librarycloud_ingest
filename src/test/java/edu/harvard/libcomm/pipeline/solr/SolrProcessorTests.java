@@ -245,4 +245,16 @@ class SolrProcessorTests {
 
     }
 
+    @Test
+    void dontBeRedundant() throws Exception {
+        Number nodeCount1 = TestHelpers.getNodeCount("//doc[field[@name='title'] = 'redundantStillImage']//field[@name='resourceType']", solrDoc);
+        Number nodeCount2 = TestHelpers.getNodeCount("//doc[field[@name='title'] = 'redundantStillImage']//field[@name='isManuscript']", solrDoc);
+
+        assertEquals(1.0, nodeCount1);
+        assertEquals(1.0, nodeCount2);
+
+        String isManuscript = TestHelpers.getXPath("//doc[field[@name='title'] = 'redundantStillImage']//field[@name='isManuscript']", solrDoc);
+        assertEquals("true", isManuscript);
+    }
+
 }
