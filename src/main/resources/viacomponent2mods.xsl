@@ -17,21 +17,23 @@
 			<xsl:apply-templates/>
 			<xsl:variable name="urnsuffix">
 				<xsl:choose>
-          <xsl:when test="string-length($suffix)">
-            <xsl:value-of select="$suffix" />
-          </xsl:when>
-					<xsl:when test="work/surrogate/image[contains(@href, $urn)]">
+					<xsl:when test="string-length($urn) and work/surrogate/image[contains(@href, $urn)]">
 						<xsl:value-of
 							select="work/surrogate/image[contains(@href, $urn)]/../@componentID"/>
 					</xsl:when>
-					<xsl:when test="work/surrogate/image[contains(@xlink:href, $urn)]">
+					<xsl:when test="string-length($urn) and work/surrogate/image[contains(@xlink:href, $urn)]">
 						<xsl:value-of
 							select="work/surrogate/image[contains(@xlink:href, $urn)]/../@componentID"
 						/>
 					</xsl:when>
-					<xsl:otherwise>
+					<xsl:when test="string-length($urn)">
 						<xsl:value-of select="substring-after($urn, 'edu/')"/>
-					</xsl:otherwise>
+          </xsl:when>
+          <xsl:when test="string-length($suffix)">
+            <xsl:value-of select="$suffix" />
+          </xsl:when>
+          <xsl:otherwise>
+          </xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
 

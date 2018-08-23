@@ -50,17 +50,21 @@ public class VIAComponentIterator implements Iterator<String> {
         String viaComponentMods = "";
       while ((nodes != null) && (position < nodes.getLength())) {
           String nodeName = nodes.item(position).getNodeName();
-          String nodeValue = nodes.item(position).getNodeValue();
           NamedNodeMap atts = nodes.item(position).getAttributes();
+          Node xlinkAttr = atts.getNamedItem("xlink:href");
           Node componentIDAttr = atts.getNamedItem("componentID");
+          String urn = "";
           String componentID = "";
+          if(xlinkAttr != null) {
+              urn = xlinkAttr.getNodeValue();
+          }
           if(componentIDAttr != null) {
               componentID = componentIDAttr.getNodeValue();
           }
 
           position++;
           try {
-              viaComponentMods += transformVIA(nodeValue, componentID);
+              viaComponentMods += transformVIA(urn, componentID);
           } catch (Exception e) {
               e.printStackTrace();
               throw new NoSuchElementException();

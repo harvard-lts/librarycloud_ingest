@@ -64,7 +64,7 @@ class VIAComponentIteratorTests {
         Iterator i = new VIAComponentIterator(r);
         String lcmString = (String) i.next();
         LibCommMessage lcm = TestMessageUtils.unmarshalLibCommMessage(IOUtils.toInputStream(lcmString, "UTF-8"));
-        //System.out.println("LCM :"+lcm.getPayload().getData());
+        System.out.println("LCM :"+lcm.getPayload().getData());
         Document mods = TestHelpers.extractXmlDoc(lcm);
         return mods;
     }
@@ -139,4 +139,10 @@ class VIAComponentIteratorTests {
         assertEquals(3, modsCount);
     }
 
+    @Test
+    void W166800Test() throws Exception {
+        Document mods1 = transform("/W166800.xml");
+        String recId = TestHelpers.getXPath("/mods:mods/mods:recordInfo/mods:recordIdentifier", mods1);
+        assertEquals("W166800_urn-3:FHCL.HOUGH:37205626", recId);
+    }
 }
