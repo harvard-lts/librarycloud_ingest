@@ -145,4 +145,11 @@ class VIAComponentIteratorTests {
         String recId = TestHelpers.getXPath("/mods:mods/mods:recordInfo/mods:recordIdentifier", mods1);
         assertEquals("W166800_urn-3:FHCL.HOUGH:37205626", recId);
     }
+
+    @Test //olvwork165410.xml
+    void olvwork165410Test() throws Exception {
+        Document mods1 = transform("/olvwork165410.xml");
+        String recId = TestHelpers.getXPath("/mods:mods/mods:recordInfo/mods:recordIdentifier", mods1);
+        assertEquals("W165410", recId);
+    }
 }

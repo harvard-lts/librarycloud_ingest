@@ -75,8 +75,10 @@
 							<xsl:value-of select="recordId"/>
 						</xsl:otherwise>
 					</xsl:choose>
-					<xsl:text>_</xsl:text>
-					<xsl:value-of select="$urnsuffix"/>
+          <xsl:if test="string-length($urnsuffix)">
+					  <xsl:text>_</xsl:text>
+					  <xsl:value-of select="$urnsuffix"/>
+          </xsl:if>
 				</recordIdentifier>
 				<languageOfCataloging>
 					<languageTerm>eng</languageTerm>
