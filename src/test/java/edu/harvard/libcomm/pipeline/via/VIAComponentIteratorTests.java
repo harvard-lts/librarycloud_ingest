@@ -153,10 +153,13 @@ class VIAComponentIteratorTests {
         assertEquals("W165410", recId);
     }
 
-    @Test 
+    @Test
     void olvwork539422Test() throws Exception {
         Document mods1 = transform("/olvwork539422.xml");
         String constituent1Title = TestHelpers.getXPath("/mods:mods/mods:relatedItem[@type='constituent']/mods:titleInfo/mods:title", mods1);
         assertEquals("Total", constituent1Title);
+
+        Number imageUrls = TestHelpers.getNodeCount("/mods:mods/mods:relatedItem[@type='constituent']/mods:location[mods:url[@displayLabel='Full Image']]", mods1);
+        assertEquals(1.0, imageUrls);
     }
 }
