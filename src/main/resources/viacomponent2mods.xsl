@@ -128,7 +128,7 @@
 	</xsl:template>
 
 	<xsl:template match="surrogate">
-		<xsl:if test="string-length($urn) and contains(image/@href, $urn)">
+		<xsl:if test="(string-length($urn) and contains(image/@href, $urn)) or $suffix = @componentID">
 			<relatedItem type="constituent">
 				<xsl:call-template name="recordElements"/>
 				<recordInfo>
