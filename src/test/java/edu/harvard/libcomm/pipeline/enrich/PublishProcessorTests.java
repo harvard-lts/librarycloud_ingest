@@ -151,5 +151,10 @@ class PublishProcessorTests {
 
         String objectInContextURL2 = TestHelpers.getXPath("//mods:mods[3]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Contagion!']/text()", doc);
         assertEquals("http://id.lib.harvard.edu/curiosity/spotlightcollname/123-W280050_urn-3:FHCL:478854", objectInContextURL2);
+
+        // no spotlight link if there's no base url
+        Number objectInContextCount = TestHelpers.getNodeCount("//mods:mods[4]/mods:location[1]/mods:url[@access = 'object in context']", doc);
+        assertEquals(1.0, objectInContextCount);
     }
+
 }

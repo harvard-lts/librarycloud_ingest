@@ -180,12 +180,14 @@
             <url xmlns="http://www.loc.gov/mods/v3" access="object in context" displayLabel="Harvard Digital Collections">http://id.lib.harvard.edu/digital_collections/<xsl:value-of select="$modsRoot//mods:recordInfo/mods:recordIdentifier" /></url>
         </xsl:if>
         <xsl:for-each select="$modsRoot//mods:extension//sets:set">
+          <xsl:if test="string-length(normalize-space(./sets:baseUrl))">
             <url xmlns="http://www.loc.gov/mods/v3" access="object in context">
                 <xsl:attribute name="displayLabel">
                     <xsl:value-of select="sets:setName/text()" />
                 </xsl:attribute>
                 <xsl:value-of select="sets:baseUrl" />-<xsl:value-of select="$modsRoot//mods:recordInfo/mods:recordIdentifier" />
             </url>
+          </xsl:if>
         </xsl:for-each>
     </xsl:template>
 
