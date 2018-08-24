@@ -100,7 +100,7 @@ public class VIAComponentIterator implements Iterator<String> {
 
     protected String transformVIA (String xslParam, String suffixParam) throws Exception {
         this.transformer.setParameter("urn", xslParam);
-        this.transformer.setParameter("suffix", suffixParam);
+        this.transformer.setParameter("nodeComponentID", suffixParam);
     StringWriter writer = new StringWriter();
         StreamResult result = new StreamResult(writer);
         transformer.transform(this.domSource, result);
