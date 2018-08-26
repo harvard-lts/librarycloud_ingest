@@ -47,24 +47,25 @@ import edu.harvard.libcomm.test.TestMessageUtils;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class PublishProcessorTests {
     PublishProcessor p;
+    LibCommMessage lcm;
+    Document doc;
 
     @BeforeAll
-    void setup() {
+    void setup() throws Exception {
         p = new PublishProcessor();
+        lcm = TestHelpers.buildLibCommMessage("mods", "publish-processor-tests-sample-1.xml");
+        p.processMessage(lcm);
+        doc = TestHelpers.extractXmlDoc(lcm);
     }
+
 
     @Test
     void expandRepositoryCodes() throws Exception {
 
-        LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "publish-processor-tests-sample-1.xml");
-
-        p.processMessage(lcm);
-        Document doc = TestHelpers.extractXmlDoc(lcm);
-
-        String repositoryTextChanged = TestHelpers.getXPath("//mods:location[1]/mods:physicalLocation[@type = 'repository']", doc);
-        String displayLabelAdded = TestHelpers.getXPath("//mods:location[1]/mods:physicalLocation[@type = 'repository']/@displayLabel", doc);
-        String extensionValue = TestHelpers.getXPath("//hvd:HarvardRepositories/hvd:HarvardRepository/text()", doc);
-        String valueURI = TestHelpers.getXPath("//mods:location[1]/mods:physicalLocation[@type = 'repository']/@valueURI", doc);
+        String repositoryTextChanged = TestHelpers.getXPath("//mods:mods[1]/mods:location[1]/mods:physicalLocation[@type = 'repository']", doc);
+        String displayLabelAdded = TestHelpers.getXPath("//mods:mods[1]/mods:location[1]/mods:physicalLocation[@type = 'repository']/@displayLabel", doc);
+        String extensionValue = TestHelpers.getXPath("//mods:mods[1]/mods:extension/hvd:HarvardRepositories/hvd:HarvardRepository/text()", doc);
+        String valueURI = TestHelpers.getXPath("//mods:mods[1]/mods:location[1]/mods:physicalLocation[@type = 'repository']/@valueURI", doc);
 
         assertEquals("African and African American Studies Reading Room, Harvard University", repositoryTextChanged);
         assertEquals("Harvard repository", displayLabelAdded);
@@ -76,12 +77,19 @@ class PublishProcessorTests {
     }
 
     @Test
+    void expandRelatedItemRepositoryCodes() throws Exception {
+        String repositoryTextChanged = TestHelpers.getXPath("//mods:mods[1]/mods:relatedItem[1]/mods:location[1]/mods:physicalLocation[@type = 'repository']", doc);
+        String displayLabelAdded = TestHelpers.getXPath("//mods:mods[1]/mods:relatedItem[1]/mods:location[1]/mods:physicalLocation[@type = 'repository']/@displayLabel", doc);
+        String extensionValue = TestHelpers.getXPath("//mods:mods[1]/mods:relatedItem[1]/mods:extension[1]/hvd:HarvardRepositories/hvd:HarvardRepository/text()", doc);
+        String valueURI = TestHelpers.getXPath("//mods:mods[1]/mods:relatedItem[1]/mods:location[1]/mods:physicalLocation[@type = 'repository']/@valueURI", doc);
+        assertEquals("Center for the History of Medicine (Francis A. Countway Library of Medicine)", repositoryTextChanged);
+        assertEquals("Harvard repository", displayLabelAdded);
+        assertEquals("Countway Medicine", extensionValue);
+        assertEquals("http://id.loc.gov/authorities/names/no2011103181", valueURI);
+    }
+
+    @Test
     void mapContentModelToDigitalFormat() throws Exception {
-        LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "publish-processor-tests-sample-1.xml");
-
-        p.processMessage(lcm);
-        Document doc = TestHelpers.extractXmlDoc(lcm);
-
         String digitalFormat = TestHelpers.getXPath("//digitalFormats:digitalFormat[1]", doc);
 
         assertEquals("Books and documents", digitalFormat);
@@ -89,10 +97,6 @@ class PublishProcessorTests {
 
     @Test
     void normalizeAccessFlagToAvailableTo() throws Exception {
-        LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "publish-processor-tests-sample-1.xml");
-
-        p.processMessage(lcm);
-        Document doc = TestHelpers.extractXmlDoc(lcm);
 
         String available1 = TestHelpers.getXPath("//mods:mods[1]/mods:extension/avail:availableTo", doc);
         String available2 = TestHelpers.getXPath("//mods:mods[2]/mods:extension/avail:availableTo", doc);
@@ -128,10 +132,6 @@ class PublishProcessorTests {
     //LTSCLOUD-695 Objects in Context Links
     @Test
     void objectInContextLinksDRS() throws Exception {
-        LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "publish-processor-tests-sample-1.xml");
-
-        p.processMessage(lcm);
-        Document doc = TestHelpers.extractXmlDoc(lcm);
         String objectInContextURL1 = TestHelpers.getXPath("//mods:mods[2]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Harvard Digital Collections']/text()", doc);
         assertEquals("http://id.lib.harvard.edu/digital_collections/W280050_urn-3:FHCL:478854", objectInContextURL1);
 
@@ -142,10 +142,6 @@ class PublishProcessorTests {
     //LTSCLOUD-695 Objects in Context Links
     @Test
     void objectInContextLinksSpotlight() throws Exception {
-        LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "publish-processor-tests-sample-1.xml");
-
-        p.processMessage(lcm);
-        Document doc = TestHelpers.extractXmlDoc(lcm);
         String objectInContextURL1 = TestHelpers.getXPath("//mods:mods[2]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Contagion!']/text()", doc);
         assertEquals("http://id.lib.harvard.edu/curiosity/spotlightcollname/123-W280050_urn-3:FHCL:478854", objectInContextURL1);
 
