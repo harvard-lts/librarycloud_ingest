@@ -26,7 +26,7 @@
 
     <xsl:template match="mods:mods">
         <xsl:element name="doc">
-            <xsl:apply-templates select="mods:titleInfo"/>
+            <xsl:apply-templates select=".//mods:titleInfo"/>
             <xsl:apply-templates select=".//mods:name"/>
             <xsl:apply-templates select=".//mods:typeOfResource"/>
              <!-- put the isOnline field here to keep grouped with isCollection and isManuscript -->
@@ -596,6 +596,7 @@
         <xsl:apply-templates select="mods:recordInfo" mode="relatedItemConstituent"/>
         -->
     </xsl:template>
+
 
     <xsl:template match="mods:titleInfo" mode="relatedItemHost">
         <xsl:element name="field">
