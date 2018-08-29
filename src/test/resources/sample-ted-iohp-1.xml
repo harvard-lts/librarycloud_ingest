@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iohpRecord xmlns:xlink="http://www.w3.org/TR/xlink">
+    <_id>Sanjabi, Karim.25</_id>
+    <admin>
+        <status>Active</status>
+        <createDate>2006-09-20</createDate>
+    </admin>
+    <tape>
+        <indexed>Y</indexed>
+        <narrator>Sanjabi, Karim</narrator>
+        <restriction>None</restriction>
+        <subject>Amirentezam, Abbas</subject>
+        <subject>Bazargan, Mehdi</subject>
+        <subject>Bazargan, Mehdi, during the Last Days of the Pahlavis</subject>
+        <subject>Beheshti, Mohammad-Hossein (Ayatollah Seyyed)</subject>
+        <subject>Brzezinski, Zbigniew</subject>
+        <subject>Carter, Jimmy</subject>
+        <subject>Forouhar, Daryoush</subject>
+        <subject>Gharabaghi, Abbas (Gen.)</subject>
+        <subject>Haghshenas, Jahangir</subject>
+        <subject>Hassibi, Kazem</subject>
+        <subject>Huyser, Robert (Gen.)</subject>
+        <subject>Khomeini, Rouhollah (Ayatollah), in Paris</subject>
+        <subject>Khomeini, Rouhollah (Ayatollah)</subject>
+        <subject>Khomeini, Rouhollah (Ayatollah), Views of</subject>
+        <subject>Khomeini, Ahmad</subject>
+        <subject>Legislative Branch, Proceedings of</subject>
+        <subject>Military</subject>
+        <subject>Montazeri, Hossein-Ali (Ayatollah)</subject>
+        <subject>Motahari, Morteza (Ayatollah)</subject>
+        <subject>Mousavi-Ardebili, Abdolkarim (Ayatollah Seyyed)</subject>
+        <subject>National Front, the Fourth</subject>
+        <subject>Rahimi-Larijani, Mehdi (Gen.)</subject>
+        <subject>Raiis, Saeed</subject>
+        <subject>Regency Council of 1979</subject>
+        <subject>Revolution of 1979, Events preceding the</subject>
+        <subject>Revolutionary Council</subject>
+        <subject>Shah, Character of the</subject>
+        <subject>Shah, Last Months in Iran</subject>
+        <subject>Stempel, John</subject>
+        <subject>Sullivan, William H.</subject>
+        <subject>Tehrani, Jalaleddin (Seyyed)</subject>
+        <subject>United States, Military Relationship with Iran</subject>
+        <subject>United States, Relations with</subject>
+        <subject>Zirakzadeh, Ahmad</subject>
+        <tapeNumber>25</tapeNumber>
+        <pages>15</pages>
+        <digitalAudio>
+            <xlink:show>embed</xlink:show>
+            <!--<xmlns:xlink>http://www.w3.org/TR/xlink</xmlns:xlink>-->
+            <xlink:href>http://nrs.harvard.edu/urn-3:FHCL:2381094</xlink:href>
+        </digitalAudio>
+        <interviewLocation>Chico, CA</interviewLocation>
+        <transliteratedSubject>Amīr Intiẓām, ‘Abbās</transliteratedSubject>
+        <transliteratedSubject>Bāzargān, Mahdī</transliteratedSubject>
+        <transliteratedSubject>Bāzargān, Mahdī, during the Last Days of the
+            Pahlavis</transliteratedSubject>
+        <transliteratedSubject>Bihishtī, Muḥammad-Ḥusayn (Āyat Allāh Sayyid)</transliteratedSubject>
+        <transliteratedSubject>Furūhar, Dāryūsh</transliteratedSubject>
+        <transliteratedSubject>Qarābāghī, ‘Abbās (Gen.)</transliteratedSubject>
+        <transliteratedSubject>Ḥaqqshinās, Jahāngīr</transliteratedSubject>
+        <transliteratedSubject>Ḥāsibī, Kāẓim</transliteratedSubject>
+        <transliteratedSubject>Khumaynī, Rūḥ Allāh (Āyat Allāh), in Paris</transliteratedSubject>
+        <transliteratedSubject>Khumaynī, Rūḥ Allāh (Āyat Allāh)</transliteratedSubject>
+        <transliteratedSubject>Khumaynī, Rūḥ Allāh (Āyat Allāh), Views of</transliteratedSubject>
+        <transliteratedSubject>Khumaynī, Aḥmad</transliteratedSubject>
+        <transliteratedSubject>Muntaẓirī, Ḥusayn-ʻAlī (Āyat Allāh)</transliteratedSubject>
+        <transliteratedSubject>Mūṭahharī, Mūrtiz̤á (Āyat Allāh)</transliteratedSubject>
+        <transliteratedSubject>Mūsavī-Ardabīlī, ‘Abd al-Karīm (Āyat Allāh
+            Sayyid)</transliteratedSubject>
+        <transliteratedSubject>Raḥīmī-Lārījānī, Mahdī (Gen.)</transliteratedSubject>
+        <transliteratedSubject>Raʾīs, Saʻīd</transliteratedSubject>
+        <transliteratedSubject>Shāh, Character of the</transliteratedSubject>
+        <transliteratedSubject>Shāh, Last Months in Iran</transliteratedSubject>
+        <transliteratedSubject>Tihrānī, Jalāl al-Dīn (Sayyid)</transliteratedSubject>
+        <transliteratedSubject>Zīrakʹzādah, Aḥmad</transliteratedSubject>
+        <digitalTranscript>
+            <xlink:show>new</xlink:show>
+            <!--<xmlns:xlink>http://www.w3.org/TR/xlink</xmlns:xlink>-->
+            <xlink:href>http://nrs.harvard.edu/urn-3:FHCL:888500</xlink:href>
+        </digitalTranscript>
+        <tapeLength>1</tapeLength>
+        <narratorSubject>Sanjabi, Karim</narratorSubject>
+        <interviewer>Zia Sedghi</interviewer>
+        <biographicalNote>Son of Ghassem Khan Sardar- Nasser (landowner). University education in
+            law in Paris, civil servant. Professor, Tehran University, Vice dean of Faculty of Law
+            (1943-44), dean of Faculty of Law (1943-44), minister of education (1951), 17th Majles
+            deputy from Kermanshah, leader of the National Front, and minister of foreign affairs
+            (1979). [Shimoni, p. 205.]</biographicalNote>
+        <gender>Male</gender>
+        <narratorTransliterated>Sanjābī, Karīm</narratorTransliterated>
+        <language>Persian</language>
+        <interviewDate>1983-10-21</interviewDate>
+    </tape>
+    <uniqueKey>Sanjabi, Karim.25</uniqueKey>
+</iohpRecord>

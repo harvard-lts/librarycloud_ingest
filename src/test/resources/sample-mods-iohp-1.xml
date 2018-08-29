@@ -1,0 +1,223 @@
+<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd"
+ xmlns="http://www.loc.gov/mods/v3">
+   <name>
+      <namePart>Sanjabi, Karim</namePart>
+      <role>
+         <roleTerm valueURI="http://id.loc.gov/vocabulary/relators/ive">Interviewee</roleTerm>
+      </role>
+   </name>
+   <note type="biographical/historical">Son of Ghassem Khan Sardar- Nasser (landowner). University education in
+            law in Paris, civil servant. Professor, Tehran University, Vice dean of Faculty of Law
+            (1943-44), dean of Faculty of Law (1943-44), minister of education (1951), 17th Majles
+            deputy from Kermanshah, leader of the National Front, and minister of foreign affairs
+            (1979). [Shimoni, p. 205.]</note>
+   <note type="biographical/historical">Male</note>
+   <titleInfo>
+      <partNumber>25</partNumber>
+   </titleInfo>
+   <location displayLabel="Digital Transcript">
+      <url>http://nrs.harvard.edu/urn-3:FHCL:888500</url>
+   </location>
+   <typeOfResource>text</typeOfResource>
+   <physicalDescription>
+      <extent>15 p.</extent>
+      <extent>1</extent>
+   </physicalDescription>
+   <location displayLabel="Digital Audio">
+      <url>http://nrs.harvard.edu/urn-3:FHCL:2381094</url>
+   </location>
+   <typeOfResource>sound recording-nonmusical</typeOfResource>
+   <language>
+      <languageTerm>Persian</languageTerm>
+   </language>
+   <accessCondition type="restriction on access">None</accessCondition>
+   <name>
+      <namePart>Zia Sedghi</namePart>
+      <role>
+         <roleTerm valueURI="http://id.loc.gov/vocabulary/relators/ive">Interviewer</roleTerm>
+      </role>
+   </name>
+   <subject>
+      <topic>Amirentezam, Abbas</topic>
+   </subject>
+   <subject>
+      <topic>Bazargan, Mehdi</topic>
+   </subject>
+   <subject>
+      <topic>Bazargan, Mehdi, during the Last Days of the Pahlavis</topic>
+   </subject>
+   <subject>
+      <topic>Beheshti, Mohammad-Hossein (Ayatollah Seyyed)</topic>
+   </subject>
+   <subject>
+      <topic>Brzezinski, Zbigniew</topic>
+   </subject>
+   <subject>
+      <topic>Carter, Jimmy</topic>
+   </subject>
+   <subject>
+      <topic>Forouhar, Daryoush</topic>
+   </subject>
+   <subject>
+      <topic>Gharabaghi, Abbas (Gen.)</topic>
+   </subject>
+   <subject>
+      <topic>Haghshenas, Jahangir</topic>
+   </subject>
+   <subject>
+      <topic>Hassibi, Kazem</topic>
+   </subject>
+   <subject>
+      <topic>Huyser, Robert (Gen.)</topic>
+   </subject>
+   <subject>
+      <topic>Khomeini, Rouhollah (Ayatollah), in Paris</topic>
+   </subject>
+   <subject>
+      <topic>Khomeini, Rouhollah (Ayatollah)</topic>
+   </subject>
+   <subject>
+      <topic>Khomeini, Rouhollah (Ayatollah), Views of</topic>
+   </subject>
+   <subject>
+      <topic>Khomeini, Ahmad</topic>
+   </subject>
+   <subject>
+      <topic>Legislative Branch, Proceedings of</topic>
+   </subject>
+   <subject>
+      <topic>Military</topic>
+   </subject>
+   <subject>
+      <topic>Montazeri, Hossein-Ali (Ayatollah)</topic>
+   </subject>
+   <subject>
+      <topic>Motahari, Morteza (Ayatollah)</topic>
+   </subject>
+   <subject>
+      <topic>Mousavi-Ardebili, Abdolkarim (Ayatollah Seyyed)</topic>
+   </subject>
+   <subject>
+      <topic>National Front, the Fourth</topic>
+   </subject>
+   <subject>
+      <topic>Rahimi-Larijani, Mehdi (Gen.)</topic>
+   </subject>
+   <subject>
+      <topic>Raiis, Saeed</topic>
+   </subject>
+   <subject>
+      <topic>Regency Council of 1979</topic>
+   </subject>
+   <subject>
+      <topic>Revolution of 1979, Events preceding the</topic>
+   </subject>
+   <subject>
+      <topic>Revolutionary Council</topic>
+   </subject>
+   <subject>
+      <topic>Shah, Character of the</topic>
+   </subject>
+   <subject>
+      <topic>Shah, Last Months in Iran</topic>
+   </subject>
+   <subject>
+      <topic>Stempel, John</topic>
+   </subject>
+   <subject>
+      <topic>Sullivan, William H.</topic>
+   </subject>
+   <subject>
+      <topic>Tehrani, Jalaleddin (Seyyed)</topic>
+   </subject>
+   <subject>
+      <topic>United States, Military Relationship with Iran</topic>
+   </subject>
+   <subject>
+      <topic>United States, Relations with</topic>
+   </subject>
+   <subject>
+      <topic>Zirakzadeh, Ahmad</topic>
+   </subject>
+   <subject>
+      <topic>Amīr Intiẓām, ‘Abbās</topic>
+   </subject>
+   <subject>
+      <topic>Bāzargān, Mahdī</topic>
+   </subject>
+   <subject>
+      <topic>Bāzargān, Mahdī, during the Last Days of the
+            Pahlavis</topic>
+   </subject>
+   <subject>
+      <topic>Bihishtī, Muḥammad-Ḥusayn (Āyat Allāh Sayyid)</topic>
+   </subject>
+   <subject>
+      <topic>Furūhar, Dāryūsh</topic>
+   </subject>
+   <subject>
+      <topic>Qarābāghī, ‘Abbās (Gen.)</topic>
+   </subject>
+   <subject>
+      <topic>Ḥaqqshinās, Jahāngīr</topic>
+   </subject>
+   <subject>
+      <topic>Ḥāsibī, Kāẓim</topic>
+   </subject>
+   <subject>
+      <topic>Khumaynī, Rūḥ Allāh (Āyat Allāh), in Paris</topic>
+   </subject>
+   <subject>
+      <topic>Khumaynī, Rūḥ Allāh (Āyat Allāh)</topic>
+   </subject>
+   <subject>
+      <topic>Khumaynī, Rūḥ Allāh (Āyat Allāh), Views of</topic>
+   </subject>
+   <subject>
+      <topic>Khumaynī, Aḥmad</topic>
+   </subject>
+   <subject>
+      <topic>Muntaẓirī, Ḥusayn-ʻAlī (Āyat Allāh)</topic>
+   </subject>
+   <subject>
+      <topic>Mūṭahharī, Mūrtiz̤á (Āyat Allāh)</topic>
+   </subject>
+   <subject>
+      <topic>Mūsavī-Ardabīlī, ‘Abd al-Karīm (Āyat Allāh
+            Sayyid)</topic>
+   </subject>
+   <subject>
+      <topic>Raḥīmī-Lārījānī, Mahdī (Gen.)</topic>
+   </subject>
+   <subject>
+      <topic>Raʾīs, Saʻīd</topic>
+   </subject>
+   <subject>
+      <topic>Shāh, Character of the</topic>
+   </subject>
+   <subject>
+      <topic>Shāh, Last Months in Iran</topic>
+   </subject>
+   <subject>
+      <topic>Tihrānī, Jalāl al-Dīn (Sayyid)</topic>
+   </subject>
+   <subject>
+      <topic>Zīrakʹzādah, Aḥmad</topic>
+   </subject>
+   <subject>
+      <name>
+         <namePart>Sanjabi, Karim</namePart>
+      </name>
+   </subject>
+   <subject>
+      <name>
+         <namePart>Sanjābī, Karīm</namePart>
+      </name>
+   </subject>
+   <recordInfo>
+        
+        <recordCreationDate>2006-09-20</recordCreationDate>
+      <recordIdentifier source="MH:TED">Sanjabi, Karim.25</recordIdentifier>
+   </recordInfo>
+</mods>
