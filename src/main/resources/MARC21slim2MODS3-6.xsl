@@ -4649,7 +4649,7 @@
   <!-- name 700 710 711 720 -->
 
   <xsl:template name="createNameFrom700">
-    <xsl:if test="@ind1='1'">
+    <xsl:if test="@ind1='0' or @ind1='1'">
       <name type="personal">
         <xsl:call-template name="xxx880"/>
         <xsl:call-template name="nameABCDQ"/>
@@ -5277,7 +5277,6 @@
       <xsl:call-template name="xxx880"/>
       <xsl:call-template name="subjectAuthority"/>
       <name type="personal">
-        <xsl:call-template name="termsOfAddress"/>
         <namePart>
           <xsl:call-template name="chopPunctuation">
             <xsl:with-param name="chopString">
@@ -5287,6 +5286,7 @@
             </xsl:with-param>
           </xsl:call-template>
         </namePart>
+        <xsl:call-template name="termsOfAddress"/>
         <xsl:call-template name="nameDate"/>
         <xsl:call-template name="affiliation"/>
         <xsl:call-template name="role"/>
