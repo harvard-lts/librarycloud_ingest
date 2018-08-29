@@ -161,7 +161,7 @@ class SolrProcessorTests {
     void buildRelatedItem() throws Exception {
         String relatedItem = (String) xPath.compile("//doc[field[@name='title'] = 'relatedItemTest']//field[@name='relatedItem'][1]").evaluate(solrDoc, XPathConstants.STRING);
 
-        assertEquals("Musique ; 1", relatedItem);
+        assertEquals("TITLE SUBTITLE 3 PARTNAME", relatedItem);
     }
 
     @Test
@@ -205,7 +205,7 @@ class SolrProcessorTests {
 
         data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='title'][2])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("Musique ; 1", data.trim());
-        
+
         data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='name'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("Bory, Jean Louis", data.trim());
 

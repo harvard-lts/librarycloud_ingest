@@ -590,10 +590,19 @@
     <xsl:template match="mods:relatedItem[@type='series']">
         <xsl:apply-templates select="./mods:titleInfo" />
         <xsl:apply-templates select="./mods:name" />
-        <xsl:for-each select="mods:titleInfo/mods:title">
-          <xsl:element name="field">
-            <xsl:attribute name="name">relatedItem</xsl:attribute>
-            <xsl:value-of select="normalize-space(.)"/>
+        <xsl:for-each select="./mods:titleInfo[mods:title]">
+            <xsl:element name="field">
+                <xsl:attribute name="name">relatedItem</xsl:attribute>
+                <xsl:value-of select="normalize-space(mods:title)"/>
+                <xsl:if test="string-length(mods:subTitle)">
+                    <xsl:value-of select="concat(' ', normalize-space(mods:subTitle))"/>
+                </xsl:if>
+                <xsl:if test="string-length(mods:partNumber)">
+                    <xsl:value-of select="concat(' ', normalize-space(mods:partNumber))"/>
+                </xsl:if>
+                <xsl:if test="string-length(mods:partName)">
+                    <xsl:value-of select="concat(' ', normalize-space(mods:partName))"/>
+                </xsl:if>
           </xsl:element>
         </xsl:for-each>
     </xsl:template>

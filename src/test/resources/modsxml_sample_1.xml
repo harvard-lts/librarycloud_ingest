@@ -148,7 +148,10 @@
      <titleInfo><title>relatedItemTest</title></titleInfo>
      <relatedItem type="series">
        <titleInfo>
-         <title>Musique ; 1</title>
+           <title>TITLE</title>
+           <subTitle>SUBTITLE</subTitle>
+           <partNumber>3</partNumber>
+           <partName>PARTNAME</partName>
        </titleInfo>
        <name type="personal">
          <namePart>Bory, Jean Louis</namePart>
