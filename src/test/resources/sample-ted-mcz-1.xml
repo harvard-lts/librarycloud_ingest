@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mczRecord xmlns:xlink="http://www.w3.org/TR/xlink">
+    <_id>ARC 209-421</_id>
+    <admin>
+        <status>Active</status>
+        <createDate>2005-11-10</createDate>
+    </admin>
+    <specimen>
+        <authority>Sabaj, M.H.</authority>
+        <commonName>Bacu</commonName>
+        <specimenNote>Top left specimen</specimenNote>
+        <specimenNote>Determiner date: 2006-07-??</specimenNote>
+        <specimenCollectionDate>1865-10-17</specimenCollectionDate>
+        <locationCollected>Belem, Brazil</locationCollected>
+        <taxonomicClassification>
+            <species>Lithodoras dorsalis (Valenciennes 1840)</species>
+            <kingdom>Animalia</kingdom>
+            <family>Doradidae</family>
+        </taxonomicClassification>
+    </specimen>
+    <specimen>
+        <authority>Sabaj, M.H.</authority>
+        <commonName>Bacu</commonName>
+        <specimenNote>Top right specimen</specimenNote>
+        <specimenNote>Determiner date: 2006-07-??</specimenNote>
+        <specimenCollectionDate>1865-09-19</specimenCollectionDate>
+        <locationCollected>Tabatinga, Brazil</locationCollected>
+        <taxonomicClassification>
+            <species>Nemadoras humeralis (Kner 1855)</species>
+            <kingdom>Animalia</kingdom>
+            <family>Doradidae</family>
+        </taxonomicClassification>
+    </specimen>
+    <specimen>
+        <authority>Sabaj, M.H.</authority>
+        <commonName>Bacu</commonName>
+        <specimenNote>Bottom specimen</specimenNote>
+        <specimenNote>Determiner date: 2006-07-??</specimenNote>
+        <taxonomicClassification>
+            <species>Oxydoras niger (Valenciennes 1821)</species>
+            <kingdom>Animalia</kingdom>
+            <family>Doradidae</family>
+        </taxonomicClassification>
+    </specimen>
+    <artwork>
+        <materialsTechniques>watercolor</materialsTechniques>
+        <support>paper</support>
+        <imageCreationDate>1865-10-17</imageCreationDate>
+        <image>
+            <thumbnail>
+                <xlink:show>embed</xlink:show>
+                <xlink:actuate>onLoad</xlink:actuate>
+                <xlink:href>http://nrs.harvard.edu/urn-3:FMUS.MCZ:2004-507088</xlink:href>
+            </thumbnail>
+            <xlink:show>new</xlink:show>
+            <xlink:actuate>onRequest</xlink:actuate>
+            <!--<xmlns:xlink>http://www.w3.org/TR/xlink</xmlns:xlink>-->
+            <xlink:href>http://nrs.harvard.edu/urn-3:FMUS.MCZ:2004-507088</xlink:href>
+        </image>
+        <workType>drawings</workType>
+        <imageCreator>Burkhardt, Jacques</imageCreator>
+        <annotation>
+            <text>Bacu - Belem Bacu Tabatinga 19 - 7br.</text>
+        </annotation>
+        <annotation>
+            <text>Teffe 17 Oct.</text>
+            <annotatedBy>Burkhardt, Jacques</annotatedBy>
+        </annotation>
+        <annotation>
+            <text>69</text>
+        </annotation>
+        <annotation>
+            <text>Porte les quads barbillon en avant</text>
+            <annotatedBy>Agassiz, Louis</annotatedBy>
+        </annotation>
+        <otherItemIdentifier>
+            <IdType>Call number</IdType>
+            <IdValue>ARC 209-421</IdValue>
+        </otherItemIdentifier>
+        <expeditionName>Thayer Expedition</expeditionName>
+        <title>Bacu (Belem, Teffe, Brazil, 17 October 1865 ; and Tabatinga, Brazil, 19 September
+            1865)</title>
+        <imageCreationLocation>Teffe, Brazil</imageCreationLocation>
+        <physicalPieceId>ARC 209-421</physicalPieceId>
+        <dimensions>18 x 26 cm.</dimensions>
+        <repositoryName>Ernst Mayr Library</repositoryName>
+        <imageDescription>3 fish drawings (5 x 10 cm., 4 x 10 cm., 9 x 18 cm.)</imageDescription>
+    </artwork>
+</mczRecord>
