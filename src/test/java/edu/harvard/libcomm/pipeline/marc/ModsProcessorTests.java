@@ -65,7 +65,6 @@ class ModsProcessorTests {
     }
 
     @Test //LTSCLOUD-756 rec: 009955294
-
     void namePartPositionTest() throws Exception {
         p = new ModsProcessor();
         LibCommMessage lcm = TestHelpers.buildLibCommMessage("marc", "009955294");
