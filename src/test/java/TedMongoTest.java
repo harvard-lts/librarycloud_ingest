@@ -25,9 +25,8 @@ public class TedMongoTest {
     public static void main (String args[]) {
         MongoClientURI mongoUri = new MongoClientURI("mongodb://localhost:27017/ted");
         MongoClient mongoClient = new MongoClient(mongoUri);
-        //MongoClient mongoClient = new MongoClient("mongo-dev-1.lts.harvard.edu",27072);
         MongoDatabase database = mongoClient.getDatabase("ted");
-        MongoCollection<Document> coll = database.getCollection("iohp");
+        MongoCollection<Document> coll = database.getCollection("mcz");
         try {
             getAllDocuments(coll);
         }
