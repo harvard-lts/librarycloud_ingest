@@ -11,7 +11,7 @@
         <dateIssued>1967</dateIssued>
       </originInfo>
       <location>
-        <physicalLocation displayLabel="Harvard repository" type="repository">Music Repository</physicalLocation>
+        <physicalLocation displayLabel="Harvard repository" type="repository">Music Repository Long Form Name</physicalLocation>
         <shelfLocator>Mus 645.5.717</shelfLocator>
       </location>
       <location>
@@ -177,7 +177,8 @@
      <notarealmodstag>
          <sonofnotarealmodstag>
              <titleInfo>
-                 <title>Musique ; 1</title>
+               <title>foo</title>
+               <subTitle>bar</subTitle>
              </titleInfo>
              <name type="personal">
                  <namePart>Bory, Jean Louis</namePart>

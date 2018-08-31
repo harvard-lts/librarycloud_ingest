@@ -203,7 +203,21 @@
                 </xsl:choose>
                 -->
             </xsl:attribute>
-            <xsl:apply-templates/>
+            <xsl:if test="string-length(mods:title)">
+              <xsl:value-of select="normalize-space(mods:title)"/>
+            </xsl:if>
+            <xsl:if test="string-length(mods:subTitle)">
+              <xsl:if test="string-length(mods:subTitle)">
+                <xsl:text> </xsl:text>
+              </xsl:if>
+              <xsl:value-of select="normalize-space(mods:subTitle)"/>
+            </xsl:if>
+            <xsl:if test="string-length(mods:partNumber)">
+              <xsl:value-of select="concat(' ', normalize-space(mods:partNumber))"/>
+            </xsl:if>
+            <xsl:if test="string-length(mods:partName)">
+              <xsl:value-of select="concat(' ', normalize-space(mods:partName))"/>
+            </xsl:if>
         </xsl:element>
       </xsl:if>
     </xsl:template>
@@ -512,6 +526,14 @@
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
+        <xsl:if test="@type = 'repository' and @displayLabel = 'Harvard repository'">
+          <xsl:element name="field">
+            <xsl:attribute name="name">
+              <xsl:text>repositoryLongForm</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+          </xsl:element>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="mods:shelfLocator">

@@ -192,11 +192,12 @@ class SolrProcessorTests {
         String r1 = (String) xPath.compile("//doc[1]//field[@name='repository'][1]").evaluate(solrDoc, XPathConstants.STRING);
         String r2 = (String) xPath.compile("//doc[1]//field[@name='repository'][2]").evaluate(solrDoc, XPathConstants.STRING);
         String r3 = (String) xPath.compile("//doc[1]//field[@name='repository'][3]").evaluate(solrDoc, XPathConstants.STRING);
+        String r4 = (String) xPath.compile("//doc[1]//field[@name='repositoryLongForm'][1]").evaluate(solrDoc, XPathConstants.STRING);
 
         assertEquals("Botany Gray Herbarium", r1);
         assertEquals("Widener", r2);
         assertEquals("Some Other Repository", r3);
-
+        assertEquals("Music Repository Long Form Name", r4);
     }
 
     @Test //LTSCLOUD-750
@@ -204,7 +205,7 @@ class SolrProcessorTests {
         String data;
 
         data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='title'][2])").evaluate(solrDoc, XPathConstants.STRING);
-        assertEquals("Musique ; 1", data.trim());
+        assertEquals("foo bar", data.trim());
 
         data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='name'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("Bory, Jean Louis", data.trim());
