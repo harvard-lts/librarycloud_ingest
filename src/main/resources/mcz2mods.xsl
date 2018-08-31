@@ -349,9 +349,6 @@
     </xsl:template>
 
     <!-- admin templates -->
-    <xsl:template match="admin">
-        <xsl:element name="recordInfo"> </xsl:element>
-    </xsl:template>
 
     <xsl:template match="admin">
         <xsl:element name="recordInfo">
