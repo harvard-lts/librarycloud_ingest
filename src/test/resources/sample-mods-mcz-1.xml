@@ -63,10 +63,8 @@
             <roleTerm>Authority</roleTerm>
          </role>
       </name>
-      <originInfo>
+      <originInfo displayLabel="Specimen Collected">
          <dateOther type="Specimen Collection Date">1865-10-17</dateOther>
-      </originInfo>
-      <originInfo displayLabel="Location Collected">
          <place>
             <placeTerm type="text">Belem, Brazil</placeTerm>
          </place>
@@ -87,10 +85,8 @@
             <roleTerm>Authority</roleTerm>
          </role>
       </name>
-      <originInfo>
+      <originInfo displayLabel="Specimen Collected">
          <dateOther type="Specimen Collection Date">1865-09-19</dateOther>
-      </originInfo>
-      <originInfo displayLabel="Location Collected">
          <place>
             <placeTerm type="text">Tabatinga, Brazil</placeTerm>
          </place>

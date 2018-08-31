@@ -46,8 +46,9 @@
             <xsl:apply-templates select="originalName"/>
             <xsl:apply-templates select="authority"/>
             <xsl:apply-templates select="specimenCollector"/>
-            <xsl:apply-templates select="specimenCollectionDate"/>
-            <xsl:apply-templates select="locationCollected"/>
+            <!--<xsl:apply-templates select="specimenCollectionDate"/>
+            <xsl:apply-templates select="locationCollected"/>-->
+            <xsl:call-template name="originInfoSpecimen"/>
             <xsl:apply-templates select="specimenNote"/>
         </xsl:element>
     </xsl:template>
@@ -313,23 +314,29 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="specimenCollectionDate">
-        <xsl:element name="originInfo">
-            <xsl:element name="dateOther">
-                <xsl:attribute name="type">Specimen Collection Date</xsl:attribute>
-                <xsl:value-of select="normalize-space(.)"/>
+    <xsl:template name="originInfoSpecimen">
+        <xsl:if test="specimenCollectionDate or locationCollected">
+            <xsl:element name="originInfo">
+                <xsl:attribute name="displayLabel">Specimen Collected</xsl:attribute>
+                <xsl:apply-templates select="specimenCollectionDate"/>
+                <xsl:apply-templates select="locationCollected"/>
             </xsl:element>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="specimenCollectionDate">
+        <xsl:element name="dateOther">
+            <xsl:attribute name="type">Specimen Collection Date</xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
     </xsl:template>
 
     <xsl:template match="locationCollected">
-        <xsl:element name="originInfo">
-            <xsl:attribute name="displayLabel">Location Collected</xsl:attribute>
-            <xsl:element name="place">
-                <xsl:element name="placeTerm">
-                    <xsl:attribute name="type">text</xsl:attribute>
-                    <xsl:value-of select="normalize-space(.)"/>
-                </xsl:element>
+        
+        <xsl:element name="place">
+            <xsl:element name="placeTerm">
+                <xsl:attribute name="type">text</xsl:attribute>
+                <xsl:value-of select="normalize-space(.)"/>
             </xsl:element>
         </xsl:element>
     </xsl:template>
@@ -357,7 +364,7 @@
             </xsl:element>
         </xsl:element>
     </xsl:template>
-    
+
     <xsl:template match="createDate">
         <xsl:element name="recordCreationDate">
             <xsl:value-of select="."/>
