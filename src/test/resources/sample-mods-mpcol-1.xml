@@ -1,0 +1,127 @@
+<modsCollection xmlns="http://www.loc.gov/mods/v3">
+    <mods>
+      <name>
+         <namePart>Zajmović, Đemo</namePart>
+         <role type="text" valueURI="http://id.loc.gov/vocabulary/relators/sn">Singer</role>
+      </name>
+      <note type="biographical/historical">Zajmović, Đemo: Zajmović was director of the hotel in Bijelo Polje.</note>
+      <titleInfo>
+         <title>Umorih se ruže trgajući</title>
+      </titleInfo>
+      <titleInfo type="alternative">
+         <title>Stare muslimanske pjesme (a)</title>
+      </titleInfo>
+      <originInfo>
+                <dateOther>1950-05-27</dateOther>
+            </originInfo>
+      <language>
+         <languageTerm>Bosnian, Croatian, or Serbian language</languageTerm>
+      </language>
+      <note type="Collection Method">recorded</note>
+      <relatedItem otherType="collection">
+         <titleInfo>
+            <title>Lord Collection</title>
+         </titleInfo>
+      </relatedItem>
+      <identifier displayLabel="Item Number">LN58a</identifier>
+      <relatedItem displayLabel="Audio">
+         <identifier displayLabel="Recording Number">spool 26 min. 3-21</identifier>
+         <physicalDescription>
+            <form>wire spool</form>
+         </physicalDescription>
+      </relatedItem>
+      <recordInfo>
+            
+            <recordCreationDate>2004-07-01</recordCreationDate>
+        <recordIdentifier source="MH:TED">LN58aZajmović, Đemo</recordIdentifier>
+      </recordInfo>
+   </mods>
+    <mods>
+      <name>
+         <namePart>Vidić, Petar</namePart>
+         <role type="text" valueURI="http://id.loc.gov/vocabulary/relators/sn">Singer</role>
+      </name>
+      <titleInfo>
+         <title>Proba</title>
+      </titleInfo>
+      <titleInfo type="translated">
+         <title>Test</title>
+      </titleInfo>
+      <originInfo>
+                <dateOther>1934-12-07</dateOther>
+            </originInfo>
+      <note type="Collection Method">recorded</note>
+      <relatedItem otherType="collection">
+         <titleInfo>
+            <title>Parry Collection</title>
+         </titleInfo>
+      </relatedItem>
+      <identifier displayLabel="Item Number">PN803</identifier>
+      <relatedItem displayLabel="Audio">
+         <identifier displayLabel="Recording Number">1337</identifier>
+         <location>
+            <url>http://nrs.harvard.edu/urn-3:HLNC.MPCOL:1068583</url>
+         </location>
+         <physicalDescription>
+            <form>aluminum disk</form>
+         </physicalDescription>
+      </relatedItem>
+      <relatedItem type="otherVersion" displayLabel="Text">manuscript<name>
+            <namePart>Nikola Vujnović</namePart>
+            <role>
+               <roleTerm type="text" valueURI="http://id.loc.gov/vocabulary/relators/trc">Transcriber</roleTerm>
+            </role>
+         </name>
+         <physicalDescription>
+            <extent unit="lines">24</extent>
+         </physicalDescription>
+         <location>
+            <url>http://nrs.harvard.edu/urn-3:HLNC.MPCOL:104493</url>
+         </location>
+      </relatedItem>
+      <recordInfo>
+            
+            <recordCreationDate>2003-06-02</recordCreationDate>
+        <recordIdentifier source="MH:TED">PN803Vidić, Petar</recordIdentifier>
+      </recordInfo>
+   </mods>
+    <mods>
+      <name>
+         <namePart>Novaković, Radivoje</namePart>
+         <role type="text" valueURI="http://id.loc.gov/vocabulary/relators/sn">Singer</role>
+      </name>
+      <titleInfo>
+         <title>Pjesma o Narodno-oslobodilačkoj borbi 1941</title>
+      </titleInfo>
+      <titleInfo type="translated">
+         <title>Song of the War of National Liberation, 1941</title>
+      </titleInfo>
+      <titleInfo type="alternative">
+         <title>Song of World War II</title>
+      </titleInfo>
+      <originInfo>
+                <dateOther>1950-05-26</dateOther>
+            </originInfo>
+      <language>
+         <languageTerm>Bosnian, Croatian, or Serbian language</languageTerm>
+      </language>
+      <note type="Collection Method">recorded</note>
+      <relatedItem otherType="collection">
+         <titleInfo>
+            <title>Lord Collection</title>
+         </titleInfo>
+      </relatedItem>
+      <identifier displayLabel="Item Number">LN53</identifier>
+      <relatedItem displayLabel="Audio">
+         <identifier displayLabel="Recording Number">spool 25 min. 1-4</identifier>
+         <physicalDescription>
+            <form>wire spool</form>
+         </physicalDescription>
+      </relatedItem>
+      <recordInfo>
+            
+            <recordCreationDate>2004-06-29</recordCreationDate>
+        <recordIdentifier source="MH:TED">LN53Novaković, Radivoje</recordIdentifier>
+      </recordInfo>
+   </mods>
+</modsCollection>
