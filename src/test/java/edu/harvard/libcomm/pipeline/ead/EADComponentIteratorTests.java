@@ -82,8 +82,10 @@ class EADComponentIteratorTests {
 
     @Test // LTSCLOUD-697
     void buildModsDateCreated() throws Exception {
-        String dateCreated = TestHelpers.getXPath("//mods:originInfo/mods:dateCreated", mods);
-        assertEquals("1848-11-07/1849-07-30", dateCreated);
+        String startDateCreated = TestHelpers.getXPath("//mods:originInfo/mods:dateCreated[@point='start']", mods);
+        assertEquals("1848-11-07", startDateCreated);
+        String endDateCreated = TestHelpers.getXPath("//mods:originInfo/mods:dateCreated[@point='end']", mods);
+        assertEquals("1849-07-30", endDateCreated);
     }
 
 
