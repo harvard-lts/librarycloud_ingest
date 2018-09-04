@@ -1,4 +1,7 @@
-<mods xmlns="http://www.loc.gov/mods/v3">
+<mods xmlns="http://www.loc.gov/mods/v3"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
    <identifier>ARC 209-421</identifier>
    <location>
       <url access="raw object">http://nrs.harvard.edu/urn-3:FMUS.MCZ:2004-507088</url>
@@ -29,7 +32,9 @@
          <placeTerm type="text">Teffe, Brazil</placeTerm>
       </place>
    </originInfo>
-   <name displayLabel="Expedition Name">Thayer Expedition</name>
+   <name displayLabel="Expedition Name">
+      <namePart>Thayer Expedition</namePart>
+   </name>
    <note type="annotation">Bacu - Belem Bacu Tabatinga 19 - 7br.</note>
    <note type="annotation">Teffe 17 Oct.--Burkhardt, Jacques</note>
    <name>
@@ -47,14 +52,14 @@
       </role>
    </name>
    <location>
-      <physicalLocation type="repository">Ernst Mayr Library<shelfLocator>ARC 209-421</shelfLocator>
-      </physicalLocation>
+      <physicalLocation type="repository" valueURI="http://isni.org/isni/0000000460377627">Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</physicalLocation>
+      <shelfLocator>ARC 209-421</shelfLocator>
    </location>
    <relatedItem otherType="Specimen">
       <subject displayLabel="Taxonomic Classification">
          <topic>Animalia--Doradidae--Lithodoras dorsalis (Valenciennes 1840)</topic>
       </subject>
-      <titleInfo type="Common Name">
+      <titleInfo otherType="Common Name">
          <title>Bacu</title>
       </titleInfo>
       <name>
@@ -76,7 +81,7 @@
       <subject displayLabel="Taxonomic Classification">
          <topic>Animalia--Doradidae--Nemadoras humeralis (Kner 1855)</topic>
       </subject>
-      <titleInfo type="Common Name">
+      <titleInfo otherType="Common Name">
          <title>Bacu</title>
       </titleInfo>
       <name>
@@ -98,7 +103,7 @@
       <subject displayLabel="Taxonomic Classification">
          <topic>Animalia--Doradidae--Oxydoras niger (Valenciennes 1821)</topic>
       </subject>
-      <titleInfo type="Common Name">
+      <titleInfo otherType="Common Name">
          <title>Bacu</title>
       </titleInfo>
       <name>
@@ -113,6 +118,6 @@
    <recordInfo>
         
         <recordCreationDate>2005-11-10</recordCreationDate>
-      <recordIdentifier source="MH:TED">ARC 209-421</recordIdentifier>
+      <recordIdentifier source="MH:MCZArtwork">ARC 209-421</recordIdentifier>
    </recordInfo>
 </mods>

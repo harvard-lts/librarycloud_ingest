@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xlink="http://www.w3.org/TR/xlink" xmlns="http://www.loc.gov/mods/v3">
+    xmlns:xlink="http://www.w3.org/TR/xlink" xmlns="http://www.loc.gov/mods/v3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
     <xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
 
     <xsl:variable name="separator">
@@ -9,12 +10,16 @@
 
     <xsl:template match="tedCollection">
         <xsl:element name="modsCollection">
+            <xsl:copy-of select="document('')/*/@xsi:schemaLocation"/>
+            <xsl:namespace name="xlink"><xsl:text>http://www.w3.org/1999/xlink</xsl:text></xsl:namespace>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
 
     <xsl:template match="mczRecord">
         <xsl:element name="mods">
+            <xsl:copy-of select="document('')/*/@xsi:schemaLocation"/>
+            <xsl:namespace name="xlink"><xsl:text>http://www.w3.org/1999/xlink</xsl:text></xsl:namespace>
             <xsl:apply-templates select="artwork"/>
             <xsl:apply-templates select="specimen"/>
             <xsl:apply-templates select="admin"/>
@@ -175,7 +180,9 @@
     <xsl:template match="expeditionName">
         <xsl:element name="name">
             <xsl:attribute name="displayLabel">Expedition Name</xsl:attribute>
-            <xsl:value-of select="normalize-space(.)"/>
+            <xsl:element name="namePart">
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:element>
         </xsl:element>
     </xsl:template>
 
@@ -229,9 +236,10 @@
         <xsl:element name="location">
             <xsl:element name="physicalLocation">
                 <xsl:attribute name="type">repository</xsl:attribute>
-                <xsl:text>Ernst Mayr Library</xsl:text>
-                <xsl:apply-templates select="otherItemIdentifier"/>
+                <xsl:attribute name="valueURI"><xsl:text>http://isni.org/isni/0000000460377627</xsl:text></xsl:attribute>
+                <xsl:text>Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</xsl:text>
             </xsl:element>
+            <xsl:apply-templates select="otherItemIdentifier"/>
         </xsl:element>
     </xsl:template>
 
@@ -276,7 +284,7 @@
 
     <xsl:template match="commonName">
         <xsl:element name="titleInfo">
-            <xsl:attribute name="type">Common Name</xsl:attribute>
+            <xsl:attribute name="otherType">Common Name</xsl:attribute>
             <xsl:element name="title">
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:element>
@@ -285,7 +293,7 @@
 
     <xsl:template match="originalName">
         <xsl:element name="titleInfo">
-            <xsl:attribute name="type">Original Name</xsl:attribute>
+            <xsl:attribute name="otherType">Original Name</xsl:attribute>
             <xsl:element name="title">
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:element>
@@ -355,7 +363,7 @@
             <xsl:apply-templates/>
             <xsl:element name="recordIdentifier">
                 <xsl:attribute name="source">
-                    <xsl:text>MH:TED</xsl:text>
+                    <xsl:text>MH:MCZArtwork</xsl:text>
                 </xsl:attribute>
                 <xsl:value-of select="../_id"/>
             </xsl:element>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xlink="http://www.w3.org/TR/xlink" xmlns="http://www.loc.gov/mods/v3">
+    xmlns:xlink="http://www.w3.org/TR/xlink" xmlns="http://www.loc.gov/mods/v3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
     <xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
 
     <xsl:variable name="separator">
@@ -9,12 +11,20 @@
 
     <xsl:template match="tedCollection">
         <xsl:element name="modsCollection">
+            <xsl:copy-of select="document('')/*/@xsi:schemaLocation"/>
+            <xsl:namespace name="xlink">
+                <xsl:text>http://www.w3.org/1999/xlink</xsl:text>
+            </xsl:namespace>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
 
     <xsl:template match="mpcolRecord">
         <xsl:element name="mods">
+            <xsl:copy-of select="document('')/*/@xsi:schemaLocation"/>
+            <xsl:namespace name="xlink">
+                <xsl:text>http://www.w3.org/1999/xlink</xsl:text>
+            </xsl:namespace>
             <xsl:apply-templates select="record"/>
             <xsl:apply-templates select="admin"/>
         </xsl:element>
@@ -48,11 +58,13 @@
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:element>
             <xsl:element name="role">
-                <xsl:attribute name="type">text</xsl:attribute>
-                <xsl:attribute name="valueURI">
-                    <xsl:text>http://id.loc.gov/vocabulary/relators/sn</xsl:text>
-                </xsl:attribute>
-                <xsl:text>Singer</xsl:text>
+                <xsl:element name="roleTerm">
+                    <xsl:attribute name="type">text</xsl:attribute>
+                    <xsl:attribute name="valueURI">
+                        <xsl:text>http://id.loc.gov/vocabulary/relators/sn</xsl:text>
+                    </xsl:attribute>
+                    <xsl:text>Singer</xsl:text>
+                </xsl:element>
             </xsl:element>
         </xsl:element>
     </xsl:template>

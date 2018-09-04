@@ -1,8 +1,13 @@
-<modsCollection xmlns="http://www.loc.gov/mods/v3">
-    <mods>
+<modsCollection xmlns="http://www.loc.gov/mods/v3"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+    <mods xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
       <name>
          <namePart>Zajmović, Đemo</namePart>
-         <role type="text" valueURI="http://id.loc.gov/vocabulary/relators/sn">Singer</role>
+         <role>
+            <roleTerm type="text" valueURI="http://id.loc.gov/vocabulary/relators/sn">Singer</roleTerm>
+         </role>
       </name>
       <note type="biographical/historical">Zajmović, Đemo: Zajmović was director of the hotel in Bijelo Polje.</note>
       <titleInfo>
@@ -36,10 +41,12 @@
         <recordIdentifier source="MH:TED">LN58aZajmović, Đemo</recordIdentifier>
       </recordInfo>
    </mods>
-    <mods>
+    <mods xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
       <name>
          <namePart>Vidić, Petar</namePart>
-         <role type="text" valueURI="http://id.loc.gov/vocabulary/relators/sn">Singer</role>
+         <role>
+            <roleTerm type="text" valueURI="http://id.loc.gov/vocabulary/relators/sn">Singer</roleTerm>
+         </role>
       </name>
       <titleInfo>
          <title>Proba</title>
@@ -85,10 +92,12 @@
         <recordIdentifier source="MH:TED">PN803Vidić, Petar</recordIdentifier>
       </recordInfo>
    </mods>
-    <mods>
+    <mods xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
       <name>
          <namePart>Novaković, Radivoje</namePart>
-         <role type="text" valueURI="http://id.loc.gov/vocabulary/relators/sn">Singer</role>
+         <role>
+            <roleTerm type="text" valueURI="http://id.loc.gov/vocabulary/relators/sn">Singer</roleTerm>
+         </role>
       </name>
       <titleInfo>
          <title>Pjesma o Narodno-oslobodilačkoj borbi 1941</title>

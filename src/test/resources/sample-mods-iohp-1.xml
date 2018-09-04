@@ -1,17 +1,14 @@
-<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd"
- xmlns="http://www.loc.gov/mods/v3">
+<mods xmlns="http://www.loc.gov/mods/v3"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
    <name>
       <namePart>Sanjabi, Karim</namePart>
       <role>
          <roleTerm valueURI="http://id.loc.gov/vocabulary/relators/ive">Interviewee</roleTerm>
       </role>
    </name>
-   <note type="biographical/historical">Son of Ghassem Khan Sardar- Nasser (landowner). University education in
-            law in Paris, civil servant. Professor, Tehran University, Vice dean of Faculty of Law
-            (1943-44), dean of Faculty of Law (1943-44), minister of education (1951), 17th Majles
-            deputy from Kermanshah, leader of the National Front, and minister of foreign affairs
-            (1979). [Shimoni, p. 205.]</note>
+   <note type="biographical/historical">Son of Ghassem Khan Sardar- Nasser (landowner). University education in law in Paris, civil servant. Professor, Tehran University, Vice dean of Faculty of Law (1943-44), dean of Faculty of Law (1943-44), minister of education (1951), 17th Majles deputy from Kermanshah, leader of the National Front, and minister of foreign affairs (1979). [Shimoni, p. 205.]</note>
    <note type="biographical/historical">Male</note>
    <titleInfo>
       <partNumber>25</partNumber>
