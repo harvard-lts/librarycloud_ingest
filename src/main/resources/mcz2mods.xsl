@@ -365,7 +365,7 @@
                 <xsl:attribute name="source">
                     <xsl:text>MH:MCZArtwork</xsl:text>
                 </xsl:attribute>
-                <xsl:value-of select="../_id"/>
+                <xsl:value-of select="replace(../_id,' ','_')"/>
             </xsl:element>
         </xsl:element>
     </xsl:template>

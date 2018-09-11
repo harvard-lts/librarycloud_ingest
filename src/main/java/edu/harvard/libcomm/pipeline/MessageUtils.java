@@ -160,7 +160,7 @@ public class MessageUtils {
 
 	static synchronized public String transformPayloadData (LibCommMessage libCommMessage, String xslFilePath, String xslParam) throws Exception {
 		String data = libCommMessage.getPayload().getData();
-		// System.out.println("DATA: " + data);
+		//System.out.println("DATA: " + data);
 		StringReader dataReader = new StringReader(data);
 //System.out.println("data: " + data);
 //System.out.println("xslParam: " + xslParam);

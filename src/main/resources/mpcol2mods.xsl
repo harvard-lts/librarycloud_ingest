@@ -308,7 +308,7 @@
             <xsl:apply-templates/>
             <xsl:element name="recordIdentifier">
                 <xsl:attribute name="source">
-                    <xsl:text>MH:TED</xsl:text>
+                    <xsl:text>MH:MPCOL</xsl:text>
                 </xsl:attribute>
                 <xsl:value-of select="../_id"/>
             </xsl:element>
