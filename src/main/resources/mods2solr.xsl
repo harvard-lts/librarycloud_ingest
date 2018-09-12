@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:mods="http://www.loc.gov/mods/v3"
-    xmlns:usage="http://lib.harvard.edu/usagedata"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:mods="http://www.loc.gov/mods/v3" xmlns:usage="http://lib.harvard.edu/usagedata"
     xmlns:set="http://hul.harvard.edu/ois/xml/ns/libraryCloud"
     xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
     xmlns:HarvardRepositories="http://hul.harvard.edu/ois/xml/ns/HarvardRepositories"
-    xmlns:tbd="http://lib.harvard.edu/TBD"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
-    xmlns:ext="http://exslt.org/common"
-    xmlns:priorrecordids="http://lib.harvard.edu/alephmigration"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    exclude-result-prefixes="xs xsi"
-    version="2.0"
-    >
+    xmlns:tbd="http://lib.harvard.edu/TBD" xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:ext="http://exslt.org/common" xmlns:priorrecordids="http://lib.harvard.edu/alephmigration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="xs xsi"
+    version="2.0">
 
     <xsl:output indent="yes" encoding="UTF-8"/>
 
@@ -29,13 +23,13 @@
             <xsl:apply-templates select="mods:titleInfo"/>
             <xsl:apply-templates select=".//mods:name"/>
             <xsl:apply-templates select=".//mods:typeOfResource"/>
-             <!-- put the isOnline field here to keep grouped with isCollection and isManuscript -->
+            <!-- put the isOnline field here to keep grouped with isCollection and isManuscript -->
             <xsl:element name="field">
                 <xsl:attribute name="name">
                     <xsl:text>isOnline</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test=".//mods:location/mods:url[@access='raw object']">
+                    <xsl:when test=".//mods:location/mods:url[@access = 'raw object']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -57,7 +51,7 @@
             <xsl:apply-templates select="mods:identifier"/>
             <xsl:apply-templates select=".//mods:location"/>
             <xsl:apply-templates select="mods:recordInfo"/>
-            <xsl:apply-templates select="mods:relatedItem[@type='series']"/>
+            <xsl:apply-templates select="mods:relatedItem[@type = 'series']"/>
             <xsl:apply-templates select="mods:extension/usage:usageData/usage:stackScore"/>
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:setName"/>
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:setSpec"/>
@@ -65,7 +59,8 @@
             <xsl:apply-templates select="mods:extension/tbd:digitalFormats/tbd:digitalFormat"/>
             <xsl:apply-templates select="mods:extension/tbd:availableTo"/>
             <xsl:apply-templates select=".//HarvardRepositories:HarvardRepositories"/>
-            <xsl:apply-templates select="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier"/>
+            <xsl:apply-templates
+                select="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier"/>
             <xsl:choose>
                 <xsl:when test="mods:extension/HarvardDRS:DRSMetadata">
                     <xsl:element name="field">
@@ -104,16 +99,24 @@
             </xsl:element>
 
             <xsl:variable name="dateRange">
-              <xsl:call-template name="buildDateRange" />
+                <xsl:call-template name="buildDateRange"/>
             </xsl:variable>
 
             <xsl:if test="string-length($dateRange) > 0 and (not(contains($dateRange, '100000')))">
-              <xsl:element name="field">
-                <xsl:attribute name="name">
-                  <xsl:text>dateRange</xsl:text>
-                </xsl:attribute>
-                <xsl:value-of select="$dateRange" />
-              </xsl:element>
+                <xsl:variable name="SDT">
+                    <xsl:value-of select="substring-after(substring-before($dateRange, ' TO '), '[')"/>
+                </xsl:variable>
+                <xsl:variable name="EDT">
+                    <xsl:value-of select="substring-before(substring-after($dateRange, ' TO '), ']')"/>
+                </xsl:variable>
+                <xsl:if test="$SDT &lt;= $EDT">
+                    <xsl:element name="field">
+                        <xsl:attribute name="name">
+                            <xsl:text>dateRange</xsl:text>
+                        </xsl:attribute>
+                        <xsl:value-of select="$dateRange"/>
+                    </xsl:element>
+                </xsl:if>
             </xsl:if>
 
             <xsl:element name="field">
@@ -121,7 +124,7 @@
                     <xsl:text>url.access.preview</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test=".//mods:location/mods:url[@access='preview']">
+                    <xsl:when test=".//mods:location/mods:url[@access = 'preview']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -134,7 +137,7 @@
                     <xsl:text>url.access.raw_object</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="..//mods:location/mods:url[@access='raw object']">
+                    <xsl:when test="..//mods:location/mods:url[@access = 'raw object']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -144,50 +147,50 @@
             </xsl:element>
 
             <xsl:for-each select="distinct-values(//mods:typeOfResource/text())">
-              <xsl:element name="field">
-                <xsl:attribute name="name">
-                  <xsl:text>resourceType</xsl:text>
-                </xsl:attribute>
-                <xsl:value-of select="normalize-space(.)"/>
-              </xsl:element>
+                <xsl:element name="field">
+                    <xsl:attribute name="name">
+                        <xsl:text>resourceType</xsl:text>
+                    </xsl:attribute>
+                    <xsl:value-of select="normalize-space(.)"/>
+                </xsl:element>
             </xsl:for-each>
 
             <xsl:element name="field">
-              <xsl:attribute name="name">
-                <xsl:text>isManuscript</xsl:text>
-              </xsl:attribute>
-              <xsl:choose>
-                <xsl:when test="//mods:typeOfResource[@manuscript='yes']">
-                  <xsl:text>true</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:text>false</xsl:text>
-                </xsl:otherwise>
-              </xsl:choose>
+                <xsl:attribute name="name">
+                    <xsl:text>isManuscript</xsl:text>
+                </xsl:attribute>
+                <xsl:choose>
+                    <xsl:when test="//mods:typeOfResource[@manuscript = 'yes']">
+                        <xsl:text>true</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>false</xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:element>
             <xsl:element name="field">
-              <xsl:attribute name="name">
-                <xsl:text>isCollection</xsl:text>
-              </xsl:attribute>
-              <xsl:choose>
-                <xsl:when test="//mods:typeOfResource[@collection='yes']">
-                  <xsl:text>true</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:text>false</xsl:text>
-                </xsl:otherwise>
-              </xsl:choose>
+                <xsl:attribute name="name">
+                    <xsl:text>isCollection</xsl:text>
+                </xsl:attribute>
+                <xsl:choose>
+                    <xsl:when test="//mods:typeOfResource[@collection = 'yes']">
+                        <xsl:text>true</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>false</xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:element>
 
         </xsl:element>
     </xsl:template>
 
     <xsl:template match="mods:titleInfo">
-      <xsl:if test="not(@type)">
-        <xsl:element name="field">
-            <xsl:attribute name="name">
-               <xsl:text>title</xsl:text>
-                <!--
+        <xsl:if test="not(@type)">
+            <xsl:element name="field">
+                <xsl:attribute name="name">
+                    <xsl:text>title</xsl:text>
+                    <!--
                 <xsl:choose>
                     <xsl:when test="@type">
                         <xsl:text>title</xsl:text>
@@ -197,10 +200,10 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 -->
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </xsl:element>
-      </xsl:if>
+                </xsl:attribute>
+                <xsl:apply-templates/>
+            </xsl:element>
+        </xsl:if>
     </xsl:template>
 
 
@@ -223,7 +226,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="mods:typeOfResource" />
+    <xsl:template match="mods:typeOfResource"/>
 
     <xsl:template match="mods:genre">
         <xsl:element name="field">
@@ -245,7 +248,7 @@
         <xsl:apply-templates select="mods:issuance"/>
     </xsl:template>
 
-    <xsl:template match="mods:place[mods:placeTerm/@type='text']">
+    <xsl:template match="mods:place[mods:placeTerm/@type = 'text']">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>originPlace</xsl:text>
@@ -286,10 +289,10 @@
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
         <xsl:element name="field">
-          <xsl:attribute name="name">
-            <xsl:text>originDate</xsl:text>
-          </xsl:attribute>
-          <xsl:value-of select="normalize-space(.)"/>
+            <xsl:attribute name="name">
+                <xsl:text>originDate</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
     </xsl:template>
 
@@ -352,20 +355,20 @@
     </xsl:template>
 
     <xsl:template match="mods:language">
-      <xsl:apply-templates/>
+        <xsl:apply-templates/>
     </xsl:template>
 
     <xsl:template match="mods:languageTerm">
-      <xsl:element name="field">
+        <xsl:element name="field">
             <xsl:attribute name="name">
-              <xsl:choose>
-                <xsl:when test="@type = 'code'">
-                  <xsl:text>languageCode</xsl:text>
-                </xsl:when>
-                <xsl:when test="@type = 'text'">
-                  <xsl:text>language</xsl:text>
-                </xsl:when>
-              </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@type = 'code'">
+                        <xsl:text>languageCode</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="@type = 'text'">
+                        <xsl:text>language</xsl:text>
+                    </xsl:when>
+                </xsl:choose>
             </xsl:attribute>
             <xsl:apply-templates/>
         </xsl:element>
@@ -401,7 +404,8 @@
 
     <xsl:template match="mods:subject">
         <xsl:apply-templates mode="subject"/>
-        <xsl:apply-templates select="mods:topic|mods:geographic|mods:temporal|mods:genre" mode="narrowersubjects"/>
+        <xsl:apply-templates select="mods:topic | mods:geographic | mods:temporal | mods:genre"
+            mode="narrowersubjects"/>
         <xsl:apply-templates select="mods:titleInfo" mode="subjecttitle"/>
         <xsl:apply-templates select="mods:name" mode="subjectname"/>
         <xsl:apply-templates select="mods:hierarchicalGeographic"/>
@@ -409,8 +413,8 @@
 
     <xsl:template match="*" mode="subject">
         <xsl:choose>
-            <xsl:when test="local-name()='geographicCode' or local-name()='hierarchicalGeographic'">
-            </xsl:when>
+            <xsl:when
+                test="local-name() = 'geographicCode' or local-name() = 'hierarchicalGeographic'"> </xsl:when>
             <xsl:otherwise>
                 <xsl:element name="field">
                     <xsl:attribute name="name">
@@ -425,7 +429,8 @@
     <xsl:template match="*" mode="narrowersubjects">
         <xsl:element name="field">
             <xsl:attribute name="name">
-                <xsl:text>subject.</xsl:text><xsl:value-of select="local-name(.)"/>
+                <xsl:text>subject.</xsl:text>
+                <xsl:value-of select="local-name(.)"/>
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
@@ -436,7 +441,7 @@
             <xsl:attribute name="name">
                 <xsl:text>subject.titleInfo</xsl:text>
             </xsl:attribute>
-            <xsl:apply-templates select="mods:title|mods:partName"/>
+            <xsl:apply-templates select="mods:title | mods:partName"/>
         </xsl:element>
     </xsl:template>
 
@@ -448,12 +453,12 @@
             <xsl:apply-templates select="mods:namePart"/>
         </xsl:element>
         <xsl:for-each select="mods:role/mods:roleTerm">
-          <xsl:element name="field">
-            <xsl:attribute name="name">
-              <xsl:text>subject.name.role</xsl:text>
-            </xsl:attribute>
-            <xsl:value-of select="text()" />
-          </xsl:element>
+            <xsl:element name="field">
+                <xsl:attribute name="name">
+                    <xsl:text>subject.name.role</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="text()"/>
+            </xsl:element>
         </xsl:for-each>
     </xsl:template>
 
@@ -470,7 +475,8 @@
     <xsl:template match="*" mode="hierarchicalGeographic">
         <xsl:element name="field">
             <xsl:attribute name="name">
-                <xsl:text>subject.hierarchicalGeographic.</xsl:text><xsl:value-of select="local-name(.)"/>
+                <xsl:text>subject.hierarchicalGeographic.</xsl:text>
+                <xsl:value-of select="local-name(.)"/>
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
@@ -530,11 +536,13 @@
                 <xsl:text>urn</xsl:text>
             </xsl:attribute>
             <xsl:choose>
-                <xsl:when test="contains(.,'?')">
-                    <xsl:value-of select="substring-before(substring-after(.,'http://nrs.harvard.edu/'),'?')"/>
+                <xsl:when test="contains(., '?')">
+                    <xsl:value-of
+                        select="substring-before(substring-after(., 'http://nrs.harvard.edu/'), '?')"
+                    />
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="substring-after(.,'http://nrs.harvard.edu/')"/>
+                    <xsl:value-of select="substring-after(., 'http://nrs.harvard.edu/')"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:element>
@@ -554,7 +562,8 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier">
+    <xsl:template
+        match="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>priorRecordIdentifier</xsl:text>
@@ -570,25 +579,25 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="mods:relatedItem[@type='series']">
-        <xsl:apply-templates select="./mods:titleInfo" />
-        <xsl:apply-templates select="./mods:name" />
+    <xsl:template match="mods:relatedItem[@type = 'series']">
+        <xsl:apply-templates select="./mods:titleInfo"/>
+        <xsl:apply-templates select="./mods:name"/>
         <xsl:for-each select="mods:titleInfo/mods:title">
-          <xsl:element name="field">
-            <xsl:attribute name="name">relatedItem</xsl:attribute>
-            <xsl:value-of select="normalize-space(.)"/>
-          </xsl:element>
+            <xsl:element name="field">
+                <xsl:attribute name="name">relatedItem</xsl:attribute>
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:element>
         </xsl:for-each>
     </xsl:template>
 
     <!-- not using related item templates below for aleph, leave for possible use with ead -->
-    <xsl:template match="mods:relatedItem[@displayLabel='collection']">
+    <xsl:template match="mods:relatedItem[@displayLabel = 'collection']">
         <xsl:apply-templates select="./mods:titleInfo" mode="relatedItemHost"/>
         <xsl:apply-templates select="./mods:name" mode="relatedItemHost"/>
         <xsl:apply-templates select="./mods:recordInfo" mode="relatedItemHost"/>
     </xsl:template>
 
-    <xsl:template match="mods:relatedItem[@type='constituent']">
+    <xsl:template match="mods:relatedItem[@type = 'constituent']">
 
         <xsl:apply-templates select="mods:titleInfo" mode="relatedItemConstituent"/>
         <!--
@@ -620,11 +629,11 @@
     </xsl:template>
 
     <xsl:template match="mods:recordIdentifier" mode="relatedItemHost">
-         <xsl:element name="field">
+        <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>relatedItemHostRecId</xsl:text>
             </xsl:attribute>
-             <xsl:apply-templates/>
+            <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
 
@@ -676,10 +685,10 @@
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
         <xsl:element name="field">
-          <xsl:attribute name="name">
-            <xsl:text>collectionTitle</xsl:text>
-          </xsl:attribute>
-          <xsl:value-of select="normalize-space(.)"/>
+            <xsl:attribute name="name">
+                <xsl:text>collectionTitle</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
     </xsl:template>
 
@@ -691,26 +700,26 @@
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
         <xsl:element name="field">
-          <xsl:attribute name="name">
-            <xsl:text>collectionTitle</xsl:text>
-          </xsl:attribute>
-          <xsl:value-of select="normalize-space(.)"/>
+            <xsl:attribute name="name">
+                <xsl:text>collectionTitle</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
     </xsl:template>
 
     <xsl:template match="set:systemId">
-      <xsl:element name="field">
-        <xsl:attribute name="name">
-          <xsl:text>setSystemId</xsl:text>
-        </xsl:attribute>
-        <xsl:value-of select="normalize-space(.)"/>
-      </xsl:element>
-      <xsl:element name="field">
-        <xsl:attribute name="name">
-          <xsl:text>collectionId</xsl:text>
-        </xsl:attribute>
-        <xsl:value-of select="normalize-space(.)"/>
-      </xsl:element>
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>setSystemId</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>collectionId</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="HarvardDRS:DRSMetadata">
@@ -718,14 +727,14 @@
     </xsl:template>
 
     <xsl:template match="HarvardRepositories:HarvardRepositories">
-      <xsl:for-each select="HarvardRepositories:HarvardRepository">
-      <xsl:element name="field">
-        <xsl:attribute name="name">
-          <xsl:text>repository</xsl:text>
-        </xsl:attribute>
-        <xsl:value-of select="normalize-space(.)"/>
-      </xsl:element>
-      </xsl:for-each>
+        <xsl:for-each select="HarvardRepositories:HarvardRepository">
+            <xsl:element name="field">
+                <xsl:attribute name="name">
+                    <xsl:text>repository</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:element>
+        </xsl:for-each>
     </xsl:template>
 
 
@@ -797,14 +806,14 @@
     </xsl:template>
 
     <xsl:template match="HarvardDRS:lastModifiedDate">
-      <xsl:if test='matches(., "\d{4}")' >
-        <xsl:element name="field">
-            <xsl:attribute name="name">
-                <xsl:text>_lastModifiedDate</xsl:text>
-            </xsl:attribute>
-            <xsl:value-of select="normalize-space(.)"/>
-        </xsl:element>
-      </xsl:if>
+        <xsl:if test='matches(., "\d{4}")'>
+            <xsl:element name="field">
+                <xsl:attribute name="name">
+                    <xsl:text>_lastModifiedDate</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:element>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="HarvardDRS:fileDeliveryURL">
@@ -835,404 +844,457 @@
     </xsl:template>
     <!-- will add space for sibs except for the last -->
     <xsl:template match="*">
-        <xsl:value-of select="."/><xsl:if test="not(position()=last())"><xsl:text> </xsl:text></xsl:if>
+        <xsl:value-of select="."/>
+        <xsl:if test="not(position() = last())">
+            <xsl:text> </xsl:text>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="buildDateRange">
-      <xsl:param name="lowDate" select="100000"/>
-      <xsl:param name="highDate" select="-100000"/>
-      <xsl:param name="startFound" select="0" />
-      <xsl:param name="endFound" select="0" />
-      <xsl:param name="dateNodes" select="descendant::*[local-name()='dateIssued' or local-name()='dateCreated']" />
-      <xsl:param name="position" select="1" />
+        <xsl:param name="lowDate" select="100000"/>
+        <xsl:param name="highDate" select="-100000"/>
+        <xsl:param name="startFound" select="0"/>
+        <xsl:param name="endFound" select="0"/>
+        <xsl:param name="dateNodes"
+            select="descendant::*[local-name() = 'dateIssued' or local-name() = 'dateCreated']"/>
+        <xsl:param name="position" select="1"/>
 
-      <!-- <xsl:message>buildDateRangeParams: -->
-      <!-- Low: <xsl:value-of select="$lowDate"/> -\-\- -->
-      <!-- High: <xsl:value-of select="$highDate"/> -\-\- -->
-      <!-- Start Found: <xsl:value-of select="$startFound"/> -\-\- -->
-      <!-- End Found: <xsl:value-of select="$endFound" /> -\-\- -->
-      <!-- Node: <xsl:value-of select="$position" /> -\-\- -->
-      <!-- </xsl:message> -->
+        <!-- <xsl:message>buildDateRangeParams: -->
+        <!-- Low: <xsl:value-of select="$lowDate"/> -\-\- -->
+        <!-- High: <xsl:value-of select="$highDate"/> -\-\- -->
+        <!-- Start Found: <xsl:value-of select="$startFound"/> -\-\- -->
+        <!-- End Found: <xsl:value-of select="$endFound" /> -\-\- -->
+        <!-- Node: <xsl:value-of select="$position" /> -\-\- -->
+        <!-- </xsl:message> -->
 
-      <xsl:choose>
-        <xsl:when test="count($dateNodes[number($position)]) &gt; 0">
-          <xsl:variable name="currentDateNode" select="$dateNodes[number($position)]" />
+        <xsl:choose>
+            <xsl:when test="count($dateNodes[number($position)]) &gt; 0">
+                <xsl:variable name="currentDateNode" select="$dateNodes[number($position)]"/>
 
-          <!-- collect all dates and build 4 digit dates separated by '_'
+                <!-- collect all dates and build 4 digit dates separated by '_'
                e.g, '1910_1920_1930_' -->
 
-          <xsl:variable name="dateString">
-            <xsl:call-template name="normalizeDate">
-              <xsl:with-param name="dateStringInput" select="$currentDateNode" />
-              <xsl:with-param name="point" select="$currentDateNode/@point" />
-            </xsl:call-template>
-          </xsl:variable>
+                <xsl:variable name="dateString">
+                    <xsl:call-template name="normalizeDate">
+                        <xsl:with-param name="dateStringInput" select="$currentDateNode"/>
+                        <xsl:with-param name="point" select="$currentDateNode/@point"/>
+                    </xsl:call-template>
+                </xsl:variable>
 
-          <!-- <xsl:message><xsl:value-of select="$dateString"/></xsl:message> -->
+                <!-- <xsl:message><xsl:value-of select="$dateString"/></xsl:message> -->
 
-          <xsl:call-template name="buildDateRange">
-            <xsl:with-param name="lowDate">
-              <xsl:choose>
-                <xsl:when test="$currentDateNode/@point = 'start' and string-length($dateString) = 4 and number($dateString) &gt; -10000 and $startFound = 0">
-                  <xsl:value-of select="number($dateString)" />
-                </xsl:when>
-                <xsl:when test="$currentDateNode/@point = 'start' and string-length($dateString) = 4 and number($dateString) &lt; $lowDate">
-                  <xsl:value-of select="number($dateString)" />
-                </xsl:when>
-                <xsl:when test="$startFound = 0"><!--only look at nodes missing @point if one hasn't been found yet -->
-                  <xsl:call-template name="findLowDate">
-                    <xsl:with-param name="dateString" select="$dateString" />
-                    <xsl:with-param name="lowDate" select="$lowDate" />
-                  </xsl:call-template>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="$lowDate" />
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:with-param>
+                <xsl:call-template name="buildDateRange">
+                    <xsl:with-param name="lowDate">
+                        <xsl:choose>
+                            <xsl:when
+                                test="$currentDateNode/@point = 'start' and string-length($dateString) = 4 and number($dateString) &gt; -10000 and $startFound = 0">
+                                <xsl:value-of select="number($dateString)"/>
+                            </xsl:when>
+                            <xsl:when
+                                test="$currentDateNode/@point = 'start' and string-length($dateString) = 4 and number($dateString) &lt; $lowDate">
+                                <xsl:value-of select="number($dateString)"/>
+                            </xsl:when>
+                            <xsl:when test="$startFound = 0">
+                                <!--only look at nodes missing @point if one hasn't been found yet -->
+                                <xsl:call-template name="findLowDate">
+                                    <xsl:with-param name="dateString" select="$dateString"/>
+                                    <xsl:with-param name="lowDate" select="$lowDate"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$lowDate"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
 
-            <xsl:with-param name="highDate">
-              <xsl:choose>
-                <xsl:when test="$currentDateNode/@point = 'end' and string-length($dateString) = 4 and number($dateString) &gt; -10000 and $endFound = 0">
-                  <xsl:value-of select="number($dateString)" />
-                </xsl:when>
-                <xsl:when test="$currentDateNode/@point = 'end' and string-length($dateString) = 4 and number($dateString) &gt; $highDate">
-                  <xsl:value-of select="number($dateString)" />
-                </xsl:when>
-                <xsl:when test="$endFound = 0"><!--only look at nodes missing @point if one hasn't been found yet -->
-                  <xsl:call-template name="findHighDate">
-                    <xsl:with-param name="dateString" select="$dateString" />
-                    <xsl:with-param name="highDate" select="$highDate" />
-                  </xsl:call-template>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="$highDate" />
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:with-param>
+                    <xsl:with-param name="highDate">
+                        <xsl:choose>
+                            <xsl:when
+                                test="$currentDateNode/@point = 'end' and string-length($dateString) = 4 and number($dateString) &gt; -10000 and $endFound = 0">
+                                <xsl:value-of select="number($dateString)"/>
+                            </xsl:when>
+                            <xsl:when
+                                test="$currentDateNode/@point = 'end' and string-length($dateString) = 4 and number($dateString) &gt; $highDate">
+                                <xsl:value-of select="number($dateString)"/>
+                            </xsl:when>
+                            <xsl:when test="$endFound = 0">
+                                <!--only look at nodes missing @point if one hasn't been found yet -->
+                                <xsl:call-template name="findHighDate">
+                                    <xsl:with-param name="dateString" select="$dateString"/>
+                                    <xsl:with-param name="highDate" select="$highDate"/>
+                                </xsl:call-template>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$highDate"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
 
-            <xsl:with-param name="dateNodes" select="$dateNodes" />
-            <xsl:with-param name="position">
-              <xsl:value-of select="$position+1" />
-            </xsl:with-param>
+                    <xsl:with-param name="dateNodes" select="$dateNodes"/>
+                    <xsl:with-param name="position">
+                        <xsl:value-of select="$position + 1"/>
+                    </xsl:with-param>
 
-            <xsl:with-param name="startFound">
-              <xsl:choose>
-                <xsl:when test="$currentDateNode/@point = 'start'">
-                  <xsl:value-of select="1" />
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="$startFound" />
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:with-param>
+                    <xsl:with-param name="startFound">
+                        <xsl:choose>
+                            <xsl:when test="$currentDateNode/@point = 'start'">
+                                <xsl:value-of select="1"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$startFound"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
 
-            <xsl:with-param name="endFound">
-              <xsl:choose>
-                <xsl:when test="$currentDateNode/@point = 'end'">
-                  <xsl:value-of select="1" />
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="$endFound" />
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:with-param>
+                    <xsl:with-param name="endFound">
+                        <xsl:choose>
+                            <xsl:when test="$currentDateNode/@point = 'end'">
+                                <xsl:value-of select="1"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$endFound"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
 
-          </xsl:call-template>
+                </xsl:call-template>
 
-        </xsl:when>
-        <xsl:when test="$lowDate &gt; $highDate">
-          <xsl:call-template name="buildDateRange">
-            <xsl:with-param name="lowDate" select="$highDate"/>
-            <xsl:with-param name="highDate" select="$lowDate"/>
-            <xsl:with-param name="startFound" select="$startFound" />
-            <xsl:with-param name="endFound" select="$endFound" />
-            <xsl:with-param name="dateNodes" select="$dateNodes" />
-            <xsl:with-param name="position" select="$position" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:call-template name="formatDateRange">
-            <xsl:with-param name="lowDate" select="string($lowDate)" />
-            <xsl:with-param name="highDate" select="string($highDate)" />
-          </xsl:call-template>
-        </xsl:otherwise>
-      </xsl:choose>
+            </xsl:when>
+            <xsl:when test="$lowDate &gt; $highDate">
+                <xsl:call-template name="buildDateRange">
+                    <xsl:with-param name="lowDate" select="$highDate"/>
+                    <xsl:with-param name="highDate" select="$lowDate"/>
+                    <xsl:with-param name="startFound" select="$startFound"/>
+                    <xsl:with-param name="endFound" select="$endFound"/>
+                    <xsl:with-param name="dateNodes" select="$dateNodes"/>
+                    <xsl:with-param name="position" select="$position"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="formatDateRange">
+                    <xsl:with-param name="lowDate" select="string($lowDate)"/>
+                    <xsl:with-param name="highDate" select="string($highDate)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="formatDateRange">
-      <xsl:param name="lowDate" />
-      <xsl:param name="highDate" />
+        <xsl:param name="lowDate"/>
+        <xsl:param name="highDate"/>
 
-      <xsl:choose>
-        <xsl:when test="starts-with($lowDate, '0')">
-          <xsl:call-template name="formatDateRange">
-            <xsl:with-param name="lowDate" select="substring($lowDate, 2)" />
-            <xsl:with-param name="highDate" select="$highDate" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="starts-with($highDate, '0')">
-          <xsl:call-template name="formatDateRange">
-            <xsl:with-param name="lowDate" select="$lowDate" />
-            <xsl:with-param name="highDate" select="substring($highDate, 2)" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="string-length($lowDate) = 4 and string-length($highDate) = 2">
-          <xsl:call-template name="formatDateRange">
-            <xsl:with-param name="lowDate" select="$lowDate" />
-            <xsl:with-param name="highDate" select="concat(substring($lowDate, 1, 2), $highDate)" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="string-length($lowDate) > 0 and string-length($highDate) > 0">
-          <xsl:value-of select="concat('[', string($lowDate), ' TO ', string($highDate), ']')" />
-        </xsl:when>
-      </xsl:choose>
+        <xsl:choose>
+            <xsl:when test="starts-with($lowDate, '0')">
+                <xsl:call-template name="formatDateRange">
+                    <xsl:with-param name="lowDate" select="substring($lowDate, 2)"/>
+                    <xsl:with-param name="highDate" select="$highDate"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="starts-with($highDate, '0')">
+                <xsl:call-template name="formatDateRange">
+                    <xsl:with-param name="lowDate" select="$lowDate"/>
+                    <xsl:with-param name="highDate" select="substring($highDate, 2)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="string-length($lowDate) = 4 and string-length($highDate) = 2">
+                <xsl:call-template name="formatDateRange">
+                    <xsl:with-param name="lowDate" select="$lowDate"/>
+                    <xsl:with-param name="highDate"
+                        select="concat(substring($lowDate, 1, 2), $highDate)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="string-length($lowDate) > 0 and string-length($highDate) > 0">
+                <xsl:value-of select="concat('[', string($lowDate), ' TO ', string($highDate), ']')"
+                />
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="normalizeDate">
-      <xsl:param name="dateStringInput"/>
-      <xsl:param name="dateStringOutput"/>
-      <xsl:param name="step" select="1" />
-      <xsl:param name="brake" select="0" />
-      <xsl:param name="point" />
+        <xsl:param name="dateStringInput"/>
+        <xsl:param name="dateStringOutput"/>
+        <xsl:param name="step" select="1"/>
+        <xsl:param name="brake" select="0"/>
+        <xsl:param name="point"/>
 
-      <xsl:choose>
-        <xsl:when test="$brake &gt; 1000">
-          <xsl:message>breaking out of loop: normalizeDate</xsl:message>
-        </xsl:when>
-        <xsl:when test='matches($dateStringInput, "\d{4}-\d{1,2}-\d{1,2}/\d{4}-\d{1,2}-\d{1,2}")'>
-          <xsl:value-of select='concat(substring($dateStringInput, 1, 4), "_", substring(substring-after($dateStringInput, "/"), 1, 4))' />
-        </xsl:when>
-        <xsl:when test='matches($dateStringInput, "\d{3}u") and string-length($dateStringInput) = 4'>
-          <xsl:value-of select="translate($dateStringInput, 'u', '0')" />
-        </xsl:when>
-        <xsl:when test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d?u{3}u?") and string-length($dateStringInput) = 4'>
-        </xsl:when>
-        <xsl:when test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d{2}u{2}") and $point = "start"'>
-          <xsl:value-of select="translate($dateStringInput, 'u', '0')" />
-        </xsl:when>
-        <xsl:when test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d{2}u{2}") and $point = "end"'>
-          <xsl:value-of select="translate($dateStringInput, 'u', '9')" />
-        </xsl:when>
-        <xsl:when test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d+\s\[\d+\]")'>
-          <xsl:value-of select='substring-before(substring-after($dateStringInput, "["), "]")' />
-        </xsl:when>
-        <xsl:when test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d+\s[\d+]")'>
-          <xsl:value-of select='substring-before(substring-after($dateStringInput, "["), "]")' />
-        </xsl:when>
-        <xsl:when test="string-length($dateStringInput) = 0 and string-length($dateStringOutput) = 0"></xsl:when>
-        <xsl:when test="$step = 1 and string-length($dateStringInput) > 0">
-          <xsl:call-template name="normalizeDate">
-            <xsl:with-param name="dateStringInput">
-              <xsl:value-of select="substring($dateStringInput, 2)" />
-            </xsl:with-param>
-            <xsl:with-param name="dateStringOutput">
-              <xsl:choose>
-                <xsl:when test="contains('0123456789?-/', substring($dateStringInput, 1, 1))">
-                  <xsl:value-of select="concat($dateStringOutput, substring($dateStringInput, 1, 1))" />
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="concat($dateStringOutput, ' ')" />
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:with-param>
-            <xsl:with-param name="brake" select="$brake+1" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="$step = 1 and contains($dateStringOutput, '  ')">
-          <xsl:call-template name="normalizeDate">
-            <xsl:with-param name="brake" select="$brake+1" />
-            <xsl:with-param name="dateStringOutput" select="concat(substring-before($dateStringOutput, '  '), ' ', substring-after($dateStringOutput, '  '))" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="$step = 1 and starts-with($dateStringOutput, ' ')">
-          <xsl:call-template name="normalizeDate">
-            <xsl:with-param name="brake" select="$brake+1" />
-            <xsl:with-param name="dateStringOutput" select="substring($dateStringOutput, 2)" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="$step = 1 and substring($dateStringOutput, string-length($dateStringOutput) - 1, 1) = ' '">
-          <xsl:call-template name="normalizeDate">
-            <xsl:with-param name="brake" select="$brake+1" />
-            <xsl:with-param name="dateStringOutput" select="substring($dateStringOutput, 1, string-length($dateStringOutput) -1)" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="$step = 1 and not(substring($dateStringOutput, string-length($dateStringOutput)) = ' ')">
-          <xsl:call-template name="normalizeDate">
-            <xsl:with-param name="brake" select="$brake+1" />
-            <xsl:with-param name="dateStringInput" select="concat($dateStringOutput, ' ')" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="$step = 1">
-          <xsl:call-template name="normalizeDate">
-            <xsl:with-param name="brake" select="$brake+1" />
-            <xsl:with-param name="dateStringInput" select="translate($dateStringOutput, ' ', '_')" />
-            <xsl:with-param name="step" select="2" />
-          </xsl:call-template>
-        </xsl:when>
-        <!-- now make each part 4 digits-->
-        <xsl:when test="$step = 2">
-          <xsl:choose>
-            <xsl:when test="contains($dateStringInput, '_')">
-              <xsl:variable name="normalizedFrag">
-                <xsl:call-template name="padDateString">
-                  <xsl:with-param name="dateString">
-                    <xsl:call-template name="normalizeDateFrag">
-                      <xsl:with-param name="dateStringInput" select="substring-before($dateStringInput, '_')" />
-                    </xsl:call-template>
-                  </xsl:with-param>
+        <xsl:choose>
+            <xsl:when test="$brake &gt; 1000">
+                <xsl:message>breaking out of loop: normalizeDate</xsl:message>
+            </xsl:when>
+            <xsl:when
+                test='matches($dateStringInput, "\d{4}-\d{1,2}-\d{1,2}/\d{4}-\d{1,2}-\d{1,2}")'>
+                <xsl:value-of
+                    select='concat(substring($dateStringInput, 1, 4), "_", substring(substring-after($dateStringInput, "/"), 1, 4))'
+                />
+            </xsl:when>
+            <xsl:when
+                test='matches($dateStringInput, "\d{3}u") and string-length($dateStringInput) = 4'>
+                <xsl:value-of select="translate($dateStringInput, 'u', '0')"/>
+            </xsl:when>
+            <xsl:when
+                test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d?u{3}u?") and string-length($dateStringInput) = 4'> </xsl:when>
+            <xsl:when
+                test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d{2}u{2}") and $point = "start"'>
+                <xsl:value-of select="translate($dateStringInput, 'u', '0')"/>
+            </xsl:when>
+            <xsl:when
+                test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d{2}u{2}") and $point = "end"'>
+                <xsl:value-of select="translate($dateStringInput, 'u', '9')"/>
+            </xsl:when>
+            <xsl:when
+                test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d+\s\[\d+\]")'>
+                <xsl:value-of select='substring-before(substring-after($dateStringInput, "["), "]")'
+                />
+            </xsl:when>
+            <xsl:when
+                test='string-length($dateStringOutput) = 0 and matches($dateStringInput, "\d+\s[\d+]")'>
+                <xsl:value-of select='substring-before(substring-after($dateStringInput, "["), "]")'
+                />
+            </xsl:when>
+            <xsl:when
+                test="string-length($dateStringInput) = 0 and string-length($dateStringOutput) = 0"/>
+            <xsl:when test="$step = 1 and string-length($dateStringInput) > 0">
+                <xsl:call-template name="normalizeDate">
+                    <xsl:with-param name="dateStringInput">
+                        <xsl:value-of select="substring($dateStringInput, 2)"/>
+                    </xsl:with-param>
+                    <xsl:with-param name="dateStringOutput">
+                        <xsl:choose>
+                            <xsl:when
+                                test="contains('0123456789?-/', substring($dateStringInput, 1, 1))">
+                                <xsl:value-of
+                                    select="concat($dateStringOutput, substring($dateStringInput, 1, 1))"
+                                />
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat($dateStringOutput, ' ')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
+                    <xsl:with-param name="brake" select="$brake + 1"/>
                 </xsl:call-template>
-              </xsl:variable>
-              <xsl:call-template name="normalizeDate">
-                <xsl:with-param name="brake" select="$brake+1" />
-                <xsl:with-param name="dateStringInput" select="substring-after($dateStringInput, '_')" />
-                <xsl:with-param name="dateStringOutput">
-                  <xsl:choose>
-                    <xsl:when test="string-length($dateStringOutput) > 0">
-                      <xsl:value-of select="concat($dateStringOutput, '_', $normalizedFrag)" />
+            </xsl:when>
+            <xsl:when test="$step = 1 and contains($dateStringOutput, '  ')">
+                <xsl:call-template name="normalizeDate">
+                    <xsl:with-param name="brake" select="$brake + 1"/>
+                    <xsl:with-param name="dateStringOutput"
+                        select="concat(substring-before($dateStringOutput, '  '), ' ', substring-after($dateStringOutput, '  '))"
+                    />
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$step = 1 and starts-with($dateStringOutput, ' ')">
+                <xsl:call-template name="normalizeDate">
+                    <xsl:with-param name="brake" select="$brake + 1"/>
+                    <xsl:with-param name="dateStringOutput" select="substring($dateStringOutput, 2)"
+                    />
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when
+                test="$step = 1 and substring($dateStringOutput, string-length($dateStringOutput) - 1, 1) = ' '">
+                <xsl:call-template name="normalizeDate">
+                    <xsl:with-param name="brake" select="$brake + 1"/>
+                    <xsl:with-param name="dateStringOutput"
+                        select="substring($dateStringOutput, 1, string-length($dateStringOutput) - 1)"
+                    />
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when
+                test="$step = 1 and not(substring($dateStringOutput, string-length($dateStringOutput)) = ' ')">
+                <xsl:call-template name="normalizeDate">
+                    <xsl:with-param name="brake" select="$brake + 1"/>
+                    <xsl:with-param name="dateStringInput" select="concat($dateStringOutput, ' ')"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$step = 1">
+                <xsl:call-template name="normalizeDate">
+                    <xsl:with-param name="brake" select="$brake + 1"/>
+                    <xsl:with-param name="dateStringInput"
+                        select="translate($dateStringOutput, ' ', '_')"/>
+                    <xsl:with-param name="step" select="2"/>
+                </xsl:call-template>
+            </xsl:when>
+            <!-- now make each part 4 digits-->
+            <xsl:when test="$step = 2">
+                <xsl:choose>
+                    <xsl:when test="contains($dateStringInput, '_')">
+                        <xsl:variable name="normalizedFrag">
+                            <xsl:call-template name="padDateString">
+                                <xsl:with-param name="dateString">
+                                    <xsl:call-template name="normalizeDateFrag">
+                                        <xsl:with-param name="dateStringInput"
+                                            select="substring-before($dateStringInput, '_')"/>
+                                    </xsl:call-template>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </xsl:variable>
+                        <xsl:call-template name="normalizeDate">
+                            <xsl:with-param name="brake" select="$brake + 1"/>
+                            <xsl:with-param name="dateStringInput"
+                                select="substring-after($dateStringInput, '_')"/>
+                            <xsl:with-param name="dateStringOutput">
+                                <xsl:choose>
+                                    <xsl:when test="string-length($dateStringOutput) > 0">
+                                        <xsl:value-of
+                                            select="concat($dateStringOutput, '_', $normalizedFrag)"
+                                        />
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$normalizedFrag"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:with-param>
+                            <xsl:with-param name="step" select="2"/>
+                        </xsl:call-template>
                     </xsl:when>
                     <xsl:otherwise>
-                      <xsl:value-of select="$normalizedFrag" />
+                        <!--DONE -->
+                        <xsl:value-of select="translate($dateStringOutput, '-', '_')"/>
                     </xsl:otherwise>
-                  </xsl:choose>
-                </xsl:with-param>
-                <xsl:with-param name="step" select="2" />
-              </xsl:call-template>
+                </xsl:choose>
             </xsl:when>
-            <xsl:otherwise>
-              <!--DONE -->
-              <xsl:value-of select="translate($dateStringOutput, '-', '_')" />
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:when>
-      </xsl:choose>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="normalizeDateFrag">
-      <xsl:param name="dateStringInput"/>
-      <xsl:param name="dateStringOutput"/>
-      <xsl:choose>
-        <xsl:when test="string-length($dateStringInput) = 5 and substring($dateStringInput, 4, 2) = '-?'">
-          <xsl:call-template name="normalizeDateFrag">
-            <xsl:with-param name="dateStringInput" select="translate($dateStringInput, '-?', '0')" />
-            <xsl:with-param name="dateStringOutput" select="$dateStringOutput" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="string-length($dateStringInput) = 4 and substring($dateStringInput, 4, 1) = '?'">
-          <xsl:call-template name="normalizeDateFrag">
-            <xsl:with-param name="dateStringInput" select="translate($dateStringInput, '?', '')" />
-            <xsl:with-param name="dateStringOutput" select="$dateStringOutput" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="string-length($dateStringInput) = 7 and substring($dateStringInput, 5, 1) = '/'">
-          <xsl:call-template name="normalizeDateFrag">
-            <xsl:with-param name="dateStringInput" select="concat(substring($dateStringInput, 1, 4), '-', substring($dateStringInput, 1, 2), substring($dateStringInput, 6, 2))" />
-            <xsl:with-param name="dateStringOutput" select="$dateStringOutput" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="string-length($dateStringInput) = 8 and substring($dateStringInput, 5, 1) = '/' and substring($dateStringInput, 8, 1) = '?'">
-          <xsl:call-template name="normalizeDateFrag">
-            <xsl:with-param name="dateStringInput" select="concat(substring($dateStringInput, 1, 4), '-', substring($dateStringInput, 1, 2), substring($dateStringInput, 6, 2))" />
-            <xsl:with-param name="dateStringOutput" select="$dateStringOutput" />
-          </xsl:call-template>
-        </xsl:when>
+        <xsl:param name="dateStringInput"/>
+        <xsl:param name="dateStringOutput"/>
+        <xsl:choose>
+            <xsl:when
+                test="string-length($dateStringInput) = 5 and substring($dateStringInput, 4, 2) = '-?'">
+                <xsl:call-template name="normalizeDateFrag">
+                    <xsl:with-param name="dateStringInput"
+                        select="translate($dateStringInput, '-?', '0')"/>
+                    <xsl:with-param name="dateStringOutput" select="$dateStringOutput"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when
+                test="string-length($dateStringInput) = 4 and substring($dateStringInput, 4, 1) = '?'">
+                <xsl:call-template name="normalizeDateFrag">
+                    <xsl:with-param name="dateStringInput"
+                        select="translate($dateStringInput, '?', '')"/>
+                    <xsl:with-param name="dateStringOutput" select="$dateStringOutput"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when
+                test="string-length($dateStringInput) = 7 and substring($dateStringInput, 5, 1) = '/'">
+                <xsl:call-template name="normalizeDateFrag">
+                    <xsl:with-param name="dateStringInput"
+                        select="concat(substring($dateStringInput, 1, 4), '-', substring($dateStringInput, 1, 2), substring($dateStringInput, 6, 2))"/>
+                    <xsl:with-param name="dateStringOutput" select="$dateStringOutput"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when
+                test="string-length($dateStringInput) = 8 and substring($dateStringInput, 5, 1) = '/' and substring($dateStringInput, 8, 1) = '?'">
+                <xsl:call-template name="normalizeDateFrag">
+                    <xsl:with-param name="dateStringInput"
+                        select="concat(substring($dateStringInput, 1, 4), '-', substring($dateStringInput, 1, 2), substring($dateStringInput, 6, 2))"/>
+                    <xsl:with-param name="dateStringOutput" select="$dateStringOutput"/>
+                </xsl:call-template>
+            </xsl:when>
 
-        <xsl:when test="starts-with($dateStringInput, '[') and (substring($dateStringInput, string-length($dateStringInput), 1) = ']')">
-          <xsl:call-template name="normalizeDateFrag">
-            <xsl:with-param name="dateStringInput" select="substring($dateStringInput, 2, string-length($dateStringInput) - 2)" />
-            <xsl:with-param name="dateStringOutput" select="$dateStringOutput" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="string-length($dateStringInput) &gt; 0">
-          <xsl:call-template name="normalizeDateFrag">
-            <xsl:with-param name="dateStringInput" select="substring($dateStringInput, 2)" />
-            <xsl:with-param name="dateStringOutput">
-              <xsl:choose>
-                <xsl:when test="contains('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ[]', substring($dateStringInput, 1, 1))">
-                  <xsl:value-of select="$dateStringOutput" />
-                </xsl:when>
-                <xsl:when test="contains('?', substring($dateStringInput, 1, 1))">
-                  <xsl:value-of select="concat($dateStringOutput, '0')" />
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="concat($dateStringOutput, substring($dateStringInput, 1, 1))" />
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:with-param>
-          </xsl:call-template>
-        </xsl:when>
+            <xsl:when
+                test="starts-with($dateStringInput, '[') and (substring($dateStringInput, string-length($dateStringInput), 1) = ']')">
+                <xsl:call-template name="normalizeDateFrag">
+                    <xsl:with-param name="dateStringInput"
+                        select="substring($dateStringInput, 2, string-length($dateStringInput) - 2)"/>
+                    <xsl:with-param name="dateStringOutput" select="$dateStringOutput"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="string-length($dateStringInput) &gt; 0">
+                <xsl:call-template name="normalizeDateFrag">
+                    <xsl:with-param name="dateStringInput" select="substring($dateStringInput, 2)"/>
+                    <xsl:with-param name="dateStringOutput">
+                        <xsl:choose>
+                            <xsl:when
+                                test="contains('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ[]', substring($dateStringInput, 1, 1))">
+                                <xsl:value-of select="$dateStringOutput"/>
+                            </xsl:when>
+                            <xsl:when test="contains('?', substring($dateStringInput, 1, 1))">
+                                <xsl:value-of select="concat($dateStringOutput, '0')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of
+                                    select="concat($dateStringOutput, substring($dateStringInput, 1, 1))"
+                                />
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
 
-        <xsl:otherwise>
-          <xsl:value-of select="$dateStringOutput" />
-        </xsl:otherwise>
-      </xsl:choose>
+            <xsl:otherwise>
+                <xsl:value-of select="$dateStringOutput"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="padDateString">
-      <xsl:param name="dateString" />
-      <xsl:choose>
-        <xsl:when test="string-length($dateString) &lt; 4">
-          <xsl:call-template name="padDateString">
-            <xsl:with-param name="dateString" select="concat('0', $dateString)" />
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$dateString" />
-        </xsl:otherwise>
-      </xsl:choose>
+        <xsl:param name="dateString"/>
+        <xsl:choose>
+            <xsl:when test="string-length($dateString) &lt; 4">
+                <xsl:call-template name="padDateString">
+                    <xsl:with-param name="dateString" select="concat('0', $dateString)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$dateString"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="findLowDate">
-      <xsl:param name="dateString" />
-      <xsl:param name="lowDate" select="100000"/>
-      <xsl:choose>
-      <xsl:when test="string-length($dateString) &gt; 0">
-        <xsl:call-template name="findLowDate">
-          <xsl:with-param name="dateString" select="substring-after($dateString, '_')" />
-          <xsl:with-param name="lowDate">
-            <xsl:choose>
-              <xsl:when test="number(substring($dateString, 1, 4)) &lt; number($lowDate)">
-                <xsl:value-of select="substring($dateString, 1, 4)" />
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:value-of select="$lowDate" />
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:with-param>
-        </xsl:call-template>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="$lowDate" />
-      </xsl:otherwise>
-      </xsl:choose>
+        <xsl:param name="dateString"/>
+        <xsl:param name="lowDate" select="100000"/>
+        <xsl:choose>
+            <xsl:when test="string-length($dateString) &gt; 0">
+                <xsl:call-template name="findLowDate">
+                    <xsl:with-param name="dateString" select="substring-after($dateString, '_')"/>
+                    <xsl:with-param name="lowDate">
+                        <xsl:choose>
+                            <xsl:when
+                                test="number(substring($dateString, 1, 4)) &lt; number($lowDate)">
+                                <xsl:value-of select="substring($dateString, 1, 4)"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$lowDate"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$lowDate"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 
 
     <xsl:template name="findHighDate">
-      <xsl:param name="dateString" />
-      <xsl:param name="highDate" select="-100000"/>
+        <xsl:param name="dateString"/>
+        <xsl:param name="highDate" select="-100000"/>
 
-      <xsl:choose>
-      <xsl:when test="string-length($dateString) &gt; 0">
-        <xsl:call-template name="findHighDate">
-          <xsl:with-param name="dateString" select="substring-after($dateString, '_')" />
-          <xsl:with-param name="highDate">
-            <xsl:choose>
-              <xsl:when test="number(substring($dateString, 1, 4)) &gt; number($highDate)">
-                <xsl:value-of select="substring($dateString, 1, 4)" />
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:value-of select="$highDate" />
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:with-param>
-        </xsl:call-template>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="$highDate" />
-      </xsl:otherwise>
-      </xsl:choose>
+        <xsl:choose>
+            <xsl:when test="string-length($dateString) &gt; 0">
+                <xsl:call-template name="findHighDate">
+                    <xsl:with-param name="dateString" select="substring-after($dateString, '_')"/>
+                    <xsl:with-param name="highDate">
+                        <xsl:choose>
+                            <xsl:when
+                                test="number(substring($dateString, 1, 4)) &gt; number($highDate)">
+                                <xsl:value-of select="substring($dateString, 1, 4)"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$highDate"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$highDate"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!--

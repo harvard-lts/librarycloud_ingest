@@ -38,7 +38,7 @@
       <recordInfo>
             
             <recordCreationDate>2004-07-01</recordCreationDate>
-        <recordIdentifier source="MH:TED">LN58aZajmović, Đemo</recordIdentifier>
+        <recordIdentifier source="MH:MHPL">LN58aZajmović, Đemo</recordIdentifier>
       </recordInfo>
    </mods>
     <mods xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
@@ -73,7 +73,12 @@
             <form>aluminum disk</form>
          </physicalDescription>
       </relatedItem>
-      <relatedItem type="otherVersion" displayLabel="Text">manuscript<name>
+      <relatedItem type="otherFormat" displayLabel="Text">
+         <physicalDescription>
+            <form>manuscript</form>
+         </physicalDescription>
+         <typeOfResource manuscript="yes">text</typeOfResource>
+         <name>
             <namePart>Nikola Vujnović</namePart>
             <role>
                <roleTerm type="text" valueURI="http://id.loc.gov/vocabulary/relators/trc">Transcriber</roleTerm>
@@ -89,7 +94,7 @@
       <recordInfo>
             
             <recordCreationDate>2003-06-02</recordCreationDate>
-        <recordIdentifier source="MH:TED">PN803Vidić, Petar</recordIdentifier>
+        <recordIdentifier source="MH:MHPL">PN803Vidić, Petar</recordIdentifier>
       </recordInfo>
    </mods>
     <mods xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
@@ -130,7 +135,7 @@
       <recordInfo>
             
             <recordCreationDate>2004-06-29</recordCreationDate>
-        <recordIdentifier source="MH:TED">LN53Novaković, Radivoje</recordIdentifier>
+        <recordIdentifier source="MH:MHPL">LN53Novaković, Radivoje</recordIdentifier>
       </recordInfo>
    </mods>
 </modsCollection>

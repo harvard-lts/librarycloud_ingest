@@ -81,6 +81,9 @@
                 <xsl:text>Digital Transcript</xsl:text>
             </xsl:attribute>
             <xsl:element name="url">
+                <xsl:attribute name="access">
+                    <xsl:text>raw object</xsl:text>
+                </xsl:attribute>
                 <xsl:value-of select="xlink:href"/>
             </xsl:element>
         </xsl:element>
@@ -95,6 +98,9 @@
                 <xsl:text>Digital Audio</xsl:text>
             </xsl:attribute>
             <xsl:element name="url">
+                <xsl:attribute name="access">
+                    <xsl:text>raw object</xsl:text>
+                </xsl:attribute>
                 <xsl:value-of select="xlink:href"/>
             </xsl:element>
         </xsl:element>
@@ -168,7 +174,7 @@
                 <xsl:attribute name="source">
                     <xsl:text>MH:IOHP</xsl:text>
                 </xsl:attribute>
-                <xsl:value-of select="../_id"/>
+                <xsl:value-of select="lower-case(replace(replace(../_id,' ',''),',',''))"/>
             </xsl:element>
         </xsl:element>
     </xsl:template>

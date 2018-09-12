@@ -10,7 +10,7 @@
 
     <xsl:param name="param1">
         <results/>
-     </xsl:param>
+    </xsl:param>
 
 
     <xsl:template match="@* | node()">
@@ -40,7 +40,7 @@
             </xsl:call-template>
         </xsl:variable>
         <xsl:choose>
-            <xsl:when test="(count($qualifiedUrls/url) != 1 or ./mods:typeOfResource/@collection) and not(mods:recordInfo/mods:recordIdentifier/@source='MH:MCZArtwork') and not(mods:recordInfo/mods:recordIdentifier/@source='MH:MPCOL') and not(mods:recordInfo/mods:recordIdentifier/@source='MH:IOHP')">
+            <xsl:when test="(count($qualifiedUrls/url) != 1 or ./mods:typeOfResource/@collection) and not(mods:recordInfo/mods:recordIdentifier/@source='MH:MCZArtwork') and not(mods:recordInfo/mods:recordIdentifier/@source='MH:MHPL') and not(mods:recordInfo/mods:recordIdentifier/@source='MH:IOHP')">
                 <xsl:copy-of select="."/>
             </xsl:when>
             <xsl:otherwise>

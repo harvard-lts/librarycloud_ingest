@@ -235,9 +235,17 @@
 
     <xsl:template match="text">
         <xsl:element name="relatedItem">
-            <xsl:attribute name="type">otherVersion</xsl:attribute>
+            <xsl:attribute name="type">otherFormat</xsl:attribute>
             <xsl:attribute name="displayLabel">Text</xsl:attribute>
-            <xsl:value-of select="availableText"/>
+            <xsl:element name="physicalDescription">
+                <xsl:element name="form">
+                    <xsl:value-of select="availableText"/>
+                </xsl:element>
+            </xsl:element>
+            <xsl:element name="typeOfResource">
+                <xsl:attribute name="manuscript">yes</xsl:attribute>
+                <xsl:text>text</xsl:text>
+            </xsl:element>
             <xsl:apply-templates select="transcriber"/>
             <xsl:apply-templates select="dictatedTo"/>
             <xsl:apply-templates select="numberOfLines"/>
@@ -308,9 +316,10 @@
             <xsl:apply-templates/>
             <xsl:element name="recordIdentifier">
                 <xsl:attribute name="source">
-                    <xsl:text>MH:MPCOL</xsl:text>
+                    <xsl:text>MH:MHPL</xsl:text>
                 </xsl:attribute>
-                <xsl:value-of select="../_id"/>
+                <!--<xsl:value-of select="../_id"/>-->
+                <xsl:value-of select="../record/itemNumber"/>
             </xsl:element>
         </xsl:element>
     </xsl:template>

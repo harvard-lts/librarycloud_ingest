@@ -14,7 +14,7 @@
       <partNumber>25</partNumber>
    </titleInfo>
    <location displayLabel="Digital Transcript">
-      <url>http://nrs.harvard.edu/urn-3:FHCL:888500</url>
+      <url access="raw object">http://nrs.harvard.edu/urn-3:FHCL:888500</url>
    </location>
    <typeOfResource>text</typeOfResource>
    <physicalDescription>
@@ -22,7 +22,7 @@
       <extent>1</extent>
    </physicalDescription>
    <location displayLabel="Digital Audio">
-      <url>http://nrs.harvard.edu/urn-3:FHCL:2381094</url>
+      <url access="raw object">http://nrs.harvard.edu/urn-3:FHCL:2381094</url>
    </location>
    <typeOfResource>sound recording-nonmusical</typeOfResource>
    <language>
@@ -215,6 +215,6 @@
    <recordInfo>
         
         <recordCreationDate>2006-09-20</recordCreationDate>
-      <recordIdentifier source="MH:TED">Sanjabi, Karim.25</recordIdentifier>
+      <recordIdentifier source="MH:IOHP">sanjabikarim.25</recordIdentifier>
    </recordInfo>
 </mods>
