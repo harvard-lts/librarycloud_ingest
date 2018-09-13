@@ -124,17 +124,57 @@
 
     </xsl:template>
 
-    <xsl:template match="mods:location[mods:url][1]">
+    <xsl:template match="mods:relatedItem">
         <xsl:copy>
-            <xsl:copy-of select="@* | node()"/>
-            <xsl:call-template name="object-in-context-links">
-                <xsl:with-param name="modsRoot" select="ancestor::mods:mods" />
-            </xsl:call-template>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+            <xsl:if test="string-length(mods:location/mods:physicalLocation[@type='repository'])" >
+                <extension xmlns="http://www.loc.gov/mods/v3">
+                    <xsl:for-each select="mods:location/mods:physicalLocation[@type='repository']">
+                        <xsl:variable name="source" select="normalize-space(./text())" />
+
+                        <xsl:if test="string-length($map//mapping[source=$source]/extensionValue)">
+
+                            <HarvardRepositories:HarvardRepositories>
+                                <HarvardRepositories:HarvardRepository>
+                                    <xsl:value-of select="$map//mapping[source=$source]/extensionValue" />
+                                </HarvardRepositories:HarvardRepository>
+                            </HarvardRepositories:HarvardRepositories>
+                        </xsl:if>
+                    </xsl:for-each>
+                </extension>
+            </xsl:if>
         </xsl:copy>
     </xsl:template>
 
+    <xsl:template match="mods:location[mods:url][1]">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+            <xsl:if test="local-name(..) = 'mods'">
+            <xsl:call-template name="object-in-context-links">
+                <xsl:with-param name="modsRoot" select="ancestor::mods:mods" />
+            </xsl:call-template>
+            </xsl:if>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="mods:url">
+        <xsl:choose>
+            <xsl:when test="contains(.,'urn-3') or contains(.,'ids.lib.harvard.edu')">
+                <xsl:copy>
+                    <xsl:copy-of select="@*"/>
+                    <xsl:value-of select="replace(.,'http:','https:')"/>
+                </xsl:copy>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <xsl:template match="mods:location/mods:physicalLocation">
-        <xsl:variable name="source" select="./text()" />
+        <xsl:variable name="source" select="normalize-space(./text())" />
         <xsl:choose>
             <xsl:when test="@type = 'repository'">
                 <xsl:copy>
@@ -176,17 +216,9 @@
 
     <xsl:template name="object-in-context-links">
         <xsl:param name="modsRoot" />
-        <xsl:if test="$modsRoot//mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'P'">
-            <url xmlns="http://www.loc.gov/mods/v3" access="object in context" displayLabel="Harvard Digital Collections">http://id.lib.harvard.edu/digital_collections/<xsl:value-of select="$modsRoot//mods:recordInfo/mods:recordIdentifier" /></url>
+        <xsl:if test="$modsRoot/mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'P'">
+            <url xmlns="http://www.loc.gov/mods/v3" access="object in context" displayLabel="Harvard Digital Collections">http://id.lib.harvard.edu/digital_collections/<xsl:value-of select="$modsRoot/mods:recordInfo/mods:recordIdentifier" /></url>
         </xsl:if>
-        <xsl:for-each select="$modsRoot//mods:extension//sets:set">
-            <url xmlns="http://www.loc.gov/mods/v3" access="object in context">
-                <xsl:attribute name="displayLabel">
-                    <xsl:value-of select="sets:setName/text()" />
-                </xsl:attribute>
-                <xsl:value-of select="sets:baseUrl" />-<xsl:value-of select="$modsRoot//mods:recordInfo/mods:recordIdentifier" />
-            </url>
-        </xsl:for-each>
     </xsl:template>
 
 </xsl:stylesheet>
