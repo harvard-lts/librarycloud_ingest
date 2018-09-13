@@ -149,13 +149,28 @@
 
     <xsl:template match="mods:location[mods:url][1]">
         <xsl:copy>
-            <xsl:copy-of select="@* | node()"/>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
             <xsl:if test="local-name(..) = 'mods'">
                 <xsl:call-template name="object-in-context-links">
                     <xsl:with-param name="modsRoot" select="ancestor::mods:mods" />
                 </xsl:call-template>
             </xsl:if>
         </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="mods:url">
+        <xsl:choose>
+            <xsl:when test="contains(.,'urn-3') or contains(.,'ids.lib.harvard.edu')">
+                <xsl:copy>
+                    <xsl:copy-of select="@*"/>
+                    <xsl:value-of select="replace(.,'http:','https:')"/>
+                </xsl:copy>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="mods:location/mods:physicalLocation">
