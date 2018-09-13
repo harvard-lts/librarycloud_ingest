@@ -39,7 +39,6 @@ class ModsProcessorTests {
         lcm = TestHelpers.buildLibCommMessage("marc", "marcxml_sample_1.xml");
         p.processMessage(lcm);
         mods = TestHelpers.extractXmlDoc(lcm);
-        System.out.println(lcm.getPayload().getData());
     }
 
 
@@ -63,5 +62,17 @@ class ModsProcessorTests {
         Document modsAlma = TestHelpers.extractXmlDoc(lcmAlma);
         String urlAlma = TestHelpers.getXPath("//mods:mods[1]//mods:relatedItem[@otherType='HOLLIS record']/mods:location/mods:url", modsAlma);
         assertEquals("http://id.lib.harvard.edu/alma/000005977/catalog", urlAlma);
+    }
+
+    @Test //LTSCLOUD-756 rec: 009955294
+    void namePartPositionTest() throws Exception {
+        p = new ModsProcessor();
+        LibCommMessage lcm = TestHelpers.buildLibCommMessage("marc", "009955294");
+        p.processMessage(lcm);
+        Document mods = TestHelpers.extractXmlDoc(lcm);
+
+        String namePart2 = TestHelpers.getXPath("//mods:subject[2]/mods:name/mods:namePart[2]", mods);
+        assertEquals("Viscount", namePart2);
+
     }
 }

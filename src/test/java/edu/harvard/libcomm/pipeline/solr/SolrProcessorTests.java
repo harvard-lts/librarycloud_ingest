@@ -45,6 +45,7 @@ class SolrProcessorTests {
         lcm.setPayload(pl);
 
         String result = MessageUtils.transformPayloadData(lcm, "src/main/resources/mods2solr.xsl", null);
+        System.out.println(result);
         InputStream solrIS = IOUtils.toInputStream(result, "UTF-8");
 
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
@@ -54,7 +55,6 @@ class SolrProcessorTests {
         solrDoc = builder.parse(solrIS);
         xPath = XPathFactory.newInstance().newXPath();
     }
-
 
     @Test
     void buildSolrLanguageFields() throws Exception {
@@ -161,7 +161,7 @@ class SolrProcessorTests {
     void buildRelatedItem() throws Exception {
         String relatedItem = (String) xPath.compile("//doc[field[@name='title'] = 'relatedItemTest']//field[@name='relatedItem'][1]").evaluate(solrDoc, XPathConstants.STRING);
 
-        assertEquals("Musique ; 1", relatedItem);
+        assertEquals("TITLE SUBTITLE 3 PARTNAME", relatedItem);
     }
 
     @Test
@@ -191,63 +191,70 @@ class SolrProcessorTests {
     void repositoryFieldAndFacet() throws Exception {
         String r1 = (String) xPath.compile("//doc[1]//field[@name='repository'][1]").evaluate(solrDoc, XPathConstants.STRING);
         String r2 = (String) xPath.compile("//doc[1]//field[@name='repository'][2]").evaluate(solrDoc, XPathConstants.STRING);
+        String r3 = (String) xPath.compile("//doc[1]//field[@name='repository'][3]").evaluate(solrDoc, XPathConstants.STRING);
+        String r4 = (String) xPath.compile("//doc[1]//field[@name='repositoryLongForm'][1]").evaluate(solrDoc, XPathConstants.STRING);
 
         assertEquals("Botany Gray Herbarium", r1);
         assertEquals("Widener", r2);
+        assertEquals("Some Other Repository", r3);
+        assertEquals("Music Repository Long Form Name", r4);
     }
 
     @Test //LTSCLOUD-750
     void matchModsNodesRegardlessOfHierarchy() throws Exception {
         String data;
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='name'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='title'][2])").evaluate(solrDoc, XPathConstants.STRING);
+        assertEquals("foo bar", data.trim());
+
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='name'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("Bory, Jean Louis", data.trim());
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='dateCreated'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='dateCreated'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("2002", data.trim());
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='dateCaptured'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='dateCaptured'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("2003", data.trim());
 
         data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='genre'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("Catalogs", data.trim());
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='physicalLocation'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='physicalLocation'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("Freer Gallery of Art", data.trim());
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='resourceType'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='_resourceType'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("still image", data.trim());
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='repository'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='repository'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("Widener", data.trim());
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='role'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='role'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("creator", data.trim());
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='shelfLocator'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='shelfLocator'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("Mus 645.5.717", data.trim());
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='subject.topic'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='subject.topic'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("Theology", data.trim());
 
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='originPlace'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='originPlace'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("Germany", data.trim());
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='publisher'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='publisher'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("PUBLISHER", data.trim());
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='originDate'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='originDate'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("2001", data.trim());
 
-        data = (String) xPath.compile("(//doc[field[@name='title'] = 'deepData']//field[@name='url.access.preview'])").evaluate(solrDoc, XPathConstants.STRING);
+        data = (String) xPath.compile("(//doc[field[@name='title'][1] = 'deepData']//field[@name='url.access.preview'])").evaluate(solrDoc, XPathConstants.STRING);
         assertEquals("true", data.trim());
 
     }
 
     @Test
     void dontBeRedundant() throws Exception {
-        Number nodeCount1 = TestHelpers.getNodeCount("//doc[field[@name='title'] = 'redundantStillImage']//field[@name='resourceType']", solrDoc);
+        Number nodeCount1 = TestHelpers.getNodeCount("//doc[field[@name='title'] = 'redundantStillImage']//field[@name='_resourceType']", solrDoc);
         Number nodeCount2 = TestHelpers.getNodeCount("//doc[field[@name='title'] = 'redundantStillImage']//field[@name='isManuscript']", solrDoc);
 
         assertEquals(1.0, nodeCount1);

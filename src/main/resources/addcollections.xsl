@@ -58,6 +58,47 @@
                 </lc:sets>
             </extension>
             <xsl:apply-templates select="mods:recordInfo"/>
+            <xsl:if test="count(mods:location/mods:url) &lt; 1">
+              <location xmlns="http://www.loc.gov/mods/v3">
+                <xsl:call-template name="object-in-context-links">
+                  <xsl:with-param name="modsRoot" select="." />
+                </xsl:call-template>
+              </location>
+            </xsl:if>
         </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="mods:location[mods:url][1]">
+      <xsl:copy>
+        <xsl:copy-of select="@*"/>
+        <xsl:apply-templates />
+        <xsl:if test="local-name(..) = 'mods'">
+          <xsl:call-template name="object-in-context-links">
+            <xsl:with-param name="modsRoot" select="ancestor::mods:mods" />
+          </xsl:call-template>
+        </xsl:if>
+      </xsl:copy>
+    </xsl:template>
+
+    <!-- abandon existing spotlight links-->
+    <xsl:template match="mods:url[@access='object in context' and @displayLabel!='Harvard Digital Collections']">
+    </xsl:template>
+
+    <xsl:template name="object-in-context-links">
+      <xsl:param name="modsRoot" />
+      <xsl:variable name="collections" select="$param1"/>
+      <xsl:variable name="recordid">
+        <xsl:value-of select="$modsRoot/mods:recordInfo/mods:recordIdentifier"/>
+      </xsl:variable>
+      <xsl:for-each select="$collections//col:item[col:item_id = $recordid]/col:collections">
+          <xsl:if test="string-length(normalize-space(col:baseUrl))">
+            <url xmlns="http://www.loc.gov/mods/v3" access="object in context">
+                <xsl:attribute name="displayLabel">
+                    <xsl:value-of select="col:setName/text()" />
+                </xsl:attribute>
+                <xsl:value-of select="col:baseUrl" />-<xsl:value-of select="$recordid" />
+            </url>
+          </xsl:if>
+        </xsl:for-each>
     </xsl:template>
 </xsl:stylesheet>

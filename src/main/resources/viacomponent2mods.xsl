@@ -10,28 +10,31 @@
 	<xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
 	<!--<xsl:param name="urn">http://nrs.harvard.edu/urn-3:FHCL:1154698</xsl:param>-->
 	<xsl:param name="urn"/>
-  <xsl:param name="suffix" />
+  <xsl:param name="nodeComponentID" />
 	<xsl:template match="/viaRecord">
+    <xsl:message>URN: <xsl:value-of select="$urn" /></xsl:message>
+    <xsl:message>SFX: <xsl:value-of select="$nodeComponentID" /></xsl:message>
 		<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
 			<xsl:apply-templates/>
 			<xsl:variable name="urnsuffix">
 				<xsl:choose>
-          <xsl:when test="string-length($suffix)">
-            <xsl:value-of select="$suffix" />
-          </xsl:when>
-					<xsl:when test="work/surrogate/image[contains(@href, $urn)]">
+					<xsl:when test="string-length($urn) and work/surrogate/image[contains(@href, $urn)]">
 						<xsl:value-of
 							select="work/surrogate/image[contains(@href, $urn)]/../@componentID"/>
 					</xsl:when>
-					<xsl:when test="work/surrogate/image[contains(@xlink:href, $urn)]">
+					<xsl:when test="string-length(work/surrogate[@componentID = $nodeComponentID]/image/@xlink:href)">
 						<xsl:value-of
-							select="work/surrogate/image[contains(@xlink:href, $urn)]/../@componentID"
-						/>
+							select="substring-after(work/surrogate[@componentID = $nodeComponentID]/image/@xlink:href, 'edu/')" />
 					</xsl:when>
-					<xsl:otherwise>
+					<xsl:when test="string-length($urn)">
 						<xsl:value-of select="substring-after($urn, 'edu/')"/>
-					</xsl:otherwise>
+          </xsl:when>
+          <xsl:when test="string-length($nodeComponentID)">
+            <xsl:value-of select="$nodeComponentID" />
+          </xsl:when>
+          <xsl:otherwise>
+          </xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
 
@@ -73,8 +76,10 @@
 							<xsl:value-of select="recordId"/>
 						</xsl:otherwise>
 					</xsl:choose>
-					<xsl:text>_</xsl:text>
-					<xsl:value-of select="$urnsuffix"/>
+          <xsl:if test="string-length($urnsuffix)">
+					  <xsl:text>_</xsl:text>
+					  <xsl:value-of select="$urnsuffix"/>
+          </xsl:if>
 				</recordIdentifier>
 				<languageOfCataloging>
 					<languageTerm>eng</languageTerm>
@@ -124,7 +129,7 @@
 	</xsl:template>
 
 	<xsl:template match="surrogate">
-		<xsl:if test="string-length($urn) and contains(image/@href, $urn)">
+		<xsl:if test="(string-length($urn) and contains(image/@href, $urn)) or $nodeComponentID = @componentID">
 			<relatedItem type="constituent">
 				<xsl:call-template name="recordElements"/>
 				<recordInfo>
@@ -329,7 +334,7 @@
 						<xsl:value-of select="dimensions"/>
 					</extent>
 				</xsl:if>
-				<!--xsl:if test="workType">		
+				<!--xsl:if test="workType">
 			<form>
 				<xsl:value-of select="workType"/>
 			</form>
@@ -451,7 +456,7 @@
 		<extension xmlns:via="http://via.harvard.edu">
 		    <via:relationship>
 			<xsl:value-of select="relationship"/>
-		    </via:relationship>	
+		    </via:relationship>
 		</extension>
 		-->
 			<xsl:apply-templates select="creator"/>
@@ -497,7 +502,7 @@
 	</xsl:template>
 
 	<xsl:template match="image">
-		<xsl:if test="contains(@href, $urn)">
+		<xsl:if test="string-length($urn) and contains(@href, $urn)">
 			<xsl:choose>
 				<xsl:when test="caption and not(../surrogate)">
 					<relatedItem type="constituent">
@@ -686,7 +691,7 @@
 			<xsl:value-of select="."/>
 		</accessCondition>
 	</xsl:template>
-	
+
 	<xsl:template match="admin"/>
 
 </xsl:stylesheet>

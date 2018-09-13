@@ -1,0 +1,68 @@
+<viaRecord originalAtHarvard="true"
+           primaryImageThumbnailURN="http://nrs.harvard.edu/urn-3:FHCL.HOUGH:37205626">
+   <recordId altRecordId="ss_8000179112">olvwork166800</recordId>
+   <work>
+      <image xmlns:xlink="http://www.w3.org/TR/xlink"
+             componentID="22621422"
+             restrictedImage="false"
+             xlink:href="http://nrs.harvard.edu/urn-3:FHCL.HOUGH:37205626">
+         <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:FHCL.HOUGH:37205626"/>
+      </image>
+      <image xmlns:xlink="http://www.w3.org/TR/xlink"
+             componentID="W166800_1"
+             altComponentID="4095537"
+             restrictedImage="false"
+             xlink:href="http://nrs.harvard.edu/urn-3:FHCL.HOUGH:37205528">
+         <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:FHCL.HOUGH:37205528"/>
+      </image>
+      <title>
+         <textElement>Copy of engraving of old man standing by woodpile</textElement>
+      </title>
+      <itemIdentifier>
+         <number>Schaaf no. 4004. Salt Print Survey at Harvard number 1449</number>
+      </itemIdentifier>
+      <workType>paper negatives</workType>
+      <workType>photogenic drawings (photographs)</workType>
+      <creator>
+         <nameElement>Talbot, William Henry Fox</nameElement>
+         <dates>1800-1877, English</dates>
+         <role>photographer</role>
+      </creator>
+      <structuredDate>
+         <beginDate>1835</beginDate>
+         <endDate>1849</endDate>
+      </structuredDate>
+      <structuredDate>
+         <beginDate>1835</beginDate>
+         <endDate>1849</endDate>
+      </structuredDate>
+      <freeDate>late 1830s or 1840s</freeDate>
+      <dimensions> image 11.8 x 8.2 cm; paper 17 x 10 cm</dimensions>
+      <topic>
+         <term>reproductions</term>
+      </topic>
+      <topic>
+         <term>prints (visual works)</term>
+      </topic>
+      <materials>photogenic drawing (process)</materials>
+      <notes>General: Title devised. See also Horblit TypPr 805.T820.176 Sz1</notes>
+      <relatedWork>
+         <relationship>Part of</relationship>
+         <textElement>Harrison D. Horblit collection of early photography</textElement>
+      </relatedWork>
+      <relatedInformation xmlns:xlink="http://www.w3.org/TR/xlink"
+                          xlink:href="http://id.lib.harvard.edu/aleph/008080945/catalog">Collection-level record</relatedInformation>
+      <useRestrictions>Houghton Library: Cite as: Horblit TypPr [number], Harrison D. Horblit Collection of Early Photography, Houghton Library, Harvard University.</useRestrictions>
+      <useRestrictions>Houghton Library: Access to this item is restricted. Please consult collection curator for further information.</useRestrictions>
+      <repository>
+         <repositoryName>Houghton Library</repositoryName>
+         <number>Horblit TypPr 805.T820.175 Sz1</number>
+      </repository>
+   </work>
+   <admin>
+      <createDate>2014-12-24</createDate>
+      <updateNote>
+         <updateDate>2018/07/27 10:52:50</updateDate>
+      </updateNote>
+   </admin>
+</viaRecord>

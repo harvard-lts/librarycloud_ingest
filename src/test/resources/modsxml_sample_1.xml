@@ -11,7 +11,7 @@
         <dateIssued>1967</dateIssued>
       </originInfo>
       <location>
-        <physicalLocation displayLabel="Harvard repository" type="repository">Music Repository</physicalLocation>
+        <physicalLocation displayLabel="Harvard repository" type="repository">Music Repository Long Form Name</physicalLocation>
         <shelfLocator>Mus 645.5.717</shelfLocator>
       </location>
       <location>
@@ -45,6 +45,11 @@
         <name type="personal">
           <namePart>Jane Doe</namePart>
         </name>
+        <extension>
+            <HarvardRepositories xmlns="http://hul.harvard.edu/ois/xml/ns/HarvardRepositories" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS" xmlns:urlinfo="http://lib.harvard.edu/urlinfo" xmlns:countries="info:lc/xmlns/codelist-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <HarvardRepository>Some Other Repository</HarvardRepository>
+            </HarvardRepositories>
+        </extension>
       </relatedItem>
    </mods>
    <mods version="3.6">
@@ -143,7 +148,10 @@
      <titleInfo><title>relatedItemTest</title></titleInfo>
      <relatedItem type="series">
        <titleInfo>
-         <title>Musique ; 1</title>
+           <title>TITLE</title>
+           <subTitle>SUBTITLE</subTitle>
+           <partNumber>3</partNumber>
+           <partName>PARTNAME</partName>
        </titleInfo>
        <name type="personal">
          <namePart>Bory, Jean Louis</namePart>
@@ -169,7 +177,8 @@
      <notarealmodstag>
          <sonofnotarealmodstag>
              <titleInfo>
-                 <title>Musique ; 1</title>
+               <title>foo</title>
+               <subTitle>bar</subTitle>
              </titleInfo>
              <name type="personal">
                  <namePart>Bory, Jean Louis</namePart>

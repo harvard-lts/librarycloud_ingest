@@ -1,0 +1,16 @@
+<modsCollection xmlns:countries="info:lc/xmlns/codelist-v1"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns="http://www.loc.gov/mods/v3"
+                xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+
+  <mods version="3.6">
+    <location>
+      <url access="raw object">http://nrs.harvard.edu/urn-3:FHCL:478854</url>
+      <url displayLabel="Old Stale set" access="object in context">http://foo.com-abc</url>
+      <url displayLabel="Harvard Digital Collections" access="object in context">http://id.lib.harvard.edu/digital_collections/abc_urn-3:FHCL:478854</url>
+    </location>
+    <recordInfo>
+      <recordIdentifier source="MH:VIA">abc</recordIdentifier>
+    </recordInfo>
+  </mods>
+</modsCollection>

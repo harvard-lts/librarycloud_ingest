@@ -160,11 +160,35 @@
 
     <xsl:template match="unitdate">
         <xsl:element name="originInfo">
-            <xsl:if test="string-length(@normal)">
+          <xsl:if test="string-length(@normal)">
+            <xsl:choose>
+              <xsl:when test='matches(@normal, "\d{4}-\d{2}-\d{2}/\d{4}-\d{2}-\d{2}")'>
+                <xsl:element name="dateCreated">
+                  <xsl:attribute name="point">start</xsl:attribute>
+                    <xsl:value-of select="substring-before(@normal, '/')"/>
+                </xsl:element>
+                <xsl:element name="dateCreated">
+                  <xsl:attribute name="point">end</xsl:attribute>
+                    <xsl:value-of select="substring-after(@normal, '/')"/>
+                </xsl:element>
+              </xsl:when>
+              <xsl:when test='matches(@normal, "\d{4}/\d{4}")'>
+                <xsl:element name="dateCreated">
+                  <xsl:attribute name="point">start</xsl:attribute>
+                    <xsl:value-of select="substring-before(@normal, '/')"/>
+                </xsl:element>
+                <xsl:element name="dateCreated">
+                  <xsl:attribute name="point">end</xsl:attribute>
+                    <xsl:value-of select="substring-after(@normal, '/')"/>
+                </xsl:element>
+              </xsl:when>
+              <xsl:otherwise>
                 <xsl:element name="dateCreated">
                     <xsl:value-of select="@normal"/>
                 </xsl:element>
-            </xsl:if>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:if>
         </xsl:element>
     </xsl:template>
     <xsl:template match="persname|famname|corpname">
