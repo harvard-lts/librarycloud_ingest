@@ -55,9 +55,18 @@
 				<recordContentSource authority="marcorg">MH</recordContentSource>
 				<recordContentSource authority="marcorg">MH-VIA</recordContentSource>
 				<recordChangeDate encoding="iso8601">
-					<xsl:value-of
-						select="replace(substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' '), '/', '-')"
-					/>
+					<xsl:choose>
+						<xsl:when test="contains(admin/updateNote,'/')">
+							<xsl:value-of select="replace(substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' '), '/', '')"/>							
+						</xsl:when>
+						<xsl:when test="contains(admin/updateNote,'-')">
+							<xsl:value-of select="replace(substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' '), '-', '')"/>							
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' ')"/>
+						</xsl:otherwise>
+					</xsl:choose>
+
 				</recordChangeDate>
 				<recordIdentifier>
 					<xsl:attribute name="source">
