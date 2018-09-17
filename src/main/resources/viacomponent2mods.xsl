@@ -55,18 +55,25 @@
 				<recordContentSource authority="marcorg">MH</recordContentSource>
 				<recordContentSource authority="marcorg">MH-VIA</recordContentSource>
 				<recordChangeDate encoding="iso8601">
+					<xsl:variable name="lastdate">
+						<xsl:choose>
+							<xsl:when test="contains(admin/updateNote[position() = last()]/updateDate,' ')">
+								<xsl:value-of select="substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' ')"/>
+							</xsl:when>
+							<xsl:otherwise><xsl:value-of select="admin/updateNote[position() = last()]/updateDate/text()"/></xsl:otherwise>
+						</xsl:choose>
+					</xsl:variable>
 					<xsl:choose>
-						<xsl:when test="contains(admin/updateNote,'/')">
-							<xsl:value-of select="replace(substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' '), '/', '')"/>							
+						<xsl:when test="contains($lastdate,'/')">
+							<xsl:value-of select="replace($lastdate, '/', '')"/>							
 						</xsl:when>
-						<xsl:when test="contains(admin/updateNote,'-')">
-							<xsl:value-of select="replace(substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' '), '-', '')"/>							
+						<xsl:when test="contains($lastdate,'-')">
+							<xsl:value-of select="replace($lastdate, '-', '')"/>							
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' ')"/>
+							<xsl:value-of select="$lastdate"/>
 						</xsl:otherwise>
 					</xsl:choose>
-
 				</recordChangeDate>
 				<recordIdentifier>
 					<xsl:attribute name="source">
