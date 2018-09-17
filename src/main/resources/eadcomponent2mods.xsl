@@ -189,6 +189,9 @@
               </xsl:otherwise>
             </xsl:choose>
           </xsl:if>
+            <xsl:element name="dateCreated">
+                <xsl:value-of select="."/>
+            </xsl:element>
         </xsl:element>
     </xsl:template>
     <xsl:template match="persname|famname|corpname">

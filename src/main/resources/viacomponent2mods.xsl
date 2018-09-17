@@ -12,29 +12,31 @@
 	<xsl:param name="urn"/>
   <xsl:param name="nodeComponentID" />
 	<xsl:template match="/viaRecord">
-    <xsl:message>URN: <xsl:value-of select="$urn" /></xsl:message>
-    <xsl:message>SFX: <xsl:value-of select="$nodeComponentID" /></xsl:message>
+		<xsl:message>URN: <xsl:value-of select="$urn"/></xsl:message>
+		<xsl:message>SFX: <xsl:value-of select="$nodeComponentID"/></xsl:message>
 		<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
 			<xsl:apply-templates/>
 			<xsl:variable name="urnsuffix">
 				<xsl:choose>
-					<xsl:when test="string-length($urn) and work/surrogate/image[contains(@href, $urn)]">
+					<xsl:when
+						test="string-length($urn) and work/surrogate/image[contains(@href, $urn)]">
 						<xsl:value-of
 							select="work/surrogate/image[contains(@href, $urn)]/../@componentID"/>
 					</xsl:when>
-					<xsl:when test="string-length(work/surrogate[@componentID = $nodeComponentID]/image/@xlink:href)">
+					<xsl:when
+						test="string-length(work/surrogate[@componentID = $nodeComponentID]/image/@xlink:href)">
 						<xsl:value-of
-							select="substring-after(work/surrogate[@componentID = $nodeComponentID]/image/@xlink:href, 'edu/')" />
+							select="substring-after(work/surrogate[@componentID = $nodeComponentID]/image/@xlink:href, 'edu/')"
+						/>
 					</xsl:when>
 					<xsl:when test="string-length($urn)">
 						<xsl:value-of select="substring-after($urn, 'edu/')"/>
-          </xsl:when>
-          <xsl:when test="string-length($nodeComponentID)">
-            <xsl:value-of select="$nodeComponentID" />
-          </xsl:when>
-          <xsl:otherwise>
-          </xsl:otherwise>
+					</xsl:when>
+					<xsl:when test="string-length($nodeComponentID)">
+						<xsl:value-of select="$nodeComponentID"/>
+					</xsl:when>
+					<xsl:otherwise> </xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
 
@@ -53,7 +55,9 @@
 				<recordContentSource authority="marcorg">MH</recordContentSource>
 				<recordContentSource authority="marcorg">MH-VIA</recordContentSource>
 				<recordChangeDate encoding="iso8601">
-					<xsl:value-of select="replace(substring-before(admin/updateNote[position() = last()]/updateDate/text(),' '),'-','')"/>
+					<xsl:value-of
+						select="replace(substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' '), '/', '-')"
+					/>
 				</recordChangeDate>
 				<recordIdentifier>
 					<xsl:attribute name="source">
@@ -76,19 +80,19 @@
 							<xsl:value-of select="recordId"/>
 						</xsl:otherwise>
 					</xsl:choose>
-          <xsl:if test="string-length($urnsuffix)">
-					  <xsl:text>_</xsl:text>
-					  <xsl:value-of select="$urnsuffix"/>
-          </xsl:if>
+					<xsl:if test="string-length($urnsuffix)">
+						<xsl:text>_</xsl:text>
+						<xsl:value-of select="$urnsuffix"/>
+					</xsl:if>
 				</recordIdentifier>
 				<languageOfCataloging>
 					<languageTerm>eng</languageTerm>
 				</languageOfCataloging>
 			</recordInfo>
-      <language>
-        <languageTerm type="code">zxx</languageTerm>
-        <languageTerm type="text">No linguistic content</languageTerm>
-      </language>
+			<language>
+				<languageTerm type="code">zxx</languageTerm>
+				<languageTerm type="text">No linguistic content</languageTerm>
+			</language>
 		</mods>
 	</xsl:template>
 
@@ -104,32 +108,50 @@
 	</xsl:template>
 
 	<xsl:template match="subwork">
-		<xsl:if test="contains(image/@href, $urn)">
-			<relatedItem type="constituent">
-				<xsl:call-template name="recordElements"/>
-				<recordInfo>
-					<recordIdentifier>
-						<xsl:value-of select="@componentID"/>
-					</recordIdentifier>
-				</recordInfo>
+		<xsl:choose>
+			<xsl:when test="contains(image/@href, $urn) and string-length(image/@href)">
+				<relatedItem type="constituent">
+					<xsl:call-template name="recordElements"/>
+					<recordInfo>
+						<recordIdentifier>
+							<xsl:value-of select="@componentID"/>
+						</recordIdentifier>
+					</recordInfo>
+					<!--<xsl:apply-templates select="surrogate"/>-->
+				</relatedItem>
+			</xsl:when>
+			<xsl:when test="contains(image/@xlink:href, $urn) and string-length(image/@xlink:href)">
+				<relatedItem type="constituent">
+					<xsl:call-template name="recordElements"/>
+					<recordInfo>
+						<recordIdentifier>
+							<xsl:value-of select="@componentID"/>
+						</recordIdentifier>
+					</recordInfo>
+					<!--<xsl:apply-templates select="surrogate"/>-->
+				</relatedItem>
+			</xsl:when>
+			<xsl:when test="surrogate/@componentID = $nodeComponentID">
+				<relatedItem type="constituent">
+					<xsl:call-template name="recordElements"/>
+					<recordInfo>
+						<recordIdentifier>
+							<xsl:value-of select="@componentID"/>
+						</recordIdentifier>
+					</recordInfo>
+					<xsl:apply-templates select="surrogate"/>
+				</relatedItem>
+			</xsl:when>
+			<xsl:otherwise/>
+			<!--<xsl:otherwise>
 				<xsl:apply-templates select="surrogate"/>
-			</relatedItem>
-		</xsl:if>
-		<xsl:if test="contains(image/@xlink:href, $urn)">
-			<relatedItem type="constituent">
-				<xsl:call-template name="recordElements"/>
-				<recordInfo>
-					<recordIdentifier>
-						<xsl:value-of select="@componentID"/>
-					</recordIdentifier>
-				</recordInfo>
-				<xsl:apply-templates select="surrogate"/>
-			</relatedItem>
-		</xsl:if>
+			</xsl:otherwise>-->
+		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="surrogate">
-		<xsl:if test="(string-length($urn) and contains(image/@href, $urn)) or $nodeComponentID = @componentID">
+		<xsl:if
+			test="(string-length($urn) and contains(image/@href, $urn)) or $nodeComponentID = @componentID">
 			<relatedItem type="constituent">
 				<xsl:call-template name="recordElements"/>
 				<recordInfo>
@@ -246,12 +268,12 @@
 					<xsl:value-of select="$roleType"/>
 				</roleTerm>
 			</role>
-      <xsl:if test="role">
-        <role>
-				  <roleTerm>
-					  <xsl:value-of select="role"/>
-				  </roleTerm>
-        </role>
+			<xsl:if test="role">
+				<role>
+					<roleTerm>
+						<xsl:value-of select="role"/>
+					</roleTerm>
+				</role>
 			</xsl:if>
 		</name>
 	</xsl:template>
@@ -292,7 +314,7 @@
 							<xsl:value-of select="/record/metadata/viaRecord/@sortDate"/>
 						</xsl:if>
 						<xsl:if test="not(/record/metadata/viaRecord/@sortDate)">
-							<xsl:value-of select="//freeDate[1]"/>
+							<xsl:value-of select="freeDate[1]"/>
 						</xsl:if>
 					</dateOther>
 				</xsl:if>
@@ -693,5 +715,6 @@
 	</xsl:template>
 
 	<xsl:template match="admin"/>
+	<xsl:template match="recordId"/>
 
 </xsl:stylesheet>
