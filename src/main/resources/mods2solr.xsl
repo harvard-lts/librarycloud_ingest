@@ -119,7 +119,7 @@
                 <xsl:variable name="EDT">
                     <xsl:value-of select="substring-before(substring-after($dateRange, ' TO '), ']')"/>
                 </xsl:variable>
-                <xsl:if test="$SDT &lt;= $EDT">
+                <xsl:if test="number($SDT) &lt;= number($EDT)">
               <xsl:element name="field">
                 <xsl:attribute name="name">
                   <xsl:text>dateRange</xsl:text>
