@@ -224,7 +224,7 @@
     <xsl:template match="HarvardDRS:fileDeliveryURL">
         <xsl:copy>
             <xsl:choose>
-                <xsl:when test="starts-with('http:')">
+                <xsl:when test="starts-with(.,'http:')">
                     <xsl:value-of select="replace(.,'http:','https:')"/>
                 </xsl:when>
                 <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
