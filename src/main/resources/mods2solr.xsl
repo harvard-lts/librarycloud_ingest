@@ -113,12 +113,20 @@
             </xsl:variable>
 
             <xsl:if test="string-length($dateRange) > 0 and (not(contains($dateRange, '100000')))">
+                <xsl:variable name="SDT">
+                    <xsl:value-of select="substring-after(substring-before($dateRange, ' TO '), '[')"/>
+                </xsl:variable>
+                <xsl:variable name="EDT">
+                    <xsl:value-of select="substring-before(substring-after($dateRange, ' TO '), ']')"/>
+                </xsl:variable>
+                <xsl:if test="$SDT &lt;= $EDT">
               <xsl:element name="field">
                 <xsl:attribute name="name">
                   <xsl:text>dateRange</xsl:text>
                 </xsl:attribute>
                 <xsl:value-of select="$dateRange" />
               </xsl:element>
+            </xsl:if>
             </xsl:if>
 
             <xsl:element name="field">
