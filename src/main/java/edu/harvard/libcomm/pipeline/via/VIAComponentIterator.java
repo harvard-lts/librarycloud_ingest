@@ -64,6 +64,7 @@ public class VIAComponentIterator implements Iterator<String> {
 
           position++;
           try {
+              if (!componentID.equals(""))
               viaComponentMods += transformVIA(urn, componentID);
           } catch (Exception e) {
               e.printStackTrace();
