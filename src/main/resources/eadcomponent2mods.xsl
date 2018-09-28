@@ -6,7 +6,7 @@
     version="2.0">
     <xsl:output encoding="UTF-8" method="xml" indent="yes" omit-xml-declaration="yes"/>
     <xsl:strip-space elements="*"/>
-    <!--<xsl:param name="componentid">div00579c00002</xsl:param>-->
+    <!--<xsl:param name="componentid">hou02966c00001</xsl:param>-->
     <xsl:param name="componentid"/>
 
     <xsl:variable name="cid_legacy_or_new">
@@ -86,19 +86,33 @@
                 <!-- third value may need to change if we do another full oai harvest - the creation/date is always just the export date
                      maybe just always use that 3rd date at this point? -->
                 <xsl:variable name="dateArr" as="xs:integer*">
-                    <xsl:call-template name="convert-date">
-                        <xsl:with-param name="thedate">
-                            <xsl:value-of select="eadheader/revisiondesc/change[item = 'Loaded into OASIS']/date"/>
-                        </xsl:with-param>
-                    </xsl:call-template>
-                    <xsl:call-template name="convert-date">
-                        <xsl:with-param name="thedate">
-                            <xsl:value-of select="eadheader/revisiondesc/change[contains(item, 'ArchivesSpace Preprocessor')]/date"/>
-                        </xsl:with-param>
-                    </xsl:call-template>
+
+                    <xsl:if test="eadheader/revisiondesc/change[item = 'Loaded into OASIS']/date">
+                        <xsl:call-template name="convert-date">
+                            <xsl:with-param name="thedate">
+                                <xsl:value-of
+                                    select="eadheader/revisiondesc/change[item = 'Loaded into OASIS']/date"
+                                />
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:if>
+
+                    <xsl:if
+                        test="eadheader/revisiondesc/change[contains(item, 'ArchivesSpace Preprocessor')]/date">
+                        <xsl:call-template name="convert-date">
+                            <xsl:with-param name="thedate">
+                                <xsl:value-of
+                                    select="eadheader/revisiondesc/change[contains(item, 'ArchivesSpace Preprocessor')]/date"
+                                />
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:if>
                     <xsl:choose>
-                        <xsl:when test="number(replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')) &gt;= 20180716">
-                            <xsl:value-of select="replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')"/>
+                        <xsl:when
+                            test="number(replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')) &gt;= 20180716">
+                            <xsl:value-of
+                                select="replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')"
+                            />
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:text>20160101</xsl:text>
