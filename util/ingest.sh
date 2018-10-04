@@ -9,6 +9,11 @@
 # 
 # TODO: Make more robust
 
+if [[ $# -ne 4 || ($1 != "ingest" && $1 != "normalize") ]] ; then
+    echo "Usage: ingest.sh [ingest|normalize] [SOURCE] [SQS_ENVIRONMENT] [DATA_FILE] "
+    exit 1
+fi
+
 INGEST_INSTRUCTION=$1
 DATA_SOURCE_NAME=$2
 SQS_ENVIRONMENT=$3
@@ -18,10 +23,10 @@ TARGET_FILE_NAME=`echo $SOURCE_FILE_NAME | sed 's/#//g'`
 TARGET_BUCKET=harvard.librarycloud.upload.$SQS_ENVIRONMENT.$DATA_SOURCE_NAME
 COMMAND_BUCKET=harvard.librarycloud.command.$SQS_ENVIRONMENT.$DATA_SOURCE_NAME
 
-if [ $# -ne 4 ]; then
-    echo "Usage: ingest.sh [INSTRUCTION] [SOURCE] [SQS_ENVIRONMENT] [DATA_FILE] "
-    exit 1
-fi
+#if [ $# -ne 4 ]; then
+#    echo "Usage: ingest.sh [INSTRUCTION] [SOURCE] [SQS_ENVIRONMENT] [DATA_FILE] "
+#    exit 1
+#fi
 
 if [ ! -f $SOURCE_FILE_PATH ]; then
   echo "Data file does not exist"
