@@ -12,7 +12,7 @@
     xmlns:countries="info:lc/xmlns/codelist-v1"
     xmlns:sets="http://hul.harvard.edu/ois/xml/ns/libraryCloud"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    exclude-result-prefixes="mods xs tbd xlink HarvardRepositories processingDate availableTo digitalFormats HarvardDRS xsi countries"
+    exclude-result-prefixes="mods xs sets tbd xlink HarvardRepositories processingDate availableTo digitalFormats HarvardDRS xsi countries"
     version="2.0">
     <!-- <xsl:namespace-alias stylesheet-prefix="mods" result-prefix="" /> -->
     <xsl:output method="xml" encoding="UTF-8"/>

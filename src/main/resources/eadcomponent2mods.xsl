@@ -81,12 +81,46 @@
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did/dao"/>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did/daogrp"/>
             <xsl:element name="recordInfo">
-                <xsl:if test="eadheader/revisiondesc/change[item='Loaded into OASIS']">
+                <!-- third value may need to change if we do another full oai harvest - the creation/date is always just the export date
+                     maybe just always use that 3rd date at this point? -->
+                <xsl:variable name="dateArr" as="xs:integer*">
+
+                    <xsl:if test="eadheader/revisiondesc/change[item = 'Loaded into OASIS']/date">
+                        <xsl:call-template name="convert-date">
+                            <xsl:with-param name="thedate">
+                                <xsl:value-of
+                                    select="eadheader/revisiondesc/change[item = 'Loaded into OASIS']/date"
+                                />
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:if>
+
+                    <xsl:if
+                        test="eadheader/revisiondesc/change[contains(item, 'ArchivesSpace Preprocessor')]/date">
+                        <xsl:call-template name="convert-date">
+                            <xsl:with-param name="thedate">
+                                <xsl:value-of
+                                    select="eadheader/revisiondesc/change[contains(item, 'ArchivesSpace Preprocessor')]/date"
+                                />
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when
+                            test="number(replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')) &gt;= 20180716">
+                            <xsl:value-of
+                                select="replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')"
+                            />
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>20160101</xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
                     <xsl:element name="recordChangeDate">
                       <xsl:attribute name="encoding">iso8601</xsl:attribute>
-                        <xsl:value-of select="format-number(max(eadheader/revisiondesc/change[item='Loaded into OASIS']/date/@normal),'00000000')"/>
+                    <xsl:value-of select="max($dateArr)"/>
                     </xsl:element>
-                </xsl:if>
                 <xsl:element name="recordIdentifier">
                     <xsl:attribute name="id"><xsl:text>s</xsl:text><xsl:value-of select="$sibcount"/></xsl:attribute>
                     <xsl:attribute name="source">MH:OASIS</xsl:attribute>
@@ -96,6 +130,16 @@
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]"/>
             <!-- <xsl:apply-templates select="/ead/eadheader/profiledesc/langusage" /> -->
         </mods>
+    </xsl:template>
+
+    <xsl:template name="convert-date">
+        <xsl:param name="thedate"/>
+        <xsl:value-of
+            select="
+                replace(normalize-space($thedate),
+                '(\d{2})/(\d{2})/(\d{4})',
+                '$3$1$2')"
+        />
     </xsl:template>
 
     <xsl:template match="c" mode="siblingcount">

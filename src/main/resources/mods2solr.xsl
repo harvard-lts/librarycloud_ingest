@@ -1103,8 +1103,7 @@
                 <xsl:value-of select='substring-before(substring-after($dateStringInput, "["), "]")'
                 />
             </xsl:when>
-            <xsl:when
-                test="string-length($dateStringInput) = 0 and string-length($dateStringOutput) = 0"/>
+        <xsl:when test="string-length($dateStringInput) = 0 and string-length($dateStringOutput) = 0"></xsl:when>
             <xsl:when test="$step = 1 and string-length($dateStringInput) > 0">
                 <xsl:call-template name="normalizeDate">
                     <xsl:with-param name="dateStringInput">
