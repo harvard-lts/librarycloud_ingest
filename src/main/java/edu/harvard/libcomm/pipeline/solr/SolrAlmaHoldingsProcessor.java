@@ -42,7 +42,7 @@ public class SolrAlmaHoldingsProcessor implements IProcessor {
 
 	    HttpSolrClient server = null;
 		Date start = new Date();
-	    server = SolrServer.getSolrConnection();
+	    server = SolrHoldingsServer.getSolrConnection();
 		UpdateRequest update = new UpdateRequest();
 		update.add(getSolrInputDocumentList(solrXml));
 		if (commitWithinTime > 0) {
