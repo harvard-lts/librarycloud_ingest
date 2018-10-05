@@ -11,20 +11,28 @@
    <note type="biographical/historical">Son of Ghassem Khan Sardar- Nasser (landowner). University education in law in Paris, civil servant. Professor, Tehran University, Vice dean of Faculty of Law (1943-44), dean of Faculty of Law (1943-44), minister of education (1951), 17th Majles deputy from Kermanshah, leader of the National Front, and minister of foreign affairs (1979). [Shimoni, p. 205.]</note>
    <note type="biographical/historical">Male</note>
    <titleInfo>
+      <title>=Interview with [narrator]: Sanjabi, Karim</title>
       <partNumber>25</partNumber>
    </titleInfo>
-   <location displayLabel="Digital Transcript">
-      <url access="raw object">http://nrs.harvard.edu/urn-3:FHCL:888500</url>
-   </location>
-   <typeOfResource>text</typeOfResource>
+   <relatedItem type="otherFormat" displayLabel="Digital Audio">
+      <location>
+         <url access="raw object">http://nrs.harvard.edu/urn-3:FHCL:2381094</url>
+      </location>
+      <typeOfResource>sound recording-nonmusical</typeOfResource>
+   </relatedItem>
+   <relatedItem type="otherVersion" displayLabel="Digital Transcript">
+      <location>
+         <url access="raw object">http://nrs.harvard.edu/urn-3:FHCL:888500</url>
+      </location>
+      <typeOfResource>text</typeOfResource>
+      <physicalDescription>
+         <extent>15 p.</extent>
+         <extent>1</extent>
+      </physicalDescription>
+   </relatedItem>
    <physicalDescription>
-      <extent>15 p.</extent>
-      <extent>1</extent>
+      <form valueURI="http://vocab.getty.edu/aat/300028661">audiocassettes</form>
    </physicalDescription>
-   <location displayLabel="Digital Audio">
-      <url access="raw object">http://nrs.harvard.edu/urn-3:FHCL:2381094</url>
-   </location>
-   <typeOfResource>sound recording-nonmusical</typeOfResource>
    <language>
       <languageTerm>Persian</languageTerm>
    </language>
@@ -213,8 +221,7 @@
       </name>
    </subject>
    <recordInfo>
-        
-        <recordCreationDate>2006-09-20</recordCreationDate>
+      <recordCreationDate>2006-09-20</recordCreationDate>
       <recordIdentifier source="MH:IOHP">sanjabikarim.25</recordIdentifier>
    </recordInfo>
 </mods>
