@@ -69,9 +69,15 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="lifeStatus | biographicalNote | gender">
+    <xsl:template match="lifeStatus | biographicalNote">
         <xsl:element name="note">
             <xsl:attribute name="type">biographical/historical</xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="gender">
+        <xsl:element name="note">
+            <xsl:attribute name="type">gender</xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
     </xsl:template>
@@ -80,8 +86,9 @@
     <xsl:template name="makeTitle">
         <xsl:element name="titleInfo">
             <xsl:element name="title">
-                <xsl:text>=Interview with [narrator]: </xsl:text>
+                <xsl:text>Interview with </xsl:text>
                 <xsl:value-of select="narrator"/>
+                <xsl:text>: </xsl:text>
             </xsl:element>
             <xsl:element name="partNumber">
                 <xsl:value-of select="tapeNumber"/>
@@ -125,9 +132,9 @@
                     <xsl:value-of select="pages"/>
                     <xsl:text> p.</xsl:text>
                 </xsl:element>
-                <xsl:element name="extent">
+                <!--<xsl:element name="extent">
                     <xsl:value-of select="tapeLength"/>
-                </xsl:element>
+                </xsl:element>-->
             </xsl:element>
         </xsl:element>
     </xsl:template>
@@ -161,7 +168,10 @@
                     <xsl:text>http://vocab.getty.edu/aat/300028661</xsl:text>
                 </xsl:attribute>
                 <xsl:text>audiocassettes</xsl:text>
-        </xsl:element>
+            </xsl:element>
+            <xsl:element name="extent">
+                <xsl:value-of select="tapeLength"/>
+            </xsl:element>
         </xsl:element>
     </xsl:template>
 
@@ -180,7 +190,7 @@
             <xsl:element name="role">
                 <xsl:element name="roleTerm">
                     <xsl:attribute name="valueURI">
-                        <xsl:text>http://id.loc.gov/vocabulary/relators/ive</xsl:text>
+                        <xsl:text>http://id.loc.gov/vocabulary/relators/ivr</xsl:text>
                     </xsl:attribute>
                     <xsl:text>Interviewer</xsl:text>
                 </xsl:element>

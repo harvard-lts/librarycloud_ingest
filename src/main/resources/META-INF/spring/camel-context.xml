@@ -976,7 +976,7 @@
 
         <!-- TED -->
         <route id="ted-ingest" errorHandlerRef="eh">
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-ted?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-ted-DEPRECATED?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <!--<marshal><custom ref="cloudbody"/></marshal>-->
             <!--<to uri="mongodb:mongoBean?database=ted&amp;collection=mcz&amp;operation=findAll&amp;outputType=DBCursor" />-->
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-mongotomods?amazonSQSClient=#sqsClient" />

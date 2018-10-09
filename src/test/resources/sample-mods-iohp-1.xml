@@ -9,9 +9,9 @@
       </role>
    </name>
    <note type="biographical/historical">Son of Ghassem Khan Sardar- Nasser (landowner). University education in law in Paris, civil servant. Professor, Tehran University, Vice dean of Faculty of Law (1943-44), dean of Faculty of Law (1943-44), minister of education (1951), 17th Majles deputy from Kermanshah, leader of the National Front, and minister of foreign affairs (1979). [Shimoni, p. 205.]</note>
-   <note type="biographical/historical">Male</note>
+   <note type="gender">Male</note>
    <titleInfo>
-      <title>=Interview with [narrator]: Sanjabi, Karim</title>
+      <title>Interview with Sanjabi, Karim: </title>
       <partNumber>25</partNumber>
    </titleInfo>
    <relatedItem type="otherFormat" displayLabel="Digital Audio">
@@ -27,11 +27,11 @@
       <typeOfResource>text</typeOfResource>
       <physicalDescription>
          <extent>15 p.</extent>
-         <extent>1</extent>
       </physicalDescription>
    </relatedItem>
    <physicalDescription>
       <form valueURI="http://vocab.getty.edu/aat/300028661">audiocassettes</form>
+      <extent>1</extent>
    </physicalDescription>
    <language>
       <languageTerm>Persian</languageTerm>
@@ -40,7 +40,7 @@
    <name>
       <namePart>Zia Sedghi</namePart>
       <role>
-         <roleTerm valueURI="http://id.loc.gov/vocabulary/relators/ive">Interviewer</roleTerm>
+         <roleTerm valueURI="http://id.loc.gov/vocabulary/relators/ivr">Interviewer</roleTerm>
       </role>
    </name>
    <subject>
