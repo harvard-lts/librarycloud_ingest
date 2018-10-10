@@ -113,9 +113,18 @@
     </xsl:template>
 
     <xsl:template match="dateType">
-        <xsl:attribute name="type">
-            <xsl:value-of select="."/>
-        </xsl:attribute>
+        <xsl:choose>
+            <xsl:when test=".='s.d'">
+                <xsl:element name="dateOther">
+                    <xsl:text>undated</xsl:text>
+                </xsl:element>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:attribute name="type">
+                    <xsl:value-of select="."/>
+                </xsl:attribute>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="dateRange">
