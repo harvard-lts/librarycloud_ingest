@@ -18,7 +18,10 @@
       </titleInfo>
       <originInfo>
                 <dateOther>1950-05-27</dateOther>
-            </originInfo>
+            <place>
+            <placeTerm>Bijelo Polje</placeTerm>
+         </place>
+      </originInfo>
       <language>
          <languageTerm>Bosnian, Croatian, or Serbian language</languageTerm>
       </language>
@@ -35,10 +38,14 @@
             <form>wire spool</form>
          </physicalDescription>
       </relatedItem>
+      <location>
+         <physicalLocation valueURI="http://isni.org/isni/0000000123154019"
+                           displayLabel="Harvard repository"
+                           type="repository">Milman Parry Collection of Oral Literature, Harvard University</physicalLocation>
+      </location>
       <recordInfo>
-            
-            <recordCreationDate>2004-07-01</recordCreationDate>
-        <recordIdentifier source="MH:MHPL">LN58aZajmović, Đemo</recordIdentifier>
+         <recordCreationDate>2004-07-01</recordCreationDate>
+         <recordIdentifier source="MH:MHPL">LN58a</recordIdentifier>
       </recordInfo>
    </mods>
     <mods xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
@@ -56,7 +63,10 @@
       </titleInfo>
       <originInfo>
                 <dateOther>1934-12-07</dateOther>
-            </originInfo>
+            <place>
+            <placeTerm>Stolac</placeTerm>
+         </place>
+      </originInfo>
       <note type="Collection Method">recorded</note>
       <relatedItem otherType="collection">
          <titleInfo>
@@ -91,10 +101,14 @@
             <url>http://nrs.harvard.edu/urn-3:HLNC.MPCOL:104493</url>
          </location>
       </relatedItem>
+      <location>
+         <physicalLocation valueURI="http://isni.org/isni/0000000123154019"
+                           displayLabel="Harvard repository"
+                           type="repository">Milman Parry Collection of Oral Literature, Harvard University</physicalLocation>
+      </location>
       <recordInfo>
-            
-            <recordCreationDate>2003-06-02</recordCreationDate>
-        <recordIdentifier source="MH:MHPL">PN803Vidić, Petar</recordIdentifier>
+         <recordCreationDate>2003-06-02</recordCreationDate>
+         <recordIdentifier source="MH:MHPL">PN803</recordIdentifier>
       </recordInfo>
    </mods>
     <mods xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
@@ -115,7 +129,10 @@
       </titleInfo>
       <originInfo>
                 <dateOther>1950-05-26</dateOther>
-            </originInfo>
+            <place>
+            <placeTerm>Bijelo Polje</placeTerm>
+         </place>
+      </originInfo>
       <language>
          <languageTerm>Bosnian, Croatian, or Serbian language</languageTerm>
       </language>
@@ -132,10 +149,14 @@
             <form>wire spool</form>
          </physicalDescription>
       </relatedItem>
+      <location>
+         <physicalLocation valueURI="http://isni.org/isni/0000000123154019"
+                           displayLabel="Harvard repository"
+                           type="repository">Milman Parry Collection of Oral Literature, Harvard University</physicalLocation>
+      </location>
       <recordInfo>
-            
-            <recordCreationDate>2004-06-29</recordCreationDate>
-        <recordIdentifier source="MH:MHPL">LN53Novaković, Radivoje</recordIdentifier>
+         <recordCreationDate>2004-06-29</recordCreationDate>
+         <recordIdentifier source="MH:MHPL">LN53</recordIdentifier>
       </recordInfo>
    </mods>
 </modsCollection>

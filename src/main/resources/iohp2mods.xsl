@@ -22,6 +22,14 @@
                 <xsl:text>http://www.w3.org/1999/xlink</xsl:text>
             </xsl:namespace>
             <xsl:apply-templates select="tape"/>
+            <xsl:element name="location">
+                <xsl:element name="physicalLocation">
+                    <xsl:attribute name="valueURI"><xsl:text>http://vocab.getty.edu/aat/300028661</xsl:text></xsl:attribute>
+                    <xsl:attribute name="displayLabel"><xsl:text>Harvard repository</xsl:text></xsl:attribute>
+                    <xsl:attribute name="type"><xsl:text>repository</xsl:text></xsl:attribute>
+                    <xsl:text>Middle Eastern Division, Widener Library, Harvard University</xsl:text>
+                </xsl:element>
+            </xsl:element>
             <xsl:apply-templates select="admin"/>
         </xsl:element>
     </xsl:template>
@@ -156,6 +164,7 @@
     <xsl:template match="language">
         <xsl:element name="language">
             <xsl:element name="languageTerm">
+                <xsl:attribute name="type"><xsl:text>text</xsl:text></xsl:attribute>
                 <xsl:value-of select="."/>
             </xsl:element>
         </xsl:element>
@@ -223,7 +232,8 @@
                 <xsl:attribute name="source">
                     <xsl:text>MH:IOHP</xsl:text>
                 </xsl:attribute>
-                <xsl:value-of select="lower-case(replace(replace(../_id, ' ', ''), ',', ''))"/>
+                <!--<xsl:value-of select="lower-case(replace(replace(../_id, ' ', ''), ',', ''))"/>-->
+                <xsl:value-of select="lower-case(replace(../_id,'[ (),]','_'))"/>
             </xsl:element>
         </xsl:element>
     </xsl:template>

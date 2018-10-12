@@ -26,6 +26,14 @@
                 <xsl:text>http://www.w3.org/1999/xlink</xsl:text>
             </xsl:namespace>
             <xsl:apply-templates select="record"/>
+            <xsl:element name="location">
+                <xsl:element name="physicalLocation">
+                    <xsl:attribute name="valueURI"><xsl:text>http://isni.org/isni/0000000123154019</xsl:text></xsl:attribute>
+                    <xsl:attribute name="displayLabel"><xsl:text>Harvard repository</xsl:text></xsl:attribute>
+                    <xsl:attribute name="type"><xsl:text>repository</xsl:text></xsl:attribute>
+                    <xsl:text>Milman Parry Collection of Oral Literature, Harvard University</xsl:text>
+                </xsl:element>
+            </xsl:element>
             <xsl:apply-templates select="admin"/>
         </xsl:element>
     </xsl:template>
@@ -35,7 +43,7 @@
         <xsl:apply-templates select="title"/>
         <xsl:apply-templates select="translatedTitle"/>
         <xsl:apply-templates select="alternateTitle"/>
-        <xsl:apply-templates select="location"/>
+        <!--<xsl:apply-templates select="location"/>-->
         <xsl:call-template name="originInfo"/>
         <xsl:apply-templates select="genre"/>
         <xsl:apply-templates select="subject"/>
@@ -99,6 +107,7 @@
         <xsl:element name="originInfo">
             <xsl:apply-templates select="date"/>
             <xsl:apply-templates select="dateRange"/>
+            <xsl:apply-templates select="location"/>
         </xsl:element>
     </xsl:template>
 
@@ -125,6 +134,14 @@
                 </xsl:attribute>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="location">
+        <xsl:element name="place">
+            <xsl:element name="placeTerm">
+                <xsl:value-of select="."/>
+            </xsl:element>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="dateRange">
@@ -162,6 +179,7 @@
     <xsl:template match="language">
         <xsl:element name="language">
             <xsl:element name="languageTerm">
+                <xsl:attribute name="type"><xsl:text>text</xsl:text></xsl:attribute>
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:element>
         </xsl:element>
@@ -212,6 +230,7 @@
     <xsl:template match="digitalAudio">
         <xsl:element name="location">
             <xsl:element name="url">
+                <xsl:attribute name="access"><xsl:text>raw object</xsl:text></xsl:attribute>
                 <xsl:value-of select="normalize-space(xlink:href)"/>
             </xsl:element>
         </xsl:element>
@@ -306,6 +325,7 @@
     <xsl:template match="digitalText">
         <xsl:element name="location">
             <xsl:element name="url">
+                <xsl:attribute name="access"><xsl:text>raw object</xsl:text></xsl:attribute>
                 <xsl:value-of select="normalize-space(xlink:href)"/>
             </xsl:element>
         </xsl:element>
@@ -322,7 +342,7 @@
 
     <xsl:template match="admin">
         <xsl:element name="recordInfo">
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="*"/>
             <xsl:element name="recordIdentifier">
                 <xsl:attribute name="source">
                     <xsl:text>MH:MHPL</xsl:text>

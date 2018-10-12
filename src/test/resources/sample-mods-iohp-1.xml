@@ -220,6 +220,11 @@
          <namePart>Sanjābī, Karīm</namePart>
       </name>
    </subject>
+   <location>
+      <physicalLocation valueURI="http://vocab.getty.edu/aat/300028661"
+                        displayLabel="Harvard repository"
+                        type="repository">Middle Eastern Division, Widener Library, Harvard University</physicalLocation>
+   </location>
    <recordInfo>
       <recordCreationDate>2006-09-20</recordCreationDate>
       <recordIdentifier source="MH:IOHP">sanjabikarim.25</recordIdentifier>

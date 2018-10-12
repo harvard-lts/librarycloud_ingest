@@ -7,6 +7,9 @@
     xmlns:HarvardRepositories="http://hul.harvard.edu/ois/xml/ns/HarvardRepositories"
     xmlns:tbd="http://lib.harvard.edu/TBD" xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:ext="http://exslt.org/common" xmlns:priorrecordids="http://lib.harvard.edu/alephmigration"
+    xmlns:processingDate="http://hul.harvard.edu/ois/xml/ns/processingDate"
+    xmlns:availableTo="http://hul.harvard.edu/ois/xml/ns/availableTo"
+    xmlns:digitalFormats="http://hul.harvard.edu/ois/xml/ns/digitalFormats"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="xs xsi"
     version="2.0">
 
@@ -20,7 +23,7 @@
 
     <xsl:template match="mods:mods">
         <xsl:element name="doc">
-            <xsl:apply-templates select="mods:titleInfo"/>
+            <xsl:apply-templates select=".//mods:titleInfo"/>
             <xsl:apply-templates select=".//mods:name"/>
             <xsl:apply-templates select=".//mods:typeOfResource"/>
             <!-- put the isOnline field here to keep grouped with isCollection and isManuscript -->
@@ -56,11 +59,15 @@
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:setName"/>
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:setSpec"/>
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:systemId"/>
-            <xsl:apply-templates select="mods:extension/tbd:digitalFormats/tbd:digitalFormat"/>
-            <xsl:apply-templates select="mods:extension/tbd:availableTo"/>
+            <xsl:apply-templates select="mods:extension/digitalFormats:digitalFormats/digitalFormats:digitalFormat"/>
+            <xsl:apply-templates select="mods:extension/availableTo:availableTo"/>
             <xsl:apply-templates select=".//HarvardRepositories:HarvardRepositories"/>
             <xsl:apply-templates
                 select="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier"/>
+
+            <xsl:apply-templates select="mods:extension/processingDate:processingDate"/>
+
+
             <xsl:choose>
                 <xsl:when test="mods:extension/HarvardDRS:DRSMetadata">
                     <xsl:element name="field">
@@ -109,7 +116,7 @@
                 <xsl:variable name="EDT">
                     <xsl:value-of select="substring-before(substring-after($dateRange, ' TO '), ']')"/>
                 </xsl:variable>
-                <xsl:if test="$SDT &lt;= $EDT">
+                <xsl:if test="number($SDT) &lt;= number($EDT)">
                     <xsl:element name="field">
                         <xsl:attribute name="name">
                             <xsl:text>dateRange</xsl:text>
@@ -201,7 +208,21 @@
                 </xsl:choose>
                 -->
                 </xsl:attribute>
-                <xsl:apply-templates/>
+                <xsl:if test="string-length(mods:title)">
+                    <xsl:value-of select="normalize-space(mods:title)"/>
+                </xsl:if>
+                <xsl:if test="string-length(mods:subTitle)">
+                    <xsl:if test="string-length(mods:subTitle)">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                    <xsl:value-of select="normalize-space(mods:subTitle)"/>
+                </xsl:if>
+                <xsl:if test="string-length(mods:partNumber)">
+                    <xsl:value-of select="concat(' ', normalize-space(mods:partNumber))"/>
+                </xsl:if>
+                <xsl:if test="string-length(mods:partName)">
+                    <xsl:value-of select="concat(' ', normalize-space(mods:partName))"/>
+                </xsl:if>
             </xsl:element>
         </xsl:if>
     </xsl:template>
@@ -513,6 +534,14 @@
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
+        <xsl:if test="@type = 'repository' and @displayLabel = 'Harvard repository'">
+            <xsl:element name="field">
+                <xsl:attribute name="name">
+                    <xsl:text>repositoryLongForm</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:element>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="mods:shelfLocator">
@@ -572,6 +601,18 @@
         </xsl:element>
     </xsl:template>
 
+    <xsl:template match="processingDate:processingDate">
+        <xsl:if test='matches(., "\d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z")'>
+            <xsl:element name="field">
+                <xsl:attribute name="name">
+                    <xsl:text>processingDate</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(concat(substring-before(., 'Z'), ':00Z'))"/>
+            </xsl:element>
+        </xsl:if>
+    </xsl:template>
+
+
     <xsl:template match="@source">
         <xsl:element name="field">
             <xsl:attribute name="name">source</xsl:attribute>
@@ -582,10 +623,19 @@
     <xsl:template match="mods:relatedItem[@type = 'series']">
         <xsl:apply-templates select="./mods:titleInfo"/>
         <xsl:apply-templates select="./mods:name"/>
-        <xsl:for-each select="mods:titleInfo/mods:title">
+        <xsl:for-each select="./mods:titleInfo[mods:title]">
             <xsl:element name="field">
                 <xsl:attribute name="name">relatedItem</xsl:attribute>
-                <xsl:value-of select="normalize-space(.)"/>
+                <xsl:value-of select="normalize-space(mods:title)"/>
+                <xsl:if test="string-length(mods:subTitle)">
+                    <xsl:value-of select="concat(' ', normalize-space(mods:subTitle))"/>
+                </xsl:if>
+                <xsl:if test="string-length(mods:partNumber)">
+                    <xsl:value-of select="concat(' ', normalize-space(mods:partNumber))"/>
+                </xsl:if>
+                <xsl:if test="string-length(mods:partName)">
+                    <xsl:value-of select="concat(' ', normalize-space(mods:partName))"/>
+                </xsl:if>
             </xsl:element>
         </xsl:for-each>
     </xsl:template>
@@ -825,7 +875,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="tbd:digitalFormat">
+    <xsl:template match="digitalFormats:digitalFormat">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>digitalFormat</xsl:text>
@@ -834,7 +884,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="tbd:availableTo">
+    <xsl:template match="availableTo:availableTo">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>availableTo</xsl:text>
@@ -1051,8 +1101,7 @@
                 <xsl:value-of select='substring-before(substring-after($dateStringInput, "["), "]")'
                 />
             </xsl:when>
-            <xsl:when
-                test="string-length($dateStringInput) = 0 and string-length($dateStringOutput) = 0"/>
+        <xsl:when test="string-length($dateStringInput) = 0 and string-length($dateStringOutput) = 0"></xsl:when>
             <xsl:when test="$step = 1 and string-length($dateStringInput) > 0">
                 <xsl:call-template name="normalizeDate">
                     <xsl:with-param name="dateStringInput">

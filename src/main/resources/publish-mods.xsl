@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:mods="http://www.loc.gov/mods/v3"
-    xmlns:tbd="http://lib.harvard.edu/TBD"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:mods="http://www.loc.gov/mods/v3" xmlns:tbd="http://lib.harvard.edu/TBD"
     xmlns:HarvardRepositories="http://hul.harvard.edu/ois/xml/ns/HarvardRepositories"
     xmlns:processingDate="http://hul.harvard.edu/ois/xml/ns/processingDate"
     xmlns:availableTo="http://hul.harvard.edu/ois/xml/ns/availableTo"
@@ -16,9 +14,11 @@
     version="2.0">
     <!-- <xsl:namespace-alias stylesheet-prefix="mods" result-prefix="" /> -->
     <xsl:output method="xml" encoding="UTF-8"/>
-    <xsl:param name="param1"><processingDate/></xsl:param>
-    <xsl:param name="repository-map-file" select="'src/main/resources/RepositoryNameMapping.xml'" />
-    <xsl:variable name="map" select="document($repository-map-file)" />
+    <xsl:param name="param1">
+        <processingDate/>
+    </xsl:param>
+    <xsl:param name="repository-map-file" select="'src/main/resources/RepositoryNameMapping.xml'"/>
+    <xsl:variable name="map" select="document($repository-map-file)"/>
 
     <xsl:template match="mods:modsCollection">
         <xsl:copy>
@@ -34,52 +34,59 @@
         </xsl:variable>
         -->
         <xsl:variable name="digitalFormats">
-          <xsl:if test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'AUDIO']">
-            <format>Audio</format>
-          </xsl:if>
-          <xsl:if test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'DOCUMENT'] or mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'PDS DOCUMENT'] or mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'PDS DOCUMENT LIST'] or mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'TEXT']">
-            <format>Books and documents</format>
-          </xsl:if>
-          <xsl:if test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'VIDEO']">
-            <format>Video </format>
-          </xsl:if>
-          <xsl:if test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'STILL IMAGE']">
-            <format>Images</format>
-          </xsl:if>
+            <xsl:if
+                test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'AUDIO'] or (mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'TEXT'] and mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:uriType = 'SDS'])">
+                <format>Audio</format>
+            </xsl:if>
+            <xsl:if
+                test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'DOCUMENT'] or mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'PDS DOCUMENT'] or mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'PDS DOCUMENT LIST'] or (mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'TEXT'] and not(mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:uriType = 'SDS']))">
+                <format>Books and documents</format>
+            </xsl:if>
+            <xsl:if test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'VIDEO']">
+                <format>Video</format>
+            </xsl:if>
+            <xsl:if
+                test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'STILL IMAGE']">
+                <format>Images</format>
+            </xsl:if>
         </xsl:variable>
 
         <xsl:variable name="harvardRepositoriesMap">
-            <xsl:variable name="locations" select="mods:location/mods:physicalLocation[@type = 'repository']" />
+            <xsl:variable name="locations"
+                select="mods:location/mods:physicalLocation[@type = 'repository']"/>
             <xsl:for-each select="$map//mapping">
-                <xsl:variable name="source" select="./source" />
+                <xsl:variable name="source" select="./source"/>
                 <xsl:if test="$locations[text() = $source]">
-                    <xsl:copy-of select="." />
+                    <xsl:copy-of select="."/>
                 </xsl:if>
             </xsl:for-each>
         </xsl:variable>
 
         <xsl:variable name="availableTo">
-          <xsl:choose>
-            <xsl:when test="mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'R'">
-              <xsl:text>Restricted</xsl:text>
-            </xsl:when>
-            <xsl:when test="mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'P'">
-              <xsl:text>Everyone</xsl:text>
-            </xsl:when>
-            <xsl:otherwise></xsl:otherwise>
-          </xsl:choose>
+            <xsl:choose>
+                <xsl:when test="mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'R'">
+                    <xsl:text>Restricted</xsl:text>
+                </xsl:when>
+                <xsl:when test="mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'P'">
+                    <xsl:text>Everyone</xsl:text>
+                </xsl:when>
+                <xsl:otherwise/>
+            </xsl:choose>
         </xsl:variable>
 
-        <xsl:if test="not(mods:recordInfo/mods:recordOrigin='Open Metadata Status: RES-C') and not(mods:recordInfo/mods:recordOrigin='Open Metadata Status: RES-D')">
-            <xsl:copy>
+        <!--<xsl:if
+            test="not(mods:recordInfo/mods:recordOrigin = 'Open Metadata Status: RES-C') and not(mods:recordInfo/mods:recordOrigin = 'Open Metadata Status: RES-D')">-->
+        <xsl:if
+            test="not(mods:recordInfo/mods:recordContentSource='UK-CbPIL')">        
+        <xsl:copy>
                 <xsl:copy-of select="@*"/>
-                <xsl:apply-templates />
+                <xsl:apply-templates/>
                 <xsl:if test="count($digitalFormats/format) &gt; 0">
                     <extension xmlns="http://www.loc.gov/mods/v3">
                         <digitalFormats:digitalFormats>
                             <xsl:for-each select="$digitalFormats/format">
                                 <digitalFormats:digitalFormat>
-                                    <xsl:value-of select="." />
+                                    <xsl:value-of select="."/>
                                 </digitalFormats:digitalFormat>
                             </xsl:for-each>
                         </digitalFormats:digitalFormats>
@@ -89,7 +96,7 @@
                 <xsl:if test="string-length($availableTo)">
                     <extension xmlns="http://www.loc.gov/mods/v3">
                         <availableTo:availableTo>
-                            <xsl:value-of select="$availableTo" />
+                            <xsl:value-of select="$availableTo"/>
                         </availableTo:availableTo>
                     </extension>
                 </xsl:if>
@@ -99,7 +106,7 @@
                         <HarvardRepositories:HarvardRepositories>
                             <xsl:for-each select="$harvardRepositoriesMap/mapping">
                                 <HarvardRepositories:HarvardRepository>
-                                    <xsl:value-of select="./extensionValue" />
+                                    <xsl:value-of select="./extensionValue"/>
                                 </HarvardRepositories:HarvardRepository>
                             </xsl:for-each>
                         </HarvardRepositories:HarvardRepositories>
@@ -108,14 +115,14 @@
 
                 <extension xmlns="http://www.loc.gov/mods/v3">
                     <processingDate:processingDate>
-                        <xsl:value-of select="$param1" />
+                        <xsl:value-of select="$param1"/>
                     </processingDate:processingDate>
                 </extension>
 
                 <xsl:if test="count(mods:location/mods:url) &lt; 1">
                     <location xmlns="http://www.loc.gov/mods/v3">
                         <xsl:call-template name="object-in-context-links">
-                            <xsl:with-param name="modsRoot" select="." />
+                            <xsl:with-param name="modsRoot" select="."/>
                         </xsl:call-template>
                     </location>
                 </xsl:if>
@@ -128,41 +135,48 @@
         <xsl:copy>
             <xsl:copy-of select="@* | node()"/>
             <xsl:call-template name="object-in-context-links">
-                <xsl:with-param name="modsRoot" select="ancestor::mods:mods" />
+                <xsl:with-param name="modsRoot" select="ancestor::mods:mods"/>
             </xsl:call-template>
         </xsl:copy>
     </xsl:template>
 
     <xsl:template match="mods:location/mods:physicalLocation">
-        <xsl:variable name="source" select="./text()" />
+        <xsl:variable name="source" select="./text()"/>
         <xsl:choose>
             <xsl:when test="@type = 'repository'">
                 <xsl:copy>
                     <xsl:for-each select="@*">
                         <xsl:choose>
-                            <xsl:when test="local-name() = 'displayLabel' and string-length($map//mapping[source=$source]/replacement)"></xsl:when>
-                            <xsl:when test="local-name() = 'valueURI' and string-length($map//mapping[source=$source]/valueURI)"></xsl:when>
-                            <xsl:otherwise><xsl:apply-templates select="." /></xsl:otherwise>
+                            <xsl:when
+                                test="local-name() = 'displayLabel' and string-length($map//mapping[source = $source]/replacement)"/>
+                            <xsl:when
+                                test="local-name() = 'valueURI' and string-length($map//mapping[source = $source]/valueURI)"/>
+                            <xsl:otherwise>
+                                <xsl:apply-templates select="."/>
+                            </xsl:otherwise>
                         </xsl:choose>
                     </xsl:for-each>
-                    <xsl:if test="string-length($map//mapping[source=$source]/replacement)">
+                    <xsl:if test="string-length($map//mapping[source = $source]/replacement)">
                         <xsl:attribute name="displayLabel">Harvard repository</xsl:attribute>
                     </xsl:if>
-                    <xsl:if test="string-length($map//mapping[source=$source]/valueURI)">
+                    <xsl:if test="string-length($map//mapping[source = $source]/valueURI)">
                         <xsl:attribute name="valueURI">
-                            <xsl:value-of select="$map//mapping[source=$source]/valueURI" />
+                            <xsl:value-of select="$map//mapping[source = $source]/valueURI"/>
                         </xsl:attribute>
                     </xsl:if>
                     <xsl:choose>
-                        <xsl:when test="string-length($map//mapping[source=$source]/replacement) &gt; 0">
-                            <xsl:value-of select="$map//mapping[source=$source]/replacement" />
+                        <xsl:when
+                            test="string-length($map//mapping[source = $source]/replacement) &gt; 0">
+                            <xsl:value-of select="$map//mapping[source = $source]/replacement"/>
                         </xsl:when>
-                        <xsl:otherwise><xsl:value-of select="text()" /></xsl:otherwise>
+                        <xsl:otherwise>
+                            <xsl:value-of select="text()"/>
+                        </xsl:otherwise>
                     </xsl:choose>
                 </xsl:copy>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="." />
+                <xsl:copy-of select="."/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -170,21 +184,25 @@
     <xsl:template match="@* | *">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates />
+            <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
 
     <xsl:template name="object-in-context-links">
-        <xsl:param name="modsRoot" />
+        <xsl:param name="modsRoot"/>
         <xsl:if test="$modsRoot//mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'P'">
-            <url xmlns="http://www.loc.gov/mods/v3" access="object in context" displayLabel="Harvard Digital Collections">http://id.lib.harvard.edu/digital_collections/<xsl:value-of select="$modsRoot//mods:recordInfo/mods:recordIdentifier" /></url>
+            <url xmlns="http://www.loc.gov/mods/v3" access="object in context"
+                displayLabel="Harvard Digital Collections"
+                    >http://id.lib.harvard.edu/digital_collections/<xsl:value-of
+                    select="$modsRoot//mods:recordInfo/mods:recordIdentifier"/></url>
         </xsl:if>
         <xsl:for-each select="$modsRoot//mods:extension//sets:set">
             <url xmlns="http://www.loc.gov/mods/v3" access="object in context">
                 <xsl:attribute name="displayLabel">
-                    <xsl:value-of select="sets:setName/text()" />
+                    <xsl:value-of select="sets:setName/text()"/>
                 </xsl:attribute>
-                <xsl:value-of select="sets:baseUrl" />-<xsl:value-of select="$modsRoot//mods:recordInfo/mods:recordIdentifier" />
+                <xsl:value-of select="sets:baseUrl"/>-<xsl:value-of
+                    select="$modsRoot//mods:recordInfo/mods:recordIdentifier"/>
             </url>
         </xsl:for-each>
     </xsl:template>
