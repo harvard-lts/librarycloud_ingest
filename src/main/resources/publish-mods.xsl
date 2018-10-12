@@ -70,7 +70,10 @@
           </xsl:choose>
         </xsl:variable>
 
-        <xsl:if test="not(mods:recordInfo/mods:recordOrigin='Open Metadata Status: RES-C') and not(mods:recordInfo/mods:recordOrigin='Open Metadata Status: RES-D')">
+        <!--<xsl:if
+            test="not(mods:recordInfo/mods:recordOrigin = 'Open Metadata Status: RES-C') and not(mods:recordInfo/mods:recordOrigin = 'Open Metadata Status: RES-D')">-->
+        <xsl:if
+            test="not(mods:recordInfo/mods:recordContentSource='UK-CbPIL')">
             <xsl:copy>
                 <xsl:copy-of select="@*"/>
                 <xsl:apply-templates />
