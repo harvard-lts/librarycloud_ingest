@@ -82,7 +82,7 @@
         <xsl:if test="marc:subfield[@code='8']">
             <xsl:element name="field">
                 <xsl:attribute name="name">
-                    <xsl:text>holdingId</xsl:text>
+                    <xsl:text>id</xsl:text>
                 </xsl:attribute>
                 <xsl:value-of select="marc:subfield[@code='8']"/>
             </xsl:element>
