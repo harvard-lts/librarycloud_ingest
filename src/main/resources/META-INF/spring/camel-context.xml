@@ -115,7 +115,7 @@
     <bean id="modsProcessorAlma" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.marc.ModsProcessor">
-                <property name="stylesheet" value="src/main/resources/MARC21slim2MODS3-6-alma.xsl"/>
+                <property name="stylesheet" value="src/main/resources/MARC21slim2MODS3-6.xsl"/>
             </bean>
         </property>
     </bean>
