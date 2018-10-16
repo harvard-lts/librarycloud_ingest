@@ -43,7 +43,7 @@
 			<relatedItem otherType="HOLLIS Images record">
 				<location>
 					<url>
-						<xsl:text>http://id.lib.harvard.edu/images/</xsl:text>
+						<xsl:text>https://id.lib.harvard.edu/images/</xsl:text>
 						<xsl:value-of select="recordId"/>
 						<xsl:text>/</xsl:text>
 						<xsl:value-of select="$urnsuffix"/>

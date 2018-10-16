@@ -220,7 +220,7 @@
     <xsl:template name="object-in-context-links">
         <xsl:param name="modsRoot" />
         <xsl:if test="$modsRoot/mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'P'">
-            <url xmlns="http://www.loc.gov/mods/v3" access="object in context" displayLabel="Harvard Digital Collections">http://id.lib.harvard.edu/digital_collections/<xsl:value-of select="$modsRoot/mods:recordInfo/mods:recordIdentifier" /></url>
+            <url xmlns="http://www.loc.gov/mods/v3" access="object in context" displayLabel="Harvard Digital Collections">https://id.lib.harvard.edu/digital_collections/<xsl:value-of select="$modsRoot/mods:recordInfo/mods:recordIdentifier" /></url>
         </xsl:if>
     </xsl:template>
 

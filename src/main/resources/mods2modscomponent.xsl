@@ -29,7 +29,7 @@
 				<xsl:attribute name="otherType">HOLLIS record</xsl:attribute>
 				<xsl:element name="location" namespace="http://www.loc.gov/mods/v3">
 					<xsl:element name="url" namespace="http://www.loc.gov/mods/v3">
-						<xsl:text>http://id.lib.harvard.edu/aleph/</xsl:text>
+						<xsl:text>https://id.lib.harvard.edu/alma/</xsl:text>
 						<xsl:value-of select="mods:recordInfo/mods:recordIdentifier"/>
 						<xsl:text>/catalog</xsl:text>
 					</xsl:element>

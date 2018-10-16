@@ -61,11 +61,11 @@
                     </xsl:variable>
                     <xsl:apply-templates
                         select="$results//docs[lower-case(substring-after(urn, 'urn-3')) = lower-case($urn)]"/>
-                    <xsl:if test="mods:recordInfo/mods:recordIdentifier/@source = 'MH:ALEPH'">
+                    <xsl:if test="mods:recordInfo/mods:recordIdentifier/@source = 'MH:ALMA'">
                         <relatedItem xmlns="http://www.loc.gov/mods/v3" otherType="HOLLIS record">
                             <location xmlns="http://www.loc.gov/mods/v3">
                                 <url xmlns="http://www.loc.gov/mods/v3">
-                                    <xsl:text>http://id.lib.harvard.edu/aleph/</xsl:text>
+                                    <xsl:text>https://id.lib.harvard.edu/alma/</xsl:text>
                                     <xsl:choose>
                                         <xsl:when
                                             test="contains(mods:recordInfo/mods:recordIdentifier, '_')">

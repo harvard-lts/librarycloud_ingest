@@ -175,7 +175,7 @@
                 <relatedItem otherType="HOLLIS record">
                     <location>
                         <url>
-                            <xsl:text>http://id.lib.harvard.edu/aleph/</xsl:text>
+                            <xsl:text>https://id.lib.harvard.edu/aleph/</xsl:text>
                             <xsl:value-of select="/ead/eadheader/eadid/@identifier"/>
                             <xsl:text>/catalog</xsl:text>
                         </url>
@@ -184,7 +184,7 @@
                 <relatedItem otherType="Finding Aid">
                     <location>
                         <url>
-                            <xsl:text>http://id.lib.harvard.edu/ead/</xsl:text>
+                            <xsl:text>https://id.lib.harvard.edu/ead/</xsl:text>
                             <xsl:value-of select="/ead/eadheader/eadid"/>
                             <xsl:text>/catalog</xsl:text>
                         </url>
