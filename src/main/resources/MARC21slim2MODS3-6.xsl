@@ -1,4 +1,4 @@
-<xsl:stylesheet xmlns="http://www.loc.gov/mods/v3" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:countries="info:lc/xmlns/codelist-v1" exclude-result-prefixes="xlink marc countries" version="1.0">
+<xsl:stylesheet xmlns="http://www.loc.gov/mods/v3" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xlink="http://www.w3.org/1999/xlink"  xmlns:priorrecordids="http://lib.harvard.edu/alephmigration" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:countries="info:lc/xmlns/codelist-v1" exclude-result-prefixes="xlink marc countries" version="1.0">
   <!--<xsl:include href="http://www.loc.gov/standards/marcxml/xslt/MARC21slimUtils.xsl"/>-->
   <xsl:include href="src/main/resources/MARC21slimUtils.xsl"/>
   <xsl:output encoding="UTF-8" indent="yes" method="xml"  omit-xml-declaration="yes"/>
@@ -8,6 +8,7 @@
 
 
   <!-- Harvard modifications
+  Revision 10.01 hardcode MH:ALMA in recordIdentifier/@source
   Revision 9.13 adding 880 titles to 490 (need to review)
   Revision 9.12 series only if ind 0
   Revision 9.11 test to see if an 880 of type 245 exists, otherwise don't bother with the altRepGroup
@@ -2928,7 +2929,8 @@
       </xsl:for-each>
       <xsl:for-each select="marc:controlfield[@tag=001]">
         <recordIdentifier>
-          <!-- Harvard Revision 9.03 - use hardcoded MH:ALEPH instead -->
+          <!-- Harvard Revision 9.03 - use hardcoded MH:ALEPH instead; replaced by below --> 
+          <!-- Harvard Revision 10.01 - use hardcoded MH:ALMA instead -->
           <!--
           <xsl:if test="../marc:controlfield[@tag=003]">
             <xsl:attribute name="source">
@@ -2937,7 +2939,7 @@
           </xsl:if>
            -->
           <xsl:attribute name="source">
-            <xsl:text>MH:ALEPH</xsl:text>
+            <xsl:text>MH:ALMA</xsl:text>
           </xsl:attribute>
           <xsl:choose>
             <xsl:when test="contains(.,'-')">
@@ -2961,11 +2963,17 @@
         </languageOfCataloging>
       </xsl:for-each>
     </recordInfo>
+
+		<!-- Harvard revision 10.01 - Add original system ID as an extension -->
+		<xsl:for-each select="marc:datafield[@tag=900]">
+			<xsl:call-template name="addOriginalSystemId"/>
+		</xsl:for-each>
+
     <relatedItem otherType="HOLLIS record">
       <location>
         <url>
-          <xsl:text>https://id.lib.harvard.edu/aleph/</xsl:text>
-          <xsl:value-of select="substring-before(marc:controlfield[@tag=001],'-')"/>
+          <xsl:text>https://id.lib.harvard.edu/alma/</xsl:text>
+          <xsl:value-of select="marc:controlfield[@tag=001]"/>
           <xsl:text>/catalog</xsl:text>
         </url>
       </location>
@@ -5881,6 +5889,20 @@
   </xsl:template>
 
   <!-- recordInfo 040 005 001 003 -->
+
+	<!-- Harvard revision 10.01 - Add original system ID as an extension -->
+	<xsl:template name="addOriginalSystemId">
+		<xsl:if test="marc:subfield[@code='a']">
+            <extension>
+            	<priorrecordids:priorrecordids>
+            		<xsl:element name="priorrecordids:recordIdentifier">
+            			<xsl:attribute name='source'>MH:ALEPH</xsl:attribute>
+						<xsl:value-of select="marc:subfield[@code='a']"/>
+                    </xsl:element>
+				</priorrecordids:priorrecordids>
+			</extension>
+		</xsl:if>
+	</xsl:template>
 
   <!-- 880 global copy template -->
   <xsl:template match="* | @*" mode="global_copy">
