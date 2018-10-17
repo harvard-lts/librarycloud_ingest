@@ -1,0 +1,64 @@
+<modsCollection xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+   <mods
+      xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+      <identifier>ARC 237-044</identifier>
+      <location displayLabel="test">
+         <url access="raw object">http://nrs.harvard.edu/urn-3:FMUS.MCZ:2005-719519</url>
+         <url access="preview">http://nrs.harvard.edu/urn-x:FMUS.MCZ:2005-719519</url>
+         <holdingSimple>
+            <copyInformation>test</copyInformation>
+         </holdingSimple>
+         <test/>
+      </location>
+      <location>
+         <url access="raw object">http://nrs.harvard.edu/urn-3:FMUS.MCZ:2005-719518</url>
+         <url access="preview">http://ids.lib.harvard.edu/urn-3x:FMUS.MCZ:2005-719518</url>
+      </location>
+      <titleInfo>
+         <title>Echinoderm and anatomical cross sections</title>
+      </titleInfo>
+      <name>
+         <namePart>Burkhardt, Jacques</namePart>
+         <role>
+            <roleTerm type="text">Creator</roleTerm>
+         </role>
+         <role>
+            <roleTerm type="text">Artist</roleTerm>
+         </role>
+      </name>
+      <genre>drawings</genre>
+      <physicalDescription>
+         <form type="materialsTechniques">watercolor</form>
+         <form type="materialsTechniques">pencil</form>
+         <form type="support">paper</form>
+         <extent>23 x 20 cm.</extent>
+         <note>Drawing of echinoderm and 4 anatomical cross sections</note>
+      </physicalDescription>
+      <note type="annotation">Master Abinosi Dupl--Agassiz, Louis</note>
+      <name>
+         <namePart>Agassiz, Louis</namePart>
+         <role>
+            <roleTerm type="text" valueURI="http://id.loc.gov/vocabulary/relators/ann">Annotator</roleTerm>
+         </role>
+      </name>
+      <location>
+         <physicalLocation type="repository" valueURI="http://isni.org/isni/0000000460377627">Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</physicalLocation>
+         <shelfLocator>ARC 237-044</shelfLocator>
+      </location>
+      <relatedItem otherType="Specimen">
+         <subject displayLabel="Taxonomic Classification">
+            <topic>Animalia</topic>
+         </subject>
+         <titleInfo otherType="Common Name">
+            <title>Echinoderm</title>
+         </titleInfo>
+      </relatedItem>
+      <recordInfo>
+
+         <recordCreationDate>2006-02-01</recordCreationDate>
+         <recordIdentifier source="MH:MCZArtwork">ARC_237-044</recordIdentifier>
+      </recordInfo>
+   </mods>
+</modsCollection>

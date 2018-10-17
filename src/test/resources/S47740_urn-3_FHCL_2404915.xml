@@ -1,0 +1,196 @@
+<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xlink="http://www.w3.org/TR/xlink"
+      xmlns="http://www.loc.gov/mods/v3"
+      xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+   
+   <titleInfo>
+      <title>Jami' 'Uqbah ibn Nafi, Medina neighborhood, Kairouan, al Qayrawan, Tunisia</title>
+   </titleInfo>
+   <titleInfo type="alternative">
+      <title>Great Mosque</title>
+   </titleInfo>
+   <titleInfo type="alternative">
+      <title>Jami' Sidi 'Uqba</title>
+   </titleInfo>
+   <titleInfo type="alternative">
+      <title>Jami' Sidi Okba</title>
+   </titleInfo>
+   <titleInfo type="alternative">
+      <title>Mosque of Sidi Okbah</title>
+   </titleInfo>
+   <titleInfo type="alternative">
+      <title>Masjid al-Qayrawan</title>
+   </titleInfo>
+   <titleInfo type="alternative">
+      <title>Sidi 'Uqba Mosque</title>
+   </titleInfo>
+   <titleInfo type="alternative">
+      <title>Al-Quairawan Mosque</title>
+   </titleInfo>
+   <name>
+      <namePart>'Ukba b. Nafi</namePart>
+      <namePart type="date">d. 683/63 AH</namePart>
+      <role>
+         <roleTerm>creator</roleTerm>
+      </role>
+      <role>
+         <roleTerm>founder</roleTerm>
+      </role>
+   </name>
+   <name>
+      <namePart>'Ukba b. Nafi</namePart>
+      <namePart type="date">d. 683/63 AH</namePart>
+      <role>
+         <roleTerm>creator</roleTerm>
+      </role>
+      <role>
+         <roleTerm>founder</roleTerm>
+      </role>
+   </name>
+   <name>
+      <namePart>Abu Muhammad Ziyadat Allah</namePart>
+      <namePart type="date">r. 817-838/201-223 AH</namePart>
+      <role>
+         <roleTerm>associated name</roleTerm>
+      </role>
+      <role>
+         <roleTerm>patron</roleTerm>
+      </role>
+   </name>
+   <name>
+      <namePart>Abu Ibrahim Ahmad</namePart>
+      <namePart type="date">r. 856-863/242-249 AH</namePart>
+      <role>
+         <roleTerm>associated name</roleTerm>
+      </role>
+      <role>
+         <roleTerm>patron</roleTerm>
+      </role>
+   </name>
+   <name>
+      <namePart>Abu Muhammad Ziyadat Allah</namePart>
+      <namePart type="date">r. 817-838/201-223 AH</namePart>
+      <role>
+         <roleTerm>associated name</roleTerm>
+      </role>
+      <role>
+         <roleTerm>patron</roleTerm>
+      </role>
+   </name>
+   <name>
+      <namePart>Abu Ibrahim Ahmad</namePart>
+      <namePart type="date">r. 856-863/242-249 AH</namePart>
+      <role>
+         <roleTerm>associated name</roleTerm>
+      </role>
+      <role>
+         <roleTerm>patron</roleTerm>
+      </role>
+   </name>
+   <typeOfResource>still image</typeOfResource>
+   <genre>religious buildings</genre>
+   <genre>mosques</genre>
+   <originInfo>
+      <dateOther keyDate="yes">original foundation 670/50 AH; rebuilt 836/221 AH;add'l work completed 862/248 AH</dateOther>
+      <dateCreated point="start">670</dateCreated>
+      <dateCreated point="end">1050</dateCreated>
+      <dateCreated>original foundation 670/50 AH; rebuilt 836/221 AH;add'l work completed 862/248 AH</dateCreated>
+   </originInfo>
+   <subject>
+      <topic>throne rooms</topic>
+   </subject>
+   <subject>
+      <topic>architecture</topic>
+   </subject>
+   <subject>
+      <topic>domestic animals</topic>
+   </subject>
+   <subject>
+      <topic>domed</topic>
+   </subject>
+   <subject>
+      <topic>courtyards</topic>
+   </subject>
+   <subject>
+      <topic>porticoes</topic>
+   </subject>
+   <subject>
+      <topic>Islamic architecture</topic>
+   </subject>
+   <subject>
+      <topic>Tower</topic>
+   </subject>
+   <subject>
+      <topic>minbars</topic>
+   </subject>
+   <subject>
+      <topic>mihrabs</topic>
+   </subject>
+   <subject>
+      <topic>arcades</topic>
+   </subject>
+   <subject>
+      <topic>Moorish</topic>
+   </subject>
+   <subject>
+      <topic>mosques</topic>
+   </subject>
+   <subject>
+      <topic>masjids</topic>
+   </subject>
+   <subject>
+      <topic>inscriptions, Kufic</topic>
+   </subject>
+   <extension xmlns:cdwalite="http://www.getty.edu/research/conducting_research/standards/cdwa/cdwalite">
+      <cdwalite:styleWrap>
+         <cdwalite:style>Aghlabid</cdwalite:style>
+      </cdwalite:styleWrap>
+   </extension>
+   <extension xmlns:cdwalite="http://www.getty.edu/research/conducting_research/standards/cdwa/cdwalite">
+      <cdwalite:styleWrap>
+         <cdwalite:style>Hafsid</cdwalite:style>
+      </cdwalite:styleWrap>
+   </extension>
+   <extension xmlns:cdwalite="http://www.getty.edu/research/conducting_research/standards/cdwa/cdwalite">
+      <cdwalite:cultureWrap>
+         <cdwalite:culture>Islamic</cdwalite:culture>
+      </cdwalite:cultureWrap>
+   </extension>
+   <extension xmlns:cdwalite="http://www.getty.edu/research/conducting_research/standards/cdwa/cdwalite">
+      <cdwalite:cultureWrap>
+         <cdwalite:culture>Tunisian</cdwalite:culture>
+      </cdwalite:cultureWrap>
+   </extension>
+   <extension xmlns:cdwalite="http://www.getty.edu/research/conducting_research/standards/cdwa/cdwalite">
+      <cdwalite:indexingMaterialsTechSet>
+         <cdwalite:termMaterialsTech>wood</cdwalite:termMaterialsTech>
+      </cdwalite:indexingMaterialsTechSet>
+   </extension>
+   <extension xmlns:cdwalite="http://www.getty.edu/research/conducting_research/standards/cdwa/cdwalite">
+      <cdwalite:indexingMaterialsTechSet>
+         <cdwalite:termMaterialsTech>marble</cdwalite:termMaterialsTech>
+      </cdwalite:indexingMaterialsTechSet>
+   </extension>
+   <location>
+      <physicalLocation displayLabel="site">Kairouan, al Qayrawan, Tunisia</physicalLocation>
+   </location>
+   
+   <relatedItem otherType="HOLLIS Images record">
+      <location>
+         <url>http://id.lib.harvard.edu/images/olvsite47740/urn-3:FHCL:2404915/catalog</url>
+      </location>
+   </relatedItem>
+   <recordInfo>
+      <recordContentSource authority="marcorg">MH</recordContentSource>
+      <recordContentSource authority="marcorg">MH-VIA</recordContentSource>
+      <recordChangeDate encoding="iso8601">20141226</recordChangeDate>
+      <recordIdentifier source="MH:VIA">S47740_urn-3:FHCL:2404915</recordIdentifier>
+      <languageOfCataloging>
+         <languageTerm>eng</languageTerm>
+      </languageOfCataloging>
+   </recordInfo>
+   <language>
+      <languageTerm type="code">zxx</languageTerm>
+      <languageTerm type="text">No linguistic content</languageTerm>
+   </language>
+</mods>
