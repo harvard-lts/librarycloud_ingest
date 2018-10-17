@@ -46,7 +46,12 @@ public class Config {
 	public String COLLECTIONS_URL;
 	public String DRSEXTENSIONS_URL;
 	public String DRS2_RAW_URL;
-	
+	public String MONGO_HOST;
+	public String MONGO_PORT;
+	public String MONGO_USERNAME;
+	public String MONGO_PASSWORD;
+	public String MONGO_DB;
+
 	private static Config conf;
 	
 	public static String propFile = "librarycloud.env.properties";
@@ -70,6 +75,12 @@ public class Config {
 		COLLECTIONS_URL = props.getProperty("collections_url");
 		DRSEXTENSIONS_URL = props.getProperty("drsextensions_url");
 		DRS2_RAW_URL = props.getProperty("drs2_raw_url");
+		MONGO_HOST = props.getProperty("mongo.host");
+		MONGO_PORT = props.getProperty("mongo.port");
+		MONGO_USERNAME = props.getProperty("mongo.username");
+		MONGO_PASSWORD = props.getProperty("mongo.password");
+		MONGO_DB = props.getProperty("mongo.db");
+
 	}
 	
 	public static synchronized Config getInstance() {

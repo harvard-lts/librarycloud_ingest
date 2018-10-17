@@ -38,7 +38,7 @@
             </xsl:call-template>
         </xsl:variable>
         <xsl:choose>
-            <xsl:when test="count($qualifiedUrls/url) != 1 or ./mods:typeOfResource/@collection">
+            <xsl:when test="(count($qualifiedUrls/url) != 1 or ./mods:typeOfResource/@collection) and not(mods:recordInfo/mods:recordIdentifier/@source='MH:MCZArtwork') and not(mods:recordInfo/mods:recordIdentifier/@source='MH:MHPL') and not(mods:recordInfo/mods:recordIdentifier/@source='MH:IOHP')">
                 <xsl:copy-of select="."/>
             </xsl:when>
             <xsl:otherwise>
@@ -46,21 +46,23 @@
                     <xsl:copy-of select="@*"/>
                     <xsl:apply-templates select="*"/>
                     <xsl:variable name="results" select="$param1"/>
+                    <xsl:for-each select="$qualifiedUrls/url">
                     <xsl:variable name="urn">
                         <xsl:choose>
-                            <xsl:when test="contains($qualifiedUrls/url/text(), '?')">
+                            <xsl:when test="contains(./text(), '?')">
                                 <xsl:value-of
-                                    select="substring-before(substring-after($qualifiedUrls/url/text(), 'urn-3'), '?')"
+                                    select="substring-before(substring-after(./text(), 'urn-3'), '?')"
                                 />
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:value-of
-                                    select="substring-after($qualifiedUrls/url/text(), 'urn-3')"/>
+                                    select="substring-after(./text(), 'urn-3')"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:variable>
                     <xsl:apply-templates
                         select="$results//docs[lower-case(substring-after(urn, 'urn-3')) = lower-case($urn)]"/>
+                    </xsl:for-each>
                     <xsl:if test="mods:recordInfo/mods:recordIdentifier/@source = 'MH:ALMA'">
                         <relatedItem xmlns="http://www.loc.gov/mods/v3" otherType="HOLLIS record">
                             <location xmlns="http://www.loc.gov/mods/v3">

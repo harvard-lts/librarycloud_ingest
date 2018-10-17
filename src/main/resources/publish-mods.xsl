@@ -34,10 +34,12 @@
         </xsl:variable>
         -->
         <xsl:variable name="digitalFormats">
-          <xsl:if test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'AUDIO']">
+            <xsl:if
+                test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'AUDIO'] or (mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'TEXT'] and mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:uriType = 'SDS'])">
             <format>Audio</format>
           </xsl:if>
-          <xsl:if test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'DOCUMENT'] or mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'PDS DOCUMENT'] or mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'PDS DOCUMENT LIST'] or mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'TEXT']">
+            <xsl:if
+                test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'DOCUMENT'] or mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'PDS DOCUMENT'] or mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'PDS DOCUMENT LIST'] or (mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'TEXT'] and not(mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:uriType = 'SDS']))">
             <format>Books and documents</format>
           </xsl:if>
           <xsl:if test="mods:extension/HarvardDRS:DRSMetadata[HarvardDRS:contentModel = 'VIDEO']">

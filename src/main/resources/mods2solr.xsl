@@ -8,6 +8,8 @@
     xmlns:tbd="http://lib.harvard.edu/TBD" xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:ext="http://exslt.org/common" xmlns:priorrecordids="http://lib.harvard.edu/alephmigration"
     xmlns:processingDate="http://hul.harvard.edu/ois/xml/ns/processingDate"
+    xmlns:availableTo="http://hul.harvard.edu/ois/xml/ns/availableTo"
+    xmlns:digitalFormats="http://hul.harvard.edu/ois/xml/ns/digitalFormats"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="xs xsi"
     version="2.0">
 
@@ -57,8 +59,8 @@
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:setName"/>
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:setSpec"/>
             <xsl:apply-templates select="mods:extension/set:sets/set:set/set:systemId"/>
-            <xsl:apply-templates select="mods:extension/tbd:digitalFormats/tbd:digitalFormat"/>
-            <xsl:apply-templates select="mods:extension/tbd:availableTo"/>
+            <xsl:apply-templates select="mods:extension/digitalFormats:digitalFormats/digitalFormats:digitalFormat"/>
+            <xsl:apply-templates select="mods:extension/availableTo:availableTo"/>
             <xsl:apply-templates select=".//HarvardRepositories:HarvardRepositories"/>
             <xsl:apply-templates
                 select="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier"/>
@@ -815,7 +817,7 @@
     <xsl:template match="HarvardDRS:contentModel">
         <xsl:element name="field">
             <xsl:attribute name="name">
-                <xsl:text>contentModel</xsl:text>
+                <xsl:text>_contentModel</xsl:text>
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
@@ -877,7 +879,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="tbd:digitalFormat">
+    <xsl:template match="digitalFormats:digitalFormat">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>digitalFormat</xsl:text>
@@ -886,7 +888,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="tbd:availableTo">
+    <xsl:template match="availableTo:availableTo">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>availableTo</xsl:text>

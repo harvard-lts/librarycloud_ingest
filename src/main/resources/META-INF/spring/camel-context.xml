@@ -40,6 +40,14 @@
         </property>
     </bean>
 
+    <bean id="tedSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
+        <property name="splitter">
+            <bean class="edu.harvard.libcomm.pipeline.ted.TedSplitter">
+                <constructor-arg value="100" /> <!-- Approx. max size of messages, in bytes -->
+            </bean>
+        </property>
+    </bean>
+
   <bean id="deleteSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.delete.DeleteFileSplitter"/>
@@ -244,7 +252,26 @@
         </property>
     </bean>
 
+    <!--<bean id="tedProcessor" class="edu.harvard.libcomm.pipeline.ted.TedToMods">
+    </bean>-->
+
+    <bean id="tedProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.ted.TedProcessor"/>
+        </property>
+    </bean>
+
     <bean id="prepareURI" class="edu.harvard.libcomm.pipeline.PrepareURIForHTTPEndpoint" />
+
+    <bean id="mongoBean" class="com.mongodb.MongoClient">
+        <constructor-arg>
+            <ref bean="mongoClientURI" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="mongoClientURI" class="com.mongodb.MongoClientURI">
+        <constructor-arg name="uri" value="mongodb://${mongo.username}:${mongo.password}@${mongo.host}:27072/${mongo.db}" />
+    </bean>
 
     <camelContext id="sqsContext" xmlns="http://camel.apache.org/schema/spring" xmlns:marcxml="http://www.loc.gov/MARC21/slim" trace="true">
         <!-- Environment-specific properties -->
@@ -946,6 +973,50 @@
                 </otherwise>
             </choice>
         </route>
+
+        <!-- TED -->
+        <route id="ted-ingest" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-ted-DEPRECATED?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <!--<marshal><custom ref="cloudbody"/></marshal>-->
+            <!--<to uri="mongodb:mongoBean?database=ted&amp;collection=mcz&amp;operation=findAll&amp;outputType=DBCursor" />-->
+            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-mongotomods?amazonSQSClient=#sqsClient" />
+        </route>
+
+        <route id="mongotomods-seda" errorHandlerRef="eh">
+            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-06" /> -->
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-mongotomods?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <to uri="seda:mongotomods?size=20&amp;blockWhenFull=true" />
+        </route>
+        <route id="mongotomods" errorHandlerRef="eh">
+            <!--<from uri="aws-sqs://{{librarycloud.sqs.environment}}-mongotomods?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />-->
+            <from uri="seda:mongotomods?concurrentConsumers=5"/>
+            <process ref="tedProcessor"/>
+            <marshal><custom ref="cloudbody"/></marshal>
+            <!--<multicast>
+                <to uri="file://{{librarycloud.files.basepath}}/done"/>
+                <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-end?amazonSQSClient=#sqsClient" />
+            </multicast>-->
+            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-05?amazonSQSClient=#sqsClient" />
+        </route>
+
+        <route id="ted-ingest-split" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-ted?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <doTry>
+                <split streaming="true" parallelProcessing="true">
+                    <method bean="tedSplitter" method="split"/>
+                    <marshal><custom ref="cloudbody"/></marshal>
+                    <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-05?amazonSQSClient=#sqsClient" />
+                    <!--<to uri="file://{{librarycloud.files.basepath}}/TEDSPLIT?fileName=${header.CamelSplitIndex}" />-->
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                    <!--<to uri="file://{{librarycloud.files.basepath}}/dead-letter" />-->
+                </doCatch>
+            </doTry>
+        </route>
+
 
     </camelContext>
 </beans>
