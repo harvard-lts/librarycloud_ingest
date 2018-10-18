@@ -3,7 +3,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:mods="http://www.loc.gov/mods/v3"
-    xmlns:tbd="http://lib.harvard.edu/TBD"
+    xmlns:originalDocument="http://lib.harvard.edu/originalDocument"
     xmlns:HarvardRepositories="http://hul.harvard.edu/ois/xml/ns/HarvardRepositories"
     xmlns:processingDate="http://hul.harvard.edu/ois/xml/ns/processingDate"
     xmlns:availableTo="http://hul.harvard.edu/ois/xml/ns/availableTo"
@@ -12,7 +12,7 @@
     xmlns:countries="info:lc/xmlns/codelist-v1"
     xmlns:sets="http://hul.harvard.edu/ois/xml/ns/libraryCloud"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    exclude-result-prefixes="mods xs sets tbd xlink HarvardRepositories processingDate availableTo digitalFormats HarvardDRS xsi countries"
+    exclude-result-prefixes="mods xs sets originalDocument xlink HarvardRepositories processingDate availableTo digitalFormats HarvardDRS xsi countries"
     version="2.0">
     <!-- <xsl:namespace-alias stylesheet-prefix="mods" result-prefix="" /> -->
     <xsl:output method="xml" encoding="UTF-8"/>

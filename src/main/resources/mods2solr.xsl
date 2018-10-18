@@ -5,7 +5,7 @@
     xmlns:set="http://hul.harvard.edu/ois/xml/ns/libraryCloud"
     xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
     xmlns:HarvardRepositories="http://hul.harvard.edu/ois/xml/ns/HarvardRepositories"
-    xmlns:tbd="http://lib.harvard.edu/TBD" xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:originalDocument="http://lib.harvard.edu/originalDocument" xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:ext="http://exslt.org/common" xmlns:priorrecordids="http://lib.harvard.edu/alephmigration"
     xmlns:processingDate="http://hul.harvard.edu/ois/xml/ns/processingDate"
     xmlns:availableTo="http://hul.harvard.edu/ois/xml/ns/availableTo"

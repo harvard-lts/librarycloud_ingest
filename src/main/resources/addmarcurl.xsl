@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs mods tbd xlink usage"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs mods originalDocument xlink usage"
     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mods="http://www.loc.gov/mods/v3"
-    xmlns:tbd="http://lib.harvard.edu/TBD"
+    xmlns:originalDocument="http://lib.harvard.edu/originalDocument"
     xmlns:usage="http://lib.harvard.edu/usagedata" version="1.0"
     >
 
@@ -26,9 +26,9 @@
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="*" />
             <extension xmlns="http://www.loc.gov/mods/v3">
-                <tbd:originalDocument>
+                <originalDocument:originalDocument>
                   <xsl:value-of select="concat($param1//marcpath,./mods:recordInfo/mods:recordIdentifier)"/>
-                </tbd:originalDocument>
+                </originalDocument:originalDocument>
             </extension>
         </xsl:copy>
     </xsl:template>
