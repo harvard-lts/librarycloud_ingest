@@ -262,7 +262,7 @@
     </bean>-->
 
     <bean id="prepareURI" class="edu.harvard.libcomm.pipeline.PrepareURIForHTTPEndpoint" />
-
+<!-- Connecting to mongo from within ted classes, but save for reference
     <bean id="mongoBean" class="com.mongodb.MongoClient">
         <constructor-arg>
             <ref bean="mongoClientURI" />
@@ -272,7 +272,7 @@
     <bean id="mongoClientURI" class="com.mongodb.MongoClientURI">
         <constructor-arg name="uri" value="mongodb://${mongo.username}:${mongo.password}@${mongo.host}:27072/${mongo.db}" />
     </bean>
-
+-->
     <camelContext id="sqsContext" xmlns="http://camel.apache.org/schema/spring" xmlns:marcxml="http://www.loc.gov/MARC21/slim" trace="true">
         <!-- Environment-specific properties -->
         <propertyPlaceholder id="librarycloud-properties" location="classpath:/librarycloud.env.properties" />
@@ -510,14 +510,14 @@
         <route id="uploadmarc-seda" errorHandlerRef="eh">
             <!-- Note the reduced messages per poll, so we don't end up getting messages timed out, since this takes a while -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=1&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <!--<unmarshal><custom ref="cloudbody"/></unmarshal>-->
             <to uri="seda:upload-marc?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="upload-marc" errorHandlerRef="eh">
             <from uri="seda:upload-marc?concurrentConsumers=4" />
             <process ref="extractPayloadProcessor" />
             <split>
-                <tokenize token="marcxml:record" inheritNamespaceTagName="marcxml:collection" xml="true" />
+                <tokenize token="record" inheritNamespaceTagName="collection" xml="true" />
                 <setHeader headerName="recordFileName">
                     <xpath resultType="java.lang.String">
                         /marcxml:record/marcxml:controlfield[@tag='001']
@@ -528,7 +528,7 @@
                     <when>
                         <simple>${in.body} != ""</simple>
                         <setHeader headerName="CamelAwsS3Key">
-                            <simple>${header.recordFileName.substring(0,9)}</simple>
+                            <simple>${header.recordFileName}</simple>
                         </setHeader>
                         <setHeader headerName="CamelAwsS3CannedAcl">
                             <simple>PublicRead</simple>
@@ -574,7 +574,8 @@
 
         <!-- VIA ingest and normalization -->
         <route id="via-ingest" errorHandlerRef="eh">
-            <!-- <from uri="file://{{librarycloud.files.basepath}}/ingest-via" />             -->
+            <!--
+                         -->
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-ingest-via?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
             <split>
                 <xtokenize mode="t">//filepath</xtokenize>
