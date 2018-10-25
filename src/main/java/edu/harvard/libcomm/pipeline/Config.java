@@ -51,6 +51,7 @@ public class Config {
 	public String MONGO_USERNAME;
 	public String MONGO_PASSWORD;
 	public String MONGO_DB;
+	public String MARC_S3_URL;
 
 	private static Config conf;
 	
@@ -80,6 +81,7 @@ public class Config {
 		MONGO_USERNAME = props.getProperty("mongo.username");
 		MONGO_PASSWORD = props.getProperty("mongo.password");
 		MONGO_DB = props.getProperty("mongo.db");
+		MARC_S3_URL = props.getProperty("marc.s3.url");
 
 	}
 	

@@ -252,6 +252,10 @@
         </property>
     </bean>
 
+    <bean id="refreshFromS3Processor" class="edu.harvard.libcomm.pipeline.enrich.RefreshFromS3Processor"/>
+
+    <bean id="S3ListProcessor" class="edu.harvard.libcomm.pipeline.enrich.S3ListProcessor"/>
+
     <!--<bean id="tedProcessor" class="edu.harvard.libcomm.pipeline.ted.TedToMods">
     </bean>-->
 
@@ -994,6 +998,20 @@
             </doTry>
         </route>
 
+        <!-- update alma from s3 -->
+        <route id="alma-refreshfroms3-split">
+            <!--<from uri="aws-sqs://{{librarycloud.sqs.environment}}-refreshfroms3-alma?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />-->
+            <from uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma"/>
+            <!-- Try block required for errors thrown out of the splitter -->
+            <doTry>
+              <split streaming="true">
+                <tokenize token="\n"/>
+                <process ref="refreshFromS3Processor"/>
+                <!--<to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml"/>-->
+                <to uri="aws-sqs://{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
+              </split>
+            </doTry>
+        </route>
 
     </camelContext>
 </beans>
