@@ -56,7 +56,7 @@ public class MessageUtils {
     	return source;
     }
     
-	protected synchronized static LibCommMessage unmarshalLibCommMessage(Reader r) throws JAXBException {
+	public synchronized static LibCommMessage unmarshalLibCommMessage(Reader r) throws JAXBException {
 		
 	 	try {			 
 			//unmarshal: xml2java
@@ -70,7 +70,7 @@ public class MessageUtils {
 		
 	}
 
-	protected synchronized static LibCommMessage unmarshalLibCommMessage(InputStream is) throws JAXBException {
+	public synchronized static LibCommMessage unmarshalLibCommMessage(InputStream is) throws JAXBException {
 		
 	 	try {
 			//unmarshal: xml2java
@@ -83,7 +83,7 @@ public class MessageUtils {
 		return libCommMessage;		
 	}
 	
-	protected synchronized static ModsCollection unmarshalMods(Reader r) throws JAXBException {
+	public synchronized static ModsCollection unmarshalMods(Reader r) throws JAXBException {
 		ModsCollection modsCollection = null;
 	 	try {
 			 

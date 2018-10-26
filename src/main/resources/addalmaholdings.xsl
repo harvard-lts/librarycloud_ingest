@@ -4,7 +4,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:mods="http://www.loc.gov/mods/v3"
     xmlns:marc="http://www.loc.gov/MARC21/slim"
-    xmlns:urlinfo="http://lib.harvard.edu/urlinfo" version="2.0"
+    xmlns:urlinfo="http://hul.harvard.edu/ois/xml/ns/urlinfo" version="2.0"
     >
 
     <xsl:output indent="no" omit-xml-declaration="yes" encoding="UTF-8"/>

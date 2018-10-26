@@ -2,11 +2,12 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:mods="http://www.loc.gov/mods/v3" xmlns:usage="http://lib.harvard.edu/usagedata"
-    xmlns:set="http://hul.harvard.edu/ois/xml/ns/libraryCloud"
+    xmlns:sets="http://hul.harvard.edu/ois/xml/ns/sets"
     xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
     xmlns:HarvardRepositories="http://hul.harvard.edu/ois/xml/ns/HarvardRepositories"
-    xmlns:originalDocument="http://lib.harvard.edu/originalDocument" xmlns:dc="http://purl.org/dc/elements/1.1/"
-    xmlns:ext="http://exslt.org/common" xmlns:priorrecordids="http://lib.harvard.edu/alephmigration"
+    xmlns:originalDocument="http://hul.harvard.edu/ois/xml/ns/originalDocument" xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:ext="http://exslt.org/common" 
+    xmlns:priorrecordids="http://hul.harvard.edu/ois/xml/ns/priorrecordids"
     xmlns:processingDate="http://hul.harvard.edu/ois/xml/ns/processingDate"
     xmlns:availableTo="http://hul.harvard.edu/ois/xml/ns/availableTo"
     xmlns:digitalFormats="http://hul.harvard.edu/ois/xml/ns/digitalFormats"
@@ -56,9 +57,9 @@
             <xsl:apply-templates select="mods:recordInfo"/>
             <xsl:apply-templates select="mods:relatedItem[@type = 'series']"/>
             <xsl:apply-templates select="mods:extension/usage:usageData/usage:stackScore"/>
-            <xsl:apply-templates select="mods:extension/set:sets/set:set/set:setName"/>
-            <xsl:apply-templates select="mods:extension/set:sets/set:set/set:setSpec"/>
-            <xsl:apply-templates select="mods:extension/set:sets/set:set/set:systemId"/>
+            <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:setName"/>
+            <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:setSpec"/>
+            <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:systemId"/>
             <xsl:apply-templates select="mods:extension/digitalFormats:digitalFormats/digitalFormats:digitalFormat"/>
             <xsl:apply-templates select="mods:extension/availableTo:availableTo"/>
             <xsl:apply-templates select=".//HarvardRepositories:HarvardRepositories"/>
@@ -731,7 +732,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="set:setName">
+    <xsl:template match="sets:setName">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>setName</xsl:text>
@@ -746,7 +747,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="set:setSpec">
+    <xsl:template match="sets:setSpec">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>setSpec</xsl:text>
@@ -761,7 +762,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="set:systemId">
+    <xsl:template match="sets:systemId">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>setSystemId</xsl:text>

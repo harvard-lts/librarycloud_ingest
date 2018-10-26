@@ -63,6 +63,7 @@
                     <xsl:apply-templates
                         select="$results//docs[lower-case(substring-after(urn, 'urn-3')) = lower-case($urn)]"/>
                     </xsl:for-each>
+                    <!-- we are already doing this in marc 2 mods xform 
                     <xsl:if test="mods:recordInfo/mods:recordIdentifier/@source = 'MH:ALMA'">
                         <relatedItem xmlns="http://www.loc.gov/mods/v3" otherType="HOLLIS record">
                             <location xmlns="http://www.loc.gov/mods/v3">
@@ -84,7 +85,7 @@
                                 </url>
                             </location>
                         </relatedItem>
-                    </xsl:if>
+                    </xsl:if>-->
                 </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
@@ -117,11 +118,11 @@
 
     <xsl:template match="docs">
         <extension xmlns="http://www.loc.gov/mods/v3">
-            <HarvardDRS:DRSMetadata>
+            <xsl:element name="DRSMetadata" namespace="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
                 <!--<xsl:apply-templates select="inDRS"/>-->
-                <HarvardDRS:inDRS>
+                <xsl:element name="inDRS" namespace="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
                     <xsl:text>true</xsl:text>
-                </HarvardDRS:inDRS>
+                </xsl:element>
                 <xsl:apply-templates select="accessFlag[not(. = 'null')]"/>
                 <xsl:apply-templates select="contentModel[not(. = 'null')]"/>
                 <xsl:apply-templates select="uriType[not(. = 'null')]"/>
@@ -130,7 +131,7 @@
                 <xsl:apply-templates select="ownerCodeDisplayName[not(. = '') and not(. = 'null')]"/>
                 <xsl:apply-templates select="metsLabel[not(. = '') and not(. = 'null')]"/>
                 <xsl:apply-templates select="lastModifiedDate[not(. = '') and not(. = 'null')]"/>
-            </HarvardDRS:DRSMetadata>
+            </xsl:element>
         </extension>
     </xsl:template>
 
@@ -189,57 +190,57 @@
     </xsl:template>
 
     <xsl:template match="inDRS">
-        <HarvardDRS:inDRS>
+        <xsl:element name="inDRS" namespace="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
             <xsl:value-of select="."/>
-        </HarvardDRS:inDRS>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="accessFlag">
-        <HarvardDRS:accessFlag>
+        <xsl:element name="accessFlag" namespace="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
             <xsl:value-of select="."/>
-        </HarvardDRS:accessFlag>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="uriType">
-        <HarvardDRS:uriType>
+        <xsl:element name="uriType" namespace="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
             <xsl:value-of select="."/>
-        </HarvardDRS:uriType>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="fileDeliveryURL">
-        <HarvardDRS:fileDeliveryURL>
+        <xsl:element name="fileDeliveryURL" namespace="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
             <xsl:value-of select="."/>
-        </HarvardDRS:fileDeliveryURL>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="contentModel">
-        <HarvardDRS:contentModel>
+        <xsl:element name="contentModel" namespace="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
             <xsl:value-of select="."/>
-        </HarvardDRS:contentModel>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="ownerCode">
-        <HarvardDRS:ownerCode>
+        <xsl:element name="ownerCode" namespace="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
             <xsl:value-of select="."/>
-        </HarvardDRS:ownerCode>
+        </xsl:element>
     </xsl:template>
 
 
     <xsl:template match="ownerCodeDisplayName">
-        <HarvardDRS:ownerCodeDisplayName>
+        <xsl:element name="ownerCodeDisplayName" namespace="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
             <xsl:value-of select="."/>
-        </HarvardDRS:ownerCodeDisplayName>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="metsLabel">
-        <HarvardDRS:metsLabel>
+        <xsl:element name="metsLabel" namespace="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
             <xsl:value-of select="."/>
-        </HarvardDRS:metsLabel>
+        </xsl:element>
     </xsl:template>
     <xsl:template match="lastModifiedDate">
-        <HarvardDRS:lastModifiedDate>
+        <xsl:element name="lastModifiedDate" namespace="http://hul.harvard.edu/ois/xml/ns/HarvardDRS">
             <xsl:value-of select="."/>
-        </HarvardDRS:lastModifiedDate>
+        </xsl:element>
     </xsl:template>
 
 </xsl:stylesheet>

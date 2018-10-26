@@ -20,7 +20,7 @@ import java.net.URI;
 /**
  * Created by mjv162 on 10/24/2018.
  */
-public class S3ListProcessor implements IProcessor {
+public class S3ListProcessor implements Processor {
     protected Logger log = Logger.getLogger(SolrProcessor.class);
 
     private Integer commitWithinTime = -1;
@@ -42,15 +42,15 @@ public class S3ListProcessor implements IProcessor {
         InputStream messageIS = MessageUtils.readMessageBody(message);
         LibCommMessage libCommMessage = MessageUtils.unmarshalLibCommMessage(messageIS);
         String s3Ids = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/almaholdings2s3list",null);
-        LibCommMessage message = new LibCommMessage();
-        message.setCommand("NORMALIZE");
+        LibCommMessage lcmessage = new LibCommMessage();
+        lcmessage.setCommand("NORMALIZE");
         LibCommMessage.Payload payload = new LibCommMessage.Payload();
         payload.setSource("ALMA");
         payload.setFormat("text");
         payload.setData(s3Ids);
-        message.setPayload(payload);
+        lcmessage.setPayload(payload);
         //String marshalledMessage = MessageUtils.marshalMessage(message);
-        exchange.getIn().setBody(message);
+        exchange.getIn().setBody(lcmessage);
     }
 
 

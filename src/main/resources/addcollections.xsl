@@ -7,7 +7,8 @@
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:col="http://api.lib.harvard.edu/v2/collection/"
     xmlns:lc="http://hul.harvard.edu/ois/xml/ns/libraryCloud"
-    exclude-result-prefixes="xs xlink mods dcterms dc col lc"
+    xmlns:sets="http://hul.harvard.edu/ois/xml/ns/sets"
+    exclude-result-prefixes="xs xlink mods dcterms dc col lc sets"
     version="2.0">
 
     <xsl:output encoding="UTF-8" indent="yes"/>
@@ -25,8 +26,12 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- Remove existing collections -->
+    <!-- Remove existing collections; changed set prefix/ns, continue to handle legacy "lc:" -->
     <xsl:template match="mods:extension[lc:sets]"/>
+    <xsl:template match="mods:extension[sets:sets]"/>
+    <!-- remove empty locations, sets -->
+    <xsl:template match="mods:location[not(./*)]"/>
+    <xsl:template match="mods:extension[sets:sets[not(./*)]]"/>
 
     <xsl:template match="mods:mods">
         <xsl:copy>
@@ -36,27 +41,27 @@
             <xsl:variable name="recordid">
                 <xsl:value-of select="./mods:recordInfo/mods:recordIdentifier"/>
             </xsl:variable>
-            <extension xmlns="http://www.loc.gov/mods/v3">
-                <lc:sets>
+            <xsl:element name="extension" xmlns="http://www.loc.gov/mods/v3">
+                <xsl:element name="sets" namespace="http://hul.harvard.edu/ois/xml/ns/sets">
                      <xsl:for-each
                         select="$collections//col:item[col:item_id = $recordid]/col:collections">
-                         <lc:set>
-                            <lc:systemId>
+                         <xsl:element name="set" namespace="http://hul.harvard.edu/ois/xml/ns/sets">
+                            <xsl:element name="systemId" namespace="http://hul.harvard.edu/ois/xml/ns/sets">
                                 <xsl:value-of select="col:systemId"/>
-                            </lc:systemId>
-                            <lc:setName>
+                            </xsl:element>
+                            <xsl:element name="setName" namespace="http://hul.harvard.edu/ois/xml/ns/sets">
                                 <xsl:value-of select="col:setName"/>
-                            </lc:setName>
-                            <lc:setSpec>
+                            </xsl:element>
+                            <xsl:element name="setSpec" namespace="http://hul.harvard.edu/ois/xml/ns/sets">
                                 <xsl:value-of select="col:setSpec"/>
-                            </lc:setSpec>
-                            <lc:baseUrl>
+                            </xsl:element>
+                            <xsl:element name="baseUrl" namespace="http://hul.harvard.edu/ois/xml/ns/sets">
                               <xsl:value-of select="col:baseUrl"/>
-                            </lc:baseUrl>
-                         </lc:set>
+                            </xsl:element>
+                         </xsl:element>
                     </xsl:for-each>
-                </lc:sets>
-            </extension>
+                </xsl:element>
+            </xsl:element>
             <xsl:apply-templates select="mods:recordInfo"/>
             <xsl:if test="count(mods:location/mods:url) &lt; 1">
               <location xmlns="http://www.loc.gov/mods/v3">
