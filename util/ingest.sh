@@ -29,18 +29,18 @@ if [ ! -f $SOURCE_FILE_PATH ]; then
 fi
 
 # Copy data file to target, creating bucket if it doesn't already exist
-if ! ./util/aws s3 cp $SOURCE_FILE_PATH s3://$TARGET_BUCKET/$TARGET_FILE_NAME; then
+if ! aws s3 cp $SOURCE_FILE_PATH s3://$TARGET_BUCKET/$TARGET_FILE_NAME; then
     echo "Creating bucket $TARGET_BUCKET"
-    ./util/aws s3 mb s3://$TARGET_BUCKET
-    ./util/aws s3api put-bucket-lifecycle --bucket $TARGET_BUCKET --lifecycle-configuration '{"Rules":[{"Status":"Enabled","Prefix":"","Expiration":{"Days":30},"ID":"Delete old items"}]}'
-    if ! ./util/aws s3 cp $SOURCE_FILE_PATH s3://$TARGET_BUCKET/$TARGET_FILE_NAME; then
+    aws s3 mb s3://$TARGET_BUCKET
+    aws s3api put-bucket-lifecycle --bucket $TARGET_BUCKET --lifecycle-configuration '{"Rules":[{"Status":"Enabled","Prefix":"","Expiration":{"Days":30},"ID":"Delete old items"}]}'
+    if ! aws s3 cp $SOURCE_FILE_PATH s3://$TARGET_BUCKET/$TARGET_FILE_NAME; then
         echo "Error uploading file"
         exit 1
     fi
 fi
 
 # Create download URL
-SOURCE_FILE_URL=`c:/DEVAREA/AWS/aws-tools/sign_s3_url.bash --bucket $TARGET_BUCKET --file-path $TARGET_FILE_NAME --minute-expire 1440`
+SOURCE_FILE_URL=`sign_s3_url.bash --bucket $TARGET_BUCKET --file-path $TARGET_FILE_NAME --minute-expire 1440`
 
 # Need to escape ampersands in the replacement string, or sed will do odd stuff
 SED_FILE_URL=`echo $SOURCE_FILE_URL | sed 's|&|\\\&amp;|g'`
@@ -64,8 +64,8 @@ if [ ! -f "$SOURCE_FILE_NAME.command.xml" ]; then
 fi
 
 # Copy ingest command to target queue
-./util/aws sqs create-queue --queue-name=$SQS_ENVIRONMENT-$INGEST_INSTRUCTION-$DATA_SOURCE_NAME
-./util/aws sqs send-message --queue=http://sqs.us-east-1.amazonaws.com/$SQS_ENVIRONMENT-$INGEST_INSTRUCTION-$DATA_SOURCE_NAME --message-body="$(<$SOURCE_FILE_NAME.command.xml)"
+aws sqs create-queue --queue-name=$SQS_ENVIRONMENT-$INGEST_INSTRUCTION-$DATA_SOURCE_NAME
+aws sqs send-message --queue=http://sqs.us-east-1.amazonaws.com/$SQS_ENVIRONMENT-$INGEST_INSTRUCTION-$DATA_SOURCE_NAME --message-body="$(<$SOURCE_FILE_NAME.command.xml)"
 
 rm $SOURCE_FILE_NAME.command.xml
 
