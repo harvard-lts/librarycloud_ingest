@@ -254,7 +254,13 @@
 
     <bean id="refreshFromS3Processor" class="edu.harvard.libcomm.pipeline.enrich.RefreshFromS3Processor"/>
 
-    <bean id="S3ListProcessor" class="edu.harvard.libcomm.pipeline.enrich.S3ListProcessor"/>
+    <bean id="s3ListProcessor" class="edu.harvard.libcomm.pipeline.enrich.S3ListProcessor"/>
+
+    <!--<bean id="s3ListProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.enrich.S3ListProcessor"/>
+        </property>
+    </bean>-->
 
     <!--<bean id="tedProcessor" class="edu.harvard.libcomm.pipeline.ted.TedToMods">
     </bean>-->
@@ -430,8 +436,14 @@
                         <completionPredicate>
                             <simple>${header.messageLength} > 150000</simple>
                         </completionPredicate>
+                        <!-- multicast doesn't work, do holdings first, then separate ingest for updating from s3 -->
                         <to uri="aws-sqs://{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient" />
                         <!-- <to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml?fileName=alma-${header.CamelSplitIndex}" /> -->
+
+                        <!--<multicast>
+                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient" />
+                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-bibidlist-from-holdings?amazonSQSClient=#sqsClient" />
+                        </multicast>-->
                     </aggregate>
                 </split>
                 <doCatch>
@@ -1000,8 +1012,8 @@
 
         <!-- update alma from s3 -->
         <route id="alma-refreshfroms3-split">
-            <!--<from uri="aws-sqs://{{librarycloud.sqs.environment}}-refreshfroms3-alma?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />-->
-            <from uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma"/>
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-update-bibids?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <!--<from uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma"/>-->
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
               <split streaming="true">
@@ -1011,6 +1023,33 @@
                 <to uri="aws-sqs://{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
               </split>
             </doTry>
+        </route>
+
+        <route id="bibidlist-from-holdings2">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-update-bibidsfromholdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <!--<from uri="file://{{librarycloud.files.basepath}}/HOLTEST"/>-->
+            <!-- Try block required for errors thrown out of the splitter -->
+            <doTry>
+                <split>
+                    <xpath>//controlfield[@tag='001']/text()</xpath>
+
+                    <setHeader headerName="outerSplitIndex">
+                        <simple>${header.CamelSplitIndex}</simple>
+                    </setHeader>
+                    <!--<to uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma?fileName=${header.outerSplitIndex}"/>-->
+                    <to uri="aws-sqs://{{librarycloud.sqs.environment}}-update-bibids?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+                    <!--<to uri="stream:out" />-->
+                </split>
+            </doTry>
+        </route>
+
+
+        <!-- create list of bibids from holdings, to reprocess bibs from s3 -->
+        <!-- 2018-10-29, not going to use? -->
+        <route id="bibidlist-from-holdings" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-bibidlist-from-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
+            <process ref="s3ListProcessor"/>
+            <to uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma"/>
         </route>
 
     </camelContext>

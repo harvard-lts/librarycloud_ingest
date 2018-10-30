@@ -26,31 +26,34 @@ public class S3ListProcessor implements Processor {
     private Integer commitWithinTime = -1;
 
     @Override
-    /*
+/*
     public void processMessage(LibCommMessage libCommMessage) throws Exception {
         try {
-            String s3Ids = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/almaholdings2s3list",null);
+            String s3Ids = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/almaholdings2s3list.xsl",null);
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
     }
 */
+
     public void process(Exchange exchange) throws Exception {
 
         Message message = exchange.getIn();
         InputStream messageIS = MessageUtils.readMessageBody(message);
+        //System.out.println("messageIS: " + IOUtils.toString(messageIS));
         LibCommMessage libCommMessage = MessageUtils.unmarshalLibCommMessage(messageIS);
         String s3Ids = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/almaholdings2s3list",null);
-        LibCommMessage lcmessage = new LibCommMessage();
-        lcmessage.setCommand("NORMALIZE");
-        LibCommMessage.Payload payload = new LibCommMessage.Payload();
-        payload.setSource("ALMA");
-        payload.setFormat("text");
-        payload.setData(s3Ids);
-        lcmessage.setPayload(payload);
+        //LibCommMessage lcmessage = new LibCommMessage();
+        //lcmessage.setCommand("NORMALIZE");
+        //LibCommMessage.Payload payload = new LibCommMessage.Payload();
+        //payload.setSource("ALMA");
+        //payload.setFormat("text");
+        //payload.setData(s3Ids);
+        //lcmessage.setPayload(payload);
         //String marshalledMessage = MessageUtils.marshalMessage(message);
-        exchange.getIn().setBody(lcmessage);
+        //exchange.getIn().setBody(lcmessage);
+        exchange.getIn().setBody(s3Ids);
     }
 
 
