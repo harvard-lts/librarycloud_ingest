@@ -252,6 +252,14 @@
         </property>
     </bean>
 
+    <bean id="s3DeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.delete.S3DeleteProcessor">
+                <property name="bucket" value="${librarycloud.s3.marc_bucket}.${librarycloud.sqs.environment}" />
+            </bean>
+        </property>
+    </bean>
+
     <bean id="refreshFromS3Processor" class="edu.harvard.libcomm.pipeline.enrich.RefreshFromS3Processor"/>
 
     <bean id="s3ListProcessor" class="edu.harvard.libcomm.pipeline.enrich.S3ListProcessor"/>
@@ -622,6 +630,7 @@
                             </completionPredicate>
                             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" />
                             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.outerSplitIndex}-${header.CamelSplitIndex}" /> -->
+                            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient" />
                         </aggregate>
                     </split>
                 </split>
@@ -955,7 +964,10 @@
                         <xpath resultType="java.lang.String">//controlfield[@tag='001']</xpath>
                     </setHeader>
                     <process ref="almaDeleteProcessor"/>
-                    <to uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
+                    <multicast streaming="true">
+                        <to uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
+                        <to uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-s3?amazonSQSClient=#sqsClient" />
+                    </multicast>
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
@@ -1010,22 +1022,7 @@
             </doTry>
         </route>
 
-        <!-- update alma from s3 -->
-        <route id="alma-refreshfroms3-split">
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-update-bibids?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
-            <!--<from uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma"/>-->
-            <!-- Try block required for errors thrown out of the splitter -->
-            <doTry>
-              <split streaming="true">
-                <tokenize token="\n"/>
-                <process ref="refreshFromS3Processor"/>
-                <!--<to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml"/>-->
-                <to uri="aws-sqs://{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
-              </split>
-            </doTry>
-        </route>
-
-        <route id="bibidlist-from-holdings2">
+        <route id="bibidlist-from-holdings">
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-update-bibidsfromholdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
             <!--<from uri="file://{{librarycloud.files.basepath}}/HOLTEST"/>-->
             <!-- Try block required for errors thrown out of the splitter -->
@@ -1043,13 +1040,25 @@
             </doTry>
         </route>
 
+        <!-- update alma from s3 -->
+        <route id="alma-refreshfroms3-split">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-update-bibids?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <!--<from uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma"/>-->
+            <!-- Try block required for errors thrown out of the splitter -->
+            <doTry>
+                <split streaming="true">
+                    <tokenize token="\n"/>
+                    <process ref="refreshFromS3Processor"/>
+                    <!--<to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml"/>-->
+                    <to uri="aws-sqs://{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
+                </split>
+            </doTry>
+        </route>
 
-        <!-- create list of bibids from holdings, to reprocess bibs from s3 -->
-        <!-- 2018-10-29, not going to use? -->
-        <route id="bibidlist-from-holdings" errorHandlerRef="eh">
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-bibidlist-from-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
-            <process ref="s3ListProcessor"/>
-            <to uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma"/>
+        <route id="deletefroms3" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-s3?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <process ref="s3DeleteProcessor"/>
+            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
         </route>
 
     </camelContext>
