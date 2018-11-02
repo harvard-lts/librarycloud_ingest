@@ -12,6 +12,7 @@
     xmlns:countries="info:lc/xmlns/codelist-v1"
     xmlns:sets="http://hul.harvard.edu/ois/xml/ns/libraryCloud"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd"
     exclude-result-prefixes="mods xs sets originalDocument xlink HarvardRepositories processingDate availableTo digitalFormats HarvardDRS xsi countries"
     version="2.0">
     <!-- <xsl:namespace-alias stylesheet-prefix="mods" result-prefix="" /> -->
@@ -22,7 +23,7 @@
 
     <xsl:template match="mods:modsCollection">
         <xsl:copy>
-            <xsl:copy-of select="@*"/>
+            <xsl:copy-of select="@*" />
             <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
@@ -77,6 +78,7 @@
         <xsl:if
             test="not(mods:recordInfo/mods:recordContentSource='UK-CbPIL')">
             <xsl:copy>
+                <xsl:copy-of select="document('')/*/@xsi:schemaLocation"/>
                 <xsl:copy-of select="@*"/>
                 <xsl:apply-templates />
                 <xsl:if test="count($digitalFormats/format) &gt; 0">

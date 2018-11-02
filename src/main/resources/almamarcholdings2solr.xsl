@@ -13,6 +13,7 @@
     </xsl:template>
 
     <xsl:template match="marc:record">
+        <xsl:if test="not(./marc:datafield[@tag=950]/marc:subfield[@code='g']='true')">
         <xsl:element name="doc">
             <xsl:apply-templates select="marc:controlfield" mode="indx"/>
             <xsl:apply-templates select="marc:datafield[@tag='852']" mode="indx"/>
@@ -43,6 +44,7 @@
             </xsl:element>
 
         </xsl:element>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="marc:leader|marc:controlfield" mode="orig">

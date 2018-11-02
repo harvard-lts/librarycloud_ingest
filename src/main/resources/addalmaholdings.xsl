@@ -29,26 +29,16 @@
             <xsl:variable name="holdings" select="$param1"/>
              <!--<xsl:variable name="holdings" select="document('')//xsl:param[@name='param1']//holdings"/>-->
             <xsl:variable name="hollisid"><xsl:value-of select="./mods:recordInfo/mods:recordIdentifier"/></xsl:variable>
-
-<!--             <xsl:message>HollisID:(<xsl:value-of select="$hollisid"/>)</xsl:message>
-            <xsl:message>Comparing to:(<xsl:value-of select="$holdings//doc/str[@name='originalMarc']/marc:record/marc:controlfield[@tag='001']" />)</xsl:message>
-
-            <xsl:message><xsl:copy-of select="$holdings//doc/str[@name='originalMarc']/marc:record/marc:controlfield[@tag='001']" /></xsl:message>
-<xsl:message>Three</xsl:message>
-            <xsl:message><xsl:copy-of select="$holdings//doc/str[@name='originalMarc']/marc:record[marc:controlfield[@tag='001']=$hollisid]" /></xsl:message>
- -->
-
             <xsl:for-each select="$holdings//doc/str[@name='originalMarc']/marc:record[marc:controlfield[@tag='001']=$hollisid]">
-                <xsl:element name="location" namespace="http://www.loc.gov/mods/v3">
-
+                <xsl:if test="not(./marc:datafield[@tag=950]/marc:subfield[@code='g']='true')">
+                    <xsl:element name="location" namespace="http://www.loc.gov/mods/v3">
                         <!-- <xsl:apply-templates select="./str[@name='originalMarc']"/> -->
                         <xsl:apply-templates select="./marc:datafield[@tag='852']"/>
                         <xsl:apply-templates select="./marc:datafield[@tag='843']"/>
                         <xsl:apply-templates select="./marc:datafield[@tag='856']"/>
-
-                 </xsl:element>
+                     </xsl:element>
+                </xsl:if>
             </xsl:for-each>
-
         </xsl:copy>
     </xsl:template>
 

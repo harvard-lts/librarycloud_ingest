@@ -252,6 +252,12 @@
         </property>
     </bean>
 
+    <bean id="solrHoldingsDeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+        <property name="processor">
+            <bean class="edu.harvard.libcomm.pipeline.solr.SolrHoldingsDeleteProcessor"/>
+        </property>
+    </bean>
+
     <bean id="s3DeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.delete.S3DeleteProcessor">
@@ -982,6 +988,43 @@
             <to uri="aws-sqs://{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
         </route>
 
+        <!-- Delete holdings handling -->
+        <route id="alma-holdings-delete-extract-file">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-alma-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
+            <split>
+                <xtokenize mode="t">//filepath</xtokenize>
+                <bean ref="prepareURI" method="prepare"/>
+                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+                <to uri="http://www.example.com"/>
+                <to uri="direct:alma-holdings-delete-file"/>
+            </split>
+        </route>
+
+        <route id="alma-holdings-delete-ingest-split">
+            <from uri="direct:alma-holdings-delete-file"/>
+            <!-- Try block required for errors thrown out of the splitter -->
+            <doTry>
+                <split streaming="true">
+                    <xtokenize>//record</xtokenize>
+                    <setHeader headerName="deleteID">
+                        <xpath resultType="java.lang.String">//datafield[@tag='852']/subfield[@code='8']</xpath>
+                    </setHeader>
+                    <process ref="almaDeleteProcessor"/>
+                    <to uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-holdings-public?amazonSQSClient=#sqsClient"/>
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter"/>
+                </doCatch>
+            </doTry>
+        </route>
+
+        <route id="deleteholdingssolr" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-holdings-public?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <process ref="solrHoldingsDeleteProcessor"/>
+            <to uri="aws-sqs://{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
+        </route>
+
         <!-- Collection update handling -->
         <route id="updatecollections-seda" errorHandlerRef="eh">
         <!--<from uri="file://{{librarycloud.files.basepath}}/updateCollection-input" /> -->
@@ -1022,8 +1065,20 @@
             </doTry>
         </route>
 
-        <route id="bibidlist-from-holdings">
-            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-update-bibidsfromholdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+        <route id="bibidlist-from-holdings-ingest" errorHandlerRef="eh">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-update-bibidsfromholdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <split>
+                <xtokenize mode="t">//filepath</xtokenize>
+                <bean ref="prepareURI" method="prepare"/>
+                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+                <to uri="http://www.example.com" />
+                <to uri="direct:bibidlist-from-holdings-file"/>
+            </split>
+        </route>
+
+        <route id="bibidlist-from-holdings-file">
+            <from uri="direct:bibidlist-from-holdings-file"/>
+            <!--<from uri="aws-sqs://{{librarycloud.sqs.environment}}-update-bibidsfromholdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />-->
             <!--<from uri="file://{{librarycloud.files.basepath}}/HOLTEST"/>-->
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
