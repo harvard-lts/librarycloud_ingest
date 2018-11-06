@@ -42,25 +42,25 @@
                 <xsl:value-of select="./mods:recordInfo/mods:recordIdentifier"/>
             </xsl:variable>
             <xsl:element name="extension" xmlns="http://www.loc.gov/mods/v3">
-                <xsl:element name="sets" namespace="http://hul.harvard.edu/ois/xml/ns/sets">
+                <sets:sets>
                      <xsl:for-each
                         select="$collections//col:item[col:item_id = $recordid]/col:collections">
-                         <xsl:element name="set" namespace="http://hul.harvard.edu/ois/xml/ns/sets">
-                            <xsl:element name="systemId" namespace="http://hul.harvard.edu/ois/xml/ns/sets">
+                         <sets:set>
+                            <sets:systemId>
                                 <xsl:value-of select="col:systemId"/>
-                            </xsl:element>
-                            <xsl:element name="setName" namespace="http://hul.harvard.edu/ois/xml/ns/sets">
+                            </sets:systemId>
+                            <sets:setName>
                                 <xsl:value-of select="col:setName"/>
-                            </xsl:element>
-                            <xsl:element name="setSpec" namespace="http://hul.harvard.edu/ois/xml/ns/sets">
+                            </sets:setName>
+                            <sets:setSpec>
                                 <xsl:value-of select="col:setSpec"/>
-                            </xsl:element>
-                            <xsl:element name="baseUrl" namespace="http://hul.harvard.edu/ois/xml/ns/sets">
+                            </sets:setSpec>
+                            <sets:baseUrl>
                               <xsl:value-of select="col:baseUrl"/>
-                            </xsl:element>
-                         </xsl:element>
+                            </sets:baseUrl>
+                         </sets:set>
                     </xsl:for-each>
-                </xsl:element>
+                </sets:sets>
             </xsl:element>
             <xsl:apply-templates select="mods:recordInfo"/>
             <xsl:if test="count(mods:location/mods:url) &lt; 1">

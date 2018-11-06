@@ -1,6 +1,6 @@
 <xsl:stylesheet xmlns="http://www.loc.gov/mods/v3" xmlns:marc="http://www.loc.gov/MARC21/slim"
   xmlns:xlink="http://www.w3.org/1999/xlink" 
-  xmlns:priorrecordids="http://hul.harvard.edu/ois/xml/ns/priorrecordids"
+  xmlns:librarycloud="http://hul.harvard.edu/ois/xml/ns/librarycloud"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
   xmlns:countries="info:lc/xmlns/codelist-v1"
   exclude-result-prefixes="xlink marc countries" version="1.0">
@@ -13,6 +13,7 @@
 
 
   <!-- Harvard modifications
+  Revision 10.02 recordChangeDate - only use 1st 8 (YYYYMMDD) to be iso8601 compliant
   Revision 10.01 hardcode MH:ALMA in recordIdentifier/@source
   Revision 9.13 adding 880 titles to 490 (need to review)
   Revision 9.12 series only if ind 0
@@ -3092,9 +3093,11 @@
         </recordCreationDate>
       </xsl:for-each>
 
+
+      <!-- Harvard Revision 10.02 recordChangeDate - only use 1st 8 (YYYYMMDD) to be iso8601 compliant -->
       <xsl:for-each select="marc:controlfield[@tag = 005]">
         <recordChangeDate encoding="iso8601">
-          <xsl:value-of select="."/>
+          <xsl:value-of select="substring(.,1,8)"/>
         </recordChangeDate>
       </xsl:for-each>
       <xsl:for-each select="marc:controlfield[@tag = 001]">
@@ -6104,12 +6107,12 @@
   <xsl:template name="addOriginalSystemId">
     <xsl:if test="marc:subfield[@code = 'a']">
       <xsl:element name="extension" namespace="http://www.loc.gov/mods/v3">
-        <xsl:element name="priorrecordids" namespace="http://hul.harvard.edu/ois/xml/ns/priorrecordids">
-          <xsl:element name="recordIdentifier" namespace="http://hul.harvard.edu/ois/xml/ns/priorrecordids">
+        <librarycloud:priorrecordids>
+          <librarycloud:recordIdentifier>
             <xsl:attribute name="source">MH:ALEPH</xsl:attribute>
             <xsl:value-of select="marc:subfield[@code = 'a']"/>
-          </xsl:element>
-        </xsl:element>
+          </librarycloud:recordIdentifier>
+      </librarycloud:priorrecordids>
       </xsl:element>
     </xsl:if>
   </xsl:template>

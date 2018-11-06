@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs mods originalDocument xlink usage"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs mods librarycloud xlink"
     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mods="http://www.loc.gov/mods/v3"
-    xmlns:originalDocument="http://hul.harvard.edu/ois/xml/ns/originalDocument"
-    xmlns:usage="http://hul.harvard.edu/usagedata" version="1.0"
+    xmlns:librarycloud="http://hul.harvard.edu/ois/xml/ns/librarycloud"
+    version="2.0"
     >
 
     <xsl:output indent="no" encoding="UTF-8"/>
@@ -26,9 +26,9 @@
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="*" />
             <extension xmlns="http://www.loc.gov/mods/v3">
-                <xsl:element name="originalDocument" namespace="http://hul.harvard.edu/ois/xml/ns/originalDocument">
+                <librarycloud:originalDocument>
                   <xsl:value-of select="concat($param1//marcpath,./mods:recordInfo/mods:recordIdentifier)"/>
-                </xsl:element>
+                </librarycloud:originalDocument>
             </extension>
         </xsl:copy>
     </xsl:template>

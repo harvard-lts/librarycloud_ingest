@@ -11,6 +11,7 @@
     xmlns:processingDate="http://hul.harvard.edu/ois/xml/ns/processingDate"
     xmlns:availableTo="http://hul.harvard.edu/ois/xml/ns/availableTo"
     xmlns:digitalFormats="http://hul.harvard.edu/ois/xml/ns/digitalFormats"
+    xmlns:librarycloud="http://hul.harvard.edu/ois/xml/ns/librarycloud"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="xs xsi"
     version="2.0">
 
@@ -60,13 +61,13 @@
             <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:setName"/>
             <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:setSpec"/>
             <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:systemId"/>
-            <xsl:apply-templates select="mods:extension/digitalFormats:digitalFormats/digitalFormats:digitalFormat"/>
-            <xsl:apply-templates select="mods:extension/availableTo:availableTo"/>
-            <xsl:apply-templates select=".//HarvardRepositories:HarvardRepositories"/>
+            <xsl:apply-templates select="mods:extension/librarycloud:digitalFormats/librarycloud:digitalFormat"/>
+            <xsl:apply-templates select="mods:extension/librarycloud:availableTo"/>
+            <xsl:apply-templates select=".//librarycloud:HarvardRepositories"/>
             <xsl:apply-templates
-                select="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier"/>
+                select="mods:extension/librarycloud:priorrecordids/librarycloud:recordIdentifier"/>
 
-            <xsl:apply-templates select="mods:extension/processingDate:processingDate"/>
+            <xsl:apply-templates select="mods:extension/librarycloud:processingDate"/>
 
 
             <xsl:choose>
@@ -595,7 +596,7 @@
     </xsl:template>
 
     <xsl:template
-        match="mods:extension/priorrecordids:priorrecordids/priorrecordids:recordIdentifier">
+        match="mods:extension/librarycloud:priorrecordids/librarycloud:recordIdentifier">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>priorRecordIdentifier</xsl:text>
@@ -604,7 +605,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="processingDate:processingDate">
+    <xsl:template match="librarycloud:processingDate">
         <xsl:if test='matches(., "\d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z")'>
             <xsl:element name="field">
                 <xsl:attribute name="name">
@@ -781,8 +782,8 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="HarvardRepositories:HarvardRepositories">
-        <xsl:for-each select="HarvardRepositories:HarvardRepository">
+    <xsl:template match="librarycloud:HarvardRepositories">
+        <xsl:for-each select="librarycloud:HarvardRepository">
             <xsl:element name="field">
                 <xsl:attribute name="name">
                     <xsl:text>repository</xsl:text>
@@ -880,7 +881,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="digitalFormats:digitalFormat">
+    <xsl:template match="librarycloud:digitalFormat">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>digitalFormat</xsl:text>
@@ -889,7 +890,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="availableTo:availableTo">
+    <xsl:template match="librarycloud:availableTo">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>availableTo</xsl:text>
