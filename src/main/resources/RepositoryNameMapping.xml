@@ -523,12 +523,14 @@
     <mapping>
         <source>MCZ</source>
         <replacement>Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</replacement>
-        <valueURI>http://isni.org/isni/0000000460377627</valueURI> --> <extensionValue>Museum Comp Zoology</extensionValue>
+        <valueURI>http://isni.org/isni/0000000460377627</valueURI>
+        <extensionValue>Museum Comp Zoology</extensionValue>
     </mapping>
     <mapping>
         <source>Ernst Mayr Library of the Museum of Comparative Zoology, Museum of Comparative Zoology, Harvard University</source>
         <replacement>Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</replacement>
-        <valueURI>http://isni.org/isni/0000000460377627</valueURI> --> <extensionValue>Museum Comp Zoology</extensionValue>
+        <valueURI>http://isni.org/isni/0000000460377627</valueURI>
+        <extensionValue>Museum Comp Zoology</extensionValue>
     </mapping>
     <mapping>
         <source>Ernst Mayr Library of the Museum of Comparative Zoology</source>
