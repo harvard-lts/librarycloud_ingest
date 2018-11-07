@@ -9,8 +9,7 @@
     xmlns:digitalFormats="http://hul.harvard.edu/ois/xml/ns/digitalFormats"
     xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
     xmlns:librarycloud="http://hul.harvard.edu/ois/xml/ns/librarycloud"
-    xmlns:countries="info:lc/xmlns/codelist-v1"
-    xmlns:sets="http://hul.harvard.edu/ois/xml/ns/sets"
+    xmlns:countries="info:lc/xmlns/codelist-v1" xmlns:sets="http://hul.harvard.edu/ois/xml/ns/sets"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd"
     exclude-result-prefixes="mods xs sets originalDocument xlink HarvardRepositories processingDate availableTo digitalFormats HarvardDRS xsi countries librarycloud"
@@ -20,7 +19,7 @@
     <xsl:param name="param1">
         <processingDate/>
     </xsl:param>
-    <xsl:param name="repository-map-file" select="'RepositoryNameMapping.xml'"/>
+    <xsl:param name="repository-map-file" select="'src/main/resources/RepositoryNameMapping.xml'" />
     <xsl:variable name="map" select="document($repository-map-file)"/>
 
     <xsl:template match="mods:modsCollection">
@@ -85,36 +84,38 @@
                 <xsl:copy-of select="@*"/>
                 <xsl:apply-templates/>
                 <mods:extension>
-                <librarycloud:librarycloud>
-                    <xsl:if test="count($digitalFormats/format) &gt; 0">
-                        <librarycloud:digitalFormats>
-                            <xsl:for-each select="$digitalFormats/format">
-                                <librarycloud:digitalFormat>
-                                    <xsl:value-of select="."/>
-                                </librarycloud:digitalFormat>
-                            </xsl:for-each>
-                        </librarycloud:digitalFormats>
-                    </xsl:if>
-                    <xsl:if test="string-length($availableTo)">
-                        <librarycloud:availableTo>
-                            <xsl:value-of select="$availableTo"/>
-                        </librarycloud:availableTo>
-                    </xsl:if>
-                    <xsl:if test="count($harvardRepositoriesMap/mapping) &gt; 0">
-                        <librarycloud:HarvardRepositories>
-                            <xsl:for-each select="$harvardRepositoriesMap/mapping">
-                                <librarycloud:HarvardRepository>
-                                    <xsl:value-of select="./extensionValue"/>
-                                </librarycloud:HarvardRepository>
-                            </xsl:for-each>
-                        </librarycloud:HarvardRepositories>
-                    </xsl:if>
-                    <librarycloud:processingDate>
-                        <xsl:value-of select="$param1"/>
-                    </librarycloud:processingDate>
-                    <xsl:apply-templates select="mods:extension/librarycloud:originalDocument" mode="lcloudchunk"/>
-                    <xsl:apply-templates select="mods:extension/librarycloud:priorrecordids" mode="lcloudchunk"/>
-                </librarycloud:librarycloud>
+                    <xsl:element name="librarycloud:librarycloud">
+                        <xsl:if test="string-length($availableTo)">
+                            <librarycloud:availableTo>
+                                <xsl:value-of select="$availableTo"/>
+                            </librarycloud:availableTo>
+                        </xsl:if>
+                        <xsl:if test="count($digitalFormats/format) &gt; 0">
+                            <librarycloud:digitalFormats>
+                                <xsl:for-each select="$digitalFormats/format">
+                                    <librarycloud:digitalFormat>
+                                        <xsl:value-of select="."/>
+                                    </librarycloud:digitalFormat>
+                                </xsl:for-each>
+                            </librarycloud:digitalFormats>
+                        </xsl:if>
+                        <xsl:if test="count($harvardRepositoriesMap/mapping) &gt; 0">
+                            <librarycloud:HarvardRepositories>
+                                <xsl:for-each select="$harvardRepositoriesMap/mapping">
+                                    <librarycloud:HarvardRepository>
+                                        <xsl:value-of select="./extensionValue"/>
+                                    </librarycloud:HarvardRepository>
+                                </xsl:for-each>
+                            </librarycloud:HarvardRepositories>
+                        </xsl:if>
+                        <xsl:apply-templates select="mods:extension/librarycloud:originalDocument"
+                            mode="lcloudchunk"/>
+                        <xsl:apply-templates select="mods:extension/librarycloud:priorrecordids"
+                            mode="lcloudchunk"/>
+                        <librarycloud:processingDate>
+                            <xsl:value-of select="$param1"/>
+                        </librarycloud:processingDate>
+                    </xsl:element>
                 </mods:extension>
                 <xsl:if test="count(mods:location/mods:url) &lt; 1">
                     <location xmlns="http://www.loc.gov/mods/v3">
@@ -250,9 +251,10 @@
     </xsl:template>
 
     <!-- hide these, we are now pulling them in as part of one extension for librarycloud namespace elements -->
-    <xsl:template match="mods:extension[librarycloud:priorrecordids] | mods:extension[librarycloud:originalDocument]"/>
-    
-    <xsl:template match="mods:extension[librarycloud:priorrecordids] | mods:extension[librarycloud:originalDocument]" mode="lcloudchunk">
+    <xsl:template
+        match="mods:extension[librarycloud:priorrecordids] | mods:extension[librarycloud:originalDocument]"/>
+
+    <xsl:template match="librarycloud:priorrecordids | librarycloud:originalDocument" mode="lcloudchunk">
         <xsl:copy-of select="."/>
     </xsl:template>
 

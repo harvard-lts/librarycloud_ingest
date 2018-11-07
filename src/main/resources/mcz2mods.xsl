@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.loc.gov/mods/v3"
+    xmlns:xlink="http://www.w3.org/TR/xlink" xmlns="http://www.loc.gov/mods/v3"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
     <xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
 
@@ -284,7 +284,7 @@
 
     <xsl:template match="commonName">
         <xsl:element name="titleInfo">
-            <xsl:attribute name="otherType">Common Name</xsl:attribute>
+            <xsl:attribute name="displayLabel">Common Name</xsl:attribute>
             <xsl:element name="title">
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:element>
@@ -293,7 +293,7 @@
 
     <xsl:template match="originalName">
         <xsl:element name="titleInfo">
-            <xsl:attribute name="otherType">Original Name</xsl:attribute>
+            <xsl:attribute name="displayLabel">Original Name</xsl:attribute>
             <xsl:element name="title">
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:element>
@@ -313,7 +313,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="specimenCollector">
+    <xsl:template match="specimenCollector[not(.=' ')]">
         <xsl:element name="name">
             <xsl:attribute name="displayLabel">Specimen Collector</xsl:attribute>
             <xsl:element name="namePart">

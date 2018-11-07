@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.loc.gov/mods/v3"
+    xmlns:xlink="http://www.w3.org/TR/xlink" xmlns="http://www.loc.gov/mods/v3"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
     <xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
@@ -45,6 +45,7 @@
         <xsl:apply-templates select="alternateTitle"/>
         <!--<xsl:apply-templates select="location"/>-->
         <xsl:call-template name="originInfo"/>
+        <xsl:apply-templates select="date/dateType[not(.='s.d.')]"/>
         <xsl:apply-templates select="genre"/>
         <xsl:apply-templates select="subject"/>
         <xsl:apply-templates select="language"/>
@@ -112,7 +113,8 @@
     </xsl:template>
 
     <xsl:template match="date">
-        <xsl:apply-templates/>
+        <xsl:apply-templates select="singleDate"/>
+        <xsl:apply-templates select="dateType[.='s.d.']"/>
     </xsl:template>
 
     <xsl:template match="singleDate">
@@ -121,19 +123,30 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="dateType">
-        <xsl:choose>
-            <xsl:when test=".='s.d'">
+    <xsl:template match="dateType[.='s.d.']">
+        <xsl:element name="dateOther">
+            <xsl:text>undated</xsl:text>
+        </xsl:element>
+        <!--<xsl:choose>
+            <xsl:when test=".='s.d.'">
                 <xsl:element name="dateOther">
                     <xsl:text>undated</xsl:text>
                 </xsl:element>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:attribute name="type">
+                <xsl:element name="note">
+                    <xsl:attribute name="type"><xsl:text>date type</xsl:text></xsl:attribute>
                     <xsl:value-of select="."/>
-                </xsl:attribute>
+                </xsl:element>
             </xsl:otherwise>
-        </xsl:choose>
+        </xsl:choose>-->
+    </xsl:template>
+    
+    <xsl:template match="dateType[not(.='s.d.')]">
+        <xsl:element name="note">
+            <xsl:attribute name="type"><xsl:text>date type</xsl:text></xsl:attribute>
+            <xsl:value-of select="."/>
+        </xsl:element>
     </xsl:template>
     
     <xsl:template match="location">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.loc.gov/mods/v3"
+    xmlns:xlink="http://www.w3.org/TR/xlink" xmlns="http://www.loc.gov/mods/v3"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
     <xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
@@ -24,11 +24,21 @@
             <xsl:apply-templates select="tape"/>
             <xsl:element name="location">
                 <xsl:element name="physicalLocation">
-                    <xsl:attribute name="valueURI"><xsl:text>http://vocab.getty.edu/aat/300028661</xsl:text></xsl:attribute>
-                    <xsl:attribute name="displayLabel"><xsl:text>Harvard repository</xsl:text></xsl:attribute>
-                    <xsl:attribute name="type"><xsl:text>repository</xsl:text></xsl:attribute>
+                    <!--<xsl:attribute name="valueURI">
+                        <xsl:text>http://vocab.getty.edu/aat/300028661</xsl:text>
+                    </xsl:attribute>-->
+                    <xsl:attribute name="displayLabel">
+                        <xsl:text>Harvard repository</xsl:text>
+                    </xsl:attribute>
+                    <xsl:attribute name="type">
+                        <xsl:text>repository</xsl:text>
+                    </xsl:attribute>
                     <xsl:text>Middle Eastern Division, Widener Library, Harvard University</xsl:text>
                 </xsl:element>
+            </xsl:element>
+            <xsl:element name="accessCondition">
+                <xsl:attribute name="type">restriction on access</xsl:attribute>
+                <xsl:text>Access to some interviews may be restricted pending the permission of the interviewee.</xsl:text>
             </xsl:element>
             <xsl:apply-templates select="admin"/>
         </xsl:element>
@@ -48,10 +58,13 @@
         <!--<xsl:apply-templates select="tapeLength"/>-->
         <xsl:call-template name="makePhysDescForm"/>
         <xsl:apply-templates select="language"/>
-        <xsl:apply-templates select="restriction"/>
+        <xsl:apply-templates select="restriction[not(. = 'None')]"/>
         <xsl:apply-templates select="interviewer"/>
+        <!--
         <xsl:apply-templates select="interviewDate"/>
         <xsl:apply-templates select="interviewLocation"/>
+        -->
+        <xsl:call-template name="origininfo"/>
         <xsl:apply-templates select="subject"/>
         <xsl:apply-templates select="transliteratedSubject"/>
         <xsl:apply-templates select="narratorSubject"/>
@@ -164,7 +177,9 @@
     <xsl:template match="language">
         <xsl:element name="language">
             <xsl:element name="languageTerm">
-                <xsl:attribute name="type"><xsl:text>text</xsl:text></xsl:attribute>
+                <xsl:attribute name="type">
+                    <xsl:text>text</xsl:text>
+                </xsl:attribute>
                 <xsl:value-of select="."/>
             </xsl:element>
         </xsl:element>
@@ -233,7 +248,7 @@
                     <xsl:text>MH:IOHP</xsl:text>
                 </xsl:attribute>
                 <!--<xsl:value-of select="lower-case(replace(replace(../_id, ' ', ''), ',', ''))"/>-->
-                <xsl:value-of select="lower-case(replace(../_id,'[ (),]','_'))"/>
+                <xsl:value-of select="lower-case(replace(../_id, '[ (),]', '_'))"/>
             </xsl:element>
         </xsl:element>
     </xsl:template>
@@ -251,6 +266,27 @@
     <xsl:template match="updateDate">
         <xsl:element name="recordChangeDate">
             <xsl:value-of select="."/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template name="origininfo">
+        <xsl:if test="interviewDate or interviewLocation">
+            <xsl:element name="originInfo">
+                <xsl:apply-templates select="interviewDate"/>
+                <xsl:apply-templates select="interviewLocation"/>
+            </xsl:element>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="interviewDate">
+        <xsl:element name="dateCaptured">
+            <xsl:value-of select="."/>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="interviewLocation">
+        <xsl:element name="place">
+            <xsl:element name="placeTerm">
+                <xsl:value-of select="."/>
+            </xsl:element>
         </xsl:element>
     </xsl:template>
 

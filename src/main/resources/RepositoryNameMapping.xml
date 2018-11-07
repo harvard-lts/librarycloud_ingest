@@ -859,6 +859,7 @@
         <valueURI>http://isni.org/isni/0000000460371700</valueURI>
         <extensionValue>Wolbach Library</extensionValue>
     </mapping>
+<!--
     <mapping>
         <source>Milman Parry Collection of Oral Literature, Harvard University</source>
         <replacement>Milman Parry Collection of Oral Literature, Harvard University</replacement>
@@ -877,4 +878,6 @@
         <valueURI>http://isni.org/isni/0000000460377627</valueURI>
         <extensionValue>Museum Comp Zoology</extensionValue>
     </mapping>
+    -->
+    
 </valueMappings>

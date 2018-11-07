@@ -19,7 +19,8 @@
             <collection>Lord Collection</collection>
             <language>Bosnian, Croatian, or Serbian language</language>
             <date>
-                <singleDate>1950-05-27</singleDate>
+                <!--<singleDate>1950-05-27</singleDate>-->
+                <dateType>s.d.</dateType>
             </date>
             <note>This song is one of a series of &quot;various old muslim songs&quot; performed by
                 Zajmović.</note>
@@ -62,6 +63,7 @@
             <collection>Parry Collection</collection>
             <date>
                 <singleDate>1934-12-07</singleDate>
+                <dateType>received</dateType>
             </date>
             <note>Text 803 contains two probe which belong to the following song.</note>
         </record>
