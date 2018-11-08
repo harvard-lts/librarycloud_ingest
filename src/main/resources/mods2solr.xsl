@@ -65,9 +65,9 @@
             <xsl:apply-templates select="mods:extension/librarycloud:availableTo"/>
             <xsl:apply-templates select=".//librarycloud:HarvardRepositories"/>
             <xsl:apply-templates
-                select="mods:extension/librarycloud:priorrecordids/librarycloud:recordIdentifier"/>
+                select="mods:extension/librarycloud:librarycloud/librarycloud:priorrecordids/librarycloud:recordIdentifier"/>
 
-            <xsl:apply-templates select="mods:extension/librarycloud:processingDate"/>
+            <xsl:apply-templates select="mods:extension/librarycloud:librarycloud/librarycloud:processingDate"/>
 
 
             <xsl:choose>
@@ -596,7 +596,7 @@
     </xsl:template>
 
     <xsl:template
-        match="mods:extension/librarycloud:priorrecordids/librarycloud:recordIdentifier">
+        match="librarycloud:recordIdentifier">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>priorRecordIdentifier</xsl:text>
