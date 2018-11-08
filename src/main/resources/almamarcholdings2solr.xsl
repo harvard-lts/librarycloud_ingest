@@ -13,7 +13,7 @@
 
     <xsl:template match="marc:record">
         <xsl:choose>
-            <xsl:when test="./marc:datafield[@tag = 950]/marc:subfield[@code = 'g'] = 'true'"/>
+            <xsl:when test="./marc:datafield[@tag = '950']/marc:subfield[@code = 'g'] = 'true'"/>
             <xsl:when
                 test="marc:datafield[@tag = '852']/marc:subfield[@code = 'b'] = ('BIO', 'BRM', 'CEA', 'CFI', 'DEV', 'FOG', 'HIL', 'LIT', 'PSY', 'QUA', 'RCA', 'RRC', 'SFL', 'SKL', 'SOC', 'WAR')"/>
             <xsl:otherwise>
