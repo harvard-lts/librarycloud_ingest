@@ -53,7 +53,7 @@
  -->
     <xsl:template match="marc:datafield[@tag='852']">
 
-        <xsl:if test="./marc:subfield[@code='b']">
+        <xsl:if test="./marc:subfield[@code='b'] and not(./marc:subfield[@code = 'b'] = ('BIO', 'BRM', 'CEA', 'CFI', 'DEV', 'FOG', 'HIL', 'LIT', 'PSY', 'QUA', 'RCA', 'RRC', 'SFL', 'SKL', 'SOC', 'WAR'))">
 
                 <xsl:choose>
                     <!--<xsl:when test="./marc:subfield[@code='b']='MMF'"/>-->
