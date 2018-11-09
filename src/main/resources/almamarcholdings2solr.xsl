@@ -19,7 +19,7 @@
             <xsl:otherwise>
                 <xsl:element name="doc">
                     <xsl:apply-templates select="marc:controlfield" mode="indx"/>
-                    <xsl:apply-templates select="marc:datafield[@tag = '852'][1]" mode="indx"/>
+                    <xsl:apply-templates select="marc:datafield[@tag = '852'][marc:subfield[@code='8']][1]" mode="indx"/>
 
                     <xsl:element name="field">
                         <xsl:attribute name="name">
