@@ -315,9 +315,15 @@
 
     <xsl:template match="specimenCollector[not(.=' ')]">
         <xsl:element name="name">
-            <xsl:attribute name="displayLabel">Specimen Collector</xsl:attribute>
+            <!--<xsl:attribute name="displayLabel">Specimen Collector</xsl:attribute>-->
             <xsl:element name="namePart">
                 <xsl:value-of select="normalize-space(.)"/>
+            </xsl:element>
+            <xsl:element name="role">
+                <xsl:element name="roleTerm">
+                    <xsl:attribute name="type"><xsl:text>text</xsl:text></xsl:attribute>
+                    <xsl:text>Specimen Collector</xsl:text>
+                </xsl:element>
             </xsl:element>
         </xsl:element>
     </xsl:template>
