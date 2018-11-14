@@ -61,8 +61,8 @@
             <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:setName"/>
             <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:setSpec"/>
             <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:systemId"/>
-            <xsl:apply-templates select="mods:extension/librarycloud:digitalFormats/librarycloud:digitalFormat"/>
-            <xsl:apply-templates select="mods:extension/librarycloud:availableTo"/>
+            <xsl:apply-templates select="mods:extension/librarycloud:librarycloud/librarycloud:digitalFormats/librarycloud:digitalFormat"/>
+            <xsl:apply-templates select="mods:extension/librarycloud:librarycloud/librarycloud:availableTo"/>
             <xsl:apply-templates select=".//librarycloud:HarvardRepositories"/>
             <xsl:apply-templates
                 select="mods:extension/librarycloud:librarycloud/librarycloud:priorrecordids/librarycloud:recordIdentifier"/>
