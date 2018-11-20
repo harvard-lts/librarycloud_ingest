@@ -58,13 +58,13 @@ public class VIAComponentIterator implements Iterator<String> {
           if(xlinkAttr != null) {
               urn = xlinkAttr.getNodeValue();
           }
-          if(componentIDAttr != null) {
+          if(componentIDAttr != null && !componentIDAttr.equals("")) {
               componentID = componentIDAttr.getNodeValue();
           }
 
           position++;
           try {
-              if (!componentID.equals(""))
+              //if (!componentID.equals(""))
               viaComponentMods += transformVIA(urn, componentID);
           } catch (Exception e) {
               e.printStackTrace();
