@@ -13,8 +13,8 @@
 
     <!-- Remove Cassidy records and those marked as suppressed -->
     <xsl:template match="marc:record">
-        <xsl:if test="not(marc:datafield[@tag=040]/marc:subfield[@code='a']='CASSD')
-                      and not(marc:datafield[@tag=950]/marc:subfield[@code='e']='true')">
+        <xsl:if test="not(marc:datafield[@tag='040']/marc:subfield[@code='a']='CASSD')
+                      and not(marc:datafield[@tag='950']/marc:subfield[@code='e']='true')">
             <xsl:copy-of select="."/>
         </xsl:if>
     </xsl:template>

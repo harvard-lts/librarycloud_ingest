@@ -17,7 +17,9 @@
 
     <!-- Custom S3 marshaller to place body on S3 -->
     <bean id="cloudbody" class="edu.harvard.libcomm.pipeline.MessageBodyS3Marshaller">
-        <constructor-arg value="20000" /> <!-- If message size in bytes is greater than this, save body to S3 -->
+        <!-- force use of s3 bucket until we determine why prod direct to sqs fouls encoding -->
+        <constructor-arg value="100" />
+        <!--<constructor-arg value="20000" />--> <!-- If message size in bytes is greater than this, save body to S3 -->
         <constructor-arg value="${librarycloud.s3.cache_bucket}.${librarycloud.sqs.environment}" />
     </bean>
 

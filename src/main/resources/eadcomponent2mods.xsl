@@ -83,7 +83,7 @@
             <xsl:element name="recordInfo">
                 <!-- third value may need to change if we do another full oai harvest - the creation/date is always just the export date
                      maybe just always use that 3rd date at this point? -->
-                <xsl:variable name="dateArr" as="xs:integer*">
+                <!--<xsl:variable name="dateArr" as="xs:integer*">
 
                     <xsl:if test="eadheader/revisiondesc/change[item = 'Loaded into OASIS']/date">
                         <xsl:call-template name="convert-date">
@@ -116,10 +116,11 @@
                             <xsl:text>20160101</xsl:text>
                         </xsl:otherwise>
                     </xsl:choose>
-                </xsl:variable>
+                </xsl:variable>-->
                     <xsl:element name="recordChangeDate">
                       <xsl:attribute name="encoding">iso8601</xsl:attribute>
-                    <xsl:value-of select="max($dateArr)"/>
+                    <!--<xsl:value-of select="max($dateArr)"/>-->
+                    <xsl:value-of select="replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')"/>
                     </xsl:element>
                 <xsl:element name="recordIdentifier">
                     <xsl:attribute name="id"><xsl:text>s</xsl:text><xsl:value-of select="$sibcount"/></xsl:attribute>
