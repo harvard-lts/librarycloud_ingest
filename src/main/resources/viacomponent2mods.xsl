@@ -10,35 +10,40 @@
 	<xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
 	<!--<xsl:param name="urn">http://nrs.harvard.edu/urn-3:FHCL:1154698</xsl:param>-->
 	<xsl:param name="urn"/>
+  <xsl:param name="nodeComponentID" />
 	<xsl:template match="/viaRecord">
+		<xsl:message>URN: <xsl:value-of select="$urn"/></xsl:message>
+		<xsl:message>SFX: <xsl:value-of select="$nodeComponentID"/></xsl:message>
 		<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd">
-			<xsl:if test="@numberOfSubworks = '0'">
-				<xsl:apply-templates select="work"/>
-			</xsl:if>
-			<xsl:if test="(@numberOfSubworks > 0 or @numberOfSurrogates > 0)">
-				<xsl:apply-templates select="group"/>
-			</xsl:if>
+			xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+			<xsl:apply-templates/>
 			<xsl:variable name="urnsuffix">
 				<xsl:choose>
-					<xsl:when test="work/surrogate/image[contains(@href, $urn)]">
+					<xsl:when
+						test="string-length($urn) and work/surrogate/image[contains(@href, $urn)]">
 						<xsl:value-of
 							select="work/surrogate/image[contains(@href, $urn)]/../@componentID"/>
 					</xsl:when>
-					<xsl:when test="work/surrogate/image[contains(@xlink:href, $urn)]">
+					<xsl:when
+						test="string-length(work/surrogate[@componentID = $nodeComponentID]/image/@xlink:href)">
 						<xsl:value-of
-							select="work/surrogate/image[contains(@xlink:href, $urn)]/../@componentID"
+							select="substring-after(work/surrogate[@componentID = $nodeComponentID]/image/@xlink:href, 'edu/')"
 						/>
 					</xsl:when>
-					<xsl:otherwise>
+					<xsl:when test="string-length($urn)">
 						<xsl:value-of select="substring-after($urn, 'edu/')"/>
-					</xsl:otherwise>
+					</xsl:when>
+					<xsl:when test="string-length($nodeComponentID)">
+						<xsl:value-of select="$nodeComponentID"/>
+					</xsl:when>
+					<xsl:otherwise> </xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
+
 			<relatedItem otherType="HOLLIS Images record">
 				<location>
 					<url>
-						<xsl:text>http://id.lib.harvard.edu/images/</xsl:text>
+						<xsl:text>https://id.lib.harvard.edu/images/</xsl:text>
 						<xsl:value-of select="recordId"/>
 						<xsl:text>/</xsl:text>
 						<xsl:value-of select="$urnsuffix"/>
@@ -50,7 +55,25 @@
 				<recordContentSource authority="marcorg">MH</recordContentSource>
 				<recordContentSource authority="marcorg">MH-VIA</recordContentSource>
 				<recordChangeDate encoding="iso8601">
-					<xsl:value-of select="replace(substring-before(admin/updateNote[position() = last()]/updateDate/text(),' '),'-','')"/>
+					<xsl:variable name="lastdate">
+						<xsl:choose>
+							<xsl:when test="contains(admin/updateNote[position() = last()]/updateDate,' ')">
+								<xsl:value-of select="substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' ')"/>
+							</xsl:when>
+							<xsl:otherwise><xsl:value-of select="admin/updateNote[position() = last()]/updateDate/text()"/></xsl:otherwise>
+						</xsl:choose>
+					</xsl:variable>
+					<xsl:choose>
+						<xsl:when test="contains($lastdate,'/')">
+							<xsl:value-of select="replace($lastdate, '/', '')"/>
+						</xsl:when>
+						<xsl:when test="contains($lastdate,'-')">
+							<xsl:value-of select="replace($lastdate, '-', '')"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="$lastdate"/>
+						</xsl:otherwise>
+					</xsl:choose>
 				</recordChangeDate>
 				<recordIdentifier>
 					<xsl:attribute name="source">
@@ -73,19 +96,19 @@
 							<xsl:value-of select="recordId"/>
 						</xsl:otherwise>
 					</xsl:choose>
-					<xsl:text>_</xsl:text>
-					<xsl:value-of select="$urnsuffix"/>
+					<xsl:if test="string-length($urnsuffix)">
+						<xsl:text>_</xsl:text>
+						<xsl:value-of select="$urnsuffix"/>
+					</xsl:if>
 				</recordIdentifier>
 				<languageOfCataloging>
 					<languageTerm>eng</languageTerm>
 				</languageOfCataloging>
 			</recordInfo>
-      <language>
-        <languageTerm type="code">zxx</languageTerm>
-      </language>
-      <language>
-        <languageTerm type="text">No linguistic content</languageTerm>
-      </language>
+			<language>
+				<languageTerm type="code">zxx</languageTerm>
+				<languageTerm type="text">No linguistic content</languageTerm>
+			</language>
 		</mods>
 	</xsl:template>
 
@@ -101,42 +124,50 @@
 	</xsl:template>
 
 	<xsl:template match="subwork">
-		<xsl:if test="contains(image/@href, $urn)">
-			<relatedItem type="constituent">
-				<xsl:call-template name="recordElements"/>
-				<recordInfo>
-					<recordIdentifier>
-						<xsl:value-of select="@componentID"/>
-					</recordIdentifier>
-				</recordInfo>
+		<xsl:choose>
+			<xsl:when test="contains(image/@href, $urn) and string-length(image/@href)">
+				<relatedItem type="constituent">
+					<xsl:call-template name="recordElements"/>
+					<recordInfo>
+						<recordIdentifier>
+							<xsl:value-of select="@componentID"/>
+						</recordIdentifier>
+					</recordInfo>
+					<!--<xsl:apply-templates select="surrogate"/>-->
+				</relatedItem>
+			</xsl:when>
+			<xsl:when test="contains(image/@xlink:href, $urn) and string-length(image/@xlink:href)">
+				<relatedItem type="constituent">
+					<xsl:call-template name="recordElements"/>
+					<recordInfo>
+						<recordIdentifier>
+							<xsl:value-of select="@componentID"/>
+						</recordIdentifier>
+					</recordInfo>
+					<!--<xsl:apply-templates select="surrogate"/>-->
+				</relatedItem>
+			</xsl:when>
+			<xsl:when test="surrogate/@componentID = $nodeComponentID">
+				<relatedItem type="constituent">
+					<xsl:call-template name="recordElements"/>
+					<recordInfo>
+						<recordIdentifier>
+							<xsl:value-of select="@componentID"/>
+						</recordIdentifier>
+					</recordInfo>
+					<xsl:apply-templates select="surrogate"/>
+				</relatedItem>
+			</xsl:when>
+			<xsl:otherwise/>
+			<!--<xsl:otherwise>
 				<xsl:apply-templates select="surrogate"/>
-			</relatedItem>
-		</xsl:if>
-		<xsl:if test="contains(image/@xlink:href, $urn)">
-			<relatedItem type="constituent">
-				<xsl:call-template name="recordElements"/>
-				<recordInfo>
-					<recordIdentifier>
-						<xsl:value-of select="@componentID"/>
-					</recordIdentifier>
-				</recordInfo>
-				<xsl:apply-templates select="surrogate"/>
-			</relatedItem>
-		</xsl:if>
+			</xsl:otherwise>-->
+		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="surrogate">
-		<xsl:if test="contains(image/@href, $urn)">
-			<relatedItem type="constituent">
-				<xsl:call-template name="recordElements"/>
-				<recordInfo>
-					<recordIdentifier>
-						<xsl:value-of select="@componentID"/>
-					</recordIdentifier>
-				</recordInfo>
-			</relatedItem>
-		</xsl:if>
-		<xsl:if test="contains(image/@xlink:href, $urn)">
+		<xsl:if
+			test="(string-length($urn) and contains(image/@href, $urn)) or $nodeComponentID = @componentID">
 			<relatedItem type="constituent">
 				<xsl:call-template name="recordElements"/>
 				<recordInfo>
@@ -252,12 +283,14 @@
 				<roleTerm>
 					<xsl:value-of select="$roleType"/>
 				</roleTerm>
-				<xsl:if test="role">
+			</role>
+			<xsl:if test="role">
+				<role>
 					<roleTerm>
 						<xsl:value-of select="role"/>
 					</roleTerm>
-				</xsl:if>
-			</role>
+				</role>
+			</xsl:if>
 		</name>
 	</xsl:template>
 
@@ -297,7 +330,7 @@
 							<xsl:value-of select="/record/metadata/viaRecord/@sortDate"/>
 						</xsl:if>
 						<xsl:if test="not(/record/metadata/viaRecord/@sortDate)">
-							<xsl:value-of select="//freeDate[1]"/>
+							<xsl:value-of select="freeDate[1]"/>
 						</xsl:if>
 					</dateOther>
 				</xsl:if>
@@ -339,7 +372,7 @@
 						<xsl:value-of select="dimensions"/>
 					</extent>
 				</xsl:if>
-				<!--xsl:if test="workType">		
+				<!--xsl:if test="workType">
 			<form>
 				<xsl:value-of select="workType"/>
 			</form>
@@ -461,7 +494,7 @@
 		<extension xmlns:via="http://via.harvard.edu">
 		    <via:relationship>
 			<xsl:value-of select="relationship"/>
-		    </via:relationship>	
+		    </via:relationship>
 		</extension>
 		-->
 			<xsl:apply-templates select="creator"/>
@@ -507,7 +540,7 @@
 	</xsl:template>
 
 	<xsl:template match="image">
-		<xsl:if test="contains(@href, $urn)">
+		<xsl:if test="string-length($urn) and contains(@href, $urn)">
 			<xsl:choose>
 				<xsl:when test="caption and not(../surrogate)">
 					<relatedItem type="constituent">
@@ -696,5 +729,8 @@
 			<xsl:value-of select="."/>
 		</accessCondition>
 	</xsl:template>
+
+	<xsl:template match="admin"/>
+	<xsl:template match="recordId"/>
 
 </xsl:stylesheet>

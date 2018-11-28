@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><lib_comm_message xmlns:mods="http://www.loc.gov/mods/v3" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xlink="http://www.w3.org/1999/xlink"><command>ENRICH</command><payload><source>aleph</source><format>mods</format><filepath>https://s3.amazonaws.com/harvard.librarycloud.upload.foo.aleph/001437267.mrc?AWSAccessKeyId=AKIAIYU6T5BKXIXVRBBA&amp;Expires=1530711351&amp;Signature=WiH%2B%2BpyD2CtQGyUGUiabKvPBm%2BY%3D</filepath>
+</payload></lib_comm_message>

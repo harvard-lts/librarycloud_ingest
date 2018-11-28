@@ -56,23 +56,69 @@ import edu.harvard.libcomm.test.TestMessageUtils;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class EADComponentIteratorTests {
 
-    @Test
-    void useResourceLanguageCode() throws Exception {
+    private Document mods;
+    private Iterator i;
+
+    @BeforeAll
+    void setup() throws Exception {
         InputStream is = new FileInputStream(this.getClass().getResource("/sample-oasis-ead.xml").getFile());
 
+        EADReader r = new EADReader(is);
+        i = new EADComponentIterator(r);
+        String lcmString = (String) i.next();
+        LibCommMessage lcm = TestMessageUtils.unmarshalLibCommMessage(IOUtils.toInputStream(lcmString, "UTF-8"));
+        mods = TestHelpers.extractXmlDoc(lcm);
+    }
+
+
+    @Test
+    void useResourceLanguageCode() throws Exception {
+        String languageCode = TestHelpers.getXPath("//mods:languageTerm[@type='code']", mods);
+        String languageText = TestHelpers.getXPath("//mods:languageTerm[@type='text']", mods);
+        assertEquals("fre", languageCode);
+        assertEquals("French", languageText);
+    }
+
+
+    @Test // LTSCLOUD-697
+    void buildModsDateCreated() throws Exception {
+        String startDateCreated = TestHelpers.getXPath("//mods:originInfo/mods:dateCreated[@point='start']", mods);
+        assertEquals("1848-11-07", startDateCreated);
+        String endDateCreated = TestHelpers.getXPath("//mods:originInfo/mods:dateCreated[@point='end']", mods);
+        assertEquals("1849-07-30", endDateCreated);
+    }
+
+
+    @Test // LTSCLOUD-619
+    void buildModsRoleTerm() throws Exception {
+        String roleTerm1 = TestHelpers.getXPath("//mods:relatedItem/mods:name[mods:namePart = 'Sam I Am']/mods:role[1]/mods:roleTerm", mods);
+        String roleTerm2 = TestHelpers.getXPath("//mods:relatedItem/mods:name[mods:namePart = 'Sam I Am']/mods:role[2]/mods:roleTerm", mods);
+
+        assertEquals("originator", roleTerm1);
+        assertEquals("creator", roleTerm2);
+    }
+
+
+    @Test // LTSCLOUD-754
+    void languageCodeForComponents() throws Exception {
+        String lcmString = (String) i.next();
+        LibCommMessage lcm = TestMessageUtils.unmarshalLibCommMessage(IOUtils.toInputStream(lcmString, "UTF-8"));
+
+        Document componentMods = TestHelpers.extractXmlDoc(lcm);
+
+        String languageCode = TestHelpers.getXPath("//mods:languageTerm[@type='code']", componentMods);
+        assertEquals("und", languageCode);
+    }
+
+    @Test
+    void properEadNamespace() throws Exception {
+        InputStream is = new FileInputStream(this.getClass().getResource("/fal00001.xml").getFile());
         EADReader r = new EADReader(is);
         Iterator i = new EADComponentIterator(r);
         String lcmString = (String) i.next();
         LibCommMessage lcm = TestMessageUtils.unmarshalLibCommMessage(IOUtils.toInputStream(lcmString, "UTF-8"));
-
-        // String xml = lcm.getPayload().getData();
-        // System.out.println(xml);
-
         Document mods = TestHelpers.extractXmlDoc(lcm);
-
         String languageCode = TestHelpers.getXPath("//mods:languageTerm[@type='code']", mods);
-        String languageText = TestHelpers.getXPath("//mods:languageTerm[@type='text']", mods);
-        assertEquals("eng", languageCode);
-        assertEquals("English", languageText);
+        assertEquals("und", languageCode);
     }
 }

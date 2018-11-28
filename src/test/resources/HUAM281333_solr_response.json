@@ -1,0 +1,36 @@
+{
+  "responseHeader":{
+    "zkConnected":true,
+    "status":0,
+    "QTime":218,
+    "params":{
+      "q":"urn_keyword:(\"urn-3:HUAM:31347_mddl\" OR \"urn-3:HUAM:DDC105015_dynmc\")",
+      "rows":"250"}},
+  "response":{"numFound":2,"start":0,"maxScore":20.843094,"docs":[
+      {
+        "id":"urn-3:HUAM:31347_mddl",
+        "urn":"urn-3:HUAM:31347_mddl",
+        "contentModel":"null",
+        "accessFlag":"null",
+        "lastModifiedDate":"null",
+        "fileDeliveryURL":"null",
+        "metsLabel":"null",
+        "uriType":"null",
+        "ownerCodeDisplayName":"null",
+        "ownerCode":"null",
+        "thumbnailURL":"null",
+        "_version_":1586689533258235914},
+      {
+        "id":"urn-3:HUAM:DDC105015_dynmc",
+        "urn":"urn-3:HUAM:DDC105015_dynmc",
+        "contentModel":"STILL IMAGE",
+        "accessFlag":"P",
+        "lastModifiedDate":"2017-04-03T18:34:05.904Z",
+        "fileDeliveryURL":"http://nrs.harvard.edu/urn-3:HUAM:DDC105015_dynmc",
+        "metsLabel":"Kilburn, William Edward. William Whistler (brother of James Abbott McNeill Whistler), 1847-1849. Harvard Art Museums, P1978.94.",
+        "uriType":"IDS",
+        "ownerCodeDisplayName":"Harvard Art Museums",
+        "ownerCode":"HUAM.MUSE",
+        "thumbnailURL":"http://nrs.harvard.edu/urn-3:HUAM:DDC105015_dynmc?width=150&height=150&usethumb=y",
+        "_version_":1584352107246387201}]
+  }}

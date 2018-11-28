@@ -1,0 +1,170 @@
+<viaRecord originalAtHarvard="false"
+           primaryImageThumbnailURN="http://nrs.harvard.edu/urn-3:VIT.BB:4876783">
+   <recordId altRecordId="ss_8000842237">olvwork539422</recordId>
+   <work>
+      <title>
+         <textElement>Angel holding a book</textElement>
+      </title>
+      <workType>paintings</workType>
+      <creator>
+         <nameElement>School of Botticelli, Sandro</nameElement>
+         <dates>born 1444 or 1445, died 1510, Italian</dates>
+         <role>artist</role>
+      </creator>
+      <structuredDate>
+         <beginDate>1490</beginDate>
+         <endDate>1510</endDate>
+      </structuredDate>
+      <structuredDate>
+         <beginDate>1490</beginDate>
+         <endDate>1510</endDate>
+      </structuredDate>
+      <freeDate>late 15th - early 16th cent.</freeDate>
+      <dimensions>45 x 26.7 mm</dimensions>
+      <topic>
+         <term>angels</term>
+      </topic>
+      <topic>
+         <term>books</term>
+      </topic>
+      <topic>
+         <term>parapets</term>
+      </topic>
+      <culture>
+         <term>Italian</term>
+      </culture>
+      <materials>panel (wood)</materials>
+      <notes>Attribution: filed as School of Botticelli at Biblioteca Berenson, Fototeca.</notes>
+      <notes>Provenance: Kleinberger, 1924; Ventura, Florence, 1927; R. M. Hurd, New York; Sotheby's, New York, 27-28 January 2005, lot 288 (source: Biblioteca Berenson, Fototeca).</notes>
+      <repository>
+         <repositoryName>unknown</repositoryName>
+      </repository>
+      <surrogate altComponentID="8080208" componentID="olvsurrogate903991">
+         <image xmlns:xlink="http://www.w3.org/TR/xlink"
+                restrictedImage="false"
+                xlink:href="http://nrs.harvard.edu/urn-3:VIT.BB:4876783">
+            <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:VIT.BB:4876783"/>
+         </image>
+         <title>
+            <textElement>Total</textElement>
+         </title>
+         <classification>
+            <number>F 277</number>
+         </classification>
+         <creator>
+            <nameElement>Offner, Mortimer</nameElement>
+            <dates>1900-1965, American</dates>
+            <role>photographer</role>
+         </creator>
+         <freeDate>1920-1941</freeDate>
+         <dimensions>233 x 145 mm</dimensions>
+         <topic>
+            <term>stamps (marks)</term>
+         </topic>
+         <materials>gelatin silver process</materials>
+         <notes>Inscription: photographer's stamp and handwritten note by Richard M. Hurd (see verso) ; Provenance: Richard M. Hurd</notes>
+         <copyright>Access Restrictions: This copy is furnished for study purposes only. Written authorization must be obtained for all other uses.</copyright>
+         <repository>
+            <repositoryName>Biblioteca Berenson, Fototeca, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</repositoryName>
+            <number>104685_1</number>
+         </repository>
+      </surrogate>
+      <surrogate altComponentID="8080209" componentID="olvsurrogate903992">
+         <image xmlns:xlink="http://www.w3.org/TR/xlink"
+                restrictedImage="false"
+                xlink:href="http://nrs.harvard.edu/urn-3:VIT.BB:4876784">
+            <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:VIT.BB:4876784"/>
+         </image>
+         <title>
+            <textElement>Verso of photograph 104685_1</textElement>
+         </title>
+         <repository>
+            <repositoryName>Biblioteca Berenson, Fototeca, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</repositoryName>
+            <number>104685_2</number>
+         </repository>
+      </surrogate>
+      <surrogate componentID="13023015">
+         <image xmlns:xlink="http://www.w3.org/TR/xlink"
+                restrictedImage="false"
+                xlink:href="http://nrs.harvard.edu/urn-3:VIT.BB:25498273">
+            <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:VIT.BB:25498273"/>
+         </image>
+         <title>
+            <textElement>Verso of photograph 400440_1</textElement>
+         </title>
+         <repository>
+            <repositoryName>Biblioteca Berenson, Fototeca, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</repositoryName>
+            <number>400440_2</number>
+         </repository>
+      </surrogate>
+      <surrogate componentID="13023014">
+         <image xmlns:xlink="http://www.w3.org/TR/xlink"
+                restrictedImage="false"
+                xlink:href="http://nrs.harvard.edu/urn-3:VIT.BB:25498271">
+            <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:VIT.BB:25498271"/>
+         </image>
+         <title>
+            <textElement>Total</textElement>
+         </title>
+         <classification>
+            <number>F 279 oversize OV 11</number>
+         </classification>
+         <creator>
+            <nameElement>unknown unknown</nameElement>
+            <role>photographer</role>
+         </creator>
+         <dimensions>467 x 292 mm</dimensions>
+         <materials>carbon prints</materials>
+         <notes>Provenance: sent by Kleinberger, December 1924.</notes>
+         <copyright>This copy is furnished for study purposes only. Written authorization must be obtained for all other uses.</copyright>
+         <repository>
+            <repositoryName>Biblioteca Berenson, Fototeca, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</repositoryName>
+            <number>400440_1</number>
+         </repository>
+      </surrogate>
+      <surrogate componentID="13023013">
+         <image xmlns:xlink="http://www.w3.org/TR/xlink"
+                restrictedImage="false"
+                xlink:href="http://nrs.harvard.edu/urn-3:VIT.BB:25498269">
+            <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:VIT.BB:25498269"/>
+         </image>
+         <title>
+            <textElement>Verso of photograph 400439_1</textElement>
+         </title>
+         <repository>
+            <repositoryName>Biblioteca Berenson, Fototeca, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</repositoryName>
+            <number>400439_2</number>
+         </repository>
+      </surrogate>
+      <surrogate componentID="13023012">
+         <image xmlns:xlink="http://www.w3.org/TR/xlink"
+                restrictedImage="false"
+                xlink:href="http://nrs.harvard.edu/urn-3:VIT.BB:25498267">
+            <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:VIT.BB:25498267"/>
+         </image>
+         <title>
+            <textElement>Total</textElement>
+         </title>
+         <classification>
+            <number>F 279 oversize OV 11</number>
+         </classification>
+         <creator>
+            <nameElement>unknown unknown</nameElement>
+            <role>photographer</role>
+         </creator>
+         <dimensions>455 x 298 mm</dimensions>
+         <materials>carbon prints</materials>
+         <notes>Provenance: sent by Kleinberger, December 1924.</notes>
+         <copyright>This copy is furnished for study purposes only. Written authorization must be obtained for all other uses.</copyright>
+         <repository>
+            <repositoryName>Biblioteca Berenson, Fototeca, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</repositoryName>
+            <number>400439_1</number>
+         </repository>
+      </surrogate>
+   </work>
+   <admin>
+      <updateNote>
+         <updateDate>2018/05/28 04:26:38</updateDate>
+      </updateNote>
+   </admin>
+</viaRecord>

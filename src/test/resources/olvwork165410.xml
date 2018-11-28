@@ -1,0 +1,82 @@
+<viaRecord images="false"
+           numberOfImages="0"
+           numberOfSubworks="0"
+           numberOfSurrogates="0"
+           originalAtHarvard="true"
+           recordSize="1979"
+           sortCreator="Frith, Francis"
+           sortDate="1860"
+           sortTitle="The Principal Corridor of the Island of Philae"
+           sortWorktype="photographs">
+   <recordId altRecordId="ss_8000179206">olvwork165410</recordId>
+   <work>
+      <title>
+         <textElement>The Principal Corridor of the Island of Philae</textElement>
+      </title>
+      <workType>Photographs</workType>
+      <workType>stereographs</workType>
+      <creator>
+         <nameElement>Frith, Francis</nameElement>
+         <dates>1822-1898, English</dates>
+         <role>photographer</role>
+         <namedates>Frith, Francis 1822-1898, English</namedates>
+      </creator>
+      <structuredDate>
+         <beginDate>1860</beginDate>
+         <endDate>1869</endDate>
+      </structuredDate>
+      <freeDate>1860s</freeDate>
+      <dimensions>8.4 x 17.1 x .3 in</dimensions>
+      <placeName>
+         <place>Philae, Egypt</place>
+      </placeName>
+      <topic>
+         <term>archaeology</term>
+      </topic>
+      <topic>
+         <term>ruins</term>
+      </topic>
+      <topic>
+         <term>stereoscopic photographs</term>
+      </topic>
+      <notes>General: Glass stereoview. ; Printed label on plate, “336. The Principal Corridor of the Island/Of Philae./Most of the pillars are beautifully scupltured with their capitals of very various,/and some of them most elegant design./[Ent. Sta. Hall.” ; Philae was a former island in the Nile River, in Upper Egypt, whose temples and monuments were moved before the island was submerged by waters behind the Aswan High Dam.</notes>
+      <notes>Identifying marks: Signed in reverse on right image, “Frith 336”</notes>
+      <relatedWork>
+         <relationship>part of</relationship>
+         <textElement>Harrison D. Horblit Collection of Early Photography</textElement>
+      </relatedWork>
+      <useRestrictions>Houghton Library: Cite as: Horblit TypPr [number], Harrison D. Horblit Collection of Early Photography, Houghton Library, Harvard University.</useRestrictions>
+      <repository>
+         <repositoryName>Houghton Library</repositoryName>
+         <number>TypDAG3312</number>
+      </repository>
+   </work>
+   <admin>
+      <createDate>2010-12-01</createDate>
+      <status>Active</status>
+      <updateNote>
+         <updateDate>2010-12-01</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2015-01-05</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2015-01-15</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2015-02-16</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2015-02-26</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2015-02-28</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2017-09-20</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2017-09-21</updateDate>
+      </updateNote>
+   </admin>
+</viaRecord>

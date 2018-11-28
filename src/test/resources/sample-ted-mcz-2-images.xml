@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tedCollection xmlns:xlink="http://www.w3.org/TR/xlink" >
+    <mczRecord>
+        <_id>ARC 237-044</_id>
+        <admin>
+            <status>Active</status>
+            <createDate>2006-02-01</createDate>
+        </admin>
+        <specimen>
+            <commonName>Echinoderm</commonName>
+            <taxonomicClassification>
+                <kingdom>Animalia</kingdom>
+            </taxonomicClassification>
+        </specimen>
+        <artwork>
+            <annotation>
+                <text>Master Abinosi Dupl</text>
+                <annotatedBy>Agassiz, Louis</annotatedBy>
+            </annotation>
+            <otherItemIdentifier>
+                <IdType>Call number</IdType>
+                <IdValue>ARC 237-044</IdValue>
+            </otherItemIdentifier>
+            <title>Echinoderm and anatomical cross sections</title>
+            <support>paper</support>
+            <materialsTechniques>watercolor</materialsTechniques>
+            <materialsTechniques>pencil</materialsTechniques>
+            <physicalPieceId>ARC 237-044</physicalPieceId>
+            <dimensions>23 x 20 cm.</dimensions>
+            <workType>drawings</workType>
+            <image>
+                <thumbnail>
+                    <xlink:show>embed</xlink:show>
+                    <xlink:actuate>onLoad</xlink:actuate>
+                    <xlink:href>http://nrs.harvard.edu/urn-3:FMUS.MCZ:2005-719519</xlink:href>
+                </thumbnail>
+                <xlink:show>new</xlink:show>
+                <xlink:actuate>onRequest</xlink:actuate>
+                <xlink:href>http://nrs.harvard.edu/urn-3:FMUS.MCZ:2005-719519</xlink:href>
+            </image>
+            <image>
+                <thumbnail>
+                    <xlink:show>embed</xlink:show>
+                    <xlink:actuate>onLoad</xlink:actuate>
+                    <xlink:href>http://nrs.harvard.edu/urn-3:FMUS.MCZ:2005-719518</xlink:href>
+                </thumbnail>
+                <xlink:show>new</xlink:show>
+                <xlink:actuate>onRequest</xlink:actuate>
+                <xlink:href>http://nrs.harvard.edu/urn-3:FMUS.MCZ:2005-719518</xlink:href>
+            </image>
+            <repositoryName>Ernst Mayr Library</repositoryName>
+            <imageDescription>Drawing of echinoderm and 4 anatomical cross
+                sections</imageDescription>
+            <imageCreator>Burkhardt, Jacques</imageCreator>
+        </artwork>
+    </mczRecord>
+</tedCollection>

@@ -5,7 +5,7 @@
 
     <xsl:output indent="yes" method="text"/>
 
-    <xsl:template match="mods:modsCollection">
+    <xsl:template match="/">
         <xsl:element name="add">
           <xsl:for-each select="//mods:url[@access='raw object' and contains(.,'urn-3') and not(contains(.,'HUL.FIG')) and not(contains(.,'ebookbatch')) and not(contains(.,'ejournals'))]">
               <xsl:text>%22</xsl:text>

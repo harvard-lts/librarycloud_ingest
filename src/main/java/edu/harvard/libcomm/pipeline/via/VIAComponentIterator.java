@@ -15,48 +15,63 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.NamedNodeMap;
 
 import edu.harvard.libcomm.message.LibCommMessage;
 import edu.harvard.libcomm.message.LibCommMessage.Payload;
 import edu.harvard.libcomm.pipeline.MessageUtils;
 
 public class VIAComponentIterator implements Iterator<String> {
-	protected Logger log = Logger.getLogger(VIAComponentIterator.class);
+  protected Logger log = Logger.getLogger(VIAComponentIterator.class);
 
-	protected VIAReader viaReader;
-	protected NodeList nodes;
-	protected DOMSource domSource;
-	protected Transformer transformer;
-	protected int position = 0;
+  protected VIAReader viaReader;
+  protected NodeList nodes;
+  protected DOMSource domSource;
+  protected Transformer transformer;
+  protected int position = 0;
 
     public VIAComponentIterator(VIAReader reader) throws Exception {
         this.viaReader = reader;
         nodes = reader.getNodes();
         domSource = reader.getDOMSource();
-        transformer = buildTransformer("src/main/resources/viacomponent2mods.xsl");        	
+        transformer = buildTransformer("src/main/resources/viacomponent2mods.xsl");
     }
 
     @Override
     public boolean hasNext() {
-    	return ((nodes != null) && (position < nodes.getLength()));
+      return ((nodes != null) && (position < nodes.getLength()));
     }
+
 
     @Override
     public String next() {
-    	log.trace("Processing node " + position + " of " + nodes.getLength());
+      log.trace("Processing node " + position + " of " + nodes.getLength());
         String viaComponentMods = "";
-    	while ((nodes != null) && (position < nodes.getLength())) {
-	        String nodeName = nodes.item(position).getNodeName();
-	        String nodeValue = nodes.item(position).getNodeValue();
-	        position++;
-			try {
-				viaComponentMods += transformVIA(nodeValue);
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new NoSuchElementException();
-			}
-            break;
-    	}
+      while ((nodes != null) && (position < nodes.getLength())) {
+          String nodeName = nodes.item(position).getNodeName();
+          NamedNodeMap atts = nodes.item(position).getAttributes();
+          Node xlinkAttr = atts.getNamedItem("xlink:href");
+          Node componentIDAttr = atts.getNamedItem("componentID");
+          String urn = "";
+          String componentID = "";
+          if(xlinkAttr != null) {
+              urn = xlinkAttr.getNodeValue();
+          }
+          if(componentIDAttr != null && !componentIDAttr.equals("")) {
+              componentID = componentIDAttr.getNodeValue();
+          }
+
+          position++;
+          try {
+              //if (!componentID.equals(""))
+              viaComponentMods += transformVIA(urn, componentID);
+          } catch (Exception e) {
+              e.printStackTrace();
+              throw new NoSuchElementException();
+          }
+          break;
+      }
         LibCommMessage lcmessage = new LibCommMessage();
         Payload payload = new Payload();
         payload.setFormat("MODS");
@@ -69,8 +84,8 @@ public class VIAComponentIterator implements Iterator<String> {
         } catch (JAXBException e) {
             e.printStackTrace();
             return null;
-        }                       
-	}
+        }
+  }
 
     @Override
     public void remove() {
@@ -78,18 +93,19 @@ public class VIAComponentIterator implements Iterator<String> {
     }
 
     protected Transformer buildTransformer(String xslFilePath) throws Exception {
-		final InputStream xsl = new FileInputStream(xslFilePath);
-		final TransformerFactory tFactory = TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl",null);
+    final InputStream xsl = new FileInputStream(xslFilePath);
+    final TransformerFactory tFactory = TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl",null);
         StreamSource styleSource = new StreamSource(xsl);
-        return tFactory.newTransformer(styleSource);    	
+        return tFactory.newTransformer(styleSource);
     }
 
-	protected String transformVIA (String xslParam) throws Exception {		
-       	this.transformer.setParameter("urn", xslParam);
-		StringWriter writer = new StringWriter();
+    protected String transformVIA (String xslParam, String suffixParam) throws Exception {
+        this.transformer.setParameter("urn", xslParam);
+        this.transformer.setParameter("nodeComponentID", suffixParam);
+    StringWriter writer = new StringWriter();
         StreamResult result = new StreamResult(writer);
         transformer.transform(this.domSource, result);
         return writer.toString();
-	}
-    
+  }
+
 }

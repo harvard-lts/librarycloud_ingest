@@ -83,7 +83,6 @@ class CollectionsProcessorTests {
         String collectionsResponse = TestHelpers.readFile("collections_items_001490591.xml");
 
         String href = Config.getInstance().COLLECTIONS_URL + "/collections/items/001490591.xml";
-        System.out.println("TEST: " +href);
 
         URLConnection urlConnection = mock(URLConnection.class);
         httpUrlStreamHandler.addConnection(new URL(href), urlConnection);
@@ -98,15 +97,6 @@ class CollectionsProcessorTests {
         }
 
         String result = lcm.getPayload().getData();
-        // System.out.println(result);
-
-        // byte[] xmlBytes = xml.getBytes();
-        // Path p1 = Paths.get("./tmp/holdings_input.xml");
-        // Files.write(p1, xmlBytes);
-
-        // byte[] resultBytes = result.getBytes();
-        // Path p2 = Paths.get("./tmp/holdings_output.xml");
-        // Files.write(p2, resultBytes);
 
         InputStream modsIS = IOUtils.toInputStream(result, "UTF-8");
 
@@ -133,7 +123,44 @@ class CollectionsProcessorTests {
 
         Number setTagsCount = TestHelpers.getNodeCount("//sets:set[1]/*", mods);
         assertEquals(4.0, setTagsCount);
-
-
     }
+
+    //LTSCLOUD-695 Objects in Context Links
+    @Test
+    void objectInContextLinksSpotlight() throws Exception {
+        String collectionsResponse = TestHelpers.readFile("collections_items_abc.xml");
+
+        String href = Config.getInstance().COLLECTIONS_URL + "/collections/items/abc.xml";
+
+        URLConnection urlConnection = mock(URLConnection.class);
+        httpUrlStreamHandler.addConnection(new URL(href), urlConnection);
+
+        InputStream stream = new ByteArrayInputStream(collectionsResponse.getBytes(StandardCharsets.UTF_8));
+        when(urlConnection.getInputStream()).thenReturn(stream);
+
+        CollectionsProcessor p = new CollectionsProcessor();
+        LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "collections-processor-tests-sample.xml");
+
+        try {
+            p.processMessage(lcm);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String result = lcm.getPayload().getData();
+        System.out.println(result);
+
+
+        Document doc = TestHelpers.extractXmlDoc(lcm);
+
+        String objectInContextURL1 = TestHelpers.getXPath("//mods:mods[1]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Fish']/text()", doc);
+        assertEquals("http://id.lib.harvard.edu/curiosity/spotlightcollname/123-abc", objectInContextURL1);
+
+        //clean out old urls, but not digital collectons
+        Number spotlightLinkCount = TestHelpers.getNodeCount("//mods:mods[1]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel != 'Harvard Digital Collections']", doc);
+        Number digitalCollectionsLinkCount = TestHelpers.getNodeCount("//mods:mods[1]/mods:location[1]/mods:url[@access = 'object in context'][@displayLabel = 'Harvard Digital Collections']", doc);
+
+        assertEquals(1.0, spotlightLinkCount);
+        assertEquals(1.0, digitalCollectionsLinkCount);
+    }
+
 }

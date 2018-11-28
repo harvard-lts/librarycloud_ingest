@@ -4,6 +4,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xpath-default-namespace="urn:isbn:1-931666-22-9"
     version="2.0">
     <xsl:output encoding="UTF-8" method="xml" indent="yes" omit-xml-declaration="yes"/>
     <xsl:strip-space elements="*"/>
@@ -37,6 +38,23 @@
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/@level"/>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//unitid"/>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//container"/>
+            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//language[string-length(@langcode) and string-length(text())]"/>
+
+            <xsl:if test="count(//c[@id=$cid_legacy_or_new]/did//language[string-length(@langcode) and string-length(text())]) &lt; 1">
+              <xsl:element name="language">
+                <xsl:element name="languageTerm">
+                  <xsl:attribute name="authority">iso639-2b</xsl:attribute>
+                  <xsl:attribute name="type">code</xsl:attribute>
+                  <xsl:text>und</xsl:text>
+                </xsl:element>
+                <xsl:element name="languageTerm">
+                  <xsl:attribute name="authority">iso639-2b</xsl:attribute>
+                  <xsl:attribute name="type">text</xsl:attribute>
+                  <xsl:text>Undefined</xsl:text>
+                </xsl:element>
+              </xsl:element>
+            </xsl:if>
+
             <!--<xsl:apply-templates select="//c[@id=$cid_legacy_or_new]//accessrestrict"/>-->
             <!--<xsl:apply-templates select="(//c[@id=$cid_legacy_or_new and not(.//accessrestrict) and ancestor::*//accessrestrict]/ancestor::*//accessrestrict)[position()=1]"/>-->
             <xsl:choose>
@@ -63,12 +81,47 @@
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did/dao"/>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did/daogrp"/>
             <xsl:element name="recordInfo">
-                <xsl:if test="eadheader/revisiondesc/change[item='Loaded into OASIS']">
+                <!-- third value may need to change if we do another full oai harvest - the creation/date is always just the export date
+                     maybe just always use that 3rd date at this point? -->
+                <!--<xsl:variable name="dateArr" as="xs:integer*">
+
+                    <xsl:if test="eadheader/revisiondesc/change[item = 'Loaded into OASIS']/date">
+                        <xsl:call-template name="convert-date">
+                            <xsl:with-param name="thedate">
+                                <xsl:value-of
+                                    select="eadheader/revisiondesc/change[item = 'Loaded into OASIS']/date"
+                                />
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:if>
+
+                    <xsl:if
+                        test="eadheader/revisiondesc/change[contains(item, 'ArchivesSpace Preprocessor')]/date">
+                        <xsl:call-template name="convert-date">
+                            <xsl:with-param name="thedate">
+                                <xsl:value-of
+                                    select="eadheader/revisiondesc/change[contains(item, 'ArchivesSpace Preprocessor')]/date"
+                                />
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when
+                            test="number(replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')) &gt;= 20180716">
+                            <xsl:value-of
+                                select="replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')"
+                            />
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>20160101</xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>-->
                     <xsl:element name="recordChangeDate">
                       <xsl:attribute name="encoding">iso8601</xsl:attribute>
-                        <xsl:value-of select="format-number(max(eadheader/revisiondesc/change[item='Loaded into OASIS']/date/@normal),'00000000')"/>
+                    <!--<xsl:value-of select="max($dateArr)"/>-->
+                    <xsl:value-of select="replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')"/>
                     </xsl:element>
-                </xsl:if>
                 <xsl:element name="recordIdentifier">
                     <xsl:attribute name="id"><xsl:text>s</xsl:text><xsl:value-of select="$sibcount"/></xsl:attribute>
                     <xsl:attribute name="source">MH:OASIS</xsl:attribute>
@@ -76,8 +129,18 @@
                 </xsl:element>
             </xsl:element>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]"/>
-            <xsl:apply-templates select="/ead/eadheader/profiledesc/langusage" />
+            <!-- <xsl:apply-templates select="/ead/eadheader/profiledesc/langusage" /> -->
         </mods>
+    </xsl:template>
+
+    <xsl:template name="convert-date">
+        <xsl:param name="thedate"/>
+        <xsl:value-of
+            select="
+                replace(normalize-space($thedate),
+                '(\d{2})/(\d{2})/(\d{4})',
+                '$3$1$2')"
+        />
     </xsl:template>
 
     <xsl:template match="c" mode="siblingcount">
@@ -113,7 +176,7 @@
                 <relatedItem otherType="HOLLIS record">
                     <location>
                         <url>
-                            <xsl:text>http://id.lib.harvard.edu/aleph/</xsl:text>
+                            <xsl:text>https://id.lib.harvard.edu/alma/</xsl:text>
                             <xsl:value-of select="/ead/eadheader/eadid/@identifier"/>
                             <xsl:text>/catalog</xsl:text>
                         </url>
@@ -122,7 +185,7 @@
                 <relatedItem otherType="Finding Aid">
                     <location>
                         <url>
-                            <xsl:text>http://id.lib.harvard.edu/ead/</xsl:text>
+                            <xsl:text>https://id.lib.harvard.edu/ead/</xsl:text>
                             <xsl:value-of select="/ead/eadheader/eadid"/>
                             <xsl:text>/catalog</xsl:text>
                         </url>
@@ -142,18 +205,35 @@
 
     <xsl:template match="unitdate">
         <xsl:element name="originInfo">
-            <xsl:if test="@startYear">
+          <xsl:if test="string-length(@normal)">
+            <xsl:choose>
+              <xsl:when test='matches(@normal, "\d{4}-\d{2}-\d{2}/\d{4}-\d{2}-\d{2}")'>
                 <xsl:element name="dateCreated">
-                    <xsl:attribute name="point">start</xsl:attribute>
-                    <xsl:value-of select="@startYear"/>
+                  <xsl:attribute name="point">start</xsl:attribute>
+                    <xsl:value-of select="substring-before(@normal, '/')"/>
                 </xsl:element>
-            </xsl:if>
-            <xsl:if test="@endYear">
                 <xsl:element name="dateCreated">
-                    <xsl:attribute name="point">end</xsl:attribute>
-                    <xsl:value-of select="@endYear"/>
+                  <xsl:attribute name="point">end</xsl:attribute>
+                    <xsl:value-of select="substring-after(@normal, '/')"/>
                 </xsl:element>
-            </xsl:if>
+              </xsl:when>
+              <xsl:when test='matches(@normal, "\d{4}/\d{4}")'>
+                <xsl:element name="dateCreated">
+                  <xsl:attribute name="point">start</xsl:attribute>
+                    <xsl:value-of select="substring-before(@normal, '/')"/>
+                </xsl:element>
+                <xsl:element name="dateCreated">
+                  <xsl:attribute name="point">end</xsl:attribute>
+                    <xsl:value-of select="substring-after(@normal, '/')"/>
+                </xsl:element>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:element name="dateCreated">
+                    <xsl:value-of select="@normal"/>
+                </xsl:element>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:if>
             <xsl:element name="dateCreated">
                 <xsl:value-of select="."/>
             </xsl:element>
@@ -176,6 +256,8 @@
                 <xsl:element name="roleTerm">
                     <xsl:text>originator</xsl:text>
                 </xsl:element>
+            </xsl:element>
+            <xsl:element name="role">
                 <xsl:element name="roleTerm">
                     <xsl:text>creator</xsl:text>
                 </xsl:element>
@@ -247,6 +329,21 @@
             <xsl:if test="p">
                 <xsl:value-of select="p"/>
             </xsl:if>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="language">
+      <xsl:element name="language">
+          <xsl:element name="languageTerm">
+            <xsl:attribute name="authority">iso639-2b</xsl:attribute>
+            <xsl:attribute name="type">code</xsl:attribute>
+            <xsl:value-of select="@langcode" />
+          </xsl:element>
+          <xsl:element name="languageTerm">
+            <xsl:attribute name="authority">iso639-2b</xsl:attribute>
+            <xsl:attribute name="type">text</xsl:attribute>
+            <xsl:value-of select="text()" />
+          </xsl:element>
         </xsl:element>
     </xsl:template>
 

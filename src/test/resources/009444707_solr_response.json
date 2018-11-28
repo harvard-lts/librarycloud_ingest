@@ -1,0 +1,23 @@
+{
+  "responseHeader":{
+    "zkConnected":true,
+    "status":0,
+    "QTime":1,
+    "params":{
+      "q":"urn_keyword:\"urn-3:FHCL:2092181\""}},
+  "response":{"numFound":1,"start":0,"maxScore":16.578358,"docs":[
+      {
+        "id":"urn-3:FHCL:2092181",
+        "urn":"urn-3:FHCL:2092181",
+        "contentModel":"STILL IMAGE",
+        "accessFlag":"P",
+        "lastModifiedDate":"2017-06-26T18:02:15.585Z",
+        "fileDeliveryURL":"http://nrs.harvard.edu/urn-3:FHCL:2092181",
+        "metsLabel":"Leth, Andries de. Carte nouvelle de la mer du Sud, [1740?]. Phillips, McLaughlin, G. Mapping of California as an island, Open Collections Program at Harvard University. http://id.lib.harvard.edu/aleph/009444707/catalog.",
+        "uriType":"IDS",
+        "ownerCodeDisplayName":"Harvard Map Collection",
+        "ownerCode":"FHCL.MAPS",
+        "thumbnailURL":"http://nrs.harvard.edu/urn-3:FHCL:2092181?width=150&height=150&usethumb=y",
+        "_version_":1583266299835842561}]
+             }
+}

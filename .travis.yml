@@ -1,1 +1,2 @@
 language: java
+before_install: ./scripts/travis_before_install.sh

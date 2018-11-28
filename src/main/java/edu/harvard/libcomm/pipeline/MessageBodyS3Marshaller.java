@@ -5,6 +5,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 import java.util.UUID;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -33,6 +36,7 @@ public class MessageBodyS3Marshaller implements DataFormat {
     private int maxData;
     private String bucket;
     private String S3_PREFIX = "https://s3.amazonaws.com/";
+    private static Pattern S3_PATTERN = Pattern.compile("^https?://s3.amazonaws.com/([^/]+)/([^?/]+)[^/]*$");
 
     public MessageBodyS3Marshaller(int maxData, String bucket) {
         this.maxData = maxData;
@@ -44,8 +48,8 @@ public class MessageBodyS3Marshaller implements DataFormat {
      set payload.filepath to the location of the data, and remove he contents of the body */
     public void marshal(Exchange exchange, Object graph, OutputStream stream) throws Exception {
 
-    Message message = exchange.getIn();
-    InputStream messageIS = MessageUtils.readMessageBody(message);
+        Message message = exchange.getIn();
+        InputStream messageIS = MessageUtils.readMessageBody(message);
         LibCommMessage libCommMessage = MessageUtils.unmarshalLibCommMessage(messageIS);
 
         if ((libCommMessage.getPayload() != null) && (libCommMessage.getPayload().getData() != null)) {
@@ -76,28 +80,23 @@ public class MessageBodyS3Marshaller implements DataFormat {
        so, download the S3 object, clear the filepath, and set the body to the contents of the object */
     public Object unmarshal(Exchange exchange, InputStream stream) throws Exception {
         LibCommMessage libCommMessage = MessageUtils.unmarshalLibCommMessage(stream);
-
-        if ((libCommMessage.getPayload() != null) &&
-            ((libCommMessage.getPayload().getData() == null) || libCommMessage.getPayload().getData().isEmpty()) &&
-            ((libCommMessage.getPayload().getFilepath() != null) && !libCommMessage.getPayload().getFilepath().isEmpty())) {
-
+        if (MessageUtils.hasResolveableFilepath(libCommMessage)) {
             String filepath = libCommMessage.getPayload().getFilepath();
-            if (filepath.startsWith(this.S3_PREFIX)) {
-                filepath = filepath.replace(this.S3_PREFIX,"");
-                String[] parts = filepath.split("/");
-                if (parts.length == 2) {
-                    String bucket = parts[0];
-                    String key = parts[1];
-                    S3Object getResult = null;
-                    try {
-                        getResult = s3Client.getObject(bucket, key);
-                        String body = IOUtils.toString(getResult.getObjectContent(), StandardCharsets.UTF_8);
-                        libCommMessage.getPayload().setData(body);
-                        libCommMessage.getPayload().setFilepath("");
-                    } finally {
-                        if (getResult != null) {
-                            getResult.close();
-                        }
+            Matcher m = S3_PATTERN.matcher(filepath);
+            if (m.matches()) {
+                String bucket = m.group(1);
+                String key = m.group(2);
+                S3Object getResult = null;
+                try {
+                    getResult = s3Client.getObject(bucket, key);
+                    String body = IOUtils.toString(getResult.getObjectContent(), StandardCharsets.UTF_8);
+                    libCommMessage.getPayload().setData(body);
+                    libCommMessage.getPayload().setFilepath("");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (getResult != null) {
+                        getResult.close();
                     }
                 }
             }

@@ -1,0 +1,123 @@
+<mods xmlns="http://www.loc.gov/mods/v3"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+   <identifier>ARC 209-421</identifier>
+   <location>
+      <url access="raw object">http://nrs.harvard.edu/urn-3:FMUS.MCZ:2004-507088</url>
+      <url access="preview">http://nrs.harvard.edu/urn-3:FMUS.MCZ:2004-507088</url>
+   </location>
+   <titleInfo>
+      <title>Bacu (Belem, Teffe, Brazil, 17 October 1865 ; and Tabatinga, Brazil, 19 September 1865)</title>
+   </titleInfo>
+   <name>
+      <namePart>Burkhardt, Jacques</namePart>
+      <role>
+         <roleTerm type="text">Creator</roleTerm>
+      </role>
+      <role>
+         <roleTerm type="text">Artist</roleTerm>
+      </role>
+   </name>
+   <genre>drawings</genre>
+   <physicalDescription>
+      <form type="materialsTechniques">watercolor</form>
+      <form type="support">paper</form>
+      <extent>18 x 26 cm.</extent>
+      <note>3 fish drawings (5 x 10 cm., 4 x 10 cm., 9 x 18 cm.)</note>
+   </physicalDescription>
+   <originInfo>
+      <dateCreated>1865-10-17</dateCreated>
+      <place>
+         <placeTerm type="text">Teffe, Brazil</placeTerm>
+      </place>
+   </originInfo>
+   <name displayLabel="Expedition Name">
+      <namePart>Thayer Expedition</namePart>
+   </name>
+   <note type="annotation">Bacu - Belem Bacu Tabatinga 19 - 7br.</note>
+   <note type="annotation">Teffe 17 Oct.--Burkhardt, Jacques</note>
+   <name>
+      <namePart>Burkhardt, Jacques</namePart>
+      <role>
+         <roleTerm type="text" valueURI="http://id.loc.gov/vocabulary/relators/ann">Annotator</roleTerm>
+      </role>
+   </name>
+   <note type="annotation">69</note>
+   <note type="annotation">Porte les quads barbillon en avant--Agassiz, Louis</note>
+   <name>
+      <namePart>Agassiz, Louis</namePart>
+      <role>
+         <roleTerm type="text" valueURI="http://id.loc.gov/vocabulary/relators/ann">Annotator</roleTerm>
+      </role>
+   </name>
+   <location>
+      <physicalLocation type="repository" valueURI="http://isni.org/isni/0000000460377627">Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</physicalLocation>
+      <shelfLocator>ARC 209-421</shelfLocator>
+   </location>
+   <relatedItem otherType="Specimen">
+      <subject displayLabel="Taxonomic Classification">
+         <topic>Animalia--Doradidae--Lithodoras dorsalis (Valenciennes 1840)</topic>
+      </subject>
+      <titleInfo otherType="Common Name">
+         <title>Bacu</title>
+      </titleInfo>
+      <name>
+         <namePart>Sabaj, M.H.</namePart>
+         <role>
+            <roleTerm>Authority</roleTerm>
+         </role>
+      </name>
+      <originInfo displayLabel="Specimen Collected">
+         <dateOther type="Specimen Collection Date">1865-10-17</dateOther>
+         <place>
+            <placeTerm type="text">Belem, Brazil</placeTerm>
+         </place>
+      </originInfo>
+      <note type="Specimen Note">Top left specimen</note>
+      <note type="Specimen Note">Determiner date: 2006-07-??</note>
+   </relatedItem>
+   <relatedItem otherType="Specimen">
+      <subject displayLabel="Taxonomic Classification">
+         <topic>Animalia--Doradidae--Nemadoras humeralis (Kner 1855)</topic>
+      </subject>
+      <titleInfo otherType="Common Name">
+         <title>Bacu</title>
+      </titleInfo>
+      <name>
+         <namePart>Sabaj, M.H.</namePart>
+         <role>
+            <roleTerm>Authority</roleTerm>
+         </role>
+      </name>
+      <originInfo displayLabel="Specimen Collected">
+         <dateOther type="Specimen Collection Date">1865-09-19</dateOther>
+         <place>
+            <placeTerm type="text">Tabatinga, Brazil</placeTerm>
+         </place>
+      </originInfo>
+      <note type="Specimen Note">Top right specimen</note>
+      <note type="Specimen Note">Determiner date: 2006-07-??</note>
+   </relatedItem>
+   <relatedItem otherType="Specimen">
+      <subject displayLabel="Taxonomic Classification">
+         <topic>Animalia--Doradidae--Oxydoras niger (Valenciennes 1821)</topic>
+      </subject>
+      <titleInfo otherType="Common Name">
+         <title>Bacu</title>
+      </titleInfo>
+      <name>
+         <namePart>Sabaj, M.H.</namePart>
+         <role>
+            <roleTerm>Authority</roleTerm>
+         </role>
+      </name>
+      <note type="Specimen Note">Bottom specimen</note>
+      <note type="Specimen Note">Determiner date: 2006-07-??</note>
+   </relatedItem>
+   <recordInfo>
+        
+        <recordCreationDate>2005-11-10</recordCreationDate>
+      <recordIdentifier source="MH:MCZArtwork">ARC 209-421</recordIdentifier>
+   </recordInfo>
+</mods>

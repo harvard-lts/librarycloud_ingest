@@ -1,4 +1,5 @@
 <viaRecord originalAtHarvard="true"
+           numberOfSubworks="0"
            primaryImageThumbnailURN="http://sharedshelf.stage.artstor.org/resolve/harvard-nrs/urn-3:FHCL.HOUGH:37097945">
    <recordId altRecordId="ss_8000175683">olvwork165257</recordId>
    <work>
@@ -7,8 +8,10 @@
       </title>
       <workType>reproductive prints</workType>
       <creator>
-         <nameElement>British School</nameElement>
-         <role>photographer</role>
+         <nameElement>Bramante, Donato</nameElement>
+         <dates>c.1444-1514, Italian</dates>
+         <role>architect</role>
+         <namedates>Bramante, Donato c.1444-1514, Italian</namedates>
       </creator>
       <dimensions> image 14.8 x 14.8 cm ; paper 19.6 x 21 cm</dimensions>
       <topic>

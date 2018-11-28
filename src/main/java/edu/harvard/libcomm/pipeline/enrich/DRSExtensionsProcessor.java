@@ -20,14 +20,13 @@ public class DRSExtensionsProcessor extends ExternalServiceProcessor implements 
 
 	protected Logger log = Logger.getLogger(DRSExtensionsProcessor.class);
 
-	public void processMessage(LibCommMessage libCommMessage) throws Exception {	
-	
+	public void processMessage(LibCommMessage libCommMessage) throws Exception {
+
 		URI uri = null;
 		String urns = getUrns(libCommMessage);
 		//urns = urns.startsWith("OR") ? urns.substring(2) : urns;
 		//can't throw out all urns bc one has ebook, only looking for recs with no urns at all
 		//if (urns.equals("")  || urns == null || urns.contains("ebook"))
-		//System.out.println("%%%%%%%%%%% URNS: " + urns);
 		//if (urns.equals("")  || urns == null)
 		if (!urns.contains("urn-3"))
 			uri = null;
@@ -39,7 +38,6 @@ public class DRSExtensionsProcessor extends ExternalServiceProcessor implements 
 			//System.out.println("URNS: " + urns);
 			uri = new URI(Config.getInstance().SOLR_EXTENSIONS_URL + "/select?q=urn_keyword:" + urns + "&rows=250");
 		}
-		//System.out.println("URI: " + uri.toString());
-		process(libCommMessage, uri, "results", "src/main/resources/adddrsextensions.xsl");
+    process(libCommMessage, uri, "results", "src/main/resources/adddrsextensions.xsl");
 	}
 }

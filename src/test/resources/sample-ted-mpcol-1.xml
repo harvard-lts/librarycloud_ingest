@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tedCollection xmlns:xlink="http://www.w3.org/TR/xlink">
+    <mpcolRecord>
+        <record>
+            <alternateTitle>Stare muslimanske pjesme (a)</alternateTitle>
+            <title>Umorih se ruže trgajući</title>
+            <audio>
+                <physicalMedium>wire spool</physicalMedium>
+                <recordingNumber>spool 26 min. 3-21</recordingNumber>
+            </audio>
+            <location>Bijelo Polje</location>
+            <collectionMethod>recorded</collectionMethod>
+            <singer>
+                <biographicalNote>Zajmović was director of the hotel in Bijelo
+                    Polje.</biographicalNote>
+                <name>Zajmović, Đemo</name>
+            </singer>
+            <itemNumber>LN58a</itemNumber>
+            <collection>Lord Collection</collection>
+            <language>Bosnian, Croatian, or Serbian language</language>
+            <date>
+                <!--<singleDate>1950-05-27</singleDate>-->
+                <dateType>s.d.</dateType>
+            </date>
+            <note>This song is one of a series of &quot;various old muslim songs&quot; performed by
+                Zajmović.</note>
+        </record>
+        <_id>LN58aZajmović, Đemo</_id>
+        <admin>
+            <status>Active</status>
+            <createDate>2004-07-01</createDate>
+        </admin>
+    </mpcolRecord>
+    <mpcolRecord>
+        <record>
+            <translatedTitle>Test</translatedTitle>
+            <text>
+                <availableText>manuscript</availableText>
+                <digitalText>
+                    <xlink:show>new</xlink:show>
+                    <!--<xmlns:xlink>http://www.w3.org/TR/xlink</xmlns:xlink>-->
+                    <xlink:href>http://nrs.harvard.edu/urn-3:HLNC.MPCOL:104493</xlink:href>
+                </digitalText>
+                <numberOfLines>24</numberOfLines>
+                <transcriber>Nikola Vujnović</transcriber>
+            </text>
+            <title>Proba</title>
+            <audio>
+                <physicalMedium>aluminum disk</physicalMedium>
+                <recordingNumber>1337</recordingNumber>
+                <digitalAudio>
+                    <xlink:show>embed</xlink:show>
+                    <!--<xmlns:xlink>http://www.w3.org/TR/xlink</xmlns:xlink>-->
+                    <xlink:href>http://nrs.harvard.edu/urn-3:HLNC.MPCOL:1068583</xlink:href>
+                </digitalAudio>
+            </audio>
+            <location>Stolac</location>
+            <collectionMethod>recorded</collectionMethod>
+            <singer>
+                <name>Vidić, Petar</name>
+            </singer>
+            <itemNumber>PN803</itemNumber>
+            <collection>Parry Collection</collection>
+            <date>
+                <singleDate>1934-12-07</singleDate>
+                <dateType>received</dateType>
+            </date>
+            <note>Text 803 contains two probe which belong to the following song.</note>
+        </record>
+        <_id>PN803Vidić, Petar</_id>
+        <admin>
+            <status>Active</status>
+            <createDate>2003-06-02</createDate>
+        </admin>
+    </mpcolRecord>
+    <mpcolRecord>
+        <record>
+            <alternateTitle>Song of World War II</alternateTitle>
+            <translatedTitle>Song of the War of National Liberation, 1941</translatedTitle>
+            <title>Pjesma o Narodno-oslobodilačkoj borbi 1941</title>
+            <audio>
+                <physicalMedium>wire spool</physicalMedium>
+                <recordingNumber>spool 25 min. 1-4</recordingNumber>
+            </audio>
+            <location>Bijelo Polje</location>
+            <collectionMethod>recorded</collectionMethod>
+            <singer>
+                <name>Novaković, Radivoje</name>
+            </singer>
+            <itemNumber>LN53</itemNumber>
+            <collection>Lord Collection</collection>
+            <language>Bosnian, Croatian, or Serbian language</language>
+            <date>
+                <singleDate>1950-05-26</singleDate>
+            </date>
+        </record>
+        <_id>LN53Novaković, Radivoje</_id>
+        <admin>
+            <status>Active</status>
+            <createDate>2004-06-29</createDate>
+        </admin>
+
+    </mpcolRecord>
+</tedCollection>

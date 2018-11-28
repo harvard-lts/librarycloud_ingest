@@ -31,5 +31,18 @@
         "ownerCodeDisplayName":"Eda Kuhn Loeb Music Library",
         "ownerCode":"FHCL.MUSI",
         "thumbnailURL":"http://ids.lib.harvard.edu/ids/view/45562415?width=150&height=150&usethumb=y",
+        "_version_":1588771491340615680},
+      {
+        "id":"urn-3:FHCL:2092181",
+        "urn":"urn-3:FHCL:2092181",
+        "contentModel":"PDS DOCUMENT",
+        "accessFlag":"P",
+        "lastModifiedDate":"2016-03-14T14:28:07.202Z",
+        "fileDeliveryURL":"http://nrs.harvard.edu/urn-3:FHCL.Loeb:10356603",
+        "metsLabel":"Bartók, Béla, 1881-1945. [Divertimento, string orchestra]. Divertimento for string orchestra. London: Hawkes [c1940]. Merritt Mus 627.22.225 Solti B. Gift of the Solti Estate. Reproduced by permission of Boosey & Hawkes Music Publishers Ltd.",
+        "uriType":"PDS",
+        "ownerCodeDisplayName":"Eda Kuhn Loeb Music Library",
+        "ownerCode":"FHCL.MUSI",
+        "thumbnailURL":"http://ids.lib.harvard.edu/ids/view/45562415?width=150&height=150&usethumb=y",
         "_version_":1588771491340615680}]
   }}

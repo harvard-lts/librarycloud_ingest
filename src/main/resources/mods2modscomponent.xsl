@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0"  
+<xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:xlink="http://www.w3.org/TR/xlink"  
     xmlns:mods="http://www.loc.gov/mods/v3" 
->
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    exclude-result-prefixes="xsi"
+    version="2.0">
+
 <xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
 	<!--<xsl:param name="url">http://nrs.harvard.edu/urn-3:HBS.Baker.GEN:5028297-2011</xsl:param>-->
 	<xsl:param name="url"></xsl:param>
@@ -26,7 +29,7 @@
 				<xsl:attribute name="otherType">HOLLIS record</xsl:attribute>
 				<xsl:element name="location" namespace="http://www.loc.gov/mods/v3">
 					<xsl:element name="url" namespace="http://www.loc.gov/mods/v3">
-						<xsl:text>http://id.lib.harvard.edu/aleph/</xsl:text>
+						<xsl:text>https://id.lib.harvard.edu/alma/</xsl:text>
 						<xsl:value-of select="mods:recordInfo/mods:recordIdentifier"/>
 						<xsl:text>/catalog</xsl:text>
 					</xsl:element>

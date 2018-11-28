@@ -1,0 +1,8 @@
+<map>
+    <mapping>
+        <source>MUS</source>
+        <replacement>Music</replacement>
+        <valueUri>http://example.com/123</valueUri>
+        <extensionValue>abc</extensionValue>
+    </mapping>
+</map>

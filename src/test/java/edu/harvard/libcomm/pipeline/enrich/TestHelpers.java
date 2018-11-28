@@ -42,6 +42,11 @@ public class TestHelpers {
                     else if ("mods".equals(prefix)) return "http://www.loc.gov/mods/v3";
                     else if ("tbd".equals(prefix)) return "http://lib.harvard.edu/TBD";
                     else if ("sets".equals(prefix)) return "http://hul.harvard.edu/ois/xml/ns/libraryCloud";
+                    else if ("drs".equals(prefix)) return "http://hul.harvard.edu/ois/xml/ns/HarvardDRS";
+                    else if ("hvd".equals(prefix)) return "http://hul.harvard.edu/ois/xml/ns/HarvardRepositories";
+                    else if ("avail".equals(prefix)) return "http://hul.harvard.edu/ois/xml/ns/availableTo";
+                    else if ("procdate".equals(prefix)) return "http://hul.harvard.edu/ois/xml/ns/processingDate";
+                    else if ("digitalFormats".equals(prefix)) return "http://hul.harvard.edu/ois/xml/ns/digitalFormats";
                     return XMLConstants.NULL_NS_URI;
                 }
 
@@ -78,7 +83,7 @@ public class TestHelpers {
 
     public static Document extractXmlDoc(LibCommMessage lcm) throws Exception{
         String s = lcm.getPayload().getData();
-
+        //        System.out.println(s);
         InputStream docIS = IOUtils.toInputStream(s, "UTF-8");
 
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
