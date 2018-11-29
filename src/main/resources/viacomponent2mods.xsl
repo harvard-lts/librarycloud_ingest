@@ -30,6 +30,17 @@
 							select="substring-after(work/surrogate[@componentID = $nodeComponentID]/image/@xlink:href, 'edu/')"
 						/>
 					</xsl:when>
+					<xsl:when
+							test="string-length($urn) and group/surrogate/image[contains(@href, $urn)]">
+						<xsl:value-of
+								select="group/surrogate/image[contains(@href, $urn)]/../@componentID"/>
+					</xsl:when>
+					<xsl:when
+							test="string-length(group/surrogate[@componentID = $nodeComponentID]/image/@xlink:href)">
+						<xsl:value-of
+								select="substring-after(group/surrogate[@componentID = $nodeComponentID]/image/@xlink:href, 'edu/')"
+						/>
+					</xsl:when>
 					<xsl:when test="string-length($urn)">
 						<xsl:value-of select="substring-after($urn, 'edu/')"/>
 					</xsl:when>
