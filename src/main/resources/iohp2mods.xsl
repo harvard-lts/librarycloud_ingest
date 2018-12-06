@@ -49,8 +49,8 @@
         <xsl:apply-templates select="lifeStatus"/>
         <xsl:apply-templates select="biographicalNote"/>
         <xsl:apply-templates select="gender"/>
-        <!--<xsl:apply-templates select="tapeNumber"/>-->
         <xsl:call-template name="makeTitle"/>
+        <xsl:apply-templates select="tapeNumber"/>
         <xsl:apply-templates select="digitalAudio"/>
         <!--<xsl:apply-templates select="digitalTranscript"/>-->
         <xsl:call-template name="makeDigitalTranscript"/>
@@ -103,7 +103,6 @@
         </xsl:element>
     </xsl:template>
 
-    <!--<xsl:template match="tapeNumber">-->
     <xsl:template name="makeTitle">
         <xsl:element name="titleInfo">
             <xsl:element name="title">
@@ -112,8 +111,15 @@
                 <xsl:text>: </xsl:text>
             </xsl:element>
             <xsl:element name="partNumber">
-                <xsl:value-of select="tapeNumber"/>
+                <xsl:text>Tape </xsl:text><xsl:value-of select="tapeNumber"/>
             </xsl:element>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="tapeNumber">
+        <xsl:element name="note">
+            <xsl:attribute name="type"><xsl:text>tape number</xsl:text></xsl:attribute>
+            <xsl:value-of select="."/>
         </xsl:element>
     </xsl:template>
 

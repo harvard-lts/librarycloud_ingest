@@ -751,7 +751,7 @@
                 <process ref="drsExtensionsProcessor"/>
                 <marshal><custom ref="cloudbody"/></marshal>
                 <!-- we want to do this, but it seems to cause glitches when doing full marc ingests.
-                Try full ingest sending via as well, tho not necessary, to see if that helps
+                Try full ingest sending via as well, tho not necessary, to see if that helps-->
                 <choice>
                     <when>
                         <xpath>//source = 'via'</xpath>
@@ -765,8 +765,7 @@
                         <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-05B?amazonSQSClient=#sqsClient" />
                     </otherwise>
                 </choice>
-                -->
-                <to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-05B?amazonSQSClient=#sqsClient" />
+                <!--<to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-05B?amazonSQSClient=#sqsClient" />-->
 
                 <!--<to uri="aws-sqs://{{librarycloud.sqs.environment}}-enrich-06?amazonSQSClient=#sqsClient" />-->
                 <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-02" /> -->

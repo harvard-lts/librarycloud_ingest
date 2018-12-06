@@ -8,7 +8,7 @@
  -->
 
 	<xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
-	<!--<xsl:param name="urn">http://nrs.harvard.edu/urn-3:FHCL:1154698</xsl:param>-->
+	<!--<xsl:param name="urn">http://nrs.harvard.edu/urn-3:FMUS:27510</xsl:param>-->
 	<xsl:param name="urn"/>
   <xsl:param name="nodeComponentID" />
 	<xsl:template match="/viaRecord">
@@ -178,7 +178,7 @@
 
 	<xsl:template match="surrogate">
 		<xsl:if
-			test="(string-length($urn) and contains(image/@href, $urn)) or $nodeComponentID = @componentID">
+			test="(string-length($urn) and (contains(image/@href, $urn) or contains(image/@xlink:href, $urn))) or $nodeComponentID = @componentID">
 			<relatedItem type="constituent">
 				<xsl:call-template name="recordElements"/>
 				<recordInfo>
