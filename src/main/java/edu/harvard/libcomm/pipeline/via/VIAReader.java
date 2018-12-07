@@ -121,11 +121,14 @@ public class VIAReader {
 
       String[] via2ModsPaths = new String[] {
           "//work/image",
-          "//work/surrogate",
+          "//work/surrogate[not(image)]",
+          "//work/surrogate/image",
           "//work[not(image) and not(surrogate)]",
-          "//group/surrogate",
+          "//group/surrogate[not(image)]",
+          "//group/surrogate/image",
           "//group/image",
-          "//group/subwork/surrogate",
+          "//group/subwork/surrogate[not(image)]",
+          "//group/subwork/surrogate/image",
           "//group/subwork/image"
       };
 
