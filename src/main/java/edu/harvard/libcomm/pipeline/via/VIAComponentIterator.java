@@ -58,14 +58,16 @@ public class VIAComponentIterator implements Iterator<String> {
           if(xlinkAttr != null) {
               urn = xlinkAttr.getNodeValue();
           }
-          if(componentIDAttr != null && !componentIDAttr.equals("")) {
+          if(componentIDAttr != null) { // && !componentIDAttr.equals("")) {
               componentID = componentIDAttr.getNodeValue();
           }
-
+          String xslParam = urn.length() > 0 ? urn : componentID;
           position++;
+
           try {
-              //if (!componentID.equals(""))
-              viaComponentMods += transformVIA(urn, componentID);
+              //viaComponentMods += transformVIA(urn, componentID);
+            if (!xslParam.equals(""))
+                  viaComponentMods += transformVIA(xslParam);
           } catch (Exception e) {
               e.printStackTrace();
               throw new NoSuchElementException();
@@ -99,10 +101,11 @@ public class VIAComponentIterator implements Iterator<String> {
         return tFactory.newTransformer(styleSource);
     }
 
-    protected String transformVIA (String xslParam, String suffixParam) throws Exception {
-        this.transformer.setParameter("urn", xslParam);
-        this.transformer.setParameter("nodeComponentID", suffixParam);
-    StringWriter writer = new StringWriter();
+    //protected String transformVIA (String xslParam, String suffixParam) throws Exception {
+    protected String transformVIA (String xslParam) throws Exception {
+        this.transformer.setParameter("chunkid", xslParam);
+        //this.transformer.setParameter("nodeComponentID", suffixParam);
+        StringWriter writer = new StringWriter();
         StreamResult result = new StreamResult(writer);
         transformer.transform(this.domSource, result);
         return writer.toString();

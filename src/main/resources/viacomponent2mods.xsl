@@ -8,108 +8,131 @@
  -->
 
 	<xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
-	<!--<xsl:param name="urn">http://nrs.harvard.edu/urn-3:FHCL:1154698</xsl:param>-->
-	<xsl:param name="urn"/>
-  <xsl:param name="nodeComponentID" />
+	<!--<xsl:param name="urn">http://nrs.harvard.edu/urn-3:FMUS:27510</xsl:param>-->
+	<xsl:param name="chunkid"/>
+	<!--<xsl:param name="nodeComponentID" />-->
 	<xsl:template match="/viaRecord">
-		<xsl:message>URN: <xsl:value-of select="$urn"/></xsl:message>
-		<xsl:message>SFX: <xsl:value-of select="$nodeComponentID"/></xsl:message>
-		<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
-			<xsl:apply-templates/>
-			<xsl:variable name="urnsuffix">
+		<!--<xsl:message>URN: <xsl:value-of select="$urn"/></xsl:message>
+		<xsl:message>SFX: <xsl:value-of select="$nodeComponentID"/></xsl:message>-->
+		<xsl:message>CHUNKID: <xsl:value-of select="$chunkid"/></xsl:message>
+		<!-- blank chunkids shouldn't be passing through, but they seem to be, do a when, otherwise -->
+		<xsl:choose>
+			<xsl:when test="$chunkid = ''"/>
+			<xsl:otherwise>
+				<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+					<xsl:apply-templates/>
+					<xsl:variable name="recidsuffix">
+						<xsl:choose>
+							<xsl:when test="starts-with($chunkid, 'http')">
+								<xsl:value-of select="substring-after($chunkid, 'edu/')"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$chunkid"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:variable>
+					<!--<xsl:variable name="urnsuffix">
 				<xsl:choose>
 					<xsl:when
-						test="string-length($urn) and work/surrogate/image[contains(@href, $urn)]">
+							test="string-length($chunkid) and work/surrogate/image[contains(@*[local-name()='href'], $chunkid)]">
 						<xsl:value-of
-							select="work/surrogate/image[contains(@href, $urn)]/../@componentID"/>
+								select="work/surrogate/image[contains(@*[local-name()='href'], $chunkid)]/@*[local-name()='href']"/>
 					</xsl:when>
 					<xsl:when
-						test="string-length(work/surrogate[@componentID = $nodeComponentID]/image/@xlink:href)">
+							test="string-length($chunkid) and group/surrogate/image[contains(@*[local-name()='href'], $chunkid)]">
 						<xsl:value-of
-							select="substring-after(work/surrogate[@componentID = $nodeComponentID]/image/@xlink:href, 'edu/')"
-						/>
+							select="group/surrogate/image[contains(@*[local-name()='href'], $chunkid)]/@*[local-name()='href']"/>
 					</xsl:when>
-					<xsl:when test="string-length($urn)">
-						<xsl:value-of select="substring-after($urn, 'edu/')"/>
+					<xsl:when test="string-length($chunkid)">
+						<xsl:value-of select="substring-after($chunkid, 'edu/')"/>
 					</xsl:when>
 					<xsl:when test="string-length($nodeComponentID)">
 						<xsl:value-of select="$nodeComponentID"/>
 					</xsl:when>
 					<xsl:otherwise> </xsl:otherwise>
 				</xsl:choose>
-			</xsl:variable>
+			</xsl:variable>-->
 
-			<relatedItem otherType="HOLLIS Images record">
-				<location>
-					<url>
-						<xsl:text>https://id.lib.harvard.edu/images/</xsl:text>
-						<xsl:value-of select="recordId"/>
-						<xsl:text>/</xsl:text>
-						<xsl:value-of select="$urnsuffix"/>
-						<xsl:text>/catalog</xsl:text>
-					</url>
-				</location>
-			</relatedItem>
-			<recordInfo>
-				<recordContentSource authority="marcorg">MH</recordContentSource>
-				<recordContentSource authority="marcorg">MH-VIA</recordContentSource>
-				<recordChangeDate encoding="iso8601">
-					<xsl:variable name="lastdate">
-						<xsl:choose>
-							<xsl:when test="contains(admin/updateNote[position() = last()]/updateDate,' ')">
-								<xsl:value-of select="substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' ')"/>
-							</xsl:when>
-							<xsl:otherwise><xsl:value-of select="admin/updateNote[position() = last()]/updateDate/text()"/></xsl:otherwise>
-						</xsl:choose>
-					</xsl:variable>
-					<xsl:choose>
-						<xsl:when test="contains($lastdate,'/')">
-							<xsl:value-of select="replace($lastdate, '/', '')"/>
-						</xsl:when>
-						<xsl:when test="contains($lastdate,'-')">
-							<xsl:value-of select="replace($lastdate, '-', '')"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:value-of select="$lastdate"/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</recordChangeDate>
-				<recordIdentifier>
-					<xsl:attribute name="source">
-						<xsl:value-of select="'MH:VIA'"/>
-					</xsl:attribute>
-					<xsl:choose>
-						<xsl:when test="starts-with(recordId, 'olvwork')">
-							<xsl:text>W</xsl:text>
-							<xsl:value-of select="substring-after(recordId, 'olvwork')"/>
-						</xsl:when>
-						<xsl:when test="starts-with(recordId, 'olvgroup')">
-							<xsl:text>G</xsl:text>
-							<xsl:value-of select="substring-after(recordId, 'olvgroup')"/>
-						</xsl:when>
-						<xsl:when test="starts-with(recordId, 'olvsite')">
-							<xsl:text>S</xsl:text>
-							<xsl:value-of select="substring-after(recordId, 'olvsite')"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:value-of select="recordId"/>
-						</xsl:otherwise>
-					</xsl:choose>
-					<xsl:if test="string-length($urnsuffix)">
-						<xsl:text>_</xsl:text>
-						<xsl:value-of select="$urnsuffix"/>
-					</xsl:if>
-				</recordIdentifier>
-				<languageOfCataloging>
-					<languageTerm>eng</languageTerm>
-				</languageOfCataloging>
-			</recordInfo>
-			<language>
-				<languageTerm type="code">zxx</languageTerm>
-				<languageTerm type="text">No linguistic content</languageTerm>
-			</language>
-		</mods>
+					<relatedItem otherType="HOLLIS Images record">
+						<location>
+							<url>
+								<xsl:text>https://id.lib.harvard.edu/images/</xsl:text>
+								<xsl:value-of select="recordId"/>
+								<xsl:text>/</xsl:text>
+								<xsl:value-of select="$recidsuffix"/>
+								<xsl:text>/catalog</xsl:text>
+							</url>
+						</location>
+					</relatedItem>
+					<recordInfo>
+						<recordContentSource authority="marcorg">MH</recordContentSource>
+						<recordContentSource authority="marcorg">MH-VIA</recordContentSource>
+						<recordChangeDate encoding="iso8601">
+							<xsl:variable name="lastdate">
+								<xsl:choose>
+									<xsl:when
+										test="contains(admin/updateNote[position() = last()]/updateDate, ' ')">
+										<xsl:value-of
+											select="substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' ')"
+										/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of
+											select="admin/updateNote[position() = last()]/updateDate/text()"
+										/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:variable>
+							<xsl:choose>
+								<xsl:when test="contains($lastdate, '/')">
+									<xsl:value-of select="replace($lastdate, '/', '')"/>
+								</xsl:when>
+								<xsl:when test="contains($lastdate, '-')">
+									<xsl:value-of select="replace($lastdate, '-', '')"/>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="$lastdate"/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</recordChangeDate>
+						<recordIdentifier>
+							<xsl:attribute name="source">
+								<xsl:value-of select="'MH:VIA'"/>
+							</xsl:attribute>
+							<xsl:choose>
+								<xsl:when test="starts-with(recordId, 'olvwork')">
+									<xsl:text>W</xsl:text>
+									<xsl:value-of select="substring-after(recordId, 'olvwork')"/>
+								</xsl:when>
+								<xsl:when test="starts-with(recordId, 'olvgroup')">
+									<xsl:text>G</xsl:text>
+									<xsl:value-of select="substring-after(recordId, 'olvgroup')"/>
+								</xsl:when>
+								<xsl:when test="starts-with(recordId, 'olvsite')">
+									<xsl:text>S</xsl:text>
+									<xsl:value-of select="substring-after(recordId, 'olvsite')"/>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="recordId"/>
+								</xsl:otherwise>
+							</xsl:choose>
+							<xsl:if test="string-length($recidsuffix)">
+								<xsl:text>_</xsl:text>
+								<xsl:value-of select="$recidsuffix"/>
+							</xsl:if>
+						</recordIdentifier>
+						<languageOfCataloging>
+							<languageTerm>eng</languageTerm>
+						</languageOfCataloging>
+					</recordInfo>
+					<language>
+						<languageTerm type="code">zxx</languageTerm>
+						<languageTerm type="text">No linguistic content</languageTerm>
+					</language>
+				</mods>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="work">
@@ -125,7 +148,7 @@
 
 	<xsl:template match="subwork">
 		<xsl:choose>
-			<xsl:when test="contains(image/@href, $urn) and string-length(image/@href)">
+			<xsl:when test="contains(image/@href, $chunkid) and string-length(image/@href)">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
 					<recordInfo>
@@ -136,7 +159,8 @@
 					<!--<xsl:apply-templates select="surrogate"/>-->
 				</relatedItem>
 			</xsl:when>
-			<xsl:when test="contains(image/@xlink:href, $urn) and string-length(image/@xlink:href)">
+			<xsl:when
+				test="contains(image/@xlink:href, $chunkid) and string-length(image/@xlink:href)">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
 					<recordInfo>
@@ -147,7 +171,7 @@
 					<!--<xsl:apply-templates select="surrogate"/>-->
 				</relatedItem>
 			</xsl:when>
-			<xsl:when test="surrogate/@componentID = $nodeComponentID">
+			<xsl:when test="surrogate/@componentID = $chunkid">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
 					<recordInfo>
@@ -167,7 +191,7 @@
 
 	<xsl:template match="surrogate">
 		<xsl:if
-			test="(string-length($urn) and contains(image/@href, $urn)) or $nodeComponentID = @componentID">
+			test="(string-length($chunkid) and (contains(image/@href, $chunkid) or contains(image/@xlink:href, $chunkid))) or $chunkid = @componentID">
 			<relatedItem type="constituent">
 				<xsl:call-template name="recordElements"/>
 				<recordInfo>
@@ -499,7 +523,7 @@
 		-->
 			<xsl:apply-templates select="creator"/>
 			<xsl:call-template name="originInfo"/>
-			<xsl:if test="contains(@href, $urn)">
+			<xsl:if test="contains(@href, $chunkid)">
 				<location>
 					<url>
 						<xsl:value-of select="@href"/>
@@ -540,7 +564,7 @@
 	</xsl:template>
 
 	<xsl:template match="image">
-		<xsl:if test="string-length($urn) and contains(@href, $urn)">
+		<xsl:if test="string-length($chunkid) and contains(@href, $chunkid)">
 			<xsl:choose>
 				<xsl:when test="caption and not(../surrogate)">
 					<relatedItem type="constituent">
@@ -603,7 +627,7 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:if>
-		<xsl:if test="contains(@xlink:href, $urn)">
+		<xsl:if test="contains(@xlink:href, $chunkid)">
 			<xsl:choose>
 				<xsl:when test="caption and not(../surrogate)">
 					<relatedItem type="constituent">
