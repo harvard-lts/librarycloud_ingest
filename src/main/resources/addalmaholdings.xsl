@@ -60,19 +60,10 @@
                     <xsl:when test="./marc:subfield[@code='b']='NET'"/>
                     <xsl:otherwise>
                         <xsl:element name="physicalLocation" namespace="http://www.loc.gov/mods/v3">
-                        <xsl:attribute name="type">
-                            <xsl:text>repository</xsl:text>
-                        </xsl:attribute>
-                        <xsl:choose>
-                            <xsl:when test="./marc:subfield[@code='b']='DIV'">Andover-Harvard Theological Library, Harvard Divinity School, Harvard University</xsl:when>
-                            <xsl:when test="./marc:subfield[@code='b']='BAK'">Baker Library Historical Collections, Harvard Business School, Harvard University</xsl:when>
-                            <xsl:when test="./marc:subfield[@code='b']='HUA'">Harvard University Archives</xsl:when>
-                            <xsl:when test="./marc:subfield[@code='b']='SCH'">Arthur and Elizabeth Schlesinger Library on the History of Women in America, Radcliffe Institute for Advanced Study, Harvard University</xsl:when>
-                            <xsl:when test="./marc:subfield[@code='b']='MED'">Center for the History of Medicine (Francis A. Countway Library of Medicine)</xsl:when>
-                            <xsl:when test="./marc:subfield[@code='b']='LAW'">Harvard Law School Library, Harvard Library, Harvard University</xsl:when>
-                            <xsl:when test="./marc:subfield[@code='b']='HOU'">Houghton Library, Harvard Library, Harvard University</xsl:when>
-                            <xsl:otherwise><xsl:value-of select="./marc:subfield[@code='b']"/></xsl:otherwise>
-                        </xsl:choose>
+                            <xsl:attribute name="type">
+                                <xsl:text>repository</xsl:text>
+                            </xsl:attribute>
+                            <xsl:value-of select="./marc:subfield[@code='b']"/>
                         </xsl:element>
                     </xsl:otherwise>
                 </xsl:choose>

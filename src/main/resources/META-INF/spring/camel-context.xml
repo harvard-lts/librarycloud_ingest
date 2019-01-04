@@ -982,6 +982,42 @@
             </doTry>
          </route>
 
+
+
+        <route id="alma-suppressed-delete-extract-file">
+            <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-alma-suppressed?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <split>
+                <xtokenize mode="t">//filepath</xtokenize>
+                <bean ref="prepareURI" method="prepare"/>
+                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+                <to uri="http://www.example.com" />
+                <to uri="direct:alma-suppressed-delete-file"/>
+            </split>
+        </route>
+
+        <route id="alma-suppressed-delete-ingest-split">
+            <from uri="direct:alma-suppressed-delete-file"/>
+            <!-- Try block required for errors thrown out of the splitter -->
+            <doTry>
+                <split streaming="true">
+                    <xtokenize>//record</xtokenize>
+                    <setHeader headerName="deleteID" >
+                        <xpath resultType="java.lang.String">//record[datafield[@tag='950']/subfield[@code='e']='true']/controlfield[@tag='001']</xpath>
+                    </setHeader>
+                    <process ref="almaDeleteProcessor"/>
+                    <multicast streaming="true">
+                        <to uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
+                        <to uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-s3?amazonSQSClient=#sqsClient" />
+                    </multicast>
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                </doCatch>
+            </doTry>
+        </route>
+
+
         <route id="deletesolr" errorHandlerRef="eh">
             <from uri="aws-sqs://{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <process ref="solrDeleteProcessor"/>
