@@ -1000,9 +1000,10 @@
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
                 <split streaming="true">
-                    <xtokenize>//record</xtokenize>
+                    <!--<xtokenize>//record</xtokenize>-->
+                    <xpath>//record[datafield[@tag='950']/subfield[@code='e']='true']</xpath>
                     <setHeader headerName="deleteID" >
-                        <xpath resultType="java.lang.String">//record[datafield[@tag='950']/subfield[@code='e']='true']/controlfield[@tag='001']</xpath>
+                        <xpath resultType="java.lang.String">//controlfield[@tag='001']</xpath>
                     </setHeader>
                     <process ref="almaDeleteProcessor"/>
                     <multicast streaming="true">
