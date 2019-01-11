@@ -15,7 +15,7 @@ SQS_ENVIRONMENT=$3
 SOURCE_FILE_PATH=$4
 SOURCE_FILE_NAME=$(basename $SOURCE_FILE_PATH)
 TARGET_FILE_NAME=`echo $SOURCE_FILE_NAME | sed 's/#//g'`
-TARGET_BUCKET=harvard.librarycloud.upload.$SQS_ENVIRONMENT.$DATA_SOURCE_NAME
+TARGET_BUCKET=harvard.librarycloud.ingest.$SQS_ENVIRONMENT/$DATA_SOURCE_NAME
 COMMAND_BUCKET=harvard.librarycloud.command.$SQS_ENVIRONMENT.$DATA_SOURCE_NAME
 
 if [ $# -ne 4 ]; then
@@ -64,8 +64,8 @@ if [ ! -f "$SOURCE_FILE_NAME.command.xml" ]; then
 fi
 
 # Copy ingest command to target queue
-aws sqs create-queue --queue-name=$SQS_ENVIRONMENT-$INGEST_INSTRUCTION-$DATA_SOURCE_NAME
-aws sqs send-message --queue=http://sqs.us-east-1.amazonaws.com/$SQS_ENVIRONMENT-$INGEST_INSTRUCTION-$DATA_SOURCE_NAME --message-body="$(<$SOURCE_FILE_NAME.command.xml)"
+aws sqs create-queue --queue-name=librarycloud-$SQS_ENVIRONMENT-$INGEST_INSTRUCTION-$DATA_SOURCE_NAME
+aws sqs send-message --queue=http://sqs.us-east-1.amazonaws.com/librarycloud-$SQS_ENVIRONMENT-$INGEST_INSTRUCTION-$DATA_SOURCE_NAME --message-body="$(<$SOURCE_FILE_NAME.command.xml)"
 
 rm $SOURCE_FILE_NAME.command.xml
 
