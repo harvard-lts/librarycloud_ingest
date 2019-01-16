@@ -105,6 +105,8 @@ public class MODSComponentIterator implements Iterator<String> {
                         String nodeValueChopped = nodeValue.substring(nodeValue.indexOf("urn-3"), nodeValue.length()).split("\\?")[0];
                         //some urls have prepended text (shouldn't be cataloged this way, but account for it anyway ...
                         //nodeValueChopped = nodeValue.substring(nodeValue.indexOf("http"), nodeValue.length()).split("\\?")[0];
+                        // 20190116 - we can't check indrs until extensions are up-to-date;
+                        /*
                         JSONTokener tokener = null;
                         try {
                             //URI uri = new URI(Config.getInstance().DRSEXTENSIONS_URL + "?urns=" + nodeValueChopped);
@@ -114,12 +116,6 @@ public class MODSComponentIterator implements Iterator<String> {
                                 JSONObject json = new JSONObject(tokener);
                                 int numFound = json.getJSONObject("response").getInt("numFound");
                                 inDRS = numFound == 0 ? false:true;
-
-                                //System.out.println("########numFound\n" + numFound + "\nnumFound##########" );
-                                //since using internal extension solr, check numFound (above)
-                                //JSONArray jsonArr = json.getJSONArray("docs");
-                                //inDRS = jsonArr.getJSONObject(0).getBoolean("inDRS");
-                                //System.out.println("########INDRS\n" + inDRS + "\nINDRS##########" );
                             } catch (Exception e) {
                                 System.out.println(e.getMessage());
                             }
@@ -127,6 +123,7 @@ public class MODSComponentIterator implements Iterator<String> {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        */
                         // 20190116 - we can't check indrs until extensions are up-to-date;
                         // rely on contains urn-3, not FIG ... above, for now
                         //if (inDRS) {
