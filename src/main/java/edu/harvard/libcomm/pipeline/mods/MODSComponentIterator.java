@@ -101,7 +101,7 @@ public class MODSComponentIterator implements Iterator<String> {
                     String nodeName = urns.item(pos).getNodeName();
                     String nodeValue = urns.item(pos).getNodeValue();
                     //System.out.println("nodeValue: " + nodeValue);
-                    if (nodeValue.contains("urn-3") && !nodeValue.contains("FIG")) {
+                    if (nodeValue.contains("urn-3") && !nodeValue.contains("HUL.FIG") && !nodeValue.contains("ebookbatch") && !nodeValue.contains("ejournals") && !nodeValue.contains("gisdata")) {
                         String nodeValueChopped = nodeValue.substring(nodeValue.indexOf("urn-3"), nodeValue.length()).split("\\?")[0];
                         //some urls have prepended text (shouldn't be cataloged this way, but account for it anyway ...
                         //nodeValueChopped = nodeValue.substring(nodeValue.indexOf("http"), nodeValue.length()).split("\\?")[0];
@@ -127,9 +127,11 @@ public class MODSComponentIterator implements Iterator<String> {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        if (inDRS) {
+                        // 20190116 - we can't check indrs until extensions are up-to-date;
+                        // rely on contains urn-3, not FIG ... above, for now
+                        //if (inDRS) {
                             urnArr.add(nodeValue);
-                        }
+                        //}
                     }
                     pos++;
                 }

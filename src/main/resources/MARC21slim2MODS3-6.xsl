@@ -13,6 +13,7 @@
 
 
   <!-- Harvard modifications
+  TO DO?: Revision 10.03 - remove "c" (collection_) from leader7 codes for manuscript
   Revision 10.02 recordChangeDate - only use 1st 8 (YYYYMMDD) to be iso8601 compliant
   Revision 10.01 hardcode MH:ALMA in recordIdentifier/@source
   Revision 9.13 adding 880 titles to 490 (need to review)
@@ -190,9 +191,12 @@
       <xsl:choose>
         <xsl:when test="$leader6 = 'a'">
           <xsl:choose>
+            <!-- TO DO?: Harvard Revision 10.03 - remove "c" (collection_) -->
             <xsl:when test="$leader7 = 'a' or $leader7 = 'c' or $leader7 = 'd' or $leader7 = 'm'"
               >BK</xsl:when>
-            <xsl:when test="$leader7 = 'b' or $leader7 = 'i' or $leader7 = 's'">SE</xsl:when>
+            <!--<xsl:when test="$leader7 = 'a' or $leader7 = 'd' or $leader7 = 'm'"
+            >BK</xsl:when>
+            <xsl:when test="$leader7 = 'b' or $leader7 = 'i' or $leader7 = 's'">SE</xsl:when>-->
           </xsl:choose>
         </xsl:when>
         <xsl:when test="$leader6 = 't'">BK</xsl:when>
@@ -1125,8 +1129,10 @@
       <xsl:for-each select="marc:leader">
         <issuance>
           <xsl:choose>
-            <xsl:when test="$leader7 = 'a' or $leader7 = 'c' or $leader7 = 'd' or $leader7 = 'm'"
-              >monographic</xsl:when>
+            <!-- TO DO?: Harvard Revision 10.03 - remove "c" (collection_) -->
+            <!--<xsl:when test="$leader7 = 'a' or $leader7 = 'd' or $leader7 = 'm'">monographic</xsl:when>-->
+            <xsl:when test="$leader7 = 'a' or $leader7 = 'c' or $leader7 = 'd' or $leader7 = 'm'">monographic</xsl:when>
+            <xsl:when test="$leader7='c'>collection</xsl:when>
             <xsl:when
               test="$leader7 = 'm' and ($leader19 = 'a' or $leader19 = 'b' or $leader19 = 'c')"
               >multipart monograph</xsl:when>
