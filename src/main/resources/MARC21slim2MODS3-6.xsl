@@ -1132,7 +1132,7 @@
             <!-- TO DO?: Harvard Revision 10.03 - remove "c" (collection_) -->
             <!--<xsl:when test="$leader7 = 'a' or $leader7 = 'd' or $leader7 = 'm'">monographic</xsl:when>-->
             <xsl:when test="$leader7 = 'a' or $leader7 = 'c' or $leader7 = 'd' or $leader7 = 'm'">monographic</xsl:when>
-            <xsl:when test="$leader7='c'>collection</xsl:when>
+            <!--<xsl:when test="$leader7='c'">collection</xsl:when>-->
             <xsl:when
               test="$leader7 = 'm' and ($leader19 = 'a' or $leader19 = 'b' or $leader19 = 'c')"
               >multipart monograph</xsl:when>

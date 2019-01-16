@@ -102,11 +102,12 @@ public class MODSComponentIterator implements Iterator<String> {
                     String nodeValue = urns.item(pos).getNodeValue();
                     //System.out.println("nodeValue: " + nodeValue);
                     if (nodeValue.contains("urn-3") && !nodeValue.contains("HUL.FIG") && !nodeValue.contains("ebookbatch") && !nodeValue.contains("ejournals") && !nodeValue.contains("gisdata")) {
+                        // 20190116 - we can't check indrs until extensions are up-to-date;
+                        /*
                         String nodeValueChopped = nodeValue.substring(nodeValue.indexOf("urn-3"), nodeValue.length()).split("\\?")[0];
                         //some urls have prepended text (shouldn't be cataloged this way, but account for it anyway ...
                         //nodeValueChopped = nodeValue.substring(nodeValue.indexOf("http"), nodeValue.length()).split("\\?")[0];
-                        // 20190116 - we can't check indrs until extensions are up-to-date;
-                        /*
+
                         JSONTokener tokener = null;
                         try {
                             //URI uri = new URI(Config.getInstance().DRSEXTENSIONS_URL + "?urns=" + nodeValueChopped);
