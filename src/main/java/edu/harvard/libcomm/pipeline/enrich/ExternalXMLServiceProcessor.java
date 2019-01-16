@@ -82,7 +82,6 @@ public class ExternalXMLServiceProcessor implements IProcessor {
 		xml = xml.replace("/&gt;","/>");
 
 		xml = "<" + wrapperToken + ">" + xml + "</" + wrapperToken + ">";
-		//System.out.println("EXT XML: " + xml);
 		log.trace("External Service result:" + xml);
 
 		try {
