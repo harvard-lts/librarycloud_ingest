@@ -113,6 +113,8 @@
         <property name="source" value="ALMA"/>
     </bean>
 
+    <bean id="newlineAggregator" class="edu.harvard.libcomm.pipeline.NewlineAggregatorStrategy"/>
+
     <bean id="extractPayloadProcessor" class="edu.harvard.libcomm.pipeline.ExtractPayloadProcessor"/>
 
     <bean id="modsProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
@@ -515,27 +517,35 @@
             <!-- Slightly different MODS transformers depending on whether it's coming from Aleph or Alma -->
             <choice>
                 <when>
-                    <xpath>//source = 'aleph'</xpath>
-                    <process ref="modsProcessor"/>
+                    <xpath>string-length(/lib_comm_message/payload/data) = 0</xpath>
+                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
                 </when>
-                <when>
-                    <xpath>//source = 'ALEPH'</xpath>
-                    <process ref="modsProcessor"/>
-                </when>
-                <when>
-                    <xpath>//source = 'alma'</xpath>
-                    <process ref="modsProcessorAlma"/>
-                </when>
-                <when>
-                    <xpath>//source = 'ALMA'</xpath>
-                    <process ref="modsProcessorAlma"/>
-                </when>
+                <otherwise>
+                    <choice>
+                        <when>
+                            <xpath>//source = 'aleph'</xpath>
+                            <process ref="modsProcessor"/>
+                        </when>
+                        <when>
+                            <xpath>//source = 'ALEPH'</xpath>
+                            <process ref="modsProcessor"/>
+                        </when>
+                        <when>
+                            <xpath>//source = 'alma'</xpath>
+                            <process ref="modsProcessorAlma"/>
+                        </when>
+                        <when>
+                            <xpath>//source = 'ALMA'</xpath>
+                            <process ref="modsProcessorAlma"/>
+                        </when>
+                    </choice>
+                    <process ref="addMarcLocationProcessor"/>
+                    <marshal><custom ref="cloudbody"/></marshal>
+                    <!-- <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" /> -->
+                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" />
+                </otherwise>
             </choice>
 
-            <process ref="addMarcLocationProcessor"/>
-            <marshal><custom ref="cloudbody"/></marshal>
-            <!-- <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" /> -->
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" />
         </route>
 
         <!-- Extract the record ID from the MARCXML, and upload the record to S3, keyed by record ID-->
@@ -1125,9 +1135,16 @@
                     <setHeader headerName="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
-                    <!--<to uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma?fileName=${header.outerSplitIndex}"/>-->
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-bibids?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-                    <!--<to uri="stream:out" />-->
+                    <aggregate strategyRef="newlineAggregator" completionSize="100" completionInterval="10000">
+                        <correlationExpression>
+                            <simple>all</simple>
+                        </correlationExpression>
+                        <!--<completionPredicate>
+                            <simple>${header.messageLength} > 150000</simple>
+                        </completionPredicate>-->
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-bibids?amazonSQSClient=#sqsClient" />
+                    </aggregate>
+                    <!--<to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-bibids?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />-->
                 </split>
             </doTry>
         </route>
