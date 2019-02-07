@@ -583,6 +583,7 @@
 
     <xsl:template match="mods:recordInfo">
         <xsl:apply-templates select="mods:recordIdentifier"/>
+        <xsl:apply-templates select="mods:recordChangeDate"/>
     </xsl:template>
 
     <xsl:template match="mods:recordIdentifier">
@@ -593,6 +594,17 @@
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="mods:recordChangeDate">
+        <xsl:if test='matches(., "\d{8}")'>
+            <xsl:element name="field">
+                <xsl:attribute name="name">
+                    <xsl:text>recordChangeDate</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:element>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template
