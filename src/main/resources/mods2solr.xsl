@@ -602,7 +602,7 @@
                 <xsl:attribute name="name">
                     <xsl:text>recordChangeDate</xsl:text>
                 </xsl:attribute>
-                <xsl:value-of select="normalize-space(.)"/>
+                <xsl:value-of select="normalize-space(.)"/><xsl:text>T00:00:00Z</xsl:text>
             </xsl:element>
         </xsl:if>
     </xsl:template>
