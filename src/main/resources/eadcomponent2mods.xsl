@@ -39,7 +39,15 @@
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//unitid"/>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//container"/>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//language[string-length(@langcode) and string-length(text())]"/>
-            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/altformavail"/>
+            <xsl:choose>
+                <xsl:when test="c[@id=$cid_legacy_or_new]/altformavail[head='Digitization Funding']">
+                    <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/altformavail[head='Digitization Funding']"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="/ead/archdesc/altformavail[head='Digitization Funding']"/>
+                </xsl:otherwise>
+            </xsl:choose>
+
 
             <xsl:if test="count(//c[@id=$cid_legacy_or_new]/did//language[string-length(@langcode) and string-length(text())]) &lt; 1">
               <xsl:element name="language">
@@ -169,9 +177,11 @@
                     <xsl:apply-templates select="/ead/archdesc/did/origination"/>
                     <xsl:apply-templates select="/ead/archdesc/did/unittitle"/>
                     <xsl:apply-templates select="/ead/archdesc/did//unitdate"/>
+                    <!-- spotlight can't pick up here, needs to be at item level
                     <xsl:if test="not(./altformavail[head='Digitization Funding'])">
                         <xsl:apply-templates select="/ead/archdesc/altformavail"/>
                     </xsl:if>
+                    -->
                     <xsl:element name="recordInfo">
                         <xsl:element name="recordIdentifier">
                             <xsl:value-of select="/ead/eadheader/eadid"/>
