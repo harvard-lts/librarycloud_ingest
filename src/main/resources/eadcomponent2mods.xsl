@@ -8,8 +8,8 @@
     version="2.0">
     <xsl:output encoding="UTF-8" method="xml" indent="yes" omit-xml-declaration="yes"/>
     <xsl:strip-space elements="*"/>
-    <xsl:param name="componentid">bak00001c00001</xsl:param>
-    <!--<xsl:param name="componentid"/>-->
+    <!--<xsl:param name="componentid">bak00001c00001</xsl:param>-->
+    <xsl:param name="componentid"/>
 
     <xsl:variable name="cid_legacy_or_new">
   <xsl:choose>
