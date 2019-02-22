@@ -163,7 +163,7 @@
 	</xsl:template>
 
 	<xsl:template name="recordElements">
-		<xsl:apply-templates select="title"/>
+		<xsl:apply-templates select="title[not(textElement='')]"/>
 		<xsl:apply-templates select="creator"/>
 		<xsl:apply-templates select="associatedName"/>
 		<xsl:call-template name="typeOfResource"/>

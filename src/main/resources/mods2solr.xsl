@@ -16,6 +16,7 @@
     version="2.0">
 
     <xsl:output indent="yes" encoding="UTF-8"/>
+    <xsl:strip-space elements="*"/>
 
     <xsl:template match="mods:modsCollection">
         <xsl:element name="add">
@@ -418,7 +419,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="mods:tableOfContent">
+    <xsl:template match="mods:tableOfContents">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>abstractTOC</xsl:text>
