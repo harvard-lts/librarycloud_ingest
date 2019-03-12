@@ -172,7 +172,7 @@
                     <xsl:text>isManuscript</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="//mods:typeOfResource[@manuscript = 'yes']">
+                    <xsl:when test=".//mods:typeOfResource[@manuscript = 'yes']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -185,7 +185,7 @@
                     <xsl:text>isCollection</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="//mods:typeOfResource[@collection = 'yes']">
+                    <xsl:when test=".//mods:typeOfResource[@collection = 'yes']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
