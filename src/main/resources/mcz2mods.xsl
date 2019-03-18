@@ -163,10 +163,6 @@
     </xsl:template>
 
     <xsl:template match="imageCreationDate">
-        <xsl:element name="recordChangeDate">
-            <xsl:attribute name="encoding"><xsl:text>iso8601</xsl:text></xsl:attribute>
-            <xsl:value-of select="replace(.,'-','')"/>
-        </xsl:element>
         <xsl:element name="dateCreated">
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
@@ -381,12 +377,6 @@
     </xsl:template>
 
     <xsl:template match="createDate">
-        <xsl:if test="not(../updateNote/updateDate)">
-            <xsl:element name="recordChangeDate">
-                <xsl:attribute name="encoding"><xsl:text>iso8601</xsl:text></xsl:attribute>
-                <xsl:value-of select="replace(.,'-','')"/>
-            </xsl:element>
-        </xsl:if>
         <xsl:element name="recordCreationDate">
             <xsl:value-of select="."/>
         </xsl:element>
@@ -397,10 +387,6 @@
         </xsl:element>
     </xsl:template>
     <xsl:template match="updateDate">
-        <xsl:element name="recordChangeDate">
-            <xsl:attribute name="encoding"><xsl:text>iso8601</xsl:text></xsl:attribute>
-            <xsl:value-of select="replace(.,'-','')"/>
-        </xsl:element>
         <xsl:element name="recordChangeDate">
             <xsl:value-of select="."/>
         </xsl:element>
