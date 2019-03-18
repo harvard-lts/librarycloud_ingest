@@ -101,7 +101,7 @@
                 <xsl:attribute name="displayLabel">
                     <xsl:value-of select="col:setName/text()" />
                 </xsl:attribute>
-                <xsl:value-of select="col:baseUrl" />-<xsl:value-of select="$recordid" />
+                <xsl:value-of select="col:baseUrl" /><xsl:value-of select="$recordid" />
             </url>
           </xsl:if>
         </xsl:for-each>

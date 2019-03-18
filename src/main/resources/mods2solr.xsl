@@ -16,6 +16,7 @@
     version="2.0">
 
     <xsl:output indent="yes" encoding="UTF-8"/>
+    <xsl:strip-space elements="*"/>
 
     <xsl:template match="mods:modsCollection">
         <xsl:element name="add">
@@ -171,7 +172,7 @@
                     <xsl:text>isManuscript</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="//mods:typeOfResource[@manuscript = 'yes']">
+                    <xsl:when test=".//mods:typeOfResource[@manuscript = 'yes']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -184,7 +185,7 @@
                     <xsl:text>isCollection</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="//mods:typeOfResource[@collection = 'yes']">
+                    <xsl:when test=".//mods:typeOfResource[@collection = 'yes']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -418,7 +419,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="mods:tableOfContent">
+    <xsl:template match="mods:tableOfContents">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>abstractTOC</xsl:text>

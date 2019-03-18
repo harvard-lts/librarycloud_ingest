@@ -8,7 +8,7 @@
     version="2.0">
     <xsl:output encoding="UTF-8" method="xml" indent="yes" omit-xml-declaration="yes"/>
     <xsl:strip-space elements="*"/>
-    <!--<xsl:param name="componentid">div00579c00002</xsl:param>-->
+    <!--<xsl:param name="componentid">bak00001c00001</xsl:param>-->
     <xsl:param name="componentid"/>
 
     <xsl:variable name="cid_legacy_or_new">
@@ -39,6 +39,15 @@
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//unitid"/>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//container"/>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//language[string-length(@langcode) and string-length(text())]"/>
+            <xsl:choose>
+                <xsl:when test="c[@id=$cid_legacy_or_new]/altformavail[head='Digitization Funding']">
+                    <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/altformavail[head='Digitization Funding']"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="/ead/archdesc/altformavail[head='Digitization Funding']"/>
+                </xsl:otherwise>
+            </xsl:choose>
+
 
             <xsl:if test="count(//c[@id=$cid_legacy_or_new]/did//language[string-length(@langcode) and string-length(text())]) &lt; 1">
               <xsl:element name="language">
@@ -417,4 +426,14 @@
         </xsl:element>
       </xsl:for-each>
     </xsl:template>
+
+    <xsl:template match="altformavail">
+        <xsl:if test="./head='Digitization Funding'">
+            <xsl:element name="note">
+                <xsl:attribute name="type">funding</xsl:attribute>
+                <xsl:value-of select="p"/>
+            </xsl:element>
+        </xsl:if>
+    </xsl:template>
+
 </xsl:stylesheet>

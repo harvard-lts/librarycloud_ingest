@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:xlink="http://www.w3.org/TR/xlink" xmlns="http://www.loc.gov/mods/v3">
+	xmlns:xlink="http://www.w3.org/TR/xlink" xmlns="http://www.loc.gov/mods/v3"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" >
 
 	<!--  Revisions
 	  2015-03-13 fix key date (was ending up in component where it didn't belong
@@ -32,28 +33,6 @@
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:variable>
-					<!--<xsl:variable name="urnsuffix">
-				<xsl:choose>
-					<xsl:when
-							test="string-length($chunkid) and work/surrogate/image[contains(@*[local-name()='href'], $chunkid)]">
-						<xsl:value-of
-								select="work/surrogate/image[contains(@*[local-name()='href'], $chunkid)]/@*[local-name()='href']"/>
-					</xsl:when>
-					<xsl:when
-							test="string-length($chunkid) and group/surrogate/image[contains(@*[local-name()='href'], $chunkid)]">
-						<xsl:value-of
-							select="group/surrogate/image[contains(@*[local-name()='href'], $chunkid)]/@*[local-name()='href']"/>
-					</xsl:when>
-					<xsl:when test="string-length($chunkid)">
-						<xsl:value-of select="substring-after($chunkid, 'edu/')"/>
-					</xsl:when>
-					<xsl:when test="string-length($nodeComponentID)">
-						<xsl:value-of select="$nodeComponentID"/>
-					</xsl:when>
-					<xsl:otherwise> </xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>-->
-
 					<relatedItem otherType="HOLLIS Images record">
 						<location>
 							<url>
@@ -66,35 +45,15 @@
 						</location>
 					</relatedItem>
 					<recordInfo>
+						<xsl:variable name="datelist">
+							<dates>
+								<xsl:apply-templates select="admin" mode="datelist"/>
+							</dates>
+						</xsl:variable>
 						<recordContentSource authority="marcorg">MH</recordContentSource>
 						<recordContentSource authority="marcorg">MH-VIA</recordContentSource>
 						<recordChangeDate encoding="iso8601">
-							<xsl:variable name="lastdate">
-								<xsl:choose>
-									<xsl:when
-										test="contains(admin/updateNote[position() = last()]/updateDate, ' ')">
-										<xsl:value-of
-											select="substring-before(admin/updateNote[position() = last()]/updateDate/text(), ' ')"
-										/>
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:value-of
-											select="admin/updateNote[position() = last()]/updateDate/text()"
-										/>
-									</xsl:otherwise>
-								</xsl:choose>
-							</xsl:variable>
-							<xsl:choose>
-								<xsl:when test="contains($lastdate, '/')">
-									<xsl:value-of select="replace($lastdate, '/', '')"/>
-								</xsl:when>
-								<xsl:when test="contains($lastdate, '-')">
-									<xsl:value-of select="replace($lastdate, '-', '')"/>
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:value-of select="$lastdate"/>
-								</xsl:otherwise>
-							</xsl:choose>
+							<xsl:value-of select="max($datelist/node()/node()/xs:integer(.))"/>
 						</recordChangeDate>
 						<recordIdentifier>
 							<xsl:attribute name="source">
@@ -204,7 +163,7 @@
 	</xsl:template>
 
 	<xsl:template name="recordElements">
-		<xsl:apply-templates select="title"/>
+		<xsl:apply-templates select="title[not(textElement='')]"/>
 		<xsl:apply-templates select="creator"/>
 		<xsl:apply-templates select="associatedName"/>
 		<xsl:call-template name="typeOfResource"/>
@@ -752,6 +711,37 @@
 			<xsl:value-of select="./@href"/>
 			<xsl:value-of select="."/>
 		</accessCondition>
+	</xsl:template>
+
+	<xsl:template match="admin" mode="datelist">
+		<xsl:apply-templates select="createDate" mode="datelist"/>
+		<xsl:apply-templates select="updateNote/updateDate" mode="datelist"/>
+	</xsl:template>
+
+	<xsl:template match="createDate | updateDate" mode="datelist">
+		<xsl:variable name="formatteddate">
+			<xsl:choose>
+				<xsl:when test="contains(., ' ')">
+					<xsl:value-of select="substring-before((.), ' ')"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="./text()"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<date>
+			<xsl:choose>
+				<xsl:when test="contains($formatteddate, '/')">
+					<xsl:value-of select="replace($formatteddate, '/', '')"/>
+				</xsl:when>
+				<xsl:when test="contains($formatteddate, '-')">
+					<xsl:value-of select="replace($formatteddate, '-', '')"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="$formatteddate"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</date>
 	</xsl:template>
 
 	<xsl:template match="admin"/>
