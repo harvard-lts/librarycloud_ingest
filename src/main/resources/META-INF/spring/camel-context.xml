@@ -183,7 +183,8 @@
     <bean id="addMarcLocationProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.enrich.AddMarcLocationProcessor">
-                <property name="marcBaseUrl" value="https://s3.amazonaws.com/${librarycloud.s3.marc_bucket}.${librarycloud.sqs.environment}/" />
+                <!--<property name="marcBaseUrl" value="https://s3.amazonaws.com/${librarycloud.s3.marc_bucket}.${librarycloud.sqs.environment}/" />-->
+                <property name="marcBaseUrl" value="https://s3.amazonaws.com/${librarycloud.s3.marc_bucket}/" />
             </bean>
         </property>
     </bean>
@@ -265,7 +266,8 @@
     <bean id="s3DeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.delete.S3DeleteProcessor">
-                <property name="bucket" value="${librarycloud.s3.marc_bucket}.${librarycloud.sqs.environment}" />
+                <!--<property name="bucket" value="${librarycloud.s3.marc_bucket}.${librarycloud.sqs.environment}" />-->
+                <property name="bucket" value="${librarycloud.s3.marc_bucket}" />
             </bean>
         </property>
     </bean>
@@ -575,7 +577,8 @@
                         <setHeader headerName="CamelAwsS3CannedAcl">
                             <simple>PublicRead</simple>
                         </setHeader>
-                        <to uri="aws-s3://{{librarycloud.s3.marc_bucket}}.{{librarycloud.sqs.environment}}?amazonS3Client=#s3Client" />
+                        <!--<to uri="aws-s3://{{librarycloud.s3.marc_bucket}}.{{librarycloud.sqs.environment}}?amazonS3Client=#s3Client" />-->
+                        <to uri="aws-s3://{{librarycloud.s3.marc_bucket}}?amazonS3Client=#s3Client" />
                     </when>
                 </choice>
             </split>
