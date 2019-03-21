@@ -1172,6 +1172,12 @@
             <process ref="s3DeleteProcessor"/>
             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
         </route>
-
+<!--
+        <route id="fullRefresh" errorHandlerRef="eh">
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-allbibs?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <process ref="s3FullListProcessor"/>
+            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
+        </route>
+-->
     </camelContext>
 </beans>
