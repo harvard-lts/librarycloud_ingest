@@ -389,15 +389,15 @@
         <!-- ============================== -->
 
         <route id="alma-ingest" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-alma?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
-            <split>
-                <xtokenize mode="t">//filepath</xtokenize>
-                <bean ref="prepareURI" method="prepare"/>
-                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
-                <to uri="http://www.example.com" />
-                <to uri="direct:alma-ingest-file"/>
-            </split>
-        </route>
+        <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-alma?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+        <split>
+            <xtokenize mode="t">//filepath</xtokenize>
+            <bean ref="prepareURI" method="prepare"/>
+            <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+            <to uri="http://www.example.com" />
+            <to uri="direct:alma-ingest-file"/>
+        </split>
+    </route>
         <route id="alma-ingest-file" errorHandlerRef="eh">
             <from uri="direct:alma-ingest-file"/>
             <doTry>
@@ -419,6 +419,42 @@
                             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient" />
                         </multicast>
                         <!-- <to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml?fileName=alma-${header.CamelSplitIndex}" /> -->
+                    </aggregate>
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                </doCatch>
+            </doTry>
+        </route>
+        <!-- ingest only to s3, used for ensuring s3 bucket has latest modified -->
+        <route id="alma-ingest-s3" errorHandlerRef="eh">
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-alma-s3?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <split>
+                <xtokenize mode="t">//filepath</xtokenize>
+                <bean ref="prepareURI" method="prepare"/>
+                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+                <to uri="http://www.example.com" />
+                <to uri="direct:alma-ingest-s3-file"/>
+            </split>
+        </route>
+        <route id="alma-ingest-s3-file" errorHandlerRef="eh">
+            <from uri="direct:alma-ingest-s3-file"/>
+            <doTry>
+                <split streaming="true">
+                    <xtokenize>//record</xtokenize>
+                    <setHeader headerName="outerSplitIndex">
+                        <simple>${header.CamelSplitIndex}</simple>
+                    </setHeader>
+                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100" completionInterval="10000">
+                        <correlationExpression>
+                            <simple>all</simple>
+                        </correlationExpression>
+                        <completionPredicate>
+                            <simple>${header.messageLength} > 150000</simple>
+                        </completionPredicate>
+                        <process ref="filterSuppressedProcessor"/>
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient" />
                     </aggregate>
                 </split>
                 <doCatch>
