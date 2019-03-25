@@ -106,6 +106,9 @@
                     <xsl:if test="not(contains(./marc:subfield[@code='u'],'HUL.FIG')) and not(contains(./marc:subfield[@code='u'],'ebookbatch')) and not(contains(./marc:subfield[@code='u'],'ejournals')) and not(contains(./marc:subfield[@code='u'],'HUL.gisdata')) and not(contains(./marc:subfield[@code='u'],'hul.gisdata'))">
                     <xsl:attribute name="access"><xsl:text>raw object</xsl:text></xsl:attribute>
                     </xsl:if>
+                    <xsl:if test="contains(./marc:subfield[@code='u'],'HUL.FIG')">
+                        <xsl:attribute name="displayLabel"><xsl:text>Google Books</xsl:text></xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates select="marc:subfield[@code='3']" mode="url"/>
                     <xsl:apply-templates select="marc:subfield[@code='z']" mode="url"/>
                     <xsl:apply-templates select="marc:subfield[@code='u']" mode="url"/>
