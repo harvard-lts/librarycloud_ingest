@@ -13,7 +13,7 @@ import org.apache.camel.Exchange;
 import org.apache.log4j.Logger;
 
 public class TedSplitter implements ISplitter {
-    protected Logger log = Logger.getLogger(edu.harvard.libcomm.pipeline.marc.MarcSplitter.class);
+    protected Logger log = Logger.getLogger(edu.harvard.libcomm.pipeline.ted.TedSplitter.class);
     private int chunkSize;
 
     public TedSplitter(int chunkSize) {
