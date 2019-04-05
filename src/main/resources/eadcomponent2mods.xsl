@@ -8,7 +8,7 @@
     version="2.0">
     <xsl:output encoding="UTF-8" method="xml" indent="yes" omit-xml-declaration="yes"/>
     <xsl:strip-space elements="*"/>
-    <!--<xsl:param name="componentid">bak00001c00001</xsl:param>-->
+    <!--<xsl:param name="componentid">hou00068c00002</xsl:param>-->
     <xsl:param name="componentid"/>
 
     <xsl:variable name="cid_legacy_or_new">
@@ -24,24 +24,21 @@
 
 
     <xsl:template match="ead">
-        <xsl:variable name="sibcount">
-            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]" mode="siblingcount"/>
+        <xsl:variable name="cmatch">
+            <xsl:copy-of select="archdesc/dsc//c[@id=$cid_legacy_or_new]"/>
         </xsl:variable>
         <mods xmlns:xlink="http://www.w3.org/1999/xlink">
-            <xsl:apply-templates select="//c[@id = $cid_legacy_or_new]/did/unittitle[not(. = '')]"/>
-            <xsl:apply-templates select="//c[@id = $cid_legacy_or_new]/did//unitdate[not(. = '')]"/>
+            <xsl:apply-templates select="$cmatch/c/did/unittitle[not(. = '')]"/>
+            <xsl:apply-templates select="$cmatch/c/did//unitdate[not(. = '')]"/>
             <xsl:apply-templates select="did//origination"/>
-            <!--<xsl:apply-templates select="//c[@id=$componentid]/did//persname"/>
-            <xsl:apply-templates select="//c[@id=$componentid]/did//famname"/>
-            <xsl:apply-templates select="//c[@id=$componentid]/did//corpname"/>-->
-            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//physdesc"/>
-            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/@level"/>
-            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//unitid"/>
-            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//container"/>
-            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did//language[string-length(@langcode) and string-length(text())]"/>
+            <xsl:apply-templates select="$cmatch/c/did//physdesc"/>
+            <xsl:apply-templates select="$cmatch/c/@level"/>
+            <xsl:apply-templates select="$cmatch/c/did//unitid"/>
+            <xsl:apply-templates select="$cmatch/c/did//container"/>
+            <xsl:apply-templates select="$cmatch/c/did//language[string-length(@langcode) and string-length(text())]"/>
             <xsl:choose>
-                <xsl:when test="c[@id=$cid_legacy_or_new]/altformavail[head='Digitization Funding']">
-                    <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/altformavail[head='Digitization Funding']"/>
+                <xsl:when test="$cmatch/c/altformavail[head='Digitization Funding']">
+                    <xsl:apply-templates select="$cmatch/c/altformavail[head='Digitization Funding']"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="/ead/archdesc/altformavail[head='Digitization Funding']"/>
@@ -49,7 +46,7 @@
             </xsl:choose>
 
 
-            <xsl:if test="count(//c[@id=$cid_legacy_or_new]/did//language[string-length(@langcode) and string-length(text())]) &lt; 1">
+            <xsl:if test="count($cmatch/c/did//language[string-length(@langcode) and string-length(text())]) &lt; 1">
               <xsl:element name="language">
                 <xsl:element name="languageTerm">
                   <xsl:attribute name="authority">iso639-2b</xsl:attribute>
@@ -63,97 +60,35 @@
                 </xsl:element>
               </xsl:element>
             </xsl:if>
-
-            <!--<xsl:apply-templates select="//c[@id=$cid_legacy_or_new]//accessrestrict"/>-->
-            <!--<xsl:apply-templates select="(//c[@id=$cid_legacy_or_new and not(.//accessrestrict) and ancestor::*//accessrestrict]/ancestor::*//accessrestrict)[position()=1]"/>-->
             <xsl:choose>
-                <xsl:when test="//c[@id=$cid_legacy_or_new]/accessrestrict">
-                    <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/accessrestrict"/>
+                <xsl:when test="$cmatch/c/accessrestrict">
+                    <xsl:apply-templates select="$cmatch/c/accessrestrict"/>
                 </xsl:when>
-                <xsl:when test="//c[@id=$cid_legacy_or_new and ancestor::c/accessrestrict]">
-                    <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/ancestor::c[accessrestrict][position()=1]/accessrestrict"/>
+                <xsl:when test="$cmatch/c[ancestor::c/accessrestrict]">
+                    <xsl:apply-templates select="$cmatch/c/ancestor::c[accessrestrict][position()=1]/accessrestrict"/>
                 </xsl:when>
-                <xsl:when test="//archdesc[accessrestrict]">
-                   <xsl:apply-templates select="//archdesc/accessrestrict"/>
+                <xsl:when test="archdesc[accessrestrict]">
+                   <xsl:apply-templates select="archdesc/accessrestrict"/>
                 </xsl:when>
             </xsl:choose>
 
-
-            <!--<xsl:call-template name="access">
-                <xsl:with-param name="cid">
-                    <xsl:value-of select="//c[@id=$cid_legacy_or_new]"/>
-                </xsl:with-param>
-            </xsl:call-template>-->
-            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/scopecontent//p[1]"/>
-            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/dao"/>
-            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/daogrp"/>
-            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did/dao"/>
-            <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]/did/daogrp"/>
+            <xsl:apply-templates select="$cmatch/c/scopecontent//p[1]"/>
+            <xsl:apply-templates select="$cmatch/c/dao"/>
+            <xsl:apply-templates select="$cmatch/c/daogrp"/>
+            <xsl:apply-templates select="$cmatch/c/did/dao"/>
+            <xsl:apply-templates select="$cmatch/c/did/daogrp"/>
             <xsl:element name="recordInfo">
-                <!-- third value may need to change if we do another full oai harvest - the creation/date is always just the export date
-                     maybe just always use that 3rd date at this point? -->
-                <!--<xsl:variable name="dateArr" as="xs:integer*">
-
-                    <xsl:if test="eadheader/revisiondesc/change[item = 'Loaded into OASIS']/date">
-                        <xsl:call-template name="convert-date">
-                            <xsl:with-param name="thedate">
-                                <xsl:value-of
-                                    select="eadheader/revisiondesc/change[item = 'Loaded into OASIS']/date"
-                                />
-                            </xsl:with-param>
-                        </xsl:call-template>
-                    </xsl:if>
-
-                    <xsl:if
-                        test="eadheader/revisiondesc/change[contains(item, 'ArchivesSpace Preprocessor')]/date">
-                        <xsl:call-template name="convert-date">
-                            <xsl:with-param name="thedate">
-                                <xsl:value-of
-                                    select="eadheader/revisiondesc/change[contains(item, 'ArchivesSpace Preprocessor')]/date"
-                                />
-                            </xsl:with-param>
-                        </xsl:call-template>
-                    </xsl:if>
-                    <xsl:choose>
-                        <xsl:when
-                            test="number(replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')) &gt;= 20180716">
-                            <xsl:value-of
-                                select="replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')"
-                            />
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:text>20160101</xsl:text>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:variable>-->
                     <xsl:element name="recordChangeDate">
                       <xsl:attribute name="encoding">iso8601</xsl:attribute>
-                    <!--<xsl:value-of select="max($dateArr)"/>-->
                     <xsl:value-of select="replace(substring-before(eadheader/profiledesc/creation/date, ' '), '-', '')"/>
                     </xsl:element>
                 <xsl:element name="recordIdentifier">
-                    <xsl:attribute name="id"><xsl:text>s</xsl:text><xsl:value-of select="$sibcount"/></xsl:attribute>
                     <xsl:attribute name="source">MH:OASIS</xsl:attribute>
-                    <xsl:value-of select="//c[@id=$cid_legacy_or_new]/@id"/>
+                    <xsl:value-of select="$cmatch/c/@id"/>
                 </xsl:element>
             </xsl:element>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]"/>
-            <!-- <xsl:apply-templates select="/ead/eadheader/profiledesc/langusage" /> -->
         </mods>
-    </xsl:template>
-
-    <xsl:template name="convert-date">
-        <xsl:param name="thedate"/>
-        <xsl:value-of
-            select="
-                replace(normalize-space($thedate),
-                '(\d{2})/(\d{2})/(\d{4})',
-                '$3$1$2')"
-        />
-    </xsl:template>
-
-    <xsl:template match="c" mode="siblingcount">
-        <xsl:value-of select="count(preceding-sibling::c) + 1"/>
     </xsl:template>
 
     <xsl:template match="c">
