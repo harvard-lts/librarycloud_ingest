@@ -47,7 +47,7 @@
             <xsl:apply-templates select=".//mods:originInfo"/>
             <xsl:apply-templates select=".//mods:publisher"/>
             <xsl:apply-templates select="mods:language"/>
-            <!--<xsl:apply-templates select="mods:physicalDescription"/>-->
+            <xsl:apply-templates select="mods:physicalDescription"/>
             <xsl:apply-templates select="mods:tableOfContents"/>
             <xsl:apply-templates select="mods:abstract"/>
             <!--<xsl:apply-templates select="mods:targetAudience"/>
@@ -158,7 +158,7 @@
                 </xsl:choose>
             </xsl:element>
 
-            <xsl:for-each select="distinct-values(//mods:typeOfResource/text())">
+            <xsl:for-each select="distinct-values(.//mods:typeOfResource/text())">
                 <xsl:element name="field">
                     <xsl:attribute name="name">
                         <xsl:text>resourceType</xsl:text>
