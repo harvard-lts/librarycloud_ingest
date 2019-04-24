@@ -86,8 +86,8 @@
     </xsl:template>
 
     <!-- abandon existing spotlight links-->
-    <xsl:template match="mods:url[@access='object in context' and @displayLabel!='Harvard Digital Collections'] and @displayLabel!='Harvard Art Museums']">
-    </xsl:template>
+    <xsl:template
+        match="mods:url[@access='object in context' and @displayLabel!='Harvard Digital Collections' and @displayLabel!='Harvard Art Museums']"> </xsl:template>
 
     <xsl:template name="object-in-context-links">
       <xsl:param name="modsRoot" />
