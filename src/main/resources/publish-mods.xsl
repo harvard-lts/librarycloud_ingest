@@ -19,7 +19,7 @@
     <xsl:param name="param1">
         <processingDate/>
     </xsl:param>
-    <xsl:param name="repository-map-file" select="'src/main/resources/RepositoryNameMapping.xml'" />
+    <xsl:param name="repository-map-file" select="'src/main/resources/RepositoryNameMapping.xml'"/>
     <xsl:variable name="map" select="document($repository-map-file)"/>
 
     <xsl:template match="mods:modsCollection">
@@ -235,6 +235,16 @@
                     >https://id.lib.harvard.edu/digital_collections/<xsl:value-of
                     select="$modsRoot/mods:recordInfo/mods:recordIdentifier"/></url>
         </xsl:if>
+        <!-- HAM recs must also point back to the HAM site -->
+        <xsl:if
+            test="$modsRoot/mods:location/mods:physicalLocation[@type='repository'] = 'Harvard Art Museums'">
+            <xsl:if test="$modsRoot/mods:identifier[@type = 'Object Number']">
+                <url xmlns="http://www.loc.gov/mods/v3" access="object in context"
+                    displayLabel="Harvard Art Museums"
+                        >https://www.harvardartmuseums.org/collections/object/<xsl:value-of
+                        select="$modsRoot/mods:identifier[@type = 'Object Number']"/></url>
+            </xsl:if>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="HarvardDRS:fileDeliveryURL">
@@ -254,7 +264,8 @@
     <xsl:template
         match="mods:extension[librarycloud:priorrecordids] | mods:extension[librarycloud:originalDocument]"/>
 
-    <xsl:template match="librarycloud:priorrecordids | librarycloud:originalDocument" mode="lcloudchunk">
+    <xsl:template match="librarycloud:priorrecordids | librarycloud:originalDocument"
+        mode="lcloudchunk">
         <xsl:copy-of select="."/>
     </xsl:template>
 

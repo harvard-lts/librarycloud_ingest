@@ -493,7 +493,7 @@
             <xsl:attribute name="name">
                 <xsl:text>subject.hierarchicalGeographic</xsl:text>
             </xsl:attribute>
-            <xsl:value-of select="normalize-space(.)"/>
+            <xsl:value-of select="./*"/>
         </xsl:element>
         <xsl:apply-templates mode="hierarchicalGeographic"/>
     </xsl:template>
