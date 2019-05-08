@@ -214,7 +214,7 @@
 				</xsl:attribute>
 			</xsl:when-->
 				<xsl:otherwise>
-					<xsl:if test="./type">
+					<xsl:if test="./type[not(.=' Title')]"> <!-- 20190507 MV added to fix ssio2via bug, will fix upstream before restrospective -->
 						<xsl:attribute name="type">
 							<xsl:value-of select="'alternative'"/>
 						</xsl:attribute>
