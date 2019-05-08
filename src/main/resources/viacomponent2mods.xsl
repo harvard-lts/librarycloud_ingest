@@ -515,11 +515,15 @@
 
 	<xsl:template match="itemIdentifier">
 		<identifier>
-			<xsl:attribute name="type">
-				<xsl:value-of select="type"/>
-			</xsl:attribute>
+			<xsl:apply-templates select="type" mode="identifierType"/>
 			<xsl:value-of select="number"/>
 		</identifier>
+	</xsl:template>
+
+	<xsl:template match="type" mode="identifierType">
+		<xsl:attribute name="type">
+			<xsl:value-of select="."/>
+		</xsl:attribute>
 	</xsl:template>
 
 	<xsl:template match="image">
