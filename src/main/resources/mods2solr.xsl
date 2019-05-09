@@ -5,8 +5,8 @@
     xmlns:sets="http://hul.harvard.edu/ois/xml/ns/sets"
     xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
     xmlns:HarvardRepositories="http://hul.harvard.edu/ois/xml/ns/HarvardRepositories"
-    xmlns:originalDocument="http://hul.harvard.edu/ois/xml/ns/originalDocument" xmlns:dc="http://purl.org/dc/elements/1.1/"
-    xmlns:ext="http://exslt.org/common" 
+    xmlns:originalDocument="http://hul.harvard.edu/ois/xml/ns/originalDocument"
+    xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ext="http://exslt.org/common"
     xmlns:priorrecordids="http://hul.harvard.edu/ois/xml/ns/priorrecordids"
     xmlns:processingDate="http://hul.harvard.edu/ois/xml/ns/processingDate"
     xmlns:availableTo="http://hul.harvard.edu/ois/xml/ns/availableTo"
@@ -47,7 +47,19 @@
             <xsl:apply-templates select=".//mods:originInfo"/>
             <xsl:apply-templates select=".//mods:publisher"/>
             <xsl:apply-templates select="mods:language"/>
-            <xsl:apply-templates select="mods:physicalDescription"/>
+            <!--<xsl:apply-templates select="mods:physicalDescription"/>-->
+            <!-- not multivalued in solr, so concatenate into 1 solr field -->
+            <xsl:if test="mods:physicalDescription">
+                <xsl:element name="field">
+                    <xsl:attribute name="name">
+                        <xsl:text>physicalDescription</xsl:text>
+                    </xsl:attribute>
+                    <xsl:variable name="physdescconcat">
+                        <xsl:value-of select="mods:physicalDescription/*"/>
+                    </xsl:variable>
+                    <xsl:value-of select="normalize-space($physdescconcat)"/>
+                </xsl:element>
+            </xsl:if>
             <xsl:apply-templates select="mods:tableOfContents"/>
             <xsl:apply-templates select="mods:abstract"/>
             <!--<xsl:apply-templates select="mods:targetAudience"/>
@@ -62,13 +74,16 @@
             <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:setName"/>
             <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:setSpec"/>
             <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:systemId"/>
-            <xsl:apply-templates select="mods:extension/librarycloud:librarycloud/librarycloud:digitalFormats/librarycloud:digitalFormat"/>
-            <xsl:apply-templates select="mods:extension/librarycloud:librarycloud/librarycloud:availableTo"/>
+            <xsl:apply-templates
+                select="mods:extension/librarycloud:librarycloud/librarycloud:digitalFormats/librarycloud:digitalFormat"/>
+            <xsl:apply-templates
+                select="mods:extension/librarycloud:librarycloud/librarycloud:availableTo"/>
             <xsl:apply-templates select=".//librarycloud:HarvardRepositories"/>
             <xsl:apply-templates
                 select="mods:extension/librarycloud:librarycloud/librarycloud:priorrecordids/librarycloud:recordIdentifier"/>
 
-            <xsl:apply-templates select="mods:extension/librarycloud:librarycloud/librarycloud:processingDate"/>
+            <xsl:apply-templates
+                select="mods:extension/librarycloud:librarycloud/librarycloud:processingDate"/>
 
 
             <xsl:choose>
@@ -400,7 +415,7 @@
         </xsl:element>
     </xsl:template>
 
-
+    <!-- not multivalued in solr, so concatenate into 1 solr field
     <xsl:template match="mods:physicalDescription">
         <xsl:element name="field">
             <xsl:attribute name="name">
@@ -409,6 +424,7 @@
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
+    -->
 
     <xsl:template match="mods:abstract">
         <xsl:element name="field">
@@ -571,8 +587,7 @@
             </xsl:attribute>
             <xsl:choose>
                 <xsl:when test="contains(., '?')">
-                    <xsl:value-of
-                        select="substring-before(substring-after(., 'harvard.edu/'), '?')"
+                    <xsl:value-of select="substring-before(substring-after(., 'harvard.edu/'), '?')"
                     />
                 </xsl:when>
                 <xsl:otherwise>
@@ -596,8 +611,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template
-        match="librarycloud:recordIdentifier">
+    <xsl:template match="librarycloud:recordIdentifier">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>priorRecordIdentifier</xsl:text>
@@ -1108,7 +1122,8 @@
                 <xsl:value-of select='substring-before(substring-after($dateStringInput, "["), "]")'
                 />
             </xsl:when>
-        <xsl:when test="string-length($dateStringInput) = 0 and string-length($dateStringOutput) = 0"></xsl:when>
+            <xsl:when
+                test="string-length($dateStringInput) = 0 and string-length($dateStringOutput) = 0"/>
             <xsl:when test="$step = 1 and string-length($dateStringInput) > 0">
                 <xsl:call-template name="normalizeDate">
                     <xsl:with-param name="dateStringInput">
