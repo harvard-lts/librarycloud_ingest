@@ -58,6 +58,7 @@
                 <xsl:choose>
                     <!--<xsl:when test="./marc:subfield[@code='b']='MMF'"/>-->
                     <xsl:when test="./marc:subfield[@code='b']='NET'"/>
+                    <xsl:when test="./marc:subfield[@code='b']='FIG'"/>
                     <xsl:otherwise>
                         <xsl:element name="physicalLocation" namespace="http://www.loc.gov/mods/v3">
                             <xsl:attribute name="type">

@@ -379,8 +379,7 @@
 	<xsl:template match="notes">
 		<note>
 			<xsl:choose>
-				<xsl:when test="starts-with(normalize-space(.), 'General:')">General note:
-						<xsl:value-of select="substring-after(normalize-space(.), 'General:')"
+				<xsl:when test="starts-with(normalize-space(.), 'General:')"><xsl:text>General note: </xsl:text><xsl:value-of select="substring-after(normalize-space(.), 'General:')"
 					/></xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="."/>
