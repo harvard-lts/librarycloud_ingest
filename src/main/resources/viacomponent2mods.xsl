@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xlink="http://www.w3.org/TR/xlink" xmlns="http://www.loc.gov/mods/v3"
+	xmlns:librarycloud="http://hul.harvard.edu/ois/xml/ns/librarycloud"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" >
 
 	<!--  Revisions
@@ -85,6 +86,11 @@
 							<languageTerm>eng</languageTerm>
 						</languageOfCataloging>
 					</recordInfo>
+					<extension xmlns="http://www.loc.gov/mods/v3">
+						<librarycloud:originalDocument>
+							<xsl:text>https://s3.amazonaws.com/via-presto/prod/</xsl:text><xsl:value-of select="recordId"/><xsl:text>.xml</xsl:text>
+						</librarycloud:originalDocument>
+					</extension>
 					<language>
 						<languageTerm type="code">zxx</languageTerm>
 						<languageTerm type="text">No linguistic content</languageTerm>

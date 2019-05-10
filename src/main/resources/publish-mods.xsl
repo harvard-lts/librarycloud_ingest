@@ -78,7 +78,7 @@
 
         <!--<xsl:if
             test="not(mods:recordInfo/mods:recordOrigin = 'Open Metadata Status: RES-C') and not(mods:recordInfo/mods:recordOrigin = 'Open Metadata Status: RES-D')">-->
-        <xsl:if test="not(lower-case(mods:recordInfo/mods:recordContentSource) = 'uk-cbpil')">
+        <xsl:if test="not(lower-case(mods:recordInfo[mods:recordIdentifier/@source='MH:ALMA']/mods:recordContentSource) = 'uk-cbpil')">
             <xsl:copy>
                 <xsl:copy-of select="document('')/*/@xsi:schemaLocation"/>
                 <xsl:copy-of select="@*"/>

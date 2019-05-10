@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns="http://www.loc.gov/mods/v3"
     xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:librarycloud="http://hul.harvard.edu/ois/xml/ns/librarycloud"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xpath-default-namespace="urn:isbn:1-931666-22-9"
@@ -96,6 +97,11 @@
                     <xsl:value-of select="$cmatch/c/@id"/>
                 </xsl:element>
             </xsl:element>
+            <extension xmlns="http://www.loc.gov/mods/v3">
+                <librarycloud:originalDocument>
+                    <xsl:text>https://s3.amazonaws.com/harvard.ead/</xsl:text><xsl:value-of select="eadheader/eadid"/><xsl:text>.xml</xsl:text>
+                </librarycloud:originalDocument>
+            </extension>
             <xsl:apply-templates select="//c[@id=$cid_legacy_or_new]"/>
         </mods>
     </xsl:template>
