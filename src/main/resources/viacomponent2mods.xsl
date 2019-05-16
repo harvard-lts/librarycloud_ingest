@@ -203,22 +203,26 @@
 
 	<xsl:template match="title">
 		<xsl:element name="titleInfo">
+			<xsl:variable name="maintitlecount">
+				<xsl:value-of select="count(../title[not(textElement = '') and not(type)])"/>
+			</xsl:variable>
 			<xsl:choose>
-				<xsl:when test="(./type = 'Abbreviated Title')">
+				<xsl:when test="lower-case(./type) = 'Abbreviated Title'">
 					<xsl:attribute name="type">
 						<xsl:value-of select="'abbreviated'"/>
 					</xsl:attribute>
 				</xsl:when>
-				<xsl:when test="(./type = 'Translated Title')">
+				<xsl:when test="lower-case(./type) = 'translated title'">
 					<xsl:attribute name="type">
 						<xsl:value-of select="'translated'"/>
 					</xsl:attribute>
 				</xsl:when>
-				<!--xsl:when test="(./type='Abbreviated Title' or ./type='Translated Title')">
+				<xsl:when test="./type = ' Title' and $maintitlecount &gt; 0">
+					<!-- 20190507 MV added to fix ssio2via bug, will fix upstream before restrospective -->
 				<xsl:attribute name="type">
-					<xsl:value-of select="type"/>
+						<xsl:value-of select="'alternative'"/>
 				</xsl:attribute>
-			</xsl:when-->
+				</xsl:when>
 				<xsl:otherwise>
 					<xsl:if test="./type[not(.=' Title')]"> <!-- 20190507 MV added to fix ssio2via bug, will fix upstream before restrospective -->
 						<xsl:attribute name="type">

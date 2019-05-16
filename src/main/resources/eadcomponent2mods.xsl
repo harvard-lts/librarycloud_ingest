@@ -78,7 +78,7 @@
             <xsl:apply-templates select="$cmatch/c/daogrp"/>
             <xsl:apply-templates select="$cmatch/c/did/dao"/>
             <xsl:apply-templates select="$cmatch/c/did/daogrp"/>
-            <relatedItem otherType="HOLLIS for Archival Discovery">
+            <relatedItem otherType="HOLLIS for Archival Discovery record">
                 <location>
                     <url>
                         <xsl:text>https://id.lib.harvard.edu/ead/c/</xsl:text>
