@@ -30,12 +30,19 @@
             <xsl:apply-templates select=".//mods:name"/>
             <xsl:apply-templates select=".//mods:typeOfResource"/>
             <!-- put the isOnline field here to keep grouped with isCollection and isManuscript -->
+            <!-- concat all urls and check those for patterns we want as isOnline, in addition to raw object urls 2019-05-29 -->
+            <xsl:variable name="isOnlineUrls">
+                <xsl:value-of select=".//mods:location/mods:url[not(@access = 'raw object') and not(@access = 'preview')]"/>
+            </xsl:variable>
             <xsl:element name="field">
                 <xsl:attribute name="name">
                     <xsl:text>isOnline</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
                     <xsl:when test=".//mods:location/mods:url[@access = 'raw object']">
+                        <xsl:text>true</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="contains(upper-case($isOnlineUrls),'HUL.FIG') or contains(upper-case($isOnlineUrls),'HUL.EBOOK') or contains(upper-case($isOnlineUrls),'HUL.EJOURNAL') or contains(upper-case($isOnlineUrls),'HUL.ERESOURCE') or contains(upper-case($isOnlineUrls),'DIGITAL.LIBRARY.MCGILL.CA/MINGQUING')"> <!-- what about this? or contains($isOnlineUrls),'HUL.GISDATA')  -->
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>

@@ -614,11 +614,15 @@
     </mapping>
     <mapping>
         <source>MCZ</source>
-        <replacement>Ernst Mayr Library of the Museum of Comparative Zoology, Harvard
-            University</replacement>
+        <replacement>Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</replacement>
         <valueURI>http://isni.org/isni/0000000460377627</valueURI>
-        <extensionValue>Museum Comp
-            Zoology</extensionValue>
+        <extensionValue>Museum Comp Zoology</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</source>
+        <replacement>Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460377627</valueURI>
+        <extensionValue>Museum Comp Zoology</extensionValue>
     </mapping>
     <mapping>
         <source>Ernst Mayr Library of the Museum of Comparative Zoology, Museum of Comparative
@@ -732,6 +736,12 @@
     </mapping>
     <mapping>
         <source>Milman Parry Collection of Oral Literature</source>
+        <replacement>Milman Parry Collection of Oral Literature, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000123154019</valueURI>
+        <extensionValue>Milman Parry Collection</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Milman Parry Collection of Oral Literature, Harvard University</source>
         <replacement>Milman Parry Collection of Oral Literature, Harvard University</replacement>
         <valueURI>http://isni.org/isni/0000000123154019</valueURI>
         <extensionValue>Milman Parry Collection</extensionValue>
@@ -981,6 +991,12 @@
         <extensionValue>Widener</extensionValue>
     </mapping>
     <mapping>
+        <source>Middle Eastern Division, Widener Library, Harvard University</source>
+        <replacement>Middle Eastern Division, Widener Library, Harvard University</replacement>
+        <!--      <valueURI></valueURI> -->
+        <extensionValue>Widener</extensionValue>
+    </mapping>
+    <mapping>
         <source>Slavic Division, Widener Library</source>
         <replacement>Slavic Division, Widener Library, Harvard University</replacement>
         <!--      <valueURI></valueURI> -->
@@ -1000,6 +1016,12 @@
     </mapping>
     <mapping>
         <source>WOL</source>
+        <replacement>John G. Wolbach Library, Harvard-Smithsonian Center for Astrophysics</replacement>
+        <valueURI>http://isni.org/isni/0000000460371700</valueURI>
+        <extensionValue>Wolbach Library</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Wolbach Archives, Wolbach Library, Harvard University</source>
         <replacement>John G. Wolbach Library, Harvard-Smithsonian Center for Astrophysics</replacement>
         <valueURI>http://isni.org/isni/0000000460371700</valueURI>
         <extensionValue>Wolbach Library</extensionValue>
