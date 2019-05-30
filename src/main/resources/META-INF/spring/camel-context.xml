@@ -397,7 +397,7 @@
             <to uri="http://www.example.com" />
             <to uri="direct:alma-ingest-file"/>
         </split>
-    </route>
+        </route>
         <route id="alma-ingest-file" errorHandlerRef="eh">
             <from uri="direct:alma-ingest-file"/>
             <doTry>

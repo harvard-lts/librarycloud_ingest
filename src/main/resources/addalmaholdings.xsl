@@ -104,12 +104,28 @@
 
     <xsl:template match="marc:datafield[@tag='856']">
                 <xsl:element name="url" namespace="http://www.loc.gov/mods/v3">
-                    <xsl:if test="not(contains(./marc:subfield[@code='u'],'HUL.FIG')) and not(contains(./marc:subfield[@code='u'],'ebookbatch')) and not(contains(./marc:subfield[@code='u'],'ejournals')) and not(contains(./marc:subfield[@code='u'],'HUL.gisdata')) and not(contains(./marc:subfield[@code='u'],'hul.gisdata'))">
+                    <!--<xsl:if test="not(contains(./marc:subfield[@code='u'],'HUL.FIG')) and not(contains(./marc:subfield[@code='u'],'ebookbatch')) and not(contains(./marc:subfield[@code='u'],'ejournals')) and not(contains(./marc:subfield[@code='u'],'HUL.gisdata')) and not(contains(./marc:subfield[@code='u'],'hul.gisdata'))">
                         <xsl:attribute name="access"><xsl:text>raw object</xsl:text></xsl:attribute>
                     </xsl:if>
                     <xsl:if test="contains(./marc:subfield[@code='u'],'HUL.FIG')">
                         <xsl:attribute name="displayLabel"><xsl:text>Google Books</xsl:text></xsl:attribute>
-                    </xsl:if>
+                    </xsl:if>-->
+                    <xsl:choose>
+                        <xsl:when test="contains(upper-case(./marc:subfield[@code='u']),'HUL.FIG')">
+                            <xsl:attribute name="displayLabel"><xsl:text>Google Books</xsl:text></xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="contains(upper-case(./marc:subfield[@code='u']),'HUL.EBOOK')"/>
+                        <xsl:when test="contains(upper-case(./marc:subfield[@code='u']),'HUL.EJOURNAL')"/>
+                        <xsl:when test="contains(upper-case(./marc:subfield[@code='u']),'HUL.ERESOURCE')"/>
+                        <xsl:when test="contains(upper-case(./marc:subfield[@code='u']),'HUL.GISDATA')"/>
+                        <xsl:when test="contains(upper-case(./marc:subfield[@code='u']),'HBS.BAKER.GEN:WES')"/>
+                        <xsl:when test="contains(lower-case(./marc:subfield[@code='u']),'digital.library.mcgill.ca/mingqing')"/>
+                        <xsl:when test="contains(lower-case(./marc:subfield[@code='u']),'www.oapen.org/search')"/>
+                        <xsl:when test="contains(lower-case(./marc:subfield[@code='u']),'id.lib.harvard.edu')"/>
+                        <xsl:otherwise>
+                            <xsl:attribute name="access"><xsl:text>raw object</xsl:text></xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     <xsl:apply-templates select="marc:subfield[@code='3']" mode="url"/>
                     <xsl:apply-templates select="marc:subfield[@code='z']" mode="url"/>
                     <xsl:apply-templates select="marc:subfield[@code='u']" mode="url"/>

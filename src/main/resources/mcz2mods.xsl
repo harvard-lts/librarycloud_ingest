@@ -100,7 +100,7 @@
             <xsl:element name="role">
                 <xsl:element name="roleTerm">
                     <xsl:attribute name="type">text</xsl:attribute>
-                    <xsl:text>Creator</xsl:text>
+                    <xsl:text>creator</xsl:text>
                 </xsl:element>
             </xsl:element>
             <xsl:element name="role">
@@ -235,6 +235,7 @@
     <xsl:template name="repository">
         <xsl:element name="location">
             <xsl:element name="physicalLocation">
+                <xsl:attribute name="displayLabel"><xsl:text>Harvard repository</xsl:text></xsl:attribute>
                 <xsl:attribute name="type">repository</xsl:attribute>
                 <xsl:attribute name="valueURI"><xsl:text>http://isni.org/isni/0000000460377627</xsl:text></xsl:attribute>
                 <xsl:text>Ernst Mayr Library of the Museum of Comparative Zoology, Harvard University</xsl:text>
