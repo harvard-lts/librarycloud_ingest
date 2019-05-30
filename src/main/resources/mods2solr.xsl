@@ -171,7 +171,7 @@
                     <xsl:text>url.access.raw_object</xsl:text>
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="..//mods:location/mods:url[@access = 'raw object']">
+                    <xsl:when test=".//mods:location/mods:url[@access = 'raw object']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
