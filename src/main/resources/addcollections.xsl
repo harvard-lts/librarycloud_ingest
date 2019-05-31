@@ -86,8 +86,8 @@
     </xsl:template>
 
     <!-- abandon existing spotlight links-->
-    <xsl:template match="mods:url[@access='object in context' and @displayLabel!='Harvard Digital Collections']">
-    </xsl:template>
+    <xsl:template
+        match="mods:url[@access='object in context' and @displayLabel!='Harvard Digital Collections' and @displayLabel!='Harvard Art Museums']"> </xsl:template>
 
     <xsl:template name="object-in-context-links">
       <xsl:param name="modsRoot" />
@@ -101,7 +101,7 @@
                 <xsl:attribute name="displayLabel">
                     <xsl:value-of select="col:setName/text()" />
                 </xsl:attribute>
-                <xsl:value-of select="col:baseUrl" />-<xsl:value-of select="$recordid" />
+                <xsl:value-of select="col:baseUrl" /><xsl:value-of select="$recordid" />
             </url>
           </xsl:if>
         </xsl:for-each>

@@ -84,6 +84,9 @@
 		</xsl:choose>
 	</xsl:template>
 	
+	<xsl:template match="mods:relatedItem">
+		<xsl:copy-of select="."/>
+	</xsl:template>
 	
 	<xsl:template match="mods:location[not(mods:url) and not(mods:physicalLocation/@type='repository')]">
 		<xsl:choose>

@@ -20,9 +20,15 @@ public class RefreshFromS3Processor implements Processor {
 
         String almaId = exchange.getIn().getBody(String.class);
         String url = Config.getInstance().MARC_S3_URL + "/" + almaId;
-        //System.out.println("url: " + url);
+        url = url.trim();
+        System.out.println("url: " + url);
         URI uri = new URI(url);
-        String marcxml = IOUtils.toString(uri.toURL().openStream(), "UTF-8");
+        String marcxml = "";
+        try {
+            marcxml = IOUtils.toString(uri.toURL().openStream(), "UTF-8");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         //System.out.println("MARCXML: " + marcxml);
 
         LibCommMessage message = new LibCommMessage();

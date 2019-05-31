@@ -23,7 +23,8 @@ public class S3DeleteProcessor implements IProcessor {
     public void processMessage(LibCommMessage libCommMessage) throws Exception {
         String recordId = libCommMessage.getPayload().getData();
         System.out.println(bucket + " : " + recordId);
-        s3Client.deleteObject(new DeleteObjectRequest(bucket, recordId));
+        if (recordId != null && !recordId.equals(""))
+            s3Client.deleteObject(new DeleteObjectRequest(bucket, recordId));
         //deleteFrom3(recordId);
     }
 

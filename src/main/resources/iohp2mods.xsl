@@ -87,6 +87,12 @@
                     <xsl:text>Interviewee</xsl:text>
                 </xsl:element>
             </xsl:element>
+            <xsl:element name="role">
+                <xsl:element name="roleTerm">
+                    <xsl:attribute name="type">text</xsl:attribute>
+                    <xsl:text>creator</xsl:text>
+                </xsl:element>
+            </xsl:element>
         </xsl:element>
     </xsl:template>
 

@@ -26,5 +26,5 @@ if [ ! -f $SOURCE_FILE_PATH ]; then
 fi
 
 # Copy ingest command to target queue
-aws sqs create-queue --queue-name=$SQS_ENVIRONMENT-$INGEST_INSTRUCTION-$DATA_SOURCE_NAME
-aws sqs send-message --queue=http://sqs.us-east-1.amazonaws.com/$SQS_ENVIRONMENT-$INGEST_INSTRUCTION-$DATA_SOURCE_NAME --message-body="$(<$SOURCE_FILE_PATH)"
+aws sqs create-queue --queue-name=$librarycloud-SQS_ENVIRONMENT-$INGEST_INSTRUCTION-$DATA_SOURCE_NAME
+aws sqs send-message --queue=http://sqs.us-east-1.amazonaws.com/librarycloud-$SQS_ENVIRONMENT-$INGEST_INSTRUCTION-$DATA_SOURCE_NAME --message-body="$(<$SOURCE_FILE_PATH)"

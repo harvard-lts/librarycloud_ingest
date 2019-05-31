@@ -36,7 +36,9 @@ public class MessageBodyS3Marshaller implements DataFormat {
     private int maxData;
     private String bucket;
     private String S3_PREFIX = "https://s3.amazonaws.com/";
-    private static Pattern S3_PATTERN = Pattern.compile("^https?://s3.amazonaws.com/([^/]+)/([^?/]+)[^/]*$");
+    //20190111 - now using /cache/ subfolder in s3, so change pattern
+    //private static Pattern S3_PATTERN = Pattern.compile("^https?://s3.amazonaws.com/([^/]+)/([^?/]+)/([^?/]+)[^/]*$");
+    private static Pattern S3_PATTERN = Pattern.compile("^https?://s3.amazonaws.com/([^/]+)/([^?/]+)/([^?/]+)[^/]*$");
 
     public MessageBodyS3Marshaller(int maxData, String bucket) {
         this.maxData = maxData;
@@ -57,13 +59,12 @@ public class MessageBodyS3Marshaller implements DataFormat {
         if (bytes.length > this.maxData) {
 
                 /* Upload to bucket with random key. We assume the bucket exists */
-                String key = UUID.randomUUID().toString();
+                String key = "cache/" + UUID.randomUUID().toString();
 
                 ObjectMetadata objectMetadata = new ObjectMetadata();
                 objectMetadata.setContentLength(bytes.length);
                 PutObjectRequest putRequest = new PutObjectRequest(this.bucket, key, new ByteArrayInputStream(bytes), objectMetadata);
                 PutObjectResult putResult = s3Client.putObject(putRequest);
-
                 /* Replace filepath with key to the object in s3 */
                 libCommMessage.getPayload().setFilepath(S3_PREFIX + this.bucket + "/" + key);
 
@@ -85,7 +86,10 @@ public class MessageBodyS3Marshaller implements DataFormat {
             Matcher m = S3_PATTERN.matcher(filepath);
             if (m.matches()) {
                 String bucket = m.group(1);
-                String key = m.group(2);
+                //20190111 key now contains cache/.., need to grab groups 2 and 3
+                //String key = m.group(2);
+                String key = m.group(2) + "/" + m.group(3);
+
                 S3Object getResult = null;
                 try {
                     getResult = s3Client.getObject(bucket, key);
