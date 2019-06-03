@@ -30,7 +30,7 @@
              <!--<xsl:variable name="holdings" select="document('')//xsl:param[@name='param1']//holdings"/>-->
             <xsl:variable name="hollisid"><xsl:value-of select="./mods:recordInfo/mods:recordIdentifier"/></xsl:variable>
             <xsl:for-each select="$holdings//doc/str[@name='originalMarc']/marc:record[marc:controlfield[@tag='001']=$hollisid]">
-                <xsl:if test="not(./marc:datafield[@tag=950]/marc:subfield[@code='g']='true') and not(./marc:datafield[@tag=852]/marc:subfield[@code = 'b'] = ('BIO', 'BRM', 'CEA', 'CFI', 'DEV', 'FOG', 'HIL', 'LIT', 'PSY', 'QUA', 'RCA', 'RRC', 'SFL', 'SKL', 'SOC', 'WAR'))">
+                <xsl:if test="not(./marc:datafield[@tag='950']/marc:subfield[@code='g']='true') and not(./marc:datafield[@tag='852']/marc:subfield[@code = 'b'] = ('BIO', 'BRM', 'CEA', 'CFI', 'DEV', 'FOG', 'HIL', 'LIT', 'PSY', 'QUA', 'RCA', 'RRC', 'SFL', 'SKL', 'SOC', 'WAR'))">
                     <xsl:element name="location" namespace="http://www.loc.gov/mods/v3">
                         <!-- <xsl:apply-templates select="./str[@name='originalMarc']"/> -->
                         <xsl:apply-templates select="./marc:datafield[@tag='852']"/>
