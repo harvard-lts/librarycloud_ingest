@@ -36,6 +36,9 @@
                         <xsl:apply-templates select="./marc:datafield[@tag='852']"/>
                         <xsl:apply-templates select="./marc:datafield[@tag='843']"/>
                         <xsl:apply-templates select="./marc:datafield[@tag='856']"/>
+                        <xsl:if test="./marc:datafield[@tag='852']/marc:subfield[@code = 'b'] = 'ART'">
+                            <xsl:apply-templates select="./marc:datafield[@tag='541']"/>
+                        </xsl:if>
                      </xsl:element>
                 </xsl:if>
             </xsl:for-each>
@@ -147,5 +150,16 @@
     <xsl:template match="marc:subfield[@code='u']" mode="url">
         <xsl:value-of select="."/>
     </xsl:template>
+
+    <!-- HUA ALMA records contain object number in 541 subf e, we use this for HUA object in context -->
+    <xsl:template match="marc:datafield[@tag='541']">
+        <xsl:if test="./marc:subfield[@code='e']">
+            <url namespace="http://www.loc.gov/mods/v3" access="object in context" displayLabel="Harvard Art Museums">
+                <xsl:text>https://www.harvardartmuseums.org/collections/object/</xsl:text><xsl:value-of select="./marc:subfield[@code='e']"/>
+            </url>
+        </xsl:if>
+    </xsl:template>
+
+
 
 </xsl:stylesheet>
