@@ -297,11 +297,15 @@
     </xsl:template>
 
     <xsl:template match="mods:place[mods:placeTerm/@type = 'text']">
+        <xsl:apply-templates select="mods:placeTerm[@type='text']"/>
+    </xsl:template>
+
+    <xsl:template match="mods:placeTerm[@type='text']">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>originPlace</xsl:text>
             </xsl:attribute>
-            <xsl:apply-templates select="mods:placeTerm"/>
+            <xsl:value-of select="."/>
         </xsl:element>
     </xsl:template>
 
