@@ -24,8 +24,8 @@ import edu.harvard.libcomm.pipeline.MessageUtils;
    extract the record ID from a header ("deleteID") on the exchange. Use that ID to create
    a delete message */
 
-public class DeleteFileAlma extends LibCommProcessor implements Processor {
-	protected Logger log = Logger.getLogger(DeleteFileAlma.class);
+public class DeleteFile extends LibCommProcessor implements Processor {
+	protected Logger log = Logger.getLogger(DeleteFile.class);
 
 	public synchronized void process(Exchange exchange) throws Exception {
 
@@ -34,13 +34,14 @@ public class DeleteFileAlma extends LibCommProcessor implements Processor {
 		/* Get the contents and header of the message */
 		Message message = exchange.getIn();
 		String recordId = message.getHeader("deleteID", String.class);
+		String source = message.getHeader("source", String.class);
 		InputStream messageIS = MessageUtils.readMessageBody(message);
 
 		/* Create the delete message */
 		LibCommMessage lcmessage = new LibCommMessage();
 		Payload payload = new Payload();
 		payload.setFormat("DELETE_ID");
-		payload.setSource("DELETE");
+		payload.setSource(source);
 		payload.setData(recordId);
 		lcmessage.setCommand("DELETE");
     	lcmessage.setPayload(payload);

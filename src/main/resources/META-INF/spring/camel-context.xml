@@ -248,7 +248,7 @@
         </property>
     </bean>
 
-    <bean id="almaDeleteProcessor" class="edu.harvard.libcomm.pipeline.delete.DeleteFileAlma">
+    <bean id="deleteProcessor" class="edu.harvard.libcomm.pipeline.delete.DeleteFile">
     </bean>
 
     <bean id="solrDeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
@@ -983,20 +983,6 @@
         </route>
 
         <!-- Delete handling -->
-         <route id="aleph-delete-ingest-split">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-aleph?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
-            <!-- Try block required for errors thrown out of the splitter -->
-            <doTry>
-                <split streaming="true">
-                    <method bean="deleteSplitter" method="split"/>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
-                </split>
-                <doCatch>
-                    <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
-                </doCatch>
-            </doTry>
-         </route>
 
          <route id="alma-delete-extract-file">
             <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-alma?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
@@ -1018,7 +1004,10 @@
                     <setHeader headerName="deleteID" >
                         <xpath resultType="java.lang.String">//controlfield[@tag='001']</xpath>
                     </setHeader>
-                    <process ref="almaDeleteProcessor"/>
+                    <setHeader headerName="source" >
+                        <simple>ALMA</simple>
+                    </setHeader>
+                    <process ref="deleteProcessor"/>
                     <multicast streaming="true">
                         <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
                         <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-s3?amazonSQSClient=#sqsClient" />
@@ -1030,8 +1019,6 @@
                 </doCatch>
             </doTry>
          </route>
-
-
 
         <route id="alma-suppressed-delete-extract-file">
             <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-alma-suppressed?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
@@ -1054,10 +1041,49 @@
                     <setHeader headerName="deleteID" >
                         <xpath resultType="java.lang.String">//controlfield[@tag='001']</xpath>
                     </setHeader>
-                    <process ref="almaDeleteProcessor"/>
+                    <setHeader headerName="source" >
+                        <simple>ALMA</simple>
+                    </setHeader>
+                    <process ref="deleteProcessor"/>
                     <multicast streaming="true">
                         <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
                         <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-s3?amazonSQSClient=#sqsClient" />
+                    </multicast>
+                </split>
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                </doCatch>
+            </doTry>
+        </route>
+
+        <!-- via deletes -->
+        <route id="via-delete-extract-file">
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-via?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <split>
+                <xtokenize mode="t">//filepath</xtokenize>
+                <bean ref="prepareURI" method="prepare"/>
+                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+                <to uri="http://www.example.com" />
+                <to uri="direct:via-delete-file"/>
+            </split>
+        </route>
+
+        <route id="via-delete-ingest-split">
+            <from uri="direct:via-delete-file"/>
+            <!-- Try block required for errors thrown out of the splitter -->
+            <doTry>
+                <split streaming="true">
+                    <xtokenize>//viaRecord</xtokenize>
+                    <setHeader headerName="deleteID" >
+                        <xpath resultType="java.lang.String">//recordId</xpath>
+                    </setHeader>
+                    <setHeader headerName="source" >
+                        <simple>VIA</simple>
+                    </setHeader>
+                    <process ref="deleteProcessor"/>
+                    <multicast streaming="true">
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
                     </multicast>
                 </split>
                 <doCatch>
@@ -1095,7 +1121,10 @@
                     <setHeader headerName="deleteID">
                         <xpath resultType="java.lang.String">//datafield[@tag='852']/subfield[@code='8']</xpath>
                     </setHeader>
-                    <process ref="almaDeleteProcessor"/>
+                    <setHeader headerName="source" >
+                        <simple>ALMA</simple>
+                    </setHeader>
+                    <process ref="deleteProcessor"/>
                     <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-holdings-public?amazonSQSClient=#sqsClient"/>
                 </split>
                 <doCatch>
