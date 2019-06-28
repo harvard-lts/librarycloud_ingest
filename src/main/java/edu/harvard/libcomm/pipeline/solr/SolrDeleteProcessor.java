@@ -26,9 +26,9 @@ public class SolrDeleteProcessor implements IProcessor {
 		recordId = recordId.replace("*","");
 		recordId = recordId.replace(" ","");
 		String source = libCommMessage.getPayload().getSource();
-		System.out.println(source + ":" + recordId);
+		System.out.println("deleting: " + source + ":" + recordId);
 		if (recordId.isEmpty())
-			log.trace("The record id is empty");
+			log.debug("The record id is empty");
 		else if (source.equals("VIA")) {
 			if (recordId.startsWith("olvwork"))
 				recordId = recordId.replace("olvwork","W");

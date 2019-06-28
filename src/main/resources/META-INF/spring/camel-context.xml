@@ -1093,6 +1093,36 @@
             </doTry>
         </route>
 
+        <!-- oasis deletes -->
+        <route id="oasis-delete-extract-file">
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-oasis?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <split>
+                <xtokenize mode="t">//filepath</xtokenize>
+                <bean ref="prepareURI" method="prepare"/>
+                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+                <to uri="http://www.example.com" />
+                <to uri="direct:oasis-delete-file"/>
+            </split>
+        </route>
+
+        <route id="oasis-delete-ingest-split" xmlns:ead="urn:isbn:1-931666-22-9">
+            <from uri="direct:oasis-delete-file"/>
+            <!-- Try block required for errors thrown out of the splitter -->
+            <doTry>
+                <setHeader headerName="deleteID" >
+                    <xpath resultType="java.lang.String">//ead:eadid/text()</xpath>
+                </setHeader>
+                <setHeader headerName="source" >
+                    <simple>OASIS</simple>
+                </setHeader>
+                <process ref="deleteProcessor"/>
+                <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                </doCatch>
+            </doTry>
+        </route>
 
         <route id="deletesolr" errorHandlerRef="eh">
             <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
