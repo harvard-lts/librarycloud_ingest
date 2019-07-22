@@ -18,7 +18,7 @@ import edu.harvard.libcomm.pipeline.MessageUtils;
 import edu.harvard.libcomm.pipeline.IProcessor;
 
 public class CollectionsProcessor implements IProcessor {
-	protected Logger log = Logger.getLogger(CollectionsProcessor.class); 	
+	protected Logger log = Logger.getLogger(CollectionsProcessor.class);
 	
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {	
 	
@@ -31,6 +31,7 @@ public class CollectionsProcessor implements IProcessor {
 
 		try {
 			recids = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/recids-comma-separated.xsl",null);
+			System.out.println("RECIDS: " + recids);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

@@ -63,7 +63,7 @@ public class MARCXMLRawAggregatorStrategy implements CompletionAwareAggregationS
         payload.setFormat("MARCXML");
         payload.setSource(getSource());
         payload.setData(body);
-        lcmessage.setCommand("ENRICH");
+        lcmessage.setCommand("normalize-marcxml");
         lcmessage.setPayload(payload);
         try {
             exchange.getIn().setBody(MessageUtils.marshalMessage(lcmessage));

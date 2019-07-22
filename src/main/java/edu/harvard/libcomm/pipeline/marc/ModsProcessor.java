@@ -13,6 +13,8 @@ public class ModsProcessor implements IProcessor {
 	private String stylesheet = "src/main/resources/MARC21slim2MODS3-6.xsl";
 
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
+		//System.out.println("NORMMARCFILEPATH: " + libCommMessage.getPayload().getFilepath());
+		//log.info("NORMALIZEMARC");
 		String modsCollection = null;
 		libCommMessage.setCommand("ENRICH");
 		try {
@@ -21,6 +23,7 @@ public class ModsProcessor implements IProcessor {
 			log.error("Could not transform record from MARC to MODS");
 			throw e;
 		}
+
 		log.trace("ModProcessor Result:" + modsCollection);
         libCommMessage.getPayload().setData(modsCollection);
 	}

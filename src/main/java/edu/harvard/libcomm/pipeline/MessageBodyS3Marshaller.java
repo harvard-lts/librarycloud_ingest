@@ -38,7 +38,7 @@ public class MessageBodyS3Marshaller implements DataFormat {
     private String S3_PREFIX = "https://s3.amazonaws.com/";
     //20190111 - now using /cache/ subfolder in s3, so change pattern
     //private static Pattern S3_PATTERN = Pattern.compile("^https?://s3.amazonaws.com/([^/]+)/([^?/]+)/([^?/]+)[^/]*$");
-    private static Pattern S3_PATTERN = Pattern.compile("^https?://s3.amazonaws.com/([^/]+)/([^?/]+)/([^?/]+)[^/]*$");
+    private static Pattern S3_PATTERN =  Pattern.compile("^https?://s3.amazonaws.com/([^/]+)/([^?/]+)/([^?/]+)[^/]*$");
 
     public MessageBodyS3Marshaller(int maxData, String bucket) {
         this.maxData = maxData;
@@ -73,7 +73,7 @@ public class MessageBodyS3Marshaller implements DataFormat {
             }
         }
 
-    String messageString = MessageUtils.marshalMessage(libCommMessage);
+        String messageString = MessageUtils.marshalMessage(libCommMessage);
         stream.write(messageString.getBytes());
     }
 
@@ -95,7 +95,9 @@ public class MessageBodyS3Marshaller implements DataFormat {
                     getResult = s3Client.getObject(bucket, key);
                     String body = IOUtils.toString(getResult.getObjectContent(), StandardCharsets.UTF_8);
                     libCommMessage.getPayload().setData(body);
-                    libCommMessage.getPayload().setFilepath("");
+                    //libCommMessage.getPayload().setFilepath("");
+                    libCommMessage.getPayload().setFilepath(filepath);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {

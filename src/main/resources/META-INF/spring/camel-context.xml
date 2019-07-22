@@ -303,7 +303,7 @@
         <constructor-arg name="uri" value="mongodb://${mongo.username}:${mongo.password}@${mongo.host}:27072/${mongo.db}" />
     </bean>
 -->
-    <camelContext id="sqsContext" xmlns="http://camel.apache.org/schema/spring" xmlns:marcxml="http://www.loc.gov/MARC21/slim" trace="true">
+    <camelContext id="sqsContext" xmlns="http://camel.apache.org/schema/spring" xmlns:marcxml="http://www.loc.gov/MARC21/slim" trace="false">
         <!-- Environment-specific properties -->
         <propertyPlaceholder id="librarycloud-properties" location="classpath:/librarycloud.env.properties" />
         <!-- Error handling behavior -->
@@ -315,8 +315,17 @@
             <to uri="log:edu.harvard.libcomm.deadletterqueue?level=ERROR"/>
             <!-- Post to the AWS dead letter queue, and handle errors (e.g. file size exceeded) -->
             <doTry>
+                <setHeader headerName="filepath">
+                    <xpath>/lib_comm_message/payload/filepath/text()</xpath>
+                </setHeader>
+                <setHeader headerName="source">
+                    <xpath>/lib_comm_message/payload/source/text()</xpath>
+                </setHeader>
+                <setHeader headerName="command">
+                    <xpath>/lib_comm_message/command/text()</xpath>
+                </setHeader>
                 <transform>
-                    <simple>${exception}${exception.stacktrace}${in.body}</simple>
+                    <simple>${header.filepath},${header.source},${header.command},${exception}}</simple>
                 </transform>
                 <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-dead-letter?amazonSQSClient=#sqsClient"/>
                 <doCatch>
@@ -414,6 +423,7 @@
                             <simple>${header.messageLength} > 150000</simple>
                         </completionPredicate>
                         <process ref="filterSuppressedProcessor"/>
+                        <marshal><custom ref="cloudbody"/></marshal>
                         <multicast parallelProcessing="true">
                             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
                             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient" />
