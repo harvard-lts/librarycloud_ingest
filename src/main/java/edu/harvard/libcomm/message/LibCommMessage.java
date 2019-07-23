@@ -143,11 +143,11 @@ public class LibCommMessage {
 
     /**
      * Gets the value of the command property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getCommand() {
         return command;
@@ -155,11 +155,11 @@ public class LibCommMessage {
 
     /**
      * Sets the value of the command property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setCommand(String value) {
         this.command = value;

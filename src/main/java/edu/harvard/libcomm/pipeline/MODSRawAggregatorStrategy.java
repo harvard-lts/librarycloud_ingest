@@ -36,7 +36,7 @@ public class MODSRawAggregatorStrategy implements CompletionAwareAggregationStra
         if (oldExchange == null) {
             return newExchange;
         }
- 
+
         String oldBody = oldExchange.getIn().getBody(String.class);
         String newBody = newExchange.getIn().getBody(String.class);
         String body = oldBody + newBody;

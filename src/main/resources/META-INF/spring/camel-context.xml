@@ -89,7 +89,7 @@
         </property>
     </bean>
 
-    <bean id="modsMessageSplitter" class="edu.harvard.libcomm.pipeline.MessageSplitter">
+    <bean id="modsItemCollectionSplitter" class="edu.harvard.libcomm.pipeline.MessageSplitter">
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.mods.MODSSplitter"/>
         </property>
@@ -106,7 +106,7 @@
     </bean>
 
     <bean id="modsRawAggregator" class="edu.harvard.libcomm.pipeline.MODSRawAggregatorStrategy">
-        <property name="source" value="ALEPH"/>
+        <property name="source" value="ALMA"/>
     </bean>
 
     <bean id="marcxmlAlmaRawAggregator" class="edu.harvard.libcomm.pipeline.MARCXMLRawAggregatorStrategy">
@@ -208,7 +208,7 @@
             <bean class="edu.harvard.libcomm.pipeline.enrich.CollectionUpdateProcessor"/>
         </property>
     </bean>
-    <bean id="removeRestrictedProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
+    <bean id="publishProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.enrich.PublishProcessor"/>
         </property>
@@ -276,22 +276,8 @@
 
     <bean id="s3ListProcessor" class="edu.harvard.libcomm.pipeline.enrich.S3ListProcessor"/>
 
-    <!--<bean id="s3ListProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
-        <property name="processor">
-            <bean class="edu.harvard.libcomm.pipeline.enrich.S3ListProcessor"/>
-        </property>
-    </bean>-->
+     <bean id="prepareURI" class="edu.harvard.libcomm.pipeline.PrepareURIForHTTPEndpoint" />
 
-    <!--<bean id="tedProcessor" class="edu.harvard.libcomm.pipeline.ted.TedToMods">
-    </bean>-->
-
-    <!--<bean id="tedProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
-        <property name="processor">
-            <bean class="edu.harvard.libcomm.pipeline.ted.TedProcessor"/>
-        </property>
-    </bean>-->
-
-    <bean id="prepareURI" class="edu.harvard.libcomm.pipeline.PrepareURIForHTTPEndpoint" />
 <!-- Connecting to mongo from within ted classes, but save for reference
     <bean id="mongoBean" class="com.mongodb.MongoClient">
         <constructor-arg>
@@ -312,7 +298,7 @@
         <redeliveryPolicyProfile id="myPolicy" maximumRedeliveries="0"/>
         <route id="dead-letter">
             <from uri="direct:dead-letter"/>
-            <to uri="log:edu.harvard.libcomm.deadletterqueue?level=ERROR"/>
+            <!--<to uri="log:edu.harvard.libcomm.deadletterqueue?level=ERROR"/>-->
             <!-- Post to the AWS dead letter queue, and handle errors (e.g. file size exceeded) -->
             <doTry>
                 <setHeader headerName="filepath">
@@ -328,6 +314,7 @@
                     <simple>${header.filepath},${header.source},${header.command},${exception}}</simple>
                 </transform>
                 <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-dead-letter?amazonSQSClient=#sqsClient"/>
+                <to uri="log:edu.harvard.libcomm.deadletterqueue?level=ERROR"/>
                 <doCatch>
                     <!-- If can't post the full message to the dead letter queue, post only the headers to the queue -->
                     <exception>java.lang.Exception</exception>
@@ -357,43 +344,6 @@
         </route>
 
         <!-- ============================== -->
-        <!-- Aleph HOLDINGS ingest -->
-        <!-- ============================== -->
-
-        <route id="holdings-ingest-split" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
-            <doTry>
-                <split streaming="true" parallelProcessing="true">
-                    <method bean="marcSplitter" method="split"/>
-                    <marshal><custom ref="cloudbody"/></marshal>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-split-holdings?amazonSQSClient=#sqsClient" />
-                    <!--<to uri="file://{{librarycloud.files.basepath}}/split-holdings?fileName=${header.CamelSplitIndex}" />-->
-                </split>
-            <doCatch>
-                <exception>java.lang.Exception</exception>
-                <to uri="direct:dead-letter" />
-            </doCatch>
-            </doTry>
-        </route>
-
-        <route id="marcholdings-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-split-holdings?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:split-holdings?size=20&amp;blockWhenFull=true"/>
-        </route>
-
-        <route id="marcholdingstosolr" errorHandlerRef="eh">
-            <from uri="seda:split-holdings?concurrentConsumers=4" />
-            <!--<from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-split-holdings?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />-->
-            <!--<from uri="file://{{librarycloud.files.basepath}}/split-holdings"/>-->
-            <process ref="solrHoldingsProcessor"/>
-            <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
-            <!--<to uri="file://{{librarycloud.files.basepath}}/done"/>-->
-        </route>
-
-
-        <!-- ============================== -->
         <!-- Alma Bib records ingest and normalization -->
         <!-- ============================== -->
 
@@ -406,7 +356,7 @@
             <to uri="http://www.example.com" />
             <to uri="direct:alma-ingest-file"/>
         </split>
-    </route>
+        </route>
         <route id="alma-ingest-file" errorHandlerRef="eh">
             <from uri="direct:alma-ingest-file"/>
             <doTry>
@@ -505,7 +455,6 @@
                         <!-- multicast doesn't work, do holdings first, then separate ingest for updating from s3 -->
                         <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient" />
                         <!-- <to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml?fileName=alma-${header.CamelSplitIndex}" /> -->
-
                         <!--<multicast>
                             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient" />
                             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-bibidlist-from-holdings?amazonSQSClient=#sqsClient" />
@@ -525,35 +474,6 @@
             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
         </route>
 
-
-        <!-- ============================== -->
-        <!-- Aleph ingest and normalization -->
-        <!-- ============================== -->
-
-        <!-- Take a command file, which references a MARC file. Download the MARC file and split it into a
-             series of messages containing MARCXML -->
-        <route id="aleph-ingest-split" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-aleph?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
-            <!-- Try block required for errors thrown out of the splitter -->
-            <doTry>
-                <split streaming="true" parallelProcessing="true">
-                    <method bean="marcSplitter" method="split"/>
-                    <marshal><custom ref="cloudbody"/></marshal>
-                    <!-- <to uri="file://{{librarycloud.files.basepath}}/cloudbody?fileName=${header.CamelSplitIndex}" /> -->
-                    <!-- Route to two locations. One copy is transformed to MODS and sent through the rest of the pipeline.
-                         The other copy is used to upload raw MARCXML data to S3 -->
-                    <multicast parallelProcessing="true">
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient" />
-                    </multicast>
-                </split>
-                <doCatch>
-                    <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
-                </doCatch>
-            </doTry>
-         </route>
-
         <!-- Transform MARCXML to MODS -->
         <route id="marctomods-seda" errorHandlerRef="eh">
             <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
@@ -569,28 +489,11 @@
                     <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
                 </when>
                 <otherwise>
-                    <choice>
-                        <when>
-                            <xpath>//source = 'aleph'</xpath>
-                            <process ref="modsProcessor"/>
-                        </when>
-                        <when>
-                            <xpath>//source = 'ALEPH'</xpath>
-                            <process ref="modsProcessor"/>
-                        </when>
-                        <when>
-                            <xpath>//source = 'alma'</xpath>
-                            <process ref="modsProcessorAlma"/>
-                        </when>
-                        <when>
-                            <xpath>//source = 'ALMA'</xpath>
-                            <process ref="modsProcessorAlma"/>
-                        </when>
-                    </choice>
+                    <process ref="modsProcessor"/>
                     <process ref="addMarcLocationProcessor"/>
                     <marshal><custom ref="cloudbody"/></marshal>
                     <!-- <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" /> -->
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" />
+                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-alma-holdings?amazonSQSClient=#sqsClient" />
                 </otherwise>
             </choice>
 
@@ -652,8 +555,9 @@
                         <completionPredicate>
                             <simple>${header.messageLength} > 150000</simple>
                         </completionPredicate>
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" />
-                        <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.CamelSplitIndex}" /> -->
+                        <marshal><custom ref="cloudbody"/></marshal>
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient" />
+                        <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-drs-extensions?fileName=${header.CamelSplitIndex}" /> -->
                     </aggregate>
                 </split>
                 <doCatch>
@@ -695,8 +599,9 @@
                             <completionPredicate>
                                 <simple>${header.messageLength} > 150000</simple>
                             </completionPredicate>
-                            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" />
-                            <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-start?fileName=${header.outerSplitIndex}-${header.CamelSplitIndex}" /> -->
+                            <marshal><custom ref="cloudbody"/></marshal>
+                            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient" />
+                            <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-drs-extensions?fileName=${header.outerSplitIndex}-${header.CamelSplitIndex}" /> -->
                         </aggregate>
                     </split>
                 </split>
@@ -714,68 +619,46 @@
             <unmarshal><custom ref="cloudbody"/></unmarshal>
             <choice>
                 <when>
-                    <xpath>//source = 'aleph'</xpath>
-                    <to uri="seda:enrich-01-aleph?size=20&amp;blockWhenFull=true" />
-                </when>
-                <when>
-                    <xpath>//source = 'ALEPH'</xpath>
-                    <to uri="seda:enrich-01-aleph?size=20&amp;blockWhenFull=true" />
-                </when>
-                <when>
                     <xpath>//source = 'alma'</xpath>
-                    <to uri="seda:enrich-01-alma?size=20&amp;blockWhenFull=true" />
+                    <to uri="seda:enrich-alma-holdings?size=20&amp;blockWhenFull=true" />
                 </when>
                 <when>
                     <xpath>//source = 'ALMA'</xpath>
-                    <to uri="seda:enrich-01-alma?size=20&amp;blockWhenFull=true" />
+                    <to uri="seda:enrich-alma-holdings?size=20&amp;blockWhenFull=true" />
                 </when>
                 <otherwise>
                     <!-- Skip MODS aggregation steps for non-aleph/alma records -->
-                    <to uri="seda:enrich-05?size=20&amp;blockWhenFull=true" />
+                    <to uri="seda:enrich-drs-extensions?size=20&amp;blockWhenFull=true" />
                 </otherwise>
             </choice>
         </route>
 
-        <!-- Add holdings to Alma or Aleph as appropriate -->
-        <route id="addholdingstomods-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-01-aleph?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-01-aleph?size=20&amp;blockWhenFull=true" />
-        </route>
-        <route id="addholdingstomods" errorHandlerRef="eh">
-            <from uri="seda:enrich-01-aleph?concurrentConsumers=1"/>
-            <process ref="holdingsProcessor"/>
-            <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-04?amazonSQSClient=#sqsClient" />
-        </route>
-
+        <!-- Add holdings to Alma -->
         <route id="addalmaholdingstomods-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-01-alma?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-alma-holdings?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-01-alma?size=20&amp;blockWhenFull=true" />
+            <to uri="seda:enrich-alma-holdings?size=20&amp;blockWhenFull=true" />
         </route>
         <route id="addalmaholdingstomods" errorHandlerRef="eh">
-            <from uri="seda:enrich-01-alma?concurrentConsumers=5"/>
+            <from uri="seda:enrich-alma-holdings?concurrentConsumers=5"/>
             <process ref="almaHoldingsProcessor"/>
             <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-04?amazonSQSClient=#sqsClient" />
+            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-split-collections?amazonSQSClient=#sqsClient" />
         </route>
 
-
-        <route id="alephmodssplit-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-04?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+        <route id="almamodssplit-seda" errorHandlerRef="eh">
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-split-collections?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-04?size=20&amp;blockWhenFull=true" />
+            <to uri="seda:enrich-split-collections?size=20&amp;blockWhenFull=true" />
         </route>
 
-        <route id="alephmodssplit" errorHandlerRef="eh">
+        <route id="almamodssplit" errorHandlerRef="eh">
             <!--<from uri="file://{{librarycloud.files.basepath}}//enrich-04" />-->
-            <from uri="seda:enrich-04?concurrentConsumers=5"/>
+            <from uri="seda:enrich-split-collections?concurrentConsumers=5"/>
             <!--<from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-04?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>-->
-            <!--<marshal><custom ref="cloudbody"/></marshal>-->
             <doTry>
                 <split streaming="true" parallelProcessing="true">
-                    <method bean="modsMessageSplitter" method="split"/>
+                    <method bean="modsItemCollectionSplitter" method="split"/>
                     <!--<marshal><custom ref="cloudbody"/></marshal>-->
                     <aggregate strategyRef="modsRawAggregator" completionSize="100" completionInterval="10000">
                         <correlationExpression>
@@ -785,9 +668,9 @@
                             <simple>${header.messageLength} > 150000</simple>
                         </completionPredicate>
                         <marshal><custom ref="cloudbody"/></marshal>
-                        <!--<to uri="seda:enrich-05?size=20&amp;blockWhenFull=true" />-->
-                        <!--<to uri="file://{{librarycloud.files.basepath}}/enrich-05" />-->
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-05?amazonSQSClient=#sqsClient" />
+                        <!--<to uri="seda:enrich-drs-extensions?size=20&amp;blockWhenFull=true" />-->
+                        <!--<to uri="file://{{librarycloud.files.basepath}}/enrich-drs-extensions" />-->
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient" />
                     </aggregate>
                 </split>
                 <doCatch>
@@ -799,13 +682,13 @@
         </route>
 
         <route id="adddrsextensionsstomods-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-05?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-05?size=20&amp;blockWhenFull=true" />
+            <to uri="seda:enrich-drs-extensions?size=20&amp;blockWhenFull=true" />
         </route>
         <route id="adddrsextensionstomods" errorHandlerRef="eh">
-            <!--<from uri="file://{{librarycloud.files.basepath}}//enrich-05" />-->
-            <from uri="seda:enrich-05?concurrentConsumers=1"/>
+            <!--<from uri="file://{{librarycloud.files.basepath}}//enrich-drs-extensions" />-->
+            <from uri="seda:enrich-drs-extensions?concurrentConsumers=1"/>
             <doTry>
                 <process ref="drsExtensionsProcessor"/>
                 <marshal><custom ref="cloudbody"/></marshal>
@@ -814,20 +697,16 @@
                 <choice>
                     <when>
                         <xpath>//source = 'via'</xpath>
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-06?amazonSQSClient=#sqsClient" />
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-collections?amazonSQSClient=#sqsClient" />
                     </when>
                     <when>
                         <xpath>//source = 'VIA'</xpath>
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-06?amazonSQSClient=#sqsClient" />
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-collections?amazonSQSClient=#sqsClient" />
                     </when>
                     <otherwise>
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-05B?amazonSQSClient=#sqsClient" />
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-pds-thumbs?amazonSQSClient=#sqsClient" />
                     </otherwise>
                 </choice>
-                <!--<to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-05B?amazonSQSClient=#sqsClient" />-->
-
-                <!--<to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-06?amazonSQSClient=#sqsClient" />-->
-                <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-02" /> -->
                 <doCatch>
                     <exception>java.lang.Exception</exception>
                     <to uri="direct:dead-letter" />
@@ -837,28 +716,28 @@
         </route>
 
         <route id="addthumbstomods-seda" errorHandlerRef="eh">
-            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-06" /> -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-05B?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-collections" /> -->
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-pds-thumbs?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-05B?size=20&amp;blockWhenFull=true" />
+            <to uri="seda:enrich-pds-thumbs?size=20&amp;blockWhenFull=true" />
         </route>
         <route id="addthumbstomods" errorHandlerRef="eh">
-            <from uri="seda:enrich-05B?concurrentConsumers=5"/>
+            <from uri="seda:enrich-pds-thumbs?concurrentConsumers=5"/>
             <process ref="thumbsProcessor"/>
             <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-06?amazonSQSClient=#sqsClient" />
+            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-collections?amazonSQSClient=#sqsClient" />
             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
         </route>
 
-
+        <!-- collections here refers to "sets" in librarycloud -->
         <route id="addcollectionstomods-seda" errorHandlerRef="eh">
-            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-06" /> -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-06?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-collections" /> -->
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-collections?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-06?size=20&amp;blockWhenFull=true" />
+            <to uri="seda:enrich-collections?size=20&amp;blockWhenFull=true" />
         </route>
         <route id="addcollectionstomods" errorHandlerRef="eh">
-            <from uri="seda:enrich-06?concurrentConsumers=5"/>
+            <from uri="seda:enrich-collections?concurrentConsumers=5"/>
             <process ref="collectionsProcessor"/>
             <marshal><custom ref="cloudbody"/></marshal>
             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-end?amazonSQSClient=#sqsClient" />
@@ -874,12 +753,14 @@
         </route>
         <route id="publish" errorHandlerRef="eh">
             <from uri="seda:enrich-end?concurrentConsumers=1" />
-            <process ref="removeRestrictedProcessor"/>
+            <process ref="publishProcessor"/>
 
-            <multicast>
+            <!-- not publishing for sns currently -->
+            <!--<multicast>
                 <to uri="direct:publish-delta"/>
                 <to uri="direct:publish-full"/>
-            </multicast>
+            </multicast>-->
+            <to uri="direct:publish-delta"/>
         </route>
 
         <!-- Publish records that have changed -->
@@ -898,7 +779,7 @@
                     <marshal><custom ref="cloudbody"/></marshal>
                     <!-- <multicast> -->
                         <!-- Publishing to Solr doesn't yet go through the SNS publishing, so put it on its own queue -->
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-delta-solr?amazonSQSClient=#sqsClient" />
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-mods-to-solr?amazonSQSClient=#sqsClient" />
                         <!--<to uri="aws-sns://harvard-librarycloud-publish-delta-{{librarycloud.sqs.environment}}?amazonSNSClient=#snsClient" /> -->
                     <!-- </multicast> -->
                 </otherwise>
@@ -925,12 +806,12 @@
         <!-- SOLR consumer for loading into item API -->
         <route id="modstosolr-seda" errorHandlerRef="eh">
             <!--<from uri="file://{{librarycloud.files.basepath}}/publish-public-delta-solr" /> -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-delta-solr?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-mods-to-solr?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:publish-public?size=20&amp;blockWhenFull=true"/>
+            <to uri="seda:mods-to-solr?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="modstosolr" errorHandlerRef="eh">
-            <from uri="seda:publish-public?concurrentConsumers=1" />
+            <from uri="seda:mods-to-solr?concurrentConsumers=1" />
             <process ref="solrLoadProcessor"/>
             <to uri="log:edu.harvard.libcomm.throughput?level=TRACE&amp;marker=solrLoadProcessor&amp;groupSize=10"/>
             <marshal><custom ref="cloudbody"/></marshal>
@@ -1209,7 +1090,7 @@
                 <split streaming="true" parallelProcessing="true">
                     <method bean="tedSplitter" method="split"/>
                     <marshal><custom ref="cloudbody"/></marshal>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-05?amazonSQSClient=#sqsClient" />
+                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient" />
                     <!--<to uri="file://{{librarycloud.files.basepath}}/TEDSPLIT?fileName=${header.CamelSplitIndex}" />-->
                 </split>
                 <doCatch>

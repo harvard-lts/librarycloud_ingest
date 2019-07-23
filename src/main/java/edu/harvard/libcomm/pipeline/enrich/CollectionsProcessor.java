@@ -25,13 +25,16 @@ public class CollectionsProcessor implements IProcessor {
 		String data;
 		String recids;
 
+		libCommMessage.setCommand("enrich-collections");
+		log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+
 		if ((Config.getInstance().COLLECTIONS_URL == null) ||  Config.getInstance().COLLECTIONS_URL.isEmpty()) {
 			return;
 		}
 
 		try {
 			recids = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/recids-comma-separated.xsl",null);
-			System.out.println("RECIDS: " + recids);
+			//System.out.println("RECIDS: " + recids);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

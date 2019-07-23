@@ -23,9 +23,11 @@ import edu.harvard.libcomm.pipeline.MessageUtils;
 /* Add Holdings data (physicalLocation, shelfLocator, url) to MODS records, retrieved from lilCloud API */
 public class PDSThumbsProcessor extends ExternalServiceProcessor implements IProcessor {
 
-    protected Logger log = Logger.getLogger(DRSExtensionsProcessor.class);
+    protected Logger log = Logger.getLogger(PDSThumbsProcessor.class);
 
     public void processMessage(LibCommMessage libCommMessage) throws Exception {
+        libCommMessage.setCommand("enrich-pds-thumbs");
+        log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
         String results = "";
         String data = libCommMessage.getPayload().getData();
         String urls = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/pds_urns.xsl",null);

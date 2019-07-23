@@ -16,7 +16,9 @@ public class PublishProcessor implements IProcessor {
 	@Override
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
 		String data = null;
-		libCommMessage.setCommand("PUBLISH");
+		libCommMessage.setCommand("enrich-end");
+		log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+
 		String modsCount = null;
 		try {
       TimeZone tz = TimeZone.getTimeZone("UTC");
