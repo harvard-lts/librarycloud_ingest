@@ -10,13 +10,14 @@ import edu.harvard.libcomm.message.LibCommMessage;
 import edu.harvard.libcomm.message.LibCommMessage.Payload;
 import edu.harvard.libcomm.pipeline.IProcessor;
 import edu.harvard.libcomm.pipeline.MessageUtils;
+import org.apache.log4j.Logger;
 
 public class PublishProcessor implements IProcessor {
-
+	protected Logger log = Logger.getLogger(PublishProcessor.class);
 	@Override
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
 		String data = null;
-		libCommMessage.setCommand("enrich-end");
+		libCommMessage.setCommand("publish");
 		log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
 
 		String modsCount = null;

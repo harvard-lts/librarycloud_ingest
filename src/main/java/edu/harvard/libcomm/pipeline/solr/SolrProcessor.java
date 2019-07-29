@@ -29,13 +29,19 @@ public class SolrProcessor implements IProcessor {
 
 	@Override
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
+		libCommMessage.setCommand("publish-to-solr");
+		log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+
 		try {
 			String solrXml = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/mods2solr.xsl",null);
 			populateIndex(solrXml);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
-		}		
+		}
+		libCommMessage.setCommand("done");
+		log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+
 	}
 	
 	private void populateIndex(String solrXml) throws Exception {

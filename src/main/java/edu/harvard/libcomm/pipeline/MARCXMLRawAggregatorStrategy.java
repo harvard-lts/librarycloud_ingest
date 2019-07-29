@@ -66,7 +66,7 @@ public class MARCXMLRawAggregatorStrategy implements CompletionAwareAggregationS
         payload.setFormat("MARCXML");
         payload.setSource(getSource());
         payload.setData(body);
-        lcmessage.setCommand("normalize-marcxml");
+        //lcmessage.setCommand("normalize-marcxml");
         lcmessage.setPayload(payload);
         String uid = UUID.randomUUID().toString();
         History hist = new History();

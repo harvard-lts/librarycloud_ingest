@@ -740,19 +740,19 @@
             <from uri="seda:enrich-collections?concurrentConsumers=5"/>
             <process ref="collectionsProcessor"/>
             <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-end?amazonSQSClient=#sqsClient" />
+            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish?amazonSQSClient=#sqsClient" />
         </route>
 
 
         <!-- Publishing records to consumers -->
         <route id="publish-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-end?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-end?size=20&amp;blockWhenFull=true"/>
+            <to uri="seda:enrich-publish?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="publish" errorHandlerRef="eh">
-            <from uri="seda:enrich-end?concurrentConsumers=1" />
+            <from uri="seda:enrich-publish?concurrentConsumers=1" />
             <process ref="publishProcessor"/>
 
             <!-- not publishing for sns currently -->
