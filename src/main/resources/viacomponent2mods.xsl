@@ -203,39 +203,35 @@
 
 	<xsl:template match="title">
 		<xsl:element name="titleInfo">
-			<xsl:variable name="maintitlecount">
-				<xsl:value-of select="count(../title[not(textElement = '') and not(type)])"/>
-			</xsl:variable>
 			<xsl:choose>
-				<xsl:when test="lower-case(./type) = 'Abbreviated Title'">
-					<xsl:attribute name="type">
-						<xsl:value-of select="'abbreviated'"/>
-					</xsl:attribute>
+				<xsl:when test="position() &gt; 1">
+					<xsl:choose>
+						<xsl:when test="lower-case(./type) = 'Abbreviated Title'">
+							<xsl:attribute name="type">
+								<xsl:value-of select="'abbreviated'"/>
+							</xsl:attribute>
+						</xsl:when>
+						<xsl:when test="lower-case(./type) = 'translated title'">
+							<xsl:attribute name="type">
+								<xsl:value-of select="'translated'"/>
+							</xsl:attribute>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:if test="./type[not(.=' Title')]"> <!-- 20190507 MV added to fix ssio2via bug, will fix upstream before restrospective -->
+								<xsl:attribute name="type">
+									<xsl:value-of select="'alternative'"/>
+								</xsl:attribute>
+							</xsl:if>
+						</xsl:otherwise>
+					</xsl:choose>
 				</xsl:when>
-				<xsl:when test="lower-case(./type) = 'translated title'">
-					<xsl:attribute name="type">
-						<xsl:value-of select="'translated'"/>
-					</xsl:attribute>
-				</xsl:when>
-				<xsl:when test="./type = ' Title' and $maintitlecount &gt; 0">
-					<!-- 20190507 MV added to fix ssio2via bug, will fix upstream before restrospective -->
-				<xsl:attribute name="type">
-						<xsl:value-of select="'alternative'"/>
-				</xsl:attribute>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:if test="./type[not(.=' Title')]"> <!-- 20190507 MV added to fix ssio2via bug, will fix upstream before restrospective -->
-						<xsl:attribute name="type">
-							<xsl:value-of select="'alternative'"/>
-						</xsl:attribute>
-					</xsl:if>
-				</xsl:otherwise>
 			</xsl:choose>
 			<xsl:element name="title">
 				<xsl:value-of select="normalize-space(textElement)"/>
 			</xsl:element>
 		</xsl:element>
 	</xsl:template>
+
 
 	<xsl:template match="creator">
 		<xsl:call-template name="name">
@@ -328,14 +324,10 @@
 					</dateOther>
 				</xsl:if>
 				<xsl:if test="structuredDate/beginDate">
-					<dateCreated point="start">
-						<xsl:value-of select="structuredDate/beginDate"/>
-					</dateCreated>
+					<xsl:apply-templates select="structuredDate[1]/beginDate"/>
 				</xsl:if>
-				<xsl:if test="structuredDate/beginDate">
-					<dateCreated point="end">
-						<xsl:value-of select="structuredDate/endDate"/>
-					</dateCreated>
+				<xsl:if test="structuredDate/endDate">
+					<xsl:apply-templates select="structuredDate[1]/endDate"/>
 				</xsl:if>
 				<xsl:if test="freeDate">
 					<dateCreated>
@@ -349,6 +341,17 @@
 				</xsl:if>
 			</originInfo>
 		</xsl:if>
+	</xsl:template>
+
+	<xsl:template match="beginDate">
+		<dateCreated point="start">
+			<xsl:value-of select="."/>
+		</dateCreated>		
+	</xsl:template>
+	<xsl:template match="endDate">
+		<dateCreated point="end">
+			<xsl:value-of select="."/>
+		</dateCreated>
 	</xsl:template>
 
 	<xsl:template name="physicalDescription">

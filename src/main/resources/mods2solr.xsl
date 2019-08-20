@@ -937,17 +937,20 @@
         <xsl:param name="highDate" select="-100000"/>
         <xsl:param name="startFound" select="0"/>
         <xsl:param name="endFound" select="0"/>
+        <!-- <xsl:param name="dateNodes"
+            select="descendant::*[local-name() = 'dateIssued' or local-name() = 'dateCreated']"/>-->
         <xsl:param name="dateNodes"
-            select="descendant::*[local-name() = 'dateIssued' or local-name() = 'dateCreated']"/>
+            select="mods:originInfo/mods:dateIssued|mods:originInfo/mods:dateCreated"/>
         <xsl:param name="position" select="1"/>
 
-        <!-- <xsl:message>buildDateRangeParams: -->
-        <!-- Low: <xsl:value-of select="$lowDate"/> -\-\- -->
-        <!-- High: <xsl:value-of select="$highDate"/> -\-\- -->
-        <!-- Start Found: <xsl:value-of select="$startFound"/> -\-\- -->
-        <!-- End Found: <xsl:value-of select="$endFound" /> -\-\- -->
-        <!-- Node: <xsl:value-of select="$position" /> -\-\- -->
-        <!-- </xsl:message> -->
+         <!-- <xsl:message>buildDateRangeParams: 
+         Low: <xsl:value-of select="$lowDate"/> -\-\- 
+         High: <xsl:value-of select="$highDate"/> -\-\- 
+         Start Found: <xsl:value-of select="$startFound"/> -\-\- 
+         End Found: <xsl:value-of select="$endFound" /> -\-\- 
+         Nodes: <xsl:value-of select="$dateNodes" /> -\-\- 
+         Position: <xsl:value-of select="$position" /> -\-\- 
+         </xsl:message> -->
 
         <xsl:choose>
             <xsl:when test="count($dateNodes[number($position)]) &gt; 0">
@@ -1098,7 +1101,10 @@
         <xsl:param name="step" select="1"/>
         <xsl:param name="brake" select="0"/>
         <xsl:param name="point"/>
-
+       <!-- <xsl:message>
+            IP: <xsl:value-of select="$dateStringInput"/> -\-\- 
+            OP: <xsl:value-of select="$dateStringOutput"/> -\-\- 
+        </xsl:message> -->
         <xsl:choose>
             <xsl:when test="$brake &gt; 1000">
                 <xsl:message>breaking out of loop: normalizeDate</xsl:message>
@@ -1107,6 +1113,12 @@
                 test='matches($dateStringInput, "\d{4}-\d{1,2}-\d{1,2}/\d{4}-\d{1,2}-\d{1,2}")'>
                 <xsl:value-of
                     select='concat(substring($dateStringInput, 1, 4), "_", substring(substring-after($dateStringInput, "/"), 1, 4))'
+                />
+            </xsl:when>
+            <xsl:when
+                test='matches($dateStringInput, "\d{4}-\d{1,2}-\d{1,2}")'>
+                <xsl:value-of
+                    select='concat(substring($dateStringInput, 1, 4), "_", substring($dateStringInput, 1, 4))'
                 />
             </xsl:when>
             <xsl:when
