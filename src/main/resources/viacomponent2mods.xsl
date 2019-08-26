@@ -2,7 +2,7 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xlink="http://www.w3.org/TR/xlink" xmlns="http://www.loc.gov/mods/v3"
 	xmlns:librarycloud="http://hul.harvard.edu/ois/xml/ns/librarycloud"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs">
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" >
 
 	<!--  Revisions
 	  2015-03-13 fix key date (was ending up in component where it didn't belong
@@ -88,9 +88,7 @@
 					</recordInfo>
 					<extension xmlns="http://www.loc.gov/mods/v3">
 						<librarycloud:originalDocument>
-							<xsl:text>https://s3.amazonaws.com/via-presto/prod/</xsl:text>
-							<xsl:value-of select="recordId"/>
-							<xsl:text>.xml</xsl:text>
+							<xsl:text>https://s3.amazonaws.com/via-presto/prod/</xsl:text><xsl:value-of select="recordId"/><xsl:text>.xml</xsl:text>
 						</librarycloud:originalDocument>
 					</extension>
 					<language>
@@ -171,7 +169,7 @@
 	</xsl:template>
 
 	<xsl:template name="recordElements">
-		<xsl:apply-templates select="title[not(textElement = '')]"/>
+		<xsl:apply-templates select="title[not(textElement='')]"/>
 		<xsl:apply-templates select="creator"/>
 		<xsl:apply-templates select="associatedName"/>
 		<xsl:call-template name="typeOfResource"/>
@@ -205,33 +203,28 @@
 
 	<xsl:template match="title">
 		<xsl:element name="titleInfo">
-			<xsl:variable name="maintitlecount">
-				<xsl:value-of select="count(../title[not(textElement = '') and not(type)])"/>
-			</xsl:variable>
 			<xsl:choose>
-				<xsl:when test="lower-case(./type) = 'Abbreviated Title'">
-					<xsl:attribute name="type">
-						<xsl:value-of select="'abbreviated'"/>
-					</xsl:attribute>
+				<xsl:when test="position() &gt; 1">
+					<xsl:choose>
+						<xsl:when test="lower-case(./type) = 'Abbreviated Title'">
+							<xsl:attribute name="type">
+								<xsl:value-of select="'abbreviated'"/>
+							</xsl:attribute>
+						</xsl:when>
+						<xsl:when test="lower-case(./type) = 'translated title'">
+							<xsl:attribute name="type">
+								<xsl:value-of select="'translated'"/>
+							</xsl:attribute>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:if test="./type[not(.=' Title')]"> <!-- 20190507 MV added to fix ssio2via bug, will fix upstream before restrospective -->
+								<xsl:attribute name="type">
+									<xsl:value-of select="'alternative'"/>
+								</xsl:attribute>
+							</xsl:if>
+						</xsl:otherwise>
+					</xsl:choose>
 				</xsl:when>
-				<xsl:when test="lower-case(./type) = 'translated title'">
-					<xsl:attribute name="type">
-						<xsl:value-of select="'translated'"/>
-					</xsl:attribute>
-				</xsl:when>
-				<xsl:when test="./type = ' Title' and $maintitlecount &gt; 0">
-					<!-- 20190507 MV added to fix ssio2via bug, will fix upstream before restrospective -->
-					<xsl:attribute name="type">
-						<xsl:value-of select="'alternative'"/>
-					</xsl:attribute>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:if test="./type[not(.=' Title')]"> <!-- 20190507 MV added to fix ssio2via bug, will fix upstream before restrospective -->
-						<xsl:attribute name="type">
-							<xsl:value-of select="'alternative'"/>
-						</xsl:attribute>
-					</xsl:if>
-				</xsl:otherwise>
 			</xsl:choose>
 			<xsl:element name="title">
 				<xsl:value-of select="normalize-space(textElement)"/>
@@ -330,14 +323,10 @@
 					</dateOther>
 				</xsl:if>
 				<xsl:if test="structuredDate/beginDate">
-					<dateCreated point="start">
-						<xsl:value-of select="structuredDate/beginDate"/>
-					</dateCreated>
+					<xsl:apply-templates select="structuredDate[1]/beginDate"/>
 				</xsl:if>
-				<xsl:if test="structuredDate/beginDate">
-					<dateCreated point="end">
-						<xsl:value-of select="structuredDate/endDate"/>
-					</dateCreated>
+				<xsl:if test="structuredDate/endDate">
+					<xsl:apply-templates select="structuredDate[1]/endDate"/>
 				</xsl:if>
 				<xsl:if test="freeDate">
 					<dateCreated>
@@ -351,6 +340,17 @@
 				</xsl:if>
 			</originInfo>
 		</xsl:if>
+	</xsl:template>
+
+	<xsl:template match="beginDate">
+		<dateCreated point="start">
+			<xsl:value-of select="."/>
+		</dateCreated>
+	</xsl:template>
+	<xsl:template match="endDate">
+		<dateCreated point="end">
+			<xsl:value-of select="."/>
+		</dateCreated>
 	</xsl:template>
 
 	<xsl:template name="physicalDescription">
@@ -391,10 +391,8 @@
 	<xsl:template match="notes">
 		<note>
 			<xsl:choose>
-				<xsl:when test="starts-with(normalize-space(.), 'General:')">
-					<xsl:text>General note: </xsl:text>
-					<xsl:value-of select="substring-after(normalize-space(.), 'General:')"/>
-				</xsl:when>
+				<xsl:when test="starts-with(normalize-space(.), 'General:')"><xsl:text>General note: </xsl:text><xsl:value-of select="substring-after(normalize-space(.), 'General:')"
+					/></xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="."/>
 				</xsl:otherwise>
@@ -734,7 +732,7 @@
 		<xsl:apply-templates select="createDate" mode="datelist"/>
 		<xsl:apply-templates select="updateNote/updateDate" mode="datelist"/>
 	</xsl:template>
-
+	
 	<xsl:template match="createDate | updateDate" mode="datelist">
 		<xsl:variable name="formatteddate">
 			<xsl:choose>

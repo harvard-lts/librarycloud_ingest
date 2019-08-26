@@ -3,6 +3,7 @@ package edu.harvard.libcomm.pipeline;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.UUID;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -18,6 +19,8 @@ import gov.loc.mods.v3.ModsCollection;
 
 import edu.harvard.libcomm.message.LibCommMessage;
 import edu.harvard.libcomm.message.LibCommMessage.Payload;
+import edu.harvard.libcomm.message.LibCommMessage.History;
+import edu.harvard.libcomm.message.LibCommMessage.History.Event;
 
 public class MARCXMLRawAggregatorStrategy implements CompletionAwareAggregationStrategy {
 
@@ -36,7 +39,7 @@ public class MARCXMLRawAggregatorStrategy implements CompletionAwareAggregationS
         if (oldExchange == null) {
             return newExchange;
         }
-
+        //log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath());
         String oldBody = oldExchange.getIn().getBody(String.class);
         String newBody = newExchange.getIn().getBody(String.class);
         String body = oldBody + newBody;
@@ -63,8 +66,15 @@ public class MARCXMLRawAggregatorStrategy implements CompletionAwareAggregationS
         payload.setFormat("MARCXML");
         payload.setSource(getSource());
         payload.setData(body);
-        lcmessage.setCommand("ENRICH");
+        //lcmessage.setCommand("normalize-marcxml");
         lcmessage.setPayload(payload);
+        String uid = UUID.randomUUID().toString();
+        History hist = new History();
+        Event event = new Event();
+        event.setMessageid(uid);
+        hist.getEvent().add(event);
+        lcmessage.setHistory(hist);
+
         try {
             exchange.getIn().setBody(MessageUtils.marshalMessage(lcmessage));
         } catch (JAXBException e) {

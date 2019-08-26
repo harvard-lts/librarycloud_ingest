@@ -335,8 +335,8 @@
     <xsl:template match="numberOfLines">
         <xsl:element name="physicalDescription">
             <xsl:element name="extent">
-                <xsl:attribute name="unit">lines</xsl:attribute>
-                <xsl:value-of select="normalize-space(.)"/>
+                <!--<xsl:attribute name="unit">lines</xsl:attribute>-->
+                <xsl:value-of select="normalize-space(.)"/><xsl:text> lines</xsl:text>
             </xsl:element>
         </xsl:element>
     </xsl:template>

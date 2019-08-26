@@ -3,6 +3,7 @@ package edu.harvard.libcomm.pipeline;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.UUID;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -72,6 +73,14 @@ public class MODSAggregatorStrategy implements CompletionAwareAggregationStrateg
 	        String data = message.getPayload().getData();
 	        data = "<modsCollection xmlns=\"http://www.loc.gov/mods/v3\">" + data + "</modsCollection>";
 	        message.getPayload().setData(data);
+			message.getPayload().setFormat("MODS");
+			String uid = UUID.randomUUID().toString();
+			LibCommMessage.History hist = new LibCommMessage.History();
+			LibCommMessage.History.Event event = new LibCommMessage.History.Event();
+			event.setMessageid(uid);
+			hist.getEvent().add(event);
+			message.setHistory(hist);
+
 	        String outboundMessage = marshalMessage(context, message);
 	        exchange.getIn().setBody(outboundMessage);
 	    } catch (Exception e) {

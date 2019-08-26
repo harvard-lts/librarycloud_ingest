@@ -30,12 +30,15 @@
              <!--<xsl:variable name="holdings" select="document('')//xsl:param[@name='param1']//holdings"/>-->
             <xsl:variable name="hollisid"><xsl:value-of select="./mods:recordInfo/mods:recordIdentifier"/></xsl:variable>
             <xsl:for-each select="$holdings//doc/str[@name='originalMarc']/marc:record[marc:controlfield[@tag='001']=$hollisid]">
-                <xsl:if test="not(./marc:datafield[@tag=950]/marc:subfield[@code='g']='true') and not(./marc:datafield[@tag=852]/marc:subfield[@code = 'b'] = ('BIO', 'BRM', 'CEA', 'CFI', 'DEV', 'FOG', 'HIL', 'LIT', 'PSY', 'QUA', 'RCA', 'RRC', 'SFL', 'SKL', 'SOC', 'WAR'))">
+                <xsl:if test="not(./marc:datafield[@tag='950']/marc:subfield[@code='g']='true') and not(./marc:datafield[@tag='852']/marc:subfield[@code = 'b'] = ('BIO', 'BRM', 'CEA', 'CFI', 'DEV', 'FOG', 'HIL', 'LIT', 'PSY', 'QUA', 'RCA', 'RRC', 'SFL', 'SKL', 'SOC', 'WAR'))">
                     <xsl:element name="location" namespace="http://www.loc.gov/mods/v3">
                         <!-- <xsl:apply-templates select="./str[@name='originalMarc']"/> -->
                         <xsl:apply-templates select="./marc:datafield[@tag='852']"/>
                         <xsl:apply-templates select="./marc:datafield[@tag='843']"/>
                         <xsl:apply-templates select="./marc:datafield[@tag='856']"/>
+                        <xsl:if test="./marc:datafield[@tag='852']/marc:subfield[@code = 'b'] = 'ART'">
+                            <xsl:apply-templates select="./marc:datafield[@tag='541']"/>
+                        </xsl:if>
                      </xsl:element>
                 </xsl:if>
             </xsl:for-each>
@@ -147,5 +150,16 @@
     <xsl:template match="marc:subfield[@code='u']" mode="url">
         <xsl:value-of select="."/>
     </xsl:template>
+
+    <!-- HUA ALMA records contain object number in 541 subf e, we use this for HUA object in context -->
+    <xsl:template match="marc:datafield[@tag='541']">
+        <xsl:if test="./marc:subfield[@code='e']">
+            <url namespace="http://www.loc.gov/mods/v3" access="object in context" displayLabel="Harvard Art Museums">
+                <xsl:text>https://www.harvardartmuseums.org/collections/object/</xsl:text><xsl:value-of select="./marc:subfield[@code='e']"/>
+            </url>
+        </xsl:if>
+    </xsl:template>
+
+
 
 </xsl:stylesheet>

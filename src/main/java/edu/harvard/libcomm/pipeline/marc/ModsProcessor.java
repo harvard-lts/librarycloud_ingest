@@ -13,15 +13,19 @@ public class ModsProcessor implements IProcessor {
 	private String stylesheet = "src/main/resources/MARC21slim2MODS3-6.xsl";
 
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
+		log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath() + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+
 		String modsCollection = null;
-		libCommMessage.setCommand("ENRICH");
+		libCommMessage.setCommand("normalize-marcxml");
 		try {
 			modsCollection = MessageUtils.transformPayloadData(libCommMessage, this.getStylesheet(), null);
 		} catch (Exception e) {
 			log.error("Could not transform record from MARC to MODS");
 			throw e;
 		}
-		log.trace("ModProcessor Result:" + modsCollection);
+
+		//log.trace("ModProcessor Result:" + modsCollection);
+		//libCommMessage.setCommand("enrich-alma-holdings");
         libCommMessage.getPayload().setData(modsCollection);
 	}
 

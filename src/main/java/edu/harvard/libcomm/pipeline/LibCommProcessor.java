@@ -49,7 +49,8 @@ public class LibCommProcessor implements Processor {
 		try {
 			processor.processMessage(libCommMessage);			
 		} catch (Exception e) {
-			log.error("Error processing message. Route:" + exchange.getFromRouteId() + "; Id:" + exchange.getExchangeId(), e);			
+			log.info("Error processing message. Route:" + exchange.getFromRouteId() + "; Exception:" + e.getMessage());
+			log.error("Error processing message. Route:" + exchange.getFromRouteId() + "; Id:" + exchange.getExchangeId(), e);
 			throw e;
 		}
 		

@@ -36,6 +36,9 @@
                     <xsl:text>Middle Eastern Division, Widener Library, Harvard University</xsl:text>
                 </xsl:element>
             </xsl:element>
+            <xsl:element name="genre">
+                <xsl:text>Oral histories</xsl:text>
+            </xsl:element>
             <xsl:element name="accessCondition">
                 <xsl:attribute name="type">restriction on access</xsl:attribute>
                 <xsl:text>Access to some interviews may be restricted pending the permission of the interviewee.</xsl:text>
