@@ -264,8 +264,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.5.1</version>
         <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
       <plugin>
@@ -277,7 +277,7 @@
         </configuration>
       </plugin>
 
-      <plugin>
+      <!--<plugin>
         <groupId>org.apache.openjpa</groupId>
         <artifactId>openjpa-maven-plugin</artifactId>
         <version>${openjpa.version}</version>
@@ -302,7 +302,7 @@
             <version>${openjpa.version}</version>
           </dependency>
         </dependencies>
-      </plugin>
+      </plugin>-->
 
       <!-- allows the route to be ran via 'mvn camel:run' -->
       <plugin>
