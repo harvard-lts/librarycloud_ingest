@@ -31,7 +31,7 @@ To date, the app handles ingesting marc bibliographic records (in marc xml forma
    ```
    export AWS_ACCESS_KEY_ID=<the access key>
    export AWS_SECRET_ACCESS_KEY=<the secret access key>
-   export PATH=$PATH:~/aws-tools
+   export PATH=$PATH:<path to aws-tools repo cloned in requirements>
    ```
 
 ## To run application (standalone, using maven):
