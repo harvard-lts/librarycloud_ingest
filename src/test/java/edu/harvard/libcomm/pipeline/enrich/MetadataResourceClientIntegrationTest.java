@@ -94,7 +94,7 @@ public class MetadataResourceClientIntegrationTest {
         byte[] keyBytes = Base64.getDecoder().decode(lcKey.getBytes());
         Key decodedKey = Keys.hmacShaKeyFor(keyBytes);
 
-        JwtBuilder builder =  getBasicJwtBuilder("jwt.lc.key", drsId);
+        JwtBuilder builder =  getBasicJwtBuilder("LC", drsId);
         builder.signWith(decodedKey);
         String jws = builder.compact();
 
@@ -155,7 +155,7 @@ public class MetadataResourceClientIntegrationTest {
         byte[] keyBytes = Base64.getDecoder().decode(lcKey.getBytes());
         Key decodedKey = Keys.hmacShaKeyFor(keyBytes);
 
-        JwtBuilder builder =  getBasicJwtBuilder("jwt.lc.key", drsId);
+        JwtBuilder builder =  getBasicJwtBuilder("LC", drsId);
         builder.signWith(decodedKey);
         String jws = builder.compact();
         log.info("jws: " + jws);
