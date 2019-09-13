@@ -45,7 +45,7 @@ class SolrProcessorTests {
         lcm.setPayload(pl);
 
         String result = MessageUtils.transformPayloadData(lcm, "src/main/resources/mods2solr.xsl", null);
-        System.out.println(result);
+        //System.out.println("SolrProcessor: " + result);
         InputStream solrIS = IOUtils.toInputStream(result, "UTF-8");
 
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();

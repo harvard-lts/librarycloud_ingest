@@ -15,6 +15,14 @@
     <!-- bootstrap the java config -->
     <bean class="edu.harvard.libcomm.config.Config" />
 
+    <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="brokerURL" value="${activemq.broker.url}" />
+        <property name="userName" value="${activemq.username}" />
+        <property name="password" value="${activemq.password}" />
+        <property name="clientId" value="${activemq.clientid}" />
+        <property name="deliveryPersistent" value="true" />
+    </bean>
+
     <!-- Custom S3 marshaller to place body on S3 -->
     <bean id="cloudbody" class="edu.harvard.libcomm.pipeline.MessageBodyS3Marshaller">
         <!-- force use of s3 bucket until we determine why prod direct to sqs fouls encoding -->
@@ -277,6 +285,9 @@
     <bean id="s3ListProcessor" class="edu.harvard.libcomm.pipeline.enrich.S3ListProcessor"/>
 
      <bean id="prepareURI" class="edu.harvard.libcomm.pipeline.PrepareURIForHTTPEndpoint" />
+
+    <bean id="drsMdsProcessor" class="edu.harvard.libcomm.pipeline.DrsMdsProcessor" />
+    <bean id="drsMdsSolrProcessor" class="edu.harvard.libcomm.pipeline.solr.DrsMdsSolrProcessor" />
 
 <!-- Connecting to mongo from within ted classes, but save for reference
     <bean id="mongoBean" class="com.mongodb.MongoClient">
@@ -1158,6 +1169,28 @@
             <process ref="s3DeleteProcessor"/>
             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
         </route>
+
+        <route id="activemqDrs" errorHandlerRef="eh">
+            <from uri="activemq:Consumer.Consumer1.VirtualTopic.DRS_OBJECT_UPDATED"/>
+            <setHeader headerName="drsId">
+                <jsonpath>$.data.objectId</jsonpath>
+            </setHeader>
+            <transform>
+                <simple>${header.drsId}</simple>
+            </transform>
+            <process ref="drsMdsProcessor"/>
+            <!--<to uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
+            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>
+        </route>
+
+        <route id="drsMdsToSolr">
+            <!--<from uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>
+            <process ref="drsMdsSolrProcessor"/>
+            <to uri="file://{{librarycloud.files.basepath}}/DRSMDSSOLR"/>
+            <!--<to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>-->
+        </route>
+
 <!--
         <route id="fullRefresh" errorHandlerRef="eh">
             <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-allbibs?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />

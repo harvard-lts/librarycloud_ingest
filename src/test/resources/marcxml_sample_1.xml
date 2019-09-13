@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?><marc:collection xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
 <marc:record><marc:leader>01207cam a2200349 i 4500</marc:leader>
-<marc:controlfield tag="001">000005977-3</marc:controlfield>
+<marc:controlfield tag="001">990000059770203941</marc:controlfield>
 <marc:controlfield tag="005">20020606090541.3</marc:controlfield><marc:controlfield tag="008">790803s1979    nyua   j      000 1 eng  </marc:controlfield></marc:record>
 <marc:record><marc:leader>01207cam a2200349 i 4500</marc:leader>
 <marc:controlfield tag="001">000005977-3</marc:controlfield>

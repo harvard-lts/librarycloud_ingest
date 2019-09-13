@@ -66,6 +66,7 @@ class StackScoreProcessorTests {
         httpUrlStreamHandler.resetConnections();
     }
 
+    @Disabled
     @Test
     void addStackScoreData() throws Exception {
 

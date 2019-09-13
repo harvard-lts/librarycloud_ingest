@@ -52,6 +52,8 @@ public class Config {
 	public String MONGO_PASSWORD;
 	public String MONGO_DB;
 	public String MARC_S3_URL;
+	public String JWT_LC_KEY;
+	public String INTEGRATION_SERVER_URL;
 
 	private static Config conf;
 	
@@ -82,6 +84,8 @@ public class Config {
 		MONGO_PASSWORD = props.getProperty("mongo.password");
 		MONGO_DB = props.getProperty("mongo.db");
 		MARC_S3_URL = props.getProperty("marc.s3.url");
+		JWT_LC_KEY = props.getProperty("jwt.lc.key");
+		INTEGRATION_SERVER_URL = props.getProperty("integration.server.url");
 
 	}
 	

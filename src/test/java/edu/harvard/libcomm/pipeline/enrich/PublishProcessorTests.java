@@ -112,7 +112,7 @@ class PublishProcessorTests {
         Date before = new Date();
 
         p.processMessage(lcm);
-        System.out.println(lcm.getPayload().getData());
+        //System.out.println("PublishProcessor: " + lcm.getPayload().getData());
         Document doc = TestHelpers.extractXmlDoc(lcm);
 
         Date after = new Date();
