@@ -60,6 +60,24 @@ class DrsMdsParseTest {
         parseMetadata(filename);
     }
 
+    @Test
+    void fdsTest () throws Exception {
+        String filename = "/fds_mds_test.json";
+        parseMetadata(filename);
+    }
+
+    @Test
+    void pdsListTest () throws Exception {
+        String filename = "/pdslist_mds_test.json";
+        parseMetadata(filename);
+    }
+
+    @Test
+    void sdsVideoTest () throws Exception {
+        String filename = "/sdsvideo_mds_test.json";
+        parseMetadata(filename);
+    }
+
     void parseMetadata(String filename) throws Exception {
         InputStream is = new FileInputStream(this.getClass().getResource(filename).getFile());
         JSONArray jsonArray = new JSONArray(IOUtils.toString(is,"UTF-8"));
@@ -138,7 +156,6 @@ class DrsMdsParseTest {
                             log.debug("No mimeType for this object");
                         }
                     }
-                    log.info("---URL: " + k);
                     printFields();
                 }
             }
@@ -153,7 +170,6 @@ class DrsMdsParseTest {
         log.info(url);
         log.info(deliveryType);
         log.info(urn);
-        //log.info(objectId);
         log.info(drsFileId);
         log.info(drsObjectId);
         log.info(accessFlag);
@@ -172,23 +188,6 @@ class DrsMdsParseTest {
         log.info(maxImageDeliveryDimension);
         log.info(mimeType);
         log.info(suppliedFilename);
-    }
-
-    private void addSolrDoc (JSONObject jsonObj, String url, String deliveryType) {
-        //drsId = jsonObj.get("drsId").toString();
-        accessFlag = jsonObj.get("accessFlag").toString();
-        JSONObject cmObj = jsonObj.getJSONObject("contentModel");
-        cmCode = cmObj.getString("code");
-        alias = cmObj.getString("alias");
-        JSONObject ownerObj = jsonObj.getJSONObject("owner");
-        ownerCode = ownerObj.getString("code");
-        ownerCodeDisplayName = ownerObj.getString("displayName");
-        JSONObject lmdObj = jsonObj.getJSONObject("lastModifiedDate");
-        lastModifiedDate = lmdObj.get("$date").toString();
-        insertionDate = jsonObj.get("insertionDate").toString();
-        //log.info("FIELDS: " + drsId + accessFlag + cmCode + alias + ownerCode + ownerCodeDisplayName + lastModifiedDate + insertionDate + url + deliveryType);
-        //assertEquals("P", accessFlag);
-        //log.debug(lastModifiedDate + insertionDate);
     }
 
 }
