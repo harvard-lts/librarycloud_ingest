@@ -34,6 +34,7 @@ public class DrsMdsProcessor implements Processor {
         int drsId = 0;
         try {
             drsId =Integer.parseInt(drsIdStr);
+            log.info("Here's the objectId passed from activemq: " + drsId);
         }
         catch (NumberFormatException e) {
             log.error("drs id: " + drsIdStr + " not parseable to integer");
@@ -49,14 +50,14 @@ public class DrsMdsProcessor implements Processor {
         log.info("About to access Tomcat at this URL endpoint: {}: " + endpoint);
 
         String lcKey = Config.getInstance().JWT_LC_KEY;
-        log.info("lcKey: " + lcKey);
+        //log.info("lcKey: " + lcKey);
         byte[] keyBytes = Base64.getDecoder().decode(lcKey.getBytes());
         Key decodedKey = Keys.hmacShaKeyFor(keyBytes);
 
         JwtBuilder builder =  getBasicJwtBuilder("LC", drsId);
         builder.signWith(decodedKey);
         String jws = builder.compact();
-        log.info("jws: " + jws);
+        //log.info("jws: " + jws);
         // parse the signed JWS and show it as JWT
         String key = Config.getInstance().JWT_LC_KEY;
         @SuppressWarnings("unchecked")
@@ -78,6 +79,7 @@ public class DrsMdsProcessor implements Processor {
 
         Object obj = response.readEntity(Object.class);
         //log.info("Response Object Entity: {}: " + obj);
+        log.info("Passing result from DMS to lc ingest for solr mapping and ingest");
         exchange.getIn().setBody(obj);
 
         /*

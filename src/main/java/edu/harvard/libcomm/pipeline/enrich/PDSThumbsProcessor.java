@@ -50,9 +50,13 @@ public class PDSThumbsProcessor extends ExternalServiceProcessor implements IPro
                     String location = con.getHeaderField("Location"); // testing + "?n=3";
                     if ((responseCode / 100) == 3) {
                         if (location.contains("//pds")) {
-                            String thumb = getIIIFThumb(StringUtils.substringAfterLast(location, "/"));
-                            //System.out.println(location + " : " + thumb);
-                            sb.append("<image><url>" + s + "</url>" + "<thumb>" + thumb + "</thumb></image>");
+                            try {
+                                String thumb = getIIIFThumb(StringUtils.substringAfterLast(location, "/"));
+                                //System.out.println(location + " : " + thumb);
+                                sb.append("<image><url>" + s + "</url>" + "<thumb>" + thumb + "</thumb></image>");
+                            } catch (Exception e)  {
+                                log.error("No thumb found for: " + s);
+                            }
                         }
                     }
                 }

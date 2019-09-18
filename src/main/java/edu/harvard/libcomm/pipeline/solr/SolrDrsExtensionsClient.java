@@ -37,19 +37,19 @@ import edu.harvard.libcomm.pipeline.IProcessor;
 * SolrServer is a singleton class for retrieving the solr connection
 *
 */
-public class SolrDrsExtensionsServer {
-	private static HttpSolrClient server = null;
+public class SolrDrsExtensionsClient {
+	private static HttpSolrClient client = null;
 
   public static HttpSolrClient getSolrConnection() {
 		try {
         //			server = new HttpSolrClient.Builder(Config.getInstance().SOLR_EXTENSIONS_URL).build();
-        server = new HttpSolrClient(Config.getInstance().SOLR_EXTENSIONS_URL);
+        client = new HttpSolrClient(Config.getInstance().SOLR_EXTENSIONS_URL);
 
 		} catch (Exception e) {
 			// TO DO - error handling
 			System.out.println( e);
 		}
 
-		return server;
+		return client;
 	}
 }

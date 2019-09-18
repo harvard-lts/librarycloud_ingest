@@ -100,9 +100,10 @@ class DrsMdsParseTest {
                 catch (JSONException e) {
                     log.debug("No viewText for this object");
                 }
+                log.info("Object Fields: " + drsObjectId + "|" + ownerSuppliedName + "|" + metsLabel + "|" + viewText);
                 JSONArray harvardMetadataLinks = null;
                 try {
-                    harvardMetadataLinks = jsonObject.getJSONArray("HarvardMetadataLinks");
+                    harvardMetadataLinks = jsonObject.getJSONArray("harvardMetadataLinks");
                     for(int j=0;j<harvardMetadataLinks.length();j++) {
                         JSONObject mdlObj = harvardMetadataLinks.getJSONObject(j);
                         harvardMetadataId = mdlObj.getString("metadataIdentifier");
@@ -112,6 +113,7 @@ class DrsMdsParseTest {
                         } catch (JSONException e) {
                             log.debug("No harvardMetadataLabel for this HarvardMetadataLink");
                         }
+                        log.info("MetadataLinks: " + "|" +  harvardMetadataId +  "|" + harvardMetadataType + "|" + harvardMetadataLabel);
                     }
 
                 } catch (JSONException e) {
@@ -156,7 +158,7 @@ class DrsMdsParseTest {
                             log.debug("No mimeType for this object");
                         }
                     }
-                    printFields();
+                    //printFields();
                 }
             }
             catch (JSONException e) {
