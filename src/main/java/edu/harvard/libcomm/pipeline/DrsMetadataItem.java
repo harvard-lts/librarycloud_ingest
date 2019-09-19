@@ -46,7 +46,8 @@ public class DrsMetadataItem {
     private String mimeType;
     @Field
     private String suppliedFilename;
-
+    @Field
+    private String thumbnailURL;
 
     public String getId() {
         return id;
@@ -206,6 +207,14 @@ public class DrsMetadataItem {
 
     public void setSuppliedFilename(String suppliedFilename) {
         this.suppliedFilename = suppliedFilename;
+    }
+
+    public String getThumbnailURL() {
+        return thumbnailURL;
+    }
+
+    public void setThumbnailURL(String thumbnailURL) {
+        this.thumbnailURL = thumbnailURL;
     }
 
 }

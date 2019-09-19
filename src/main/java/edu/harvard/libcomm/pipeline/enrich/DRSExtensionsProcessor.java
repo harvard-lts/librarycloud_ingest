@@ -37,7 +37,7 @@ public class DRSExtensionsProcessor extends ExternalServiceProcessor implements 
 			urns = urns.replace("OR  OR ", "OR ");
 			urns = "(" + urns.replace(" ","+") + ")";
 			//System.out.println("URNS: " + urns);
-			uri = new URI(Config.getInstance().SOLR_EXTENSIONS_URL + "/select?q=urn_keyword:" + urns + "&rows=250");
+			uri = new URI(Config.getInstance().SOLR_EXTENSIONS_URL + "/select?q=urn:" + urns + "&rows=250");
 		}
     process(libCommMessage, uri, "results", "src/main/resources/adddrsextensions.xsl");
 	}

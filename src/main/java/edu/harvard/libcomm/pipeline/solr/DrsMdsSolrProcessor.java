@@ -13,6 +13,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -24,32 +29,6 @@ public class DrsMdsSolrProcessor implements Processor {
     private Integer commitWithinTime = -1;
     Collection<SolrInputDocument> docs = null;
     List<DrsMetadataItem> itemList = null;
-/*
-    private String url;
-    private String deliveryType;
-    private String urn;
-    private String objectId;
-    private String drsFileId; // file level only
-    private String drsObjectId;
-    private String accessFlag;
-    private String lastModifiedDate;
-    private String insertionDate;
-    private String ownerSuppliedName;
-    private String cmCode;
-    private String alias;
-    private String ownerCode;
-    private String ownerCodeDisplayName;
-    private String metsLabel;                 // object level only
-    //private String harvardMetadataType;       // object level only
-    //private String harvardMetadataId;         // object level only
-    //private String harvardMetadataLabel;      // object level only
-    private ArrayList<String> harvardMetadataLinks;    //
-    private String viewText;                  // object level only
-    private String maxImageDeliveryDimension; // file level only
-    private String mimeType;                  // file level only
-    private String suppliedFilename;          // file level only
-
- */
 
     public void process(Exchange exchange) throws Exception {
         docs = new ArrayList<SolrInputDocument>();
@@ -63,12 +42,12 @@ public class DrsMdsSolrProcessor implements Processor {
 
 
     void parseJson(String json) throws Exception {
+        String drsObjectId = null;
+        String ownerSuppliedName = null;
+        String metsLabel = null;
+        String viewText = null;
         JSONArray jsonArray = new JSONArray(json);
         for(int i=0;i<jsonArray.length();i++) {
-            String drsObjectId = null;
-            String ownerSuppliedName = null;
-            String metsLabel = null;
-            String viewText = null;
             ArrayList<String> harvardMetadataLinks = new ArrayList<String>();
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             //set all the object fields
@@ -88,7 +67,7 @@ public class DrsMdsSolrProcessor implements Processor {
                 catch (JSONException e) {
                     log.debug("No viewText for this object");
                 }
-                log.info("Object Fields: " + drsObjectId + "|" + ownerSuppliedName + "|" + metsLabel + "|" + viewText);
+                //log.info("Object Fields: " + drsObjectId + "|" + ownerSuppliedName + "|" + metsLabel + "|" + viewText);
                 JSONArray harvardMetadataArr = null;
                 try {
                     harvardMetadataLinks = new ArrayList<String>();
@@ -125,11 +104,18 @@ public class DrsMdsSolrProcessor implements Processor {
                     item.setViewText(viewText);
                     item.setHarvardMetadataLinks(harvardMetadataLinks);
                     JSONObject urnObj = urnArr.getJSONObject(k);
-                    item.setId(jsonObject.get("drsId").toString());
-                    item.setDeliveryType(urnObj.getString("deliveryType"));
+                    String deliveryType = urnObj.getString("deliveryType");
+                    item.setDeliveryType(deliveryType);
+                    if (deliveryType.equals("PDS")) {
+                        String thumb = getIIIFThumb(drsObjectId);
+                        // below just for testing with real object in iiif
+                        //String thumb = getIIIFThumb("457753039");
+                        item.setThumbnailURL(thumb);
+                    }
                     String url = urnObj.getString("url");
                     item.setUrl(url);
                     String urn = StringUtils.substringAfter(url,"harvard.edu/");
+                    item.setId(urn);
                     item.setUrn(urn);
                     item.setAccessFlag(jsonObject.get("accessFlag").toString());
                     JSONObject cmObj = jsonObject.getJSONObject("contentModel");
@@ -234,6 +220,48 @@ public class DrsMdsSolrProcessor implements Processor {
 
         Date end = new Date();
         log.debug("Solr insert query time: " + (end.getTime() - start.getTime()));
+    }
+
+    private static String getIIIFThumb(String objectId) {
+        String thumb = "";
+        String iiifBaseUrl = "https://iiif.lib.harvard.edu/manifests/drs:";
+        try {
+            String id = objectId.split("\\?")[0];
+            int seq = 1;
+            if (objectId.contains("?n="))
+                seq = Integer.parseInt(StringUtils.substringAfter(objectId,"?n="));
+            URL iiifUrl = new URL(iiifBaseUrl + id); //(objectId.contains("?n=") ? objectId.replace("?n=","$") + "i" : objectId));
+            InputStream is = iiifUrl.openConnection().getInputStream();
+            try {
+                JSONObject iiifObj = new JSONObject(readUrl(is));
+                JSONArray seqArr = iiifObj.getJSONArray("sequences");
+                JSONArray canvArr = seqArr.getJSONObject(0).getJSONArray("canvases");
+                thumb = canvArr.getJSONObject(seq -1).getJSONObject("thumbnail").getString("@id");
+            } catch (JSONException jse) {
+                jse.printStackTrace();
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return thumb;
+    }
+
+    private static String readUrl(InputStream is) {
+        StringBuilder content = new StringBuilder();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+            String line;
+            // read from the urlconnection via the bufferedreader
+            while ((line = bufferedReader.readLine()) != null) {
+                content.append(line + "\n");
+            }
+            bufferedReader.close();
+        } catch (Exception e) {
+            System.out.println("BAD REQ: " + e.getMessage());
+            e.printStackTrace();
+        }
+        //System.out.println("READURL: " + content.toString());
+        return content.toString();
     }
 
 }
