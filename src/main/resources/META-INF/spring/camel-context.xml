@@ -288,6 +288,8 @@
 
     <bean id="drsMdsProcessor" class="edu.harvard.libcomm.pipeline.DrsMdsProcessor" />
     <bean id="drsMdsSolrProcessor" class="edu.harvard.libcomm.pipeline.solr.DrsMdsSolrProcessor" />
+    <bean id="drsMdsUpdateProcessor" class="edu.harvard.libcomm.pipeline.enrich.DrsMdsUpdateProcessor" />
+
 
 <!-- Connecting to mongo from within ted classes, but save for reference
     <bean id="mongoBean" class="com.mongodb.MongoClient">
@@ -1156,7 +1158,7 @@
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
                 <split streaming="true">
-                    <tokenize token="\n"/>
+                    <tokenize token="\r\n|\n" xml="false" trim="true" />
                     <process ref="refreshFromS3Processor"/>
                     <!--<to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml"/>-->
                     <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
@@ -1187,8 +1189,15 @@
             <!--<from uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
             <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>
             <process ref="drsMdsSolrProcessor"/>
-            <to uri="file://{{librarycloud.files.basepath}}/DRSMDSSOLR"/>
-            <!--<to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>-->
+            <!--<to uri="file://{{librarycloud.files.basepath}}/DRSMDSSOLR"/>-->
+            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"/>
+        </route>
+        <route id="drsMdsUpdate">
+            <!--<from uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"/>
+            <process ref="drsMdsUpdateProcessor"/>
+            <!--<to uri="file://{{librarycloud.files.basepath}}/DRSMDSSOLR"/>-->
+            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
         </route>
 
 <!--

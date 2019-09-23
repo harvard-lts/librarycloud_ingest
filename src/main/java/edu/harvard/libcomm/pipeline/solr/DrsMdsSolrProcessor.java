@@ -29,6 +29,7 @@ public class DrsMdsSolrProcessor implements Processor {
     private Integer commitWithinTime = -1;
     Collection<SolrInputDocument> docs = null;
     List<DrsMetadataItem> itemList = null;
+    private String urlJson;
 
     public void process(Exchange exchange) throws Exception {
         docs = new ArrayList<SolrInputDocument>();
@@ -37,7 +38,7 @@ public class DrsMdsSolrProcessor implements Processor {
         //log.info(drsMetadataJson);
         parseJson(drsMetadataJson);
         populateIndex();
-        exchange.getIn().setBody("DONE");
+        exchange.getIn().setBody(urlJson);
     }
 
 
@@ -96,6 +97,8 @@ public class DrsMdsSolrProcessor implements Processor {
             JSONArray urnArr = null;
             try {
                 urnArr = jsonObject.getJSONArray("deliveryUrns");
+                if (urnArr.length() > 0)
+                    urlJson = urnArr.toString();
                 for(int k=0;k<urnArr.length();k++) {
                     DrsMetadataItem item = new DrsMetadataItem();
                     item.setDrsObjectId(drsObjectId);
@@ -156,47 +159,6 @@ public class DrsMdsSolrProcessor implements Processor {
         }
 
     }
-/*
-    private void buildSolrDoc (JSONObject jsonObj, String url, String deliveryType) {
-        log.info("Parsing and mapping drs metadata to solr fields");
-        SolrInputDocument doc = new SolrInputDocument();
-        //required
-        doc.addField("id",urn);
-        doc.addField("urn",urn);
-        doc.addField("fileDeliveryURL",url);
-        doc.addField("uriType",deliveryType);
-        doc.addField("drsObjectId",drsObjectId);
-        doc.addField("accessFlag",accessFlag);
-        doc.addField("contentModelCode",cmCode);
-        doc.addField("contentModel",alias);
-        doc.addField("ownerCode",ownerCode);
-        doc.addField("ownerCodeDisplayName",ownerCodeDisplayName);
-        doc.addField("lastModifiedDate",lastModifiedDate);
-        doc.addField("insertionDate",insertionDate);
-        doc.addField("ownerSuppliedName",ownerSuppliedName);
-        // optional or file
-        if (metsLabel != null)
-            doc.addField("metsLabel",metsLabel);
-        if (viewText != null)
-            doc.addField("viewText",viewText);
-        if (drsFileId != null)
-            doc.addField("drsFileId",drsFileId);
-        if (maxImageDeliveryDimension != null)
-            doc.addField("maxImageDeliveryDimension",maxImageDeliveryDimension);
-        if (mimeType != null)
-            doc.addField("mimeType",mimeType);
-        if (suppliedFilename != null)
-            doc.addField("suppliedFilename",suppliedFilename);
-        if (harvardMetadataLinks.size() > 0)
-            doc.addField("harvardMetadataLink",harvardMetadataLinks;
-        }
-
-        docs.add(doc);
-        //log.info("Here are the parsed fields: " + drsId + ", " + accessFlag + ", " + cmCode + ", " + alias + ", " + ownerCode + ", " + ownerCodeDisplayName + ", " + lastModifiedDate + ", " + insertionDate + ", " + url + ", " + deliveryType);
-
-    }
-    */
-
 
     private void populateIndex() throws Exception {
         log.info("Inserting into solr");
