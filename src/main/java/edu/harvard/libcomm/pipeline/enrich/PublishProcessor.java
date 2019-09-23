@@ -18,8 +18,11 @@ public class PublishProcessor implements IProcessor {
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
 		String data = null;
 		libCommMessage.setCommand("publish");
-		log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
-
+		try {
+			log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath() + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+		} catch (Exception e) {
+			log.error("Unable to log message info");
+		}
 		String modsCount = null;
 		try {
       TimeZone tz = TimeZone.getTimeZone("UTC");

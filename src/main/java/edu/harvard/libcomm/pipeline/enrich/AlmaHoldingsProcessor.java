@@ -44,7 +44,7 @@ public class AlmaHoldingsProcessor extends ExternalXMLServiceProcessor implement
 		libCommMessage.setCommand("enrich-alma-holdings");
 		try {
 			log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath() + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
-		} Catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Unable to log message info");
 		}
 		URI uri = new URI(Config.getInstance().SOLR_HOLDINGS_URL + "/select?q=bibId:(" + getRecordIds(libCommMessage) + ")&rows=250&wt=xml");

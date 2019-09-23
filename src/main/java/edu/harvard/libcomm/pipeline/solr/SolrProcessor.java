@@ -30,8 +30,11 @@ public class SolrProcessor implements IProcessor {
 	@Override
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
 		libCommMessage.setCommand("publish-to-solr");
-		log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
-
+		try {
+			log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath() + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+		} catch (Exception e) {
+			log.error("Unable to log message info");
+		}
 		try {
 			String solrXml = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/mods2solr.xsl",null);
 			populateIndex(solrXml);
