@@ -34,21 +34,21 @@ import edu.harvard.libcomm.pipeline.IProcessor;
 /**
 *
 *
-* SolrServer is a singleton class for retrieving the solr connection
+* SolrHoldingsClient is a singleton class for retrieving the solr connection
 *
 */
-public class SolrHoldingsServer {
-	private static HttpSolrClient server = null;
+public class SolrHoldingsClient {
+	private static HttpSolrClient client = null;
 	
 	public static HttpSolrClient getSolrConnection() {
 		try {
-      // server = new HttpSolrClient.Builder(Config.getInstance().SOLR_HOLDINGS_URL).build();
-        server = new HttpSolrClient(Config.getInstance().SOLR_HOLDINGS_URL);
+      // client = new HttpSolrClient.Builder(Config.getInstance().SOLR_HOLDINGS_URL).build();
+        client = new HttpSolrClient(Config.getInstance().SOLR_HOLDINGS_URL);
 
 		} catch (Exception e) {
 			// TO DO - error handling
 			System.out.println( e);
 		}
-		return server;
+		return client;
 	}
 }

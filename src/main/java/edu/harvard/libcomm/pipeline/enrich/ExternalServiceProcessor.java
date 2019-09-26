@@ -73,11 +73,12 @@ public class ExternalServiceProcessor implements IProcessor {
 			xml = XML.toString(json);
 		}
 		xml = "<" + wrapperToken + ">" + xml + "</" + wrapperToken + ">";
-		//System.out.println("EXT XML: " + xml);
+		//log.info("xml: " + xml);
 		log.trace("External Service result:" + xml);
 		
 		try {
 			data = MessageUtils.transformPayloadData(libCommMessage,transformXSL,xml);
+			//log.info("data: " + data);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

@@ -48,8 +48,8 @@ public class QueryUrnsFromSolr {
     }
 
     private void queryForUrns() throws Exception {
-        // HttpSolrClient server = new HttpSolrClient.Builder(URL).build();
-        HttpSolrClient server = new HttpSolrClient(URL);
+        // HttpSolrClient client = new HttpSolrClient.Builder(URL).build();
+        HttpSolrClient client = new HttpSolrClient(URL);
         String currentStatus = type + "_huldrsadmin_status_string:current";
         String queryStr = "doc_type_string:" + type + " AND " + currentStatus + " AND " + field + ":[* TO *]";
         if (type.equals("object"))
@@ -63,7 +63,7 @@ public class QueryUrnsFromSolr {
         String newLine = System.getProperty("line.separator");
         while (! done) {
             q.set(CursorMarkParams.CURSOR_MARK_PARAM, cursorMark);
-            QueryResponse rsp = server.query(q);
+            QueryResponse rsp = client.query(q);
             String nextCursorMark = rsp.getNextCursorMark();
             String urns = writeUrns(rsp);
             //System.out.println(urns);

@@ -23,6 +23,9 @@
         </xsl:copy>
     </xsl:template>
 
+    <!-- Remove existing collections; changed set prefix/ns, continue to handle legacy "lc:" -->
+    <xsl:template match="mods:extension[HarvardDRS:DRSMetadata]"/>
+
     <xsl:template name="returnQualifiedUrls">
         <xsl:param name="node"/>
         <xsl:for-each

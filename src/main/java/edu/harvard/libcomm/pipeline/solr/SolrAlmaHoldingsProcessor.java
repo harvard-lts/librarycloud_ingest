@@ -40,17 +40,17 @@ public class SolrAlmaHoldingsProcessor implements IProcessor {
 
 	private void populateIndex(String solrXml) throws Exception {
 
-	    HttpSolrClient server = null;
+	    HttpSolrClient client = null;
 		Date start = new Date();
-	    server = SolrHoldingsServer.getSolrConnection();
+	    client = SolrHoldingsClient.getSolrConnection();
 		UpdateRequest update = new UpdateRequest();
 		update.add(getSolrInputDocumentList(solrXml));
 		if (commitWithinTime > 0) {
 			update.setCommitWithin(commitWithinTime);
-		    update.process(server);
+		    update.process(client);
 		} else {
-		    update.process(server);
-    	    server.commit();
+		    update.process(client);
+    	    client.commit();
 		}
 		Date end = new Date();
 		log.debug("Solr insert query time: " + (end.getTime() - start.getTime()));

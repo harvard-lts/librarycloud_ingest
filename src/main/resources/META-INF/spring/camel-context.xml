@@ -1197,7 +1197,27 @@
             <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"/>
             <process ref="drsMdsUpdateProcessor"/>
             <!--<to uri="file://{{librarycloud.files.basepath}}/DRSMDSSOLR"/>-->
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
+            <marshal><custom ref="cloudbody"/></marshal>
+            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-metadata?amazonSQSClient=#sqsClient"/>
+        </route>
+
+        <route id="adddrsmetadataimmediate-seda" errorHandlerRef="eh">
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-metadata?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <to uri="seda:enrich-drs-metadata?size=20&amp;blockWhenFull=true" />
+        </route>
+        <route id="adddrsextensionstomodsImmediate" errorHandlerRef="eh">
+            <!--<from uri="file://{{librarycloud.files.basepath}}//enrich-drs-extensions" />-->
+            <from uri="seda:enrich-drs-metadata?concurrentConsumers=1"/>
+            <doTry>
+                <process ref="drsExtensionsProcessor"/>
+                <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+                <doCatch>
+                    <exception>java.lang.Exception</exception>
+                    <to uri="direct:dead-letter" />
+                    <!--<to uri="file://{{librarycloud.files.basepath}}/dead-letter" />-->
+                </doCatch>
+            </doTry>
         </route>
 
 <!--

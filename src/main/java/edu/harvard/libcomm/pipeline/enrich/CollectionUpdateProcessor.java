@@ -13,7 +13,7 @@ import edu.harvard.libcomm.message.LibCommMessage;
 import edu.harvard.libcomm.message.LibCommMessage.Payload;
 import edu.harvard.libcomm.pipeline.IProcessor;
 import edu.harvard.libcomm.pipeline.MessageUtils;
-import edu.harvard.libcomm.pipeline.solr.SolrServer;
+import edu.harvard.libcomm.pipeline.solr.SolrClient;
 
 public class CollectionUpdateProcessor implements IProcessor {
     protected Logger log = Logger.getLogger(CollectionsProcessor.class);
@@ -61,12 +61,12 @@ public class CollectionUpdateProcessor implements IProcessor {
 
         SolrDocumentList docs;
         SolrDocument doc = null;
-        HttpSolrClient server = null;
+        HttpSolrClient client = null;
         try {
-            server = SolrServer.getSolrConnection();
+            client = SolrClient.getSolrConnection();
 
             SolrQuery query = new SolrQuery("recordIdentifier:" + replaceSolrSpecialCharacters(itemId));
-            QueryResponse response = server.query(query);
+            QueryResponse response = client.query(query);
             docs = response.getResults();
             if (docs.size() == 0)
                 log.debug("Item " + itemId + " not found");

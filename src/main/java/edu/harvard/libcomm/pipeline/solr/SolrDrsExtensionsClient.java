@@ -34,7 +34,7 @@ import edu.harvard.libcomm.pipeline.IProcessor;
 /**
 *
 *
-* SolrServer is a singleton class for retrieving the solr connection
+* SolrDrsExtensionsClient is a singleton class for retrieving the solr connection
 *
 */
 public class SolrDrsExtensionsClient {
@@ -42,7 +42,7 @@ public class SolrDrsExtensionsClient {
 
   public static HttpSolrClient getSolrConnection() {
 		try {
-        //			server = new HttpSolrClient.Builder(Config.getInstance().SOLR_EXTENSIONS_URL).build();
+        //			client = new HttpSolrClient.Builder(Config.getInstance().SOLR_EXTENSIONS_URL).build();
         client = new HttpSolrClient(Config.getInstance().SOLR_EXTENSIONS_URL);
 
 		} catch (Exception e) {

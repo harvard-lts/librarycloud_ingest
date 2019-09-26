@@ -29,16 +29,19 @@ public class DrsMdsSolrProcessor implements Processor {
     private Integer commitWithinTime = -1;
     Collection<SolrInputDocument> docs = null;
     List<DrsMetadataItem> itemList = null;
-    private String urlJson;
+    ArrayList<String> urnArrayList;
 
     public void process(Exchange exchange) throws Exception {
         docs = new ArrayList<SolrInputDocument>();
         itemList = new ArrayList<DrsMetadataItem>();
+        urnArrayList = new ArrayList<String>();
         String drsMetadataJson = exchange.getIn().getBody(String.class);
         //log.info(drsMetadataJson);
         parseJson(drsMetadataJson);
+        JSONArray urnArray = new JSONArray(urnArrayList);
+        String urnJson = urnArray.toString();
         populateIndex();
-        exchange.getIn().setBody(urlJson);
+        exchange.getIn().setBody(urnJson);
     }
 
 
@@ -94,19 +97,19 @@ public class DrsMdsSolrProcessor implements Processor {
 
 
             }
-            JSONArray urnArr = null;
+            JSONArray deliveryUrnsArr = null;
             try {
-                urnArr = jsonObject.getJSONArray("deliveryUrns");
-                if (urnArr.length() > 0)
-                    urlJson = urnArr.toString();
-                for(int k=0;k<urnArr.length();k++) {
+                deliveryUrnsArr = jsonObject.getJSONArray("deliveryUrns");
+                //if (deliveryUrnsArr.length() > 0)
+                //    urlJson = deliveryUrnsArr.toString();
+                for(int k=0;k<deliveryUrnsArr.length();k++) {
                     DrsMetadataItem item = new DrsMetadataItem();
                     item.setDrsObjectId(drsObjectId);
                     item.setOwnerSuppliedName(ownerSuppliedName);
                     item.setMetsLabel(metsLabel);
                     item.setViewText(viewText);
                     item.setHarvardMetadataLinks(harvardMetadataLinks);
-                    JSONObject urnObj = urnArr.getJSONObject(k);
+                    JSONObject urnObj = deliveryUrnsArr.getJSONObject(k);
                     String deliveryType = urnObj.getString("deliveryType");
                     item.setDeliveryType(deliveryType);
                     if (deliveryType.equals("PDS")) {
@@ -120,6 +123,7 @@ public class DrsMdsSolrProcessor implements Processor {
                     String urn = StringUtils.substringAfter(url,"harvard.edu/");
                     item.setId(urn);
                     item.setUrn(urn);
+                    urnArrayList.add(urn);
                     item.setAccessFlag(jsonObject.get("accessFlag").toString());
                     JSONObject cmObj = jsonObject.getJSONObject("contentModel");
                     item.setCmCode(cmObj.getString("code"));
@@ -184,7 +188,7 @@ public class DrsMdsSolrProcessor implements Processor {
         log.debug("Solr insert query time: " + (end.getTime() - start.getTime()));
     }
 
-    private static String getIIIFThumb(String objectId) {
+    private String getIIIFThumb(String objectId) {
         String thumb = "";
         String iiifBaseUrl = "https://iiif.lib.harvard.edu/manifests/drs:";
         try {
@@ -200,15 +204,15 @@ public class DrsMdsSolrProcessor implements Processor {
                 JSONArray canvArr = seqArr.getJSONObject(0).getJSONArray("canvases");
                 thumb = canvArr.getJSONObject(seq -1).getJSONObject("thumbnail").getString("@id");
             } catch (JSONException jse) {
-                jse.printStackTrace();
+                log.info(jse.getMessage());
             }
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            log.info(ioe.getMessage());
         }
         return thumb;
     }
 
-    private static String readUrl(InputStream is) {
+    private String readUrl(InputStream is) {
         StringBuilder content = new StringBuilder();
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
