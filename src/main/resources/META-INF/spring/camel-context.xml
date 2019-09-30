@@ -1172,6 +1172,9 @@
             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
         </route>
 
+
+        <!-- 20190926 - adding activemq and drsmds routes for ingesting drs metadata from new mongo api into "extensions" solr, -->
+        <!-- and triggering realtime update into matching bibrecs -->
         <route id="activemqDrs" errorHandlerRef="eh">
             <from uri="activemq:Consumer.Consumer1.VirtualTopic.DRS_OBJECT_UPDATED"/>
             <setHeader headerName="drsId">
