@@ -2,12 +2,10 @@ package edu.harvard.libcomm.pipeline.enrich;
 
 import edu.harvard.libcomm.message.LibCommMessage;
 import edu.harvard.libcomm.message.LibCommMessage.Payload;
-import edu.harvard.libcomm.pipeline.DrsMdsProcessor;
 import edu.harvard.libcomm.pipeline.MessageUtils;
 import edu.harvard.libcomm.pipeline.solr.SolrClient;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -17,7 +15,6 @@ import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 

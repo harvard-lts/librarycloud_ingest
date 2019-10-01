@@ -1,5 +1,6 @@
-package edu.harvard.libcomm.pipeline;
+package edu.harvard.libcomm.pipeline.enrich;
 
+import edu.harvard.libcomm.pipeline.Config;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.apache.camel.Exchange;

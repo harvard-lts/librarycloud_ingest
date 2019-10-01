@@ -286,7 +286,7 @@
 
      <bean id="prepareURI" class="edu.harvard.libcomm.pipeline.PrepareURIForHTTPEndpoint" />
 
-    <bean id="drsMdsProcessor" class="edu.harvard.libcomm.pipeline.DrsMdsProcessor" />
+    <bean id="drsMdsProcessor" class="edu.harvard.libcomm.pipeline.enrich.DrsMdsProcessor" />
     <bean id="drsMdsSolrProcessor" class="edu.harvard.libcomm.pipeline.solr.DrsMdsSolrProcessor" />
     <bean id="drsMdsUpdateProcessor" class="edu.harvard.libcomm.pipeline.enrich.DrsMdsUpdateProcessor" />
 
