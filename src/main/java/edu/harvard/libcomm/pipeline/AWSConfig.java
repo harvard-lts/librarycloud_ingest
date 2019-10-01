@@ -1,4 +1,4 @@
-package edu.harvard.libcomm.config;
+package edu.harvard.libcomm.pipeline;
 
 import org.springframework.context.annotation.*;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,7 +46,7 @@ import com.amazonaws.services.s3.model.*;
 
 @Configuration
 @PropertySource("classpath:librarycloud.env.properties")
-public class Config {
+public class AWSConfig {
 
     private String awsRegion = "us-east-1";
 

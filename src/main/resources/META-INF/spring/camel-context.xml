@@ -13,7 +13,7 @@
     <context:property-placeholder location="classpath:/librarycloud.env.properties" />
 
     <!-- bootstrap the java config -->
-    <bean class="edu.harvard.libcomm.config.Config" />
+    <bean class="edu.harvard.libcomm.pipeline.AWSConfig" />
 
     <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
         <property name="brokerURL" value="${activemq.broker.url}" />

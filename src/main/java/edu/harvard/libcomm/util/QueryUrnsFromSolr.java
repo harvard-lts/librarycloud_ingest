@@ -1,4 +1,4 @@
-package main.java.edu.harvard.libcomm.util;
+package edu.harvard.libcomm.util;
 
 import edu.harvard.libcomm.pipeline.Config;
 import org.apache.solr.client.solrj.SolrQuery;
