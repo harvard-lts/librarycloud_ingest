@@ -39,7 +39,7 @@ public class DRSExtensionsProcessor extends ExternalServiceProcessor implements 
 			//Why are we getting this condition? TO DO - catch upstream
 			urns = urns.replace("OR  OR ", "OR ");
 			urns = "(" + urns.replace(" ","+") + ")";
-			//System.out.println("URNS: " + urns);
+			//log.info("URNS: " + urns);
 			uri = new URI(Config.getInstance().SOLR_EXTENSIONS_URL + "/select?q=urn:" + urns + "&rows=250");
 		}
     process(libCommMessage, uri, "results", "src/main/resources/adddrsextensions.xsl");

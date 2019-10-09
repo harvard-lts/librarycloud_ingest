@@ -17,14 +17,30 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 public class DrsMdsUpdateProcessor implements Processor {
 
-    protected Logger log = Logger.getLogger(DrsMdsProcessor.class);
+    protected Logger log = Logger.getLogger(DrsMdsUpdateProcessor.class);
     public void process(Exchange exchange) throws Exception {
         String urnQuery = "(";
-        String urnJson = exchange.getIn().getBody(String.class);
-        //log.info("urlJson: " + urlJson);
+        //String urnJson = exchange.getIn().getBody(String.class);
+        //log.info("urlJson: " + urnJson);
+        List<Exchange> grouped = exchange.getIn().getBody(List.class);
+        Iterator<Exchange> groupedIterator = grouped.iterator();
+        int counter = 0;
+        while (groupedIterator.hasNext()) {
+            if (counter > 0)
+                urnQuery += " OR ";
+            //String url = jsonObject.getString("url");
+            String urn = groupedIterator.next().getIn().getBody(String.class);
+            urnQuery += "\"" + urn + "\"";
+            counter++;
+            //log.info("urn: " + urn);
+        }
+
+        /*
         JSONArray jsonArray = new JSONArray(urnJson);
         //log.info("jsonArray: " + jsonArray.toString());
         for(int i=0;i<jsonArray.length();i++) {
@@ -41,16 +57,22 @@ public class DrsMdsUpdateProcessor implements Processor {
                 log.debug("no urns for this object");
             }
         }
+        */
         urnQuery = "urn:" + urnQuery + ")";
         //log.info("urlQuery: " + urnQuery);
         String modsRecords = getSolrModsRecords(urnQuery);
-        String modsCollection = "<modsCollection xmlns=\"http://www.loc.gov/mods/v3\">" + modsRecords + "</modsCollection>";
+        String modsCollection = null;
+        if (modsRecords == null || modsRecords.equals(""))
+            modsCollection = "";
+        else
+            modsCollection = "<modsCollection xmlns=\"http://www.loc.gov/mods/v3\">" + modsRecords + "</modsCollection>";
         //log.info("modsCollection: " + modsCollection);
         LibCommMessage message = new LibCommMessage();
         Payload payload = new Payload();
         payload.setData(modsCollection);
         message.setPayload(payload);
         exchange.getIn().setBody(MessageUtils.marshalMessage(message));
+
     }
 
     private String getSolrModsRecords(String urnQuery)

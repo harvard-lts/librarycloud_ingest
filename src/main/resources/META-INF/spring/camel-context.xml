@@ -1185,23 +1185,34 @@
             </transform>
             <process ref="drsMdsProcessor"/>
             <!--<to uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>
+            <!--<to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>-->
+            <to uri="seda:drs-mds?size=20&amp;blockWhenFull=true" />
         </route>
 
         <route id="drsMdsToSolr">
             <!--<from uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>
+            <!--<from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>-->
+            <from uri="seda:drs-mds?concurrentConsumers=1"/>
             <process ref="drsMdsSolrProcessor"/>
-            <!--<to uri="file://{{librarycloud.files.basepath}}/DRSMDSSOLR"/>-->
             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"/>
         </route>
         <route id="drsMdsUpdate">
             <!--<from uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
             <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"/>
-            <process ref="drsMdsUpdateProcessor"/>
-            <!--<to uri="file://{{librarycloud.files.basepath}}/DRSMDSSOLR"/>-->
-            <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-metadata?amazonSQSClient=#sqsClient"/>
+
+            <split streaming="true">
+                <jsonpath>$</jsonpath>
+                <aggregate completionSize="100"
+                                 completionTimeout="1000" groupExchanges="true">
+                    <correlationExpression>
+                        <constant>true</constant>
+                    </correlationExpression>
+                    <process ref="drsMdsUpdateProcessor"/>
+                    <marshal><custom ref="cloudbody"/></marshal>
+                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-metadata?amazonSQSClient=#sqsClient"/>
+                </aggregate>
+            </split>
+
         </route>
 
         <route id="adddrsmetadataimmediate-seda" errorHandlerRef="eh">
@@ -1212,15 +1223,25 @@
         <route id="adddrsextensionstomodsImmediate" errorHandlerRef="eh">
             <!--<from uri="file://{{librarycloud.files.basepath}}//enrich-drs-extensions" />-->
             <from uri="seda:enrich-drs-metadata?concurrentConsumers=1"/>
-            <doTry>
-                <process ref="drsExtensionsProcessor"/>
-                <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-                <doCatch>
-                    <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
-                    <!--<to uri="file://{{librarycloud.files.basepath}}/dead-letter" />-->
-                </doCatch>
-            </doTry>
+
+            <choice>
+                <when>
+                    <xpath>string-length(/lib_comm_message/payload/data) = 0</xpath>
+                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                </when>
+                <otherwise>
+                    <doTry>
+                        <process ref="drsExtensionsProcessor"/>
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+                        <doCatch>
+                            <exception>java.lang.Exception</exception>
+                            <to uri="direct:dead-letter" />
+                            <!--<to uri="file://{{librarycloud.files.basepath}}/dead-letter" />-->
+                        </doCatch>
+                    </doTry>
+                </otherwise>
+            </choice>
+
         </route>
 
 <!--

@@ -27,12 +27,12 @@ public class DrsMdsSolrProcessor implements Processor {
 
     protected Logger log = Logger.getLogger(DrsMdsSolrProcessor.class);
     private Integer commitWithinTime = -1;
-    Collection<SolrInputDocument> docs = null;
+    //Collection<SolrInputDocument> docs = null;
     List<DrsMetadataItem> itemList = null;
     ArrayList<String> urnArrayList;
 
     public void process(Exchange exchange) throws Exception {
-        docs = new ArrayList<SolrInputDocument>();
+        //docs = new ArrayList<SolrInputDocument>();
         itemList = new ArrayList<DrsMetadataItem>();
         urnArrayList = new ArrayList<String>();
         String drsMetadataJson = exchange.getIn().getBody(String.class);
