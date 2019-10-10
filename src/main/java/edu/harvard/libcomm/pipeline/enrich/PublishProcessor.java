@@ -29,7 +29,7 @@ public class PublishProcessor implements IProcessor {
 		  DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
 		  df.setTimeZone(tz);
 		  String processingDate = df.format(new Date());
-		  log.info("processingDate: " + processingDate);
+		  //log.info("processingDate: " + processingDate);
 		  data = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/publish-mods.xsl", "<processingDate>"+processingDate+"</processingDate>");
 		  LibCommMessage tempMessage = new LibCommMessage();
 		  Payload tempPayload = new Payload();
