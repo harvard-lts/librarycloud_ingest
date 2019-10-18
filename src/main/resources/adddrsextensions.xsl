@@ -313,12 +313,12 @@
             <xsl:variable name="pos" select="position()"/>
             <xsl:choose>
                 <xsl:when test="$pos = 1">
-                    <xsl:element name="HarvardDRS:metadataType">
+                    <xsl:element name="HarvardDRS:metadataIdentifier">
                         <xsl:value-of select="."/>
                     </xsl:element>
                 </xsl:when>
                 <xsl:when test="$pos = 2">
-                    <xsl:element name="HarvardDRS:metadataIdentifier">
+                    <xsl:element name="HarvardDRS:metadataType">
                         <xsl:value-of select="."/>
                     </xsl:element>
                 </xsl:when>

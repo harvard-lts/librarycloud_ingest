@@ -51,8 +51,8 @@ public class DrsMdsSolrProcessor implements Processor {
         String metsLabel = null;
         String viewText = null;
         JSONArray jsonArray = new JSONArray(json);
+        ArrayList<String> harvardMetadataLinks = new ArrayList<String>();
         for(int i=0;i<jsonArray.length();i++) {
-            ArrayList<String> harvardMetadataLinks = new ArrayList<String>();
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             //set all the object fields
             String contentType = jsonObject.getString("contentType");
@@ -74,7 +74,6 @@ public class DrsMdsSolrProcessor implements Processor {
                 //log.info("Object Fields: " + drsObjectId + "|" + ownerSuppliedName + "|" + metsLabel + "|" + viewText);
                 JSONArray harvardMetadataArr = null;
                 try {
-                    harvardMetadataLinks = new ArrayList<String>();
                     harvardMetadataArr = jsonObject.getJSONArray("harvardMetadataLinks");
                     for(int j=0;j<harvardMetadataArr.length();j++) {
                         JSONObject mdlObj = harvardMetadataArr.getJSONObject(j);

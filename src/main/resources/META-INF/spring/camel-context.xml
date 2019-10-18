@@ -1189,14 +1189,14 @@
             <to uri="seda:drs-mds?size=20&amp;blockWhenFull=true" />
         </route>
 
-        <route id="drsMdsToSolr">
+        <route id="drsMdsToSolr" errorHandlerRef="eh">
             <!--<from uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
             <!--<from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>-->
             <from uri="seda:drs-mds?concurrentConsumers=1"/>
             <process ref="drsMdsSolrProcessor"/>
             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"/>
         </route>
-        <route id="drsMdsUpdate">
+        <route id="drsMdsUpdate" errorHandlerRef="eh">
             <!--<from uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
             <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"/>
 
