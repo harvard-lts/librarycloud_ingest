@@ -11,6 +11,10 @@
     <xsl:param name="param1">
         <results/>
     </xsl:param>
+    
+    <!-- uncomment below (and comment param above) to test null values -->
+    
+    <!--<xsl:param name="param1" select="document('../../test/resources/drs_mds_nullvalues.xml')"/>-->
 
 
     <xsl:template match="@* | node()">
@@ -141,14 +145,14 @@
                 <xsl:apply-templates select="metsLabel[not(. = '') and not(. = 'null')]"/>
                 <xsl:apply-templates select="lastModifiedDate[not(. = '') and not(. = 'null')]"/>
                 -->
-                <xsl:apply-templates select="drsObjectId[not(. = 'null')]"/>
-                <xsl:apply-templates select="drsFileId[not(. = 'null')]"/>
-                <xsl:apply-templates select="accessFlag[not(. = 'null')]"/>
-                <xsl:apply-templates select="contentModel[not(. = 'null')]"/>
+                <xsl:apply-templates select="drsObjectId[not(. = '') and not(. = 'null')]"/>
+                <xsl:apply-templates select="drsFileId[not(. = '') and not(. = 'null')]"/>
+                <xsl:apply-templates select="accessFlag[not(. = '') and not(. = 'null')]"/>
+                <xsl:apply-templates select="contentModel[not(. = '') and not(. = 'null')]"/>
                 <xsl:apply-templates select="contentModelCode[not(. = '') and not(. = 'null')]"/>
-                <xsl:apply-templates select="uriType[not(. = 'null')]"/>
+                <xsl:apply-templates select="uriType[not(. = '') and not(. = 'null')]"/>
                 <xsl:apply-templates select="fileDeliveryURL[not(. = '') and not(. = 'null')]"/>
-                <xsl:apply-templates select="ownerCode[not(. = 'null')]"/>
+                <xsl:apply-templates select="ownerCode[not(. = '') and not(. = 'null')]"/>
                 <xsl:apply-templates select="ownerCodeDisplayName[not(. = '') and not(. = 'null')]"/>
                 <xsl:apply-templates select="metsLabel[not(. = '') and not(. = 'null')]"/>
                 <xsl:apply-templates select="lastModifiedDate[not(. = '') and not(. = 'null')]"/>
@@ -158,7 +162,7 @@
                 <xsl:apply-templates select="maxImageDeliveryDimension[not(. = '') and not(. = 'null')]"/>
                 <xsl:apply-templates select="mimeType[not(. = '') and not(. = 'null')]"/>
                 <xsl:apply-templates select="suppliedFilename[not(. = '') and not(. = 'null')]"/>
-                <xsl:if test="harvardMetadataLink">
+                <xsl:if test="harvardMetadataLink[not(. = '') and not(. = 'null')]">
                     <xsl:element name="HarvardDRS:harvardMetadataLinks">
                         <xsl:apply-templates select="harvardMetadataLink[not(. = '') and not(. = 'null')]"/>
                     </xsl:element>                    
