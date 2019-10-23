@@ -1176,7 +1176,8 @@
         <!-- 20190926 - adding activemq and drsmds routes for ingesting drs metadata from new mongo api into "extensions" solr, -->
         <!-- and triggering realtime update into matching bibrecs -->
         <route id="activemqDrs" errorHandlerRef="eh">
-            <from uri="activemq:Consumer.Consumer1.VirtualTopic.DRS_OBJECT_UPDATED"/>
+            <from uri="activemq:Consumer.librarycloud-{{librarycloud.sqs.environment}}.VirtualTopic.DRS_OBJECT_UPDATED"/>
+            <!--<from uri="activemq:Consumer.Consumer1.VirtualTopic.DRS_OBJECT_UPDATED"/>-->
             <setHeader headerName="drsId">
                 <jsonpath>$.data.objectId</jsonpath>
             </setHeader>

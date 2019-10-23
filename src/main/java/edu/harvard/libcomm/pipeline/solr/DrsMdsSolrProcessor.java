@@ -111,6 +111,26 @@ public class DrsMdsSolrProcessor implements Processor {
                     JSONObject urnObj = deliveryUrnsArr.getJSONObject(k);
                     String deliveryType = urnObj.getString("deliveryType");
                     item.setDeliveryType(deliveryType);
+                    if (contentType.equals("file")) {
+                        String drsFileId = jsonObject.get("drsId").toString();
+                        item.setDrsFileId(drsFileId);
+                        item.setSuppliedFilename(jsonObject.getString("suppliedFilename"));
+                        if (deliveryType.equals("IDS")) {
+                            item.setThumbnailURL("https://ids.lib.harvard.edu/ids/iiif/" + drsFileId + "/full/,150/0/default.jpg");
+                        }
+                        try {
+                            item.setMaxImageDeliveryDimension(jsonObject.get("maxImageDeliveryDimension").toString());
+                        }
+                        catch (JSONException e) {
+                            log.debug("No maxImageDeliveryDimension for this object");
+                        }
+                        try {
+                            item.setMimeType(jsonObject.getString("mimeType"));
+                        }
+                        catch (JSONException e) {
+                            log.debug("No mimeType for this object");
+                        }
+                    }
                     if (deliveryType.equals("PDS")) {
                         String thumb = getIIIFThumb(drsObjectId);
                         // below just for testing with real object in iiif
@@ -134,24 +154,7 @@ public class DrsMdsSolrProcessor implements Processor {
                     item.setLastModifiedDate(lmdObj.get("$date").toString());
                     JSONObject idObj = jsonObject.getJSONObject("insertionDate");
                     item.setInsertionDate(idObj.get("$date").toString());
-                    contentType = jsonObject.getString("contentType");
-                    if (contentType.equals("file")) {
-
-                        item.setDrsFileId(jsonObject.get("drsId").toString());
-                        item.setSuppliedFilename(jsonObject.getString("suppliedFilename"));
-                        try {
-                            item.setMaxImageDeliveryDimension(jsonObject.getString("maxImageDeliveryDimension"));
-                        }
-                        catch (JSONException e) {
-                            log.debug("No maxImageDeliveryDimension for this object");
-                        }
-                        try {
-                            item.setMimeType(jsonObject.getString("mimeType"));
-                        }
-                        catch (JSONException e) {
-                            log.debug("No mimeType for this object");
-                        }
-                    }
+                    item.setStatus(jsonObject.getString("status"));
                     itemList.add(item);
                     //printFields();
                 }
