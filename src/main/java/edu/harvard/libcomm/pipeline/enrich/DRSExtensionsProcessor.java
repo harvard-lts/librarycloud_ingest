@@ -22,14 +22,14 @@ public class DRSExtensionsProcessor extends ExternalServiceProcessor implements 
 
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
 		libCommMessage.setCommand("enrich-drs-extensions");
-		log.info("adding DRS Metadata to MODS records");
-		/*
+		//log.info("adding DRS Metadata to MODS records");
+
 		try {
 			log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath() + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
 		} catch (Exception e) {
 			log.error("Unable to log message info");
 		}
-		 */
+
 		URI uri = null;
 		String urns = getUrns(libCommMessage);
 		//urns = urns.startsWith("OR") ? urns.substring(2) : urns;

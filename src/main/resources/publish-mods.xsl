@@ -15,7 +15,7 @@
     exclude-result-prefixes="mods xs sets originalDocument xlink HarvardRepositories processingDate availableTo digitalFormats HarvardDRS xsi countries librarycloud"
     version="2.0">
     <!-- <xsl:namespace-alias stylesheet-prefix="mods" result-prefix="" /> -->
-    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+    <xsl:output method="xml" encoding="UTF-8"/>
     <xsl:param name="param1">
         <processingDate/>
     </xsl:param>

@@ -74,11 +74,11 @@ public class ExternalServiceProcessor implements IProcessor {
 		}
 		xml = "<" + wrapperToken + ">" + xml + "</" + wrapperToken + ">";
 		//log.info("xml: " + xml);
-		log.info("DRS Metadata to insert into MODS:" + xml);
-		
+		log.trace("External Service result:" + xml);
+
 		try {
 			data = MessageUtils.transformPayloadData(libCommMessage,transformXSL,xml);
-			log.info("MODS data: " + data);
+			//log.info("MODS data: " + data);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
