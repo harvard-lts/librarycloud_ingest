@@ -167,7 +167,7 @@ public class DrsMdsSolrProcessor implements Processor {
     }
 
     private void populateIndex() throws Exception {
-        log.info("Inserting into solr");
+        log.info("Inserting DRS Metadata into librarycloud \"extensions\" solr collection");
         HttpSolrClient client = null;
         Date start = new Date();
         client = SolrDrsExtensionsClient.getSolrConnection();

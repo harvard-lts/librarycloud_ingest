@@ -79,7 +79,7 @@ public class DrsMdsProcessor implements Processor {
         }
 
         Object obj = response.readEntity(Object.class);
-        //log.info("Response Object Entity: {}: " + obj);
+        log.info("Response Object Entity: {}: " + obj);
         log.info("Passing result from DMS to lc ingest for solr mapping and ingest");
         exchange.getIn().setBody(obj);
 

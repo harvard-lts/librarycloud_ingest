@@ -1187,7 +1187,15 @@
             <process ref="drsMdsProcessor"/>
             <!--<to uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
             <!--<to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>-->
-            <to uri="seda:drs-mds?size=20&amp;blockWhenFull=true" />
+            <choice>
+                <when>
+                    <simple>${in.body} != "[]"</simple>
+                    <to uri="seda:drs-mds?size=20&amp;blockWhenFull=true" />
+                </when>
+                <otherwise>
+                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                </otherwise>
+            </choice>
         </route>
 
         <route id="drsMdsToSolr" errorHandlerRef="eh">

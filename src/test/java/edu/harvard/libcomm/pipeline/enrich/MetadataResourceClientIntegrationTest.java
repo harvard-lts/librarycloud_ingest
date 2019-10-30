@@ -50,6 +50,7 @@ public class MetadataResourceClientIntegrationTest {
 
     @Test
     public void testLibraryCloudObject() {
+        int objectId = 473172644;
         //int objectId = 400338692; //PDS
         //int objectId = 400338492; //IDS
         //int objectId = 400087249; //SDS (multiple, also has FDS
@@ -58,7 +59,8 @@ public class MetadataResourceClientIntegrationTest {
         //int objectId = 400333866; //SDS_VIDEO
         //int objectId = 462381088; //PDS PROD 462315836 (normal), 462381088 errors
         //int objectId = 400004554; //FDS R flag, dev
-        int objectId = 400000100; //FDS N flag, dev
+        //int objectId = 400000100; //FDS N flag, dev
+        //int objectId = 472309868; //SDS restricted prod
 
         log.info("here we go...");
         String serverUrl = Config.getInstance().INTEGRATION_SERVER_URL;
