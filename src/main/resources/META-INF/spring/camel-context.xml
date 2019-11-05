@@ -1241,7 +1241,9 @@
                 <otherwise>
                     <doTry>
                         <process ref="drsExtensionsProcessor"/>
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+                        <marshal><custom ref="cloudbody"/></marshal>
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+                        <!-- <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />-->
                         <doCatch>
                             <exception>java.lang.Exception</exception>
                             <to uri="direct:dead-letter" />
@@ -1252,6 +1254,18 @@
             </choice>
 
         </route>
+
+        <route id="publish-immmediate-seda" errorHandlerRef="eh">
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <to uri="seda:enrich-publish-immediate?size=20&amp;blockWhenFull=true"/>
+        </route>
+        <route id="publish-immediate" errorHandlerRef="eh">
+            <from uri="seda:enrich-publish-immediate?concurrentConsumers=1" />
+            <process ref="publishProcessor"/>
+            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+        </route>
+
 
 <!--
         <route id="fullRefresh" errorHandlerRef="eh">

@@ -84,8 +84,39 @@
                 <xsl:copy-of select="document('')/*/@xsi:schemaLocation"/>
                 <xsl:copy-of select="@*"/>
                 <xsl:apply-templates/>
+                <xsl:choose>
+                    <xsl:when test="mods:extension[librarycloud:librarycloud]">
+                        <!--<xsl:apply-templates select="mods:extension[librarycloud:librarycloud]"></xsl:apply-templates>-->
                         <mods:extension>
-                            <xsl:element name="librarycloud:librarycloud">
+                            <librarycloud:librarycloud>
+                                <xsl:copy-of select="mods:extension/librarycloud:librarycloud/*"/>
+                                <xsl:if
+                                    test="not(mods:extension/librarycloud:librarycloud/librarycloud:availableTo)">
+                                    <xsl:if test="string-length($availableTo)">
+                                        <librarycloud:availableTo>
+                                            <xsl:value-of select="$availableTo"/>
+                                        </librarycloud:availableTo>
+
+                                    </xsl:if>
+                                </xsl:if>
+                                <xsl:if
+                                    test="not(mods:extension/librarycloud:librarycloud/librarycloud:digitalFormats)">
+                                    <xsl:if test="count($digitalFormats/format) &gt; 0">
+                                        <librarycloud:digitalFormats>
+                                            <xsl:for-each select="$digitalFormats/format">
+                                                <librarycloud:digitalFormat>
+                                                  <xsl:value-of select="."/>
+                                                </librarycloud:digitalFormat>
+                                            </xsl:for-each>
+                                        </librarycloud:digitalFormats>
+                                    </xsl:if>
+                                </xsl:if>
+                            </librarycloud:librarycloud>
+                        </mods:extension>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <mods:extension>
+                            <librarycloud:librarycloud>
                                 <xsl:if test="string-length($availableTo)">
                                     <librarycloud:availableTo>
                                         <xsl:value-of select="$availableTo"/>
@@ -119,8 +150,10 @@
                                 <librarycloud:processingDate>
                                     <xsl:value-of select="$param1"/>
                                 </librarycloud:processingDate>
-                            </xsl:element>
+                            </librarycloud:librarycloud>
                         </mods:extension>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:if test="count(mods:location/mods:url) &lt; 1">
                     <location xmlns="http://www.loc.gov/mods/v3">
                         <xsl:call-template name="object-in-context-links">
@@ -143,13 +176,15 @@
                         <xsl:variable name="source" select="normalize-space(./text())"/>
 
                         <xsl:if test="string-length($map//mapping[source = $source]/extensionValue)">
-
-                            <librarycloud:HarvardRepositories>
-                                <librarycloud:HarvardRepository>
-                                    <xsl:value-of
-                                        select="$map//mapping[source = $source]/extensionValue"/>
-                                </librarycloud:HarvardRepository>
-                            </librarycloud:HarvardRepositories>
+                            <librarycloud:librarycloud>
+                                <librarycloud:HarvardRepositories>
+                                    <librarycloud:HarvardRepository>
+                                        <xsl:value-of
+                                            select="$map//mapping[source = $source]/extensionValue"
+                                        />
+                                    </librarycloud:HarvardRepository>
+                                </librarycloud:HarvardRepositories>
+                            </librarycloud:librarycloud>
                         </xsl:if>
                     </xsl:for-each>
                 </xsl:element>
@@ -233,7 +268,8 @@
 
     <xsl:template name="object-in-context-links">
         <xsl:param name="modsRoot"/>
-        <xsl:if test="$modsRoot/mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'P'">
+        <xsl:if
+            test="$modsRoot/mods:extension/HarvardDRS:DRSMetadata/HarvardDRS:accessFlag = 'P' and not(mods:url[@displayLabel = 'Harvard Digital Collections'])">
             <url xmlns="http://www.loc.gov/mods/v3" access="object in context"
                 displayLabel="Harvard Digital Collections"
                     >https://id.lib.harvard.edu/digital_collections/<xsl:value-of
@@ -273,5 +309,7 @@
         <xsl:copy-of select="."/>
     </xsl:template>
 
+    <xsl:template match="mods:extension[librarycloud:librarycloud]"/>
+    <!--<xsl:template match="mods:extension[not(normalize-space() = '')]"/>-->
 
 </xsl:stylesheet>
