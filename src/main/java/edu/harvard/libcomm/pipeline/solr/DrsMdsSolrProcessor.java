@@ -58,6 +58,7 @@ public class DrsMdsSolrProcessor implements Processor {
             String contentType = jsonObject.getString("contentType");
             if (contentType.equals("object")) {
                 drsObjectId = jsonObject.get("objectId").toString();
+                log.info("drsObjectId: " + drsObjectId);
                 ownerSuppliedName = jsonObject.getString("ownerSuppliedName");
                 try {
                     metsLabel = jsonObject.getString("metsLabel");
