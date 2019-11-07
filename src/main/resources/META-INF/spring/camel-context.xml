@@ -386,7 +386,7 @@
                             <simple>${header.messageLength} > 150000</simple>
                         </completionPredicate>
                         <process ref="filterSuppressedProcessor"/>
-                        <marshal><custom ref="cloudbody"/></marshal>
+                        <!--<marshal><custom ref="cloudbody"/></marshal>-->
                         <multicast parallelProcessing="true">
                             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
                             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient" />
