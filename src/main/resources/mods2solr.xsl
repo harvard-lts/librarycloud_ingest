@@ -949,6 +949,42 @@
         </xsl:element>
     </xsl:template>
 
+    <xsl:template match="HarvardDRS:harvardMetadataLinks">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:harvardMetadataLink">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:metadataIdentifier">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>harvardMetadataIdentifier</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+            <xsl:message><xsl:value-of select="."/></xsl:message>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:displayLabel">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>harvardMetadataLabel</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:metadataType">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>harvardMetadataType</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
     <xsl:template match="HarvardDRS:maxImageDeliveryDimension">
         <xsl:element name="field">
             <xsl:attribute name="name">
