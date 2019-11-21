@@ -36,7 +36,7 @@ public class DrsMdsSolrProcessor implements Processor {
         itemList = new ArrayList<DrsMetadataItem>();
         urnArrayList = new ArrayList<String>();
         String drsMetadataJson = exchange.getIn().getBody(String.class);
-        log.info(drsMetadataJson);
+        //log.info(drsMetadataJson);
         parseJson(drsMetadataJson);
         JSONArray urnArray = new JSONArray(urnArrayList);
         String urnJson = urnArray.toString();
