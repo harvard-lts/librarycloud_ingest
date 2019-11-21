@@ -40,7 +40,8 @@ public class DrsMdsSolrProcessor implements Processor {
         parseJson(drsMetadataJson);
         JSONArray urnArray = new JSONArray(urnArrayList);
         String urnJson = urnArray.toString();
-        populateIndex();
+        if urnArray.length() > 0
+            populateIndex();
         exchange.getIn().setBody(urnJson);
     }
 
@@ -58,7 +59,6 @@ public class DrsMdsSolrProcessor implements Processor {
             String contentType = jsonObject.getString("contentType");
             if (contentType.equals("object")) {
                 drsObjectId = jsonObject.get("objectId").toString();
-                log.info("drsObjectId: " + drsObjectId);
                 ownerSuppliedName = jsonObject.getString("ownerSuppliedName");
                 try {
                     metsLabel = jsonObject.getString("metsLabel");
@@ -174,18 +174,6 @@ public class DrsMdsSolrProcessor implements Processor {
         client = SolrDrsExtensionsClient.getSolrConnection();
         client.addBeans(itemList);
         client.commit();
-        /*
-        UpdateRequest update = new UpdateRequest();
-        update.add(docs);
-        if (commitWithinTime > 0) {
-            update.setCommitWithin(commitWithinTime);
-            update.process(client);
-        } else {
-            update.process(clinet);
-            client.commit();
-        }
-
-         */
 
         Date end = new Date();
         log.debug("Solr insert query time: " + (end.getTime() - start.getTime()));
