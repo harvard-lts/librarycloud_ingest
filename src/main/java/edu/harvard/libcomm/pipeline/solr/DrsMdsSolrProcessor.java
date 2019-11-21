@@ -40,7 +40,7 @@ public class DrsMdsSolrProcessor implements Processor {
         parseJson(drsMetadataJson);
         JSONArray urnArray = new JSONArray(urnArrayList);
         String urnJson = urnArray.toString();
-        if urnArray.length() > 0
+        if (urnArray.length() > 0)
             populateIndex();
         exchange.getIn().setBody(urnJson);
     }
