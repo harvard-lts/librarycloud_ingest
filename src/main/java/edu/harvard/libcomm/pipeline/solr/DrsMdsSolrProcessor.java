@@ -36,11 +36,12 @@ public class DrsMdsSolrProcessor implements Processor {
         itemList = new ArrayList<DrsMetadataItem>();
         urnArrayList = new ArrayList<String>();
         String drsMetadataJson = exchange.getIn().getBody(String.class);
-        //log.info(drsMetadataJson);
+        log.info(drsMetadataJson);
         parseJson(drsMetadataJson);
         JSONArray urnArray = new JSONArray(urnArrayList);
         String urnJson = urnArray.toString();
-        populateIndex();
+        if urnArray.length() > 0
+            populateIndex();
         exchange.getIn().setBody(urnJson);
     }
 
@@ -173,18 +174,6 @@ public class DrsMdsSolrProcessor implements Processor {
         client = SolrDrsExtensionsClient.getSolrConnection();
         client.addBeans(itemList);
         client.commit();
-        /*
-        UpdateRequest update = new UpdateRequest();
-        update.add(docs);
-        if (commitWithinTime > 0) {
-            update.setCommitWithin(commitWithinTime);
-            update.process(client);
-        } else {
-            update.process(clinet);
-            client.commit();
-        }
-
-         */
 
         Date end = new Date();
         log.debug("Solr insert query time: " + (end.getTime() - start.getTime()));
