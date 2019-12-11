@@ -128,14 +128,16 @@
     </xsl:template>
 
     <xsl:template match="docs">
-        <xsl:if test="status = 'current'">
-            <extension xmlns="http://www.loc.gov/mods/v3">
-                <xsl:element name="HarvardDRS:DRSMetadata">
-                    <!--<xsl:apply-templates select="inDRS"/>-->
-                    <xsl:element name="HarvardDRS:inDRS">
-                        <xsl:text>true</xsl:text>
-                    </xsl:element>
-                    <!--
+        <xsl:choose>
+            <xsl:when test="status = 'deleted'"/>
+            <xsl:otherwise>
+                <extension xmlns="http://www.loc.gov/mods/v3">
+                    <xsl:element name="HarvardDRS:DRSMetadata">
+                        <!--<xsl:apply-templates select="inDRS"/>-->
+                        <xsl:element name="HarvardDRS:inDRS">
+                            <xsl:text>true</xsl:text>
+                        </xsl:element>
+                        <!--
                 <xsl:apply-templates select="drsObjectId[not(. = 'null')]"/>
                 <xsl:apply-templates select="accessFlag[not(. = 'null')]"/>
                 <xsl:apply-templates select="contentModel[not(. = 'null')]"/>
@@ -146,34 +148,40 @@
                 <xsl:apply-templates select="metsLabel[not(. = '') and not(. = 'null')]"/>
                 <xsl:apply-templates select="lastModifiedDate[not(. = '') and not(. = 'null')]"/>
                 -->
-                    <xsl:apply-templates select="drsObjectId[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="drsFileId[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="accessFlag[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="contentModel[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="contentModelCode[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="uriType[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="fileDeliveryURL[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="ownerCode[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates
-                        select="ownerCodeDisplayName[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="metsLabel[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="lastModifiedDate[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="insertionDate[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="ownerSuppliedName[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="viewText[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates
-                        select="maxImageDeliveryDimension[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="mimeType[not(. = '') and not(. = 'null')]"/>
-                    <xsl:apply-templates select="suppliedFilename[not(. = '') and not(. = 'null')]"/>
-                    <xsl:if test="harvardMetadataLink[not(. = '') and not(. = 'null')]">
-                        <xsl:element name="HarvardDRS:harvardMetadataLinks">
-                            <xsl:apply-templates
-                                select="harvardMetadataLink[not(. = '') and not(. = 'null')]"/>
-                        </xsl:element>
-                    </xsl:if>
-                </xsl:element>
-            </extension>
-        </xsl:if>
+                        <xsl:apply-templates select="drsObjectId[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates select="drsFileId[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates select="accessFlag[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates select="contentModel[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates
+                            select="contentModelCode[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates select="uriType[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates
+                            select="fileDeliveryURL[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates select="ownerCode[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates
+                            select="ownerCodeDisplayName[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates select="metsLabel[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates
+                            select="lastModifiedDate[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates select="insertionDate[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates
+                            select="ownerSuppliedName[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates select="viewText[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates
+                            select="maxImageDeliveryDimension[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates select="mimeType[not(. = '') and not(. = 'null')]"/>
+                        <xsl:apply-templates
+                            select="suppliedFilename[not(. = '') and not(. = 'null')]"/>
+                        <xsl:if test="harvardMetadataLink[not(. = '') and not(. = 'null')]">
+                            <xsl:element name="HarvardDRS:harvardMetadataLinks">
+                                <xsl:apply-templates
+                                    select="harvardMetadataLink[not(. = '') and not(. = 'null')]"/>
+                            </xsl:element>
+                        </xsl:if>
+                    </xsl:element>
+                </extension>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="mods:location">
