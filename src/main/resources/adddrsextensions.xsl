@@ -128,7 +128,9 @@
     </xsl:template>
 
     <xsl:template match="docs">
-        <xsl:if test="status = 'current'">
+        <xsl:choose>
+            <xsl:when test="status = 'deleted'"/>
+            <xsl:otherwise>
             <extension xmlns="http://www.loc.gov/mods/v3">
                 <xsl:element name="HarvardDRS:DRSMetadata">
                     <!--<xsl:apply-templates select="inDRS"/>-->
@@ -173,7 +175,8 @@
                     </xsl:if>
                 </xsl:element>
             </extension>
-        </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="mods:location">

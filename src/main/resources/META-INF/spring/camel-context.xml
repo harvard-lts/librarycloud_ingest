@@ -1198,6 +1198,29 @@
             </choice>
         </route>
 
+        <!-- this is for refreshing drs ids by loading files to queue, if for istance there is a failure above -->
+        <route id="updatedrsids">
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-drsids?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <!--<from uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma"/>-->
+            <!-- Try block required for errors thrown out of the splitter -->
+            <doTry>
+                <split streaming="true">
+                    <tokenize token="\r\n|\n" xml="false" trim="true" />
+                    <process ref="drsMdsProcessor"/>
+                    <!--<to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml"/>-->
+                    <choice>
+                        <when>
+                            <simple>${in.body} != "[]"</simple>
+                            <to uri="seda:drs-mds?size=20&amp;blockWhenFull=true" />
+                        </when>
+                        <otherwise>
+                            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                        </otherwise>
+                    </choice>
+                </split>
+            </doTry>
+        </route>
+
         <route id="drsMdsToSolr" errorHandlerRef="eh">
             <!--<from uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
             <!--<from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>-->
