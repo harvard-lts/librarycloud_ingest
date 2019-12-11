@@ -20,7 +20,7 @@
         <property name="userName" value="${activemq.username}" />
         <property name="password" value="${activemq.password}" />
         <property name="clientId" value="${activemq.clientid}" />
-        <property name="concurrentConsumers" value="${activemq.concurrentConsumers}" />
+        <!--<property name="concurrentConsumers" value="${activemq.concurrentConsumers}" />-->
     </bean>
 
     <!-- Custom S3 marshaller to place body on S3 -->
@@ -1175,6 +1175,7 @@
 
         <!-- 20190926 - adding activemq and drsmds routes for ingesting drs metadata from new mongo api into "extensions" solr, -->
         <!-- and triggering realtime update into matching bibrecs -->
+
         <route id="activemqDrs" errorHandlerRef="eh">
             <from uri="activemq:Consumer.librarycloud-{{librarycloud.sqs.environment}}.VirtualTopic.DRS_OBJECT_UPDATED"/>
             <!--<from uri="activemq:Consumer.Consumer1.VirtualTopic.DRS_OBJECT_UPDATED"/>-->
@@ -1196,6 +1197,29 @@
                     <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
                 </otherwise>
             </choice>
+        </route>
+
+        <!-- this is for refreshing drs ids by loading files to queue, if for istance there is a failure above -->
+        <route id="updatedrsids">
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-drsids?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <!--<from uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma"/>-->
+            <!-- Try block required for errors thrown out of the splitter -->
+            <doTry>
+                <split streaming="true">
+                    <tokenize token="\r\n|\n" xml="false" trim="true" />
+                    <process ref="drsMdsProcessor"/>
+                    <!--<to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml"/>-->
+                    <choice>
+                        <when>
+                            <simple>${in.body} != "[]"</simple>
+                            <to uri="seda:drs-mds?size=20&amp;blockWhenFull=true" />
+                        </when>
+                        <otherwise>
+                            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                        </otherwise>
+                    </choice>
+                </split>
+            </doTry>
         </route>
 
         <route id="drsMdsToSolr" errorHandlerRef="eh">
@@ -1221,7 +1245,6 @@
                     <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-metadata?amazonSQSClient=#sqsClient"/>
                 </aggregate>
             </split>
-
         </route>
 
         <route id="adddrsmetadataimmediate-seda" errorHandlerRef="eh">
