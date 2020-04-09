@@ -760,8 +760,7 @@
         <extensionValue>Countway Medicine</extensionValue>
     </mapping>
     <mapping>
-        <source>Center for the History of Medicine (Francis A. Countway Library of
-            Medicine)</source>
+        <source>Center for the History of Medicine (Francis A. Countway Library of Medicine)</source>
         <replacement>Center for the History of Medicine (Francis A. Countway Library of
             Medicine)</replacement>
         <valueURI>http://id.loc.gov/authorities/names/no2011103181</valueURI>
@@ -783,8 +782,7 @@
     </mapping>    
     <mapping>
         <source>Countway Library of Medicine</source>
-        <replacement>Center for the History of Medicine (Francis A. Countway Library of
-            Medicine)</replacement>
+        <replacement>Center for the History of Medicine (Francis A. Countway Library of Medicine)</replacement>
         <valueURI>http://id.loc.gov/authorities/names/no2011103181</valueURI>
         <extensionValue>Countway Medicine</extensionValue>
     </mapping>  
