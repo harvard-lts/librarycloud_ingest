@@ -20,7 +20,7 @@
         <property name="userName" value="${activemq.username}" />
         <property name="password" value="${activemq.password}" />
         <property name="clientId" value="${activemq.clientid}" />
-        <!--<property name="concurrentConsumers" value="${activemq.concurrentConsumers}" />-->
+        <property name="deliveryPersistent" value="true" />
     </bean>
 
     <!-- Custom S3 marshaller to place body on S3 -->
