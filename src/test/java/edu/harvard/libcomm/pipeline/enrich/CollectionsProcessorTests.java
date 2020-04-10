@@ -147,7 +147,7 @@ class CollectionsProcessorTests {
             e.printStackTrace();
         }
         String result = lcm.getPayload().getData();
-        System.out.println(result);
+        //System.out.println("CollectionsProcessor: " + result);
 
 
         Document doc = TestHelpers.extractXmlDoc(lcm);

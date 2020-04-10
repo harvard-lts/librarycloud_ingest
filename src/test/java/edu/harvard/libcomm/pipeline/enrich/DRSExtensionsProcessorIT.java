@@ -70,6 +70,7 @@ class DRSExtensionsProcessorIT {
         assertEquals("http://nrs.harvard.edu/urn-3:FHCL:562268?width=150&height=150&usethumb=y", thumb1Url);
     }
 
+    @Disabled
     @Test
     void test009180601() throws Exception {
         LibCommMessage lcm = TestHelpers.buildLibCommMessage("mods", "009180601");

@@ -22,7 +22,14 @@ public class DRSExtensionsProcessor extends ExternalServiceProcessor implements 
 
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
 		libCommMessage.setCommand("enrich-drs-extensions");
-		log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+		//log.info("adding DRS Metadata to MODS records");
+
+		try {
+			log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath() + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+		} catch (Exception e) {
+			log.error("Unable to log message info");
+		}
+
 		URI uri = null;
 		String urns = getUrns(libCommMessage);
 		//urns = urns.startsWith("OR") ? urns.substring(2) : urns;
@@ -36,8 +43,8 @@ public class DRSExtensionsProcessor extends ExternalServiceProcessor implements 
 			//Why are we getting this condition? TO DO - catch upstream
 			urns = urns.replace("OR  OR ", "OR ");
 			urns = "(" + urns.replace(" ","+") + ")";
-			//System.out.println("URNS: " + urns);
-			uri = new URI(Config.getInstance().SOLR_EXTENSIONS_URL + "/select?q=urn_keyword:" + urns + "&rows=250");
+			//log.info("URNS: " + urns);
+			uri = new URI(Config.getInstance().SOLR_EXTENSIONS_URL + "/select?q=urn:" + urns + "&rows=250");
 		}
     process(libCommMessage, uri, "results", "src/main/resources/adddrsextensions.xsl");
 	}

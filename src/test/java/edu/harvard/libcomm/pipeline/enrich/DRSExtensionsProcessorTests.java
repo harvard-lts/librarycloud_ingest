@@ -157,7 +157,7 @@ class DRSExtensionsProcessorTests {
         p.processMessage(lcm);
 
         Document doc = TestHelpers.extractXmlDoc(lcm);
-        System.out.println(lcm.getPayload().getData());
+        //System.out.println("DRSExtensions: " + lcm.getPayload().getData());
         String lastModifiedDate = TestHelpers.getXPath("//mods:mods//drs:lastModifiedDate", doc);
 
         assertEquals("", lastModifiedDate);

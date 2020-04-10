@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mods:mods xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
+   xmlns:sets="http://hul.harvard.edu/ois/xml/ns/sets" xmlns:mods="http://www.loc.gov/mods/v3"
+   xmlns:librarycloud="http://hul.harvard.edu/ois/xml/ns/librarycloud"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <mods:titleInfo>
+      <mods:title>Yeats's paradises, Full video recording, Full video recording, Full video
+         recording, Full video recording, Full video recording, Full video recording, Full video
+         recording, Full video recording</mods:title>
+      <mods:subTitle>a lecture</mods:subTitle>
+   </mods:titleInfo>
+   <mods:name type="personal">
+      <mods:namePart>Vendler, Helen</mods:namePart>
+      <mods:namePart type="date">1933-</mods:namePart>
+      <mods:role>
+         <mods:roleTerm type="text">creator</mods:roleTerm>
+      </mods:role>
+      <mods:role>
+         <mods:roleTerm type="text">author.</mods:roleTerm>
+      </mods:role>
+   </mods:name>
+   <mods:name type="personal">
+      <mods:namePart>Vendler, Helen</mods:namePart>
+      <mods:namePart type="date">1933-</mods:namePart>
+      <mods:role>
+         <mods:roleTerm type="text">speaker.</mods:roleTerm>
+      </mods:role>
+   </mods:name>
+   <mods:name type="personal">
+      <mods:namePart>Perkins, David</mods:namePart>
+      <mods:role>
+         <mods:roleTerm type="text">introducer.</mods:roleTerm>
+      </mods:role>
+   </mods:name>
+   <mods:name type="corporate">
+      <mods:namePart>Woodberry Poetry Room (Harvard College Library)</mods:namePart>
+      <mods:role>
+         <mods:roleTerm type="text">sponsoring body,</mods:roleTerm>
+      </mods:role>
+      <mods:role>
+         <mods:roleTerm type="text">host institution.</mods:roleTerm>
+      </mods:role>
+   </mods:name>
+   <mods:typeOfResource>moving image</mods:typeOfResource>
+   <mods:genre authority="marcgt">videorecording</mods:genre>
+   <mods:genre authority="rdacontent">two-dimensional moving image</mods:genre>
+   <mods:genre authority="0">Oral interpretation of poetry.</mods:genre>
+   <mods:genre authority="0">Videocassettes.</mods:genre>
+   <mods:originInfo>
+      <mods:place>
+         <mods:placeTerm authority="marccountry" type="code">mau</mods:placeTerm>
+         <mods:placeTerm authority="marccountry" type="text">Massachusetts</mods:placeTerm>
+      </mods:place>
+      <mods:dateIssued encoding="marc">1991</mods:dateIssued>
+      <mods:issuance>monographic</mods:issuance>
+   </mods:originInfo>
+   <mods:originInfo>
+      <mods:place>
+         <mods:placeTerm type="text">Cambridge, Massachusetts :</mods:placeTerm>
+      </mods:place>
+      <mods:publisher>[recordist not identified],</mods:publisher>
+      <mods:dateOther type="production">1991 April 1.</mods:dateOther>
+   </mods:originInfo>
+   <mods:originInfo>
+      <mods:place>
+         <mods:placeTerm type="text">Cambridge, Massachusetts :</mods:placeTerm>
+      </mods:place>
+      <mods:publisher>Woodberry Poetry Room,</mods:publisher>
+      <mods:dateIssued>1991.</mods:dateIssued>
+   </mods:originInfo>
+   <mods:language>
+      <mods:languageTerm authority="iso639-2b" type="code">eng</mods:languageTerm>
+      <mods:languageTerm authority="iso639-2b" type="text">English</mods:languageTerm>
+   </mods:language>
+   <mods:physicalDescription>
+      <mods:extent>1 videocassette : sound, color ; 1/2 in.</mods:extent>
+      <mods:form type="media" authority="rdamedia">video</mods:form>
+      <mods:form type="carrier" authority="rdacarrier">videocassette</mods:form>
+   </mods:physicalDescription>
+   <mods:tableOfContents>Introduction / David Perkins -- Lecture / Helen
+      Vendler.</mods:tableOfContents>
+   <mods:targetAudience authority="marctarget">general</mods:targetAudience>
+   <mods:note type="statement of responsibility">by Helen Vendle.</mods:note>
+   <mods:note>Lecture given as part of the Poetry Room Sixtieth Anniversary Celebration (April 8-12,
+      1991).</mods:note>
+   <mods:note type="venue">Recorded April 9, 1991, in the Woodberry Poetry Room, Lamont Library,
+      Harvard University.</mods:note>
+   <mods:note type="system details">VHS.</mods:note>
+   <mods:subject authority="lcsh">
+      <mods:name type="personal">
+         <mods:namePart>Yeats, W. B. (William Butler)</mods:namePart>
+         <mods:namePart type="date">1865-1939</mods:namePart>
+      </mods:name>
+      <mods:topic>Criticism and interpretation</mods:topic>
+   </mods:subject>
+   <mods:subject authority="lcsh">
+      <mods:name type="corporate">
+         <mods:namePart>Woodberry Poetry Room (Harvard College Library)</mods:namePart>
+      </mods:name>
+      <mods:topic>Anniversaries, etc</mods:topic>
+   </mods:subject>
+   <mods:subject authority="lcsh">
+      <mods:topic>Irish poetry</mods:topic>
+      <mods:temporal>20th century</mods:temporal>
+      <mods:topic>History and criticism</mods:topic>
+   </mods:subject>
+   <mods:relatedItem type="series">
+      <mods:titleInfo>
+         <mods:title>Woodberry Poetry Room video collection</mods:title>
+      </mods:titleInfo>
+   </mods:relatedItem>
+   <mods:identifier type="oclc">612311354</mods:identifier>
+   <mods:recordInfo>
+      <mods:descriptionStandard>rda</mods:descriptionStandard>
+      <mods:recordContentSource authority="marcorg">MH-H</mods:recordContentSource>
+      <mods:recordCreationDate encoding="marc">910905</mods:recordCreationDate>
+      <mods:recordChangeDate encoding="iso8601">20131002</mods:recordChangeDate>
+      <mods:recordIdentifier source="MH:ALMA">990025250650203941</mods:recordIdentifier>
+      <mods:recordOrigin>Converted from MARCXML to MODS version 3.6 using MARC21slim2MODS3-6.xsl
+         (Revision 1.117 2017/02/14)</mods:recordOrigin>
+      <mods:languageOfCataloging>
+         <mods:languageTerm authority="iso639-2b" type="code">eng</mods:languageTerm>
+      </mods:languageOfCataloging>
+   </mods:recordInfo>
+   <mods:relatedItem otherType="HOLLIS record">
+      <mods:location>
+         <mods:url>https://id.lib.harvard.edu/alma/990025250650203941/catalog</mods:url>
+      </mods:location>
+   </mods:relatedItem>
+   <mods:location>
+      <mods:physicalLocation valueURI="http://id.loc.gov/authorities/names/n85304584"
+         displayLabel="Harvard repository" type="repository">Woodberry Poetry Room, Harvard
+         University</mods:physicalLocation>
+      <mods:shelfLocator>PR5907 .V45 1991vx</mods:shelfLocator>
+   </mods:location>
+   <mods:location>
+      <mods:url displayLabel="Full video recording" access="raw object"
+         >https://nrs.harvard.edu/urn-3:FHCL.HOUGH:39892760</mods:url>
+   </mods:location>
+   <mods:extension>
+      <librarycloud:librarycloud xmlns="http://www.loc.gov/mods/v3">
+         <librarycloud:HarvardRepositories>
+            <librarycloud:HarvardRepository>Poetry Room (Lamont)</librarycloud:HarvardRepository>
+         </librarycloud:HarvardRepositories>
+         <librarycloud:originalDocument>https://s3.amazonaws.com/harvard.librarycloud.marc.qa/990025250650203941</librarycloud:originalDocument>
+         <librarycloud:priorrecordids>
+            <librarycloud:recordIdentifier source="MH:ALEPH"
+               >002525065</librarycloud:recordIdentifier>
+         </librarycloud:priorrecordids>
+         <librarycloud:processingDate>2019-09-03T00:55Z</librarycloud:processingDate>
+      </librarycloud:librarycloud>
+   </mods:extension>
+   <!--<mods:extension>
+      <HarvardDRS:DRSMetadata xmlns="http://www.loc.gov/mods/v3">
+         <HarvardDRS:inDRS>true</HarvardDRS:inDRS>
+         <HarvardDRS:drsObjectId>466645662</HarvardDRS:drsObjectId>
+         <HarvardDRS:drsFileId>466645665</HarvardDRS:drsFileId>
+         <HarvardDRS:accessFlag>P</HarvardDRS:accessFlag>
+         <HarvardDRS:contentModel>VIDEO</HarvardDRS:contentModel>
+         <HarvardDRS:contentModelCode>CMID-12.0</HarvardDRS:contentModelCode>
+         <HarvardDRS:uriType>SDS_VIDEO</HarvardDRS:uriType>
+         <HarvardDRS:fileDeliveryURL>https://nrs.harvard.edu/urn-3:FHCL.HOUGH:39892760</HarvardDRS:fileDeliveryURL>
+         <HarvardDRS:ownerCode>FHCL.HOUGH</HarvardDRS:ownerCode>
+         <HarvardDRS:ownerCodeDisplayName>Houghton Library</HarvardDRS:ownerCodeDisplayName>
+         <HarvardDRS:metsLabel>Lecture by Helen Vendler: "Yeats's Paradises." Recorded on April 9,
+            1991, in the Forum Room, Lamont Library, Harvard University. Part of the Woodberry
+            Poetry Room video collection. </HarvardDRS:metsLabel>
+         <HarvardDRS:lastModifiedDate>2019-05-14T18:04:20Z</HarvardDRS:lastModifiedDate>
+         <HarvardDRS:insertionDate>2019-05-14T18:04:20Z</HarvardDRS:insertionDate>
+         <HarvardDRS:ownerSuppliedName>PR5907V451991vx</HarvardDRS:ownerSuppliedName>
+         <HarvardDRS:viewText>off</HarvardDRS:viewText>
+         <HarvardDRS:mimeType>video/quicktime</HarvardDRS:mimeType>
+         <HarvardDRS:suppliedFilename>PR5907V451991vx_DM_01_01.mp4</HarvardDRS:suppliedFilename>
+         <HarvardDRS:harvardMetadataLinks>
+            <HarvardDRS:harvardMetadataLink>
+               <HarvardDRS:metadataIdentifier>http://id.lib.harvard.edu/alma/990025250650203941/catalog</HarvardDRS:metadataIdentifier>
+               <HarvardDRS:metadataType>Alma</HarvardDRS:metadataType>
+               <HarvardDRS:displayLabel>Hollis</HarvardDRS:displayLabel>
+            </HarvardDRS:harvardMetadataLink>
+         </HarvardDRS:harvardMetadataLinks>
+      </HarvardDRS:DRSMetadata>
+   </mods:extension>-->
+</mods:mods>

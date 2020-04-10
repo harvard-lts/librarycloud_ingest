@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <valueMappings>
+    <!-- 2020-03-30: Removed "Villa " from I Tatti replacement names 
+        Law joins Baker and FAL as having subunits in replacement elements.(RKW)-->
+    <!-- 2019-07-25: Added entries for updated names from ArchivesSpace: 
+   AJP, ARN, BAK, BER, DDO, ENV, ECB, FAL, FAR, GRA, LAW, MUS, ORC, SCH, URI.(RKW) -->
     <!-- 2018-11-07: cleaned up XML (RKW) -->
     <!-- 2018-08-23: added block for "Peabody Museum Archives" (RKW)-->
     <!-- 2018-07-23: revised (RKW) -->
@@ -25,7 +29,21 @@
         <extensionValue>Botany Arboretum</extensionValue>
     </mapping>
     <mapping>
+        <source>Arnold Arboretum Horticulture Library (Jamaica Plain)</source>
+        <replacement>Arnold Arboretum Horticultural Library (Jamaica Plain), Harvard
+            University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Botany Arboretum</extensionValue>
+    </mapping>
+    <mapping>
         <source>Archives of the Arnold Arboretum, Harvard University</source>
+        <replacement>Arnold Arboretum Horticultural Library (Jamaica Plain), Harvard
+            University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Botany Arboretum</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Arnold Arboretum Archives</source>
         <replacement>Arnold Arboretum Horticultural Library (Jamaica Plain), Harvard
             University</replacement>
         <!--    <valueURI></valueURI>  -->
@@ -45,6 +63,13 @@
         <!--    <valueURI></valueURI>  -->
         <extensionValue>Botany Arnold (Cambr.)</extensionValue>
     </mapping>
+    <mapping>
+        <source>Botany Libraries, Arnold Arboretum Library (Cambridge), Harvard University</source>
+        <replacement>Arnold Arboretum Library (Cambridge), Botany Libraries, Harvard
+            University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Botany Arnold (Cambr.)</extensionValue>
+    </mapping>   
     <mapping>
         <source>Archives of the Arnold Arboretum (Cambridge), Botany Libraries, Harvard
             University</source>
@@ -73,6 +98,13 @@
     </mapping>
     <mapping>
         <source>Harvard Art Museum Archives, Harvard Art Museums, Harvard University</source>
+        <replacement>Harvard Art Museums Archives, Harvard Art Museums, Harvard
+            University</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2008065752</valueURI>
+        <extensionValue>Harvard Art Museums</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Harvard Art Museums Archives</source>
         <replacement>Harvard Art Museums Archives, Harvard Art Museums, Harvard
             University</replacement>
         <valueURI>http://id.loc.gov/authorities/names/no2008065752</valueURI>
@@ -122,23 +154,34 @@
         <!--    <valueURI></valueURI>  -->
         <extensionValue>Baker Business</extensionValue>
     </mapping>
-
+    <mapping>
+        <source>Baker Library Special Collections, Harvard Business School, Harvard University</source>
+        <replacement>Baker Library Special Collections, Harvard Business School, Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Baker Business</extensionValue>
+    </mapping>
     <mapping>
         <source>BER</source>
-        <replacement>Biblioteca Berenson, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
+        <replacement>Biblioteca Berenson, I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
         <valueURI>http://isni.org/isni/0000000460340699</valueURI>
         <extensionValue>Biblioteca Berenson</extensionValue>
     </mapping>
     <mapping>
         <source>Berenson Art Collection, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</source>
-        <replacement>Berenson Art Collection, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
+        <replacement>Berenson Art Collection, I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
         <!--    <valueURI></valueURI>  -->
         <extensionValue>Biblioteca Berenson</extensionValue>
     </mapping>
     <mapping>
         <source>Biblioteca Berenson, Fototeca, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</source>
-        <replacement>Biblioteca Berenson, Fototeca, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
+        <replacement>Biblioteca Berenson, Fototeca, I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
         <!--    <valueURI></valueURI>  -->
+        <extensionValue>Biblioteca Berenson</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Biblioteca Berenson, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</source>
+        <replacement>Biblioteca Berenson, I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
+        <valueURI>http://isni.org/isni/0000000460340699</valueURI>
         <extensionValue>Biblioteca Berenson</extensionValue>
     </mapping>
     <mapping>
@@ -225,6 +268,13 @@
         <extensionValue>Dumbarton Oaks</extensionValue>
     </mapping>
     <mapping>
+        <source>Dumbarton Oaks ICFA</source>
+        <replacement>Dumbarton Oaks Research Library and Collection, Harvard
+            University</replacement>
+        <valueURI>http://isni.org/isni/0000000121086569</valueURI>
+        <extensionValue>Dumbarton Oaks</extensionValue>
+    </mapping>
+    <mapping>
         <source>DES</source>
         <replacement>Frances L. Loeb Library, Graduate School of Design, Harvard
             University</replacement>
@@ -248,6 +298,13 @@
     </mapping>
     <mapping>
         <source>Frances Loeb Library Special Collections, Graduate School of Design, Harvard University</source>
+        <replacement>Frances L. Loeb Library, Graduate School of Design, Harvard
+            University</replacement>
+        <valueURI>http://isni.org/isni/0000000460342862</valueURI>
+        <extensionValue>Loeb Design</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Frances Loeb Library</source>
         <replacement>Frances L. Loeb Library, Graduate School of Design, Harvard
             University</replacement>
         <valueURI>http://isni.org/isni/0000000460342862</valueURI>
@@ -296,6 +353,13 @@
         <extensionValue>Botany Econ. Botany</extensionValue>
     </mapping>
     <mapping>
+        <source>Botany Libraries, Economic Botany Library of Oakes Ames, Harvard University</source>
+        <replacement>Economic Botany Library of Oakes Ames, Botany Libraries, Harvard
+            University</replacement>
+        <valueURI>http://isni.org/isni/0000000463448371</valueURI>
+        <extensionValue>Botany Econ. Botany</extensionValue>
+    </mapping>
+    <mapping>
         <source>Economic Botany Archives of Oakes Ames, Botany Libraries, Harvard
             University</source>
         <replacement>Economic Botany Library of Oakes Ames, Botany Libraries, Harvard
@@ -305,6 +369,12 @@
     </mapping>
     <mapping>
         <source>ENV</source>
+        <replacement>Environmental Science and Public Policy Archives, Harvard University</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Environmental Information Ctr</extensionValue>
+    </mapping>
+    <mapping>
+        <source>ESPP Archives</source>
         <replacement>Environmental Science and Public Policy Archives, Harvard University</replacement>
         <!--    <valueURI></valueURI>  -->
         <extensionValue>Environmental Information Ctr</extensionValue>
@@ -329,7 +399,25 @@
         <extensionValue>Fine Arts</extensionValue>
     </mapping>
     <mapping>
+        <source>Fine Arts Library, Harvard Library</source>
+        <replacement>Fine Arts Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000109432246</valueURI>
+        <extensionValue>Fine Arts</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Fine Arts Library, Harvard University</source>
+        <replacement>Fine Arts Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000109432246</valueURI>
+        <extensionValue>Fine Arts</extensionValue>
+    </mapping>
+    <mapping>
         <source>Fine Arts Library, Harvard Library, Harvard University</source>
+        <replacement>Fine Arts Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000109432246</valueURI>
+        <extensionValue>Fine Arts</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Fine Arts Library</source>
         <replacement>Fine Arts Library, Harvard University</replacement>
         <valueURI>http://isni.org/isni/0000000109432246</valueURI>
         <extensionValue>Fine Arts</extensionValue>
@@ -349,6 +437,13 @@
     </mapping>
     <mapping>
         <source>FAR</source>
+        <replacement>Farlow Reference Library of Cryptogamic Botany, Botany Libraries, Harvard
+            University</replacement>
+        <valueURI>http://isni.org/isni/000000046344838X</valueURI>
+        <extensionValue>Botany Farlow Library </extensionValue>
+    </mapping>
+    <mapping>
+        <source>Botany Libraries, Farlow Reference Library of Cryptogamic Botany, Harvard University</source>
         <replacement>Farlow Reference Library of Cryptogamic Botany, Botany Libraries, Harvard
             University</replacement>
         <valueURI>http://isni.org/isni/000000046344838X</valueURI>
@@ -405,6 +500,12 @@
         <extensionValue>Botany Gray Herbarium</extensionValue>
     </mapping>
     <mapping>
+        <source>Botany Libraries, Gray Herbarium Library, Harvard University</source>
+        <replacement>Gray Herbarium Library, Botany Libraries, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000463448419</valueURI>
+        <extensionValue>Botany Gray Herbarium</extensionValue>
+    </mapping>
+    <mapping>
         <source>Archives of the Gray Herbarium, Botany Libraries, Harvard University</source>
         <replacement>Gray Herbarium Library, Botany Libraries, Harvard University</replacement>
         <valueURI>http://isni.org/isni/0000000463448419</valueURI>
@@ -418,6 +519,14 @@
     </mapping>
     <mapping>
         <source>GUT</source>
+        <replacement>Monroe C. Gutman Library, Graduate School of Education, Harvard
+            University</replacement>
+        <valueURI>http://isni.org/isni/0000000460342846</valueURI>
+        <extensionValue>Gutman Education</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Monroe C. Gutman Library, Harvard Graduate School of Education, Harvard
+            University</source>
         <replacement>Monroe C. Gutman Library, Graduate School of Education, Harvard
             University</replacement>
         <valueURI>http://isni.org/isni/0000000460342846</valueURI>
@@ -595,6 +704,12 @@
         <extensionValue>Law School</extensionValue>
     </mapping>
     <mapping>
+        <source>Harvard Law School Library, Historical &amp; Special Collections</source>
+        <replacement>Harvard Law School Library, Historical &amp; Special Collections</replacement>
+        <valueURI>http://isni.org/isni/000000011940971X</valueURI>
+        <extensionValue>Law School</extensionValue>
+    </mapping>
+    <mapping>
         <source>LIN</source>
         <replacement>Linguistics Library, Harvard University</replacement>
         <valueURI>http://id.loc.gov/authorities/names/no2018024257</valueURI>
@@ -625,8 +740,7 @@
         <extensionValue>Museum Comp Zoology</extensionValue>
     </mapping>
     <mapping>
-        <source>Ernst Mayr Library of the Museum of Comparative Zoology, Museum of Comparative
-            Zoology, Harvard University</source>
+        <source>Ernst Mayr Library of the Museum of Comparative Zoology, Museum of Comparative Zoology, Harvard University</source>
         <replacement>Ernst Mayr Library of the Museum of Comparative Zoology, Harvard
             University</replacement>
         <valueURI>http://isni.org/isni/0000000460377627</valueURI>
@@ -646,8 +760,7 @@
         <extensionValue>Countway Medicine</extensionValue>
     </mapping>
     <mapping>
-        <source>Center for the History of Medicine (Francis A. Countway Library of
-            Medicine)</source>
+        <source>Center for the History of Medicine (Francis A. Countway Library of Medicine)</source>
         <replacement>Center for the History of Medicine (Francis A. Countway Library of
             Medicine)</replacement>
         <valueURI>http://id.loc.gov/authorities/names/no2011103181</valueURI>
@@ -664,6 +777,12 @@
         <source>Countway Library of Medicine, Center for the History of Medicine</source>
         <replacement>Center for the History of Medicine (Francis A. Countway Library of
             Medicine)</replacement>
+        <valueURI>http://id.loc.gov/authorities/names/no2011103181</valueURI>
+        <extensionValue>Countway Medicine</extensionValue>
+    </mapping>    
+    <mapping>
+        <source>Countway Library of Medicine</source>
+        <replacement>Center for the History of Medicine (Francis A. Countway Library of Medicine)</replacement>
         <valueURI>http://id.loc.gov/authorities/names/no2011103181</valueURI>
         <extensionValue>Countway Medicine</extensionValue>
     </mapping>  
@@ -693,6 +812,12 @@
     </mapping>
     <mapping>
         <source>Loeb Music Library</source>
+        <replacement>Eda Kuhn Loeb Music Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000460341675</valueURI>
+        <extensionValue>Loeb Music</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Eda Kuhn Loeb Music Library</source>
         <replacement>Eda Kuhn Loeb Music Library, Harvard University</replacement>
         <valueURI>http://isni.org/isni/0000000460341675</valueURI>
         <extensionValue>Loeb Music</extensionValue>
@@ -748,6 +873,13 @@
     </mapping>
     <mapping>
         <source>ORC</source>
+        <replacement>Orchid Library of Oakes Ames, Botany Libraries, Harvard
+            University</replacement>
+        <valueURI>http://isni.org/isni/0000000463448427</valueURI>
+        <extensionValue>Botany Ames Orchid</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Botany Libraries, Orchid Library of Oakes Ames, Harvard University</source>
         <replacement>Orchid Library of Oakes Ames, Botany Libraries, Harvard
             University</replacement>
         <valueURI>http://isni.org/isni/0000000463448427</valueURI>
@@ -853,6 +985,13 @@
         <extensionValue>Schlesinger</extensionValue>
     </mapping>
     <mapping>
+        <source>Schlesinger Library on the History of Women in America, Radcliffe Institute for Advanced Study</source>
+        <replacement>Arthur and Elizabeth Schlesinger Library on the History of Women in America,
+            Radcliffe Institute for Advanced Study, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000109426663</valueURI>
+        <extensionValue>Schlesinger</extensionValue>
+    </mapping>
+    <mapping>
         <source>Schlesinger Library, Radcliffe Institute</source>
         <replacement>Arthur and Elizabeth Schlesinger Library on the History of Women in America,
             Radcliffe Institute for Advanced Study, Harvard University</replacement>
@@ -944,8 +1083,22 @@
         <extensionValue>Ukrainian Res Inst</extensionValue>
     </mapping>
     <mapping>
+        <source>Ukrainian Research Institute</source>
+        <replacement>Ukrainian Research Institute Reference Library, Harvard
+            University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/n79124861</valueURI>
+        <extensionValue>Ukrainian Res Inst</extensionValue>
+    </mapping>
+    <mapping>
         <source>Ukrainian Research Institute Reference Library, Harvard Library, Harvard
             University</source>
+        <replacement>Ukrainian Research Institute Reference Library, Harvard
+            University</replacement>
+        <valueURI>http://id.loc.gov/rwo/agents/n79124861</valueURI>
+        <extensionValue>Ukrainian Res Inst</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Ukrainian Research Institute Library, Harvard University</source>
         <replacement>Ukrainian Research Institute Reference Library, Harvard
             University</replacement>
         <valueURI>http://id.loc.gov/rwo/agents/n79124861</valueURI>
@@ -1016,12 +1169,6 @@
     </mapping>
     <mapping>
         <source>WOL</source>
-        <replacement>John G. Wolbach Library, Harvard-Smithsonian Center for Astrophysics</replacement>
-        <valueURI>http://isni.org/isni/0000000460371700</valueURI>
-        <extensionValue>Wolbach Library</extensionValue>
-    </mapping>
-    <mapping>
-        <source>Wolbach Archives, Wolbach Library, Harvard University</source>
         <replacement>John G. Wolbach Library, Harvard-Smithsonian Center for Astrophysics</replacement>
         <valueURI>http://isni.org/isni/0000000460371700</valueURI>
         <extensionValue>Wolbach Library</extensionValue>

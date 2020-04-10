@@ -162,7 +162,7 @@ public class MessageUtils {
 		String data = libCommMessage.getPayload().getData();
 		//System.out.println("DATA: " + data);
 		StringReader dataReader = new StringReader(data);
-//System.out.println("data: " + data);
+//System.out.println("MODS BEFORE TRANSFORM: " + data);
 //System.out.println("xslParam: " + xslParam);
 		StringWriter writer = new StringWriter();
 		final InputStream xsl = new FileInputStream(xslFilePath);

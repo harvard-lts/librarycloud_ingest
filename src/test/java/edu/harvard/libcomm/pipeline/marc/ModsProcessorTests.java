@@ -54,14 +54,14 @@ class ModsProcessorTests {
     @Test //LTSCLOUD-752
     void idDotLibURL() throws Exception {
         String url = TestHelpers.getXPath("//mods:mods[1]//mods:relatedItem[@otherType='HOLLIS record']/mods:location/mods:url", mods);
-        assertEquals("http://id.lib.harvard.edu/aleph/000005977/catalog", url);
+        assertEquals("https://id.lib.harvard.edu/alma/990000059770203941/catalog", url);
 
-        p.setStylesheet("src/main/resources/MARC21slim2MODS3-6-alma.xsl");
+        p.setStylesheet("src/main/resources/MARC21slim2MODS3-6.xsl");
         LibCommMessage lcmAlma = TestHelpers.buildLibCommMessage("marc", "marcxml_sample_1.xml");
         p.processMessage(lcmAlma);
         Document modsAlma = TestHelpers.extractXmlDoc(lcmAlma);
         String urlAlma = TestHelpers.getXPath("//mods:mods[1]//mods:relatedItem[@otherType='HOLLIS record']/mods:location/mods:url", modsAlma);
-        assertEquals("http://id.lib.harvard.edu/alma/000005977/catalog", urlAlma);
+        assertEquals("https://id.lib.harvard.edu/alma/990000059770203941/catalog", urlAlma);
     }
 
     @Test //LTSCLOUD-756 rec: 009955294

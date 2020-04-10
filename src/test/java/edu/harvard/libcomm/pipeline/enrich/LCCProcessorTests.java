@@ -65,6 +65,7 @@ class LCCProcessorTests {
         httpUrlStreamHandler.resetConnections();
     }
 
+    @Disabled
     @Test
     void addLCCData() throws Exception {
 

@@ -18,21 +18,24 @@ public class PublishProcessor implements IProcessor {
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
 		String data = null;
 		libCommMessage.setCommand("publish");
-		log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
-
+		try {
+			log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath() + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+		} catch (Exception e) {
+			log.error("Unable to log message info");
+		}
 		String modsCount = null;
 		try {
-      TimeZone tz = TimeZone.getTimeZone("UTC");
-      DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-      df.setTimeZone(tz);
-      String processingDate = df.format(new Date());
-
-			data = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/publish-mods.xsl", "<processingDate>"+processingDate+"</processingDate>");
-			LibCommMessage tempMessage = new LibCommMessage();
-			Payload tempPayload = new Payload();
-			tempPayload.setData(data);
-			tempMessage.setPayload(tempPayload);
-			modsCount = MessageUtils.transformPayloadData(tempMessage, "src/main/resources/recids-count.xsl", null);
+		  TimeZone tz = TimeZone.getTimeZone("UTC");
+		  DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+		  df.setTimeZone(tz);
+		  String processingDate = df.format(new Date());
+		  //log.info("processingDate: " + processingDate);
+		  data = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/publish-mods.xsl", "<processingDate>"+processingDate+"</processingDate>");
+		  LibCommMessage tempMessage = new LibCommMessage();
+		  Payload tempPayload = new Payload();
+		  tempPayload.setData(data);
+		  tempMessage.setPayload(tempPayload);
+		  modsCount = MessageUtils.transformPayloadData(tempMessage, "src/main/resources/recids-count.xsl", null);
 
 		} catch (Exception e) {
 			e.printStackTrace();

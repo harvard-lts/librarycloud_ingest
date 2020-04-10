@@ -1,20 +1,10 @@
 package edu.harvard.libcomm.pipeline.solr;
 
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.net.URI;
-import java.util.Date;
-
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.request.UpdateRequest;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-import org.json.XML;
 
 import edu.harvard.libcomm.message.LibCommMessage;
-import edu.harvard.libcomm.message.LibCommMessage.Payload;
 import edu.harvard.libcomm.pipeline.IProcessor;
 
 public class SolrDeleteProcessor implements IProcessor {
@@ -46,29 +36,29 @@ public class SolrDeleteProcessor implements IProcessor {
 	}
 
 	private void deleteFromSolr(String id) throws Exception{
-    HttpSolrClient server = SolrServer.getSolrConnection();
+    HttpSolrClient client = SolrClient.getSolrConnection();
 		UpdateRequest update = new UpdateRequest();
 		update.deleteById(id);
 		if (commitWithinTime > 0) {
 			update.setCommitWithin(commitWithinTime);
-			update.process(server);
+			update.process(client);
 		} else {
-			update.process(server);
-			server.commit();
+			update.process(client);
+			client.commit();
 		}
 	}
 
 	private void deleteFromSolrByQuery(String idQry) throws Exception {
 		idQry = idQry.replace(" ","");
-		HttpSolrClient server = SolrServer.getSolrConnection();
+		HttpSolrClient client = SolrClient.getSolrConnection();
 		UpdateRequest update = new UpdateRequest();
 		update.deleteByQuery("recordIdentifier:" + idQry);
 		if (commitWithinTime > 0) {
 			update.setCommitWithin(commitWithinTime);
-			update.process(server);
+			update.process(client);
 		} else {
-			update.process(server);
-			server.commit();
+			update.process(client);
+			client.commit();
 		}
 	}
 

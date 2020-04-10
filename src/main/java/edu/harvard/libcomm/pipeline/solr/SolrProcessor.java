@@ -30,10 +30,16 @@ public class SolrProcessor implements IProcessor {
 	@Override
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
 		libCommMessage.setCommand("publish-to-solr");
-		log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+
+		try {
+			log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath() + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+		} catch (Exception e) {
+			log.error("Unable to log message info");
+		}
 
 		try {
 			String solrXml = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/mods2solr.xsl",null);
+			//log.info("solrXml: " + solrXml);
 			populateIndex(solrXml);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,19 +52,20 @@ public class SolrProcessor implements IProcessor {
 	
 	private void populateIndex(String solrXml) throws Exception {
 
-	    HttpSolrClient server = null;
+	    HttpSolrClient client = null;
 		Date start = new Date();
-	    server = SolrServer.getSolrConnection();
+	    client = SolrClient.getSolrConnection();
 		UpdateRequest update = new UpdateRequest();
 		update.add(getSolrInputDocumentList(solrXml));
 		if (commitWithinTime > 0) {
 			update.setCommitWithin(commitWithinTime);
-		    update.process(server);
+		    update.process(client);
 		} else {
-		    update.process(server);
-    	    server.commit();
+		    update.process(client);
+    	    client.commit();
 		}
 		Date end = new Date();
+		log.info("Inserting DRS Metadata into \"librarycloud\"  solr collection");
 		log.debug("Solr insert query time: " + (end.getTime() - start.getTime()));
 	}
 

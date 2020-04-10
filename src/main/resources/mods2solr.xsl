@@ -32,7 +32,9 @@
             <!-- put the isOnline field here to keep grouped with isCollection and isManuscript -->
             <!-- concat all urls and check those for patterns we want as isOnline, in addition to raw object urls 2019-05-29 -->
             <xsl:variable name="isOnlineUrls">
-                <xsl:value-of select=".//mods:location/mods:url[not(@access = 'raw object') and not(@access = 'preview')]"/>
+                <xsl:value-of
+                    select=".//mods:location/mods:url[not(@access = 'raw object') and not(@access = 'preview')]"
+                />
             </xsl:variable>
             <xsl:element name="field">
                 <xsl:attribute name="name">
@@ -42,7 +44,9 @@
                     <xsl:when test=".//mods:location/mods:url[@access = 'raw object']">
                         <xsl:text>true</xsl:text>
                     </xsl:when>
-                    <xsl:when test="contains(upper-case($isOnlineUrls),'HUL.FIG') or contains(upper-case($isOnlineUrls),'HUL.EBOOK') or contains(upper-case($isOnlineUrls),'HUL.EJOURNAL') or contains(upper-case($isOnlineUrls),'HUL.ERESOURCE') or contains(upper-case($isOnlineUrls),'DIGITAL.LIBRARY.MCGILL.CA/MINGQUING')"> <!-- what about this? or contains($isOnlineUrls),'HUL.GISDATA')  -->
+                    <xsl:when
+                        test="contains(upper-case($isOnlineUrls), 'HUL.FIG') or contains(upper-case($isOnlineUrls), 'HUL.EBOOK') or contains(upper-case($isOnlineUrls), 'HUL.EJOURNAL') or contains(upper-case($isOnlineUrls), 'HUL.ERESOURCE') or contains(upper-case($isOnlineUrls), 'DIGITAL.LIBRARY.MCGILL.CA/MINGQUING')">
+                        <!-- what about this? or contains($isOnlineUrls),'HUL.GISDATA')  -->
                         <xsl:text>true</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -297,10 +301,10 @@
     </xsl:template>
 
     <xsl:template match="mods:place[mods:placeTerm/@type = 'text']">
-        <xsl:apply-templates select="mods:placeTerm[@type='text']"/>
+        <xsl:apply-templates select="mods:placeTerm[@type = 'text']"/>
     </xsl:template>
 
-    <xsl:template match="mods:placeTerm[@type='text']">
+    <xsl:template match="mods:placeTerm[@type = 'text']">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>originPlace</xsl:text>
@@ -898,10 +902,129 @@
         </xsl:if>
     </xsl:template>
 
+    <xsl:template match="HarvardDRS:insertionDate">
+        <xsl:if test='matches(., "\d{4}")'>
+            <xsl:element name="field">
+                <xsl:attribute name="name">
+                    <xsl:text>insertionDate</xsl:text>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:element>
+        </xsl:if>
+    </xsl:template>
+
     <xsl:template match="HarvardDRS:fileDeliveryURL">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>fileDeliveryURL</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:drsObjectId">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>drsObjectId</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:drsFileId">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>drsFileId</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:contentModelCode">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>contentModelCode</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:harvardMetadataLinks">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:harvardMetadataLink">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:metadataIdentifier">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>harvardMetadataIdentifier</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+            <xsl:message><xsl:value-of select="."/></xsl:message>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:displayLabel">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>harvardMetadataLabel</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:metadataType">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>harvardMetadataType</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:maxImageDeliveryDimension">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>maxImageDeliveryDimension</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:mimeType">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>mimeType</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:ownerSuppliedName">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>ownerSuppliedName</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:suppliedFilename">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>suppliedFilename</xsl:text>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="HarvardDRS:viewText">
+        <xsl:element name="field">
+            <xsl:attribute name="name">
+                <xsl:text>viewText</xsl:text>
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
@@ -940,10 +1063,10 @@
         <!-- <xsl:param name="dateNodes"
             select="descendant::*[local-name() = 'dateIssued' or local-name() = 'dateCreated']"/>-->
         <xsl:param name="dateNodes"
-            select="mods:originInfo/mods:dateIssued|mods:originInfo/mods:dateCreated"/>
+            select="mods:originInfo/mods:dateIssued | mods:originInfo/mods:dateCreated"/>
         <xsl:param name="position" select="1"/>
 
-         <!-- <xsl:message>buildDateRangeParams: 
+        <!-- <xsl:message>buildDateRangeParams: 
          Low: <xsl:value-of select="$lowDate"/> -\-\- 
          High: <xsl:value-of select="$highDate"/> -\-\- 
          Start Found: <xsl:value-of select="$startFound"/> -\-\- 
@@ -1101,7 +1224,7 @@
         <xsl:param name="step" select="1"/>
         <xsl:param name="brake" select="0"/>
         <xsl:param name="point"/>
-       <!-- <xsl:message>
+        <!-- <xsl:message>
             IP: <xsl:value-of select="$dateStringInput"/> -\-\- 
             OP: <xsl:value-of select="$dateStringOutput"/> -\-\- 
         </xsl:message> -->
@@ -1115,8 +1238,7 @@
                     select='concat(substring($dateStringInput, 1, 4), "_", substring(substring-after($dateStringInput, "/"), 1, 4))'
                 />
             </xsl:when>
-            <xsl:when
-                test='matches($dateStringInput, "\d{4}-\d{1,2}-\d{1,2}")'>
+            <xsl:when test='matches($dateStringInput, "\d{4}-\d{1,2}-\d{1,2}")'>
                 <xsl:value-of
                     select='concat(substring($dateStringInput, 1, 4), "_", substring($dateStringInput, 1, 4))'
                 />

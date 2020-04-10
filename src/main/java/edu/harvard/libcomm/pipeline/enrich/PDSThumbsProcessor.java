@@ -27,7 +27,11 @@ public class PDSThumbsProcessor extends ExternalServiceProcessor implements IPro
 
     public void processMessage(LibCommMessage libCommMessage) throws Exception {
         libCommMessage.setCommand("enrich-pds-thumbs");
-        log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+        try {
+            log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath() + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
+        } catch (Exception e) {
+            log.error("Unable to log message info");
+        }
         String results = "";
         String data = libCommMessage.getPayload().getData();
         String urls = MessageUtils.transformPayloadData(libCommMessage,"src/main/resources/pds_urns.xsl",null);
@@ -50,9 +54,13 @@ public class PDSThumbsProcessor extends ExternalServiceProcessor implements IPro
                     String location = con.getHeaderField("Location"); // testing + "?n=3";
                     if ((responseCode / 100) == 3) {
                         if (location.contains("//pds")) {
-                            String thumb = getIIIFThumb(StringUtils.substringAfterLast(location, "/"));
-                            //System.out.println(location + " : " + thumb);
-                            sb.append("<image><url>" + s + "</url>" + "<thumb>" + thumb + "</thumb></image>");
+                            try {
+                                String thumb = getIIIFThumb(StringUtils.substringAfterLast(location, "/"));
+                                //System.out.println(location + " : " + thumb);
+                                sb.append("<image><url>" + s + "</url>" + "<thumb>" + thumb + "</thumb></image>");
+                            } catch (Exception e)  {
+                                log.error("No thumb found for: " + s);
+                            }
                         }
                     }
                 }

@@ -13,7 +13,15 @@
     <context:property-placeholder location="classpath:/librarycloud.env.properties" />
 
     <!-- bootstrap the java config -->
-    <bean class="edu.harvard.libcomm.config.Config" />
+    <bean class="edu.harvard.libcomm.pipeline.AWSConfig" />
+
+    <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="brokerURL" value="${activemq.broker.url}" />
+        <property name="userName" value="${activemq.username}" />
+        <property name="password" value="${activemq.password}" />
+        <property name="clientId" value="${activemq.clientid}" />
+        <property name="deliveryPersistent" value="true" />
+    </bean>
 
     <!-- Custom S3 marshaller to place body on S3 -->
     <bean id="cloudbody" class="edu.harvard.libcomm.pipeline.MessageBodyS3Marshaller">
@@ -278,6 +286,11 @@
 
      <bean id="prepareURI" class="edu.harvard.libcomm.pipeline.PrepareURIForHTTPEndpoint" />
 
+    <bean id="drsMdsProcessor" class="edu.harvard.libcomm.pipeline.enrich.DrsMdsProcessor" />
+    <bean id="drsMdsSolrProcessor" class="edu.harvard.libcomm.pipeline.solr.DrsMdsSolrProcessor" />
+    <bean id="drsMdsUpdateProcessor" class="edu.harvard.libcomm.pipeline.enrich.DrsMdsUpdateProcessor" />
+
+
 <!-- Connecting to mongo from within ted classes, but save for reference
     <bean id="mongoBean" class="com.mongodb.MongoClient">
         <constructor-arg>
@@ -373,7 +386,7 @@
                             <simple>${header.messageLength} > 150000</simple>
                         </completionPredicate>
                         <process ref="filterSuppressedProcessor"/>
-                        <marshal><custom ref="cloudbody"/></marshal>
+                        <!--<marshal><custom ref="cloudbody"/></marshal>-->
                         <multicast parallelProcessing="true">
                             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
                             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient" />
@@ -1145,7 +1158,7 @@
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
                 <split streaming="true">
-                    <tokenize token="\n"/>
+                    <tokenize token="\r\n|\n" xml="false" trim="true" />
                     <process ref="refreshFromS3Processor"/>
                     <!--<to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml"/>-->
                     <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
@@ -1158,6 +1171,125 @@
             <process ref="s3DeleteProcessor"/>
             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
         </route>
+
+
+        <!-- 20190926 - adding activemq and drsmds routes for ingesting drs metadata from new mongo api into "extensions" solr, -->
+        <!-- and triggering realtime update into matching bibrecs -->
+        <route id="activemqDrs" errorHandlerRef="eh">
+            <from uri="activemq:Consumer.librarycloud-{{librarycloud.sqs.environment}}.VirtualTopic.DRS_OBJECT_UPDATED"/>
+            <!--<from uri="activemq:Consumer.Consumer1.VirtualTopic.DRS_OBJECT_UPDATED"/>-->
+            <setHeader headerName="drsId">
+                <jsonpath>$.data.objectId</jsonpath>
+            </setHeader>
+            <transform>
+                <simple>${header.drsId}</simple>
+            </transform>
+            <process ref="drsMdsProcessor"/>
+            <!--<to uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
+            <!--<to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>-->
+            <choice>
+                <when>
+                    <simple>${in.body} != "[]"</simple>
+                    <to uri="seda:drs-mds?size=20&amp;blockWhenFull=true" />
+                </when>
+                <otherwise>
+                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                </otherwise>
+            </choice>
+        </route>
+
+        <!-- this is for refreshing drs ids by loading files to queue, if for istance there is a failure above -->
+        <route id="updatedrsids">
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-drsids?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <!--<from uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma"/>-->
+            <!-- Try block required for errors thrown out of the splitter -->
+            <doTry>
+                <split streaming="true">
+                    <tokenize token="\r\n|\n" xml="false" trim="true" />
+                    <process ref="drsMdsProcessor"/>
+                    <!--<to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml"/>-->
+                    <choice>
+                        <when>
+                            <simple>${in.body} != "[]"</simple>
+                            <to uri="seda:drs-mds?size=20&amp;blockWhenFull=true" />
+                        </when>
+                        <otherwise>
+                            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                        </otherwise>
+                    </choice>
+                </split>
+            </doTry>
+        </route>
+
+        <route id="drsMdsToSolr" errorHandlerRef="eh">
+            <!--<from uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
+            <!--<from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>-->
+            <from uri="seda:drs-mds?concurrentConsumers=1"/>
+            <process ref="drsMdsSolrProcessor"/>
+            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"/>
+        </route>
+        <route id="drsMdsUpdate" errorHandlerRef="eh">
+            <!--<from uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"/>
+
+            <split streaming="true">
+                <jsonpath>$</jsonpath>
+                <aggregate completionSize="100"
+                                 completionTimeout="1000" groupExchanges="true">
+                    <correlationExpression>
+                        <constant>true</constant>
+                    </correlationExpression>
+                    <process ref="drsMdsUpdateProcessor"/>
+                    <marshal><custom ref="cloudbody"/></marshal>
+                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-metadata?amazonSQSClient=#sqsClient"/>
+                </aggregate>
+            </split>
+
+        </route>
+
+        <route id="adddrsmetadataimmediate-seda" errorHandlerRef="eh">
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-metadata?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <to uri="seda:enrich-drs-metadata?size=20&amp;blockWhenFull=true" />
+        </route>
+        <route id="adddrsextensionstomodsImmediate" errorHandlerRef="eh">
+            <!--<from uri="file://{{librarycloud.files.basepath}}//enrich-drs-extensions" />-->
+            <from uri="seda:enrich-drs-metadata?concurrentConsumers=1"/>
+
+            <choice>
+                <when>
+                    <xpath>string-length(/lib_comm_message/payload/data) = 0</xpath>
+                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                </when>
+                <otherwise>
+                    <doTry>
+                        <process ref="drsExtensionsProcessor"/>
+                        <marshal><custom ref="cloudbody"/></marshal>
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+                        <!-- <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />-->
+                        <doCatch>
+                            <exception>java.lang.Exception</exception>
+                            <to uri="direct:dead-letter" />
+                            <!--<to uri="file://{{librarycloud.files.basepath}}/dead-letter" />-->
+                        </doCatch>
+                    </doTry>
+                </otherwise>
+            </choice>
+
+        </route>
+
+        <route id="publish-immmediate-seda" errorHandlerRef="eh">
+            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <to uri="seda:enrich-publish-immediate?size=20&amp;blockWhenFull=true"/>
+        </route>
+        <route id="publish-immediate" errorHandlerRef="eh">
+            <from uri="seda:enrich-publish-immediate?concurrentConsumers=1" />
+            <process ref="publishProcessor"/>
+            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+        </route>
+
+
 <!--
         <route id="fullRefresh" errorHandlerRef="eh">
             <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-allbibs?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
