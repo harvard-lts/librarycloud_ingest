@@ -57,7 +57,7 @@
             <xsl:variable name="locations"
                 select="mods:location/mods:physicalLocation[@type = 'repository']"/>
             <xsl:for-each select="$map//mapping">
-                <xsl:variable name="source" select="./source"/>
+                <xsl:variable name="source" select="normalize-space(./source)"/>
                 <xsl:if test="$locations[text() = $source]">
                     <xsl:copy-of select="."/>
                 </xsl:if>
@@ -175,12 +175,12 @@
                     <xsl:for-each select="mods:location/mods:physicalLocation[@type = 'repository']">
                         <xsl:variable name="source" select="normalize-space(./text())"/>
 
-                        <xsl:if test="string-length($map//mapping[source = $source]/extensionValue)">
+                        <xsl:if test="string-length($map//mapping[normalize-space(source) = $source]/extensionValue)">
                             <librarycloud:librarycloud>
                                 <librarycloud:HarvardRepositories>
                                     <librarycloud:HarvardRepository>
                                         <xsl:value-of
-                                            select="$map//mapping[source = $source]/extensionValue"
+                                            select="$map//mapping[normalize-space(source) = $source]/extensionValue"
                                         />
                                     </librarycloud:HarvardRepository>
                                 </librarycloud:HarvardRepositories>
@@ -226,26 +226,26 @@
                     <xsl:for-each select="@*">
                         <xsl:choose>
                             <xsl:when
-                                test="local-name() = 'displayLabel' and string-length($map//mapping[source = $source]/replacement)"/>
+                                test="local-name() = 'displayLabel' and string-length($map//mapping[normalize-space(source) = $source]/replacement)"/>
                             <xsl:when
-                                test="local-name() = 'valueURI' and string-length($map//mapping[source = $source]/valueURI)"/>
+                                test="local-name() = 'valueURI' and string-length($map//mapping[normalize-space(source) = $source]/valueURI)"/>
                             <xsl:otherwise>
                                 <xsl:apply-templates select="."/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:for-each>
-                    <xsl:if test="string-length($map//mapping[source = $source]/replacement)">
+                    <xsl:if test="string-length($map//mapping[normalize-space(source) = $source]/replacement)">
                         <xsl:attribute name="displayLabel">Harvard repository</xsl:attribute>
                     </xsl:if>
-                    <xsl:if test="string-length($map//mapping[source = $source]/valueURI)">
+                    <xsl:if test="string-length($map//mapping[normalize-space(source) = $source]/valueURI)">
                         <xsl:attribute name="valueURI">
-                            <xsl:value-of select="$map//mapping[source = $source]/valueURI"/>
+                            <xsl:value-of select="$map//mapping[normalize-space(source) = $source]/valueURI"/>
                         </xsl:attribute>
                     </xsl:if>
                     <xsl:choose>
                         <xsl:when
-                            test="string-length($map//mapping[source = $source]/replacement) &gt; 0">
-                            <xsl:value-of select="$map//mapping[source = $source]/replacement"/>
+                            test="string-length($map//mapping[normalize-space(source) = $source]/replacement) &gt; 0">
+                            <xsl:value-of select="$map//mapping[normalize-space(source) = $source]/replacement"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="text()"/>
