@@ -54,6 +54,7 @@ public class Config {
 	public String MARC_S3_URL;
 	public String JWT_LC_KEY;
 	public String INTEGRATION_SERVER_URL;
+	public String COLL_API_KEY;
 
 	private static Config conf;
 	
@@ -86,6 +87,7 @@ public class Config {
 		MARC_S3_URL = props.getProperty("marc.s3.url");
 		JWT_LC_KEY = props.getProperty("jwt.lc.key");
 		INTEGRATION_SERVER_URL = props.getProperty("integration.server.url");
+		COLL_API_KEY = props.getProperty("coll.api.key");
 
 	}
 	
