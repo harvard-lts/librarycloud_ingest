@@ -82,9 +82,9 @@
             <xsl:apply-templates select="mods:recordInfo"/>
             <xsl:apply-templates select="mods:relatedItem[@type = 'series']"/>
             <xsl:apply-templates select="mods:extension/usage:usageData/usage:stackScore"/>
-            <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:setName"/>
+            <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:setName[not(../sets:public='false')]"/>
             <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:setSpec"/>
-            <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:systemId"/>
+            <xsl:apply-templates select="mods:extension/sets:sets/sets:set/sets:systemId[not(../sets:public='false')]"/>
             <xsl:apply-templates
                 select="mods:extension/librarycloud:librarycloud/librarycloud:digitalFormats/librarycloud:digitalFormat"/>
             <xsl:apply-templates
@@ -792,12 +792,14 @@
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
+        <!--
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>collectionTitle</xsl:text>
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
+        -->
     </xsl:template>
 
     <xsl:template match="sets:systemId">
