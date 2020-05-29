@@ -128,7 +128,14 @@
                 <xsl:text disable-output-escaping="yes">
                     &lt;![CDATA[
                 </xsl:text>
-                <xsl:copy-of select="."/>
+                <!--<xsl:copy-of select=".[not(self::mods:extension/sets:sets/sets:set[sets:public='false'])]"/>-->
+                <mods:mods>
+                    <xsl:copy-of select="*[not(self::mods:extension) and not(self::mods:recordInfo)]" copy-namespaces="no"/>
+                    <xsl:copy-of select="mods:extension[not(descendant::sets:sets)]" copy-namespaces="no"/>
+                    <xsl:apply-templates select="mods:extension[descendant::sets:sets]" mode="originalmods"/>
+                    <xsl:copy-of select="mods:recordInfo" copy-namespaces="no"/>
+                    <!--<xsl:copy-of select="*[not(descendant::sets:public='false'])]" copy-namespaces="no"/>-->
+                </mods:mods>
                 <xsl:text disable-output-escaping="yes">
                     ]]&gt;
                 </xsl:text>
@@ -1513,6 +1520,27 @@
         </xsl:choose>
     </xsl:template>
 
+    <xsl:template match="mods:extension" mode="originalmods">
+        <xsl:copy copy-namespaces="no">
+            <xsl:apply-templates select="sets:sets" mode="originalmods"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="sets:sets" mode="originalmods">
+        <xsl:copy copy-namespaces="no">
+            <xsl:apply-templates select="sets:set" mode="originalmods"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="sets:set" mode="originalmods">
+        <xsl:choose>
+            <xsl:when test="sets:public='false'"/>
+            <xsl:otherwise>
+                <xsl:copy-of select="." copy-namespaces="no"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     <!--
         ? = not yet implemented
     <field name="resourceType" type="string" indexed="true" stored="true"/>
