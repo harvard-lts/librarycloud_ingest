@@ -1523,9 +1523,14 @@
     </xsl:template>
 
     <xsl:template match="mods:extension" mode="originalmods">
-        <xsl:copy copy-namespaces="no">
-            <xsl:apply-templates select="sets:sets" mode="originalmods"/>
-        </xsl:copy>
+        <xsl:choose>
+            <xsl:when test="count(sets:sets/sets:set) = 1 and sets:sets/sets:set[sets:public='false']"/>
+            <xsl:otherwise>
+                <xsl:copy copy-namespaces="no">
+                    <xsl:apply-templates select="sets:sets" mode="originalmods"/>
+                </xsl:copy>                
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="sets:sets" mode="originalmods">
