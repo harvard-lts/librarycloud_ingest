@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <valueMappings>
+    <!-- 2020-06-10: Removed duplicate Biblioteca Berenson block (RKW) -->
     <!-- 2020-06-04: Added new Berenson name forms as source values (RKW) -->
     <!-- 2020-04-21: Removed extraneous line breaks (RKW) -->
     <!-- 2020-04-10: Added mapping for new DDO source name from ArchivesSpace (RKW) -->
@@ -186,12 +187,6 @@
     </mapping>
     <mapping>
         <source>Biblioteca Berenson, Villa I Tatti - The Harvard University Center for Italian Renaissance Studies</source>
-        <replacement>Biblioteca Berenson, I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
-        <valueURI>http://isni.org/isni/0000000460340699</valueURI>
-        <extensionValue>Biblioteca Berenson</extensionValue>
-    </mapping>
-    <mapping>
-        <source>Biblioteca Berenson, I Tatti - The Harvard University Center for Italian Renaissance Studies</source>
         <replacement>Biblioteca Berenson, I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
         <valueURI>http://isni.org/isni/0000000460340699</valueURI>
         <extensionValue>Biblioteca Berenson</extensionValue>
