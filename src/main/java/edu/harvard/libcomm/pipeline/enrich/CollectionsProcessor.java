@@ -56,6 +56,9 @@ public class CollectionsProcessor implements IProcessor {
 			Date end = new Date();
 			log.trace("CollectionsProcessor query time: " + (end.getTime() - start.getTime()));
 			log.trace("CollectionsProcessor query : " +  collApiUrl);
+			if (collectionsXml == null) {
+				return;
+			}
 		} catch (FileNotFoundException e) {
 			// If none of the items are in a collection, we'll get a 404
 			return;
