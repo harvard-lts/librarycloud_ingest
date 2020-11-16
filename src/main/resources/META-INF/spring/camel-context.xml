@@ -1175,6 +1175,7 @@
 
         <!-- 20190926 - adding activemq and drsmds routes for ingesting drs metadata from new mongo api into "extensions" solr, -->
         <!-- and triggering realtime update into matching bibrecs -->
+
         <route id="activemqDrs" errorHandlerRef="eh">
             <from uri="activemq:Consumer.librarycloud-{{librarycloud.sqs.environment}}.VirtualTopic.DRS_OBJECT_UPDATED"/>
             <!--<from uri="activemq:Consumer.Consumer1.VirtualTopic.DRS_OBJECT_UPDATED"/>-->
@@ -1244,7 +1245,6 @@
                     <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-metadata?amazonSQSClient=#sqsClient"/>
                 </aggregate>
             </split>
-
         </route>
 
         <route id="adddrsmetadataimmediate-seda" errorHandlerRef="eh">

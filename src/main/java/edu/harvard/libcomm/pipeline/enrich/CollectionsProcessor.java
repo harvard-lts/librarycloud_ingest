@@ -1,8 +1,12 @@
 package edu.harvard.libcomm.pipeline.enrich;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
 import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
@@ -42,15 +46,19 @@ public class CollectionsProcessor implements IProcessor {
 			e.printStackTrace();
 			throw e;
 		}
-
-		URI uri = new URI(Config.getInstance().COLLECTIONS_URL + "/collections/items/" + recids + ".xml");
+		String collApiUrl = Config.getInstance().COLLECTIONS_URL + "/collections/items/" + recids + ".xml";
+		//URI uri = new URI(collApiUrl);
 		String collectionsXml;
 		try {
 			Date start = new Date();
-			collectionsXml = IOUtils.toString(uri.toURL().openStream(), "UTF-8");
+			//collectionsXml = IOUtils.toString(uri.toURL().openStream(), "UTF-8");
+			collectionsXml = getXml(collApiUrl);
 			Date end = new Date();
 			log.trace("CollectionsProcessor query time: " + (end.getTime() - start.getTime()));
-			log.trace("CollectionsProcessor query : " +  uri.toURL());
+			log.trace("CollectionsProcessor query : " +  collApiUrl);
+			if (collectionsXml == null) {
+				return;
+			}
 		} catch (FileNotFoundException e) {
 			// If none of the items are in a collection, we'll get a 404
 			return;
@@ -68,5 +76,32 @@ public class CollectionsProcessor implements IProcessor {
 		}
 		
 		libCommMessage.getPayload().setData(data);        
+	}
+
+	private String getXml(String url) throws IOException {
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		con.setRequestMethod("GET");
+		con.setRequestProperty("X-LibraryCloud-API-Key",Config.getInstance().COLL_API_KEY);
+		int responseCode = con.getResponseCode();
+		System.out.println("GET Response Code :: " + responseCode);
+		if (responseCode == HttpURLConnection.HTTP_OK) { // success
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+			// print result
+			return response.toString();
+		} else {
+			System.out.println("GET request failed");
+			return null;
+		}
+
 	}
 }

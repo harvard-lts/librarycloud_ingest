@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <valueMappings>
+    <!-- 2020-06-10: Removed duplicate Biblioteca Berenson block (RKW) -->
+    <!-- 2020-06-04: Added new Berenson name forms as source values (RKW) -->
     <!-- 2020-04-21: Removed extraneous line breaks (RKW) -->
     <!-- 2020-04-10: Added mapping for new DDO source name from ArchivesSpace (RKW) -->
-    <!-- 2020-03-30: Removed "Villa " from I Tatti replacement names 
+    <!-- 2020-03-30: Removed "Villa " from I Tatti replacement names
         Law joins Baker and FAL as having subunits in replacement elements.(RKW)-->
-    <!-- 2019-07-25: Added entries for updated names from ArchivesSpace: 
+    <!-- 2019-07-25: Added entries for updated names from ArchivesSpace:
    AJP, ARN, BAK, BER, DDO, ENV, ECB, FAL, FAR, GRA, LAW, MUS, ORC, SCH, URI.(RKW) -->
     <!-- 2018-11-07: cleaned up XML (RKW) -->
     <!-- 2018-08-23: added block for "Peabody Museum Archives" (RKW)-->
@@ -62,7 +64,7 @@
         <replacement>Arnold Arboretum Library (Cambridge), Botany Libraries, Harvard University</replacement>
         <!--    <valueURI></valueURI>  -->
         <extensionValue>Botany Arnold (Cambr.)</extensionValue>
-    </mapping>   
+    </mapping>
     <mapping>
         <source>Archives of the Arnold Arboretum (Cambridge), Botany Libraries, Harvard University</source>
         <replacement>Arnold Arboretum Library (Cambridge), Botany Libraries, Harvard University</replacement>
@@ -157,6 +159,18 @@
         <source>Biblioteca Berenson, I Tatti - The Harvard University Center for Italian Renaissance Studies</source>
         <replacement>Biblioteca Berenson, I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
         <valueURI>http://isni.org/isni/0000000460340699</valueURI>
+        <extensionValue>Biblioteca Berenson</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Biblioteca Berenson, Fototeca, I Tatti - The Harvard University Center for Italian Renaissance Studies</source>
+        <replacement>Biblioteca Berenson, Fototeca, I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
+        <!--    <valueURI></valueURI>  -->
+        <extensionValue>Biblioteca Berenson</extensionValue>
+    </mapping>
+    <mapping>
+        <source>Berenson Art Collection, I Tatti - The Harvard University Center for Italian Renaissance Studies</source>
+        <replacement>Berenson Art Collection, I Tatti - The Harvard University Center for Italian Renaissance Studies</replacement>
+        <!--    <valueURI></valueURI>  -->
         <extensionValue>Biblioteca Berenson</extensionValue>
     </mapping>
     <mapping>
@@ -501,7 +515,7 @@
         <valueURI>http://isni.org/isni/0000000460342846</valueURI>
         <extensionValue>Gutman Education</extensionValue>
     </mapping>
-<!-- HCO mapping per Daina Bouquin email to Robin Wendler, 2018-06-18 -->
+    <!-- HCO mapping per Daina Bouquin email to Robin Wendler, 2018-06-18 -->
     <mapping>
         <source>HCO</source>
         <replacement>John G. Wolbach Library, Harvard-Smithsonian Center for Astrophysics</replacement>
@@ -741,13 +755,13 @@
         <replacement>Center for the History of Medicine (Francis A. Countway Library of Medicine)</replacement>
         <valueURI>http://id.loc.gov/authorities/names/no2011103181</valueURI>
         <extensionValue>Countway Medicine</extensionValue>
-    </mapping>    
+    </mapping>
     <mapping>
         <source>Countway Library of Medicine</source>
         <replacement>Center for the History of Medicine (Francis A. Countway Library of Medicine)</replacement>
         <valueURI>http://id.loc.gov/authorities/names/no2011103181</valueURI>
         <extensionValue>Countway Medicine</extensionValue>
-    </mapping>  
+    </mapping>
     <mapping>
         <source>MIC</source>
         <replacement>Microforms, Lamont Library, Harvard University</replacement>

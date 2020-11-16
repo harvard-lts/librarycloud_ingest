@@ -86,4 +86,5 @@ public class CollectionUpdateProcessor implements IProcessor {
 
         return (doc == null) ? null : doc.getFieldValue("originalMods").toString();
     }
+
 }

@@ -58,6 +58,11 @@
                             <sets:baseUrl>
                               <xsl:value-of select="col:baseUrl"/>
                             </sets:baseUrl>
+                            <xsl:if test="col:public='false'">
+                                <sets:public>
+                                  <xsl:value-of select="col:public"/>
+                                </sets:public>
+                            </xsl:if>
                          </sets:set>
                     </xsl:for-each>
                 </sets:sets>
