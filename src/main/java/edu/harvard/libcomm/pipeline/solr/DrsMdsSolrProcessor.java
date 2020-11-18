@@ -18,10 +18,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class DrsMdsSolrProcessor implements Processor {
 
@@ -51,6 +50,9 @@ public class DrsMdsSolrProcessor implements Processor {
         String ownerSuppliedName = null;
         String metsLabel = null;
         String viewText = null;
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+        df.setTimeZone(tz);
         JSONArray jsonArray = new JSONArray(json);
         ArrayList<String> harvardMetadataLinks = new ArrayList<String>();
         for(int i=0;i<jsonArray.length();i++) {
@@ -141,8 +143,9 @@ public class DrsMdsSolrProcessor implements Processor {
                     String url = urnObj.getString("url");
                     item.setUrl(url);
                     String urn = StringUtils.substringAfter(url,"harvard.edu/");
-                    item.setId(urn);
-                    item.setUrn(urn);
+                    String urnUC = urn.toUpperCase();
+                    item.setId(urnUC);
+                    item.setUrn(urnUC);
                     urnArrayList.add(urn);
                     item.setAccessFlag(jsonObject.get("accessFlag").toString());
                     JSONObject cmObj = jsonObject.getJSONObject("contentModel");
@@ -156,6 +159,8 @@ public class DrsMdsSolrProcessor implements Processor {
                     JSONObject idObj = jsonObject.getJSONObject("insertionDate");
                     item.setInsertionDate(idObj.get("$date").toString());
                     item.setStatus(jsonObject.getString("status"));
+                    String processingDate = df.format(new Date());
+                    item.setProcessingDate(processingDate);
                     itemList.add(item);
                     //printFields();
                 }

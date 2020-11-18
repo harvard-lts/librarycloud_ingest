@@ -33,7 +33,7 @@
     <xsl:template name="returnQualifiedUrls">
         <xsl:param name="node"/>
         <xsl:for-each
-            select="$node/descendant::mods:url[@access = 'raw object' and not(contains(., 'HUL.FIG')) and not(contains(., 'ebookbatch')) and not(contains(., 'ejournals')) and not(contains(., 'HUL.gisdata')) and not(contains(., 'hul.gisdata'))]">
+            select="$node/descendant::mods:url[@access = 'raw object' and not(contains(upper-case(.), 'HUL.FIG')) and not(contains(upper-case(.), 'EBOOKBATCH')) and not(contains(upper-case(.), 'EJOURNALS')) and not(contains(upper-case(.), 'HUL.GISDATA'))]">
             <url>
                 <xsl:value-of select="."/>
             </url>
@@ -60,12 +60,24 @@
                         <xsl:variable name="urn">
                             <xsl:choose>
                                 <xsl:when test="contains(./text(), '?')">
-                                    <xsl:value-of
-                                        select="substring-before(substring-after(./text(), 'urn-3'), '?')"
-                                    />
+                                    <xsl:if test="contains(./text(), 'urn-3')">
+                                        <xsl:value-of
+                                            select="substring-before(substring-after(./text(), 'urn-3'), '?')"
+                                        />
+                                    </xsl:if>
+                                    <xsl:if test="contains(./text(), 'URN-3')">
+                                        <xsl:value-of
+                                            select="substring-before(substring-after(./text(), 'URN-3'), '?')"
+                                        />
+                                    </xsl:if>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="substring-after(./text(), 'urn-3')"/>
+                                    <xsl:if test="contains(./text(), 'urn-3')">
+                                        <xsl:value-of select="substring-after(./text(), 'urn-3')"/>
+                                    </xsl:if>
+                                    <xsl:if test="contains(./text(), 'URN-3')">
+                                        <xsl:value-of select="substring-after(./text(), 'URN-3')"/>
+                                    </xsl:if>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:variable>
@@ -203,13 +215,26 @@
                     <xsl:variable name="urn">
                         <xsl:choose>
                             <xsl:when test="contains($qualifiedUrls/url, '?')">
-                                <xsl:value-of
-                                    select="substring-before(substring-after($qualifiedUrls/url, 'urn-3'), '?')"
-                                />
+                                <xsl:if test="contains($qualifiedUrls/url, 'urn-3')">
+                                    <xsl:value-of
+                                        select="substring-before(substring-after($qualifiedUrls/url, 'urn-3'), '?')"
+                                    />
+                                </xsl:if>
+                                <xsl:if test="contains($qualifiedUrls/url, 'URN-3')">
+                                    <xsl:value-of
+                                        select="substring-before(substring-after($qualifiedUrls/url, 'URN-3'), '?')"
+                                    />
+                                </xsl:if>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="substring-after($qualifiedUrls/url, 'urn-3')"
-                                />
+                                <xsl:if test="contains($qualifiedUrls/url, 'urn-3')">
+                                    <xsl:value-of
+                                        select="substring-after($qualifiedUrls/url, 'urn-3')"/>
+                                </xsl:if>
+                                <xsl:if test="contains($qualifiedUrls/url, 'URN-3')">
+                                    <xsl:value-of
+                                        select="substring-after($qualifiedUrls/url, 'URN-3')"/>
+                                </xsl:if>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:variable>

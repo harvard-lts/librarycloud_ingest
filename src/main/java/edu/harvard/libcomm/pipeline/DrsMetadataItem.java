@@ -51,6 +51,9 @@ public class DrsMetadataItem {
     @Field
     private String status;
 
+    @Field
+    private String processingDate;
+
     public String getId() {
         return id;
     }
@@ -226,4 +229,14 @@ public class DrsMetadataItem {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getProcessingDate() {
+        return processingDate;
+    }
+
+    public void setProcessingDate(String processingDate) {
+        this.processingDate = processingDate;
+    }
+
+
 }
