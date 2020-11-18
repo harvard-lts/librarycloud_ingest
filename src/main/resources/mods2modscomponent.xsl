@@ -90,7 +90,7 @@
 					</xsl:variable>
 					<xsl:value-of select="."/>
 					<xsl:text>_</xsl:text>
-					<xsl:value-of select="$urn"/>
+					<xsl:value-of select="upper-case($urn)"/>
 				</xsl:copy>
 			</xsl:when>
 			<xsl:otherwise>
