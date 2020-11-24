@@ -41,7 +41,7 @@ public class DRSExtensionsProcessor extends ExternalServiceProcessor implements 
 		if (!urns.contains("URN3-3"))
 			uri = null;
 		else {
-		urns = urns.endsWith(" OR ") ? urns.substring(0, urns.length() - 4) : urns;
+			urns = urns.endsWith(" OR ") ? urns.substring(0, urns.length() - 4) : urns;
 			//Why are we getting this condition? TO DO - catch upstream
 			urns = urns.replace("OR  OR ", "OR ");
 			urns = "(" + urns.replace(" ","+") + ")";
