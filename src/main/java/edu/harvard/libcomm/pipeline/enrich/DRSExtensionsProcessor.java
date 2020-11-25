@@ -38,7 +38,7 @@ public class DRSExtensionsProcessor extends ExternalServiceProcessor implements 
 		//if (urns.equals("")  || urns == null)
 		//Make case insensitive - 20201117
 		String urnsUC = urns.toUpperCase();
-		if (!urnsUC.contains("URN3-3"))
+		if (!urnsUC.contains("URN-3"))
 			uri = null;
 		else {
 			urns = urns.endsWith(" OR ") ? urns.substring(0, urns.length() - 4) : urns;
