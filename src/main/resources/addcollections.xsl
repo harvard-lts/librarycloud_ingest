@@ -44,7 +44,7 @@
             <xsl:element name="extension" xmlns="http://www.loc.gov/mods/v3">
                 <sets:sets>
                      <xsl:for-each
-                        select="$collections//col:item[col:item_id = $recordid]/col:collections">
+                        select="$collections//col:item[upper-case(col:item_id) = upper-case($recordid)]/col:collections">
                          <sets:set>
                             <sets:systemId>
                                 <xsl:value-of select="col:systemId"/>
