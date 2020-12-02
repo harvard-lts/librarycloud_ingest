@@ -65,7 +65,7 @@ public class CollectionUpdateProcessor implements IProcessor {
         try {
             client = SolrClient.getSolrConnection();
 
-            SolrQuery query = new SolrQuery("recordIdentifier:" + replaceSolrSpecialCharacters(itemId));
+            SolrQuery query = new SolrQuery("recordIdentifier_keyword:" + replaceSolrSpecialCharacters(itemId));
             QueryResponse response = client.query(query);
             docs = response.getResults();
             if (docs.size() == 0)
