@@ -740,7 +740,7 @@
 	</xsl:template>
 
 	<xsl:template match="admin" mode="datelist">
-		<xsl:apply-templates select="createDate" mode="datelist"/>
+		<xsl:apply-templates select="createDate[not(.='')]" mode="datelist"/>
 		<xsl:apply-templates select="updateNote/updateDate" mode="datelist"/>
 	</xsl:template>
 	
