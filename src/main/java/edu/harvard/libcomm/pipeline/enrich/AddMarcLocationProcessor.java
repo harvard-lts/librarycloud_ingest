@@ -35,7 +35,8 @@ public class AddMarcLocationProcessor implements IProcessor {
 		try {
 			data = MessageUtils.transformPayloadData(libCommMessage,
 				"src/main/resources/addmarcurl.xsl", 
-				"<marcpath>" + marcBaseUrl + "</marcpath>");
+			//	"<marcpath>" + marcBaseUrl + "</marcpath>");
+				"<marcpath>harvard.librarycloud.marc</marcpath>";
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
