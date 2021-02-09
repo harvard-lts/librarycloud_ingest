@@ -23,6 +23,14 @@
         <property name="deliveryPersistent" value="true" />
     </bean>
 
+    <bean id="activemqTest" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="brokerURL" value="tcp://localhost:61616" />
+        <property name="userName" value="admin" />
+        <property name="password" value="admin" />
+        <property name="clientId" value="devclient" />
+        <property name="deliveryPersistent" value="true" />
+    </bean>
+
     <!-- Custom S3 marshaller to place body on S3 -->
     <bean id="cloudbody" class="edu.harvard.libcomm.pipeline.MessageBodyS3Marshaller">
         <!-- force use of s3 bucket until we determine why prod direct to sqs fouls encoding -->
@@ -1197,6 +1205,11 @@
                     <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
                 </otherwise>
             </choice>
+        </route>
+
+        <route id="activemqTest" errorHandlerRef="eh">
+            <from uri="file:src/test/activemq" />
+            <to uri="activemqTest:topic:firstTopic"/>
         </route>
 
         <!-- this is for refreshing drs ids by loading files to queue, if for istance there is a failure above -->
