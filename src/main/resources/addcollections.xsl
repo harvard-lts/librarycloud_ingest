@@ -44,7 +44,7 @@
             <xsl:element name="extension" xmlns="http://www.loc.gov/mods/v3">
                 <sets:sets>
                      <xsl:for-each
-                        select="$collections//col:item[col:item_id = $recordid]/col:collections">
+                        select="$collections//col:item[upper-case(col:item_id) = upper-case($recordid)]/col:collections">
                          <sets:set>
                             <sets:systemId>
                                 <xsl:value-of select="col:systemId"/>
@@ -100,7 +100,7 @@
       <xsl:variable name="recordid">
         <xsl:value-of select="$modsRoot/mods:recordInfo/mods:recordIdentifier"/>
       </xsl:variable>
-      <xsl:for-each select="$collections//col:item[col:item_id = $recordid]/col:collections">
+        <xsl:for-each select="$collections//col:item[upper-case(col:item_id) = upper-case($recordid)]/col:collections">
           <xsl:if test="string-length(normalize-space(col:baseUrl))">
             <url xmlns="http://www.loc.gov/mods/v3" access="object in context">
                 <xsl:attribute name="displayLabel">

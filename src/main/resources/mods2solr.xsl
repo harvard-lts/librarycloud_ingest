@@ -609,11 +609,11 @@
             </xsl:attribute>
             <xsl:choose>
                 <xsl:when test="contains(., '?')">
-                    <xsl:value-of select="substring-before(substring-after(., 'harvard.edu/'), '?')"
+                    <xsl:value-of select="upper-case(substring-before(substring-after(., 'harvard.edu/'), '?'))"
                     />
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="substring-after(., 'harvard.edu/')"/>
+                    <xsl:value-of select="upper-case(substring-after(., 'harvard.edu/'))"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:element>

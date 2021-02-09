@@ -36,10 +36,12 @@ public class DRSExtensionsProcessor extends ExternalServiceProcessor implements 
 		//can't throw out all urns bc one has ebook, only looking for recs with no urns at all
 		//if (urns.equals("")  || urns == null || urns.contains("ebook"))
 		//if (urns.equals("")  || urns == null)
-		if (!urns.contains("urn-3"))
+		//Make case insensitive - 20201117
+		String urnsUC = urns.toUpperCase();
+		if (!urnsUC.contains("URN-3"))
 			uri = null;
 		else {
-		urns = urns.endsWith(" OR ") ? urns.substring(0, urns.length() - 4) : urns;
+			urns = urns.endsWith(" OR ") ? urns.substring(0, urns.length() - 4) : urns;
 			//Why are we getting this condition? TO DO - catch upstream
 			urns = urns.replace("OR  OR ", "OR ");
 			urns = "(" + urns.replace(" ","+") + ")";

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
-                xmlns:mods="http://www.loc.gov/mods/v3"
-                xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
-                exclude-result-prefixes="xs mods xlink HarvardDRS" version="2.0">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:mods="http://www.loc.gov/mods/v3"
+    xmlns:HarvardDRS="http://hul.harvard.edu/ois/xml/ns/HarvardDRS"
+    exclude-result-prefixes="xs mods xlink HarvardDRS" version="2.0">
 
     <xsl:output encoding="UTF-8" indent="yes"/>
     <xsl:strip-space elements="*"/>
@@ -33,7 +33,7 @@
     <xsl:template name="returnQualifiedUrls">
         <xsl:param name="node"/>
         <xsl:for-each
-                select="$node/descendant::mods:url[@access = 'raw object' and not(contains(., 'HUL.FIG')) and not(contains(., 'ebookbatch')) and not(contains(., 'ejournals')) and not(contains(., 'HUL.gisdata')) and not(contains(., 'hul.gisdata'))]">
+            select="$node/descendant::mods:url[@access = 'raw object' and not(contains(upper-case(.), 'HUL.FIG')) and not(contains(upper-case(.), 'EBOOKBATCH')) and not(contains(upper-case(.), 'EJOURNALS')) and not(contains(upper-case(.), 'HUL.GISDATA'))]">
             <url>
                 <xsl:value-of select="."/>
             </url>
@@ -48,7 +48,7 @@
         </xsl:variable>
         <xsl:choose>
             <xsl:when
-                    test="(./mods:typeOfResource/@collection) and not(mods:recordInfo/mods:recordIdentifier/@source = 'MH:MCZArtwork') and not(mods:recordInfo/mods:recordIdentifier/@source = 'MH:MHPL') and not(mods:recordInfo/mods:recordIdentifier/@source = 'MH:IOHP')">
+                test="(./mods:typeOfResource/@collection) and not(mods:recordInfo/mods:recordIdentifier/@source = 'MH:MCZArtwork') and not(mods:recordInfo/mods:recordIdentifier/@source = 'MH:MHPL') and not(mods:recordInfo/mods:recordIdentifier/@source = 'MH:IOHP')">
                 <xsl:copy-of select="."/>
             </xsl:when>
             <xsl:otherwise>
@@ -60,17 +60,29 @@
                         <xsl:variable name="urn">
                             <xsl:choose>
                                 <xsl:when test="contains(./text(), '?')">
-                                    <xsl:value-of
+                                    <xsl:if test="contains(./text(), 'urn-3')">
+                                        <xsl:value-of
                                             select="substring-before(substring-after(./text(), 'urn-3'), '?')"
-                                    />
+                                        />
+                                    </xsl:if>
+                                    <xsl:if test="contains(./text(), 'URN-3')">
+                                        <xsl:value-of
+                                            select="substring-before(substring-after(./text(), 'URN-3'), '?')"
+                                        />
+                                    </xsl:if>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="substring-after(./text(), 'urn-3')"/>
+                                    <xsl:if test="contains(./text(), 'urn-3')">
+                                        <xsl:value-of select="substring-after(./text(), 'urn-3')"/>
+                                    </xsl:if>
+                                    <xsl:if test="contains(./text(), 'URN-3')">
+                                        <xsl:value-of select="substring-after(./text(), 'URN-3')"/>
+                                    </xsl:if>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:variable>
                         <xsl:apply-templates
-                                select="$results//docs[lower-case(substring-after(urn, 'urn-3')) = lower-case($urn)]"
+                            select="$results//docs[lower-case(substring-after(urn, 'urn-3')) = lower-case($urn)]"
                         />
                     </xsl:for-each>
                     <!-- we are already doing this in marc 2 mods xform 
@@ -119,10 +131,10 @@
         <xsl:copy>
             <xsl:value-of select="."/>
             <xsl:if
-                    test="../../mods:location/mods:url[@access = 'raw object']/@displayLabel[not(. = 'Full Image')]">
+                test="../../mods:location/mods:url[@access = 'raw object']/@displayLabel[not(. = 'Full Image')]">
                 <xsl:text>, </xsl:text>
                 <xsl:value-of
-                        select="../../mods:location/mods:url[@access = 'raw object']/@displayLabel"/>
+                    select="../../mods:location/mods:url[@access = 'raw object']/@displayLabel"/>
             </xsl:if>
         </xsl:copy>
     </xsl:template>
@@ -153,29 +165,29 @@
                         <xsl:apply-templates select="accessFlag[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates select="contentModel[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates
-                                select="contentModelCode[not(. = '') and not(. = 'null')]"/>
+                            select="contentModelCode[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates select="uriType[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates
-                                select="fileDeliveryURL[not(. = '') and not(. = 'null')]"/>
+                            select="fileDeliveryURL[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates select="ownerCode[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates
-                                select="ownerCodeDisplayName[not(. = '') and not(. = 'null')]"/>
+                            select="ownerCodeDisplayName[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates select="metsLabel[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates
-                                select="lastModifiedDate[not(. = '') and not(. = 'null')]"/>
+                            select="lastModifiedDate[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates select="insertionDate[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates
-                                select="ownerSuppliedName[not(. = '') and not(. = 'null')]"/>
+                            select="ownerSuppliedName[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates select="viewText[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates
-                                select="maxImageDeliveryDimension[not(. = '') and not(. = 'null')]"/>
+                            select="maxImageDeliveryDimension[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates select="mimeType[not(. = '') and not(. = 'null')]"/>
                         <xsl:apply-templates
-                                select="suppliedFilename[not(. = '') and not(. = 'null')]"/>
+                            select="suppliedFilename[not(. = '') and not(. = 'null')]"/>
                         <xsl:if test="harvardMetadataLink[not(. = '') and not(. = 'null')]">
                             <xsl:element name="HarvardDRS:harvardMetadataLinks">
                                 <xsl:apply-templates
-                                        select="harvardMetadataLink[not(. = '') and not(. = 'null')]"/>
+                                    select="harvardMetadataLink[not(. = '') and not(. = 'null')]"/>
                             </xsl:element>
                         </xsl:if>
                     </xsl:element>
@@ -203,20 +215,33 @@
                     <xsl:variable name="urn">
                         <xsl:choose>
                             <xsl:when test="contains($qualifiedUrls/url, '?')">
-                                <xsl:value-of
+                                <xsl:if test="contains($qualifiedUrls/url, 'urn-3')">
+                                    <xsl:value-of
                                         select="substring-before(substring-after($qualifiedUrls/url, 'urn-3'), '?')"
-                                />
+                                    />
+                                </xsl:if>
+                                <xsl:if test="contains($qualifiedUrls/url, 'URN-3')">
+                                    <xsl:value-of
+                                        select="substring-before(substring-after($qualifiedUrls/url, 'URN-3'), '?')"
+                                    />
+                                </xsl:if>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="substring-after($qualifiedUrls/url, 'urn-3')"
-                                />
+                                <xsl:if test="contains($qualifiedUrls/url, 'urn-3')">
+                                    <xsl:value-of
+                                        select="substring-after($qualifiedUrls/url, 'urn-3')"/>
+                                </xsl:if>
+                                <xsl:if test="contains($qualifiedUrls/url, 'URN-3')">
+                                    <xsl:value-of
+                                        select="substring-after($qualifiedUrls/url, 'URN-3')"/>
+                                </xsl:if>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:variable>
                     <xsl:choose>
                         <xsl:when test="not(string-length(mods:url[@access = 'preview']))">
                             <xsl:apply-templates
-                                    select="$results//docs[lower-case(substring-after(urn, 'urn-3')) = lower-case($urn)]/thumbnailURL[not(. = '') and not(. = 'null')]"
+                                select="$results//docs[lower-case(substring-after(urn, 'urn-3')) = lower-case($urn)]/thumbnailURL[not(. = '') and not(. = 'null')]"
                             />
                         </xsl:when>
                         <xsl:otherwise/>

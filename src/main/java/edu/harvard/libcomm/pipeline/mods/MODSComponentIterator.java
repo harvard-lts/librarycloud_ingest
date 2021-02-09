@@ -101,7 +101,9 @@ public class MODSComponentIterator implements Iterator<String> {
                     String nodeName = urns.item(pos).getNodeName();
                     String nodeValue = urns.item(pos).getNodeValue();
                     //System.out.println("nodeValue: " + nodeValue);
-                    if (nodeValue.contains("urn-3") && !nodeValue.contains("HUL.FIG") && !nodeValue.contains("ebookbatch") && !nodeValue.contains("ejournals") && !nodeValue.contains("gisdata")) {
+                    // Make case insensitive - 20201117
+                    String nodeValueUC = nodeValue.toUpperCase();
+                    if (nodeValueUC.contains("URN-3") && !nodeValueUC.contains("HUL.FIG") && !nodeValueUC.contains("EBOOKBATCH") && !nodeValueUC.contains("EJOURNALS") && !nodeValueUC.contains("GISDATA")) {
                         // 20190116 - we can't check indrs until extensions are up-to-date;
                         /*
                         String nodeValueChopped = nodeValue.substring(nodeValue.indexOf("urn-3"), nodeValue.length()).split("\\?")[0];

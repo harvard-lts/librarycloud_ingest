@@ -79,7 +79,17 @@
 							</xsl:choose>
 							<xsl:if test="string-length($recidsuffix)">
 								<xsl:text>_</xsl:text>
-								<xsl:value-of select="$recidsuffix"/>
+								<xsl:choose>
+									<xsl:when test="contains($recidsuffix,'URN-3')">
+										<xsl:value-of select="upper-case($recidsuffix)"/>
+									</xsl:when>
+									<xsl:when test="contains($recidsuffix,'urn-3')">
+										<xsl:value-of select="upper-case($recidsuffix)"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="$recidsuffix"/>										
+									</xsl:otherwise>
+								</xsl:choose>
 							</xsl:if>
 						</recordIdentifier>
 						<languageOfCataloging>
@@ -729,7 +739,7 @@
 	</xsl:template>
 
 	<xsl:template match="admin" mode="datelist">
-		<xsl:apply-templates select="createDate" mode="datelist"/>
+		<xsl:apply-templates select="createDate[not(.='')]" mode="datelist"/>
 		<xsl:apply-templates select="updateNote/updateDate" mode="datelist"/>
 	</xsl:template>
 	

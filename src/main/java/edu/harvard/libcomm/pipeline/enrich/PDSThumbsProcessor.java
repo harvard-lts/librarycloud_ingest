@@ -40,7 +40,9 @@ public class PDSThumbsProcessor extends ExternalServiceProcessor implements IPro
             //String urls = "http://nrs.harvard.edu/urn-3:fhcl.loeb:957096,http://nrs.harvard.edu/urn-3:HUL.ARCH:26515075?n=13,http://nrs.harvard.edu/urn-3:fhcl.loeb:957096  ,http://nrs.harvard.edu/urn-3:HUL.FIG:006755588";
             StringBuilder sb = new StringBuilder();
             for (String s : urls.split(",")) {
-                if (s.contains("urn-3") && !s.contains("HUL.FIG") && !s.contains("ebookbatch") && !s.contains("ejournals") && !s.contains("gisdata")) {
+                //make case insensitive - 20201117
+                String sUC = s.toUpperCase();
+                if (sUC.contains("URN-3") && !sUC.contains("HUL.FIG") && !sUC.contains("EBOOKBATCH") && !sUC.contains("EJOURNALS") && !sUC.contains("GISDATA")) {
                     HttpURLConnection con = null;
                     int responseCode = 0;
                     try {
