@@ -8,27 +8,27 @@
     http://camel.apache.org/schema/spring
     http://camel.apache.org/schema/spring/camel-spring.xsd
     http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-3.0.xsd"
-    >
-    <context:property-placeholder location="classpath:/librarycloud.env.properties" />
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <context:property-placeholder location="classpath:/librarycloud.env.properties"/>
 
     <!-- bootstrap the java config -->
-    <bean class="edu.harvard.libcomm.pipeline.AWSConfig" />
+    <bean class="edu.harvard.libcomm.pipeline.AWSConfig"/>
 
     <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
-        <property name="brokerURL" value="${activemq.broker.url}" />
-        <property name="userName" value="${activemq.username}" />
-        <property name="password" value="${activemq.password}" />
-        <property name="clientId" value="${activemq.clientid}" />
-        <property name="deliveryPersistent" value="true" />
+        <property name="brokerURL" value="${activemq.broker.url}"/>
+        <property name="userName" value="${activemq.username}"/>
+        <property name="password" value="${activemq.password}"/>
+        <property name="clientId" value="${activemq.clientid}"/>
+        <property name="deliveryPersistent" value="true"/>
     </bean>
 
     <!-- Custom S3 marshaller to place body on S3 -->
     <bean id="cloudbody" class="edu.harvard.libcomm.pipeline.MessageBodyS3Marshaller">
         <!-- force use of s3 bucket until we determine why prod direct to sqs fouls encoding -->
-        <constructor-arg value="100" />
-        <!--<constructor-arg value="20000" />--> <!-- If message size in bytes is greater than this, save body to S3 -->
-        <constructor-arg value="${librarycloud.s3.cache_bucket}.${librarycloud.sqs.environment}" />
+        <constructor-arg value="100"/>
+        <!--<constructor-arg value="20000" />-->
+        <!-- If message size in bytes is greater than this, save body to S3 -->
+        <constructor-arg value="${librarycloud.s3.cache_bucket}.${librarycloud.sqs.environment}"/>
     </bean>
 
     <!-- Set a shorter timeout for shutdown, primarily for testing purposes. Default is 300. -->
@@ -45,7 +45,8 @@
     <bean id="marcSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.marc.MarcSplitter">
-                <constructor-arg value="500000" /> <!-- Approx. max size of messages, in bytes -->
+                <constructor-arg value="500000"/>
+                <!-- Approx. max size of messages, in bytes -->
             </bean>
         </property>
     </bean>
@@ -53,12 +54,13 @@
     <bean id="tedSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.ted.TedSplitter">
-                <constructor-arg value="100" /> <!-- Approx. max size of messages, in bytes -->
+                <constructor-arg value="100"/>
+                <!-- Approx. max size of messages, in bytes -->
             </bean>
         </property>
     </bean>
 
-  <bean id="deleteSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
+    <bean id="deleteSplitter" class="edu.harvard.libcomm.pipeline.Splitter">
         <property name="splitter">
             <bean class="edu.harvard.libcomm.pipeline.delete.DeleteFileSplitter"/>
         </property>
@@ -117,7 +119,8 @@
         <property name="source" value="ALMA"/>
     </bean>
 
-    <bean id="marcxmlAlmaRawAggregator" class="edu.harvard.libcomm.pipeline.MARCXMLRawAggregatorStrategy">
+    <bean id="marcxmlAlmaRawAggregator"
+        class="edu.harvard.libcomm.pipeline.MARCXMLRawAggregatorStrategy">
         <property name="source" value="ALMA"/>
     </bean>
 
@@ -149,7 +152,8 @@
             <bean class="edu.harvard.libcomm.pipeline.FilterSuppressedProcessor"/>
         </property>
     </bean>
-    <bean id="filterUnchangedMarcProcessor" class="edu.harvard.libcomm.pipeline.FilterUnchangedMarcProcessor" />
+    <bean id="filterUnchangedMarcProcessor"
+        class="edu.harvard.libcomm.pipeline.FilterUnchangedMarcProcessor"/>
     <bean id="holdingsProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.enrich.HoldingsProcessor"/>
@@ -192,7 +196,8 @@
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.enrich.AddMarcLocationProcessor">
                 <!--<property name="marcBaseUrl" value="https://s3.amazonaws.com/${librarycloud.s3.marc_bucket}.${librarycloud.sqs.environment}/" />-->
-                <property name="marcBaseUrl" value="https://s3.amazonaws.com/${librarycloud.s3.marc_bucket}/" />
+                <property name="marcBaseUrl"
+                    value="https://s3.amazonaws.com/${librarycloud.s3.marc_bucket}/"/>
             </bean>
         </property>
     </bean>
@@ -256,8 +261,7 @@
         </property>
     </bean>
 
-    <bean id="deleteProcessor" class="edu.harvard.libcomm.pipeline.delete.DeleteFile">
-    </bean>
+    <bean id="deleteProcessor" class="edu.harvard.libcomm.pipeline.delete.DeleteFile"> </bean>
 
     <bean id="solrDeleteProcessor" class="edu.harvard.libcomm.pipeline.LibCommProcessor">
         <property name="processor">
@@ -275,23 +279,25 @@
         <property name="processor">
             <bean class="edu.harvard.libcomm.pipeline.delete.S3DeleteProcessor">
                 <!--<property name="bucket" value="${librarycloud.s3.marc_bucket}.${librarycloud.sqs.environment}" />-->
-                <property name="bucket" value="${librarycloud.s3.marc_bucket}" />
+                <property name="bucket" value="${librarycloud.s3.marc_bucket}"/>
             </bean>
         </property>
     </bean>
 
-    <bean id="refreshFromS3Processor" class="edu.harvard.libcomm.pipeline.enrich.RefreshFromS3Processor"/>
+    <bean id="refreshFromS3Processor"
+        class="edu.harvard.libcomm.pipeline.enrich.RefreshFromS3Processor"/>
 
     <bean id="s3ListProcessor" class="edu.harvard.libcomm.pipeline.enrich.S3ListProcessor"/>
 
-     <bean id="prepareURI" class="edu.harvard.libcomm.pipeline.PrepareURIForHTTPEndpoint" />
+    <bean id="prepareURI" class="edu.harvard.libcomm.pipeline.PrepareURIForHTTPEndpoint"/>
 
-    <bean id="drsMdsProcessor" class="edu.harvard.libcomm.pipeline.enrich.DrsMdsProcessor" />
-    <bean id="drsMdsSolrProcessor" class="edu.harvard.libcomm.pipeline.solr.DrsMdsSolrProcessor" />
-    <bean id="drsMdsUpdateProcessor" class="edu.harvard.libcomm.pipeline.enrich.DrsMdsUpdateProcessor" />
+    <bean id="drsMdsProcessor" class="edu.harvard.libcomm.pipeline.enrich.DrsMdsProcessor"/>
+    <bean id="drsMdsSolrProcessor" class="edu.harvard.libcomm.pipeline.solr.DrsMdsSolrProcessor"/>
+    <bean id="drsMdsUpdateProcessor"
+        class="edu.harvard.libcomm.pipeline.enrich.DrsMdsUpdateProcessor"/>
 
 
-<!-- Connecting to mongo from within ted classes, but save for reference
+    <!-- Connecting to mongo from within ted classes, but save for reference
     <bean id="mongoBean" class="com.mongodb.MongoClient">
         <constructor-arg>
             <ref bean="mongoClientURI" />
@@ -302,9 +308,11 @@
         <constructor-arg name="uri" value="mongodb://${mongo.username}:${mongo.password}@${mongo.host}:27072/${mongo.db}" />
     </bean>
 -->
-    <camelContext id="sqsContext" xmlns="http://camel.apache.org/schema/spring" xmlns:marcxml="http://www.loc.gov/MARC21/slim" trace="false">
+    <camelContext id="sqsContext" xmlns="http://camel.apache.org/schema/spring"
+        xmlns:marcxml="http://www.loc.gov/MARC21/slim" trace="false">
         <!-- Environment-specific properties -->
-        <propertyPlaceholder id="librarycloud-properties" location="classpath:/librarycloud.env.properties" />
+        <propertyPlaceholder id="librarycloud-properties"
+            location="classpath:/librarycloud.env.properties"/>
         <!-- Error handling behavior -->
         <errorHandler id="eh" redeliveryPolicyRef="myPolicy" type="DeadLetterChannel"
             deadLetterUri="direct:dead-letter"/>
@@ -326,7 +334,8 @@
                 <transform>
                     <simple>${header.filepath},${header.source},${header.command},${exception}}</simple>
                 </transform>
-                <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-dead-letter?amazonSQSClient=#sqsClient"/>
+                <to
+                    uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-dead-letter?amazonSQSClient=#sqsClient"/>
                 <to uri="log:edu.harvard.libcomm.deadletterqueue?level=ERROR"/>
                 <doCatch>
                     <!-- If can't post the full message to the dead letter queue, post only the headers to the queue -->
@@ -336,14 +345,17 @@
                         <simple>Error placing failed message on dead letter queue. Headers for affected message: ${headers}. Exception: ${exception}${exception.stacktrace}</simple>
                     </transform>
                     <doTry>
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-dead-letter?amazonSQSClient=#sqsClient"/>
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-dead-letter?amazonSQSClient=#sqsClient"/>
                         <doCatch>
                             <!-- If can't even post the headers to the dead letter queue, log error and be done -->
                             <exception>java.lang.Exception</exception>
                             <transform>
                                 <simple>Error placing failed message headers on dead letter queue. Headers for affected message: ${headers} Exception: ${exception}${exception.stacktrace}</simple>
                             </transform>
-                            <to uri="log:edu.harvard.libcomm.deadletterqueue?level=ERROR&amp;showAll=true"/>
+                            <to
+                                uri="log:edu.harvard.libcomm.deadletterqueue?level=ERROR&amp;showAll=true"
+                            />
                         </doCatch>
                     </doTry>
                 </doCatch>
@@ -352,8 +364,10 @@
 
         <!-- Setup bucket used by cloudbody marshalling service if it does not already exist -->
         <route id="forceCreationOfS3Bucket" errorHandlerRef="eh">
-            <from uri="direct:nothing" />
-            <to uri="aws-s3://{{librarycloud.s3.cache_bucket}}.{{librarycloud.sqs.environment}}?amazonS3Client=#s3Client" />
+            <from uri="direct:nothing"/>
+            <to
+                uri="aws-s3://{{librarycloud.s3.cache_bucket}}.{{librarycloud.sqs.environment}}?amazonS3Client=#s3Client"
+            />
         </route>
 
         <!-- ============================== -->
@@ -361,14 +375,15 @@
         <!-- ============================== -->
 
         <route id="alma-ingest" errorHandlerRef="eh">
-        <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-alma?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
-        <split>
-            <xtokenize mode="t">//filepath</xtokenize>
-            <bean ref="prepareURI" method="prepare"/>
-            <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
-            <to uri="http://www.example.com" />
-            <to uri="direct:alma-ingest-file"/>
-        </split>
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-alma?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true"/>
+            <split>
+                <xtokenize mode="t">//filepath</xtokenize>
+                <bean ref="prepareURI" method="prepare"/>
+                <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
+                <to uri="http://www.example.com"/>
+                <to uri="direct:alma-ingest-file"/>
+            </split>
         </route>
         <route id="alma-ingest-file" errorHandlerRef="eh">
             <from uri="direct:alma-ingest-file"/>
@@ -378,7 +393,8 @@
                     <setHeader headerName="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
-                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100" completionInterval="10000">
+                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100"
+                        completionInterval="10000">
                         <correlationExpression>
                             <simple>all</simple>
                         </correlationExpression>
@@ -388,26 +404,30 @@
                         <process ref="filterSuppressedProcessor"/>
                         <!--<marshal><custom ref="cloudbody"/></marshal>-->
                         <multicast parallelProcessing="true">
-                            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
-                            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient" />
+                            <to
+                                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient"/>
+                            <to
+                                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient"
+                            />
                         </multicast>
                         <!-- <to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml?fileName=alma-${header.CamelSplitIndex}" /> -->
                     </aggregate>
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                 </doCatch>
             </doTry>
         </route>
         <!-- ingest only to s3, used for ensuring s3 bucket has latest modified -->
         <route id="alma-ingest-s3" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-alma-s3?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-alma-s3?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true"/>
             <split>
                 <xtokenize mode="t">//filepath</xtokenize>
                 <bean ref="prepareURI" method="prepare"/>
                 <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
-                <to uri="http://www.example.com" />
+                <to uri="http://www.example.com"/>
                 <to uri="direct:alma-ingest-s3-file"/>
             </split>
         </route>
@@ -419,7 +439,8 @@
                     <setHeader headerName="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
-                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100" completionInterval="10000">
+                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100"
+                        completionInterval="10000">
                         <correlationExpression>
                             <simple>all</simple>
                         </correlationExpression>
@@ -427,12 +448,14 @@
                             <simple>${header.messageLength} > 150000</simple>
                         </completionPredicate>
                         <process ref="filterSuppressedProcessor"/>
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient" />
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient"
+                        />
                     </aggregate>
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                 </doCatch>
             </doTry>
         </route>
@@ -441,12 +464,13 @@
         <!-- Alma Holdings records ingest   -->
         <!-- ============================== -->
         <route id="alma-holdings-ingest" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-alma-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-alma-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true"/>
             <split>
                 <xtokenize mode="t">//filepath</xtokenize>
                 <bean ref="prepareURI" method="prepare"/>
                 <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
-                <to uri="http://www.example.com" />
+                <to uri="http://www.example.com"/>
                 <to uri="direct:alma-holdings-ingest-file"/>
             </split>
         </route>
@@ -458,7 +482,8 @@
                     <setHeader headerName="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
-                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100" completionInterval="10000">
+                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100"
+                        completionInterval="10000">
                         <correlationExpression>
                             <simple>all</simple>
                         </correlationExpression>
@@ -466,7 +491,8 @@
                             <simple>${header.messageLength} > 150000</simple>
                         </completionPredicate>
                         <!-- multicast doesn't work, do holdings first, then separate ingest for updating from s3 -->
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient" />
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient"/>
                         <!-- <to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml?fileName=alma-${header.CamelSplitIndex}" /> -->
                         <!--<multicast>
                             <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient" />
@@ -476,37 +502,49 @@
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                 </doCatch>
             </doTry>
         </route>
 
         <route id="alma-holdings-update" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true"/>
             <process ref="solrAlmaHoldingsProcessor"/>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
+            <to
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"
+            />
         </route>
 
         <!-- Transform MARCXML to MODS -->
         <route id="marctomods-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
             <to uri="seda:normalize-marcxml?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="marctomods" errorHandlerRef="eh">
-            <from uri="seda:normalize-marcxml?concurrentConsumers=4" />
+            <from uri="seda:normalize-marcxml?concurrentConsumers=4"/>
             <!-- Slightly different MODS transformers depending on whether it's coming from Aleph or Alma -->
             <choice>
                 <when>
                     <xpath>string-length(/lib_comm_message/payload/data) = 0</xpath>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient"
+                    />
                 </when>
                 <otherwise>
                     <process ref="modsProcessor"/>
                     <process ref="addMarcLocationProcessor"/>
-                    <marshal><custom ref="cloudbody"/></marshal>
+                    <marshal>
+                        <custom ref="cloudbody"/>
+                    </marshal>
                     <!-- <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient" /> -->
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-alma-holdings?amazonSQSClient=#sqsClient" />
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-alma-holdings?amazonSQSClient=#sqsClient"
+                    />
                 </otherwise>
             </choice>
 
@@ -515,15 +553,16 @@
         <!-- Extract the record ID from the MARCXML, and upload the record to S3, keyed by record ID-->
         <route id="uploadmarc-seda" errorHandlerRef="eh">
             <!-- Note the reduced messages per poll, so we don't end up getting messages timed out, since this takes a while -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=1&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-upload-marc?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=1&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true"/>
             <!--<unmarshal><custom ref="cloudbody"/></unmarshal>-->
             <to uri="seda:upload-marc?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="upload-marc" errorHandlerRef="eh">
-            <from uri="seda:upload-marc?concurrentConsumers=4" />
-            <process ref="extractPayloadProcessor" />
+            <from uri="seda:upload-marc?concurrentConsumers=4"/>
+            <process ref="extractPayloadProcessor"/>
             <split>
-                <tokenize token="record" inheritNamespaceTagName="collection" xml="true" />
+                <tokenize token="record" inheritNamespaceTagName="collection" xml="true"/>
                 <setHeader headerName="recordFileName">
                     <xpath resultType="java.lang.String">
                         /marcxml:record/marcxml:controlfield[@tag='001']
@@ -540,7 +579,8 @@
                             <simple>PublicRead</simple>
                         </setHeader>
                         <!--<to uri="aws-s3://{{librarycloud.s3.marc_bucket}}.{{librarycloud.sqs.environment}}?amazonS3Client=#s3Client" />-->
-                        <to uri="aws-s3://{{librarycloud.s3.marc_bucket}}?amazonS3Client=#s3Client" />
+                        <to uri="aws-s3://{{librarycloud.s3.marc_bucket}}?amazonS3Client=#s3Client"
+                        />
                     </when>
                 </choice>
             </split>
@@ -551,31 +591,36 @@
         <!-- ============================== -->
         <route id="oasis-ingest-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}/ingest-oasis" /> -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-oasis?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-oasis?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true"/>
             <to uri="seda:oasis-ingest-seda?size=4&amp;blockWhenFull=true"/>
         </route>
 
         <route id="oasis-ingest" errorHandlerRef="eh">
-            <from uri="seda:oasis-ingest-seda?concurrentConsumers=4" />
+            <from uri="seda:oasis-ingest-seda?concurrentConsumers=4"/>
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
                 <split streaming="true" parallelProcessing="true">
                     <method bean="eadSplitter" method="split"/>
-                    <aggregate strategyRef="modsAggregator" completionSize="100" completionInterval="10000">
+                    <aggregate strategyRef="modsAggregator" completionSize="100"
+                        completionInterval="10000">
                         <correlationExpression>
                             <simple>all</simple>
                         </correlationExpression>
                         <completionPredicate>
                             <simple>${header.messageLength} > 150000</simple>
                         </completionPredicate>
-                        <marshal><custom ref="cloudbody"/></marshal>
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient" />
+                        <marshal>
+                            <custom ref="cloudbody"/>
+                        </marshal>
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient"/>
                         <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-drs-extensions?fileName=${header.CamelSplitIndex}" /> -->
                     </aggregate>
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                 </doCatch>
             </doTry>
         </route>
@@ -584,12 +629,13 @@
         <route id="via-ingest" errorHandlerRef="eh">
             <!--
                          -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-via?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-via?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true"/>
             <split>
                 <xtokenize mode="t">//filepath</xtokenize>
                 <bean ref="prepareURI" method="prepare"/>
                 <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
-                <to uri="http://www.example.com" />
+                <to uri="http://www.example.com"/>
                 <!-- <to uri="file://{{librarycloud.files.basepath}}/ingest-via-file-url?fileName=via-file-${id}" /> -->
                 <to uri="direct:via-ingest-file"/>
             </split>
@@ -605,22 +651,26 @@
 
                     <split streaming="true" parallelProcessing="true">
                         <method bean="viaRawSplitter" method="split"/>
-                        <aggregate strategyRef="modsAggregator" completionSize="100" completionInterval="10000">
+                        <aggregate strategyRef="modsAggregator" completionSize="100"
+                            completionInterval="10000">
                             <correlationExpression>
                                 <simple>all</simple>
                             </correlationExpression>
                             <completionPredicate>
                                 <simple>${header.messageLength} > 150000</simple>
                             </completionPredicate>
-                            <marshal><custom ref="cloudbody"/></marshal>
-                            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient" />
+                            <marshal>
+                                <custom ref="cloudbody"/>
+                            </marshal>
+                            <to
+                                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient"/>
                             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-drs-extensions?fileName=${header.outerSplitIndex}-${header.CamelSplitIndex}" /> -->
                         </aggregate>
                     </split>
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                 </doCatch>
             </doTry>
         </route>
@@ -628,41 +678,54 @@
         <!-- Route messages to the correct part of the enrich pipeline -->
         <route id="enrich-start" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-start" /> -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-start?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
             <choice>
                 <when>
                     <xpath>//source = 'alma'</xpath>
-                    <to uri="seda:enrich-alma-holdings?size=20&amp;blockWhenFull=true" />
+                    <to uri="seda:enrich-alma-holdings?size=20&amp;blockWhenFull=true"/>
                 </when>
                 <when>
                     <xpath>//source = 'ALMA'</xpath>
-                    <to uri="seda:enrich-alma-holdings?size=20&amp;blockWhenFull=true" />
+                    <to uri="seda:enrich-alma-holdings?size=20&amp;blockWhenFull=true"/>
                 </when>
                 <otherwise>
                     <!-- Skip MODS aggregation steps for non-aleph/alma records -->
-                    <to uri="seda:enrich-drs-extensions?size=20&amp;blockWhenFull=true" />
+                    <to uri="seda:enrich-drs-extensions?size=20&amp;blockWhenFull=true"/>
                 </otherwise>
             </choice>
         </route>
 
         <!-- Add holdings to Alma -->
         <route id="addalmaholdingstomods-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-alma-holdings?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-alma-holdings?size=20&amp;blockWhenFull=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-alma-holdings?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
+            <to uri="seda:enrich-alma-holdings?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="addalmaholdingstomods" errorHandlerRef="eh">
             <from uri="seda:enrich-alma-holdings?concurrentConsumers=5"/>
             <process ref="almaHoldingsProcessor"/>
-            <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-split-collections?amazonSQSClient=#sqsClient" />
+            <marshal>
+                <custom ref="cloudbody"/>
+            </marshal>
+            <to
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-split-collections?amazonSQSClient=#sqsClient"
+            />
         </route>
 
         <route id="almamodssplit-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-split-collections?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-split-collections?size=20&amp;blockWhenFull=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-split-collections?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
+            <to uri="seda:enrich-split-collections?size=20&amp;blockWhenFull=true"/>
         </route>
 
         <route id="almamodssplit" errorHandlerRef="eh">
@@ -673,56 +736,72 @@
                 <split streaming="true" parallelProcessing="true">
                     <method bean="modsItemCollectionSplitter" method="split"/>
                     <!--<marshal><custom ref="cloudbody"/></marshal>-->
-                    <aggregate strategyRef="modsRawAggregator" completionSize="100" completionInterval="10000">
+                    <aggregate strategyRef="modsRawAggregator" completionSize="100"
+                        completionInterval="10000">
                         <correlationExpression>
                             <simple>all</simple>
                         </correlationExpression>
                         <completionPredicate>
                             <simple>${header.messageLength} > 150000</simple>
                         </completionPredicate>
-                        <marshal><custom ref="cloudbody"/></marshal>
+                        <marshal>
+                            <custom ref="cloudbody"/>
+                        </marshal>
                         <!--<to uri="seda:enrich-drs-extensions?size=20&amp;blockWhenFull=true" />-->
                         <!--<to uri="file://{{librarycloud.files.basepath}}/enrich-drs-extensions" />-->
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient" />
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient"
+                        />
                     </aggregate>
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
                     <!--<to uri="file://{{librarycloud.files.basepath}}/dead-letter" />-->
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                 </doCatch>
             </doTry>
         </route>
 
         <route id="adddrsextensionsstomods-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-drs-extensions?size=20&amp;blockWhenFull=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
+            <to uri="seda:enrich-drs-extensions?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="adddrsextensionstomods" errorHandlerRef="eh">
             <!--<from uri="file://{{librarycloud.files.basepath}}//enrich-drs-extensions" />-->
             <from uri="seda:enrich-drs-extensions?concurrentConsumers=1"/>
             <doTry>
                 <process ref="drsExtensionsProcessor"/>
-                <marshal><custom ref="cloudbody"/></marshal>
+                <marshal>
+                    <custom ref="cloudbody"/>
+                </marshal>
                 <!-- we want to do this, but it seems to cause glitches when doing full marc ingests.
                 Try full ingest sending via as well, tho not necessary, to see if that helps-->
                 <choice>
                     <when>
                         <xpath>//source = 'via'</xpath>
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-collections?amazonSQSClient=#sqsClient" />
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-collections?amazonSQSClient=#sqsClient"
+                        />
                     </when>
                     <when>
                         <xpath>//source = 'VIA'</xpath>
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-collections?amazonSQSClient=#sqsClient" />
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-collections?amazonSQSClient=#sqsClient"
+                        />
                     </when>
                     <otherwise>
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-pds-thumbs?amazonSQSClient=#sqsClient" />
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-pds-thumbs?amazonSQSClient=#sqsClient"
+                        />
                     </otherwise>
                 </choice>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                     <!--<to uri="file://{{librarycloud.files.basepath}}/dead-letter" />-->
                 </doCatch>
             </doTry>
@@ -730,42 +809,58 @@
 
         <route id="addthumbstomods-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-collections" /> -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-pds-thumbs?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-pds-thumbs?size=20&amp;blockWhenFull=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-pds-thumbs?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
+            <to uri="seda:enrich-pds-thumbs?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="addthumbstomods" errorHandlerRef="eh">
             <from uri="seda:enrich-pds-thumbs?concurrentConsumers=5"/>
             <process ref="thumbsProcessor"/>
-            <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-collections?amazonSQSClient=#sqsClient" />
+            <marshal>
+                <custom ref="cloudbody"/>
+            </marshal>
+            <to
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-collections?amazonSQSClient=#sqsClient"/>
             <!-- <to uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
         </route>
 
         <!-- collections here refers to "sets" in librarycloud -->
         <route id="addcollectionstomods-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}//enrich-collections" /> -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-collections?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-collections?size=20&amp;blockWhenFull=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-collections?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
+            <to uri="seda:enrich-collections?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="addcollectionstomods" errorHandlerRef="eh">
             <from uri="seda:enrich-collections?concurrentConsumers=5"/>
             <process ref="collectionsProcessor"/>
-            <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish?amazonSQSClient=#sqsClient" />
+            <marshal>
+                <custom ref="cloudbody"/>
+            </marshal>
+            <to
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish?amazonSQSClient=#sqsClient"
+            />
         </route>
 
 
         <!-- Publishing records to consumers -->
         <route id="publish-seda" errorHandlerRef="eh">
             <!-- <from uri="file://{{librarycloud.files.basepath}}/enrich-end" /> -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
             <to uri="seda:enrich-publish?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="publish" errorHandlerRef="eh">
-            <from uri="seda:enrich-publish?concurrentConsumers=1" />
+            <from uri="seda:enrich-publish?concurrentConsumers=1"/>
             <process ref="publishProcessor"/>
 
             <!-- not publishing for sns currently -->
@@ -786,14 +881,19 @@
             <choice>
                 <when>
                     <xpath>string-length(/lib_comm_message/payload/data) = 0</xpath>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient"
+                    />
                 </when>
                 <otherwise>
-                    <marshal><custom ref="cloudbody"/></marshal>
+                    <marshal>
+                        <custom ref="cloudbody"/>
+                    </marshal>
                     <!-- <multicast> -->
-                        <!-- Publishing to Solr doesn't yet go through the SNS publishing, so put it on its own queue -->
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-mods-to-solr?amazonSQSClient=#sqsClient" />
-                        <!--<to uri="aws-sns://harvard-librarycloud-publish-delta-{{librarycloud.sqs.environment}}?amazonSNSClient=#snsClient" /> -->
+                    <!-- Publishing to Solr doesn't yet go through the SNS publishing, so put it on its own queue -->
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-mods-to-solr?amazonSQSClient=#sqsClient"/>
+                    <!--<to uri="aws-sns://harvard-librarycloud-publish-delta-{{librarycloud.sqs.environment}}?amazonSNSClient=#snsClient" /> -->
                     <!-- </multicast> -->
                 </otherwise>
             </choice>
@@ -807,10 +907,14 @@
             <choice>
                 <when>
                     <xpath>string-length(/lib_comm_message/payload/data) = 0</xpath>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient"
+                    />
                 </when>
                 <otherwise>
-                    <marshal><custom ref="cloudbody"/></marshal>
+                    <marshal>
+                        <custom ref="cloudbody"/>
+                    </marshal>
                     <!-- <to uri="aws-sns://harvard-librarycloud-publish-full-{{librarycloud.sqs.environment}}?amazonSNSClient=#snsClient" /> -->
                 </otherwise>
             </choice>
@@ -819,47 +923,65 @@
         <!-- SOLR consumer for loading into item API -->
         <route id="modstosolr-seda" errorHandlerRef="eh">
             <!--<from uri="file://{{librarycloud.files.basepath}}/publish-public-delta-solr" /> -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-mods-to-solr?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-mods-to-solr?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
             <to uri="seda:mods-to-solr?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="modstosolr" errorHandlerRef="eh">
-            <from uri="seda:mods-to-solr?concurrentConsumers=1" />
+            <from uri="seda:mods-to-solr?concurrentConsumers=1"/>
             <process ref="solrLoadProcessor"/>
-            <to uri="log:edu.harvard.libcomm.throughput?level=TRACE&amp;marker=solrLoadProcessor&amp;groupSize=10"/>
-            <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
+            <to
+                uri="log:edu.harvard.libcomm.throughput?level=TRACE&amp;marker=solrLoadProcessor&amp;groupSize=10"/>
+            <marshal>
+                <custom ref="cloudbody"/>
+            </marshal>
+            <to
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
             <!-- <to uri="file://{{librarycloud.files.basepath}}/done" /> -->
         </route>
 
         <!-- SOLR consumer for loading into item API where the updates should be commited immediately -->
         <route id="modstosolr-immediate" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
             <process ref="solrLoadProcessorImmediate"/>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
+            <multicast streaming="true">
+                <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
+                <to uri="direct:write-mq"/>
+            </multicast>
         </route>
 
         <!-- DRS Extension Update handling - handles text file of urns, csv separated, line by line -->
         <route id="extension-update-ingest-split">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-extensions?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-extensions?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
                 <split streaming="true" parallelProcessing="true">
                     <method bean="updateSplitter" method="split"/>
-                    <marshal><custom ref="cloudbody"/></marshal>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-extensions?amazonSQSClient=#sqsClient" />
+                    <marshal>
+                        <custom ref="cloudbody"/>
+                    </marshal>
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-extensions?amazonSQSClient=#sqsClient"/>
                     <!--<to uri="seda:update-extensions?size=20&amp;blockWhenFull=true" />-->
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                 </doCatch>
             </doTry>
         </route>
 
         <route id="updateextensions-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-extensions?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-extensions?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
             <to uri="seda:update-extensions?size=20&amp;blockWhenFull=true"/>
         </route>
 
@@ -867,34 +989,43 @@
             <!--<from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-extensions?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />-->
             <from uri="seda:update-extensions?concurrentConsumers=500"/>
             <process ref="drsExtensionsNewUpdateProcessor"/>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drsextensionstosolr?amazonSQSClient=#sqsClient"/>
+            <to
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drsextensionstosolr?amazonSQSClient=#sqsClient"
+            />
         </route>
 
         <route id="drsextensionstosolr-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drsextensionstosolr?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drsextensionstosolr?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
             <to uri="seda:drsextensionstosolr?size=20&amp;blockWhenFull=true"/>
         </route>
 
         <route id="drsextensionstotosolr" errorHandlerRef="eh">
-            <from uri="seda:drsextensionstosolr?concurrentConsumers=4" />
+            <from uri="seda:drsextensionstosolr?concurrentConsumers=4"/>
             <!--<from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-split-holdings?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />-->
             <!--<from uri="file://{{librarycloud.files.basepath}}/split-holdings"/>-->
             <process ref="solrDrsExtensionsProcessor"/>
-            <marshal><custom ref="cloudbody"/></marshal>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
+            <marshal>
+                <custom ref="cloudbody"/>
+            </marshal>
+            <to
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
             <!--<to uri="file://{{librarycloud.files.basepath}}/done"/>-->
         </route>
 
         <!-- Delete handling -->
 
-         <route id="alma-delete-extract-file">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-alma?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+        <route id="alma-delete-extract-file">
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-alma?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
             <split>
                 <xtokenize mode="t">//filepath</xtokenize>
                 <bean ref="prepareURI" method="prepare"/>
                 <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
-                <to uri="http://www.example.com" />
+                <to uri="http://www.example.com"/>
                 <to uri="direct:alma-delete-file"/>
             </split>
         </route>
@@ -905,32 +1036,36 @@
             <doTry>
                 <split streaming="true">
                     <xtokenize>//record</xtokenize>
-                    <setHeader headerName="deleteID" >
+                    <setHeader headerName="deleteID">
                         <xpath resultType="java.lang.String">//controlfield[@tag='001']</xpath>
                     </setHeader>
-                    <setHeader headerName="source" >
+                    <setHeader headerName="source">
                         <simple>ALMA</simple>
                     </setHeader>
                     <process ref="deleteProcessor"/>
                     <multicast streaming="true">
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-s3?amazonSQSClient=#sqsClient" />
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient"/>
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-s3?amazonSQSClient=#sqsClient"
+                        />
                     </multicast>
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                 </doCatch>
             </doTry>
-         </route>
+        </route>
 
         <route id="alma-suppressed-delete-extract-file">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-alma-suppressed?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-alma-suppressed?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
             <split>
                 <xtokenize mode="t">//filepath</xtokenize>
                 <bean ref="prepareURI" method="prepare"/>
                 <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
-                <to uri="http://www.example.com" />
+                <to uri="http://www.example.com"/>
                 <to uri="direct:alma-suppressed-delete-file"/>
             </split>
         </route>
@@ -942,33 +1077,37 @@
                 <split streaming="true">
                     <!--<xtokenize>//record</xtokenize>-->
                     <xpath>//record[datafield[@tag='950']/subfield[@code='e']='true']</xpath>
-                    <setHeader headerName="deleteID" >
+                    <setHeader headerName="deleteID">
                         <xpath resultType="java.lang.String">//controlfield[@tag='001']</xpath>
                     </setHeader>
-                    <setHeader headerName="source" >
+                    <setHeader headerName="source">
                         <simple>ALMA</simple>
                     </setHeader>
                     <process ref="deleteProcessor"/>
                     <multicast streaming="true">
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-s3?amazonSQSClient=#sqsClient" />
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient"/>
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-s3?amazonSQSClient=#sqsClient"
+                        />
                     </multicast>
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                 </doCatch>
             </doTry>
         </route>
 
         <!-- via deletes -->
         <route id="via-delete-extract-file">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-via?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-via?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
             <split>
                 <xtokenize mode="t">//filepath</xtokenize>
                 <bean ref="prepareURI" method="prepare"/>
                 <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
-                <to uri="http://www.example.com" />
+                <to uri="http://www.example.com"/>
                 <to uri="direct:via-delete-file"/>
             </split>
         </route>
@@ -979,32 +1118,35 @@
             <doTry>
                 <split streaming="true">
                     <xtokenize>//viaRecord</xtokenize>
-                    <setHeader headerName="deleteID" >
+                    <setHeader headerName="deleteID">
                         <xpath resultType="java.lang.String">//recordId</xpath>
                     </setHeader>
-                    <setHeader headerName="source" >
+                    <setHeader headerName="source">
                         <simple>VIA</simple>
                     </setHeader>
                     <process ref="deleteProcessor"/>
                     <multicast streaming="true">
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient"
+                        />
                     </multicast>
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                 </doCatch>
             </doTry>
         </route>
 
         <!-- oasis deletes -->
         <route id="oasis-delete-extract-file">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-oasis?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-oasis?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
             <split>
                 <xtokenize mode="t">//filepath</xtokenize>
                 <bean ref="prepareURI" method="prepare"/>
                 <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
-                <to uri="http://www.example.com" />
+                <to uri="http://www.example.com"/>
                 <to uri="direct:oasis-delete-file"/>
             </split>
         </route>
@@ -1013,30 +1155,35 @@
             <from uri="direct:oasis-delete-file"/>
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
-                <setHeader headerName="deleteID" >
+                <setHeader headerName="deleteID">
                     <xpath resultType="java.lang.String">//ead:eadid/text()</xpath>
                 </setHeader>
-                <setHeader headerName="source" >
+                <setHeader headerName="source">
                     <simple>OASIS</simple>
                 </setHeader>
                 <process ref="deleteProcessor"/>
-                <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient" />
+                <to
+                    uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient"/>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                 </doCatch>
             </doTry>
         </route>
 
         <route id="deletesolr" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-public?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
             <process ref="solrDeleteProcessor"/>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
+            <to
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"
+            />
         </route>
 
         <!-- Delete holdings handling -->
         <route id="alma-holdings-delete-extract-file">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-alma-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-alma-holdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
             <split>
                 <xtokenize mode="t">//filepath</xtokenize>
                 <bean ref="prepareURI" method="prepare"/>
@@ -1055,11 +1202,13 @@
                     <setHeader headerName="deleteID">
                         <xpath resultType="java.lang.String">//datafield[@tag='852']/subfield[@code='8']</xpath>
                     </setHeader>
-                    <setHeader headerName="source" >
+                    <setHeader headerName="source">
                         <simple>ALMA</simple>
                     </setHeader>
                     <process ref="deleteProcessor"/>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-holdings-public?amazonSQSClient=#sqsClient"/>
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-holdings-public?amazonSQSClient=#sqsClient"
+                    />
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
@@ -1069,16 +1218,20 @@
         </route>
 
         <route id="deleteholdingssolr" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-holdings-public?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-holdings-public?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
             <process ref="solrHoldingsDeleteProcessor"/>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
+            <to
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"
+            />
         </route>
 
         <!-- Collection update handling -->
         <route id="updatecollections-seda" errorHandlerRef="eh">
-        <!--<from uri="file://{{librarycloud.files.basepath}}/updateCollection-input" /> -->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-public?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <to uri="seda:update-public?size=20&amp;blockWhenFull=true" />
+            <!--<from uri="file://{{librarycloud.files.basepath}}/updateCollection-input" /> -->
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-public?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <to uri="seda:update-public?size=20&amp;blockWhenFull=true"/>
         </route>
 
         <route id="updateCollection" errorHandlerRef="eh">
@@ -1087,10 +1240,14 @@
             <choice>
                 <when>
                     <xpath>string-length(/lib_comm_message/payload/data) = 0</xpath>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient"
+                    />
                 </when>
                 <otherwise>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"
+                    />
                 </otherwise>
             </choice>
         </route>
@@ -1098,29 +1255,34 @@
         <!-- TED -->
 
         <route id="ted-ingest-split" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-ted?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-ted?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
             <doTry>
                 <split streaming="true" parallelProcessing="true">
                     <method bean="tedSplitter" method="split"/>
-                    <marshal><custom ref="cloudbody"/></marshal>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient" />
+                    <marshal>
+                        <custom ref="cloudbody"/>
+                    </marshal>
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-extensions?amazonSQSClient=#sqsClient"/>
                     <!--<to uri="file://{{librarycloud.files.basepath}}/TEDSPLIT?fileName=${header.CamelSplitIndex}" />-->
                 </split>
                 <doCatch>
                     <exception>java.lang.Exception</exception>
-                    <to uri="direct:dead-letter" />
+                    <to uri="direct:dead-letter"/>
                     <!--<to uri="file://{{librarycloud.files.basepath}}/dead-letter" />-->
                 </doCatch>
             </doTry>
         </route>
 
         <route id="bibidlist-from-holdings-ingest" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-bibidsfromholdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-bibidsfromholdings?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800&amp;extendMessageVisibility=true"/>
             <split>
                 <xtokenize mode="t">//filepath</xtokenize>
                 <bean ref="prepareURI" method="prepare"/>
                 <!-- Download the file identified in the message header. This URI (http://www.example.com) is ignored -->
-                <to uri="http://www.example.com" />
+                <to uri="http://www.example.com"/>
                 <to uri="direct:bibidlist-from-holdings-file"/>
             </split>
         </route>
@@ -1137,14 +1299,17 @@
                     <setHeader headerName="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
-                    <aggregate strategyRef="newlineAggregator" completionSize="100" completionInterval="10000">
+                    <aggregate strategyRef="newlineAggregator" completionSize="100"
+                        completionInterval="10000">
                         <correlationExpression>
                             <simple>all</simple>
                         </correlationExpression>
                         <!--<completionPredicate>
                             <simple>${header.messageLength} > 150000</simple>
                         </completionPredicate>-->
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-bibids?amazonSQSClient=#sqsClient" />
+                        <to
+                            uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-bibids?amazonSQSClient=#sqsClient"
+                        />
                     </aggregate>
                     <!--<to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-bibids?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />-->
                 </split>
@@ -1153,23 +1318,29 @@
 
         <!-- update alma from s3 -->
         <route id="alma-refreshfroms3-split">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-bibids?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-bibids?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
             <!--<from uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma"/>-->
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
                 <split streaming="true">
-                    <tokenize token="\r\n|\n" xml="false" trim="true" />
+                    <tokenize token="\r\n|\n" xml="false" trim="true"/>
                     <process ref="refreshFromS3Processor"/>
                     <!--<to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml"/>-->
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient" />
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-normalize-marcxml?amazonSQSClient=#sqsClient"
+                    />
                 </split>
             </doTry>
         </route>
 
         <route id="deletefroms3" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-s3?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-delete-s3?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
             <process ref="s3DeleteProcessor"/>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"/>
+            <to
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-done?amazonSQSClient=#sqsClient"
+            />
         </route>
 
 
@@ -1177,7 +1348,8 @@
         <!-- and triggering realtime update into matching bibrecs -->
 
         <route id="activemqDrs" errorHandlerRef="eh">
-            <from uri="activemq:Consumer.librarycloud-{{librarycloud.sqs.environment}}.VirtualTopic.DRS_OBJECT_UPDATED"/>
+            <from
+                uri="activemq:Consumer.librarycloud-{{librarycloud.sqs.environment}}.VirtualTopic.DRS_OBJECT_UPDATED"/>
             <!--<from uri="activemq:Consumer.Consumer1.VirtualTopic.DRS_OBJECT_UPDATED"/>-->
             <setHeader headerName="drsId">
                 <jsonpath>$.data.objectId</jsonpath>
@@ -1191,31 +1363,41 @@
             <choice>
                 <when>
                     <simple>${in.body} != "[]"</simple>
-                    <to uri="seda:drs-mds?size=20&amp;blockWhenFull=true" />
+                    <to uri="seda:drs-mds?size=20&amp;blockWhenFull=true"/>
                 </when>
                 <otherwise>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient"
+                    />
                 </otherwise>
             </choice>
         </route>
 
+        <route id="activemqTest" errorHandlerRef="eh">
+            <from uri="file:src/test/activemq"/>
+            <to uri="activemq:queue:libcloudupdate"/>
+        </route>
+
         <!-- this is for refreshing drs ids by loading files to queue, if for istance there is a failure above -->
         <route id="updatedrsids">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-drsids?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-drsids?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
             <!--<from uri="file://{{librarycloud.files.basepath}}/refreshfroms3-alma"/>-->
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
                 <split streaming="true">
-                    <tokenize token="\r\n|\n" xml="false" trim="true" />
+                    <tokenize token="\r\n|\n" xml="false" trim="true"/>
                     <process ref="drsMdsProcessor"/>
                     <!--<to uri="file://{{librarycloud.files.basepath}}/normalize-marcxml"/>-->
                     <choice>
                         <when>
                             <simple>${in.body} != "[]"</simple>
-                            <to uri="seda:drs-mds?size=20&amp;blockWhenFull=true" />
+                            <to uri="seda:drs-mds?size=20&amp;blockWhenFull=true"/>
                         </when>
                         <otherwise>
-                            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                            <to
+                                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient"
+                            />
                         </otherwise>
                     </choice>
                 </split>
@@ -1227,49 +1409,58 @@
             <!--<from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds?amazonSQSClient=#sqsClient"/>-->
             <from uri="seda:drs-mds?concurrentConsumers=1"/>
             <process ref="drsMdsSolrProcessor"/>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"/>
+            <to
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"
+            />
         </route>
         <route id="drsMdsUpdate" errorHandlerRef="eh">
             <!--<from uri="file://{{librarycloud.files.basepath}}/DRSMDS"/>-->
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"/>
-
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-drs-mds-update?amazonSQSClient=#sqsClient"/>
             <split streaming="true">
                 <jsonpath>$</jsonpath>
-                <aggregate completionSize="100"
-                                 completionTimeout="1000" groupExchanges="true">
+                <aggregate completionSize="100" completionTimeout="1000" groupExchanges="true">
                     <correlationExpression>
                         <constant>true</constant>
                     </correlationExpression>
                     <process ref="drsMdsUpdateProcessor"/>
-                    <marshal><custom ref="cloudbody"/></marshal>
+                    <marshal>
+                        <custom ref="cloudbody"/>
+                    </marshal>
                     <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-metadata?amazonSQSClient=#sqsClient"/>
                 </aggregate>
             </split>
         </route>
 
         <route id="adddrsmetadataimmediate-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-metadata?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
-            <to uri="seda:enrich-drs-metadata?size=20&amp;blockWhenFull=true" />
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-drs-metadata?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
+            <to uri="seda:enrich-drs-metadata?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="adddrsextensionstomodsImmediate" errorHandlerRef="eh">
             <!--<from uri="file://{{librarycloud.files.basepath}}//enrich-drs-extensions" />-->
             <from uri="seda:enrich-drs-metadata?concurrentConsumers=1"/>
-
             <choice>
                 <when>
                     <xpath>string-length(/lib_comm_message/payload/data) = 0</xpath>
-                    <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient" />
+                    <to
+                        uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-empty-message?amazonSQSClient=#sqsClient"
+                    />
                 </when>
                 <otherwise>
                     <doTry>
                         <process ref="drsExtensionsProcessor"/>
-                        <marshal><custom ref="cloudbody"/></marshal>
-                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+                        <marshal>
+                            <custom ref="cloudbody"/>
+                        </marshal>
+                        <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
                         <!-- <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />-->
                         <doCatch>
                             <exception>java.lang.Exception</exception>
-                            <to uri="direct:dead-letter" />
+                            <to uri="direct:dead-letter"/>
                             <!--<to uri="file://{{librarycloud.files.basepath}}/dead-letter" />-->
                         </doCatch>
                     </doTry>
@@ -1279,18 +1470,33 @@
         </route>
 
         <route id="publish-immmediate-seda" errorHandlerRef="eh">
-            <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
-            <unmarshal><custom ref="cloudbody"/></unmarshal>
+            <from
+                uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-publish-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+            <unmarshal>
+                <custom ref="cloudbody"/>
+            </unmarshal>
             <to uri="seda:enrich-publish-immediate?size=20&amp;blockWhenFull=true"/>
         </route>
         <route id="publish-immediate" errorHandlerRef="eh">
-            <from uri="seda:enrich-publish-immediate?concurrentConsumers=1" />
+            <from uri="seda:enrich-publish-immediate?concurrentConsumers=1"/>
             <process ref="publishProcessor"/>
-            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
+            <to uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-publish-public-immediate?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>
+
         </route>
 
+        <route id="writemq" errorHandlerRef="eh">
+            <from uri="direct:write-mq"/>
+            <setHeader headerName="drsObjectId">
+                <xpath>/lib_comm_message/payload/data/text()</xpath>
+            </setHeader>
 
-<!--
+            <transform>
+                <simple>${header.drsObjectId}</simple>
+            </transform>
+            <log message="${in.body}"/>
+            <to uri="activemq:queue:iiifmetadata_update"/>
+        </route>
+        <!--
         <route id="fullRefresh" errorHandlerRef="eh">
             <from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-update-allbibs?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10" />
             <process ref="s3FullListProcessor"/>

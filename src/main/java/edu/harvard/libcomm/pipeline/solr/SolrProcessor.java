@@ -26,6 +26,7 @@ public class SolrProcessor implements IProcessor {
 	protected Logger log = Logger.getLogger(SolrProcessor.class); 	
 
 	private Integer commitWithinTime = -1;
+	private String drsObjectId = null;
 
 	@Override
 	public void processMessage(LibCommMessage libCommMessage) throws Exception {
@@ -46,6 +47,8 @@ public class SolrProcessor implements IProcessor {
 			throw e;
 		}
 		libCommMessage.setCommand("done");
+		// 2021-02-12 pass the drsObjectId for dropping message on iiif bib metadata update mq queue
+		libCommMessage.getPayload().setData("{\"drsObjectId\":\"" + drsObjectId + "\"}");
 		log.info(libCommMessage.getCommand() + "," + libCommMessage.getPayload().getSource() + "," + libCommMessage.getPayload().getFilepath()); // + "," + libCommMessage.getHistory().getEvent().get(0).getMessageid());
 
 	}
@@ -102,7 +105,10 @@ public class SolrProcessor implements IProcessor {
 
 	                    String fieldName = fieldElement.getAttribute("name");
 	                    String fieldValue = fieldElement.getTextContent();
-
+	                    // 2021-02-13 grab drsObjectId to put in message
+	                    if (fieldName.equals("drsObjectId"))
+	                    	drsObjectId = fieldValue;
+						log.info(fieldName + ":" + fieldValue);
 	                    solrInputDoc.addField(fieldName, fieldValue);
 	                }
 

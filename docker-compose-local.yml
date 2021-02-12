@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+
+  librarycloud_ingest_debug:
+    container_name: 'librarycloud_ingest-debug'
+    build:
+      context: './'
+      dockerfile: 'Dockerfile.local'
+    volumes:
+      - './:/home/librarycloud/librarycloud_ingest'
+    networks:
+      - mps-net
+
+networks:
+  mps-net:
+    name: "mps-net"
