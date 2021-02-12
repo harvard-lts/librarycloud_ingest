@@ -1,0 +1,145 @@
+<viaRecord images="true"
+           numberOfImages="4"
+           numberOfSubworks="0"
+           numberOfSurrogates="1"
+           originalAtHarvard="true"
+           primaryImageThumbnailURN="http://nrs.harvard.edu/urn-3:RAD.SCHL:5142203"
+           recordSize="5126"
+           sortCreator="Child, Paul"
+           sortDate="1951"
+           sortTitle="Paris"
+           sortWorktype="photographs">
+   <recordId altRecordId="ss_8000533563">olvwork577824</recordId>
+   <work>
+      <image xmlns:xlink="http://www.w3.org/TR/xlink"
+             altComponentID="7238244"
+             componentID="W577824_1"
+             restrictedImage="false"
+	     xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244351">
+         <caption>An nrs-dev url for testing purposes</caption>
+	 <thumbnail xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244351"/>
+      </image>
+      <image xmlns:xlink="http://www.w3.org/TR/xlink"
+             altComponentID="7238245"
+             componentID="W577824_2"
+             restrictedImage="false"
+	     xlink:href="https://nrs-dev.harvard.edu/urn-3:HUL.OIS:1254645">
+         <caption>7. two boys fishing, Quaide Bourbon (far)</caption>
+	 <thumbnail xlink:href="https://nrs-dev.lts.harvard.edu/urn-3:HUL.OIS:1254645"/>
+      </image>
+      <image xmlns:xlink="http://www.w3.org/TR/xlink"
+             altComponentID="17425885"
+             restrictedImage="false"
+             xlink:href="http://nrs.harvard.edu/urn-3:RAD.SCHL:32975508">
+         <caption>1. engraving posters</caption>
+         <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:RAD.SCHL:32975508"/>
+      </image>
+      <title>
+         <textElement>Paris</textElement>
+      </title>
+      <workType>photographs</workType>
+      <creator>
+         <nameElement>Child, Paul</nameElement>
+         <dates>1902-1994, American</dates>
+         <role>photographer</role>
+         <namedates>Child, Paul 1902-1994, American</namedates>
+      </creator>
+      <structuredDate>
+         <beginDate>1951</beginDate>
+         <endDate>1951</endDate>
+      </structuredDate>
+      <freeDate>1951 Feb 10-Mar 23</freeDate>
+      <dimensions>2.25 x 2.25 inches</dimensions>
+      <placeName>
+         <place>Paris, France</place>
+      </placeName>
+      <topic>
+         <term>fishing</term>
+      </topic>
+      <topic>
+         <term>boys</term>
+      </topic>
+      <topic>
+         <term>rivers</term>
+      </topic>
+      <topic>
+         <term>riverbanks</term>
+      </topic>
+      <materials>negative (photographic) on film</materials>
+      <materials>film</materials>
+      <materials>gelatin silver process</materials>
+      <materials>ILFORD</materials>
+      <notes>General: Cataloger selected representative images for digitization</notes>
+      <notes>Inscription: [Image number and caption transcribed from Paul Child log books:] 1. engraving posters; 2. Hotel Sully, window and roof; 3. Mme. de Stirgnes Theatre; 4. roofs: Rue de la Grande Truandine, Paris; 5. buildings on Rue Valette; 6. two boys fishing, Quaide Bourbon (close up); 7. two boys fishing, Quaide Bourbon (far); 8. Notre Dame and tree, from Quaide Orleans; 9. Sancerre Canal with reflected trees; 10. bridge and Loire at Gien, no trees; 11. bridge and Loire at Gien, plus trees; 12. Little church, St. Germiny</notes>
+      <copyright>Schlesinger Library, Radcliffe Institute for Advanced Study, Harvard University</copyright>
+      <relatedWork>
+         <relationship>part of</relationship>
+         <textElement>Julia Child Additional papers. Folder: Paul Child log book transcription: 1_37, HOLLIS collection-level record: 12694681</textElement>
+      </relatedWork>
+      <relatedInformation xmlns:xlink="http://www.w3.org/TR/xlink"
+                          xlink:href="http://nrs.harvard.edu/urn-3:RAD.SCHL:sch01321">Electronic finding aid</relatedInformation>
+      <useRestrictions>Schlesinger Library on the History of Women in America, Radcliffe Institute: This image may not be reproduced or transmitted in any form or by any means, electronic or mechanical, without permission in writing from the Schlesinger Library. Please contact slref@radcliffe.edu</useRestrictions>
+      <repository>
+         <repositoryName>Schlesinger Library on the History of Women in America, Radcliffe Institute</repositoryName>
+         <number>MC660-1-37</number>
+      </repository>
+      <surrogate componentID="14171267">
+         <image xmlns:xlink="http://www.w3.org/TR/xlink"
+                restrictedImage="false"
+                xlink:href="http://nrs.harvard.edu/urn-3:RAD.SCHL:29396836">
+            <thumbnail xlink:href="http://nrs.harvard.edu/urn-3:RAD.SCHL:29396836"/>
+         </image>
+         <title>
+            <textElement>5. buildings on Rue Valette</textElement>
+         </title>
+         <classification>
+            <number>MC660-PD.240-1 ; MC660-1-37-5</number>
+         </classification>
+         <notes>Digitized from print: MC660-PD.240-1</notes>
+         <copyright>If researchers wish to publish, reproduce, or otherwise make any use of an image in the Schlesinger Library's collections that requires permission from the copyright holder(s) of the image, it is the researcher's responsibility to obtain all such permissions.</copyright>
+         <repository>
+            <repositoryName>Schlesinger Library on the History of Women in America, Radcliffe Institute</repositoryName>
+         </repository>
+      </surrogate>
+   </work>
+   <admin>
+      <createDate>2012-05-08</createDate>
+      <status>Active</status>
+      <updateNote>
+         <updateDate>2015-01-19</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2015-02-13</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2015-02-26</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2015-03-13</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2016-04-26</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2016-04-28</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2016-05-05</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2016-09-27</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2016-11-30</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2016-12-07</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2017-06-22</updateDate>
+      </updateNote>
+      <updateNote>
+         <updateDate>2017-06-23</updateDate>
+      </updateNote>
+   </admin>
+</viaRecord>
