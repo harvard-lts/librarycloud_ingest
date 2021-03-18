@@ -108,7 +108,7 @@ public class SolrProcessor implements IProcessor {
 	                    // 2021-02-13 grab drsObjectId to put in message
 	                    if (fieldName.equals("drsObjectId"))
 	                    	drsObjectId = fieldValue;
-						log.info(fieldName + ":" + fieldValue);
+						//log.info(fieldName + ":" + fieldValue);
 	                    solrInputDoc.addField(fieldName, fieldValue);
 	                }
 
