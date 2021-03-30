@@ -50,6 +50,11 @@ echo $SQS_ENVIRONMENT
   export AWS_ACCESS_KEY_ID=`aws configure get prod.aws_access_key_id`
   export AWS_SECRET_ACCESS_KEY=`aws configure get prod.aws_secret_access_key`
 
+elif [ "$SQS_ENVIRONMENT" = "dev" ]; then
+echo $SQS_ENVIRONMENT
+  export AWS_ACCESS_KEY_ID=`aws configure get dev.aws_access_key_id`
+  export AWS_SECRET_ACCESS_KEY=`aws configure get dev.aws_secret_access_key`
+
 else
  echo "no such profile"
  exit 0

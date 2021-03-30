@@ -74,7 +74,7 @@ public class ExternalServiceProcessor implements IProcessor {
 		}
 		xml = "<" + wrapperToken + ">" + xml + "</" + wrapperToken + ">";
 		//log.info("xml: " + xml);
-		log.trace("External Service result:" + xml);
+		//log.trace("External Service result:" + xml);
 
 		try {
 			data = MessageUtils.transformPayloadData(libCommMessage,transformXSL,xml);

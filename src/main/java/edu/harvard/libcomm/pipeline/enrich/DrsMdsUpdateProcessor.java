@@ -58,7 +58,8 @@ public class DrsMdsUpdateProcessor implements Processor {
             }
         }
         */
-        urnQuery = "urn:" + urnQuery + ")";
+        // 2021-02-12 urn_keyword is case insensitive, unlike "urn"
+        urnQuery = "urn_keyword:" + urnQuery + ")";
         //log.info("urlQuery: " + urnQuery);
         String modsRecords = getSolrModsRecords(urnQuery);
         String modsCollection = null;
