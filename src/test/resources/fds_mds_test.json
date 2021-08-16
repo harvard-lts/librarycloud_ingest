@@ -1,0 +1,387 @@
+[
+    {
+        "_id": 400333792,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "object",
+        "drsId": 400333792,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:37.564Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:14Z"},
+        "lastModifiedDate": {"$date": "2019-04-23T01:25:10Z"},
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "obj_basic_smoke_test_opaque_w_URNs--85c4ecd5-8c99-4965-a71d-43fe61bde18f",
+        "status": "current",
+        "viewText": "off"
+    },
+    {
+        "_id": 400333794,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244252"
+            }
+        ],
+        "drsId": 400333794,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:37.746Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:14Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:14Z"},
+        "mimeType": "application/zip",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "32044017190406aa",
+        "status": "current",
+        "suppliedFilename": "32044017190406aa.zip"
+    },
+    {
+        "_id": 400333796,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244254"
+            }
+        ],
+        "drsId": 400333796,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:37.837Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:15Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:15Z"},
+        "mimeType": "application/postscript",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "circle",
+        "status": "current",
+        "suppliedFilename": "circle.eps"
+    },
+    {
+        "_id": 400333797,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244255"
+            }
+        ],
+        "drsId": 400333797,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:37.925Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:15Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:15Z"},
+        "mimeType": "image/png",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "circle",
+        "status": "current",
+        "suppliedFilename": "circle.png"
+    },
+    {
+        "_id": 400333798,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244256"
+            }
+        ],
+        "drsId": 400333798,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:38.012Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:16Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:16Z"},
+        "mimeType": "application/vnd.ms-powerpoint",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "Digital_Preservation_at_Harvard",
+        "status": "current",
+        "suppliedFilename": "Digital_Preservation_at_Harvard.ppt"
+    },
+    {
+        "_id": 400333799,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244257"
+            }
+        ],
+        "drsId": 400333799,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:38.1Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:16Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:16Z"},
+        "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "drs2-beta2-BBtraining-attendance-20120516",
+        "status": "current",
+        "suppliedFilename": "drs2-beta2-BBtraining-attendance-20120516.xlsx"
+    },
+    {
+        "_id": 400333800,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244258"
+            }
+        ],
+        "drsId": 400333800,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:38.187Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:17Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:17Z"},
+        "mimeType": "video/quicktime",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "hcl_aps_short_640x360",
+        "status": "current",
+        "suppliedFilename": "hcl_aps_short_640x360.mp4"
+    },
+    {
+        "_id": 400333801,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244259"
+            }
+        ],
+        "drsId": 400333801,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:38.277Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:17Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:17Z"},
+        "mimeType": "video/quicktime",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "http   www.babajaga-film.de",
+        "status": "current",
+        "suppliedFilename": "http   www.babajaga-film.de.mp4"
+    },
+    {
+        "_id": 400333802,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244262"
+            }
+        ],
+        "drsId": 400333802,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:38.365Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:17Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:17Z"},
+        "mimeType": "application/x-dosexec",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "msicuu2",
+        "status": "current",
+        "suppliedFilename": "msicuu2.exe"
+    },
+    {
+        "_id": 400333803,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244265"
+            }
+        ],
+        "drsId": 400333803,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:38.452Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:18Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:18Z"},
+        "mimeType": "video/quicktime",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "sample_sorenson",
+        "status": "current",
+        "suppliedFilename": "sample_sorenson.mov"
+    },
+    {
+        "_id": 400333804,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244268"
+            }
+        ],
+        "drsId": 400333804,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:38.54Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:18Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:18Z"},
+        "mimeType": "application/vnd.ms-excel",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "Sample - manual wave start with custom grouping",
+        "status": "current",
+        "suppliedFilename": "Sample - manual wave start with custom grouping.xls"
+    },
+    {
+        "_id": 400333805,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244270"
+            }
+        ],
+        "drsId": 400333805,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:38.628Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:19Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:19Z"},
+        "mimeType": "text/plain",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "drs_documentation_dirstructure",
+        "status": "current",
+        "suppliedFilename": "drs_documentation_dirstructure.txt"
+    },
+    {
+        "_id": 400333806,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244272"
+            }
+        ],
+        "drsId": 400333806,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:38.823Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:19Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:19Z"},
+        "mimeType": "text/plain",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "drs_documentation_test_audio_set_in_DRS1_URNs",
+        "status": "current",
+        "suppliedFilename": "drs_documentation_test_audio_set_in_DRS1_URNs.txt"
+    },
+    {
+        "_id": 400333795,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-1.0",
+            "alias": "OPAQUE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244253"
+            }
+        ],
+        "drsId": 400333795,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:38.912Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:14Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:14Z"},
+        "mimeType": "video/avi",
+        "objectId": 400333792,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "ccvt_box",
+        "status": "current",
+        "suppliedFilename": "ccvt_box.avi"
+    }
+]

@@ -212,6 +212,12 @@
                     <xsl:value-of select="replace(., 'http:', 'https:')"/>
                 </xsl:copy>
             </xsl:when>
+            <xsl:when test="contains(., 'URN-3') or contains(., 'ids.lib.harvard.edu')">
+                <xsl:copy>
+                    <xsl:copy-of select="@*"/>
+                    <xsl:value-of select="replace(., 'http:', 'https:')"/>
+                </xsl:copy>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="."/>
             </xsl:otherwise>

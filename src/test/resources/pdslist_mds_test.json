@@ -1,0 +1,55 @@
+[
+    {
+        "_id": 400086911,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-14.0",
+            "alias": "PDS DOCUMENT LIST"
+        },
+        "contentType": "object",
+        "deliveryUrns": [
+            {
+                "deliveryType": "PDS_LIST",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:pa_1235206"
+            },
+            {
+                "deliveryType": "PDS_LIST",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:PA_ListObj_1235087"
+            },
+            {
+                "deliveryType": "PDS_LIST",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:pa_1235190"
+            }
+        ],
+        "drsId": 400086911,
+        "harvardMetadataLinks": [
+            {
+                "metadataIdentifier": "TESTING LOCAL",
+                "metadataType": "Local",
+                "displayLabel": "Local"
+            },
+            {
+                "metadataIdentifier": "https://www.washingtonpost.com/",
+                "metadataType": "Local",
+                "displayLabel": "Local"
+            },
+            {
+                "metadataIdentifier": "http://idtest.lib.harvard.edu:10020/aleph/000734772/catalog",
+                "metadataType": "Aleph",
+                "displayLabel": "HOLLIS+"
+            }
+        ],
+        "indexUpdateTime": {"$date": "2019-08-30T18:10:08.517Z"},
+        "insertionDate": {"$date": "2015-09-18T22:15:23Z"},
+        "lastModifiedDate": {"$date": "2019-08-30T18:10:00Z"},
+        "metsLabel": "Adar, Zvi., ha- Sipur ha-Miḳraʼi. Jerusalem, 1980. ha-Maḥlaḳah le-ḥinukh ule-tarbut ba-golah shel ha-Histadrut ha-Tsiyonit ha-ʻOlamit.",
+        "objectId": 400086911,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "ObjListof20-vz-realPDSObjectswFiles--da271070-9451-405d-9b85-99bf4469aa98",
+        "status": "current",
+        "viewText": "off"
+    }
+]

@@ -28,9 +28,8 @@
 package edu.harvard.libcomm.pipeline.solr;
 
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
-
 import edu.harvard.libcomm.pipeline.Config;
-import edu.harvard.libcomm.pipeline.IProcessor;
+
 /**
 *
 *

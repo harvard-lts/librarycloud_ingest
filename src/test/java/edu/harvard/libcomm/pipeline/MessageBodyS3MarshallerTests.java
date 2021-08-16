@@ -1,33 +1,13 @@
 package edu.harvard.libcomm.pipeline;
 
-import java.io.*;
-import org.apache.commons.io.IOUtils;
-
-import org.apache.camel.Exchange;
-
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.S3Object;
-
-
-import org.junit.jupiter.api.Test;
+import org.apache.camel.Exchange;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-
-import static org.mockito.Mockito.*;
-import org.mockito.Mock;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static org.mockito.ArgumentMatchers.*;
-
-import edu.harvard.libcomm.test.TestHelpers;
-import edu.harvard.libcomm.test.TestMessageUtils;
-import edu.harvard.libcomm.message.LibCommMessage;
 
 @ExtendWith(MockitoExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -47,7 +27,7 @@ class MessageBodyS3MarshallerTests {
     public void setup() {
         marshaller = new MessageBodyS3Marshaller(5000000, "foo");
     }
-
+/* rewrite these to use local s3 equivalent
     @Test
     public void basicUnmarshallTest() throws Exception {
         String message = TestHelpers.readFile("s3marshall-test.xml");
@@ -79,4 +59,6 @@ class MessageBodyS3MarshallerTests {
         String data = lcm.getPayload().getData();
         assertEquals("<foo>bar</foo>", data);
     }
+
+ */
 }

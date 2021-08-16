@@ -4,7 +4,7 @@
     <!-- 2020-06-04: Added new Berenson name forms as source values (RKW) -->
     <!-- 2020-04-21: Removed extraneous line breaks (RKW) -->
     <!-- 2020-04-10: Added mapping for new DDO source name from ArchivesSpace (RKW) -->
-    <!-- 2020-03-30: Removed "Villa " from I Tatti replacement names 
+    <!-- 2020-03-30: Removed "Villa " from I Tatti replacement names
         Law joins Baker and FAL as having subunits in replacement elements.(RKW)-->
     <!-- 2019-07-25: Added entries for updated names from ArchivesSpace: 
    AJP, ARN, BAK, BER, DDO, ENV, ECB, FAL, FAR, GRA, LAW, MUS, ORC, SCH, URI.(RKW) -->
@@ -761,7 +761,7 @@
         <replacement>Center for the History of Medicine (Francis A. Countway Library of Medicine)</replacement>
         <valueURI>http://id.loc.gov/authorities/names/no2011103181</valueURI>
         <extensionValue>Countway Medicine</extensionValue>
-    </mapping>  
+    </mapping>
     <mapping>
         <source>MIC</source>
         <replacement>Microforms, Lamont Library, Harvard University</replacement>

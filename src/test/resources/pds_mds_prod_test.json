@@ -1,0 +1,1213 @@
+[
+    {
+        "_id": 462315836,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "object",
+        "deliveryUrns": [
+            {
+                "deliveryType": "PDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508480"
+            }
+        ],
+        "drsId": 462315836,
+        "harvardMetadataLinks": [
+            {
+                "metadataIdentifier": "http://id.lib.harvard.edu/alma/990049455570203941/catalog",
+                "metadataType": "Alma",
+                "displayLabel": "Alma"
+            }
+        ],
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.563Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:41Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:41Z"},
+        "metsLabel": "Amherst, J. H., 1776-1851. Christophe, King of Hayti : a drama in 3 acts : manuscript. 1821. Act II. TS 3111.225. Houghton Library, Harvard University, Cambridge, Mass.",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002",
+        "status": "current",
+        "viewText": "on"
+    },
+    {
+        "_id": 462315838,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508481"
+            }
+        ],
+        "drsId": 462315838,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.598Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:42Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:42Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0001",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0001.jp2"
+    },
+    {
+        "_id": 462315839,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508482"
+            }
+        ],
+        "drsId": 462315839,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.629Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:42Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:42Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0002",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0002.jp2"
+    },
+    {
+        "_id": 462315840,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508483"
+            }
+        ],
+        "drsId": 462315840,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.66Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:42Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:42Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0003",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0003.jp2"
+    },
+    {
+        "_id": 462315841,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508484"
+            }
+        ],
+        "drsId": 462315841,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.691Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:43Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:43Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0004",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0004.jp2"
+    },
+    {
+        "_id": 462315842,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508485"
+            }
+        ],
+        "drsId": 462315842,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.72Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:43Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:43Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0005",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0005.jp2"
+    },
+    {
+        "_id": 462315843,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508486"
+            }
+        ],
+        "drsId": 462315843,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.75Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:44Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:44Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0006",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0006.jp2"
+    },
+    {
+        "_id": 462315844,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508487"
+            }
+        ],
+        "drsId": 462315844,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.781Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:44Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:44Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0007",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0007.jp2"
+    },
+    {
+        "_id": 462315845,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508488"
+            }
+        ],
+        "drsId": 462315845,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.812Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:44Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:44Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0008",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0008.jp2"
+    },
+    {
+        "_id": 462315846,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508489"
+            }
+        ],
+        "drsId": 462315846,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.842Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:45Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:45Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0009",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0009.jp2"
+    },
+    {
+        "_id": 462315847,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508490"
+            }
+        ],
+        "drsId": 462315847,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.872Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:45Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:45Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0010",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0010.jp2"
+    },
+    {
+        "_id": 462315848,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508491"
+            }
+        ],
+        "drsId": 462315848,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.902Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:45Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:45Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0011",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0011.jp2"
+    },
+    {
+        "_id": 462315849,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508492"
+            }
+        ],
+        "drsId": 462315849,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.931Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:46Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:46Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0012",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0012.jp2"
+    },
+    {
+        "_id": 462315850,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508493"
+            }
+        ],
+        "drsId": 462315850,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.961Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:46Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:46Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0013",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0013.jp2"
+    },
+    {
+        "_id": 462315851,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508494"
+            }
+        ],
+        "drsId": 462315851,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:04.99Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:46Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:46Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0014",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0014.jp2"
+    },
+    {
+        "_id": 462315852,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508495"
+            }
+        ],
+        "drsId": 462315852,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.025Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:47Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:47Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0015",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0015.jp2"
+    },
+    {
+        "_id": 462315853,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508496"
+            }
+        ],
+        "drsId": 462315853,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.054Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:47Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:47Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0016",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0016.jp2"
+    },
+    {
+        "_id": 462315854,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508497"
+            }
+        ],
+        "drsId": 462315854,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.084Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:48Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:48Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0017",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0017.jp2"
+    },
+    {
+        "_id": 462315855,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508498"
+            }
+        ],
+        "drsId": 462315855,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.113Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:48Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:48Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0018",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0018.jp2"
+    },
+    {
+        "_id": 462315856,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508499"
+            }
+        ],
+        "drsId": 462315856,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.143Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:48Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:48Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0019",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0019.jp2"
+    },
+    {
+        "_id": 462315857,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508500"
+            }
+        ],
+        "drsId": 462315857,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.172Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:49Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:49Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0020",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0020.jp2"
+    },
+    {
+        "_id": 462315858,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508501"
+            }
+        ],
+        "drsId": 462315858,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.202Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:49Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:49Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0021",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0021.jp2"
+    },
+    {
+        "_id": 462315859,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508502"
+            }
+        ],
+        "drsId": 462315859,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.231Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:49Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:49Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0022",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0022.jp2"
+    },
+    {
+        "_id": 462315860,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508503"
+            }
+        ],
+        "drsId": 462315860,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.262Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:50Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:50Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0023",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0023.jp2"
+    },
+    {
+        "_id": 462315861,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508504"
+            }
+        ],
+        "drsId": 462315861,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.313Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:50Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:50Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0024",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0024.jp2"
+    },
+    {
+        "_id": 462315862,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508505"
+            }
+        ],
+        "drsId": 462315862,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.367Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:51Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:51Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0025",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0025.jp2"
+    },
+    {
+        "_id": 462315863,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508506"
+            }
+        ],
+        "drsId": 462315863,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.397Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:51Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:51Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0026",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0026.jp2"
+    },
+    {
+        "_id": 462315864,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508507"
+            }
+        ],
+        "drsId": 462315864,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.428Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:51Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:51Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0027",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0027.jp2"
+    },
+    {
+        "_id": 462315865,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508508"
+            }
+        ],
+        "drsId": 462315865,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.458Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:52Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:52Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0028",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0028.jp2"
+    },
+    {
+        "_id": 462315866,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508509"
+            }
+        ],
+        "drsId": 462315866,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.488Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:52Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:52Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0029",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0029.jp2"
+    },
+    {
+        "_id": 462315867,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508510"
+            }
+        ],
+        "drsId": 462315867,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.517Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:52Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:52Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0030",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0030.jp2"
+    },
+    {
+        "_id": 462315868,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508511"
+            }
+        ],
+        "drsId": 462315868,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.548Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:53Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:53Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0031",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0031.jp2"
+    },
+    {
+        "_id": 462315869,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508512"
+            }
+        ],
+        "drsId": 462315869,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.578Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:53Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:53Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0032",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0032.jp2"
+    },
+    {
+        "_id": 462315870,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508513"
+            }
+        ],
+        "drsId": 462315870,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.609Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:53Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:53Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0033",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0033.jp2"
+    },
+    {
+        "_id": 462315871,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508514"
+            }
+        ],
+        "drsId": 462315871,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.64Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:54Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:54Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0034",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0034.jp2"
+    },
+    {
+        "_id": 462315872,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508515"
+            }
+        ],
+        "drsId": 462315872,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.67Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:54Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:54Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0035",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0035.jp2"
+    },
+    {
+        "_id": 462315873,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508516"
+            }
+        ],
+        "drsId": 462315873,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.7Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:55Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:55Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0036",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0036.jp2"
+    },
+    {
+        "_id": 462315874,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508517"
+            }
+        ],
+        "drsId": 462315874,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.732Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:55Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:55Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0037",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0037.jp2"
+    },
+    {
+        "_id": 462315875,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508518"
+            }
+        ],
+        "drsId": 462315875,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.762Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:55Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:55Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0038",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0038.jp2"
+    },
+    {
+        "_id": 462315876,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508519"
+            }
+        ],
+        "drsId": 462315876,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.792Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:56Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:56Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0039",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0039.jp2"
+    },
+    {
+        "_id": 462315877,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508520"
+            }
+        ],
+        "drsId": 462315877,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.822Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:56Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:56Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0040",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0040.jp2"
+    },
+    {
+        "_id": 462315878,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508521"
+            }
+        ],
+        "drsId": 462315878,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.854Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:56Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:56Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0041",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0041.jp2"
+    },
+    {
+        "_id": 462315879,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs.lib.harvard.edu/urn-3:FHCL.HOUGH:38508522"
+            }
+        ],
+        "drsId": 462315879,
+        "indexUpdateTime": {"$date": "2019-02-22T17:15:05.884Z"},
+        "insertionDate": {"$date": "2019-02-22T17:13:57Z"},
+        "lastModifiedDate": {"$date": "2019-02-22T17:13:57Z"},
+        "mimeType": "image/jp2",
+        "objectId": 462315836,
+        "owner": {
+            "code": "FHCL.HOUGH",
+            "displayName": "Houghton Library"
+        },
+        "ownerSuppliedName": "ts_3111_225_0002_0042",
+        "status": "current",
+        "suppliedFilename": "ts_3111_225_0002_0042.jp2"
+    }
+]

@@ -1,0 +1,55 @@
+[
+    {
+        "_id": 400333866,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-12.0",
+            "alias": "VIDEO"
+        },
+        "contentType": "object",
+        "drsId": 400333866,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:49.093Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:40Z"},
+        "lastModifiedDate": {"$date": "2019-04-23T01:35:44Z"},
+        "objectId": 400333866,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "The_General--29c0cd5a-a87d-4bef-b7e4-a57565f55103",
+        "status": "current",
+        "viewText": "off"
+    },
+    {
+        "_id": 400333869,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-12.0",
+            "alias": "VIDEO"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "SDS_VIDEO",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244309"
+            },
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244310"
+            }
+        ],
+        "drsId": 400333869,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:49.332Z"},
+        "insertionDate": {"$date": "2018-12-12T20:15:41Z"},
+        "lastModifiedDate": {"$date": "2018-12-12T20:15:41Z"},
+        "mimeType": "video/quicktime",
+        "objectId": 400333866,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "The_General",
+        "status": "current",
+        "suppliedFilename": "The_General--The_General.mp4"
+    }
+]

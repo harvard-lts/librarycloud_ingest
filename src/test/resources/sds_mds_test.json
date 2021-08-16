@@ -1,0 +1,181 @@
+[
+    {
+        "_id": 400087249,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-2.0",
+            "alias": "AUDIO"
+        },
+        "contentType": "object",
+        "drsId": 400087249,
+        "indexUpdateTime": {"$date": "2019-04-23T02:06:32.914Z"},
+        "insertionDate": {"$date": "2015-10-01T21:52:01Z"},
+        "lastModifiedDate": {"$date": "2019-04-23T01:27:26Z"},
+        "objectId": 400087249,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "AudioObject-VZ-2015",
+        "status": "current",
+        "viewText": "on"
+    },
+    {
+        "_id": 400087251,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-2.0",
+            "alias": "AUDIO"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "FDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.TEST:1222948"
+            },
+            {
+                "deliveryType": "SDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1210467"
+            }
+        ],
+        "drsId": 400087251,
+        "indexUpdateTime": {"$date": "2019-04-23T02:06:33.075Z"},
+        "insertionDate": {"$date": "2015-10-01T21:52:01Z"},
+        "lastModifiedDate": {"$date": "2016-09-23T19:54:35Z"},
+        "mimeType": "audio/mpeg",
+        "objectId": 400087249,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "JSCDKYO1.0000001",
+        "status": "current",
+        "suppliedFilename": "JSCDKYO1.0000001--JSCDKYO1.0000001.mp3"
+    },
+    {
+        "_id": 400263616,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-2.0",
+            "alias": "AUDIO"
+        },
+        "contentType": "file",
+        "drsId": 400263616,
+        "indexUpdateTime": {"$date": "2019-04-23T02:06:33.163Z"},
+        "insertionDate": {"$date": "2018-05-10T17:13:47Z"},
+        "lastModifiedDate": {"$date": "2018-05-10T17:13:47Z"},
+        "mimeType": "audio/x-aiff",
+        "objectId": 400087249,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "status": "current",
+        "suppliedFilename": "Audio_1_01.L.aif"
+    },
+    {
+        "_id": 400263617,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-2.0",
+            "alias": "AUDIO"
+        },
+        "contentType": "file",
+        "drsId": 400263617,
+        "indexUpdateTime": {"$date": "2019-04-23T02:06:33.251Z"},
+        "insertionDate": {"$date": "2018-05-10T17:14:21Z"},
+        "lastModifiedDate": {"$date": "2018-05-10T17:14:21Z"},
+        "mimeType": "audio/mpeg",
+        "objectId": 400087249,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "status": "current",
+        "suppliedFilename": "QA_2_4_simple_audio_1.mp3"
+    },
+    {
+        "_id": 400263618,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-2.0",
+            "alias": "AUDIO"
+        },
+        "contentType": "file",
+        "drsId": 400263618,
+        "indexUpdateTime": {"$date": "2019-04-23T02:06:33.338Z"},
+        "insertionDate": {"$date": "2018-05-10T17:14:46Z"},
+        "lastModifiedDate": {"$date": "2018-05-10T17:14:46Z"},
+        "mimeType": "audio/x-aiff",
+        "objectId": 400087249,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "status": "current",
+        "suppliedFilename": "test.aif"
+    },
+    {
+        "_id": 400263619,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-2.0",
+            "alias": "AUDIO"
+        },
+        "contentType": "file",
+        "drsId": 400263619,
+        "indexUpdateTime": {"$date": "2019-04-23T02:06:33.442Z"},
+        "insertionDate": {"$date": "2018-05-10T17:15:08Z"},
+        "lastModifiedDate": {"$date": "2018-05-10T17:15:08Z"},
+        "mimeType": "audio/x-wave",
+        "objectId": 400087249,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "status": "current",
+        "suppliedFilename": "test.wav"
+    },
+    {
+        "_id": 400263620,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-2.0",
+            "alias": "AUDIO"
+        },
+        "contentType": "file",
+        "drsId": 400263620,
+        "indexUpdateTime": {"$date": "2019-04-23T02:06:33.528Z"},
+        "insertionDate": {"$date": "2018-05-10T17:15:38Z"},
+        "lastModifiedDate": {"$date": "2018-05-10T17:15:38Z"},
+        "mimeType": "audio/x-wave",
+        "objectId": 400087249,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "status": "current",
+        "suppliedFilename": "thermo.wav"
+    },
+    {
+        "_id": 400263615,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-2.0",
+            "alias": "AUDIO"
+        },
+        "contentType": "file",
+        "drsId": 400263615,
+        "indexUpdateTime": {"$date": "2019-04-23T02:06:33.673Z"},
+        "insertionDate": {"$date": "2018-05-10T17:12:14Z"},
+        "lastModifiedDate": {"$date": "2018-05-10T17:12:14Z"},
+        "mimeType": "audio/mpeg",
+        "objectId": 400087249,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "status": "current",
+        "suppliedFilename": "After_So_Long.mp3"
+    }
+]
