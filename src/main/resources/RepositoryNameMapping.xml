@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <valueMappings>
+    <!-- 2021-08-11: Added Alma mapping for new SEC library (RKW) -->
+    <!-- 2021-07-23: Changed and added mappings for new name (Harvard Divinity School Library) replacing the old Andover-Harvard Theology Library name.-->
+    <!-- 2021-05-19: Added mapping for Harvard Forest and Cabot Science Library, from JSTOR Forum (RKW) -->
+    <!-- 2021-04-29: Added comments about DOC, MIC, and POE being converted to LAM in Alma. Left entries in place for now. -->
     <!-- 2020-06-10: Removed duplicate Biblioteca Berenson block (RKW) -->
     <!-- 2020-06-04: Added new Berenson name forms as source values (RKW) -->
     <!-- 2020-04-21: Removed extraneous line breaks (RKW) -->
     <!-- 2020-04-10: Added mapping for new DDO source name from ArchivesSpace (RKW) -->
-    <!-- 2020-03-30: Removed "Villa " from I Tatti replacement names
+    <!-- 2020-03-30: Removed "Villa " from I Tatti replacement names, 
         Law joins Baker and FAL as having subunits in replacement elements.(RKW)-->
-    <!-- 2019-07-25: Added entries for updated names from ArchivesSpace:
+    <!-- 2019-07-25: Added entries for updated names from ArchivesSpace: 
    AJP, ARN, BAK, BER, DDO, ENV, ECB, FAL, FAR, GRA, LAW, MUS, ORC, SCH, URI.(RKW) -->
     <!-- 2018-11-07: cleaned up XML (RKW) -->
     <!-- 2018-08-23: added block for "Peabody Museum Archives" (RKW)-->
@@ -64,7 +68,7 @@
         <replacement>Arnold Arboretum Library (Cambridge), Botany Libraries, Harvard University</replacement>
         <!--    <valueURI></valueURI>  -->
         <extensionValue>Botany Arnold (Cambr.)</extensionValue>
-    </mapping>
+    </mapping>   
     <mapping>
         <source>Archives of the Arnold Arboretum (Cambridge), Botany Libraries, Harvard University</source>
         <replacement>Arnold Arboretum Library (Cambridge), Botany Libraries, Harvard University</replacement>
@@ -210,6 +214,12 @@
         <extensionValue>Cabot Science</extensionValue>
     </mapping>
     <mapping>
+        <source>Cabot Science Library</source>
+        <replacement>Cabot Science Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/000000046073724X</valueURI>
+        <extensionValue>Cabot Science</extensionValue>
+    </mapping>
+    <mapping>
         <source>CAR</source>
         <replacement>Carpenter Center for the Visual Arts, Harvard University</replacement>
         <valueURI>http://isni.org/isni/000000011942846X</valueURI>
@@ -319,22 +329,29 @@
     </mapping>
     <mapping>
         <source>DIV</source>
-        <replacement>Andover-Harvard Theological Library, Harvard Divinity School, Harvard University</replacement>
+        <replacement>Harvard Divinity School Library, Harvard University</replacement>
         <valueURI>http://isni.org/isni/0000000121705139</valueURI>
-        <extensionValue>Andover-Harv. Theol</extensionValue>
+        <extensionValue>Divinity Library</extensionValue>
     </mapping>
     <mapping>
         <source>Andover-Harvard Theological Library, Harvard Divinity School</source>
-        <replacement>Andover-Harvard Theological Library, Harvard Divinity School, Harvard University</replacement>
+        <replacement>Harvard Divinity School Library, Harvard University</replacement>
         <valueURI>http://isni.org/isni/0000000121705139</valueURI>
-        <extensionValue>Andover-Harv. Theol</extensionValue>
+        <extensionValue>Divinity Library</extensionValue>
     </mapping>
     <mapping>
         <source>Andover-Harvard Theological Library, Harvard Divinity School, Harvard University</source>
-        <replacement>Andover-Harvard Theological Library, Harvard Divinity School, Harvard University</replacement>
+        <replacement>Harvard Divinity School Library, Harvard University</replacement>
         <valueURI>http://isni.org/isni/0000000121705139</valueURI>
-        <extensionValue>Andover-Harv. Theol</extensionValue>
+        <extensionValue>Divinity Library</extensionValue>
     </mapping>
+    <mapping>
+        <source>Harvard Divinity School Library, Harvard University</source>
+        <replacement>Harvard Divinity School Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000121705139</valueURI>
+        <extensionValue>Divinity Library</extensionValue>
+    </mapping>
+    <!-- DOC is being converted to LAM, spring 2021 -->
     <mapping>
         <source>DOC</source>
         <replacement>Government Documents and Microforms Collection, Harvard Library, Harvard University</replacement>
@@ -450,6 +467,12 @@
         <extensionValue>Harvard Forest</extensionValue>
     </mapping>
     <mapping>
+        <source>Harvard Forest</source>
+        <replacement>Harvard Forest Library, Harvard University</replacement>
+        <valueURI>http://isni.org/isni/0000000464615004</valueURI>
+        <extensionValue>Harvard Forest</extensionValue>
+    </mapping>
+    <mapping>
         <source>FUN</source>
         <replacement>Fung Library, Harvard University</replacement>
         <valueURI>http://isni.org/isni/0000000463633294</valueURI>
@@ -515,7 +538,7 @@
         <valueURI>http://isni.org/isni/0000000460342846</valueURI>
         <extensionValue>Gutman Education</extensionValue>
     </mapping>
-    <!-- HCO mapping per Daina Bouquin email to Robin Wendler, 2018-06-18 -->
+<!-- HCO mapping per Daina Bouquin email to Robin Wendler, 2018-06-18 -->
     <mapping>
         <source>HCO</source>
         <replacement>John G. Wolbach Library, Harvard-Smithsonian Center for Astrophysics</replacement>
@@ -755,13 +778,14 @@
         <replacement>Center for the History of Medicine (Francis A. Countway Library of Medicine)</replacement>
         <valueURI>http://id.loc.gov/authorities/names/no2011103181</valueURI>
         <extensionValue>Countway Medicine</extensionValue>
-    </mapping>
+    </mapping>    
     <mapping>
         <source>Countway Library of Medicine</source>
         <replacement>Center for the History of Medicine (Francis A. Countway Library of Medicine)</replacement>
         <valueURI>http://id.loc.gov/authorities/names/no2011103181</valueURI>
         <extensionValue>Countway Medicine</extensionValue>
-    </mapping>
+    </mapping> 
+    <!-- MIC is being converted to LAM, spring 2021 -->
     <mapping>
         <source>MIC</source>
         <replacement>Microforms, Lamont Library, Harvard University</replacement>
@@ -906,6 +930,7 @@
         <valueURI>http://id.loc.gov/authorities/names/no2018043450</valueURI>
         <extensionValue>Physics Research</extensionValue>
     </mapping>
+<!-- POE is being converted to LAM, spring 2021 -->
     <mapping>
         <source>POE</source>
         <replacement>Woodberry Poetry Room, Harvard University</replacement>
@@ -971,6 +996,12 @@
         <replacement>Straus Center for Conservation and Technical Studies, Harvard Art Museums, Harvard University</replacement>
         <valueURI>http://isni.org/isni/000000012218462X</valueURI>
         <extensionValue>Straus Conservation</extensionValue>
+    </mapping>
+    <mapping>
+        <source>SEC</source>
+        <replacement>Science and Engineering Complex Library, Harvard University</replacement>
+        <valueURI></valueURI>
+        <extensionValue>Science and Engineering Complex Library</extensionValue>
     </mapping>
     <mapping>
         <source>SIA</source>
