@@ -1,0 +1,51 @@
+[
+    {
+        "_id": 400338492,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-5.0",
+            "alias": "STILL IMAGE"
+        },
+        "contentType": "object",
+        "drsId": 400338492,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:40.719Z"},
+        "insertionDate": {"$date": "2019-02-01T14:58:09Z"},
+        "lastModifiedDate": {"$date": "2019-04-23T01:31:26Z"},
+        "objectId": 400338492,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "ObjImgTest2019",
+        "status": "current",
+        "viewText": "off"
+    },
+    {
+        "_id": 400338494,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-5.0",
+            "alias": "STILL IMAGE"
+        },
+        "contentType": "file",
+        "deliveryUrns": [
+            {
+                "deliveryType": "IDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244351"
+            }
+        ],
+        "drsId": 400338494,
+        "indexUpdateTime": {"$date": "2019-04-23T02:20:40.869Z"},
+        "insertionDate": {"$date": "2019-02-01T14:58:11Z"},
+        "lastModifiedDate": {"$date": "2019-02-01T14:58:11Z"},
+        "mimeType": "image/jp2",
+        "objectId": 400338492,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "U971571_1",
+        "status": "current",
+        "suppliedFilename": "U971571_1.jp2"
+    }
+]

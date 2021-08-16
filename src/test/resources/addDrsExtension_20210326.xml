@@ -1,0 +1,56 @@
+<results>
+    <response>
+        <docs>
+            <contentModel>PDS DOCUMENT</contentModel>
+            <lastModifiedDate>2021-02-01T19:24:30Z</lastModifiedDate>
+            <ownerCode>FHCL.MED</ownerCode>
+            <processingDate>2021-02-01T19:25:00Z</processingDate>
+            <insertionDate>2006-07-20T20:27:21Z</insertionDate>
+            <harvardMetadataLink>http://id.lib.harvard.edu/aleph/008755156/catalog~Aleph~HOLLIS+</harvardMetadataLink>
+            <harvardMetadataLink>http://nrs.harvard.edu/urn-3:FHCL.Hough:hou00316~Finding
+                Aid~Finding Aid</harvardMetadataLink>
+            <ownerSuppliedName>Mahdavi_Fereidoun-METS</ownerSuppliedName>
+            <urn>URN-3:FHCL:100433700</urn>
+            <contentModelCode>CMID-4.0</contentModelCode>
+            <fileDeliveryURL>https://nrs.harvard.edu/URN-3:FHCL:100433700</fileDeliveryURL>
+            <ownerCodeDisplayName>Middle Eastern Division. Widener Library. Harvard College
+                Library</ownerCodeDisplayName>
+            <viewText>off</viewText>
+            <_version_>1690522113232863232</_version_>
+            <uriType>PDS</uriType>
+            <accessFlag>P</accessFlag>
+            <drsObjectId>5135809</drsObjectId>
+            <id>URN-3:FHCL:100433700</id>
+            <metsLabel>Fereidoun Mahdavi. Interview recorded by Zia Sedghi, 9-10, 20 June 1984,
+                Paris, France. Iranian Oral History Collection, Harvard University.</metsLabel>
+            <status>current</status>
+        </docs>
+        <docs>
+            <contentModel>PDS DOCUMENT</contentModel>
+            <lastModifiedDate>2021-02-01T19:26:20Z</lastModifiedDate>
+            <ownerCode>FHCL.MED</ownerCode>
+            <processingDate>2021-02-01T19:28:00Z</processingDate>
+            <insertionDate>2006-07-20T20:28:27Z</insertionDate>
+            <harvardMetadataLink>http://id.lib.harvard.edu/aleph/008755156/catalog~Aleph~HOLLIS+</harvardMetadataLink>
+            <harvardMetadataLink>http://nrs.harvard.edu/urn-3:FHCL.Hough:hou00316~Finding
+                Aid~Finding Aid</harvardMetadataLink>
+            <ownerSuppliedName>Mehr_Farhang-METS</ownerSuppliedName>
+            <urn>URN-3:FHCL:100433724</urn>
+            <contentModelCode>CMID-4.0</contentModelCode>
+            <fileDeliveryURL>https://nrs.harvard.edu/URN-3:FHCL:100433724</fileDeliveryURL>
+            <ownerCodeDisplayName>Middle Eastern Division. Widener Library. Harvard College
+                Library</ownerCodeDisplayName>
+            <viewText>off</viewText>
+            <_version_>1690522304570720257</_version_>
+            <uriType>PDS</uriType>
+            <accessFlag>P</accessFlag>
+            <drsObjectId>5136157</drsObjectId>
+            <id>URN-3:FHCL:100433724</id>
+            <metsLabel>Farhang Mehr. Interview recorded by Habib Ladjevardi, 14 &amp; 21 May and 4
+                June 1984 and 22 January and 5 February 1986, Cambridge, Massachusetts. Iranian Oral
+                History Collection, Harvard University.</metsLabel>
+            <thumbnailURL>https://ids.lib.harvard.edu/ids/iiif/5136158/full/,150/0/default.jpg</thumbnailURL>
+            <status>current</status>
+        </docs>
+    </response>
+</results>

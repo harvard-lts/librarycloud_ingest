@@ -81,8 +81,10 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:variable>
+                        <!--<xsl:message>1:<xsl:value-of select="$results//docs[substring-after(lower-case(urn), 'urn-3')]"/></xsl:message>
+                        <xsl:message>2:<xsl:value-of select="lower-case($urn)"/></xsl:message>-->
                         <xsl:apply-templates
-                            select="$results//docs[lower-case(substring-after(urn, 'urn-3')) = lower-case($urn)]"
+                            select="$results//docs[lower-case(substring-after(lower-case(urn), 'urn-3')) = lower-case($urn)]"
                         />
                     </xsl:for-each>
                     <!-- we are already doing this in marc 2 mods xform 

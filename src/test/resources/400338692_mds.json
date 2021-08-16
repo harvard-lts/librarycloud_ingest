@@ -1,0 +1,205 @@
+[
+    {
+        "_id": 400338692,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "object",
+        "deliveryUrns": [
+            {
+                "deliveryType": "PDS",
+                "url": "https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244359"
+            }
+        ],
+        "drsId": 400338692,
+        "indexUpdateTime": {"$date": "2019-08-22T15:40:02.317Z"},
+        "insertionDate": {"$date": "2019-02-06T19:45:05Z"},
+        "lastModifiedDate": {"$date": "2019-08-22T15:40:00Z"},
+        "objectId": 400338692,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "JPCDDA_0000001_2019",
+        "status": "current",
+        "viewText": "off"
+    },
+    {
+        "_id": 400338694,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "drsId": 400338694,
+        "indexUpdateTime": {"$date": "2019-08-22T15:40:02.462Z"},
+        "insertionDate": {"$date": "2019-02-06T19:45:06Z"},
+        "lastModifiedDate": {"$date": "2019-02-06T19:45:06Z"},
+        "mimeType": "image/jp2",
+        "objectId": 400338692,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "JPCDDA_0000001__0001",
+        "status": "current",
+        "suppliedFilename": "JPCDDA_0000001--JPCDDA_0000001__0001.jp2"
+    },
+    {
+        "_id": 400338695,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "drsId": 400338695,
+        "indexUpdateTime": {"$date": "2019-08-22T15:40:02.549Z"},
+        "insertionDate": {"$date": "2019-02-06T19:45:07Z"},
+        "lastModifiedDate": {"$date": "2019-02-06T19:45:07Z"},
+        "mimeType": "image/jp2",
+        "objectId": 400338692,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "JPCDDA_0000001__0002",
+        "status": "current",
+        "suppliedFilename": "JPCDDA_0000001--JPCDDA_0000001__0002.jp2"
+    },
+    {
+        "_id": 400338696,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "drsId": 400338696,
+        "indexUpdateTime": {"$date": "2019-08-22T15:40:02.634Z"},
+        "insertionDate": {"$date": "2019-02-06T19:45:07Z"},
+        "lastModifiedDate": {"$date": "2019-02-06T19:45:07Z"},
+        "mimeType": "image/jp2",
+        "objectId": 400338692,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "JPCDDA_0000001__0003",
+        "status": "current",
+        "suppliedFilename": "JPCDDA_0000001--JPCDDA_0000001__0003.jp2"
+    },
+    {
+        "_id": 400338697,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "drsId": 400338697,
+        "indexUpdateTime": {"$date": "2019-08-22T15:40:02.718Z"},
+        "insertionDate": {"$date": "2019-02-06T19:45:07Z"},
+        "lastModifiedDate": {"$date": "2019-02-06T19:45:07Z"},
+        "mimeType": "image/jp2",
+        "objectId": 400338692,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "JPCDDA_0000001__0004",
+        "status": "current",
+        "suppliedFilename": "JPCDDA_0000001--JPCDDA_0000001__0004.jp2"
+    },
+    {
+        "_id": 400338698,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "drsId": 400338698,
+        "indexUpdateTime": {"$date": "2019-08-22T15:40:02.803Z"},
+        "insertionDate": {"$date": "2019-02-06T19:45:07Z"},
+        "lastModifiedDate": {"$date": "2019-02-06T19:45:07Z"},
+        "mimeType": "image/jp2",
+        "objectId": 400338692,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "JPCDDA_0000001__0005",
+        "status": "current",
+        "suppliedFilename": "JPCDDA_0000001--JPCDDA_0000001__0005.jp2"
+    },
+    {
+        "_id": 400338699,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "drsId": 400338699,
+        "indexUpdateTime": {"$date": "2019-08-22T15:40:02.888Z"},
+        "insertionDate": {"$date": "2019-02-06T19:45:07Z"},
+        "lastModifiedDate": {"$date": "2019-02-06T19:45:07Z"},
+        "mimeType": "image/jp2",
+        "objectId": 400338692,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "JPCDDA_0000001__0006",
+        "status": "current",
+        "suppliedFilename": "JPCDDA_0000001--JPCDDA_0000001__0006.jp2"
+    },
+    {
+        "_id": 400338700,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "drsId": 400338700,
+        "indexUpdateTime": {"$date": "2019-08-22T15:40:02.973Z"},
+        "insertionDate": {"$date": "2019-02-06T19:45:07Z"},
+        "lastModifiedDate": {"$date": "2019-02-06T19:45:07Z"},
+        "mimeType": "image/jp2",
+        "objectId": 400338692,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "JPCDDA_0000001__0007",
+        "status": "current",
+        "suppliedFilename": "JPCDDA_0000001--JPCDDA_0000001__0007.jp2"
+    },
+    {
+        "_id": 400338701,
+        "accessFlag": "P",
+        "contentModel": {
+            "code": "CMID-4.0",
+            "alias": "PDS DOCUMENT"
+        },
+        "contentType": "file",
+        "drsId": 400338701,
+        "indexUpdateTime": {"$date": "2019-08-22T15:40:03.057Z"},
+        "insertionDate": {"$date": "2019-02-06T19:45:07Z"},
+        "lastModifiedDate": {"$date": "2019-02-06T19:45:07Z"},
+        "mimeType": "image/jp2",
+        "objectId": 400338692,
+        "owner": {
+            "code": "HUL.TEST",
+            "displayName": "Society for Basic Irreproducible Research"
+        },
+        "ownerSuppliedName": "JPCDDA_0000001__0008",
+        "status": "current",
+        "suppliedFilename": "JPCDDA_0000001--JPCDDA_0000001__0008.jp2"
+    }
+]

@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+    <eadheader>
+        <eadid identifier="990075252760203941" countrycode="US" mainagencycode="US-MH-H"
+            >hou00009</eadid>
+        <filedesc>
+            <titlestmt>
+                <titleproper>Smith, Theodora Eliot. Theodora Eliot Smith papers, 1864-1969: Guide.
+                        <num>MS Am 1691.15</num>
+                </titleproper>
+                <author>Houghton Library, Harvard College Library</author>
+            </titlestmt>
+            <publicationstmt>
+                <publisher>Harvard University, Cambridge, Massachusetts 02138 USA</publisher>
+                <p id="logostmt">
+                    <extref xlink:actuate="onLoad"
+                        xlink:href="http://nrs.harvard.edu/urn-3:HUL.OIS:fas_shield"
+                        xlink:show="embed" xlink:type="simple"/>
+                </p>
+                <address>
+                    <addressline>Harvard Yard</addressline>
+                    <addressline>Harvard University</addressline>
+                    <addressline>Cambridge, MA 02138</addressline>
+                    <addressline>Houghton_Library@harvard.edu </addressline>
+                    <addressline>URL: <extptr xlink:href="http://nrs.harvard.edu/urn-3:hul.ois:HOU"
+                            xlink:show="new" xlink:title="http://nrs.harvard.edu/urn-3:hul.ois:HOU"
+                            xlink:type="simple"/>
+                    </addressline>
+                </address>
+            </publicationstmt>
+        </filedesc>
+        <profiledesc>
+            <creation>This finding aid was produced using ArchivesSpace on <date>2019-02-21 03:00:02
+                    -0500</date>.</creation>
+        </profiledesc>
+        <revisiondesc>
+            <change>
+                <date>12/02/2016</date>
+                <item>This resource was modified by the ArchivesSpace Preprocessor developed by the
+                    Harvard Library
+                    (https://github.com/harvard-library/archivesspace-preprocessor)</item>
+            </change>
+            <change>
+                <date>03/04/2015</date>
+                <item>Loaded into OASIS</item>
+            </change>
+            <change>
+                <date>07/15/1996</date>
+                <item>
+                    <name>LAM</name>
+                </item>
+            </change>
+            <change>
+                <date>May 17, 2006</date>
+                <item>hou00009 converted by Harvard University Library OIS from EAD 1.0 to 2002 by
+                    v1to02.xsl (sy2006-05-17).</item>
+            </change>
+            <change>
+                <date>07/29/1996</date>
+                <item>
+                    <name>LAM</name>
+                </item>
+            </change>
+            <change>
+                <date>May 17, 2006</date>
+                <item>hou00009 converted by Harvard University Library OIS from EAD 1.0 to 2002 by
+                    v1to02.xsl (sy2006-05-17).</item>
+            </change>
+            <change>
+                <date>08/22/1996</date>
+                <item>
+                    <name>LAM</name>
+                </item>
+            </change>
+            <change>
+                <date>May 17, 2006</date>
+                <item>hou00009 converted by Harvard University Library OIS from EAD 1.0 to 2002 by
+                    v1to02.xsl (sy2006-05-17).</item>
+            </change>
+            <change>
+                <date>11/14/1997</date>
+                <item>
+                    <name>LAM</name>
+                </item>
+            </change>
+            <change>
+                <date>May 17, 2006</date>
+                <item>hou00009 converted by Harvard University Library OIS from EAD 1.0 to 2002 by
+                    v1to02.xsl (sy2006-05-17).</item>
+            </change>
+            <change>
+                <date>05/20/1998</date>
+                <item>
+                    <name>Bonnie B. Salt</name>
+                </item>
+            </change>
+            <change>
+                <date>May 17, 2006</date>
+                <item>hou00009 converted by Harvard University Library OIS from EAD 1.0 to 2002 by
+                    v1to02.xsl (sy2006-05-17).</item>
+            </change>
+            <change>
+                <date>09/21/1998</date>
+                <item>
+                    <name>BBS</name>
+                </item>
+            </change>
+            <change>
+                <date>May 17, 2006</date>
+                <item>hou00009 converted by Harvard University Library OIS from EAD 1.0 to 2002 by
+                    v1to02.xsl (sy2006-05-17).</item>
+            </change>
+            <change>
+                <date>09/28/1998</date>
+                <item>
+                    <name>BBS</name>
+                </item>
+            </change>
+            <change>
+                <date>May 17, 2006</date>
+                <item>hou00009 converted by Harvard University Library OIS from EAD 1.0 to 2002 by
+                    v1to02.xsl (sy2006-05-17).</item>
+            </change>
+            <change>
+                <date>12/28/1998</date>
+                <item>
+                    <name>BBS</name>
+                </item>
+            </change>
+            <change>
+                <date>May 17, 2006</date>
+                <item>hou00009 converted by Harvard University Library OIS from EAD 1.0 to 2002 by
+                    v1to02.xsl (sy2006-05-17).</item>
+            </change>
+            <change>
+                <date>2/22/1999</date>
+                <item>
+                    <name>BBS</name>
+                </item>
+            </change>
+            <change>
+                <date>May 17, 2006</date>
+                <item>hou00009 converted by Harvard University Library OIS from EAD 1.0 to 2002 by
+                    v1to02.xsl (sy2006-05-17).</item>
+            </change>
+            <change>
+                <date>October 16, 2013</date>
+                <item>
+                    <name>Emilie Hardman</name> added digital links</item>
+            </change>
+            <change>
+                <date>02/19/2015</date>
+                <item>
+                    <name>Bonnie Salt </name>updates</item>
+            </change>
+        </revisiondesc>
+    </eadheader>
+    <frontmatter>
+        <titlepage>
+            <num>MS Am 1691.15</num>
+            <titleproper>Smith, Theodora Eliot. Theodora Eliot Smith papers, 1864-1969: Guide. </titleproper>
+            <author>Houghton Library, Harvard College Library</author>
+            <p>
+                <extptr xlink:href="http://nrs.harvard.edu/urn-3:HUL.OIS:fas_shield"
+                    xlink:type="simple"/>
+            </p>
+            <publisher>Harvard University, Cambridge, Massachusetts 02138 USA</publisher>
+            <p>© President and Fellows of Harvard College</p>
+        </titlepage>
+    </frontmatter>
+    <archdesc level="collection">
+        <did>
+            <physloc id="aspace_fa63d26d3e88e8fb8a93a176b66b1a58">b</physloc>
+            <unitid>MS Am 1691.15</unitid>
+            <repository>
+                <corpname>Houghton Library, Harvard College Library</corpname>
+            </repository>
+            <unittitle>Theodora Eliot Smith papers</unittitle>
+            <unitdate calendar="gregorian" era="ce" normal="1864/1969" type="inclusive"
+                >1864-1969</unitdate>
+            <physdesc altrender="whole">
+                <extent>1.25 linear feet</extent>
+                <extent> (3 boxes)</extent>
+            </physdesc>
+            <langmaterial id="aspace_2f4eb1a71507b4de429075a831bb3651">Collection materials are in
+                    <language langcode="eng">English. </language>
+            </langmaterial>
+            <abstract id="aspace_8b67248c1a8eae7473e7c6b5e438142a">Materials relating to the
+                American-born, British poet T.S. Eliot and the Eliot family, collected by his niece,
+                Theodora Eliot Smith.</abstract>
+        </did>
+        <acqinfo id="aspace_73d62220acac5ef1d7ef47d8a634f167">
+            <head>Immediate Source of Acquisition</head>
+            <p>
+                <num>87M-89. </num>Manuscripts presented by: <persname>Theodora Eliot Smith,
+                </persname>Broadmead, Apt. L-12, 13801 York Road, Cockeysville, Maryland 21030;
+                received <date calendar="gregorian" era="ce">1979. </date>
+            </p>
+        </acqinfo>
+        <processinfo id="aspace_4906b3364f2caa432141c70ff6766c75">
+            <head>Processing Information</head>
+            <p>Processed by: Patricia Burdick</p>
+        </processinfo>
+        <accessrestrict id="aspace_d730b45a5e9e4669984955391488a5c7">
+            <head>Conditions Governing Access</head>
+            <p>Manuscripts of unpublished T.S. Eliot material may be consulted only with the
+                permission of Mrs. T.S. Eliot. Other material in this collection is open for
+                research use.</p>
+        </accessrestrict>
+        <prefercite id="aspace_b32a0558ad64b0d9c51f6cba5460cce4">
+            <head>Preferred Citation for Publication:</head>
+            <p>Theodora Eliot Smith Papers, 1864-1969 (MS Am 1691.15). Houghton Library, Harvard
+                University.</p>
+        </prefercite>
+        <bioghist id="aspace_72385479e54cec2aa383a7a845e13aee">
+            <head>Biographical / Historical</head>
+            <p>Theodora Eliot Smith is the niece of T.S. (Thomas Stearns) Eliot, poet, dramatist,
+                and critic.</p>
+        </bioghist>
+        <scopecontent id="aspace_d2596ea8ad822981d7a37ec3524dc372">
+            <head>Scope and Contents</head>
+            <p>Collection consists of drawing of Eliot, letters to family members, biographical
+                miscellany and printed materials on Eliot and his family, 1921 photograph album
+                (including photographs of T.S. Eliot and Vivienne Eliot), loose photographs of Eliot
+                and family members (ca. 1920s-1940s) and photographs of Eliot's visit to Harvard
+                University, scrapbook, theater programs, and clippings. </p>
+            <p>Also includes materials relating to Charlotte Champe Stearns Eliot, Henry Ware Eliot
+                (1843-1919) diary from 1864, Henry Ware Eliot (1879-1947), Marion Cushing Eliot,
+                Theresa Garrett Eliot, Vivienne Eliot, Charlotte Eliot Smith, and Theodora Eliot
+                Smith.</p>
+        </scopecontent>
+        <dsc>
+            <c id="hou00009c00001" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 1</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:PA_ListObj_1235087"
+                        xlink:show="new" xlink:title="Test 1" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 1</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00002" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 2</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:pa_1235190"
+                        xlink:show="new" xlink:title="Test2" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 2</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00003" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 3</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.TEST:1222948"
+                        xlink:show="new" xlink:title="Test 3" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 3</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00004" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 4</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1210467"
+                        xlink:show="new" xlink:title="Test 4" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 4</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00005" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 5</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244256"
+                        xlink:show="new" xlink:title="Test 5" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 5</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00006" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 6</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244257"
+                        xlink:show="new" xlink:title="Test 6" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 6</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00007" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 7</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244265"
+                        xlink:show="new" xlink:title="Test 7" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 7</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00008" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 81</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244272"
+                        xlink:show="new" xlink:title="Test 8" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 8</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00009" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 9</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:pa_1235206"
+                        xlink:show="new" xlink:title="Test 9" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 9</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00010" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 10</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244309"
+                        xlink:show="new" xlink:title="Test 10" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 10</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00011" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 11</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244310"
+                        xlink:show="new" xlink:title="Test 11" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 11</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00012" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 12</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244351"
+                        xlink:show="new" xlink:title="Test 12" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 12</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00013" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 13</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244252"
+                        xlink:show="new" xlink:title="Test 13" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 13</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00014" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 14</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244254"
+                        xlink:show="new" xlink:title="Test 14" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 14</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00015" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 15</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244255"
+                        xlink:show="new" xlink:title="Test 15" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 15</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00016" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 16</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244258"
+                        xlink:show="new" xlink:title="Test 16" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 16</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00017" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 17</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244259"
+                        xlink:show="new" xlink:title="Test 17" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 17</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00018" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 18</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244262"
+                        xlink:show="new" xlink:title="Test 18" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 18</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00019" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 19</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244268"
+                        xlink:show="new" xlink:title="Test 19" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 19</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>      
+            <c id="hou00009c00020" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 1</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244270"
+                        xlink:show="new" xlink:title="Test 1" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 1</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00021" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 20</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244253"
+                        xlink:show="new" xlink:title="Test 20" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 20</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+            <c id="hou00009c00022" level="otherlevel" otherlevel="unspecified">
+                <did>
+                    <unittitle>Test 21</unittitle>
+                    <dao xlink:actuate="onRequest" xlink:audience="external"
+                        xlink:href="https://nrs-dev.lib.harvard.edu/urn-3:HUL.OIS:1244359"
+                        xlink:show="new" xlink:title="Test 21" xlink:type="simple">
+                        <daodesc>
+                            <p>Test 21</p>
+                        </daodesc>
+                    </dao>
+                </did>
+            </c>
+        </dsc>
+    </archdesc>
+</ead>

@@ -603,6 +603,7 @@
             </xsl:attribute>
             <xsl:value-of select="normalize-space(.)"/>
         </xsl:element>
+        <xsl:if test="contains(upper-case(.), '//NRS')">
         <xsl:element name="field">
             <xsl:attribute name="name">
                 <xsl:text>urn</xsl:text>
@@ -617,6 +618,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:element>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="mods:recordInfo">

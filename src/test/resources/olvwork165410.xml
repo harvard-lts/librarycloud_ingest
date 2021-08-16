@@ -1,7 +1,7 @@
 <viaRecord images="false"
            numberOfImages="0"
            numberOfSubworks="0"
-           numberOfSurrogates="0"
+           numberOfSurrogates="1"
            originalAtHarvard="true"
            recordSize="1979"
            sortCreator="Frith, Francis"
@@ -50,6 +50,11 @@
          <repositoryName>Houghton Library</repositoryName>
          <number>TypDAG3312</number>
       </repository>
+      <surrogate altComponentID="W165410_1" componentID="4095631">
+         <repository>
+            <repositoryName>Houghton Library</repositoryName>
+         </repository>
+      </surrogate>
    </work>
    <admin>
       <createDate>2010-12-01</createDate>

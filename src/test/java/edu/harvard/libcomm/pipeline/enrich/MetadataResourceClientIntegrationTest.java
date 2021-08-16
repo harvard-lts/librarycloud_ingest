@@ -50,9 +50,9 @@ public class MetadataResourceClientIntegrationTest {
 
     @Test
     public void testLibraryCloudObject() {
-        int objectId = 462479396; //deadletter
+        //int objectId = 462479396; //deadletter
         //int objectId = 473172644;
-        //int objectId = 400338692; //PDS
+        int objectId = 400338692; //PDS
         //int objectId = 400338492; //IDS
         //int objectId = 400087249; //SDS (multiple, also has FDS
         //int objectId = 400333792; //FDS;

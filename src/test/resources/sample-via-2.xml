@@ -1,6 +1,5 @@
-<viaRecord originalAtHarvard="true"
-           numberOfSubworks="0"
-           primaryImageThumbnailURN="http://sharedshelf.stage.artstor.org/resolve/harvard-nrs/urn-3:FHCL.HOUGH:37097945">
+<viaRecord originalAtHarvard="true" numberOfSubworks="0"
+   primaryImageThumbnailURN="http://sharedshelf.stage.artstor.org/resolve/harvard-nrs/urn-3:FHCL.HOUGH:37097945">
    <recordId altRecordId="ss_8000175683">olvwork165257</recordId>
    <work>
       <title>
@@ -33,8 +32,10 @@
          <textElement>Harrison D. Horblit collection of early photography</textElement>
       </relatedWork>
       <relatedInformation xmlns:xlink="http://www.w3.org/TR/xlink"
-                          xlink:href="http://id.lib.harvard.edu/aleph/008080945/catalog">Collection-level record</relatedInformation>
-      <useRestrictions>Houghton Library: Cite as: Horblit TypPr [number], Harrison D. Horblit Collection of Early Photography, Houghton Library, Harvard University.</useRestrictions>
+         xlink:href="http://id.lib.harvard.edu/aleph/008080945/catalog">Collection-level
+         record</relatedInformation>
+      <useRestrictions>Houghton Library: Cite as: Horblit TypPr [number], Harrison D. Horblit
+         Collection of Early Photography, Houghton Library, Harvard University.</useRestrictions>
       <repository>
          <repositoryName>Houghton Library</repositoryName>
          <number>Horblit TypPr 805.A147.228 (1) Sz1</number>
