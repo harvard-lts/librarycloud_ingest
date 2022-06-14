@@ -16,8 +16,8 @@
     <spring.version>4.2.5.RELEASE</spring.version><!-- last release compatible with Camel 2.17.7 -->
     <openjpa.version>2.3.0</openjpa.version>
     <camel.version>2.17.7</camel.version><!-- last release for Java 1.7-->
-    <!-- <aws-java-sdk.version>1.11.301</aws-java-sdk.version> -->
-    <aws-java-sdk.version>1.10.8</aws-java-sdk.version>
+    <aws-java-sdk.version>1.11.301</aws-java-sdk.version> 
+    <!-- <aws-java-sdk.version>1.10.8</aws-java-sdk.version> -->
     <io.jsonwebtoken.version>0.10.7</io.jsonwebtoken.version>
     <resteasy.version>3.5.0.Final</resteasy.version>
     <junit.jupiter.version>5.2.0</junit.jupiter.version>
