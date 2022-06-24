@@ -12,6 +12,7 @@
 	<xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
 	<!--<xsl:param name="urn">http://nrs.harvard.edu/urn-3:FMUS:27510</xsl:param>-->
 	<xsl:param name="chunkid"/>
+	<!--<xsl:param name="chunkid">urn-3:FHCL.HOUGH:1864022</xsl:param>-->
 	<!--<xsl:param name="nodeComponentID" />-->
 	<xsl:template match="/viaRecord">
 		<!--<xsl:message>URN: <xsl:value-of select="$urn"/></xsl:message>
@@ -157,10 +158,33 @@
 					<xsl:apply-templates select="surrogate"/>
 				</relatedItem>
 			</xsl:when>
+			<xsl:when test="contains(surrogate[1]/image/@href, $chunkid) and string-length(surrogate[1]/image/@href)">
+				<relatedItem type="constituent">
+					<xsl:call-template name="recordElements"/>
+					<recordInfo>
+						<recordIdentifier>
+							<xsl:value-of select="@componentID"/>
+						</recordIdentifier>
+					</recordInfo>
+					<xsl:apply-templates select="surrogate"/>
+				</relatedItem>
+			</xsl:when>
+			<xsl:when
+				test="contains(surrogate[1]/image/@xlink:href, $chunkid) and string-length(surrogate[1]/image/@xlink:href)">
+				<relatedItem type="constituent">
+					<xsl:call-template name="recordElements"/>
+					<recordInfo>
+						<recordIdentifier>
+							<xsl:value-of select="@componentID"/>
+						</recordIdentifier>
+					</recordInfo>
+					<xsl:apply-templates select="surrogate"/>
+				</relatedItem>
+			</xsl:when>
 			<xsl:otherwise/>
-			<!--<xsl:otherwise>
+			<!-- <xsl:otherwise>
 				<xsl:apply-templates select="surrogate"/>
-			</xsl:otherwise>-->
+			</xsl:otherwise> -->
 		</xsl:choose>
 	</xsl:template>
 
