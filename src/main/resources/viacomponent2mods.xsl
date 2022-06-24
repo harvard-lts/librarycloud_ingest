@@ -2,7 +2,7 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xlink="http://www.w3.org/TR/xlink" xmlns="http://www.loc.gov/mods/v3"
 	xmlns:librarycloud="http://hul.harvard.edu/ois/xml/ns/librarycloud"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" >
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs">
 
 	<!--  Revisions
 	  2015-03-13 fix key date (was ending up in component where it didn't belong
@@ -12,7 +12,7 @@
 	<xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
 	<!--<xsl:param name="urn">http://nrs.harvard.edu/urn-3:FMUS:27510</xsl:param>-->
 	<xsl:param name="chunkid"/>
-	<!--<xsl:param name="chunkid">urn-3:FHCL.HOUGH:1864022</xsl:param>-->
+	<!--<xsl:param name="chunkid">urn-3:FHCL:3599021</xsl:param>-->
 	<!--<xsl:param name="nodeComponentID" />-->
 	<xsl:template match="/viaRecord">
 		<!--<xsl:message>URN: <xsl:value-of select="$urn"/></xsl:message>
@@ -81,14 +81,14 @@
 							<xsl:if test="string-length($recidsuffix)">
 								<xsl:text>_</xsl:text>
 								<xsl:choose>
-									<xsl:when test="contains($recidsuffix,'URN-3')">
+									<xsl:when test="contains($recidsuffix, 'URN-3')">
 										<xsl:value-of select="upper-case($recidsuffix)"/>
 									</xsl:when>
-									<xsl:when test="contains($recidsuffix,'urn-3')">
+									<xsl:when test="contains($recidsuffix, 'urn-3')">
 										<xsl:value-of select="upper-case($recidsuffix)"/>
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:value-of select="$recidsuffix"/>										
+										<xsl:value-of select="$recidsuffix"/>
 									</xsl:otherwise>
 								</xsl:choose>
 							</xsl:if>
@@ -99,7 +99,9 @@
 					</recordInfo>
 					<extension xmlns="http://www.loc.gov/mods/v3">
 						<librarycloud:originalDocument>
-							<xsl:text>https://s3.amazonaws.com/via-presto/prod/</xsl:text><xsl:value-of select="recordId"/><xsl:text>.xml</xsl:text>
+							<xsl:text>https://s3.amazonaws.com/via-presto/prod/</xsl:text>
+							<xsl:value-of select="recordId"/>
+							<xsl:text>.xml</xsl:text>
 						</librarycloud:originalDocument>
 					</extension>
 					<language>
@@ -147,18 +149,7 @@
 					<!--<xsl:apply-templates select="surrogate"/>-->
 				</relatedItem>
 			</xsl:when>
-			<xsl:when test="surrogate/@componentID = $chunkid">
-				<relatedItem type="constituent">
-					<xsl:call-template name="recordElements"/>
-					<recordInfo>
-						<recordIdentifier>
-							<xsl:value-of select="@componentID"/>
-						</recordIdentifier>
-					</recordInfo>
-					<xsl:apply-templates select="surrogate"/>
-				</relatedItem>
-			</xsl:when>
-			<xsl:when test="contains(surrogate[1]/image/@href, $chunkid) and string-length(surrogate[1]/image/@href)">
+			<xsl:when test=".[surrogate/@componentID = $chunkid]">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
 					<recordInfo>
@@ -170,7 +161,7 @@
 				</relatedItem>
 			</xsl:when>
 			<xsl:when
-				test="contains(surrogate[1]/image/@xlink:href, $chunkid) and string-length(surrogate[1]/image/@xlink:href)">
+				test="surrogate[tokenize(image/attribute::node()[local-name() = 'href'], '/')[last()] = $chunkid]">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
 					<recordInfo>
@@ -182,9 +173,6 @@
 				</relatedItem>
 			</xsl:when>
 			<xsl:otherwise/>
-			<!-- <xsl:otherwise>
-				<xsl:apply-templates select="surrogate"/>
-			</xsl:otherwise> -->
 		</xsl:choose>
 	</xsl:template>
 
@@ -203,7 +191,7 @@
 	</xsl:template>
 
 	<xsl:template name="recordElements">
-		<xsl:apply-templates select="title[not(textElement='')]"/>
+		<xsl:apply-templates select="title[not(textElement = '')]"/>
 		<xsl:apply-templates select="creator"/>
 		<xsl:apply-templates select="associatedName"/>
 		<xsl:call-template name="typeOfResource"/>
@@ -251,7 +239,8 @@
 							</xsl:attribute>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:if test="./type[not(.=' Title')]"> <!-- 20190507 MV added to fix ssio2via bug, will fix upstream before restrospective -->
+							<xsl:if test="./type[not(. = ' Title')]">
+								<!-- 20190507 MV added to fix ssio2via bug, will fix upstream before restrospective -->
 								<xsl:attribute name="type">
 									<xsl:value-of select="'alternative'"/>
 								</xsl:attribute>
@@ -425,8 +414,10 @@
 	<xsl:template match="notes">
 		<note>
 			<xsl:choose>
-				<xsl:when test="starts-with(normalize-space(.), 'General:')"><xsl:text>General note: </xsl:text><xsl:value-of select="substring-after(normalize-space(.), 'General:')"
-					/></xsl:when>
+				<xsl:when test="starts-with(normalize-space(.), 'General:')">
+					<xsl:text>General note: </xsl:text>
+					<xsl:value-of select="substring-after(normalize-space(.), 'General:')"/>
+				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="."/>
 				</xsl:otherwise>
@@ -763,10 +754,10 @@
 	</xsl:template>
 
 	<xsl:template match="admin" mode="datelist">
-		<xsl:apply-templates select="createDate[not(.='')]" mode="datelist"/>
+		<xsl:apply-templates select="createDate[not(. = '')]" mode="datelist"/>
 		<xsl:apply-templates select="updateNote/updateDate" mode="datelist"/>
 	</xsl:template>
-	
+
 	<xsl:template match="createDate | updateDate" mode="datelist">
 		<xsl:variable name="formatteddate">
 			<xsl:choose>
