@@ -12,7 +12,7 @@
 	<xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
 	<!--<xsl:param name="urn">http://nrs.harvard.edu/urn-3:FMUS:27510</xsl:param>-->
 	<xsl:param name="chunkid"/>
-	<!--<xsl:param name="chunkid">urn-3:FHCL:3599021</xsl:param>-->
+	<!--<xsl:param name="chunkid">urn-3:FHCL:3599019</xsl:param>-->
 	<!--<xsl:param name="nodeComponentID" />-->
 	<xsl:template match="/viaRecord">
 		<!--<xsl:message>URN: <xsl:value-of select="$urn"/></xsl:message>
@@ -126,7 +126,7 @@
 
 	<xsl:template match="subwork">
 		<xsl:choose>
-			<xsl:when test="contains(image/@href, $chunkid) and string-length(image/@href)">
+			<xsl:when test="contains(upper-case(image/@href), upper-case($chunkid)) and string-length(image/@href)">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
 					<recordInfo>
@@ -138,7 +138,7 @@
 				</relatedItem>
 			</xsl:when>
 			<xsl:when
-				test="contains(image/@xlink:href, $chunkid) and string-length(image/@xlink:href)">
+				test="contains(upper-case(image/@xlink:href), upper-case($chunkid)) and string-length(image/@xlink:href)">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
 					<recordInfo>
@@ -161,7 +161,7 @@
 				</relatedItem>
 			</xsl:when>
 			<xsl:when
-				test="surrogate[tokenize(image/attribute::node()[local-name() = 'href'], '/')[last()] = $chunkid]">
+				test="surrogate[upper-case(tokenize(image/attribute::node()[local-name() = 'href'], '/')[last()]) = upper-case($chunkid)]">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
 					<recordInfo>
@@ -178,7 +178,7 @@
 
 	<xsl:template match="surrogate">
 		<xsl:if
-			test="(string-length($chunkid) and (contains(image/@href, $chunkid) or contains(image/@xlink:href, $chunkid))) or $chunkid = @componentID">
+			test="(string-length($chunkid) and (contains(upper-case(image/@href), upper-case($chunkid)) or contains(upper-case(image/@xlink:href), upper-case($chunkid)))) or $chunkid = @componentID">
 			<relatedItem type="constituent">
 				<xsl:call-template name="recordElements"/>
 				<recordInfo>
