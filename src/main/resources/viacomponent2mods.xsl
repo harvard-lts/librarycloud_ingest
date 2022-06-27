@@ -11,7 +11,7 @@
 
 	<xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
 	<!--<xsl:param name="urn">http://nrs.harvard.edu/urn-3:FMUS:27510</xsl:param>-->
-	<xsl:param name="chunkid"/>
+	<xsl:param name="chunkid"></xsl:param>
 	<!--<xsl:param name="chunkid">urn-3:FHCL:3599019</xsl:param>-->
 	<!--<xsl:param name="nodeComponentID" />-->
 	<xsl:template match="/viaRecord">
