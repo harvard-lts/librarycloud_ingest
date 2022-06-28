@@ -161,10 +161,10 @@
 					<xsl:apply-templates select="surrogate"/>
 				</relatedItem>
 			</xsl:when>
-			<xsl:when test="surrogate">
+			<!--<xsl:when test="surrogate">
 				<xsl:apply-templates select="./surrogate" mode="surrInSW"/>
-			</xsl:when>
-			<!--<xsl:when
+			</xsl:when>-->
+			<xsl:when
 				test="surrogate[tokenize(image/@href, '/')[last()] = $chunkid]">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
@@ -187,7 +187,7 @@
 					</recordInfo>
 					<xsl:apply-templates select="surrogate"/>
 				</relatedItem>
-			</xsl:when>-->
+			</xsl:when>
 			<xsl:otherwise/>
 		</xsl:choose>
 	</xsl:template>
