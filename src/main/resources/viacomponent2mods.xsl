@@ -162,7 +162,7 @@
 				</relatedItem>
 			</xsl:when>
 			<xsl:when
-				test="surrogate[tokenize(image/attribute::node()[local-name() = 'href'], '/')[last()] = $chunkid]">
+				test="surrogate[tokenize(image/@href, '/')[last()] = $chunkid]">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
 					<recordInfo>
@@ -170,22 +170,23 @@
 							<xsl:value-of select="@componentID"/>
 						</recordIdentifier>
 					</recordInfo>
-					<xsl:apply-templates select="surrogate" mode="surrInSubwork"/>
+					<xsl:apply-templates select="surrogate"/>
+				</relatedItem>
+			</xsl:when>
+			<xsl:when
+				test="surrogate[tokenize(image/@xlink:href, '/')[last()] = $chunkid]">
+				<relatedItem type="constituent">
+					<xsl:call-template name="recordElements"/>
+					<recordInfo>
+						<recordIdentifier>
+							<xsl:value-of select="@componentID"/>
+						</recordIdentifier>
+					</recordInfo>
+					<xsl:apply-templates select="surrogate"/>
 				</relatedItem>
 			</xsl:when>
 			<xsl:otherwise/>
 		</xsl:choose>
-	</xsl:template>
-
-	<xsl:template match="surrogate" mode="surrInSubwork">
-		<relatedItem type="constituent">
-			<xsl:call-template name="recordElements"/>
-			<recordInfo>
-				<recordIdentifier>
-					<xsl:value-of select="@componentID"/>
-				</recordIdentifier>
-			</recordInfo>
-		</relatedItem>
 	</xsl:template>
 
 	<xsl:template match="surrogate">
