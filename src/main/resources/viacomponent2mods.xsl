@@ -11,7 +11,7 @@
 
 	<xsl:output method="xml" omit-xml-declaration="yes" version="1.0" encoding="UTF-8" indent="yes"/>
 	<!--<xsl:param name="urn">http://nrs.harvard.edu/urn-3:FMUS:27510</xsl:param>-->
-	<xsl:param name="chunkid"></xsl:param>
+	<xsl:param name="chunkid">urn-3:FHCL:3599019</xsl:param>
 	<!--<xsl:param name="chunkid">urn-3:FHCL:3599019</xsl:param>-->
 	<!--<xsl:param name="nodeComponentID" />-->
 	<xsl:template match="/viaRecord">
@@ -126,7 +126,8 @@
 
 	<xsl:template match="subwork">
 		<xsl:choose>
-			<xsl:when test="contains(upper-case(image/@href), upper-case($chunkid)) and string-length(image/@href)">
+			<xsl:when
+				test="contains(upper-case(image/@href), upper-case($chunkid)) and string-length(image/@href)">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
 					<recordInfo>
@@ -161,7 +162,7 @@
 				</relatedItem>
 			</xsl:when>
 			<xsl:when
-				test="surrogate[upper-case(tokenize(image/attribute::node()[local-name() = 'href'], '/')[last()]) = upper-case($chunkid)]">
+				test="surrogate[tokenize(image/attribute::node()[local-name() = 'href'], '/')[last()] = $chunkid]">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
 					<recordInfo>
@@ -169,11 +170,22 @@
 							<xsl:value-of select="@componentID"/>
 						</recordIdentifier>
 					</recordInfo>
-					<xsl:apply-templates select="surrogate"/>
+					<xsl:apply-templates select="surrogate" mode="surrInSubwork"/>
 				</relatedItem>
 			</xsl:when>
 			<xsl:otherwise/>
 		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="surrogate" mode="surrInSubwork">
+		<relatedItem type="constituent">
+			<xsl:call-template name="recordElements"/>
+			<recordInfo>
+				<recordIdentifier>
+					<xsl:value-of select="@componentID"/>
+				</recordIdentifier>
+			</recordInfo>
+		</relatedItem>
 	</xsl:template>
 
 	<xsl:template match="surrogate">
