@@ -161,7 +161,10 @@
 					<xsl:apply-templates select="surrogate"/>
 				</relatedItem>
 			</xsl:when>
-			<xsl:when
+			<xsl:when test="surrogate">
+				<xsl:apply-templates select="./surrogate" mode="surrInSW"/>
+			</xsl:when>
+			<!--<xsl:when
 				test="surrogate[tokenize(image/@href, '/')[last()] = $chunkid]">
 				<relatedItem type="constituent">
 					<xsl:call-template name="recordElements"/>
@@ -184,9 +187,35 @@
 					</recordInfo>
 					<xsl:apply-templates select="surrogate"/>
 				</relatedItem>
-			</xsl:when>
+			</xsl:when>-->
 			<xsl:otherwise/>
 		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="surrogate" mode="surrInSW">
+		<xsl:if
+			test="(string-length($chunkid) and (contains(upper-case(image/@href), upper-case($chunkid)) or contains(upper-case(image/@xlink:href), upper-case($chunkid)))) or $chunkid = @componentID">
+			<relatedItem type="constituent">
+				<xsl:call-template name="recordElementsSubWSurr">
+					<xsl:with-param name="parentsw" select="ancestor::subwork"/>
+				</xsl:call-template>
+				<recordInfo>
+					<recordIdentifier>
+						<xsl:value-of select="ancestor::subwork/@componentID"/>
+					</recordIdentifier>
+				</recordInfo>
+				<relatedItem type="constituent">
+					<xsl:call-template name="recordElements"/>
+					<recordInfo>
+						<recordIdentifier>
+							<xsl:value-of select="@componentID"/>
+						</recordIdentifier>
+					</recordInfo>
+				</relatedItem>
+			</relatedItem>
+
+
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="surrogate">
@@ -201,6 +230,40 @@
 				</recordInfo>
 			</relatedItem>
 		</xsl:if>
+	</xsl:template>
+
+	<xsl:template name="recordElementsSubWSurr">
+		<xsl:param name="parentsw"/>
+		<xsl:apply-templates select="$parentsw/title[not(textElement = '')]"/>
+		<xsl:apply-templates select="$parentsw/creator"/>
+		<xsl:apply-templates select="$parentsw/associatedName"/>
+		<!--<xsl:call-template name="typeOfResource"/>-->
+		<xsl:apply-templates select="$parentsw/workType"/>
+		<!--<xsl:call-template name="originInfo"/>-->
+		<!--xsl:apply-templates select="production"/>
+		<xsl:apply-templates select="structuredDate"/>
+		<xsl:apply-templates select="freeDate"/>
+		<xsl:apply-templates select="state"/-->
+		<!--xsl:apply-templates select="physicalDescription"/>
+		<xsl:apply-templates select="dimensions"/>
+		<xsl:apply-templates select="workType"/-->
+		<!--<xsl:call-template name="physicalDescription"/>-->
+		<xsl:apply-templates select="$parentsw/description"/>
+		<xsl:apply-templates select="$parentsw/notes"/>
+		<xsl:apply-templates select="$parentsw/placeName"/>
+		<xsl:apply-templates select="$parentsw/topic"/>
+		<xsl:apply-templates select="$parentsw/style"/>
+		<xsl:apply-templates select="$parentsw/culture"/>
+		<xsl:apply-templates select="$parentsw/materials"/>
+		<xsl:apply-templates select="$parentsw/classification"/>
+		<xsl:apply-templates select="$parentsw/relatedWork"/>
+		<xsl:apply-templates select="$parentsw/relatedInformation"/>
+		<xsl:apply-templates select="$parentsw/itemIdentifier"/>
+		<xsl:apply-templates select="$parentsw/image"/>
+		<xsl:apply-templates select="$parentsw/repository"/>
+		<xsl:apply-templates select="$parentsw/location"/>
+		<xsl:apply-templates select="$parentsw/useRestrictions"/>
+		<xsl:apply-templates select="$parentsw/copyright"/>
 	</xsl:template>
 
 	<xsl:template name="recordElements">
