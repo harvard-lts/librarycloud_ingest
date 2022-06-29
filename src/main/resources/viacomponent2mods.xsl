@@ -237,9 +237,43 @@
 		<xsl:apply-templates select="$parentsw/title[not(textElement = '')]"/>
 		<xsl:apply-templates select="$parentsw/creator"/>
 		<xsl:apply-templates select="$parentsw/associatedName"/>
-		<!--<xsl:call-template name="typeOfResource"/>-->
+		<xsl:call-template name="typeOfResource"/>
 		<xsl:apply-templates select="$parentsw/workType"/>
 		<!--<xsl:call-template name="originInfo"/>-->
+		<xsl:if test="$parentsw/production | $parentsw/structuredDate | $parentsw/freeDate | $parentsw/state">
+			<originInfo>
+				<xsl:if test="$parentsw/production/placeOfProduction/place">
+					<place>
+						<placeTerm>
+							<xsl:value-of select="$parentsw/production/placeOfProduction/place"/>
+						</placeTerm>
+					</place>
+				</xsl:if>
+				<xsl:if test="$parentsw/production/producer">
+					<publisher>
+						<xsl:value-of select="$parentsw/production/producer"/>
+					</publisher>
+				</xsl:if>
+				<!-- dateOther keyDate is used for date sorting -->
+				<!-- 2015-02-27 - but only for work/group-level-->
+				<xsl:if test="$parentsw/structuredDate/beginDate">
+					<xsl:apply-templates select="$parentsw/structuredDate[1]/beginDate"/>
+				</xsl:if>
+				<xsl:if test="$parentsw/structuredDate/endDate">
+					<xsl:apply-templates select="$parentsw/structuredDate[1]/endDate"/>
+				</xsl:if>
+				<xsl:if test="$parentsw/freeDate">
+					<dateCreated>
+						<xsl:value-of select="$parentsw/freeDate"/>
+					</dateCreated>
+				</xsl:if>
+				<xsl:if test="$parentsw/state">
+					<edition>
+						<xsl:value-of select="$parentsw/state"/>
+					</edition>
+				</xsl:if>
+			</originInfo>
+		</xsl:if>
 		<!--xsl:apply-templates select="production"/>
 		<xsl:apply-templates select="structuredDate"/>
 		<xsl:apply-templates select="freeDate"/>
@@ -248,6 +282,20 @@
 		<xsl:apply-templates select="dimensions"/>
 		<xsl:apply-templates select="workType"/-->
 		<!--<xsl:call-template name="physicalDescription"/>-->
+		<xsl:if test="$parentsw/physicalDescription or $parentsw/dimensions">
+			<physicalDescription>
+				<xsl:if test="$parentsw/physicalDescription">
+					<note>
+						<xsl:value-of select="$parentsw/physicalDescription"/>
+					</note>
+				</xsl:if>
+				<xsl:if test="$parentsw/dimensions">
+					<extent>
+						<xsl:value-of select="$parentsw/dimensions"/>
+					</extent>
+				</xsl:if>
+			</physicalDescription>
+		</xsl:if>
 		<xsl:apply-templates select="$parentsw/description"/>
 		<xsl:apply-templates select="$parentsw/notes"/>
 		<xsl:apply-templates select="$parentsw/placeName"/>
@@ -298,6 +346,8 @@
 		<xsl:apply-templates select="useRestrictions"/>
 		<xsl:apply-templates select="copyright"/>
 	</xsl:template>
+
+
 
 	<xsl:template match="title">
 		<xsl:element name="titleInfo">
