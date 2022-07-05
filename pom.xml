@@ -15,7 +15,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <spring.version>4.2.5.RELEASE</spring.version><!-- last release compatible with Camel 2.17.7 -->
     <openjpa.version>2.3.0</openjpa.version>
-    <camel.version>2.17.7</camel.version><!-- last release for Java 1.7-->
+    <camel.version>2.24.0</camel.version><!-- last release for Java 1.7-->
     <aws-java-sdk.version>1.10.77</aws-java-sdk.version>
     <!--<aws-java-sdk.version>1.12.249</aws-java-sdk.version>-->
     <io.jsonwebtoken.version>0.10.7</io.jsonwebtoken.version>
