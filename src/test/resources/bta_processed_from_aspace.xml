@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+   <eadheader>
+      <eadid identifier="000000000000000000" countrycode="US" mainagencycode="US-MH-Ed"
+         >gut5000</eadid>
+      <filedesc>
+         <titlestmt>
+            <titleproper>Black Teacher Archive<num>BTA</num>
+            </titleproper>
+         </titlestmt>
+         <publicationstmt>
+            <publisher>Monroe C. Gutman Library, Harvard Graduate School of Education, Harvard
+               University</publisher>
+            <p id="logostmt">
+               <extref xlink:actuate="onLoad"
+                  xlink:href="https://nrs.harvard.edu/urn-3:HUL.OIS:gse_shield" xlink:show="embed"
+                  xlink:type="simple"/>
+            </p>
+            <address>
+               <addressline>Monroe C. Gutman Library</addressline>
+               <addressline>6 Appian Way</addressline>
+               <addressline>Cambridge, MA 02138</addressline>
+               <addressline>special_collections@gse.harvard.edu</addressline>
+               <addressline>URL: <extptr xlink:href="https://library.harvard.edu/gut"
+                     xlink:show="new" xlink:title="https://library.harvard.edu/gut"
+                     xlink:type="simple"/>
+               </addressline>
+            </address>
+         </publicationstmt>
+      </filedesc>
+      <profiledesc>
+         <creation>This finding aid was produced using ArchivesSpace on <date>2022-08-24 17:54:14
+               +0000</date>.</creation>
+         <langusage>eng</langusage>
+      </profiledesc>
+   </eadheader>
+   <frontmatter>
+      <titlepage>
+         <num>BTA</num>
+         <titleproper>Black Teacher Archive </titleproper>
+         <author>Monroe C. Gutman Library, Harvard Graduate School of Education, Harvard
+            University</author>
+         <publisher>Monroe C. Gutman Library, Harvard Graduate School of Education, Harvard
+            University</publisher>
+         <p>© President and Fellows of Harvard College</p>
+      </titlepage>
+   </frontmatter>
+   <archdesc level="collection">
+      <did>
+         <unitid>BTA</unitid>
+         <repository>
+            <corpname>Monroe C. Gutman Library, Harvard Graduate School of Education, Harvard
+               University</corpname>
+         </repository>
+         <unittitle>Black Teacher Archive</unittitle>
+         <unitdate datechar="creation" normal="1907/1973" type="inclusive">1907-1973</unitdate>
+         <physdesc altrender="whole">
+            <extent>xx Gigabytes</extent>
+         </physdesc>
+         <langmaterial>
+            <language langcode="eng">English</language> . </langmaterial>
+      </did>
+      <dsc>
+         <c id="gut5000c00001" level="series">
+            <did>
+               <unittitle>National Publications</unittitle>
+            </did>
+            <c id="gut5000c00012" level="subseries">
+               <did>
+                  <unittitle>National Note-book Series </unittitle>
+                  <origination label="Creator">
+                     <corpname authfilenumber="no91006169" role="pbl" rules="rda" source="lcnaf"
+                        >National Association of Teachers in Colored Schools (U.S.)</corpname>
+                  </origination>
+               </did>
+               <odd id="aspace_6272ff5f5bd6b5921f46b237a2147ac9">
+                  <head>Place of Publication</head>
+                  <p>Augusta, Georgia</p>
+               </odd>
+               <otherfindaid id="aspace_b264f96050971a27d97aefc85238083a">
+                  <head>OCLC Number</head>
+                  <p>31202450</p>
+               </otherfindaid>
+               <otherfindaid id="aspace_5d879a87844afd284ffc0ed4bcb62822">
+                  <head>Cataloging Note</head>
+                  <p>Also cataloged separately:
+                     http://id.lib.harvard.edu/alma/99155775548803941/catalog</p>
+               </otherfindaid>
+               <userestrict id="aspace_df5aba648980cfa9a105c44d8d1a1128">
+                  <head>Conditions Governing Use</head>
+                  <p>Permission granted to Harvard Graduate School of Education to display this item
+                     for non-profit research and educational purposes. Any reuse of this item in
+                     excess of fair use or other copyright exemptions requires permission from the
+                     rights and/or repository holder.</p>
+               </userestrict>
+               <bioghist id="aspace_f386ceb139595c89641c3c702ad880c0">
+                  <head>Issuing Body Note</head>
+                  <p>"Official publication of the National Association of Teachers in Colored
+                     Schools."</p>
+               </bioghist>
+               <controlaccess>
+                  <genreform source="ingest">Periodicals.</genreform>
+               </controlaccess>
+               <c id="gut5000c00013" level="item">
+                  <did>
+                     <unitid>bta_56402872_US_1918. </unitid>
+                     <unittitle>No.1</unittitle>
+                     <unitdate datechar="Creation" normal="1918-10/1918-10">October 1918</unitdate>
+                     <origination label="Creator">
+                        <corpname authfilenumber="no2002008383" role="Provider of digitization"
+                           rules="rda" source="lcnaf">University of Oregon. Libraries</corpname>
+                     </origination>
+                     <origination label="source">
+                        <corpname authfilenumber="no2002008383" role="own" rules="rda"
+                           source="lcnaf">University of Oregon. Libraries</corpname>
+                     </origination>
+                     <dao audience="external" xlink:actuate="onRequest"
+                        xlink:href="https://nrs.harvard.edu/URN-3:GSE.LIBR:101457798"
+                        xlink:show="new" xlink:title="No.1" xlink:type="simple">
+                        <daodesc>
+                           <p>No.1</p>
+                        </daodesc>
+                     </dao>
+                  </did>
+                  <prefercite id="aspace_f9a692919f9a9cf32f9d69bad86f1433">
+                     <head>Preferred Citation</head>
+                     <p>The National note-book series. Augusta, Ga. : Publicity Committee of the
+                        National Association of Teachers in Colored Schools. No. 1. Oct. 1918.
+                        University of Oregon Libraries. Black Teacher Archive.</p>
+                  </prefercite>
+                  <altformavail id="aspace_7f66a252e750bef42527170bfaa14252">
+                     <head>Existence and Location of Copies</head>
+                     <p>
+                        <extref
+                           xlink:href="https://docs.google.com/spreadsheets/d/1p_3eCcXXZ0TNZCWq4D_U_S_foqKd3GfCeP4IRYv_qBw/edit#gid=0"
+                           >Other digital copies of this issue</extref>
+                     </p>
+                  </altformavail>
+                  <controlaccess>
+                     <corpname authfilenumber="no2002008383" role="own" rules="rda" source="lcnaf"
+                        >University of Oregon. Libraries</corpname>
+                  </controlaccess>
+               </c>
+               <c id="gut5000c00014" level="item">
+                  <did>
+                     <unitid>bta_56402872_US_1919. </unitid>
+                     <unittitle>No.2</unittitle>
+                     <unitdate datechar="creation" normal="1919-08/1919-08">August 1919</unitdate>
+                     <origination label="Creator">
+                        <corpname authfilenumber="no2002008383" role="own" rules="rda"
+                           source="lcnaf">University of Oregon. Libraries</corpname>
+                     </origination>
+                     <origination label="source">
+                        <corpname authfilenumber="no2002008383" role="Provider of digitization"
+                           rules="rda" source="lcnaf">University of Oregon. Libraries</corpname>
+                     </origination>
+                     <origination label="Creator">
+                        <persname role="crp" source="ingest">Washington, Booker T.,
+                           1856-1915</persname>
+                     </origination>
+                     <dao audience="external" xlink:actuate="onRequest"
+                        xlink:href="https://nrs.harvard.edu/URN-3:GSE.LIBR:101457812"
+                        xlink:show="new" xlink:title="No.2" xlink:type="simple">
+                        <daodesc>
+                           <p>No.2</p>
+                        </daodesc>
+                     </dao>
+                  </did>
+                  <prefercite id="aspace_43a2033a37d8c8129092db4557f126fb">
+                     <head>Preferred Citation</head>
+                     <p>The National note-book series. Augusta, Ga. : Publicity Committee of the
+                        National Association of Teachers in Colored Schools. No. 2. Aug. 1919.
+                        University of Oregon Libraries. Black Teacher Archive.</p>
+                  </prefercite>
+                  <odd id="aspace_1e7ea31ca653be36ee890219e5131f26">
+                     <head>Physical Description of Original</head>
+                     <p>This issue is bound together v.1-5 (1930-1934) in the rare books of the
+                        North Carolina Collection at University of North Carolina Chapel Hill.</p>
+                  </odd>
+                  <altformavail id="aspace_2a8e8958a5edde0c651188a91bb1a646">
+                     <head>Existence and Location of Copies</head>
+                     <p>
+                        <extref xlink:href="https://archive.org/details/northcarolinatea1519unse"
+                           >Digital copies of this issue appear in North Carolina Library Internet
+                           Archive</extref>
+                     </p>
+                  </altformavail>
+                  <controlaccess>
+                     <corpname authfilenumber="no2002008383" role="Provider of digitization"
+                        rules="rda" source="lcnaf">University of Oregon. Libraries</corpname>
+                  </controlaccess>
+               </c>
+            </c>
+            <c id="gut5000c00015" level="subseries">
+               <did>
+                  <unittitle>The National Note-book Quarterly </unittitle>
+               </did>
+               <odd id="aspace_4e56396af486ceb0864c52cdc92399bd">
+                  <head>Place of Publication</head>
+                  <p>Augusta, Georgia</p>
+               </odd>
+               <otherfindaid id="aspace_81b8318129ec437cc50a014faa890322">
+                  <head>OCLC Number</head>
+                  <p>10508661</p>
+               </otherfindaid>
+               <userestrict id="aspace_26e70a86b3b80a350adefea9a37a2133">
+                  <head>Conditions Governing Use</head>
+                  <p>Permission granted to Harvard Graduate School of Education to display this item
+                     for non-profit research and educational purposes. Any reuse of this item in
+                     excess of fair use or other copyright exemptions requires permission from the
+                     rights and/or repository holder.</p>
+               </userestrict>
+               <otherfindaid id="aspace_326def59a970f8524b34d917b61fe2b2">
+                  <head>Cataloging Note</head>
+                  <p>Also cataloged separately:
+                     http://id.lib.harvard.edu/alma/99155796560403941/catalog</p>
+               </otherfindaid>
+               <controlaccess>
+                  <genreform source="ingest">Periodicals.</genreform>
+               </controlaccess>
+               <c id="gut5000c00016" level="item">
+                  <did>
+                     <unittitle>Volume I. No.4</unittitle>
+                     <unitdate datechar="publication" normal="1919/1919">October 1919</unitdate>
+                  </did>
+               </c>
+               <c id="gut5000c00017" level="item">
+                  <did>
+                     <unittitle>Volume II. No.1</unittitle>
+                     <unitdate datechar="publication" normal="1920/1920">January 1920</unitdate>
+                  </did>
+               </c>
+               <c id="gut5000c00018" level="item">
+                  <did>
+                     <unittitle>Volume II. No.2</unittitle>
+                     <unitdate datechar="publication" normal="1920/1920">April 1920</unitdate>
+                  </did>
+               </c>
+               <c id="gut5000c00019" level="item">
+                  <did>
+                     <unittitle>Volume II. No.3</unittitle>
+                     <unitdate datechar="publication" normal="1920/1920">July 1920</unitdate>
+                  </did>
+               </c>
+               <c id="gut5000c00020" level="item">
+                  <did>
+                     <unittitle>Volume II. No.4</unittitle>
+                     <unitdate datechar="publication" normal="1920/1920">October 1920</unitdate>
+                  </did>
+               </c>
+               <c id="gut5000c00021" level="item">
+                  <did>
+                     <unittitle>Volume III. No.2</unittitle>
+                     <unitdate datechar="publication" normal="1921/1921">April 1921</unitdate>
+                  </did>
+               </c>
+            </c>
+            <c id="gut5000c00022" level="subseries">
+               <did>
+                  <unittitle>The National Note-book</unittitle>
+                  <origination label="Creator">
+                     <corpname authfilenumber="no91006169" role="pbl" rules="rda" source="lcnaf"
+                        >National Association of Teachers in Colored Schools (U.S.)</corpname>
+                  </origination>
+               </did>
+               <odd id="aspace_b117994178856411030ee5196f45d456">
+                  <head>Place of Publication</head>
+                  <p>Augusta,Georgia</p>
+               </odd>
+               <otherfindaid id="aspace_a4f16177321b2a4405e6dfafa6c29b1b">
+                  <head>OCLC Number</head>
+                  <p>10508664</p>
+               </otherfindaid>
+               <otherfindaid id="aspace_b0d46fa07e1e66452d4fdd2be3a072e8">
+                  <head>Cataloging Note</head>
+                  <p>Also cataloged separately:
+                     http://id.lib.harvard.edu/alma/99155796560503941/catalog</p>
+               </otherfindaid>
+               <userestrict id="aspace_ac094a91a2b6b06a3736ef0d61005896">
+                  <head>Conditions Governing Use</head>
+                  <p>Permission granted to Harvard Graduate School of Education to display this item
+                     for non-profit research and educational purposes. Any reuse of this item in
+                     excess of fair use or other copyright exemptions requires permission from the
+                     rights and/or repository holder.</p>
+               </userestrict>
+               <controlaccess>
+                  <genreform source="ingest">Periodicals.</genreform>
+               </controlaccess>
+               <c id="gut5000c00023" level="item">
+                  <did>
+                     <unitid>bta_10508664_US_1918. </unitid>
+                     <unittitle>Digest of the Fifteenth Annual Meeting of the National
+                        Association</unittitle>
+                     <unitdate datechar="publication" normal="1918/1918">October 1918</unitdate>
+                     <origination label="source">
+                        <corpname authfilenumber="no2002008383" role="Provider of digitization"
+                           rules="rda" source="lcnaf">University of Oregon. Libraries</corpname>
+                     </origination>
+                     <origination label="Creator">
+                        <corpname authfilenumber="no2002008383" role="own" rules="rda"
+                           source="lcnaf">University of Oregon. Libraries</corpname>
+                     </origination>
+                     <dao audience="external" xlink:actuate="onRequest"
+                        xlink:href="https://nrs.harvard.edu/URN-3:GSE.LIBR:101457684"
+                        xlink:show="new"
+                        xlink:title="Digest of the Fifteenth Annual Meeting of the National Association"
+                        xlink:type="simple">
+                        <daodesc>
+                           <p>Digest of the Fifteenth Annual Meeting of the National Association</p>
+                        </daodesc>
+                     </dao>
+                  </did>
+                  <controlaccess>
+                     <corpname authfilenumber="no2002008383" role="Provider of digitization"
+                        rules="rda" source="lcnaf">University of Oregon. Libraries</corpname>
+                  </controlaccess>
+               </c>
+               <c id="gut5000c00024" level="item">
+                  <did>
+                     <unitid>bta_10508664_US_1919_001_001. </unitid>
+                     <unittitle>Volume I. No.1</unittitle>
+                     <unitdate datechar="publication" normal="1919/1919">January 1919</unitdate>
+                     <origination label="Creator">
+                        <corpname authfilenumber="no2002008383" role="own" rules="rda"
+                           source="lcnaf">University of Oregon. Libraries</corpname>
+                     </origination>
+                     <origination label="source">
+                        <corpname authfilenumber="no2002008383" role="Provider of digitization"
+                           rules="rda" source="lcnaf">University of Oregon. Libraries</corpname>
+                     </origination>
+                     <dao audience="external" xlink:actuate="onRequest"
+                        xlink:href="https://nrs.harvard.edu/URN-3:GSE.LIBR:101457710"
+                        xlink:show="new" xlink:title="Volume 1. No.1" xlink:type="simple">
+                        <daodesc>
+                           <p>Volume 1. No.1</p>
+                        </daodesc>
+                     </dao>
+                  </did>
+                  <controlaccess>
+                     <corpname authfilenumber="no2002008383" role="Provider of digitization"
+                        rules="rda" source="lcnaf">University of Oregon. Libraries</corpname>
+                  </controlaccess>
+               </c>
+               <c id="gut5000c00025" level="item">
+                  <did>
+                     <unitid>bta_10508664_US_1919_001_002. </unitid>
+                     <unittitle>Volume I. No.2</unittitle>
+                     <unitdate datechar="publication" normal="1919/1919">April 1919</unitdate>
+                     <origination label="Creator">
+                        <corpname authfilenumber="no2002008383" role="own" rules="rda"
+                           source="lcnaf">University of Oregon. Libraries</corpname>
+                     </origination>
+                     <origination label="source">
+                        <corpname authfilenumber="no2002008383" role="Provider of digitization"
+                           rules="rda" source="lcnaf">University of Oregon. Libraries</corpname>
+                     </origination>
+                     <dao audience="external" xlink:actuate="onRequest"
+                        xlink:href="https://nrs.harvard.edu/URN-3:GSE.LIBR:101457738"
+                        xlink:show="new" xlink:title="Volume 1. No.2" xlink:type="simple">
+                        <daodesc>
+                           <p>Volume 1. No.2</p>
+                        </daodesc>
+                     </dao>
+                  </did>
+                  <controlaccess>
+                     <corpname authfilenumber="no2002008383" role="Provider of digitization"
+                        rules="rda" source="lcnaf">University of Oregon. Libraries</corpname>
+                  </controlaccess>
+               </c>
+               <c id="gut5000c00026" level="item">
+                  <did>
+                     <unitid>bta_10508664_US_1919_001_003. </unitid>
+                     <unittitle>Volume I. No.3</unittitle>
+                     <unitdate datechar="publication" normal="1919/1919">July 1919</unitdate>
+                     <origination label="Creator">
+                        <corpname authfilenumber="no2002008383" role="own" rules="rda"
+                           source="lcnaf">University of Oregon. Libraries</corpname>
+                     </origination>
+                     <origination label="source">
+                        <corpname authfilenumber="no2002008383" role="Provider of digitization"
+                           rules="rda" source="lcnaf">University of Oregon. Libraries</corpname>
+                     </origination>
+                     <dao xlink:actuate="onRequest" xlink:href="bta_10508664_US_1919_001_003d"
+                        xlink:show="new" xlink:title="Volume 1. No.3" xlink:type="simple">
+                        <daodesc>
+                           <p>Volume 1. No.3</p>
+                        </daodesc>
+                     </dao>
+                  </did>
+                  <controlaccess>
+                     <corpname authfilenumber="no2002008383" role="Provider of digitization"
+                        rules="rda" source="lcnaf">University of Oregon. Libraries</corpname>
+                  </controlaccess>
+               </c>
+            </c>
+            <c id="gut5000c00006" level="subseries">
+               <did>
+                  <unittitle>The National Educational Outlook Among Negroes</unittitle>
+               </did>
+            </c>
+            <c id="gut5000c00005" level="subseries">
+               <did>
+                  <unittitle>The Bulletin: Official Organ of the National Association of Teachers in
+                     Colored Schools</unittitle>
+               </did>
+               <odd id="aspace_1dee79a7930fae657cb34c17c8d1cda3">
+                  <head>Place of Publication</head>
+                  <p>Tuskegee, Alabama</p>
+               </odd>
+               <otherfindaid id="aspace_55be193b07beb14861582944e085bd72">
+                  <head>OCLC Number</head>
+                  <p>30786086</p>
+               </otherfindaid>
+               <otherfindaid id="aspace_92603a865d9f3722e9010680619b0ee5">
+                  <head>Cataloging Note</head>
+                  <p>Also cataloged
+                     seperately:http://id.lib.harvard.edu/alma/99155716110003941/catalog</p>
+               </otherfindaid>
+               <userestrict id="aspace_d1369739a078adcf6a1d52514a0e187b">
+                  <head>Conditions Governing Use</head>
+                  <p>Permission granted to Harvard Graduate School of Education to display this item
+                     for non-profit research and educational purposes. Any reuse of this item in
+                     excess of fair use or other copyright exemptions requires permission from the
+                     rights and/or repository holder.</p>
+               </userestrict>
+               <controlaccess>
+                  <subject source="ingest">Periodicals</subject>
+               </controlaccess>
+            </c>
+            <c id="gut5000c00027" level="subseries">
+               <did>
+                  <unittitle>The Bulletin: Official Organ of the American Teachers
+                     Association</unittitle>
+                  <origination label="Creator">
+                     <corpname authfilenumber="nr93006254" rules="rda" source="lcnaf">American
+                        Teachers Association</corpname>
+                  </origination>
+               </did>
+               <odd id="aspace_314223ddc58baee5464063ffe6f9d967">
+                  <head>Place of Publication</head>
+                  <p>Montgomery, Alabama</p>
+               </odd>
+               <odd id="aspace_3260890427b23d9df5700b3c78bb3b2b">
+                  <head>OCLC Number</head>
+                  <p>30786193</p>
+               </odd>
+               <userestrict id="aspace_b18b0ba9fee4d1090791fb68881695eb">
+                  <head>Conditions Governing Use</head>
+                  <p>Permission granted to Harvard Graduate School of Education to display this item
+                     for non-profit research and educational purposes. Any reuse of this item in
+                     excess of fair use or other copyright exemptions requires permission from the
+                     rights and/or repository holder.</p>
+               </userestrict>
+               <otherfindaid id="aspace_2bf1a7b93387fcfac849732e38d17952">
+                  <head>Cataloging Note</head>
+                  <p>Also cataloged seperately:
+                     http://id.lib.harvard.edu/alma/99155801558803941/catalog</p>
+               </otherfindaid>
+               <controlaccess>
+                  <genreform source="ingest">Periodicals.</genreform>
+               </controlaccess>
+            </c>
+         </c>
+         <c id="gut5000c00002" level="series">
+            <did>
+               <unittitle>Alabama Publications</unittitle>
+            </did>
+            <c id="gut5000c00028" level="subseries">
+               <did>
+                  <unittitle>The Alabama State Teachers Association Journal</unittitle>
+                  <unitdate datechar="publication" normal="1959/1969" type="inclusive"
+                     >1959-1969</unitdate>
+               </did>
+               <otherfindaid id="aspace_0152bd6b371aabf25d9d12e577fecdfd">
+                  <head>OCLC Number</head>
+                  <p>44212019</p>
+               </otherfindaid>
+               <otherfindaid id="aspace_59bf881758bfa40bcde9fdbd1e72aec8">
+                  <head>Other Finding Aids</head>
+                  <p>Also cataloged separately:
+                     http://id.lib.harvard.edu/alma/99155837006903941/catalog</p>
+               </otherfindaid>
+               <odd id="aspace_657615e37c107cd0421ac4f728a6c394">
+                  <head>Place of Publication</head>
+                  <p>Montgomery, Alabama</p>
+               </odd>
+               <userestrict id="aspace_92625fe87060fd073a67822e3ccc4aea">
+                  <head>Conditions Governing Use</head>
+                  <p>Permission granted to Harvard Graduate School of Education to display this item
+                     for non-profit research and educational purposes. Any reuse of this item in
+                     excess of fair use or other copyright exemptions requires permission from the
+                     rights and/or repository holder.</p>
+               </userestrict>
+               <odd id="aspace_29fd273e0ed33ca7a2e6278eb5de9bca">
+                  <head>Physical Description of Original</head>
+                  <p>Fake data: This issue is bound together v.1-5 (1930-1934) in the rare books of
+                     the North Carolina Collection at University of North Carolina Chapel Hill.</p>
+               </odd>
+               <controlaccess>
+                  <genreform source="aat">Periodicals.</genreform>
+               </controlaccess>
+            </c>
+            <c id="gut5000c00029" level="subseries">
+               <did>
+                  <unittitle> Alabama State Teachers Association News</unittitle>
+                  <unitdate datechar="publication" normal="1955/1955" type="inclusive"
+                     >1955</unitdate>
+               </did>
+               <otherfindaid id="aspace_f29225f9903f10816a7326fcc61bbb8e">
+                  <head>OCLC Number</head>
+                  <p>44211055</p>
+               </otherfindaid>
+               <otherfindaid id="aspace_83d389e7fa1f3647b975977d94e7e0fb">
+                  <head>Other Finding Aids</head>
+                  <p>Also cataloged separately:
+                     http://id.lib.harvard.edu/alma/99155842431403941/catalog</p>
+               </otherfindaid>
+               <odd id="aspace_93e63b2c6922cccb5cc3832b460c52ee">
+                  <head>Place of Publication</head>
+                  <p>Montgomery, Alabama</p>
+               </odd>
+               <userestrict id="aspace_c7ed0d953e6d9b2749fff4ac31ab3bbd">
+                  <head>Conditions Governing Use</head>
+                  <p>Permission granted to Harvard Graduate School of Education to display this item
+                     for non-profit research and educational purposes. Any reuse of this item in
+                     excess of fair use or other copyright exemptions requires permission from the
+                     rights and/or repository holder.</p>
+               </userestrict>
+               <controlaccess>
+                  <genreform source="aat">Periodicals.</genreform>
+               </controlaccess>
+            </c>
+         </c>
+         <c id="gut5000c00003" level="series">
+            <did>
+               <unittitle>Arkansas Publications</unittitle>
+            </did>
+            <c id="gut5000c00007" level="subseries">
+               <did>
+                  <unittitle>The Bulletin of the Arkansas Teachers Association</unittitle>
+                  <unitdate datechar="publication" normal="1962/1968" type="inclusive"
+                     >1962-1968</unitdate>
+                  <origination label="Creator">
+                     <corpname authfilenumber="n82030777" role="pbl" rules="rda" source="lcnaf"
+                        >Arkansas Teachers Association</corpname>
+                  </origination>
+               </did>
+               <odd id="aspace_3bfb35bea2d0bec60bd1c96a957d768c">
+                  <head>Place of Publication</head>
+                  <p>Little Rock, Arkansas</p>
+               </odd>
+               <otherfindaid id="aspace_c2724e7d62499981f65e2ff726ca91a1">
+                  <head>OCLC Number</head>
+                  <p>31202450</p>
+               </otherfindaid>
+               <accessrestrict id="aspace_41de5a860e3865aaa6d677e7b4a0175e">
+                  <head>Conditions Governing Access</head>
+                  <p>Permission granted to Harvard Graduate School of Education to display this item
+                     for non-profit research and educational purposes. Any reuse of this item in
+                     excess of fair use or other copyright exemptions requires permission from the
+                     rights and/or repository holder.</p>
+               </accessrestrict>
+               <otherfindaid id="aspace_a85c630848b4f69387ad423effdd14a7">
+                  <head>Cataloging Note</head>
+                  <p>Also cataloged separately:
+                     http://id.lib.harvard.edu/alma/99155775548803941/catalog</p>
+               </otherfindaid>
+               <controlaccess>
+                  <genreform source="aat">Periodicals.</genreform>
+               </controlaccess>
+               <c id="gut5000c00008" level="item">
+                  <did>
+                     <unitid>bta_31202450_AK_1962_030_003. </unitid>
+                     <unittitle>Volume 30. No.3</unittitle>
+                     <unitdate datechar="creation" normal="1962-03/1962-03">March 1962</unitdate>
+                     <origination label="Creator">
+                        <corpname authfilenumber="n85298899" role="own" rules="rda" source="lcnaf"
+                           >University of Arkansas, Fayetteville. Libraries</corpname>
+                     </origination>
+                     <origination label="source">
+                        <corpname authfilenumber="n85298899" role="Provider of digitization"
+                           rules="rda" source="lcnaf">University of Arkansas, Fayetteville.
+                           Libraries</corpname>
+                     </origination>
+                     <dao audience="external" xlink:actuate="onRequest"
+                        xlink:href="https://nrs.harvard.edu/URN-3:GSE.LIBR:101269704"
+                        xlink:show="new" xlink:title="Volume 30. No.3" xlink:type="simple">
+                        <daodesc>
+                           <p>Volume 30. No.3</p>
+                        </daodesc>
+                     </dao>
+                  </did>
+                  <controlaccess>
+                     <corpname authfilenumber="n85298899" role="Provider of digitization"
+                        rules="rda" source="lcnaf">University of Arkansas, Fayetteville.
+                        Libraries</corpname>
+                  </controlaccess>
+               </c>
+               <c id="gut5000c00009" level="item">
+                  <did>
+                     <unitid>bta_31202450_AK_1962_030_004. </unitid>
+                     <unittitle>Volume 30. No.4</unittitle>
+                     <unitdate datechar="publication" normal="1963-06/1963-06">June 1962</unitdate>
+                     <origination label="Creator">
+                        <corpname authfilenumber="n85298899" role="own" rules="rda" source="lcnaf"
+                           >University of Arkansas, Fayetteville. Libraries</corpname>
+                     </origination>
+                     <origination label="source">
+                        <corpname authfilenumber="n85298899" role="Provider of digitization"
+                           rules="rda" source="lcnaf">University of Arkansas, Fayetteville.
+                           Libraries</corpname>
+                     </origination>
+                     <dao xlink:actuate="onRequest" xlink:href="bta_31202450_AK_1962_030_004d"
+                        xlink:show="new" xlink:title="Volume 30. No.4" xlink:type="simple">
+                        <daodesc>
+                           <p>Volume 30. No.4</p>
+                        </daodesc>
+                     </dao>
+                  </did>
+                  <controlaccess>
+                     <corpname authfilenumber="n85298899" role="Provider of digitization"
+                        rules="rda" source="lcnaf">University of Arkansas, Fayetteville.
+                        Libraries</corpname>
+                  </controlaccess>
+               </c>
+               <c id="gut5000c00010" level="item">
+                  <did>
+                     <unitid>bta_31202450_AK_1962_031_001. </unitid>
+                     <unittitle>Volume 31. No.1</unittitle>
+                     <unitdate datechar="publication" normal="1962-09/1962-09">September
+                        1962</unitdate>
+                     <origination label="Creator">
+                        <corpname authfilenumber="n85298899" role="own" rules="rda" source="lcnaf"
+                           >University of Arkansas, Fayetteville. Libraries</corpname>
+                     </origination>
+                     <origination label="source">
+                        <corpname authfilenumber="n85298899" role="Provider of digitization"
+                           rules="rda" source="lcnaf">University of Arkansas, Fayetteville.
+                           Libraries</corpname>
+                     </origination>
+                     <dao xlink:actuate="onRequest" xlink:href="bta_31202450_AK_1962_031_001d"
+                        xlink:show="new" xlink:title="Volume 31. No.1" xlink:type="simple">
+                        <daodesc>
+                           <p>Volume 31. No.1</p>
+                        </daodesc>
+                     </dao>
+                  </did>
+                  <controlaccess>
+                     <corpname authfilenumber="n85298899" role="Provider of digitization"
+                        rules="rda" source="lcnaf">University of Arkansas, Fayetteville.
+                        Libraries</corpname>
+                  </controlaccess>
+               </c>
+               <c id="gut5000c00011" level="item">
+                  <did>
+                     <unitid>bta_31202450_AK_1962_031_002. </unitid>
+                     <unittitle>Volume 31. No.2</unittitle>
+                     <unitdate datechar="publication" normal="1962-12/1962-12">December
+                        1962</unitdate>
+                     <origination label="Creator">
+                        <corpname authfilenumber="n85298899" role="own" rules="rda" source="lcnaf"
+                           >University of Arkansas, Fayetteville. Libraries</corpname>
+                     </origination>
+                     <origination label="source">
+                        <corpname authfilenumber="n85298899" role="Provider of digitization"
+                           rules="rda" source="lcnaf">University of Arkansas, Fayetteville.
+                           Libraries</corpname>
+                     </origination>
+                     <dao xlink:actuate="onRequest" xlink:href="bta_31202450_AK_1962_031_002d"
+                        xlink:show="new" xlink:title="Volume 31. No.2" xlink:type="simple">
+                        <daodesc>
+                           <p>Volume 31. No.2</p>
+                        </daodesc>
+                     </dao>
+                  </did>
+                  <controlaccess>
+                     <corpname authfilenumber="n85298899" role="Provider of digitization"
+                        rules="rda" source="lcnaf">University of Arkansas, Fayetteville.
+                        Libraries</corpname>
+                  </controlaccess>
+               </c>
+            </c>
+         </c>
+      </dsc>
+   </archdesc>
+</ead>
