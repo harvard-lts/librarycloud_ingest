@@ -1,0 +1,46 @@
+<originationroles>
+    <map>
+        <code>arc</code>
+        <fulltext>Architect</fulltext>
+    </map>
+    <map>
+        <code>crp</code>
+        <fulltext>Correspondent</fulltext>
+    </map>
+    <map>
+        <code>dnr</code>
+        <fulltext>Donor</fulltext>
+    </map>
+    <map>
+        <code>dpc</code>
+        <fulltext>Depicted</fulltext>
+    </map>
+    <map>
+        <code>edt</code>
+        <fulltext>Editor</fulltext>
+    </map>
+    <map>
+        <code>eng</code>
+        <fulltext>Engineer</fulltext>
+    </map>
+    <map>
+        <code>own</code>
+        <fulltext>Owner</fulltext>
+    </map>
+    <map>
+        <code>pht</code>
+        <fulltext>Photographer</fulltext>
+    </map>
+    <map>
+        <code>prv</code>
+        <fulltext>Provider of digitization</fulltext>
+    </map>
+    <map>
+        <code>pbl</code>
+        <fulltext>Publisher</fulltext>
+    </map>
+    <map>
+        <code>rcp</code>
+        <fulltext>Recipient</fulltext>
+    </map>
+</originationroles>
