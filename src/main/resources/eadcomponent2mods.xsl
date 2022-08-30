@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.loc.gov/mods/v3"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:librarycloud="http://hul.harvard.edu/ois/xml/ns/librarycloud"
+    xmlns:roles="urn:roles"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xpath-default-namespace="urn:isbn:1-931666-22-9"
@@ -10,6 +11,10 @@
     <xsl:strip-space elements="*"/>
     <!--<xsl:param name="componentid">hou00068c00002</xsl:param>-->
     <xsl:param name="componentid">gut5000c00014</xsl:param>
+
+
+    <xsl:key name="roletextlookup" match="roles:map" use="roles:code"/>
+    <xsl:variable name="originationroles" select="document('originationroles.xml')/roles:originationroles"/>
 
     <xsl:variable name="cid_legacy_or_new">
         <xsl:choose>
@@ -254,20 +259,19 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="originationroles">
+    <xsl:template match="roles:originationroles">
         <xsl:param name="originationName"/>
-        <TESTING/>
+        <xsl:variable name="rolecode" select="$originationName/@role"/>
         <xsl:element name="name">
             <xsl:element name="namePart">
-                <xsl:value-of select="normalize-space(.)"/>
+                <xsl:value-of select="normalize-space($originationName)"/>
             </xsl:element>
             <xsl:element name="role">
                 <xsl:element name="roleTerm">
                     <xsl:choose>
                         <xsl:when
-                            test="key('roletextlookup', $originationName/@role)/fulltext != ''">
-                            <xsl:value-of
-                                select="key('roletextlookup', $originationName/@role)/fulltext"/>
+                            test="key('roletextlookup', $rolecode)/roles:fulltext != ''">
+                            <xsl:value-of select="key('roletextlookup', $rolecode)/roles:fulltext"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="@role"/>
@@ -459,8 +463,5 @@
             </xsl:element>
         </xsl:if>
     </xsl:template>
-
-    <xsl:key name="roletextlookup" match="map" use="code"/>
-    <xsl:variable name="originationroles" select="document('origination-roles.xml')/originationroles"/>
 
 </xsl:stylesheet>
