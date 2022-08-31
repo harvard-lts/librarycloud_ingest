@@ -274,7 +274,7 @@
                             <xsl:value-of select="key('roletextlookup', $rolecode)/roles:fulltext"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:value-of select="@role"/>
+                            <xsl:value-of select="$rolecode"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:element>
