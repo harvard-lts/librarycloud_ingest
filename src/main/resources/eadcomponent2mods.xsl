@@ -41,6 +41,7 @@
             <xsl:apply-templates select="$cmatch/c/did//unitid"/>
             <xsl:apply-templates select="$cmatch/c/did//container"/>
             <xsl:apply-templates select="$cmatch/c/did//origination"/>
+            <xsl:apply-templates select="$cmatch/c/otherfindaid[head='HOLLIS record']"/>
             <xsl:apply-templates
                 select="$cmatch/c/did//language[string-length(@langcode) and string-length(text())]"/>
             <xsl:choose>
@@ -55,21 +56,21 @@
             </xsl:choose>
 
 
-            <xsl:if
+            <!--<xsl:if
                 test="count($cmatch/c/did//language[string-length(@langcode) and string-length(text())]) &lt; 1">
                 <xsl:element name="language">
                     <xsl:element name="languageTerm">
                         <xsl:attribute name="authority">iso639-2b</xsl:attribute>
                         <xsl:attribute name="type">code</xsl:attribute>
-                        <xsl:text>und</xsl:text>
+                        <xsl:value-of select="@langcode"
                     </xsl:element>
                     <xsl:element name="languageTerm">
                         <xsl:attribute name="authority">iso639-2b</xsl:attribute>
                         <xsl:attribute name="type">text</xsl:attribute>
-                        <xsl:text>Undefined</xsl:text>
+                        <xsl:value-of select="."/>
                     </xsl:element>
                 </xsl:element>
-            </xsl:if>
+            </xsl:if>-->
             <xsl:choose>
                 <xsl:when test="$cmatch/c/accessrestrict">
                     <xsl:apply-templates select="$cmatch/c/accessrestrict"/>
@@ -131,6 +132,9 @@
                 <xsl:apply-templates select="parent::c/did//unitid"/>
                 <xsl:apply-templates select="parent::c/bioghist"/>
                 <xsl:apply-templates select="parent::c/did/origination"/>
+                <xsl:apply-templates select="parent::c/otherfindaid[head='HOLLIS record']"/>
+                <xsl:apply-templates
+                    select="parent::c/did//language[string-length(@langcode) and string-length(text())]"/>
                 <xsl:element name="recordInfo">
                     <xsl:element name="recordIdentifier">
                         <xsl:value-of select="parent::c/@id"/>
@@ -375,7 +379,7 @@
             <xsl:attribute name="type">bibliographic history</xsl:attribute>
             <xsl:attribute name="displayLabeo">Issuing Body Note</xsl:attribute>
             <xsl:if test="p">
-                <xsl:value-of select="p[1]"/>
+                <xsl:value-of select="normalize-space(p[1])"/>
             </xsl:if>
         </xsl:element>
     </xsl:template>
@@ -461,6 +465,19 @@
                 <xsl:attribute name="type">funding</xsl:attribute>
                 <xsl:value-of select="p"/>
             </xsl:element>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="otherfindaid">
+        <xsl:if test="p">
+        <xsl:element name="relatedItem">
+            <xsl:attribute name="otherType">HOLLIS record</xsl:attribute>
+            <xsl:element name="location">
+                <xsl:element name="url">
+                    <xsl:value-of select="normalize-space(p)"/>
+                </xsl:element>
+            </xsl:element>
+        </xsl:element>
         </xsl:if>
     </xsl:template>
 
