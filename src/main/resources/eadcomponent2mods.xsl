@@ -42,6 +42,7 @@
             <xsl:apply-templates select="$cmatch/c/did//container"/>
             <xsl:apply-templates select="$cmatch/c/did//origination"/>
             <xsl:apply-templates select="$cmatch/c/otherfindaid[head='HOLLIS record']"/>
+            <xsl:apply-templates select="$cmatch/c/controlaccess/genreform"/>
             <xsl:apply-templates
                 select="$cmatch/c/did//language[string-length(@langcode) and string-length(text())]"/>
             <xsl:choose>
@@ -133,6 +134,7 @@
                 <xsl:apply-templates select="parent::c/bioghist"/>
                 <xsl:apply-templates select="parent::c/did/origination"/>
                 <xsl:apply-templates select="parent::c/otherfindaid[head='HOLLIS record']"/>
+                <xsl:apply-templates select="parent::c/controlaccess/genreform"/>
                 <xsl:apply-templates
                     select="parent::c/did//language[string-length(@langcode) and string-length(text())]"/>
                 <xsl:element name="recordInfo">
@@ -479,6 +481,10 @@
             </xsl:element>
         </xsl:element>
         </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="controlaccess/genreform">
+        <xsl:element name="genre"><xsl:value-of select="normalize-space(.)"/></xsl:element>
     </xsl:template>
 
 </xsl:stylesheet>
