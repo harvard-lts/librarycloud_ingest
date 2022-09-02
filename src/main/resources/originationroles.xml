@@ -5,6 +5,10 @@
         <fulltext>Architect</fulltext>
     </map>
     <map>
+        <code>aut</code>
+        <fulltext>Author</fulltext>
+    </map>
+    <map>
         <code>crp</code>
         <fulltext>Correspondent</fulltext>
     </map>

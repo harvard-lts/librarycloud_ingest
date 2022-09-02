@@ -11,7 +11,7 @@
     <xsl:param name="componentid"></xsl:param>
     <!-- comment above, uncomment below for
     testing (you can change the id -->
-    <!--<xsl:param name="componentid">hou00001c00002</xsl:param>-->
+    <!--<xsl:param name="componentid">gut5000c00015</xsl:param>-->
     <xsl:key name="roletextlookup" match="roles:map" use="roles:code"/>
     <xsl:variable name="originationroles"
         select="document('src/main/resources/originationroles.xml')/roles:originationroles"/>
@@ -35,7 +35,7 @@
         <mods xmlns:xlink="http://www.w3.org/1999/xlink">
             <xsl:apply-templates select="$cmatch/c/did/unittitle[not(. = '')]"/>
             <xsl:apply-templates select="$cmatch/c/did//unitdate[not(. = '')]"/>
-            <xsl:apply-templates select="did//origination"/>
+            <xsl:apply-templates select="archdesc/did//origination" mode="resourcelevel"/>
             <xsl:apply-templates select="$cmatch/c/did//physdesc"/>
             <xsl:apply-templates select="$cmatch/c/@level"/>
             <xsl:apply-templates select="$cmatch/c/did//unitid"/>
@@ -48,6 +48,20 @@
             <xsl:apply-templates select="$cmatch/c/userestrict"/>
             <xsl:apply-templates
                 select="$cmatch/c/did//language[string-length(@langcode) and string-length(text())]"/>
+            <xsl:if test="not($cmatch/c/did//language[string-length(@langcode) and string-length(text())])">
+                <xsl:element name="language">
+                    <xsl:element name="languageTerm">
+                        <xsl:attribute name="authority">iso639-2b</xsl:attribute>
+                        <xsl:attribute name="type">code</xsl:attribute>
+                        <xsl:text>und</xsl:text>
+                    </xsl:element>
+                    <xsl:element name="languageTerm">
+                        <xsl:attribute name="authority">iso639-2b</xsl:attribute>
+                        <xsl:attribute name="type">text</xsl:attribute>
+                        <xsl:text>Undefined</xsl:text>
+                    </xsl:element>
+                </xsl:element>
+            </xsl:if>
             <xsl:apply-templates
                 select="$cmatch/c/altformavail[head = 'Existence and Location of Copies']"/>
             <xsl:choose>
@@ -244,6 +258,24 @@
             </xsl:element>
         </xsl:element>
     </xsl:template>
+    <xsl:template match="origination" mode="resourcelevel">
+        <xsl:element name="name">
+            <xsl:element name="namePart">
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:element>
+            <xsl:element name="role">
+                <xsl:element name="roleTerm">
+                    <xsl:text>originator</xsl:text>
+                </xsl:element>
+            </xsl:element>
+            <xsl:element name="role">
+                <xsl:element name="roleTerm">
+                    <xsl:text>creator</xsl:text>
+                </xsl:element>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    
     <xsl:template match="origination">
         <xsl:apply-templates select="persname | famname | corpname | name" mode="originationNames"/>
     </xsl:template>
@@ -381,7 +413,7 @@
     <xsl:template match="bioghist">
         <xsl:element name="note">
             <xsl:attribute name="type">bibliographic history</xsl:attribute>
-            <xsl:attribute name="displayLabeo">Issuing Body Note</xsl:attribute>
+            <xsl:attribute name="displayLabel">Issuing Body Note</xsl:attribute>
             <xsl:if test="p">
                 <xsl:value-of select="normalize-space(p[1])"/>
             </xsl:if>
