@@ -8,10 +8,10 @@
     version="2.0">
     <xsl:output encoding="UTF-8" method="xml" indent="yes" omit-xml-declaration="yes"/>
     <xsl:strip-space elements="*"/>
-    <xsl:param name="componentid">hou00068c00002</xsl:param>
+    <xsl:param name="componentid"></xsl:param>
     <!-- comment above, uncomment below for
     testing (you can change the id -->
-    <!--<xsl:param name="componentid">gut5000c00014</xsl:param>-->
+    <!--<xsl:param name="componentid">hou00001c00002</xsl:param>-->
     <xsl:key name="roletextlookup" match="roles:map" use="roles:code"/>
     <xsl:variable name="originationroles"
         select="document('src/main/resources/originationroles.xml')/roles:originationroles"/>
@@ -45,6 +45,7 @@
             <xsl:apply-templates select="$cmatch/c/controlaccess/genreform"/>
             <xsl:apply-templates select="$cmatch/c/odd"/>
             <xsl:apply-templates select="$cmatch/c/prefercite[head = 'Preferred Citation']"/>
+            <xsl:apply-templates select="$cmatch/c/userestrict"/>
             <xsl:apply-templates
                 select="$cmatch/c/did//language[string-length(@langcode) and string-length(text())]"/>
             <xsl:apply-templates
@@ -137,6 +138,7 @@
                 <xsl:apply-templates select="parent::c/controlaccess/genreform"/>
                 <xsl:apply-templates select="parent::c/odd"/>
                 <xsl:apply-templates select="parent::c/prefercite[head = 'Preferred Citation']"/>
+                <xsl:apply-templates select="parent::c/userestrict"/>
                 <xsl:apply-templates
                     select="parent::c/altformavail[head = 'Existence and Location of Copies']"/>
                 <xsl:apply-templates
@@ -202,6 +204,16 @@
                             <xsl:value-of select="substring-after(@normal, '/')"/>
                         </xsl:element>
                     </xsl:when>
+                    <xsl:when test='matches(@normal, "\d{4}-\d{2}/\d{4}-\d{2}")'>
+                        <xsl:element name="dateCreated">
+                            <xsl:attribute name="point">start</xsl:attribute>
+                            <xsl:value-of select="substring-before(@normal, '/')"/>
+                        </xsl:element>
+                        <xsl:element name="dateCreated">
+                            <xsl:attribute name="point">end</xsl:attribute>
+                            <xsl:value-of select="substring-after(@normal, '/')"/>
+                        </xsl:element>
+                    </xsl:when>
                     <xsl:when test='matches(@normal, "\d{4}/\d{4}")'>
                         <xsl:element name="dateCreated">
                             <xsl:attribute name="point">start</xsl:attribute>
@@ -220,6 +232,7 @@
                 </xsl:choose>
             </xsl:if>
             <xsl:element name="dateCreated">
+                <xsl:attribute name="keyDate">yes</xsl:attribute>
                 <xsl:value-of select="."/>
             </xsl:element>
         </xsl:element>
@@ -318,6 +331,9 @@
                 <xsl:attribute name="type">
                     <xsl:text>container</xsl:text>
                 </xsl:attribute>
+                <xsl:if test="@type">
+                    <xsl:value-of select="@type"/><xsl:text> </xsl:text>
+                </xsl:if>
                 <xsl:value-of select="."/>
             </xsl:element>
         </xsl:element>
@@ -472,7 +488,7 @@
                 <xsl:element name="note">
                     <xsl:attribute name="type">source characteristics</xsl:attribute>
                     <xsl:attribute name="displayLabel">
-                        <xsl:text>Physical Description ofOriginal</xsl:text>
+                        <xsl:text>Physical Description of Original</xsl:text>
                     </xsl:attribute>
                     <xsl:value-of select="normalize-space(p)"/>
                 </xsl:element>
@@ -489,12 +505,20 @@
             <xsl:otherwise/>
         </xsl:choose>
     </xsl:template>
+    
     <xsl:template match="prefercite[head = 'Preferred Citation']">
         <xsl:element name="note">
             <xsl:attribute name="type">preferred citation</xsl:attribute>
             <xsl:value-of select="normalize-space(p)"/>
         </xsl:element>
+    </xsl:template>   
+    <xsl:template match="userestrict">
+        <xsl:element name="accessCondition">
+            <xsl:attribute name="type">use and reproduction</xsl:attribute>
+            <xsl:value-of select="normalize-space(p)"/>
+        </xsl:element>
     </xsl:template>
+    
     <xsl:template match="altformavail[head = 'Existence and Location of Copies']">
         <xsl:element name="relatedItem">
             <xsl:attribute name="othertype">Source Institution Digitization</xsl:attribute>
@@ -506,7 +530,7 @@
             </xsl:element>
             <xsl:element name="location">
                 <xsl:element name="url">
-                    <xsl:value-of select="p/extref/@xlink:href"/>
+                    <xsl:value-of select="p/extref/@*[local-name() = 'href']"/>
                 </xsl:element>
             </xsl:element>
         </xsl:element>
