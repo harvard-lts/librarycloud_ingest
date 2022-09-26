@@ -16,11 +16,15 @@
     <bean class="edu.harvard.libcomm.pipeline.AWSConfig" />
 
     <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
-        <property name="brokerURL" value="${activemq.broker.url}" />
-        <property name="userName" value="${activemq.username}" />
-        <property name="password" value="${activemq.password}" />
-        <property name="clientId" value="${activemq.clientid}" />
-        <property name="deliveryPersistent" value="true" />
+      <property name="connectionFactory">
+        <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+          <property name="brokerURL" value="${activemq.broker.url}" />
+          <property name="userName" value="${activemq.username}" />
+          <property name="password" value="${activemq.password}" />
+          <property name="clientID" value="${activemq.clientid}" />
+          <!--<property name="deliveryPersistent" value="true" />-->
+        </bean>
+      </property>
     </bean>
 
     <!-- Custom S3 marshaller to place body on S3 -->
