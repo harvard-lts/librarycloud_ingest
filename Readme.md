@@ -25,5 +25,10 @@ To date, the app handles ingesting marc bibliographic records (in marc xml forma
 * e.g.
 *./librarycloud/utils/ingest.sh ingest alma dev ./testmarc.xml
 
+## Test
+- set `JAVA_HOME to openjdk 8`
+- run `> mvn clean install`  
+Tests should pass
+
 
 

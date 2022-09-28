@@ -8,11 +8,13 @@ import javax.persistence.*;
 import javax.persistence.criteria.*;
 import javax.persistence.metamodel.*;
 
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.log4j.Logger;
 
 import edu.harvard.libcomm.model.*;
 
+@Component
 public class IngestDAO {
 	@PersistenceContext
 	private EntityManager em;
