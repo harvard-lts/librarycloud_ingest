@@ -35,7 +35,7 @@
         <mods xmlns:xlink="http://www.w3.org/1999/xlink">
             <xsl:apply-templates select="$cmatch/c/did/unittitle[not(. = '')]"/>
             <xsl:apply-templates select="$cmatch/c/did//unitdate[not(. = '')]"/>
-            <xsl:apply-templates select="archdesc/did//origination" mode="resourcelevel"/>
+            <!--<xsl:apply-templates select="archdesc/did//origination" mode="resourcelevel"/>-->
             <xsl:apply-templates select="$cmatch/c/did//physdesc"/>
             <xsl:apply-templates select="$cmatch/c/@level"/>
             <xsl:apply-templates select="$cmatch/c/did//unitid"/>
