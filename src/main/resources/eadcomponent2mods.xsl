@@ -60,7 +60,7 @@
                 </xsl:otherwise>
             </xsl:choose>
 
-            <!--<xsl:if
+           <!--<xsl:if
                 test="count($cmatch/c/did//language[string-length(@langcode) and string-length(text())]) &lt; 1">
                 <xsl:element name="language">
                     <xsl:element name="languageTerm">
@@ -350,8 +350,7 @@
                     <xsl:text>container</xsl:text>
                 </xsl:attribute>
                 <xsl:if test="@type">
-                    <xsl:value-of select="@type"/>
-                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="@type"/><xsl:text> </xsl:text>
                 </xsl:if>
                 <xsl:value-of select="."/>
             </xsl:element>
