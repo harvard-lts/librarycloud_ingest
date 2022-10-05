@@ -11,7 +11,7 @@
     <xsl:param name="componentid"></xsl:param>
     <!-- comment above, uncomment below for
     testing (you can change the id -->
-    <!--<xsl:param name="componentid">gut5000c00015</xsl:param>-->
+    <!--<xsl:param name="componentid">gut5000c00014</xsl:param>-->
     <xsl:key name="roletextlookup" match="roles:map" use="roles:code"/>
     <xsl:variable name="originationroles"
         select="document('src/main/resources/originationroles.xml')/roles:originationroles"/>
@@ -46,22 +46,7 @@
             <xsl:apply-templates select="$cmatch/c/odd"/>
             <xsl:apply-templates select="$cmatch/c/prefercite[head = 'Preferred Citation']"/>
             <xsl:apply-templates select="$cmatch/c/userestrict"/>
-            <xsl:apply-templates
-                select="$cmatch/c/did//language[string-length(@langcode) and string-length(text())]"/>
-            <xsl:if test="not($cmatch/c/did//language[string-length(@langcode) and string-length(text())])">
-                <xsl:element name="language">
-                    <xsl:element name="languageTerm">
-                        <xsl:attribute name="authority">iso639-2b</xsl:attribute>
-                        <xsl:attribute name="type">code</xsl:attribute>
-                        <xsl:text>und</xsl:text>
-                    </xsl:element>
-                    <xsl:element name="languageTerm">
-                        <xsl:attribute name="authority">iso639-2b</xsl:attribute>
-                        <xsl:attribute name="type">text</xsl:attribute>
-                        <xsl:text>Undefined</xsl:text>
-                    </xsl:element>
-                </xsl:element>
-            </xsl:if>
+            <xsl:apply-templates select="//c[@id = $cid_legacy_or_new]" mode="lang"/>
             <xsl:apply-templates
                 select="$cmatch/c/altformavail[head = 'Existence and Location of Copies']"/>
             <xsl:choose>
@@ -74,6 +59,7 @@
                         select="/ead/archdesc/altformavail[head = 'Digitization Funding']"/>
                 </xsl:otherwise>
             </xsl:choose>
+
             <!--<xsl:if
                 test="count($cmatch/c/did//language[string-length(@langcode) and string-length(text())]) &lt; 1">
                 <xsl:element name="language">
@@ -155,8 +141,8 @@
                 <xsl:apply-templates select="parent::c/userestrict"/>
                 <xsl:apply-templates
                     select="parent::c/altformavail[head = 'Existence and Location of Copies']"/>
-                <xsl:apply-templates
-                    select="parent::c/did//language[string-length(@langcode) and string-length(text())]"/>
+                <!--<xsl:apply-templates
+                    select="parent::c/did//language[string-length(@langcode) and string-length(text())]"/>-->
                 <xsl:element name="recordInfo">
                     <xsl:element name="recordIdentifier">
                         <xsl:value-of select="parent::c/@id"/>
@@ -168,7 +154,7 @@
                 <xsl:attribute name="displayLabel">collection</xsl:attribute>
                 <xsl:apply-templates select="/ead/archdesc/did//repository"/>
                 <xsl:apply-templates select="/ead/archdesc/did//unitid"/>
-                <xsl:apply-templates select="/ead/archdesc/did/origination"/>
+                <xsl:apply-templates select="/ead/archdesc/did/origination" mode="resourcelevel"/>
                 <xsl:apply-templates select="/ead/archdesc/did/unittitle"/>
                 <xsl:apply-templates select="/ead/archdesc/did//unitdate"/>
                 <xsl:element name="recordInfo">
@@ -275,7 +261,7 @@
             </xsl:element>
         </xsl:element>
     </xsl:template>
-    
+
     <xsl:template match="origination">
         <xsl:apply-templates select="persname | famname | corpname | name" mode="originationNames"/>
     </xsl:template>
@@ -364,7 +350,8 @@
                     <xsl:text>container</xsl:text>
                 </xsl:attribute>
                 <xsl:if test="@type">
-                    <xsl:value-of select="@type"/><xsl:text> </xsl:text>
+                    <xsl:value-of select="@type"/>
+                    <xsl:text> </xsl:text>
                 </xsl:if>
                 <xsl:value-of select="."/>
             </xsl:element>
@@ -537,20 +524,20 @@
             <xsl:otherwise/>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="prefercite[head = 'Preferred Citation']">
         <xsl:element name="note">
             <xsl:attribute name="type">preferred citation</xsl:attribute>
             <xsl:value-of select="normalize-space(p)"/>
         </xsl:element>
-    </xsl:template>   
+    </xsl:template>
     <xsl:template match="userestrict">
         <xsl:element name="accessCondition">
             <xsl:attribute name="type">use and reproduction</xsl:attribute>
             <xsl:value-of select="normalize-space(p)"/>
         </xsl:element>
     </xsl:template>
-    
+
     <xsl:template match="altformavail[head = 'Existence and Location of Copies']">
         <xsl:element name="relatedItem">
             <xsl:attribute name="othertype">Source Institution Digitization</xsl:attribute>
@@ -567,4 +554,35 @@
             </xsl:element>
         </xsl:element>
     </xsl:template>
+
+    <xsl:template match="c" mode="lang">
+        <xsl:choose>
+
+            <xsl:when test="./did//language[string-length(@langcode) and string-length(text())]">
+                <xsl:apply-templates
+                    select="./did//language[string-length(@langcode) and string-length(text())]"/>
+            </xsl:when>
+            <xsl:when
+                test=".[ancestor::c/did//language[string-length(@langcode) and string-length(text())]]">
+                <xsl:apply-templates
+                    select="./ancestor::c[did//language][1]/did//language"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:element name="language">
+                    <xsl:element name="languageTerm">
+                        <xsl:attribute name="authority">iso639-2b</xsl:attribute>
+                        <xsl:attribute name="type">code</xsl:attribute>
+                        <xsl:text>und</xsl:text>
+                    </xsl:element>
+                    <xsl:element name="languageTerm">
+                        <xsl:attribute name="authority">iso639-2b</xsl:attribute>
+                        <xsl:attribute name="type">text</xsl:attribute>
+                        <xsl:text>Undefined</xsl:text>
+                    </xsl:element>
+                </xsl:element>
+            </xsl:otherwise>
+        </xsl:choose>
+
+    </xsl:template>
+
 </xsl:stylesheet>
