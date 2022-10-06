@@ -60,7 +60,7 @@
                 </xsl:otherwise>
             </xsl:choose>
 
-           <!--<xsl:if
+            <!--<xsl:if
                 test="count($cmatch/c/did//language[string-length(@langcode) and string-length(text())]) &lt; 1">
                 <xsl:element name="language">
                     <xsl:element name="languageTerm">
@@ -162,15 +162,17 @@
                         <xsl:value-of select="/ead/eadheader/eadid"/>
                     </xsl:element>
                 </xsl:element>
-                <relatedItem otherType="HOLLIS record">
-                    <location>
-                        <url>
-                            <xsl:text>https://id.lib.harvard.edu/alma/</xsl:text>
-                            <xsl:value-of select="/ead/eadheader/eadid/@identifier"/>
-                            <xsl:text>/catalog</xsl:text>
-                        </url>
-                    </location>
-                </relatedItem>
+                <xsl:if test="/ead/eadheader/eadid/@identifier != '000000000000000000'">
+                    <relatedItem otherType="HOLLIS record">
+                        <location>
+                            <url>
+                                <xsl:text>https://id.lib.harvard.edu/alma/</xsl:text>
+                                <xsl:value-of select="/ead/eadheader/eadid/@identifier"/>
+                                <xsl:text>/catalog</xsl:text>
+                            </url>
+                        </location>
+                    </relatedItem>
+                </xsl:if>
                 <relatedItem otherType="Finding Aid">
                     <location>
                         <url>
@@ -350,7 +352,8 @@
                     <xsl:text>container</xsl:text>
                 </xsl:attribute>
                 <xsl:if test="@type">
-                    <xsl:value-of select="@type"/><xsl:text> </xsl:text>
+                    <xsl:value-of select="@type"/>
+                    <xsl:text> </xsl:text>
                 </xsl:if>
                 <xsl:value-of select="."/>
             </xsl:element>
@@ -398,8 +401,15 @@
     </xsl:template>
     <xsl:template match="bioghist">
         <xsl:element name="note">
-            <xsl:attribute name="type">bibliographic history</xsl:attribute>
-            <xsl:attribute name="displayLabel">Issuing Body Note</xsl:attribute>
+            <xsl:choose>
+                <xsl:when test="head = 'Issuing Body Note'">
+                    <xsl:attribute name="type">bibliographic history</xsl:attribute>
+                    <xsl:attribute name="displayLabel">Issuing Body Note</xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="type">biographical/historical</xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:if test="p">
                 <xsl:value-of select="normalize-space(p[1])"/>
             </xsl:if>
@@ -563,8 +573,7 @@
             </xsl:when>
             <xsl:when
                 test=".[ancestor::c/did//language[string-length(@langcode) and string-length(text())]]">
-                <xsl:apply-templates
-                    select="./ancestor::c[did//language][1]/did//language"/>
+                <xsl:apply-templates select="./ancestor::c[did//language][1]/did//language"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:element name="language">
