@@ -9,8 +9,7 @@
     <xsl:output encoding="UTF-8" method="xml" indent="yes" omit-xml-declaration="yes"/>
     <xsl:strip-space elements="*"/>
     <xsl:param name="componentid"></xsl:param>
-    <!-- comment above, uncomment below for
-    testing (you can change the id -->
+    <!-- comment above, uncomment below for testing (you can change the id -->
     <!--<xsl:param name="componentid">gut5000c00014</xsl:param>-->
     <xsl:key name="roletextlookup" match="roles:map" use="roles:code"/>
     <xsl:variable name="originationroles"
@@ -42,7 +41,7 @@
             <xsl:apply-templates select="$cmatch/c/did//container"/>
             <xsl:apply-templates select="$cmatch/c/did//origination"/>
             <xsl:apply-templates select="$cmatch/c/otherfindaid[head = 'HOLLIS record']"/>
-            <xsl:apply-templates select="$cmatch/c/controlaccess/genreform"/>
+            <xsl:apply-templates select="$cmatch/c/controlaccess"/>
             <xsl:apply-templates select="$cmatch/c/odd"/>
             <xsl:apply-templates select="$cmatch/c/prefercite[head = 'Preferred Citation']"/>
             <xsl:apply-templates select="$cmatch/c/userestrict"/>
@@ -135,7 +134,7 @@
                 <xsl:apply-templates select="parent::c/bioghist"/>
                 <xsl:apply-templates select="parent::c/did/origination"/>
                 <xsl:apply-templates select="parent::c/otherfindaid[head = 'HOLLIS record']"/>
-                <xsl:apply-templates select="parent::c/controlaccess/genreform"/>
+                <xsl:apply-templates select="parent::c/controlaccess"/>
                 <xsl:apply-templates select="parent::c/odd"/>
                 <xsl:apply-templates select="parent::c/prefercite[head = 'Preferred Citation']"/>
                 <xsl:apply-templates select="parent::c/userestrict"/>
@@ -342,6 +341,9 @@
     </xsl:template>
     <xsl:template match="unitid">
         <xsl:element name="identifier">
+            <xsl:attribute name="type">
+                <xsl:text>unit id</xsl:text>
+            </xsl:attribute>
             <xsl:value-of select="."/>
         </xsl:element>
     </xsl:template>
@@ -505,11 +507,72 @@
             </xsl:element>
         </xsl:if>
     </xsl:template>
-    <xsl:template match="controlaccess/genreform">
-        <xsl:element name="genre">
-            <xsl:value-of select="normalize-space(.)"/>
-        </xsl:element>
+    <xsl:template match="controlaccess">
+        <xsl:apply-templates mode="ctrlacc"/>
     </xsl:template>
+
+    <xsl:template match="genreform | subject | corpname | persname | famname | geogname"
+        mode="ctrlacc">
+        <xsl:choose>
+            <xsl:when test="name() = 'genreform'">
+                <xsl:element name="genre">
+                    <xsl:value-of select="normalize-space(.)"/>
+                </xsl:element>
+            </xsl:when>
+            <xsl:when test="name() = 'subject'">
+                <xsl:element name="subject">
+                    <xsl:element name="topic">
+                        <xsl:value-of select="normalize-space(.)"/>
+                    </xsl:element>
+                </xsl:element>
+            </xsl:when>
+            <xsl:when test="name() = 'corpname'">
+                <xsl:element name="subject">
+                    <xsl:element name="name">
+                        <xsl:attribute name="type">
+                            <xsl:text>corporate</xsl:text>
+                        </xsl:attribute>
+                        <xsl:element name="namePart">
+                            <xsl:value-of select="normalize-space(.)"/>
+                        </xsl:element>
+                    </xsl:element>
+                </xsl:element>
+            </xsl:when>
+            <xsl:when test="name() = 'persname'">
+                <xsl:element name="subject">
+                    <xsl:element name="name">
+                        <xsl:attribute name="type">
+                            <xsl:text>personal</xsl:text>
+                        </xsl:attribute>
+                        <xsl:element name="namePart">
+                            <xsl:value-of select="normalize-space(.)"/>
+                        </xsl:element>
+                    </xsl:element>
+                </xsl:element>
+            </xsl:when>
+            <xsl:when test="name() = 'famname'">
+                <xsl:element name="subject">
+                    <xsl:element name="name">
+                        <xsl:attribute name="type">
+                            <xsl:text>family</xsl:text>
+                        </xsl:attribute>
+                        <xsl:element name="namePart">
+                            <xsl:value-of select="normalize-space(.)"/>
+                        </xsl:element>
+                    </xsl:element>
+                </xsl:element>
+            </xsl:when>
+            <xsl:when test="name() = 'geogname'">
+                <xsl:element name="subject">
+                    <xsl:element name="geographic">
+                        <xsl:value-of select="normalize-space(.)"/>
+                    </xsl:element>
+                </xsl:element>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+
+
     <xsl:template match="odd">
         <xsl:choose>
             <xsl:when test="head = 'Physical Description of Original'">
