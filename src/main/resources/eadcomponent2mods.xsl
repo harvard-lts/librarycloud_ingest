@@ -130,6 +130,7 @@
             <xsl:if test="parent::c">
                 <xsl:apply-templates select="parent::c/did/unittitle"/>
                 <xsl:apply-templates select="parent::c/did//unitdate"/>
+                <xsl:apply-templates select="parent::c/@level"/>
                 <xsl:apply-templates select="parent::c/did//unitid"/>
                 <xsl:apply-templates select="parent::c/bioghist"/>
                 <xsl:apply-templates select="parent::c/did/origination"/>
