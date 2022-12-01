@@ -13,6 +13,7 @@
 
 
   <!-- Harvard modifications
+  Revision 10.03 remove tests for controlfield008-28 equals "|" (loc only fixing in 3.7 onward)  
   TO DO?: Revision 10.03 - remove "c" (collection_) from leader7 codes for manuscript
   Revision 10.02 recordChangeDate - only use 1st 8 (YYYYMMDD) to be iso8601 compliant
   Revision 10.01 hardcode MH:ALMA in recordIdentifier/@source
@@ -701,9 +702,9 @@
         <xsl:when test="contains($controlField008-28, 'z')">
           <genre authority="marcgt">government publication</genre>
         </xsl:when>
-        <xsl:when test="contains($controlField008-28, '|')">
+        <!--<xsl:when test="contains($controlField008-28, '|')">
           <genre authority="marcgt">government publication</genre>
-        </xsl:when>
+        </xsl:when>-->
       </xsl:choose>
     </xsl:if>
     <xsl:if test="$typeOf008 = 'CF'">
@@ -742,9 +743,9 @@
         <xsl:when test="contains($controlField008-28, 'z')">
           <genre authority="marcgt">government publication</genre>
         </xsl:when>
-        <xsl:when test="contains($controlField008-28, '|')">
+        <!--<xsl:when test="contains($controlField008-28, '|')">
           <genre authority="marcgt">government publication</genre>
-        </xsl:when>
+        </xsl:when>-->
       </xsl:choose>
     </xsl:if>
     <xsl:if test="$typeOf008 = 'CR'">
@@ -783,9 +784,9 @@
         <xsl:when test="contains($controlField008-28, 'z')">
           <genre authority="marcgt">government publication</genre>
         </xsl:when>
-        <xsl:when test="contains($controlField008-28, '|')">
+        <!--<xsl:when test="contains($controlField008-28, '|')">
           <genre authority="marcgt">government publication</genre>
-        </xsl:when>
+        </xsl:when>-->
       </xsl:choose>
     </xsl:if>
     <xsl:if test="$typeOf008 = 'MP'">
@@ -824,9 +825,9 @@
         <xsl:when test="contains($controlField008-28, 'z')">
           <genre authority="marcgt">government publication</genre>
         </xsl:when>
-        <xsl:when test="contains($controlField008-28, '|')">
+        <!--<xsl:when test="contains($controlField008-28, '|')">
           <genre authority="marcgt">government publication</genre>
-        </xsl:when>
+        </xsl:when>-->
       </xsl:choose>
     </xsl:if>
     <xsl:if test="$typeOf008 = 'VM'">
@@ -865,9 +866,9 @@
         <xsl:when test="contains($controlField008-28, 'z')">
           <genre authority="marcgt">government publication</genre>
         </xsl:when>
-        <xsl:when test="contains($controlField008-28, '|')">
+        <!--<xsl:when test="contains($controlField008-28, '|')">
           <genre authority="marcgt">government publication</genre>
-        </xsl:when>
+        </xsl:when>-->
       </xsl:choose>
     </xsl:if>
 
