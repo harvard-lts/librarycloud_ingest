@@ -5,7 +5,10 @@
   xmlns:countries="info:lc/xmlns/codelist-v1"
   exclude-result-prefixes="xlink marc countries" version="1.0">
   <!--<xsl:include href="http://www.loc.gov/standards/marcxml/xslt/MARC21slimUtils.xsl"/>-->
+  
   <xsl:include href="src/main/resources/MARC21slimUtils.xsl"/>
+  <!-- comment above, uncomment below for Oxygen testing -->
+  <!-- <xsl:include href="MARC21slimUtils.xsl"/> -->
   <xsl:output encoding="UTF-8" indent="yes" method="xml" omit-xml-declaration="yes"/>
   <xsl:strip-space elements="*"/>
   <xsl:param name="marc-countries-file" select="'src/main/resources/countries.xml'"/>
@@ -13,6 +16,7 @@
 
 
   <!-- Harvard modifications
+  Revision 10.04 fix 653 concatenation of subfields
   Revision 10.03 remove tests for controlfield008-28 equals "|" (loc only fixing in 3.7 onward)  
   TO DO?: Revision 10.03 - remove "c" (collection_) from leader7 codes for manuscript
   Revision 10.02 recordChangeDate - only use 1st 8 (YYYYMMDD) to be iso8601 compliant
@@ -5670,19 +5674,29 @@
     </subject>
   </xsl:template>
 
+  <!-- Harvard 10.04 - fixing concatenation of subfields -->
   <xsl:template name="createSubFrom653">
-
+    <xsl:variable name="childCount" select="count(node())"/>
+    <xsl:variable name="concatSubf">
+      <xsl:for-each select="node()">
+        <xsl:value-of select="."/>
+        <xsl:if test="not(position()=$childCount)">
+          <xsl:text> -- </xsl:text>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:variable>
+    
     <xsl:if test="@ind2 = ' '">
       <subject>
         <topic>
-          <xsl:value-of select="."/>
+          <xsl:value-of select="$concatSubf"/>
         </topic>
       </subject>
     </xsl:if>
     <xsl:if test="@ind2 = '0'">
       <subject>
         <topic>
-          <xsl:value-of select="."/>
+          <xsl:value-of select="$concatSubf"/>
         </topic>
       </subject>
     </xsl:if>
@@ -5691,7 +5705,7 @@
       <subject>
         <name type="personal">
           <namePart>
-            <xsl:value-of select="."/>
+            <xsl:value-of select="$concatSubf"/>
           </namePart>
         </name>
       </subject>
@@ -5700,7 +5714,7 @@
       <subject>
         <name type="family">
           <namePart>
-            <xsl:value-of select="."/>
+            <xsl:value-of select="$concatSubf"/>
           </namePart>
         </name>
       </subject>
@@ -5709,7 +5723,7 @@
       <subject>
         <name type="corporate">
           <namePart>
-            <xsl:value-of select="."/>
+            <xsl:value-of select="$concatSubf"/>
           </namePart>
         </name>
       </subject>
@@ -5718,7 +5732,7 @@
       <subject>
         <name type="conference">
           <namePart>
-            <xsl:value-of select="."/>
+            <xsl:value-of select="$concatSubf"/>
           </namePart>
         </name>
       </subject>
@@ -5726,14 +5740,14 @@
     <xsl:if test="@ind2 = 4">
       <subject>
         <temporal>
-          <xsl:value-of select="."/>
+          <xsl:value-of select="$concatSubf"/>
         </temporal>
       </subject>
     </xsl:if>
     <xsl:if test="@ind2 = 5">
       <subject>
         <geographic>
-          <xsl:value-of select="."/>
+          <xsl:value-of select="$concatSubf"/>
         </geographic>
       </subject>
     </xsl:if>
@@ -5741,7 +5755,7 @@
     <xsl:if test="@ind2 = 6">
       <subject>
         <genre>
-          <xsl:value-of select="."/>
+          <xsl:value-of select="$concatSubf"/>
         </genre>
       </subject>
     </xsl:if>
