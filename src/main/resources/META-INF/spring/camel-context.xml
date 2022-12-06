@@ -313,7 +313,7 @@
         <errorHandler id="eh" redeliveryPolicyRef="myPolicy" type="DeadLetterChannel"
             deadLetterUri="direct:dead-letter"/>
 
-        <errorHandler id="ehmq type="DefaultErrorHandler"
+        <errorHandler id="ehmq" type="DefaultErrorHandler"
             <redeliveryPolicy maximumRedeliveries="5"
             retryAttemptedLogLevel="WARN"
             backOffMultiplier="2"
