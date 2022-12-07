@@ -310,9 +310,7 @@
         <!-- Environment-specific properties -->
         <propertyPlaceholder id="librarycloud-properties" location="classpath:/librarycloud.env.properties" />
         <!-- Error handling behavior -->
-        <!--<errorHandler id="eh" redeliveryPolicyRef="myPolicy" type="DeadLetterChannel"
-            deadLetterUri="direct:dead-letter"/>-->
-        <errorHandler id="eh" maximumRedeliveries="5" type="DeadLetterChannel"
+        <errorHandler id="eh" redeliveryPolicyRef="myPolicy" type="DeadLetterChannel"
             deadLetterUri="direct:dead-letter"/>
 
         <!--<errorHandler id="ehmq" type="DefaultErrorHandler">
@@ -322,7 +320,7 @@
             useExponentialBackOff="true"/>
         </errorHandler>-->
 
-        <redeliveryPolicyProfile id="myPolicy" maximumRedeliveries="0"/>
+        <redeliveryPolicyProfile id="myPolicy" maximumRedeliveries="5"/>
         <route id="dead-letter">
             <from uri="direct:dead-letter"/>
             <!--<to uri="log:edu.harvard.libcomm.deadletterqueue?level=ERROR"/>-->
