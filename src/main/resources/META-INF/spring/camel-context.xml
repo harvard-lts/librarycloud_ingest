@@ -313,12 +313,12 @@
         <errorHandler id="eh" redeliveryPolicyRef="myPolicy" type="DeadLetterChannel"
             deadLetterUri="direct:dead-letter"/>
 
-        <!--<errorHandler id="ehmq" type="DefaultErrorHandler">
+        <errorHandler id="ehmq" type="DefaultErrorHandler">
             <redeliveryPolicy maximumRedeliveries="5"
             retryAttemptedLogLevel="WARN"
             backOffMultiplier="2"
             useExponentialBackOff="true"/>
-        </errorHandler>-->
+        </errorHandler>
 
         <redeliveryPolicyProfile id="myPolicy" maximumRedeliveries="0"/>
         <route id="dead-letter">
@@ -1188,7 +1188,7 @@
         <!-- 20190926 - adding activemq and drsmds routes for ingesting drs metadata from new mongo api into "extensions" solr, -->
         <!-- and triggering realtime update into matching bibrecs -->
 
-        <route id="activemqDrs" errorHandlerRef="eh">
+        <route id="activemqDrs" errorHandlerRef="ehmq">
             <from uri="activemq:Consumer.librarycloud-{{librarycloud.sqs.environment}}.VirtualTopic.DRS_OBJECT_UPDATED"/>
             <!--<from uri="activemq:Consumer.Consumer1.VirtualTopic.DRS_OBJECT_UPDATED"/>-->
             <setHeader headerName="drsId">
