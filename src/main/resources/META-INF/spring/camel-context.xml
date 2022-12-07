@@ -21,13 +21,6 @@
                 <property name="userName" value="${activemq.username}"/>
                 <property name="password" value="${activemq.password}"/>
                 <property name="clientID" value="${activemq.clientid}"/>
-                <property name="redeliveryPolicy">
-                    <!--<property name="deliveryPersistent" value="true" />-->
-                    <bean class="org.apache.activemq.RedeliveryPolicy">
-                        <property name="maximumRedeliveries" value="5"/>
-                        <property name="redeliveryDelay" value="5000"/>
-                    </bean>
-                </property>
             </bean>
         </property>
     </bean>
