@@ -30,5 +30,8 @@ To date, the app handles ingesting marc bibliographic records (in marc xml forma
 - run `> mvn clean install`  
 Tests should pass
 
+## Docker build
+- This is nonstandard and needs to be pulled into the standard docker framework at some point
+
 
 
