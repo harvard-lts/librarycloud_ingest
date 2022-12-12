@@ -1,0 +1,5 @@
+# ubuntu 18 probably. 
+FROM ingest-qa:LTSCLOUD-1125
+
+WORKDIR /home/librarycloud/librarycloud_ingest
+CMD mvn camel:run -q -Dmaven.test.skip=true > /dev/null

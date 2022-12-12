@@ -32,6 +32,30 @@ Tests should pass
 
 ## Docker build
 - This is nonstandard and needs to be pulled into the standard docker framework at some point
+> docker build . 
 
+run 'docker images' to get the list of images and image IDs
+
+> docker tag (image id) ingest-qa:[VERSION]  #e.g. 'docker tag 8bc41040fd9f ingest-qa:1.8.10'
+
+> docker build  -f Dockerfile2 . 
+
+run 'docker images' to get the list of images and image IDs
+
+> docker tag (container id) lcingest-qa:[VERSION] #e.g. 'docker tag 8bc41040fd9f lcingest-qa:1.8.10'
+
+log into docker registry 
+docker login https://registry.lts.harvard.edu  
+username:  
+pass:  
+
+# updating image: 
+> docker tag lcingest-qa:[VERSION]registry.lts.harvard.edu/lts/lcingest-qa:latest
+
+# upload the updated image
+docker image push registry.lts.harvard.edu/lts/lcingest-qa:latest
+
+MJV NOTES:
+edit the Dockerfiles to the appropriate tag(branch) 
 
 
