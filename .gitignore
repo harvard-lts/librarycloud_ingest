@@ -1,8 +1,8 @@
 /target/
 /src/main/resources/aws.properties
 /src/main/resources/librarycloud.env.properties
-#/src/main/resources/log4j.properties
-/src/main/resources/META-INF/persistence.xml
+/src/main/resources/log4j.properties
+#/src/main/resources/META-INF/persistence.xml
 /bin/
 .DS_Store
 .idea
