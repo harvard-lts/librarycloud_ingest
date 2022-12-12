@@ -1,18 +1,26 @@
 # ubuntu 
-FROM ubuntu:latest
+FROM ubuntu:latest as builder
 
-RUN apt-get update
-RUN apt-get -y install openjdk-8-jdk-headless git
-RUN apt-get -y install maven
-RUN mkdir -p /home/librarycloud/ingest/cameldata 
-RUN cd  /home/librarycloud/ && git clone https://github.com/harvard-library/librarycloud_ingest.git 
-RUN cd /home/librarycloud/librarycloud_ingest && git checkout LTSCLOUD-1125
-#ADD persistence.xml /home/librarycloud/librarycloud_ingest/src/main/resources/META-INF/persistence.xml
-#RUN useradd --create-home lcadm
+RUN apt-get update && \
+    apt-get -y install openjdk-8-jdk-headless git && \
+    apt-get -y install maven && \
+    mkdir -p /home/librarycloud/ingest/cameldata && \
+    cd  /home/librarycloud/ && git clone https://github.com/harvard-library/librarycloud_ingest.git && \
+    cd /home/librarycloud/librarycloud_ingest && git checkout LTSCLOUD-1125 && \
+    useradd --uid 55003 -m lcadm
 WORKDIR /home/librarycloud/librarycloud_ingest
 COPY --chown=lcadm ./ .
-RUN useradd --uid 55003 -m lcadm
-USER lcadm
-#RUN mkdir -p /home/librarycloud/librarycloud_ingest/target/classes
+RUN chown lcadm:lcadm -R /home/librarycloud/librarycloud_ingest
 
-RUN mvn -e -X clean install -Dmaven.test.skip=true 
+USER lcadm
+
+RUN mvn clean install -Dmaven.test.skip=true 
+
+FROM builder
+
+USER lcadm
+
+WORKDIR /home/librarycloud/librarycloud_ingest
+
+CMD mvn camel:run -q -Dmaven.test.skip=true 
+
