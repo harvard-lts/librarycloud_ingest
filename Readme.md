@@ -36,7 +36,7 @@ Modify the Dockerfile to contain the correct tag or branch
 Build the container
 - docker compose -f docker-compose.yml build
 Push to the repository (need to be logged in)
-- docker image push registry.lts.harvard.edu/lts/lcingest-qa:latest
+- docker image push registry.lts.harvard.edu/lts/lcingest:latest
 Stop/Start container on qa (legacy dev not yet ready on cloud, so we start wit qa)
 
 
