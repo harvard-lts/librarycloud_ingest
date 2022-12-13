@@ -1,1 +1,3 @@
 librarycloud.env.properties
+Dockerfile
+docker-compose.yml
