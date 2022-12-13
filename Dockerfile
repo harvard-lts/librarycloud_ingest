@@ -16,11 +16,4 @@ USER lcadm
 
 RUN mvn clean install -Dmaven.test.skip=true 
 
-FROM builder
-
-USER lcadm
-
-WORKDIR /home/librarycloud/librarycloud_ingest
-
 CMD mvn camel:run -q -Dmaven.test.skip=true 
-
