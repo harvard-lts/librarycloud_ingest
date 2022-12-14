@@ -1,0 +1,12 @@
+# Build image
+# `docker-compose -f docker-compose.yml build`
+# Push to registry
+# `docker-compose -f docker-compose.yml push`
+
+version: '3.8'
+services:
+  app:
+    image: registry.lts.harvard.edu/lts/lcingest:latest
+    build:
+      context: .
+      dockerfile: Dockerfile

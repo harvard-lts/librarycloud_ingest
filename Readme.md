@@ -30,5 +30,15 @@ To date, the app handles ingesting marc bibliographic records (in marc xml forma
 - run `> mvn clean install`  
 Tests should pass
 
+## Docker build and deploy
+Modify the Dockerfile to contain the correct tag or branch  
+- (... git checkout <TAG_OR_BRANCH>)
+Build the container
+- docker compose -f docker-compose.yml build
+Push to the repository (need to be logged in)
+- docker image push registry.lts.harvard.edu/lts/lcingest:latest
+Stop/Start container on qa (legacy dev not yet ready on cloud, so we start wit qa)
+
+
 
 
