@@ -10,7 +10,7 @@
     <xsl:strip-space elements="*"/>
     <xsl:param name="componentid"></xsl:param>
     <!-- comment above, uncomment below for testing (you can change the id -->
-    <!--<xsl:param name="componentid">gut5000c00014</xsl:param>-->
+    <!--<xsl:param name="componentid">GUT50000c01647</xsl:param>-->
     <xsl:key name="roletextlookup" match="roles:map" use="roles:code"/>
     <xsl:variable name="originationroles"
         select="document('src/main/resources/originationroles.xml')/roles:originationroles"/>
@@ -44,6 +44,7 @@
             <xsl:apply-templates select="$cmatch/c/controlaccess"/>
             <xsl:apply-templates select="$cmatch/c/odd"/>
             <xsl:apply-templates select="$cmatch/c/prefercite[head = 'Preferred Citation']"/>
+            <xsl:apply-templates select="$cmatch/c/originalsloc[head = 'Existence and Location of Originals']"/>
             <xsl:apply-templates select="$cmatch/c/userestrict"/>
             <xsl:apply-templates select="//c[@id = $cid_legacy_or_new]" mode="lang"/>
             <xsl:apply-templates
@@ -138,6 +139,7 @@
                 <xsl:apply-templates select="parent::c/controlaccess"/>
                 <xsl:apply-templates select="parent::c/odd"/>
                 <xsl:apply-templates select="parent::c/prefercite[head = 'Preferred Citation']"/>
+                <xsl:apply-templates select="parent::c/originalsloc[head = 'Existence and Location of Originals']"/>
                 <xsl:apply-templates select="parent::c/userestrict"/>
                 <xsl:apply-templates
                     select="parent::c/altformavail[head = 'Existence and Location of Copies']"/>
@@ -601,6 +603,12 @@
     <xsl:template match="prefercite[head = 'Preferred Citation']">
         <xsl:element name="note">
             <xsl:attribute name="type">preferred citation</xsl:attribute>
+            <xsl:value-of select="normalize-space(p)"/>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="originalsloc[head = 'Existence and Location of Originals']">
+        <xsl:element name="note">
+            <xsl:attribute name="type">original location</xsl:attribute>
             <xsl:value-of select="normalize-space(p)"/>
         </xsl:element>
     </xsl:template>
