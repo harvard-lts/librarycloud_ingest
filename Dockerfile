@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get -y install maven && \
     mkdir -p /home/librarycloud/ingest/cameldata && \
     cd  /home/librarycloud/ && git clone https://github.com/harvard-library/librarycloud_ingest.git && \
-    cd /home/librarycloud/librarycloud_ingest && git checkout v1.9.6 && \
+    cd /home/librarycloud/librarycloud_ingest && git checkout LTSDEVS-146 && \
     useradd --uid 55003 -m lcadm
 WORKDIR /home/librarycloud/librarycloud_ingest
 COPY --chown=lcadm ./ .
