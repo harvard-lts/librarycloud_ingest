@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.EventObject;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.management.EventNotifierSupport;
-import org.apache.camel.management.event.ExchangeCompletedEvent;
-import org.apache.camel.management.event.ExchangeSentEvent;
+import org.apache.camel.support.EventNotifierSupport;
+import org.apache.camel.impl.event.ExchangeCompletedEvent;
+import org.apache.camel.impl.event.ExchangeSentEvent;
 import org.apache.log4j.Logger;
 
 public class EventTimer extends EventNotifierSupport {

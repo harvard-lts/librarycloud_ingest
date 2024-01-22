@@ -72,17 +72,18 @@ public class MODSReader {
 			XPath xpath = factory.newXPath();
 
 			xpath.setNamespaceContext(new NamespaceContext() {
+				@Override
 			    public String getNamespaceURI(String prefix) {
 			        return prefix.equals("mods") ? "http://www.loc.gov/mods/v3"  : null;
 			    }
-
-			    public Iterator<?> getPrefixes(String val) {
+				@Override
+				public String getPrefix(String uri) {
 			        return null;
 			    }
-
-			    public String getPrefix(String uri) {
-			        return null;
-			    }
+				@Override
+				public Iterator getPrefixes(String namespaceURI) {
+					return null;
+				}
 			});
 			
 			Object result = null;

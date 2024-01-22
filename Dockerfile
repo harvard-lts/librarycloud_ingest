@@ -2,7 +2,7 @@
 FROM ubuntu:latest as builder
 
 RUN apt-get update && \
-    apt-get -y install openjdk-8-jdk-headless git && \
+    apt-get -y install openjdk-17-jdk-headless git && \
     apt-get -y install maven && \
     mkdir -p /home/librarycloud/ingest/cameldata && \
     cd  /home/librarycloud/ && git clone https://github.com/harvard-library/librarycloud_ingest.git && \

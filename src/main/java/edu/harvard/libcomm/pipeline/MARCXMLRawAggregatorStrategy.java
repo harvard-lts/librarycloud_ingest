@@ -11,7 +11,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.processor.aggregate.CompletionAwareAggregationStrategy;
+import org.apache.camel.AggregationStrategy;
 import org.apache.log4j.Logger;
 
 import gov.loc.marc.CollectionType; /* Required? */
@@ -22,7 +22,7 @@ import edu.harvard.libcomm.message.LibCommMessage.Payload;
 import edu.harvard.libcomm.message.LibCommMessage.History;
 import edu.harvard.libcomm.message.LibCommMessage.History.Event;
 
-public class MARCXMLRawAggregatorStrategy implements CompletionAwareAggregationStrategy {
+public class MARCXMLRawAggregatorStrategy implements AggregationStrategy {
 
 	protected Logger log = Logger.getLogger(MARCXMLRawAggregatorStrategy.class);
 	protected LibCommMessage libCommMessage = null;

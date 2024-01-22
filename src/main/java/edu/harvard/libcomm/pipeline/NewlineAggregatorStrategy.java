@@ -1,7 +1,7 @@
 package edu.harvard.libcomm.pipeline;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.processor.aggregate.AggregationStrategy;
+import org.apache.camel.AggregationStrategy;
 //import org.apache.camel.processor.aggregate.CompletionAwareAggregationStrategy;
 import org.apache.log4j.Logger;
 

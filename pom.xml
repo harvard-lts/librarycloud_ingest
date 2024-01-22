@@ -15,10 +15,10 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spring.version>5.2.24.RELEASE</spring.version>
+    <spring.version>6.0.0</spring.version>
     <!-- last release compatible with Camel 2.17.7 -->
     <openjpa.version>2.3.0</openjpa.version>
-    <camel.version>2.24.3</camel.version>
+    <camel.version>3.21.0</camel.version>
     <!-- last release for Java 1.7-->
     <aws-java-sdk.version>1.10.77</aws-java-sdk.version>
     <!--<aws-java-sdk.version>1.12.249</aws-java-sdk.version>-->
@@ -382,14 +382,17 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.6.1</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+          <release>17</release>
+          <compilerArgs>
+            <arg>--add-opens</arg> 
+            <arg>java.base/java.lang=ALL-UNNAMED</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>2.6</version>
+        <version>3.3.0</version>
         <configuration>
           <encoding>UTF-8</encoding>
         </configuration>

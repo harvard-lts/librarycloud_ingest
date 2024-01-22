@@ -10,7 +10,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.processor.aggregate.CompletionAwareAggregationStrategy;
+import org.apache.camel.AggregationStrategy;
 import org.apache.log4j.Logger;
 
 import gov.loc.marc.CollectionType; /* Required? */
@@ -19,7 +19,7 @@ import gov.loc.mods.v3.ModsCollection;
 import edu.harvard.libcomm.message.LibCommMessage;
 import edu.harvard.libcomm.message.LibCommMessage.Payload;
 
-public class MODSRawAggregatorStrategy implements CompletionAwareAggregationStrategy {
+public class MODSRawAggregatorStrategy implements AggregationStrategy {
  
 	protected Logger log = Logger.getLogger(MODSAggregatorStrategy.class); 
 	protected LibCommMessage libCommMessage = null;

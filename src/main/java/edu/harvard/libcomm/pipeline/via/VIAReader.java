@@ -104,14 +104,15 @@ public class VIAReader {
       XPath xpath = factory.newXPath();
 
       xpath.setNamespaceContext(new NamespaceContext() {
+          @Override
           public String getNamespaceURI(String prefix) {
               return prefix.equals("xlink") ? "http://www.w3.org/TR/xlink"  : null;
           }
-
-          public Iterator<?> getPrefixes(String val) {
+          @Override
+          public Iterator getPrefixes(String namespaceURI) {
               return null;
           }
-
+          @Override
           public String getPrefix(String uri) {
               return null;
           }
