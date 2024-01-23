@@ -7,13 +7,14 @@ import org.apache.camel.Exchange;
 import org.apache.camel.support.EventNotifierSupport;
 import org.apache.camel.impl.event.ExchangeCompletedEvent;
 import org.apache.camel.impl.event.ExchangeSentEvent;
+import org.apache.camel.spi.CamelEvent;
 import org.apache.log4j.Logger;
 
 public class EventTimer extends EventNotifierSupport {
 
 	protected Logger log = Logger.getLogger(EventTimer.class); 
 	 
-    public void notify(EventObject event) throws Exception {
+    public void notify(CamelEvent event) throws Exception {
  
 		  if (event instanceof ExchangeSentEvent) {
 		      ExchangeSentEvent sent = (ExchangeSentEvent) event;
@@ -31,7 +32,7 @@ public class EventTimer extends EventNotifierSupport {
 		      log.info("Took " + elapsed + " millis for the exchange on the route : " + routeId);
 		  }
     }
- 
+ 	
     public boolean isEnabled(EventObject event) {
         // we only want the sent events
         return (event instanceof ExchangeSentEvent || event instanceof ExchangeCompletedEvent) ;
@@ -47,10 +48,12 @@ public class EventTimer extends EventNotifierSupport {
 		setIgnoreExchangeRedeliveryEvents(true);
 		setIgnoreExchangeSentEvents(false);
     }
- 
-    protected void doStop() throws Exception {
+	
+	/*@Override
+	protected void stop() throws Exception {
         // noop
-    }
- 
+    }*/
+	
+	
 }
 

@@ -110,4 +110,14 @@ public class MessageBodyS3Marshaller implements DataFormat {
         String messageString = MessageUtils.marshalMessage(libCommMessage);
         return messageString;
     }
+
+    @Override
+    public void start() {
+        // TODO Auto-generated method stub
+    }  
+
+    @Override
+    public void stop() {
+        // TODO Auto-generated method stub
+    }  
 }
