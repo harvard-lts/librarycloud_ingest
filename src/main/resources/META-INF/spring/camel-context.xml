@@ -333,13 +333,13 @@
             <!--<to uri="log:edu.harvard.libcomm.deadletterqueue?level=ERROR"/>-->
             <!-- Post to the AWS dead letter queue, and handle errors (e.g. file size exceeded) -->
             <doTry>
-                <setHeader headerName="filepath">
+                <setHeader name="filepath">
                     <xpath>/lib_comm_message/payload/filepath/text()</xpath>
                 </setHeader>
-                <setHeader headerName="source">
+                <setHeader name="source">
                     <xpath>/lib_comm_message/payload/source/text()</xpath>
                 </setHeader>
-                <setHeader headerName="command">
+                <setHeader name="command">
                     <xpath>/lib_comm_message/command/text()</xpath>
                 </setHeader>
                 <transform>
@@ -401,7 +401,7 @@
             <doTry>
                 <split streaming="true">
                     <xtokenize>//record</xtokenize>
-                    <setHeader headerName="outerSplitIndex">
+                    <setHeader name="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
                     <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100"
@@ -447,7 +447,7 @@
             <doTry>
                 <split streaming="true">
                     <xtokenize>//record</xtokenize>
-                    <setHeader headerName="outerSplitIndex">
+                    <setHeader name="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
                     <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100"
@@ -490,7 +490,7 @@
             <doTry>
                 <split streaming="true">
                     <xtokenize>//record</xtokenize>
-                    <setHeader headerName="outerSplitIndex">
+                    <setHeader name="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
                     <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100"
@@ -574,7 +574,7 @@
             <process ref="extractPayloadProcessor"/>
             <split>
                 <tokenize token="record" inheritNamespaceTagName="collection" xml="true"/>
-                <setHeader headerName="recordFileName">
+                <setHeader name="recordFileName">
                     <xpath resultType="java.lang.String">
                         /marcxml:record/marcxml:controlfield[@tag='001']
                     </xpath>
@@ -583,10 +583,10 @@
                 <choice>
                     <when>
                         <simple>${in.body} != ""</simple>
-                        <setHeader headerName="CamelAwsS3Key">
+                        <setHeader name="CamelAwsS3Key">
                             <simple>${header.recordFileName}</simple>
                         </setHeader>
-                        <setHeader headerName="CamelAwsS3CannedAcl">
+                        <setHeader name="CamelAwsS3CannedAcl">
                             <simple>PublicRead</simple>
                         </setHeader>
                         <!--<to uri="aws-s3://{{librarycloud.s3.marc_bucket}}.{{librarycloud.sqs.environment}}?amazonS3Client=#s3Client" />-->
@@ -612,7 +612,8 @@
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
                 <split streaming="true" parallelProcessing="true">
-                    <method bean="eadSplitter" method="split"/>
+                    <!--<method bean="eadSplitter" method="split"/>-->
+                    <method>eadSplitter.split()</method>
                     <aggregate strategyRef="modsAggregator" completionSize="100"
                         completionInterval="10000">
                         <correlationExpression>
@@ -656,12 +657,13 @@
             <doTry>
                 <split streaming="true">
                     <tokenize token="viaRecord" xml="true"/>
-                    <setHeader headerName="outerSplitIndex">
+                    <setHeader name="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
 
                     <split streaming="true" parallelProcessing="true">
-                        <method bean="viaRawSplitter" method="split"/>
+                        <!--<method bean="viaRawSplitter" method="split"/>-->
+                        <method>viaRawSplitter.split()</method>
                         <aggregate strategyRef="modsAggregator" completionSize="100"
                             completionInterval="10000">
                             <correlationExpression>
@@ -745,7 +747,8 @@
             <!--<from uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-enrich-04?amazonSQSClient=#sqsClient&amp;maxMessagesPerPoll=10"/>-->
             <doTry>
                 <split streaming="true" parallelProcessing="true">
-                    <method bean="modsItemCollectionSplitter" method="split"/>
+                    <!--<method bean="modsItemCollectionSplitter" method="split"/>-->
+                    <method>modsItemCollectionSplitter.split()</method>
                     <!--<marshal><custom ref="cloudbody"/></marshal>-->
                     <aggregate strategyRef="modsRawAggregator" completionSize="100"
                         completionInterval="10000">
@@ -971,7 +974,8 @@
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
                 <split streaming="true" parallelProcessing="true">
-                    <method bean="updateSplitter" method="split"/>
+                    <!--<method bean="updateSplitter" method="split"/>-->
+                    <method>updateSplitter.split()</method>
                     <marshal>
                         <custom ref="cloudbody"/>
                     </marshal>
@@ -1046,10 +1050,10 @@
             <doTry>
                 <split streaming="true">
                     <xtokenize>//record</xtokenize>
-                    <setHeader headerName="deleteID">
+                    <setHeader name="deleteID">
                         <xpath resultType="java.lang.String">//controlfield[@tag='001']</xpath>
                     </setHeader>
-                    <setHeader headerName="source">
+                    <setHeader name="source">
                         <simple>ALMA</simple>
                     </setHeader>
                     <process ref="deleteProcessor"/>
@@ -1087,10 +1091,10 @@
                 <split streaming="true">
                     <!--<xtokenize>//record</xtokenize>-->
                     <xpath>//record[datafield[@tag='950']/subfield[@code='e']='true']</xpath>
-                    <setHeader headerName="deleteID">
+                    <setHeader name="deleteID">
                         <xpath resultType="java.lang.String">//controlfield[@tag='001']</xpath>
                     </setHeader>
-                    <setHeader headerName="source">
+                    <setHeader name="source">
                         <simple>ALMA</simple>
                     </setHeader>
                     <process ref="deleteProcessor"/>
@@ -1128,10 +1132,10 @@
             <doTry>
                 <split streaming="true">
                     <xtokenize>//viaRecord</xtokenize>
-                    <setHeader headerName="deleteID">
+                    <setHeader name="deleteID">
                         <xpath resultType="java.lang.String">//recordId</xpath>
                     </setHeader>
-                    <setHeader headerName="source">
+                    <setHeader name="source">
                         <simple>VIA</simple>
                     </setHeader>
                     <process ref="deleteProcessor"/>
@@ -1165,10 +1169,10 @@
             <from uri="direct:oasis-delete-file"/>
             <!-- Try block required for errors thrown out of the splitter -->
             <doTry>
-                <setHeader headerName="deleteID">
+                <setHeader name="deleteID">
                     <xpath resultType="java.lang.String">//ead:eadid/text()</xpath>
                 </setHeader>
-                <setHeader headerName="source">
+                <setHeader name="source">
                     <simple>OASIS</simple>
                 </setHeader>
                 <process ref="deleteProcessor"/>
@@ -1209,10 +1213,10 @@
             <doTry>
                 <split streaming="true">
                     <xtokenize>//record</xtokenize>
-                    <setHeader headerName="deleteID">
+                    <setHeader name="deleteID">
                         <xpath resultType="java.lang.String">//datafield[@tag='852']/subfield[@code='8']</xpath>
                     </setHeader>
-                    <setHeader headerName="source">
+                    <setHeader name="source">
                         <simple>ALMA</simple>
                     </setHeader>
                     <process ref="deleteProcessor"/>
@@ -1269,7 +1273,8 @@
                 uri="aws-sqs://librarycloud-{{librarycloud.sqs.environment}}-ingest-ted?amazonSQSClient=#sqsClient&amp;visibilityTimeout=1800"/>
             <doTry>
                 <split streaming="true" parallelProcessing="true">
-                    <method bean="tedSplitter" method="split"/>
+                    <!--<method bean="tedSplitter" method="split"/>-->
+                    <method>tedSplitter.split()</method>
                     <marshal>
                         <custom ref="cloudbody"/>
                     </marshal>
@@ -1306,7 +1311,7 @@
                 <split>
                     <xpath>//controlfield[@tag='001']/text()</xpath>
 
-                    <setHeader headerName="outerSplitIndex">
+                    <setHeader name="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
                     <aggregate strategyRef="newlineAggregator" completionSize="100"
@@ -1361,7 +1366,7 @@
             <from
                 uri="activemq:Consumer.librarycloud-{{librarycloud.sqs.environment}}.VirtualTopic.DRS_OBJECT_UPDATED"/>
             <!--<from uri="activemq:Consumer.Consumer1.VirtualTopic.DRS_OBJECT_UPDATED"/>-->
-            <setHeader headerName="drsId">
+            <setHeader name="drsId">
                 <jsonpath>$.data.objectId</jsonpath>
             </setHeader>
             <transform>
