@@ -6,7 +6,7 @@
     http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://camel.apache.org/schema/spring
-    http://camel.apache.org/schema/spring/camel-spring.xsd
+    http://camel.apache.org/schema/spring/camel-spring-4.0.0.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     <context:property-placeholder location="classpath:/librarycloud.env.properties"/>
@@ -404,7 +404,7 @@
                     <setHeader name="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
-                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100"
+                    <aggregate aggregationStrategy="edu.harvard.libcomm.pipeline.MARCXMLRawAggregatorStrategy" completionSize="100"
                         completionInterval="10000">
                         <correlationExpression>
                             <simple>all</simple>
@@ -450,7 +450,7 @@
                     <setHeader name="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
-                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100"
+                    <aggregate aggregationStrategy="#bean:marcxmlAlmaRawAggregator" completionSize="100"
                         completionInterval="10000">
                         <correlationExpression>
                             <simple>all</simple>
@@ -493,7 +493,7 @@
                     <setHeader name="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
-                    <aggregate strategyRef="marcxmlAlmaRawAggregator" completionSize="100"
+                    <aggregate aggregationStrategy="#bean:marcxmlAlmaRawAggregator" completionSize="100"
                         completionInterval="10000">
                         <correlationExpression>
                             <simple>all</simple>
@@ -614,7 +614,7 @@
                 <split streaming="true" parallelProcessing="true">
                     <!--<method bean="eadSplitter" method="split"/>-->
                     <method>eadSplitter.split()</method>
-                    <aggregate strategyRef="modsAggregator" completionSize="100"
+                    <aggregate aggregationStrategy="#bean:modsAggregator" completionSize="100"
                         completionInterval="10000">
                         <correlationExpression>
                             <simple>all</simple>
@@ -664,7 +664,7 @@
                     <split streaming="true" parallelProcessing="true">
                         <!--<method bean="viaRawSplitter" method="split"/>-->
                         <method>viaRawSplitter.split()</method>
-                        <aggregate strategyRef="modsAggregator" completionSize="100"
+                        <aggregate aggregationStrategy="#bean:modsAggregator" completionSize="100"
                             completionInterval="10000">
                             <correlationExpression>
                                 <simple>all</simple>
@@ -750,7 +750,7 @@
                     <!--<method bean="modsItemCollectionSplitter" method="split"/>-->
                     <method>modsItemCollectionSplitter.split()</method>
                     <!--<marshal><custom ref="cloudbody"/></marshal>-->
-                    <aggregate strategyRef="modsRawAggregator" completionSize="100"
+                    <aggregate aggregationStrategy="#bean:modsRawAggregator" completionSize="100"
                         completionInterval="10000">
                         <correlationExpression>
                             <simple>all</simple>
@@ -1314,7 +1314,7 @@
                     <setHeader name="outerSplitIndex">
                         <simple>${header.CamelSplitIndex}</simple>
                     </setHeader>
-                    <aggregate strategyRef="newlineAggregator" completionSize="100"
+                    <aggregate aggregationStrategy="#bean:newlineAggregator" completionSize="100"
                         completionInterval="10000">
                         <correlationExpression>
                             <simple>all</simple>
@@ -1430,7 +1430,8 @@
 
             <split streaming="true">
                 <jsonpath>$</jsonpath>
-                <aggregate completionSize="100" completionTimeout="1000" groupExchanges="true">
+                <!--<aggregate completionSize="100" completionTimeout="1000" groupExchanges="true">-->
+                <aggregate aggregationStrategy="null" completionSize="100" completionTimeout="1000">
                     <correlationExpression>
                         <constant>true</constant>
                     </correlationExpression>

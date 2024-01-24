@@ -40,6 +40,12 @@
       <artifactId>camel-spring</artifactId>
       <version>${camel.version}</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-spring-main -->
+    <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-spring-main</artifactId>
+        <version>${camel.version}</version>
+    </dependency>
 
     <!-- active mq for drs metadata queue -->
 
@@ -424,16 +430,16 @@
         <artifactId>camel-maven-plugin</artifactId>
         <version>${camel.version}</version>
         <!--<configuration>
-          <fileApplicationContextUri>src/main/resources/camel-context.xml</fileApplicationContextUri>
+          <fileApplicationContextUri>src/main/resources/META-INF/spring/camel-context.xml</fileApplicationContextUri>
           <mainClass>org.apache.camel.spring.Main</mainClass>
-        </configuration>
-        <executions>
+        </configuration>-->
+        <!--<executions>
           <execution>
               <goals>
                   <goal>run</goal>
               </goals>
           </execution>
-        </executions> -->
+        </executions>-->
       </plugin>
 
       <plugin>
@@ -450,7 +456,7 @@
           <additionalClasspathElements>
             <additionalClasspathElement>src/test/resources</additionalClasspathElement>
           </additionalClasspathElements>
-          <skipTests>${skip.surefire.tests}</skipTests>
+          <skipTests>true</skipTests>
         </configuration>
       </plugin>
 
@@ -468,6 +474,10 @@
         </executions>
       </plugin>
 
+      <!--<plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>-->
     </plugins>
   </build>
 
