@@ -47,7 +47,7 @@
         <version>${camel.version}</version>
     </dependency>
 
-    <!-- active mq for drs metadata queue -->
+     <!-- active mq for drs metadata queue -->
 
     <dependency>
       <groupId>org.apache.activemq</groupId>
@@ -111,25 +111,6 @@
       <artifactId>reload4j</artifactId>
       <version>1.2.21</version>
     </dependency>
-
-    <!--
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>2.12.0</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>2.12.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>2.12.0</version>
-    </dependency>
--->
 
     <!-- for ELK logging -->
 
@@ -258,13 +239,6 @@
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
-
-    <!--  marc4j fork at freelib -->
-    <!--<dependency>
-      <groupId>info.freelibrary</groupId>
-      <artifactId>freelib-marc4j</artifactId>
-      <version>2.6.3</version>
-    </dependency>-->
 
     <!-- https://mvnrepository.com/artifact/org.marc4j/marc4j -->
     <dependency>
@@ -396,33 +370,6 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
-
-      <!--<plugin>
-        <groupId>org.apache.openjpa</groupId>
-        <artifactId>openjpa-maven-plugin</artifactId>
-        <version>${openjpa.version}</version>
-        <configuration>
-          <includes>**/model/*.class</includes>
-          <addDefaultConstructor>true</addDefaultConstructor>
-          <enforcePropertyRestrictions>true</enforcePropertyRestrictions>
-        </configuration>
-        <executions>
-          <execution>
-            <id>enhancer</id>
-            <phase>process-classes</phase>
-            <goals>
-              <goal>enhance</goal>
-            </goals>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.openjpa</groupId>
-            <artifactId>openjpa</artifactId>
-            <version>${openjpa.version}</version>
-          </dependency>
-        </dependencies>
-      </plugin>-->
 
       <!-- allows the route to be ran via 'mvn camel:run' -->
       <plugin>

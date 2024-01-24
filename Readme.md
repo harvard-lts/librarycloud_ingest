@@ -39,6 +39,10 @@ Push to the repository (need to be logged in)
 - docker image push registry.lts.harvard.edu/lts/lcingest:latest
 Stop/Start container on qa (legacy dev not yet ready on cloud, so we start wit qa)
 
+## Run docker locally
+Make sure Dockerfile has correct branch you want to pull and test
+- docker-compose -f docker-compose-local.yml up --build -d --force-recreate
+
 
 
 
