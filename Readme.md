@@ -41,7 +41,7 @@ Stop/Start container on qa (legacy dev not yet ready on cloud, so we start wit q
 
 ## Run docker locally
 Make sure Dockerfile has correct branch you want to pull and test
-- docker-compose -f docker-compose-local.yml up --build -d --force-recreate
+- docker-compose -f docker-compose.yml up --build -d --force-recreate
 
 
 
